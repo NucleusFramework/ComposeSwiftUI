@@ -72,6 +72,10 @@ class Bridge:
             return ["%s?.let { listOf(it.start, it.endInclusive) }" % name]
         if k in ("list", "set"):
             return ["%s.toList()" % name]
+        if k in ("lsk", "lsr"):
+            return ["%s.key" % name]
+        if k == "optional" and self.inner.kind in ("lsk", "lsr"):
+            return ["%s?.key" % name]
         return [name]
 
     # Swift ---------------------------------------------------------------------------------
@@ -83,6 +87,7 @@ class Bridge:
             "str": "%s.string(%d)", "bool": "%s.bool(%d)", "int": "%s.int(%d)", "double": "%s.double(%d)",
             "cgfloat": "%s.cgFloat(%d)", "float": "%s.float(%d)", "hash": "%s.hashable(%d)",
             "lsk": "LocalizedStringKey(%s.string(%d))", "action": "%s.action(%d)",
+            "lsr": "LocalizedStringResource(String.LocalizationValue(%s.string(%d)))", "text": "Text(%s.string(%d))",
             "drange": "%s.doubleRange(%d)", "irange": "%s.intRange(%d)", "date": "%s.date(%d)",
         }
         if k in simple:
@@ -98,14 +103,14 @@ class Bridge:
         if k == "url":
             return ["guard let %s = URL(string: %s.string(%d)) else { %s }" % (var, src, i, fallback)], var
         if k == "value":
-            return ["guard let %s = %s(%s.raw(%d)) else { %s }" % (var, self.swift_type, src, i, fallback)], var
+            return ["guard let %s = %s(%s.expr(%d)) else { %s }" % (var, self.swift_type, src, i, fallback)], var
         if k == "proto":
             # opened through a local generic function by the emitter (see Generator.open_call)
-            return ["guard let %s = %s(%s.raw(%d)) else { %s }" % (var, self.swift_type, src, i, fallback)], "q" + var[1:]
+            return ["guard let %s = %s(%s.expr(%d)) else { %s }" % (var, self.swift_type, src, i, fallback)], "q" + var[1:]
         if k in ("list", "set"):
             el = self.inner
             if el.kind == "value":
-                expr = "%s.list(%d).compactMap { %s($0) }" % (src, i, el.swift_type)
+                expr = "%s.exprList(%d).compactMap { %s($0) }" % (src, i, el.swift_type)
             elif el.kind == "str":
                 expr = "%s.list(%d).compactMap { $0 as? String }" % (src, i)
             elif el.kind in ("double", "cgfloat"):
@@ -120,6 +125,8 @@ class Bridge:
                 "str": "%s.stringOpt(%d)", "bool": "%s.boolOpt(%d)", "int": "%s.intOpt(%d)",
                 "double": "%s.doubleOpt(%d)", "cgfloat": "%s.cgFloatOpt(%d)", "action": "%s.actionOpt(%d)",
                 "lsk": "%s.stringOpt(%d).map { LocalizedStringKey($0) }", "hash": "%s.hashableOpt(%d)",
+                "lsr": "%s.stringOpt(%d).map { LocalizedStringResource(String.LocalizationValue($0)) }",
+                "text": "%s.stringOpt(%d).map { Text($0) }",
                 "drange": "%s.doubleRangeOpt(%d)", "irange": "%s.intRangeOpt(%d)",
                 "float": "%s.doubleOpt(%d).map { Float($0) }", "date": "%s.dateOpt(%d)",
             }
@@ -128,7 +135,7 @@ class Bridge:
             if inner.kind == "url":
                 return [], "%s.stringOpt(%d).flatMap { URL(string: $0) }" % (src, i)
             if inner.kind == "value":
-                return [], "(%s.isNil(%d) ? nil : %s(%s.raw(%d)))" % (src, i, inner.swift_type, src, i)
+                return [], "%s(%s.expr(%d))" % (inner.swift_type, src, i)
             if inner.kind == "async_action":
                 return ["let %s = %s.actionOpt(%d)" % (var, src, i)], "%s.map { f in { f() } }" % var
             raise Unsupported("optional of %s" % inner.kind)
@@ -149,7 +156,8 @@ PRIMS = {
     "String": ("str", "String"), "Substring": ("str", "String"), "Bool": ("bool", "Boolean"),
     "Int": ("int", "Int"), "Double": ("double", "Double"), "TimeInterval": ("double", "Double"),
     "CGFloat": ("cgfloat", "Double"), "Float": ("float", "Float"),
-    "LocalizedStringKey": ("lsk", "String"), "URL": ("url", "String"),
+    "LocalizedStringKey": ("lsk", "LocalizedKey"), "LocalizedStringResource": ("lsr", "LocalizedKey"),
+    "Text": ("text", "String"), "URL": ("url", "String"),
     "Date": ("date", "Double"),
 }
 

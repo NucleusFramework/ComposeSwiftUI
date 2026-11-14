@@ -1,4 +1,4 @@
-"""Loads SwiftUI symbol graphs (iOS + macOS) into a merged, queryable model."""
+"""Loads SwiftUI symbol graphs (iOS, macOS, tvOS, watchOS) into a merged, queryable model."""
 
 import glob
 import json
@@ -6,9 +6,12 @@ import os
 
 from swifttypes import decl_params, parse_type
 
+ALL_PLATFORMS = ("ios", "macos", "tvos", "watchos")
+DOMAIN = {"ios": "iOS", "macos": "macOS", "tvos": "tvOS", "watchos": "watchOS"}
+OSNAME = DOMAIN
+DEPLOYMENT = {"ios": (17, 0), "macos": (14, 0), "tvos": (17, 0), "watchos": (10, 0)}
+# Platforms present in the symbol graph root (set by Model; ios+macos by default).
 PLATFORMS = ("ios", "macos")
-DOMAIN = {"ios": "iOS", "macos": "macOS"}
-DEPLOYMENT = {"ios": (17, 0), "macos": (14, 0)}
 
 
 def _version(v):
@@ -123,6 +126,9 @@ def _case_params(decl):
 
 class Model:
     def __init__(self, sg_root):
+        global PLATFORMS
+        PLATFORMS = tuple(p for p in ALL_PLATFORMS if glob.glob(os.path.join(sg_root, p, "*.symbols.json")))
+        self.platforms = PLATFORMS
         self.syms = {}
         for plat in PLATFORMS:
             for f in sorted(glob.glob(os.path.join(sg_root, plat, "*.symbols.json"))):

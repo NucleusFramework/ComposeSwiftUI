@@ -12,14 +12,26 @@ val publishVersion =
         ?.removePrefix("refs/tags/v")
         ?: "1.0.0"
 
+val coreOnly = providers.gradleProperty("csui.coreOnly").isPresent
+
 kotlin {
-    iosArm64()
-    iosSimulatorArm64()
-    macosArm64()
+    listOf(
+        iosArm64(), iosSimulatorArm64(), iosX64(),
+        macosArm64(), macosX64(),
+        tvosArm64(), tvosSimulatorArm64(),
+        watchosArm64(), watchosDeviceArm64(), watchosSimulatorArm64(),
+    ).forEach { target ->
+        // Core-only framework used by generator/verify.py to typecheck the generated Swift.
+        if (coreOnly) target.binaries.framework { baseName = "BenchShared" }
+    }
 
     sourceSets {
         commonMain {
-            if (!providers.gradleProperty("csui.coreOnly").isPresent) kotlin.srcDir("src/generated/kotlin")
+            // generated bindings + hand-written ones built on them (excluded for core-only verification builds)
+            if (!coreOnly) {
+                kotlin.srcDir("src/generated/kotlin")
+                kotlin.srcDir("src/extras/kotlin")
+            }
             dependencies {
                 api(libs.compose.runtime)
                 api(libs.coroutines.core)
@@ -62,5 +74,27 @@ mavenPublishing {
     publishToMavenCentral()
     if (project.hasProperty("signingInMemoryKey")) {
         signAllPublications()
+    }
+}
+
+/**
+ * Copies the Swift renderer (ComposeSwiftUI) into an app project, re-exporting your Kotlin framework:
+ *   ./gradlew :runtime:installSwiftRenderer -Pdest=/path/to/App/ComposeSwiftUI -Pframework=Shared
+ */
+tasks.register("installSwiftRenderer") {
+    group = "compose swiftui"
+    description = "Copies the Swift renderer sources into -Pdest, importing the Kotlin framework -Pframework."
+    val src = rootProject.layout.projectDirectory.dir("swift/ComposeSwiftUI")
+    val dest = providers.gradleProperty("dest")
+    val framework = providers.gradleProperty("framework").orElse("Shared")
+    doLast {
+        val target = file(dest.get())
+        copy {
+            from(src)
+            into(target)
+            exclude("KotlinModule.swift")
+        }
+        target.resolve("KotlinModule.swift").writeText("@_exported import ${framework.get()}\n")
+        println("Swift renderer installed in $target (Kotlin framework: ${framework.get()})")
     }
 }

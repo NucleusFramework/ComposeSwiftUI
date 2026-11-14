@@ -67,8 +67,8 @@ for section, title, kind, path in entries:
 
 lines = ["# SwiftUI API coverage", "",
          "Every symbol entry of Apple's SwiftUI documentation index (developer.apple.com/documentation/swiftui), "
-         "matched against the iOS 27 / macOS 27 SDK symbol graphs and the generator.", "",
-         "Legend: ✅ generated and compiler-verified on iOS **and** macOS · ☑️ covered by an equivalent overload · "
+         "matched against the iOS, macOS, tvOS and watchOS 27 SDK symbol graphs and the generator.", "",
+         "Legend: ✅ generated and compiler-verified on every platform where Apple ships it (iOS, macOS, tvOS, watchOS) · ☑️ covered by an equivalent overload · "
          "⛔ generated but rejected by the compiler (reason given) · ➖ skipped (reason given) · · not applicable to a "
          "declarative bridge (type aliases, operators, read-only instance properties) · ? not in the iOS/macOS SDK.", "",
          "## Summary", "", "| Status | Entries |", "|---|---|"]

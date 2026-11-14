@@ -40,7 +40,7 @@ ComposeView { ProfileKt.profileScreen() }      // after ComposeGenerated.setUp()
  └──────────────────────────────┘                 └────────────────────────────────────────┘
 ```
 
-- `runtime/` — Kotlin Multiplatform library (iosArm64, iosSimulatorArm64, macosArm64): `SNode` tree, `SNodeApplier`,
+- `runtime/` — Kotlin Multiplatform library (iOS, macOS, tvOS, watchOS): `SNode` tree, `SNodeApplier`,
   `ComposeSwiftUIHost` (Recomposer, frame clock, `ViewModelStoreOwner`), `Modifier`, `viewModel { }`, `watchFlow`.
 - `swift/ComposeSwiftUI/` — the Swift renderer: `ComposeView`, `NodeView`, typed argument decoding, bindings.
 - Only the node that changed is invalidated on the Swift side (one `ObservableObject` per node); children keep stable
@@ -66,7 +66,8 @@ ComposeView { ProfileKt.profileScreen() }      // after ComposeGenerated.setUp()
 
 ```bash
 generator/extract.sh                        # symbol graphs from the installed Xcode SDKs
-python3 -I generator/verify.py <sg> . build/corefw/macos build/corefw/ios --kotlin
+./gradlew :runtime:linkDebugFrameworkMacosArm64 :runtime:linkDebugFrameworkIosSimulatorArm64 -Pcsui.coreOnly=true  # core frameworks
+python3 -I generator/verify.py <sg> . <core-framework-root> --kotlin
 python3 -I generator/api_index.py .         # docs/API.md — every Kotlin entry point
 python3 -I generator/coverage_report.py <apple-doc-index.json> .   # docs/COVERAGE.md
 ```
@@ -100,12 +101,68 @@ See `bench/BENCH_GUIDE.md` to write screens.
 3. Call `ComposeGenerated.setUp()` once at startup, then use `ComposeView { YourKt.yourScreen() }` anywhere in SwiftUI.
 4. Plain SwiftUI code can observe the same view models with `watchFlow` (see `bench/app/FlowState.swift`).
 
-## Limits (current)
+## Beyond the generated API (hand-written, `Extras.kt` / `Handwritten.swift`)
 
-- Data-driven SwiftUI containers that take Swift collections + `(Element) -> Content` builders (`ForEach`,
-  `List(data)`, `Table`) are replaced by Kotlin loops with `key(...)`. Builders with parameters are not generated;
-  `GeometryReader { size -> }` is provided by hand.
-- `Shape` methods returning shapes are not generated; `ShapeView(shape, fill, stroke, lineWidth, strokeStyle,
-  trimFrom, trimTo)` covers fill / stroke / trim.
-- Types without a Kotlin representation (`UTType`, `AttributedString`, `Transferable`, `KeyPath`…) are skipped; see the
-  skip reasons in `docs/COVERAGE.md`.
+| SwiftUI | Compose SwiftUI |
+|---|---|
+| `ForEach(items, id:)` | `ForEach(items, key = { it.id }) { item -> }` (or a Kotlin `for` + `key`) |
+| `NavigationStack(path:)` + `navigationDestination(for:)` | `NavigationStack(path, onPathChange, destination = { value -> }) { root }` |
+| `sheet(item:)`, `fullScreenCover(item:)`, `popover(item:)`, `alert(…presenting:)`, `confirmationDialog(…presenting:)` | `Modifier.sheet(item, onDismiss) { item -> }`… |
+| `@Environment(\.colorScheme / .dynamicTypeSize / .horizontalSizeClass / .locale / .layoutDirection / .isEnabled / .isPresented / .dismiss)` | `EnvironmentReader { env -> }` |
+| `@FocusState` + `.focused($x)` | `Modifier.focused(isFocused, onFocusChange)` |
+| `DragGesture`, `MagnifyGesture`, `RotateGesture`, `SpatialTapGesture` | `Modifier.dragGesture(…)`, `magnifyGesture`, `rotateGesture`, `onTapGesture { x, y -> }` |
+| `@Namespace` + `matchedGeometryEffect`, `matchedTransitionSource`, `.navigationTransition(.zoom)` | `NamespaceScope { ns -> }` + `Modifier.matchedGeometryEffect(id, ns)`, `matchedTransitionSource`, `zoomTransition` |
+| `withAnimation(.spring) { }` | `withAnimation(Animation.spring) { state = … }` (recomposition lands in the animated transaction) |
+| custom `Layout` | `CustomLayout(policy: LayoutPolicy) { content }` |
+| custom `Shape` | `PathShape { moveTo(0.0, 0.0); lineTo(1.0, 0.5); close() }` (unit coordinates) |
+| `GeometryReader { proxy in }` | `GeometryReader { size -> }` |
+| any Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map", modifier, args…)` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
+| `Text("**Hello**")` / localized keys | `Text(LocalizedKey("hello.title"))` or `"hello.title".localized` (plain `String` = verbatim) |
+| `Circle().trim(from:to:).stroke(style:)` | `ShapeView(Circle(), stroke = …, strokeStyle = StrokeStyle(…), trimFrom, trimTo)` |
+| reactive inputs from Swift | `ComposeView(input: value) { … }` + Kotlin `hostInput<T>()` |
+
+## Performance
+
+The renderer is built so that Compose's targeted recomposition pays off on the SwiftUI side:
+
+- one Observation-tracked model per node: a state change re-evaluates only the nodes whose arguments changed
+  (plain SwiftUI re-evaluates the whole `body` that reads the state);
+- modifiers are applied with a generic recursive chain (`ModChain`): the concrete `ModifiedContent<…>` type is kept at
+  every step and a node costs a single `AnyView`;
+- arguments are read through typed Kotlin accessors (`SArgs`): no NSArray bridging, no Swift dynamic casts;
+- methods of the concrete type at the head of a chain (`Text.font`, `Image.resizable`…) are applied as Swift would.
+
+Release numbers for the 50 screens ([docs/bench/RESULTS.md](docs/bench/RESULTS.md), mean of per-screen medians):
+
+| | Pixel-identical | Mount (SwiftUI → Compose SwiftUI) | Update (SwiftUI → Compose SwiftUI) |
+|---|---|---|---|
+| iOS simulator | 48 / 50 | 24.3 → 25.8 ms (×1.06) | 1.81 → 1.49 ms (**×0.82, faster**) |
+| macOS | 50 / 50 | 15.0 → 17.2 ms (×1.14) | 2.15 → 2.13 ms (×0.99) |
+
+Updates are as fast or faster than plain SwiftUI: only the nodes whose arguments changed are re-evaluated. Mounting
+costs a few percent more: Kotlin composition is ~0.3 ms per screen, and the rest is SwiftUI building one extra
+type-erased layer per dynamic node (`AnyView` + `ForEach` element), the price of a tree decided at runtime instead of at
+compile time.
+
+## Platforms
+
+iOS (arm64, simulator arm64/x64), macOS (arm64, x64), tvOS (arm64, simulator), watchOS (arm64, deviceArm64, simulator).
+The generator reads the symbol graphs of every platform and emits `#if os(...)` / `#available` guards; `verify.py`
+typechecks the generated Swift for iOS, macOS, tvOS and watchOS. visionOS has no Kotlin/Native target.
+
+## Installing the Swift renderer in an app
+
+```bash
+./gradlew :runtime:installSwiftRenderer -Pdest=/path/to/App/ComposeSwiftUI -Pframework=Shared
+```
+
+copies the renderer sources and writes `KotlinModule.swift` re-exporting your Kotlin framework (`Shared`).
+
+## Known differences
+
+- Kotlin can't overload on parameter names: overloads that differ only by Swift labels get the label as suffix
+  (`ImageSystemName("star")` for `Image(systemName:)`).
+- Two benchmark screens show sub-pixel differences on iOS only (an SF Symbol vertically centred 1 px apart in one
+  column, and the Liquid Glass search field placeholder after updates); macOS is pixel-identical on all 50 screens.
+- APIs whose Swift types have no Kotlin representation (`UTType`, `Transferable`, `KeyPath`, `AttributedString`…) are
+  listed with the reason in `docs/COVERAGE.md`.

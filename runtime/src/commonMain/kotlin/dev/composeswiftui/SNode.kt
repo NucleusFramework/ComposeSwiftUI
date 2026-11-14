@@ -31,14 +31,14 @@ class SSlotRef internal constructor(val index: Int) {
  * SwiftUI type (e.g. `Font.title`, `Color(red:green:blue:)`, `.borderedProminent`).
  * [id] is a generated identifier decoded by the generated Swift code.
  */
-open class SExpr(val id: Int, val args: List<Any?> = emptyList()) {
+open class SExpr(val id: Int, val args: List<Any?> = emptyList()) : SArgs by ExprArgs(args) {
     override fun equals(other: Any?) = other is SExpr && other.id == id && other.args == args
     override fun hashCode() = id * 31 + args.hashCode()
     override fun toString() = "SExpr($id, $args)"
 }
 
 /** One applied view modifier: generated [id] plus its encoded arguments. */
-class SModifier(val id: Int, val args: List<Any?>) {
+class SModifier(val id: Int, val args: List<Any?>) : SArgs by ExprArgs(args) {
     override fun equals(other: Any?) = other is SModifier && other.id == id && other.args == args
     override fun hashCode() = id * 31 + args.hashCode()
 }
@@ -47,11 +47,33 @@ class SModifier(val id: Int, val args: List<Any?>) {
  * Node of the tree produced by composition. Swift renders each node as one SwiftUI view.
  * [kind] identifies the SwiftUI view type (generated id, or one of [SNodeKinds]).
  */
-class SNode internal constructor(val kind: Int) {
+class SNode internal constructor(val kind: Int) : SArgs {
     val id: Long = nextId++
 
     var args: List<Any?> = emptyList()
         private set
+
+    private val argsView = object : ListArgs() {
+        override val argList get() = args
+    }
+
+    override fun argCount() = argsView.argCount()
+    override fun argIsNull(index: Int) = argsView.argIsNull(index)
+    override fun argDouble(index: Int) = argsView.argDouble(index)
+    override fun argInt(index: Int) = argsView.argInt(index)
+    override fun argBool(index: Int) = argsView.argBool(index)
+    override fun argString(index: Int) = argsView.argString(index)
+    override fun argExpr(index: Int) = argsView.argExpr(index)
+    override fun argAction(index: Int) = argsView.argAction(index)
+    override fun argCallback(index: Int) = argsView.argCallback(index)
+    override fun argSlot(index: Int) = argsView.argSlot(index)
+    override fun argExprList(index: Int) = argsView.argExprList(index)
+    override fun argList(index: Int) = argsView.argList(index)
+    override fun argAt(index: Int) = argsView.argAt(index)
+
+    /** Modifier [index] of the chain (avoids bridging the whole list from Swift). */
+    fun modifierAt(index: Int): SModifier = modifiers[index]
+    fun modifierCount(): Int = modifiers.size
     var modifiers: List<SModifier> = emptyList()
         private set
 
@@ -60,6 +82,9 @@ class SNode internal constructor(val kind: Int) {
 
     /** Slot nodes by slot index (secondary builders such as labels, overlays, sheets). */
     fun slot(index: Int): SNode? = _children.firstOrNull { it.kind == SNodeKinds.SLOT && it.slotIndex == index }
+
+    /** True when the node has neither children nor slots (rendered inline by its parent on the Swift side). */
+    val isLeaf: Boolean get() = _children.isEmpty()
 
     var slotIndex: Int = -1
         internal set
@@ -161,3 +186,5 @@ private fun transferCallbacks(old: Any?, new: Any?) {
         old is SExpr && new is SExpr -> transferCallbacks(old.args, new.args)
     }
 }
+
+internal class ExprArgs(override val argList: List<Any?>) : ListArgs()

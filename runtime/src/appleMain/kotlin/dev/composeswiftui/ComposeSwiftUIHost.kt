@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Recomposer
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.ObserverHandle
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.lifecycle.ViewModelStore
@@ -33,6 +34,13 @@ class ComposeSwiftUIHost(private val content: @Composable () -> Unit) : ViewMode
     private val recomposer = Recomposer(scope.coroutineContext + clock)
     private var composition: Composition? = null
     private var frameScheduled = false
+    private val input = mutableStateOf<Any?>(null)
+
+    /** Pushes a new value from Swift (`ComposeView(input:)`); read it with [hostInput]. */
+    fun updateInput(value: Any?) {
+        input.value = value
+        flush()
+    }
 
     /** Starts composing. Idempotent. */
     fun start() {
@@ -41,7 +49,13 @@ class ComposeSwiftUIHost(private val content: @Composable () -> Unit) : ViewMode
         GlobalSnapshotManager.ensureStarted()
         scope.launch(clock, start = CoroutineStart.UNDISPATCHED) { recomposer.runRecomposeAndApplyChanges() }
         composition = Composition(SNodeApplier(root), recomposer).apply {
-            setContent { CompositionLocalProvider(LocalViewModelStoreOwner provides this@ComposeSwiftUIHost, content = content) }
+            setContent {
+                CompositionLocalProvider(
+                    LocalViewModelStoreOwner provides this@ComposeSwiftUIHost,
+                    LocalHostInput provides input.value,
+                    content = content,
+                )
+            }
         }
     }
 

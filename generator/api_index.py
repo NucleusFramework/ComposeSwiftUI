@@ -16,7 +16,7 @@ for m in re.finditer(r"public fun (\w+)\((.*?)\n\) \{", views, re.S):
     out.append(collapse("%s(%s)" % (m.group(1), m.group(2))))
 for m in re.finditer(r"public fun (\w+View)\(([^)]*)\)", views):
     out.append(collapse("%s(%s)" % (m.group(1), m.group(2))))
-hand = open(os.path.join(root, "runtime/src/commonMain/kotlin/dev/composeswiftui/Handwritten.kt")).read()
+hand = open(os.path.join(root, "runtime/src/extras/kotlin/dev/composeswiftui/Handwritten.kt")).read()
 for m in re.finditer(r"public fun (ShapeView)\((.*?)\n\) \{", hand, re.S):
     out.append(collapse("%s(%s)" % (m.group(1), m.group(2))))
 out += ["```", "", "## Modifiers", "", "```kotlin"]

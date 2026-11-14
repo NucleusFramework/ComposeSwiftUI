@@ -14,7 +14,7 @@ import kotlin.native.HiddenFromObjC
  * ```swift
  * @frozen nonisolated struct AngularGradient
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
@@ -29,7 +29,7 @@ public fun AngularGradientView(angularGradient: AngularGradient, modifier: Modif
  * ```swift
  * @frozen struct AnyShape
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
@@ -44,7 +44,7 @@ public fun AnyShapeView(anyShape: AnyShape, modifier: Modifier = Modifier) {
  * ```swift
  * nonisolated init(@ContentBuilder primary: () -> Primary, @ContentBuilder secondary: () -> Secondary)
  * ```
- * Availability: iOS 27.1+, macOS 27.1+
+ * Availability: iOS 27.1+, macOS 27.1+, tvOS 27.1+, watchOS 27.1+
  */
 @HiddenFromObjC
 @Composable
@@ -62,7 +62,7 @@ public fun ArrangementView(
  * ```swift
  * nonisolated init(url: URL?, scale: CGFloat = 1) where Content == Image
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -80,7 +80,7 @@ public fun AsyncImage(
  * ```swift
  * @preconcurrency nonisolated init(role: ButtonRole?, action: @escaping @MainActor () -> Void, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -99,7 +99,7 @@ public fun Button(
  * ```swift
  * @preconcurrency nonisolated init(action: @escaping @MainActor () -> Void, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -117,7 +117,7 @@ public fun Button(
  * ```swift
  * @preconcurrency nonisolated init(role: ButtonRole, action: @escaping @MainActor () -> Void)
  * ```
- * Availability: iOS 26.0+, macOS 26.0+
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
 @HiddenFromObjC
 @Composable
@@ -135,7 +135,7 @@ public fun Button(
  * ```swift
  * @preconcurrency nonisolated init<S>(_ title: S, role: ButtonRole?, action: @escaping @MainActor () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -145,7 +145,7 @@ public fun Button(
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(9, listOf(title, role, SAction(action)), modifier)
+    SwiftView(10, listOf(title, role, SAction(action)), modifier)
 }
 
 /**
@@ -154,7 +154,7 @@ public fun Button(
  * ```swift
  * @preconcurrency nonisolated init<S>(_ title: S, action: @escaping @MainActor () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -163,7 +163,7 @@ public fun Button(
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(11, listOf(title, SAction(action)), modifier)
+    SwiftView(13, listOf(title, SAction(action)), modifier)
 }
 
 /**
@@ -172,7 +172,7 @@ public fun Button(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, systemImage: String, role: ButtonRole?, action: @escaping @MainActor () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -183,7 +183,7 @@ public fun Button(
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(13, listOf(title, systemImage, role, SAction(action)), modifier)
+    SwiftView(16, listOf(title, systemImage, role, SAction(action)), modifier)
 }
 
 /**
@@ -192,7 +192,7 @@ public fun Button(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, systemImage: String, action: @escaping @MainActor () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -202,7 +202,7 @@ public fun Button(
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(15, listOf(title, systemImage, SAction(action)), modifier)
+    SwiftView(19, listOf(title, systemImage, SAction(action)), modifier)
 }
 
 /**
@@ -211,13 +211,13 @@ public fun Button(
  * ```swift
  * struct ButtonBorderShape
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun ButtonBorderShapeView(buttonBorderShape: ButtonBorderShape, modifier: Modifier = Modifier) {
-    SwiftView(16, listOf(buttonBorderShape), modifier)
+    SwiftView(20, listOf(buttonBorderShape), modifier)
 }
 
 /**
@@ -226,13 +226,13 @@ public fun ButtonBorderShapeView(buttonBorderShape: ButtonBorderShape, modifier:
  * ```swift
  * @frozen struct Capsule
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun CapsuleView(capsule: Capsule, modifier: Modifier = Modifier) {
-    SwiftView(17, listOf(capsule), modifier)
+    SwiftView(21, listOf(capsule), modifier)
 }
 
 /**
@@ -241,13 +241,13 @@ public fun CapsuleView(capsule: Capsule, modifier: Modifier = Modifier) {
  * ```swift
  * @frozen struct Circle
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun CircleView(circle: Circle, modifier: Modifier = Modifier) {
-    SwiftView(18, listOf(circle), modifier)
+    SwiftView(22, listOf(circle), modifier)
 }
 
 /**
@@ -256,13 +256,13 @@ public fun CircleView(circle: Circle, modifier: Modifier = Modifier) {
  * ```swift
  * @frozen struct Color
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun ColorView(color: Color, modifier: Modifier = Modifier) {
-    SwiftView(19, listOf(color), modifier)
+    SwiftView(23, listOf(color), modifier)
 }
 
 /**
@@ -271,13 +271,13 @@ public fun ColorView(color: Color, modifier: Modifier = Modifier) {
  * ```swift
  * struct ConcentricRectangle
  * ```
- * Availability: iOS 26.0+, macOS 26.0+
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun ConcentricRectangleView(concentricRectangle: ConcentricRectangle, modifier: Modifier = Modifier) {
-    SwiftView(20, listOf(concentricRectangle), modifier)
+    SwiftView(24, listOf(concentricRectangle), modifier)
 }
 
 /**
@@ -286,13 +286,13 @@ public fun ConcentricRectangleView(concentricRectangle: ConcentricRectangle, mod
  * ```swift
  * @frozen struct ContainerRelativeShape
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun ContainerRelativeShapeView(containerRelativeShape: ContainerRelativeShape, modifier: Modifier = Modifier) {
-    SwiftView(21, listOf(containerRelativeShape), modifier)
+    SwiftView(25, listOf(containerRelativeShape), modifier)
 }
 
 /**
@@ -301,7 +301,7 @@ public fun ContainerRelativeShapeView(containerRelativeShape: ContainerRelativeS
  * ```swift
  * nonisolated init(@ContentBuilder label: () -> Label, @ContentBuilder description: () -> Description = { EmptyView() }, @ContentBuilder actions: () -> Actions = { EmptyView() })
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -311,25 +311,7 @@ public fun ContentUnavailableView(
     description: @Composable () -> Unit,
     actions: @Composable () -> Unit,
 ) {
-    SwiftView(22, listOf(SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, description, actions))
-}
-
-/**
- * SwiftUI `ContentUnavailableView.init(_:systemImage:description:)`
- *
- * ```swift
- * nonisolated init<S>(_ title: S, systemImage name: String, description: Text? = nil) where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ContentUnavailableView(
-    title: String,
-    systemImage: String,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(24, listOf(title, systemImage), modifier)
+    SwiftView(26, listOf(SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, description, actions))
 }
 
 /**
@@ -338,7 +320,7 @@ public fun ContentUnavailableView(
  * ```swift
  * nonisolated init<C, L>(@ContentBuilder content: () -> C, @ContentBuilder label: () -> L) where Content == LabeledControlGroupContent<C, L>, C : View, L : View
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -347,7 +329,7 @@ public fun ControlGroup(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(27, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(33, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -356,7 +338,7 @@ public fun ControlGroup(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -364,7 +346,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(28, listOf(), modifier, content = content)
+    SwiftView(34, listOf(), modifier, content = content)
 }
 
 /**
@@ -373,7 +355,7 @@ public fun ControlGroup(
  * ```swift
  * @export(implementation) nonisolated init<C, S>(_ title: S, systemImage: String, @ContentBuilder content: () -> C) where Content == LabeledControlGroupContent<C, Label<Text, Image>>, C : View, S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -383,7 +365,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(30, listOf(title, systemImage), modifier, content = content)
+    SwiftView(37, listOf(title, systemImage), modifier, content = content)
 }
 
 /**
@@ -392,7 +374,7 @@ public fun ControlGroup(
  * ```swift
  * @export(implementation) nonisolated init<C, S>(_ title: S, @ContentBuilder content: () -> C) where Content == LabeledControlGroupContent<C, Text>, C : View, S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -401,7 +383,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(32, listOf(title), modifier, content = content)
+    SwiftView(40, listOf(title), modifier, content = content)
 }
 
 /**
@@ -410,7 +392,7 @@ public fun ControlGroup(
  * ```swift
  * nonisolated init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -421,7 +403,7 @@ public fun DatePicker(
     onSelectionChange: (Double) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(33, listOf(selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier, content = content)
+    SwiftView(41, listOf(selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier, content = content)
 }
 
 /**
@@ -430,7 +412,7 @@ public fun DatePicker(
  * ```swift
  * nonisolated init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -441,7 +423,7 @@ public fun DatePicker(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(35, listOf(title, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
+    SwiftView(44, listOf(title, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
 }
 
 /**
@@ -450,13 +432,13 @@ public fun DatePicker(
  * ```swift
  * nonisolated struct DefaultDocumentGroupLaunchActions
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun DefaultDocumentGroupLaunchActionsView(defaultDocumentGroupLaunchActions: DefaultDocumentGroupLaunchActions, modifier: Modifier = Modifier) {
-    SwiftView(36, listOf(defaultDocumentGroupLaunchActions), modifier)
+    SwiftView(45, listOf(defaultDocumentGroupLaunchActions), modifier)
 }
 
 /**
@@ -465,13 +447,13 @@ public fun DefaultDocumentGroupLaunchActionsView(defaultDocumentGroupLaunchActio
  * ```swift
  * struct DefaultGlassEffectShape
  * ```
- * Availability: iOS 26.0+, macOS 26.0+
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun DefaultGlassEffectShapeView(defaultGlassEffectShape: DefaultGlassEffectShape, modifier: Modifier = Modifier) {
-    SwiftView(37, listOf(defaultGlassEffectShape), modifier)
+    SwiftView(46, listOf(defaultGlassEffectShape), modifier)
 }
 
 /**
@@ -480,7 +462,7 @@ public fun DefaultGlassEffectShapeView(defaultGlassEffectShape: DefaultGlassEffe
  * ```swift
  * nonisolated init(isExpanded: Binding<Bool>, @ContentBuilder content: @escaping () -> Content, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -491,7 +473,7 @@ public fun DisclosureGroup(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(38, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(47, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -500,7 +482,7 @@ public fun DisclosureGroup(
  * ```swift
  * nonisolated init(@ContentBuilder content: @escaping () -> Content, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -509,7 +491,7 @@ public fun DisclosureGroup(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(39, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(48, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -518,7 +500,7 @@ public fun DisclosureGroup(
  * ```swift
  * nonisolated init<S>(_ label: S, isExpanded: Binding<Bool>, @ContentBuilder content: @escaping () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -529,7 +511,7 @@ public fun DisclosureGroup(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(41, listOf(label, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(51, listOf(label, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -538,7 +520,7 @@ public fun DisclosureGroup(
  * ```swift
  * nonisolated init<S>(_ label: S, @ContentBuilder content: @escaping () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -547,7 +529,7 @@ public fun DisclosureGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(43, listOf(label), modifier, content = content)
+    SwiftView(54, listOf(label), modifier, content = content)
 }
 
 /**
@@ -556,14 +538,14 @@ public fun DisclosureGroup(
  * ```swift
  * nonisolated init()
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun Divider(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(44, listOf(), modifier)
+    SwiftView(55, listOf(), modifier)
 }
 
 /**
@@ -572,13 +554,13 @@ public fun Divider(
  * ```swift
  * nonisolated struct EditButton
  * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op)
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun EditButtonView(editButton: EditButton, modifier: Modifier = Modifier) {
-    SwiftView(45, listOf(editButton), modifier)
+    SwiftView(56, listOf(editButton), modifier)
 }
 
 /**
@@ -587,13 +569,13 @@ public fun EditButtonView(editButton: EditButton, modifier: Modifier = Modifier)
  * ```swift
  * @frozen struct Ellipse
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun EllipseView(ellipse: Ellipse, modifier: Modifier = Modifier) {
-    SwiftView(46, listOf(ellipse), modifier)
+    SwiftView(57, listOf(ellipse), modifier)
 }
 
 /**
@@ -602,13 +584,13 @@ public fun EllipseView(ellipse: Ellipse, modifier: Modifier = Modifier) {
  * ```swift
  * @frozen nonisolated struct EllipticalGradient
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun EllipticalGradientView(ellipticalGradient: EllipticalGradient, modifier: Modifier = Modifier) {
-    SwiftView(47, listOf(ellipticalGradient), modifier)
+    SwiftView(58, listOf(ellipticalGradient), modifier)
 }
 
 /**
@@ -617,14 +599,14 @@ public fun EllipticalGradientView(ellipticalGradient: EllipticalGradient, modifi
  * ```swift
  * nonisolated init()
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun EmptyView(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(48, listOf(), modifier)
+    SwiftView(59, listOf(), modifier)
 }
 
 /**
@@ -633,7 +615,7 @@ public fun EmptyView(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -641,7 +623,7 @@ public fun Form(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(49, listOf(), modifier, content = content)
+    SwiftView(60, listOf(), modifier, content = content)
 }
 
 /**
@@ -650,7 +632,7 @@ public fun Form(
  * ```swift
  * nonisolated init<V>(value: V, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> CurrentValueLabel, @ContentBuilder markedValueLabels: () -> MarkedValueLabels) where BoundsLabel == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -662,7 +644,7 @@ public fun Gauge(
     currentValueLabel: @Composable () -> Unit,
     markedValueLabels: @Composable () -> Unit,
 ) {
-    SwiftView(50, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, currentValueLabel, markedValueLabels))
+    SwiftView(61, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, currentValueLabel, markedValueLabels))
 }
 
 /**
@@ -671,7 +653,7 @@ public fun Gauge(
  * ```swift
  * nonisolated init<V>(value: V, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> CurrentValueLabel, @ContentBuilder minimumValueLabel: () -> BoundsLabel, @ContentBuilder maximumValueLabel: () -> BoundsLabel, @ContentBuilder markedValueLabels: () -> MarkedValueLabels) where V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -685,7 +667,7 @@ public fun Gauge(
     maximumValueLabel: @Composable () -> Unit,
     markedValueLabels: @Composable () -> Unit,
 ) {
-    SwiftView(51, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SSlotRef(4)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel, markedValueLabels))
+    SwiftView(62, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SSlotRef(4)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel, markedValueLabels))
 }
 
 /**
@@ -694,7 +676,7 @@ public fun Gauge(
  * ```swift
  * nonisolated init<V>(value: V, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> CurrentValueLabel, @ContentBuilder minimumValueLabel: () -> BoundsLabel, @ContentBuilder maximumValueLabel: () -> BoundsLabel) where MarkedValueLabels == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -707,7 +689,7 @@ public fun Gauge(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(52, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
+    SwiftView(63, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -716,7 +698,7 @@ public fun Gauge(
  * ```swift
  * nonisolated init<V>(value: V, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> CurrentValueLabel) where BoundsLabel == EmptyView, MarkedValueLabels == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -727,7 +709,7 @@ public fun Gauge(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(53, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
+    SwiftView(64, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
 }
 
 /**
@@ -736,7 +718,7 @@ public fun Gauge(
  * ```swift
  * nonisolated init<V>(value: V, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label) where CurrentValueLabel == EmptyView, BoundsLabel == EmptyView, MarkedValueLabels == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -746,7 +728,7 @@ public fun Gauge(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(54, listOf(value, listOf(bounds.start, bounds.endInclusive)), modifier, content = content)
+    SwiftView(65, listOf(value, listOf(bounds.start, bounds.endInclusive)), modifier, content = content)
 }
 
 /**
@@ -755,7 +737,7 @@ public fun Gauge(
  * ```swift
  * @MainActor @preconcurrency init(spacing: CGFloat? = nil, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 26.0+, macOS 26.0+
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
 @HiddenFromObjC
 @Composable
@@ -764,7 +746,7 @@ public fun GlassEffectContainer(
     spacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(55, listOf(spacing), modifier, content = content)
+    SwiftView(66, listOf(spacing), modifier, content = content)
 }
 
 /**
@@ -773,7 +755,7 @@ public fun GlassEffectContainer(
  * ```swift
  * nonisolated init(alignment: Alignment = .center, horizontalSpacing: CGFloat? = nil, verticalSpacing: CGFloat? = nil, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -784,7 +766,7 @@ public fun Grid(
     verticalSpacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(56, listOf(alignment, horizontalSpacing, verticalSpacing), modifier, content = content)
+    SwiftView(67, listOf(alignment, horizontalSpacing, verticalSpacing), modifier, content = content)
 }
 
 /**
@@ -793,7 +775,7 @@ public fun Grid(
  * ```swift
  * nonisolated init(alignment: VerticalAlignment? = nil, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -802,7 +784,7 @@ public fun GridRow(
     alignment: VerticalAlignment? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(57, listOf(alignment), modifier, content = content)
+    SwiftView(68, listOf(alignment), modifier, content = content)
 }
 
 /**
@@ -811,7 +793,7 @@ public fun GridRow(
  * ```swift
  * @export(implementation) nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -819,7 +801,7 @@ public fun Group(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(58, listOf(), modifier, content = content)
+    SwiftView(69, listOf(), modifier, content = content)
 }
 
 /**
@@ -828,7 +810,7 @@ public fun Group(
  * ```swift
  * @export(implementation) nonisolated init(@ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -837,7 +819,7 @@ public fun GroupBox(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(59, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(70, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -846,7 +828,7 @@ public fun GroupBox(
  * ```swift
  * nonisolated init<S>(_ title: S, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -855,7 +837,7 @@ public fun GroupBox(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(61, listOf(title), modifier, content = content)
+    SwiftView(73, listOf(title), modifier, content = content)
 }
 
 /**
@@ -864,7 +846,7 @@ public fun GroupBox(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -872,7 +854,7 @@ public fun GroupBox(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(62, listOf(), modifier, content = content)
+    SwiftView(74, listOf(), modifier, content = content)
 }
 
 /**
@@ -881,7 +863,7 @@ public fun GroupBox(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -889,7 +871,7 @@ public fun HSplitView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(63, listOf(), modifier, content = content)
+    SwiftView(75, listOf(), modifier, content = content)
 }
 
 /**
@@ -898,7 +880,7 @@ public fun HSplitView(
  * ```swift
  * nonisolated init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -908,7 +890,7 @@ public fun HStack(
     spacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(64, listOf(alignment, spacing), modifier, content = content)
+    SwiftView(76, listOf(alignment, spacing), modifier, content = content)
 }
 
 /**
@@ -917,13 +899,13 @@ public fun HStack(
  * ```swift
  * @MainActor @preconcurrency struct HelpLink
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun HelpLinkView(helpLink: HelpLink, modifier: Modifier = Modifier) {
-    SwiftView(65, listOf(helpLink), modifier)
+    SwiftView(77, listOf(helpLink), modifier)
 }
 
 /**
@@ -932,7 +914,7 @@ public fun HelpLinkView(helpLink: HelpLink, modifier: Modifier = Modifier) {
  * ```swift
  * init(decorative name: String, variableValue: Double?, bundle: Bundle? = nil)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -941,7 +923,7 @@ public fun Image(
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(66, listOf(decorative, variableValue), modifier)
+    SwiftView(78, listOf(decorative, variableValue), modifier)
 }
 
 /**
@@ -950,7 +932,7 @@ public fun Image(
  * ```swift
  * init(decorative name: String, bundle: Bundle? = nil)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -958,7 +940,7 @@ public fun Image(
     decorative: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(67, listOf(decorative), modifier)
+    SwiftView(79, listOf(decorative), modifier)
 }
 
 /**
@@ -967,7 +949,7 @@ public fun Image(
  * ```swift
  * init(systemName: String, variableValue: Double?)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -976,7 +958,7 @@ public fun ImageSystemName(
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(68, listOf(systemName, variableValue), modifier)
+    SwiftView(80, listOf(systemName, variableValue), modifier)
 }
 
 /**
@@ -985,7 +967,7 @@ public fun ImageSystemName(
  * ```swift
  * init(systemName: String)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -993,7 +975,7 @@ public fun ImageSystemName(
     systemName: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(69, listOf(systemName), modifier)
+    SwiftView(81, listOf(systemName), modifier)
 }
 
 /**
@@ -1002,7 +984,7 @@ public fun ImageSystemName(
  * ```swift
  * init(_ name: String, variableValue: Double?, bundle: Bundle? = nil)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1011,7 +993,7 @@ public fun ImageVariableValue(
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(70, listOf(name, variableValue), modifier)
+    SwiftView(83, listOf(name, variableValue), modifier)
 }
 
 /**
@@ -1020,7 +1002,7 @@ public fun ImageVariableValue(
  * ```swift
  * nonisolated init(@ContentBuilder title: () -> Title, @ContentBuilder icon: () -> Icon)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1029,7 +1011,7 @@ public fun Label(
     title: @Composable () -> Unit,
     icon: @Composable () -> Unit,
 ) {
-    SwiftView(72, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(title, icon))
+    SwiftView(86, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(title, icon))
 }
 
 /**
@@ -1038,7 +1020,7 @@ public fun Label(
  * ```swift
  * nonisolated init<S>(_ title: S, systemImage name: String) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1047,7 +1029,7 @@ public fun Label(
     systemImage: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(74, listOf(title, systemImage), modifier)
+    SwiftView(89, listOf(title, systemImage), modifier)
 }
 
 /**
@@ -1056,7 +1038,7 @@ public fun Label(
  * ```swift
  * init<S>(_ title: S, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1065,7 +1047,7 @@ public fun LabeledContent(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(78, listOf(title), modifier, content = content)
+    SwiftView(95, listOf(title), modifier, content = content)
 }
 
 /**
@@ -1074,7 +1056,7 @@ public fun LabeledContent(
  * ```swift
  * init<S1, S2>(_ title: S1, value: S2) where S1 : StringProtocol, S2 : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1083,7 +1065,7 @@ public fun LabeledContent(
     value: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(80, listOf(title, value), modifier)
+    SwiftView(98, listOf(title, value), modifier)
 }
 
 /**
@@ -1092,7 +1074,7 @@ public fun LabeledContent(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1101,7 +1083,7 @@ public fun LabeledContent(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(81, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(99, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1110,7 +1092,7 @@ public fun LabeledContent(
  * ```swift
  * nonisolated init(rows: [GridItem], alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1122,7 +1104,7 @@ public fun LazyHGrid(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(82, listOf(rows.toList(), alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(100, listOf(rows.toList(), alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1131,7 +1113,7 @@ public fun LazyHGrid(
  * ```swift
  * nonisolated init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1142,7 +1124,7 @@ public fun LazyHStack(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(83, listOf(alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(101, listOf(alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1151,7 +1133,7 @@ public fun LazyHStack(
  * ```swift
  * nonisolated init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1163,7 +1145,7 @@ public fun LazyVGrid(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(84, listOf(columns.toList(), alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(102, listOf(columns.toList(), alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1172,7 +1154,7 @@ public fun LazyVGrid(
  * ```swift
  * nonisolated init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1183,7 +1165,7 @@ public fun LazyVStack(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(85, listOf(alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(103, listOf(alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1192,13 +1174,13 @@ public fun LazyVStack(
  * ```swift
  * @frozen nonisolated struct LinearGradient
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun LinearGradientView(linearGradient: LinearGradient, modifier: Modifier = Modifier) {
-    SwiftView(86, listOf(linearGradient), modifier)
+    SwiftView(104, listOf(linearGradient), modifier)
 }
 
 /**
@@ -1207,7 +1189,7 @@ public fun LinearGradientView(linearGradient: LinearGradient, modifier: Modifier
  * ```swift
  * @MainActor @preconcurrency init(destination: URL, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1216,7 +1198,7 @@ public fun Link(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(87, listOf(destination), modifier, content = content)
+    SwiftView(105, listOf(destination), modifier, content = content)
 }
 
 /**
@@ -1225,7 +1207,7 @@ public fun Link(
  * ```swift
  * nonisolated init<S>(_ title: S, destination: URL) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1234,7 +1216,7 @@ public fun Link(
     destination: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(89, listOf(title, destination), modifier)
+    SwiftView(108, listOf(title, destination), modifier)
 }
 
 /**
@@ -1243,7 +1225,7 @@ public fun Link(
  * ```swift
  * nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1253,7 +1235,7 @@ public fun List(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(90, listOf(selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(109, listOf(selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -1262,7 +1244,7 @@ public fun List(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1270,7 +1252,7 @@ public fun List(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(91, listOf(), modifier, content = content)
+    SwiftView(110, listOf(), modifier, content = content)
 }
 
 /**
@@ -1279,7 +1261,7 @@ public fun List(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label, primaryAction: @escaping () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1289,7 +1271,7 @@ public fun Menu(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(92, listOf(SSlotRef(0), SAction(primaryAction)), modifier, slots = listOf(label), content = content)
+    SwiftView(111, listOf(SSlotRef(0), SAction(primaryAction)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1298,7 +1280,7 @@ public fun Menu(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1307,7 +1289,7 @@ public fun Menu(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(93, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(112, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1316,7 +1298,7 @@ public fun Menu(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, systemImage: String, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1326,7 +1308,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(96, listOf(title, systemImage), modifier, content = content)
+    SwiftView(117, listOf(title, systemImage), modifier, content = content)
 }
 
 /**
@@ -1335,7 +1317,7 @@ public fun Menu(
  * ```swift
  * nonisolated init<S>(_ title: S, @ContentBuilder content: () -> Content, primaryAction: @escaping () -> Void) where Label == Text, S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1345,7 +1327,7 @@ public fun Menu(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(98, listOf(title, SAction(primaryAction)), modifier, content = content)
+    SwiftView(120, listOf(title, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -1354,7 +1336,7 @@ public fun Menu(
  * ```swift
  * nonisolated init<S>(_ title: S, @ContentBuilder content: () -> Content) where Label == Text, S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1363,7 +1345,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(100, listOf(title), modifier, content = content)
+    SwiftView(123, listOf(title), modifier, content = content)
 }
 
 /**
@@ -1372,7 +1354,7 @@ public fun Menu(
  * ```swift
  * nonisolated init<S>(_ title: S, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1381,7 +1363,7 @@ public fun MenuButton(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(102, listOf(title), modifier, content = content)
+    SwiftView(125, listOf(title), modifier, content = content)
 }
 
 /**
@@ -1390,7 +1372,7 @@ public fun MenuButton(
  * ```swift
  * @export(implementation) nonisolated init(@ContentBuilder destination: () -> Destination, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1399,25 +1381,66 @@ public fun NavigationLink(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(103, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(126, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
- * SwiftUI `NavigationLink.init(_:destination:)`
+ * SwiftUI `NavigationLink.init(destinationName:tag:selection:label:)`
  *
  * ```swift
- * @export(implementation) nonisolated init<S>(_ title: S, @ContentBuilder destination: () -> Destination) where S : StringProtocol
+ * nonisolated init<V>(destinationName: String, tag: V, selection: Binding<V?>, @ContentBuilder label: () -> Label) where V : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun NavigationLink(
-    title: String,
+    destinationName: String,
+    tag: Any,
+    selection: Any?,
+    modifier: Modifier = Modifier,
+    onSelectionChange: (Any?) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(129, listOf(destinationName, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `NavigationLink.init(destinationName:label:)`
+ *
+ * ```swift
+ * nonisolated init(destinationName: String, @ContentBuilder label: () -> Label)
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationLink(
+    destinationName: String,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(107, listOf(title), modifier, content = content)
+    SwiftView(130, listOf(destinationName), modifier, content = content)
+}
+
+/**
+ * SwiftUI `NavigationLink.init(destinationName:isActive:label:)`
+ *
+ * ```swift
+ * nonisolated init(destinationName: String, isActive: Binding<Bool>, @ContentBuilder label: () -> Label)
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationLink(
+    destinationName: String,
+    isActive: Boolean,
+    modifier: Modifier = Modifier,
+    onIsActiveChange: (Boolean) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(131, listOf(destinationName, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -1426,7 +1449,7 @@ public fun NavigationLink(
  * ```swift
  * nonisolated init<P>(value: P?, @ContentBuilder label: () -> Label) where P : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1435,7 +1458,7 @@ public fun NavigationLink(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(112, listOf(value), modifier, content = content)
+    SwiftView(139, listOf(value), modifier, content = content)
 }
 
 /**
@@ -1444,7 +1467,7 @@ public fun NavigationLink(
  * ```swift
  * nonisolated init<P>(value: P?, @ContentBuilder label: () -> Label) where P : Decodable, P : Encodable, P : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1453,7 +1476,7 @@ public fun NavigationLinkValue(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(113, listOf(value), modifier, content = content)
+    SwiftView(140, listOf(value), modifier, content = content)
 }
 
 /**
@@ -1462,7 +1485,7 @@ public fun NavigationLinkValue(
  * ```swift
  * nonisolated init<S, P>(_ title: S, value: P?) where Label == Text, S : StringProtocol, P : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1471,7 +1494,7 @@ public fun NavigationLink(
     value: Any?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(116, listOf(title, value), modifier)
+    SwiftView(145, listOf(title, value), modifier)
 }
 
 /**
@@ -1480,7 +1503,7 @@ public fun NavigationLink(
  * ```swift
  * nonisolated init<S, P>(_ title: S, value: P?) where Label == Text, S : StringProtocol, P : Decodable, P : Encodable, P : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1489,7 +1512,7 @@ public fun NavigationLinkValue(
     value: Any?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(117, listOf(title, value), modifier)
+    SwiftView(146, listOf(title, value), modifier)
 }
 
 /**
@@ -1498,7 +1521,7 @@ public fun NavigationLinkValue(
  * ```swift
  * nonisolated init(@ContentBuilder sidebar: () -> Sidebar, @ContentBuilder detail: () -> Detail) where Content == EmptyView
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1507,7 +1530,7 @@ public fun NavigationSplitView(
     sidebar: @Composable () -> Unit,
     detail: @Composable () -> Unit,
 ) {
-    SwiftView(118, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
+    SwiftView(147, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
 }
 
 /**
@@ -1516,7 +1539,7 @@ public fun NavigationSplitView(
  * ```swift
  * nonisolated init(@ContentBuilder sidebar: () -> Sidebar, @ContentBuilder content: () -> Content, @ContentBuilder detail: () -> Detail)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1526,7 +1549,7 @@ public fun NavigationSplitView(
     content: @Composable () -> Unit,
     detail: @Composable () -> Unit,
 ) {
-    SwiftView(119, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
+    SwiftView(148, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
 }
 
 /**
@@ -1535,7 +1558,7 @@ public fun NavigationSplitView(
  * ```swift
  * nonisolated init(@ContentBuilder root: () -> Root) where Data == NavigationPath
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1543,7 +1566,7 @@ public fun NavigationStack(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(120, listOf(), modifier, content = content)
+    SwiftView(149, listOf(), modifier, content = content)
 }
 
 /**
@@ -1552,7 +1575,7 @@ public fun NavigationStack(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1560,24 +1583,7 @@ public fun NavigationView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(121, listOf(), modifier, content = content)
-}
-
-/**
- * SwiftUI `NewDocumentButton.init(_:contentType:source:)`
- *
- * ```swift
- * nonisolated init(_ label: Text? = nil, contentType: UTType? = nil, source: DocumentCreationSource)
- * ```
- * Availability: iOS 27.0+, macOS: unavailable (no-op)
- */
-@HiddenFromObjC
-@Composable
-public fun NewDocumentButton(
-    source: DocumentCreationSource,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(123, listOf(source), modifier)
+    SwiftView(150, listOf(), modifier, content = content)
 }
 
 /**
@@ -1586,7 +1592,7 @@ public fun NewDocumentButton(
  * ```swift
  * nonisolated init(_ title: some StringProtocol, contentType: UTType? = nil, source: DocumentCreationSource)
  * ```
- * Availability: iOS 27.0+, macOS: unavailable (no-op)
+ * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1595,23 +1601,7 @@ public fun NewDocumentButton(
     source: DocumentCreationSource,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(124, listOf(title, source), modifier)
-}
-
-/**
- * SwiftUI `NewDocumentButton.init(_:contentType:)`
- *
- * ```swift
- * nonisolated init(_ label: Text? = nil, contentType: UTType? = nil)
- * ```
- * Availability: iOS 18.0+, macOS 15.0+
- */
-@HiddenFromObjC
-@Composable
-public fun NewDocumentButton(
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(126, listOf(), modifier)
+    SwiftView(154, listOf(title, source), modifier)
 }
 
 /**
@@ -1620,7 +1610,7 @@ public fun NewDocumentButton(
  * ```swift
  * nonisolated init(_ title: some StringProtocol, contentType: UTType? = nil)
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -1628,7 +1618,7 @@ public fun NewDocumentButton(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(127, listOf(title), modifier)
+    SwiftView(158, listOf(title), modifier)
 }
 
 /**
@@ -1637,7 +1627,7 @@ public fun NewDocumentButton(
  * ```swift
  * init(shape: Content, offset: CGSize)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1646,7 +1636,7 @@ public fun OffsetShape(
     offset: CGSize,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(134, listOf(shape, offset), modifier)
+    SwiftView(167, listOf(shape, offset), modifier)
 }
 
 /**
@@ -1655,13 +1645,13 @@ public fun OffsetShape(
  * ```swift
  * @frozen struct Path
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun PathView(path: Path, modifier: Modifier = Modifier) {
-    SwiftView(135, listOf(path), modifier)
+    SwiftView(168, listOf(path), modifier)
 }
 
 /**
@@ -1670,7 +1660,7 @@ public fun PathView(path: Path, modifier: Modifier = Modifier) {
  * ```swift
  * nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View)
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1682,7 +1672,7 @@ public fun Picker(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(136, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel), content = content)
+    SwiftView(169, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel), content = content)
 }
 
 /**
@@ -1691,7 +1681,7 @@ public fun Picker(
  * ```swift
  * @export(implementation) nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1702,7 +1692,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(137, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(170, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1711,7 +1701,7 @@ public fun Picker(
  * ```swift
  * nonisolated init<S>(_ title: S, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder currentValueLabel: () -> some View) where S : StringProtocol
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1723,7 +1713,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(139, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(173, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -1732,7 +1722,7 @@ public fun Picker(
  * ```swift
  * nonisolated init<S>(_ title: S, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1743,7 +1733,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(141, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(176, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -1752,7 +1742,7 @@ public fun Picker(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, systemImage: String, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder currentValueLabel: () -> some View) where S : StringProtocol
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1765,7 +1755,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(143, listOf(title, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(179, listOf(title, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -1774,7 +1764,7 @@ public fun Picker(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, systemImage: String, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1786,7 +1776,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(145, listOf(title, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(182, listOf(title, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -1795,7 +1785,7 @@ public fun Picker(
  * ```swift
  * nonisolated init<V>(value: V?, total: V = 1.0, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1806,7 +1796,7 @@ public fun ProgressView(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(146, listOf(value, total, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
+    SwiftView(183, listOf(value, total, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
 }
 
 /**
@@ -1815,7 +1805,7 @@ public fun ProgressView(
  * ```swift
  * nonisolated init<V>(value: V?, total: V = 1.0, @ContentBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1825,7 +1815,7 @@ public fun ProgressView(
     total: Double = 1.0,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(147, listOf(value, total), modifier, content = content)
+    SwiftView(184, listOf(value, total), modifier, content = content)
 }
 
 /**
@@ -1834,7 +1824,7 @@ public fun ProgressView(
  * ```swift
  * nonisolated init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1843,7 +1833,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(148, listOf(value, total), modifier)
+    SwiftView(185, listOf(value, total), modifier)
 }
 
 /**
@@ -1852,7 +1842,7 @@ public fun ProgressView(
  * ```swift
  * nonisolated init(@ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1860,7 +1850,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(149, listOf(), modifier, content = content)
+    SwiftView(186, listOf(), modifier, content = content)
 }
 
 /**
@@ -1869,14 +1859,14 @@ public fun ProgressView(
  * ```swift
  * nonisolated init() where Label == EmptyView
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ProgressView(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(150, listOf(), modifier)
+    SwiftView(187, listOf(), modifier)
 }
 
 /**
@@ -1885,7 +1875,7 @@ public fun ProgressView(
  * ```swift
  * nonisolated init<S>(_ title: S) where Label == Text, S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1893,7 +1883,7 @@ public fun ProgressView(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(152, listOf(title), modifier)
+    SwiftView(190, listOf(title), modifier)
 }
 
 /**
@@ -1902,7 +1892,7 @@ public fun ProgressView(
  * ```swift
  * nonisolated init<S, V>(_ title: S, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, S : StringProtocol, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1912,7 +1902,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(154, listOf(title, value, total), modifier)
+    SwiftView(193, listOf(title, value, total), modifier)
 }
 
 /**
@@ -1921,13 +1911,13 @@ public fun ProgressView(
  * ```swift
  * @frozen nonisolated struct RadialGradient
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun RadialGradientView(radialGradient: RadialGradient, modifier: Modifier = Modifier) {
-    SwiftView(155, listOf(radialGradient), modifier)
+    SwiftView(194, listOf(radialGradient), modifier)
 }
 
 /**
@@ -1936,13 +1926,13 @@ public fun RadialGradientView(radialGradient: RadialGradient, modifier: Modifier
  * ```swift
  * @frozen struct Rectangle
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) {
-    SwiftView(156, listOf(rectangle), modifier)
+    SwiftView(195, listOf(rectangle), modifier)
 }
 
 /**
@@ -1951,14 +1941,14 @@ public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) {
  * ```swift
  * nonisolated init() where Label == Label<Text, Image>
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun RenameButton(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(157, listOf(), modifier)
+    SwiftView(196, listOf(), modifier)
 }
 
 /**
@@ -1967,7 +1957,7 @@ public fun RenameButton(
  * ```swift
  * init(shape: Content, angle: Angle, anchor: UnitPoint = .center)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -1977,7 +1967,7 @@ public fun RotatedShape(
     modifier: Modifier = Modifier,
     anchor: UnitPoint = UnitPoint.center,
 ) {
-    SwiftView(158, listOf(shape, angle, anchor), modifier)
+    SwiftView(197, listOf(shape, angle, anchor), modifier)
 }
 
 /**
@@ -1986,13 +1976,13 @@ public fun RotatedShape(
  * ```swift
  * @frozen struct RoundedRectangle
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Modifier = Modifier) {
-    SwiftView(159, listOf(roundedRectangle), modifier)
+    SwiftView(198, listOf(roundedRectangle), modifier)
 }
 
 /**
@@ -2001,7 +1991,7 @@ public fun RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Mo
  * ```swift
  * init(shape: Content, scale: CGSize, anchor: UnitPoint = .center)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2011,7 +2001,7 @@ public fun ScaledShape(
     modifier: Modifier = Modifier,
     anchor: UnitPoint = UnitPoint.center,
 ) {
-    SwiftView(160, listOf(shape, scale, anchor), modifier)
+    SwiftView(199, listOf(shape, scale, anchor), modifier)
 }
 
 /**
@@ -2020,7 +2010,7 @@ public fun ScaledShape(
  * ```swift
  * nonisolated init(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2030,7 +2020,7 @@ public fun ScrollView(
     showsIndicators: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(161, listOf(axes, showsIndicators), modifier, content = content)
+    SwiftView(200, listOf(axes, showsIndicators), modifier, content = content)
 }
 
 /**
@@ -2039,7 +2029,7 @@ public fun ScrollView(
  * ```swift
  * @export(implementation) nonisolated init(_ axes: Axis.Set = .vertical, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2048,7 +2038,7 @@ public fun ScrollView(
     axes: Axis.Set = Axis.Set.vertical,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(162, listOf(axes), modifier, content = content)
+    SwiftView(201, listOf(axes), modifier, content = content)
 }
 
 /**
@@ -2057,7 +2047,7 @@ public fun ScrollView(
  * ```swift
  * @export(implementation) init(@ContentBuilder content: () -> Content, @ContentBuilder header: () -> Parent, @ContentBuilder footer: () -> Footer)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2067,7 +2057,7 @@ public fun Section(
     header: @Composable () -> Unit,
     footer: @Composable () -> Unit,
 ) {
-    SwiftView(163, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(header, footer), content = content)
+    SwiftView(202, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(header, footer), content = content)
 }
 
 /**
@@ -2076,7 +2066,7 @@ public fun Section(
  * ```swift
  * @export(implementation) init<S>(_ title: S, isExpanded: Binding<Bool>, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2087,7 +2077,7 @@ public fun Section(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(165, listOf(title, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(205, listOf(title, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2096,7 +2086,7 @@ public fun Section(
  * ```swift
  * @export(implementation) init<S>(_ title: S, @ContentBuilder content: () -> Content) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2105,7 +2095,7 @@ public fun Section(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(167, listOf(title), modifier, content = content)
+    SwiftView(208, listOf(title), modifier, content = content)
 }
 
 /**
@@ -2114,7 +2104,7 @@ public fun Section(
  * ```swift
  * @export(implementation) init(isExpanded: Binding<Bool>, @ContentBuilder content: () -> Content, @ContentBuilder header: () -> Parent)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2125,7 +2115,7 @@ public fun Section(
     content: @Composable () -> Unit,
     header: @Composable () -> Unit,
 ) {
-    SwiftView(168, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(header), content = content)
+    SwiftView(209, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(header), content = content)
 }
 
 /**
@@ -2134,7 +2124,7 @@ public fun Section(
  * ```swift
  * @export(implementation) init(@ContentBuilder content: () -> Content, @ContentBuilder header: () -> Parent)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2143,7 +2133,7 @@ public fun Section(
     content: @Composable () -> Unit,
     header: @Composable () -> Unit,
 ) {
-    SwiftView(169, listOf(SSlotRef(0)), modifier, slots = listOf(header), content = content)
+    SwiftView(210, listOf(SSlotRef(0)), modifier, slots = listOf(header), content = content)
 }
 
 /**
@@ -2152,7 +2142,7 @@ public fun Section(
  * ```swift
  * @export(implementation) init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2160,26 +2150,7 @@ public fun Section(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(170, listOf(), modifier, content = content)
-}
-
-/**
- * SwiftUI `SecureField.init(text:prompt:label:)`
- *
- * ```swift
- * nonisolated init(text: Binding<String>, prompt: Text? = nil, @ContentBuilder label: () -> Label)
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun SecureField(
-    text: String,
-    modifier: Modifier = Modifier,
-    onTextChange: (String) -> Unit,
-    content: @Composable () -> Unit,
-) {
-    SwiftView(172, listOf(text, SValueCallback { onTextChange(it as String) }), modifier, content = content)
+    SwiftView(211, listOf(), modifier, content = content)
 }
 
 /**
@@ -2188,7 +2159,7 @@ public fun SecureField(
  * ```swift
  * nonisolated init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2199,7 +2170,7 @@ public fun SecureField(
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(174, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(218, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -2208,7 +2179,7 @@ public fun SecureField(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, text: Binding<String>) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2218,7 +2189,7 @@ public fun SecureField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(176, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(221, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -2227,7 +2198,7 @@ public fun SecureField(
  * ```swift
  * nonisolated init(@ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -2235,7 +2206,7 @@ public fun SettingsLink(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(177, listOf(), modifier, content = content)
+    SwiftView(222, listOf(), modifier, content = content)
 }
 
 /**
@@ -2244,120 +2215,14 @@ public fun SettingsLink(
  * ```swift
  * nonisolated init() where Label == DefaultSettingsLinkLabel
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
 public fun SettingsLink(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(178, listOf(), modifier)
-}
-
-/**
- * SwiftUI `ShareLink.init(item:subject:message:)`
- *
- * ```swift
- * nonisolated init(item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ShareLink(
-    item: String,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(179, listOf(item), modifier)
-}
-
-/**
- * SwiftUI `ShareLink.init(item:subject:message:)`
- *
- * ```swift
- * nonisolated init(item: String, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<String>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ShareLinkItem(
-    item: String,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(180, listOf(item), modifier)
-}
-
-/**
- * SwiftUI `ShareLink.init(_:item:subject:message:)`
- *
- * ```swift
- * nonisolated init<S>(_ title: S, item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>, S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ShareLink(
-    title: String,
-    item: String,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(182, listOf(title, item), modifier)
-}
-
-/**
- * SwiftUI `ShareLink.init(_:item:subject:message:)`
- *
- * ```swift
- * nonisolated init<S>(_ title: S, item: String, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<String>, S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ShareLinkItem(
-    title: String,
-    item: String,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(184, listOf(title, item), modifier)
-}
-
-/**
- * SwiftUI `ShareLink.init(item:subject:message:label:)`
- *
- * ```swift
- * nonisolated init(item: URL, subject: Text? = nil, message: Text? = nil, @ContentBuilder label: () -> Label) where Data == CollectionOfOne<URL>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ShareLink(
-    item: String,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
-) {
-    SwiftView(185, listOf(item), modifier, content = content)
-}
-
-/**
- * SwiftUI `ShareLink.init(item:subject:message:label:)`
- *
- * ```swift
- * nonisolated init(item: String, subject: Text? = nil, message: Text? = nil, @ContentBuilder label: () -> Label) where Data == CollectionOfOne<String>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ShareLinkItem(
-    item: String,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
-) {
-    SwiftView(186, listOf(item), modifier, content = content)
+    SwiftView(223, listOf(), modifier)
 }
 
 /**
@@ -2366,7 +2231,7 @@ public fun ShareLinkItem(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, neutralValue: V? = nil, enabledBounds: ClosedRange<V>? = nil, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View = { EmptyView() }, @ContentBuilder minimumValueLabel: () -> ValueLabel = { EmptyView() }, @ContentBuilder maximumValueLabel: () -> ValueLabel = { EmptyView() }, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 26.0+, macOS 26.0+
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS 26.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2383,7 +2248,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(187, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
+    SwiftView(236, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2392,7 +2257,7 @@ public fun Slider(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, neutralValue: V? = nil, enabledBounds: ClosedRange<V>? = nil, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View = { EmptyView() }, @ContentBuilder minimumValueLabel: () -> ValueLabel = { EmptyView() }, @ContentBuilder maximumValueLabel: () -> ValueLabel = { EmptyView() }, tick: (V) -> SliderTick<V>? = { _ in nil }, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 26.0+, macOS 26.0+
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS 26.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2410,7 +2275,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(188, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
+    SwiftView(237, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2419,7 +2284,7 @@ public fun Slider(
  * ```swift
  * @export(implementation) nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, @ContentBuilder label: () -> Label, @ContentBuilder minimumValueLabel: () -> ValueLabel, @ContentBuilder maximumValueLabel: () -> ValueLabel, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2434,7 +2299,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(189, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
+    SwiftView(238, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2443,7 +2308,7 @@ public fun Slider(
  * ```swift
  * @export(implementation) nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label, @ContentBuilder minimumValueLabel: () -> ValueLabel, @ContentBuilder maximumValueLabel: () -> ValueLabel, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2457,7 +2322,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(190, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
+    SwiftView(239, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2466,7 +2331,7 @@ public fun Slider(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ContentBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2478,7 +2343,7 @@ public fun Slider(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(191, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(240, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2487,7 +2352,7 @@ public fun Slider(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ContentBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2500,7 +2365,7 @@ public fun Slider(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(192, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(241, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2509,7 +2374,7 @@ public fun Slider(
  * ```swift
  * @export(implementation) nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, @ContentBuilder label: () -> Label, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2522,7 +2387,7 @@ public fun SliderValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(193, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(242, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2531,7 +2396,7 @@ public fun SliderValue(
  * ```swift
  * @export(implementation) nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, @ContentBuilder label: () -> Label, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2543,7 +2408,7 @@ public fun SliderValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(194, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(243, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2552,7 +2417,7 @@ public fun SliderValue(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2563,7 +2428,7 @@ public fun Slider(
     onValueChange: (Double) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(195, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(244, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2572,7 +2437,7 @@ public fun Slider(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2584,7 +2449,7 @@ public fun Slider(
     onValueChange: (Double) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(196, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(245, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2593,7 +2458,7 @@ public fun Slider(
  * ```swift
  * init(minLength: CGFloat? = nil)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2601,7 +2466,7 @@ public fun Spacer(
     modifier: Modifier = Modifier,
     minLength: Double? = null,
 ) {
-    SwiftView(197, listOf(minLength), modifier)
+    SwiftView(246, listOf(minLength), modifier)
 }
 
 /**
@@ -2610,7 +2475,7 @@ public fun Spacer(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ContentBuilder label: () -> Label) where V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2623,7 +2488,7 @@ public fun Stepper(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(198, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(247, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2632,7 +2497,7 @@ public fun Stepper(
  * ```swift
  * @export(implementation) nonisolated init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, @ContentBuilder label: () -> Label, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2645,7 +2510,7 @@ public fun StepperValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(199, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(248, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2654,7 +2519,7 @@ public fun StepperValue(
  * ```swift
  * nonisolated init<V>(value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ContentBuilder label: () -> Label) where V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2666,7 +2531,7 @@ public fun Stepper(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(200, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(249, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2675,7 +2540,7 @@ public fun Stepper(
  * ```swift
  * @export(implementation) nonisolated init<V>(value: Binding<V>, step: V.Stride = 1, @ContentBuilder label: () -> Label, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2687,7 +2552,7 @@ public fun StepperValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(201, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(250, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2696,7 +2561,7 @@ public fun StepperValue(
  * ```swift
  * nonisolated init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2709,7 +2574,7 @@ public fun Stepper(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(203, listOf(title, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(253, listOf(title, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2718,7 +2583,7 @@ public fun Stepper(
  * ```swift
  * nonisolated init<S, V>(_ title: S, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2730,7 +2595,7 @@ public fun Stepper(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(205, listOf(title, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(256, listOf(title, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2739,7 +2604,7 @@ public fun Stepper(
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2747,7 +2612,7 @@ public fun TabView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(206, listOf(), modifier, content = content)
+    SwiftView(257, listOf(), modifier, content = content)
 }
 
 /**
@@ -2756,7 +2621,7 @@ public fun TabView(
  * ```swift
  * init(verbatim content: String)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2764,7 +2629,7 @@ public fun Text(
     verbatim: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(207, listOf(verbatim), modifier)
+    SwiftView(258, listOf(verbatim), modifier)
 }
 
 /**
@@ -2773,7 +2638,7 @@ public fun Text(
  * ```swift
  * init(_ date: Date, style: Text.DateStyle)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2782,7 +2647,7 @@ public fun Text(
     style: Text.DateStyle,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(208, listOf(date, style), modifier)
+    SwiftView(259, listOf(date, style), modifier)
 }
 
 /**
@@ -2791,52 +2656,13 @@ public fun Text(
  * ```swift
  * nonisolated struct TextEditor
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun TextEditorView(textEditor: TextEditor, modifier: Modifier = Modifier) {
-    SwiftView(211, listOf(textEditor), modifier)
-}
-
-/**
- * SwiftUI `TextField.init(text:prompt:axis:label:)`
- *
- * ```swift
- * nonisolated init(text: Binding<String>, prompt: Text? = nil, axis: Axis, @ContentBuilder label: () -> Label)
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun TextField(
-    text: String,
-    axis: Axis,
-    modifier: Modifier = Modifier,
-    onTextChange: (String) -> Unit,
-    content: @Composable () -> Unit,
-) {
-    SwiftView(212, listOf(text, SValueCallback { onTextChange(it as String) }, axis), modifier, content = content)
-}
-
-/**
- * SwiftUI `TextField.init(text:prompt:label:)`
- *
- * ```swift
- * nonisolated init(text: Binding<String>, prompt: Text? = nil, @ContentBuilder label: () -> Label)
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun TextField(
-    text: String,
-    modifier: Modifier = Modifier,
-    onTextChange: (String) -> Unit,
-    content: @Composable () -> Unit,
-) {
-    SwiftView(213, listOf(text, SValueCallback { onTextChange(it as String) }), modifier, content = content)
+    SwiftView(263, listOf(textEditor), modifier)
 }
 
 /**
@@ -2845,7 +2671,7 @@ public fun TextField(
  * ```swift
  * nonisolated init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2857,7 +2683,7 @@ public fun TextField(
     onEditingChanged: (Boolean) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(215, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
+    SwiftView(267, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -2866,7 +2692,7 @@ public fun TextField(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2877,7 +2703,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     onEditingChanged: (Boolean) -> Unit,
 ) {
-    SwiftView(217, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(269, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2886,7 +2712,7 @@ public fun TextField(
  * ```swift
  * nonisolated init<S>(_ title: S, text: Binding<String>, axis: Axis) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2897,7 +2723,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(219, listOf(title, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
+    SwiftView(272, listOf(title, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
 }
 
 /**
@@ -2906,7 +2732,7 @@ public fun TextField(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2917,7 +2743,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(221, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(280, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -2926,7 +2752,7 @@ public fun TextField(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, text: Binding<String>) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2936,7 +2762,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(223, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(283, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -2945,13 +2771,13 @@ public fun TextField(
  * ```swift
  * struct TextInputBorderShape
  * ```
- * Availability: iOS 27.0+, macOS 27.0+
+ * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, modifier: Modifier = Modifier) {
-    SwiftView(224, listOf(textInputBorderShape), modifier)
+    SwiftView(288, listOf(textInputBorderShape), modifier)
 }
 
 /**
@@ -2960,7 +2786,7 @@ public fun TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, 
  * ```swift
  * nonisolated init(isOn: Binding<Bool>, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2970,7 +2796,7 @@ public fun Toggle(
     onIsOnChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(225, listOf(isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier, content = content)
+    SwiftView(289, listOf(isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2979,7 +2805,7 @@ public fun Toggle(
  * ```swift
  * nonisolated init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -2989,7 +2815,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(227, listOf(title, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(292, listOf(title, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -2998,7 +2824,7 @@ public fun Toggle(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, systemImage: String, isOn: Binding<Bool>) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -3009,7 +2835,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(229, listOf(title, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(295, listOf(title, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -3018,13 +2844,13 @@ public fun Toggle(
  * ```swift
  * @frozen struct UnevenRoundedRectangle
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Renders the value as a view.
  */
 @HiddenFromObjC
 @Composable
 public fun UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRectangle, modifier: Modifier = Modifier) {
-    SwiftView(230, listOf(unevenRoundedRectangle), modifier)
+    SwiftView(296, listOf(unevenRoundedRectangle), modifier)
 }
 
 /**
@@ -3033,7 +2859,7 @@ public fun UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRecta
  * ```swift
  * nonisolated init(@ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -3041,7 +2867,7 @@ public fun VSplitView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(231, listOf(), modifier, content = content)
+    SwiftView(297, listOf(), modifier, content = content)
 }
 
 /**
@@ -3050,7 +2876,7 @@ public fun VSplitView(
  * ```swift
  * nonisolated init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -3060,7 +2886,7 @@ public fun VStack(
     spacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(232, listOf(alignment, spacing), modifier, content = content)
+    SwiftView(298, listOf(alignment, spacing), modifier, content = content)
 }
 
 /**
@@ -3069,7 +2895,7 @@ public fun VStack(
  * ```swift
  * nonisolated init(in axes: Axis.Set = [.horizontal, .vertical], @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -3078,7 +2904,7 @@ public fun ViewThatFits(
     axes: Axis.Set? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(233, listOf(axes), modifier, content = content)
+    SwiftView(299, listOf(axes), modifier, content = content)
 }
 
 /**
@@ -3087,7 +2913,7 @@ public fun ViewThatFits(
  * ```swift
  * nonisolated init(windowID: String) where Label == DefaultWindowVisibilityToggleLabel
  * ```
- * Availability: iOS: unavailable (no-op), macOS 15.0+
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
@@ -3095,7 +2921,7 @@ public fun WindowVisibilityToggle(
     windowID: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(234, listOf(windowID), modifier)
+    SwiftView(300, listOf(windowID), modifier)
 }
 
 /**
@@ -3104,7 +2930,7 @@ public fun WindowVisibilityToggle(
  * ```swift
  * nonisolated init(alignment: Alignment = .center, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -3113,25 +2939,7 @@ public fun ZStack(
     alignment: Alignment = Alignment.center,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(235, listOf(alignment), modifier, content = content)
-}
-
-/**
- * SwiftUI `ContentUnavailableView.init(_:image:description:)`
- *
- * ```swift
- * nonisolated init<S>(_ title: S, image name: String, description: Text? = nil) where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+
- */
-@HiddenFromObjC
-@Composable
-public fun ContentUnavailableViewImage(
-    title: String,
-    image: String,
-    modifier: Modifier = Modifier,
-) {
-    SwiftView(26, listOf(title, image), modifier)
+    SwiftView(301, listOf(alignment), modifier, content = content)
 }
 
 /**
@@ -3140,7 +2948,7 @@ public fun ContentUnavailableViewImage(
  * ```swift
  * nonisolated init<S>(_ title: S, image name: String) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
@@ -3149,7 +2957,26 @@ public fun LabelImage(
     image: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(76, listOf(title, image), modifier)
+    SwiftView(92, listOf(title, image), modifier)
+}
+
+/**
+ * SwiftUI `Button.init(_:role:action:)`
+ *
+ * ```swift
+ * @preconcurrency @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, role: ButtonRole?, action: @escaping @MainActor () -> Void)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Button(
+    titleResource: LocalizedKey,
+    role: ButtonRole?,
+    modifier: Modifier = Modifier,
+    action: () -> Unit,
+) {
+    SwiftView(8, listOf(titleResource.key, role, SAction(action)), modifier)
 }
 
 /**
@@ -3158,17 +2985,35 @@ public fun LabelImage(
  * ```swift
  * @preconcurrency nonisolated init(_ titleKey: LocalizedStringKey, role: ButtonRole?, action: @escaping @MainActor () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ButtonRole(
-    titleKey: String,
+    titleKey: LocalizedKey,
     role: ButtonRole?,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(8, listOf(titleKey, role, SAction(action)), modifier)
+    SwiftView(9, listOf(titleKey.key, role, SAction(action)), modifier)
+}
+
+/**
+ * SwiftUI `Button.init(_:action:)`
+ *
+ * ```swift
+ * @preconcurrency @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, action: @escaping @MainActor () -> Void)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Button(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    action: () -> Unit,
+) {
+    SwiftView(11, listOf(titleResource.key, SAction(action)), modifier)
 }
 
 /**
@@ -3177,16 +3022,36 @@ public fun ButtonRole(
  * ```swift
  * @preconcurrency nonisolated init(_ titleKey: LocalizedStringKey, action: @escaping @MainActor () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ButtonAction(
-    titleKey: String,
+    titleKey: LocalizedKey,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(10, listOf(titleKey, SAction(action)), modifier)
+    SwiftView(12, listOf(titleKey.key, SAction(action)), modifier)
+}
+
+/**
+ * SwiftUI `Button.init(_:systemImage:role:action:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, role: ButtonRole?, action: @escaping @MainActor () -> Void)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Button(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    role: ButtonRole?,
+    modifier: Modifier = Modifier,
+    action: () -> Unit,
+) {
+    SwiftView(14, listOf(titleResource.key, systemImage, role, SAction(action)), modifier)
 }
 
 /**
@@ -3195,18 +3060,37 @@ public fun ButtonAction(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, role: ButtonRole?, action: @escaping @MainActor () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ButtonSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     role: ButtonRole?,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(12, listOf(titleKey, systemImage, role, SAction(action)), modifier)
+    SwiftView(15, listOf(titleKey.key, systemImage, role, SAction(action)), modifier)
+}
+
+/**
+ * SwiftUI `Button.init(_:systemImage:action:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, action: @escaping @MainActor () -> Void)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Button(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+    action: () -> Unit,
+) {
+    SwiftView(17, listOf(titleResource.key, systemImage, SAction(action)), modifier)
 }
 
 /**
@@ -3215,17 +3099,36 @@ public fun ButtonSystemImage(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, action: @escaping @MainActor () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ButtonSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(14, listOf(titleKey, systemImage, SAction(action)), modifier)
+    SwiftView(18, listOf(titleKey.key, systemImage, SAction(action)), modifier)
+}
+
+/**
+ * SwiftUI `ContentUnavailableView.init(_:systemImage:description:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ title: LocalizedStringResource, systemImage name: String, description: Text? = nil)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ContentUnavailableView(
+    title: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+) {
+    SwiftView(27, listOf(title.key, systemImage, description), modifier)
 }
 
 /**
@@ -3234,16 +3137,55 @@ public fun ButtonSystemImage(
  * ```swift
  * nonisolated init(_ title: LocalizedStringKey, systemImage name: String, description: Text? = nil)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ContentUnavailableViewSystemImage(
+    title: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+) {
+    SwiftView(28, listOf(title.key, systemImage, description), modifier)
+}
+
+/**
+ * SwiftUI `ContentUnavailableView.init(_:systemImage:description:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, systemImage name: String, description: Text? = nil) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ContentUnavailableView(
     title: String,
     systemImage: String,
     modifier: Modifier = Modifier,
+    description: String? = null,
 ) {
-    SwiftView(23, listOf(title, systemImage), modifier)
+    SwiftView(29, listOf(title, systemImage, description), modifier)
+}
+
+/**
+ * SwiftUI `ControlGroup.init(_:systemImage:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<C>(_ titleResource: LocalizedStringResource, systemImage: String, @ContentBuilder content: () -> C) where Content == LabeledControlGroupContent<C, Label<Text, Image>>, C : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun ControlGroup(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(35, listOf(titleResource.key, systemImage), modifier, content = content)
 }
 
 /**
@@ -3252,17 +3194,55 @@ public fun ContentUnavailableViewSystemImage(
  * ```swift
  * @export(implementation) nonisolated init<C>(_ titleKey: LocalizedStringKey, systemImage: String, @ContentBuilder content: () -> C) where Content == LabeledControlGroupContent<C, Label<Text, Image>>, C : View
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
 public fun ControlGroupSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(29, listOf(titleKey, systemImage), modifier, content = content)
+    SwiftView(36, listOf(titleKey.key, systemImage), modifier, content = content)
+}
+
+/**
+ * SwiftUI `ControlGroup.init(_:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<C>(_ titleResource: LocalizedStringResource, @ContentBuilder content: () -> C) where Content == LabeledControlGroupContent<C, Text>, C : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun ControlGroup(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(38, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `DatePicker.init(_:selection:displayedComponents:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date])
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun DatePicker(
+    titleResource: LocalizedKey,
+    selection: Double,
+    modifier: Modifier = Modifier,
+    displayedComponents: DatePickerComponents? = null,
+    onSelectionChange: (Double) -> Unit,
+) {
+    SwiftView(42, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
 }
 
 /**
@@ -3271,18 +3251,38 @@ public fun ControlGroupSystemImage(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date])
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun DatePickerSelection(
-    titleKey: String,
+    titleKey: LocalizedKey,
     selection: Double,
     modifier: Modifier = Modifier,
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(34, listOf(titleKey, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
+    SwiftView(43, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
+}
+
+/**
+ * SwiftUI `DisclosureGroup.init(_:isExpanded:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, isExpanded: Binding<Bool>, @ContentBuilder content: @escaping () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun DisclosureGroup(
+    titleResource: LocalizedKey,
+    isExpanded: Boolean,
+    modifier: Modifier = Modifier,
+    onIsExpandedChange: (Boolean) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(49, listOf(titleResource.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3291,18 +3291,109 @@ public fun DatePickerSelection(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, isExpanded: Binding<Bool>, @ContentBuilder content: @escaping () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
 public fun DisclosureGroupIsExpanded(
-    titleKey: String,
+    titleKey: LocalizedKey,
     isExpanded: Boolean,
     modifier: Modifier = Modifier,
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(40, listOf(titleKey, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(50, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `DisclosureGroup.init(_:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, @ContentBuilder content: @escaping () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun DisclosureGroup(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(52, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `GroupBox.init(_:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun GroupBox(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(71, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Image.init(_:variableValue:bundle:label:)`
+ *
+ * ```swift
+ * init(_ name: String, variableValue: Double?, bundle: Bundle? = nil, label: Text)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Image(
+    name: String,
+    variableValue: Double?,
+    label: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(82, listOf(name, variableValue, label), modifier)
+}
+
+/**
+ * SwiftUI `Image.init(_:bundle:label:)`
+ *
+ * ```swift
+ * init(_ name: String, bundle: Bundle? = nil, label: Text)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Image(
+    name: String,
+    label: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(84, listOf(name, label), modifier)
+}
+
+/**
+ * SwiftUI `Label.init(_:systemImage:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage name: String)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Label(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(87, listOf(titleResource.key, systemImage), modifier)
 }
 
 /**
@@ -3311,16 +3402,52 @@ public fun DisclosureGroupIsExpanded(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, systemImage name: String)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun LabelSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(73, listOf(titleKey, systemImage), modifier)
+    SwiftView(88, listOf(titleKey.key, systemImage), modifier)
+}
+
+/**
+ * SwiftUI `LabeledContent.init(_:content:)`
+ *
+ * ```swift
+ * init(_ titleResource: LocalizedStringResource, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun LabeledContent(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(93, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `LabeledContent.init(_:value:)`
+ *
+ * ```swift
+ * init<S>(_ titleResource: LocalizedStringResource, value: S) where S : StringProtocol
+ * ```
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun LabeledContent(
+    titleResource: LocalizedKey,
+    value: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(96, listOf(titleResource.key, value), modifier)
 }
 
 /**
@@ -3329,16 +3456,34 @@ public fun LabelSystemImage(
  * ```swift
  * init<S>(_ titleKey: LocalizedStringKey, value: S) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun LabeledContentValue(
-    titleKey: String,
+    titleKey: LocalizedKey,
     value: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(79, listOf(titleKey, value), modifier)
+    SwiftView(97, listOf(titleKey.key, value), modifier)
+}
+
+/**
+ * SwiftUI `Link.init(_:destination:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, destination: URL)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Link(
+    titleResource: LocalizedKey,
+    destination: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(106, listOf(titleResource.key, destination), modifier)
 }
 
 /**
@@ -3347,16 +3492,36 @@ public fun LabeledContentValue(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, destination: URL)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun LinkDestination(
-    titleKey: String,
+    titleKey: LocalizedKey,
     destination: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(88, listOf(titleKey, destination), modifier)
+    SwiftView(107, listOf(titleKey.key, destination), modifier)
+}
+
+/**
+ * SwiftUI `Menu.init(_:systemImage:content:primaryAction:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, @ContentBuilder content: () -> Content, primaryAction: @escaping () -> Void)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun Menu(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+    primaryAction: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(113, listOf(titleResource.key, systemImage, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3365,18 +3530,37 @@ public fun LinkDestination(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, @ContentBuilder content: () -> Content, primaryAction: @escaping () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
-public fun Menu(
-    titleKey: String,
+public fun MenuSystemImage(
+    titleKey: LocalizedKey,
     systemImage: String,
     modifier: Modifier = Modifier,
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(94, listOf(titleKey, systemImage, SAction(primaryAction)), modifier, content = content)
+    SwiftView(114, listOf(titleKey.key, systemImage, SAction(primaryAction)), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Menu.init(_:systemImage:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun Menu(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(115, listOf(titleResource.key, systemImage), modifier, content = content)
 }
 
 /**
@@ -3385,17 +3569,36 @@ public fun Menu(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
 public fun MenuSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(95, listOf(titleKey, systemImage), modifier, content = content)
+    SwiftView(116, listOf(titleKey.key, systemImage), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Menu.init(_:content:primaryAction:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, @ContentBuilder content: () -> Content, primaryAction: @escaping () -> Void) where Label == Text
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun Menu(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    primaryAction: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(118, listOf(titleResource.key, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3404,17 +3607,125 @@ public fun MenuSystemImage(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, @ContentBuilder content: () -> Content, primaryAction: @escaping () -> Void) where Label == Text
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
 public fun MenuPrimaryAction(
-    titleKey: String,
+    titleKey: LocalizedKey,
     modifier: Modifier = Modifier,
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(97, listOf(titleKey, SAction(primaryAction)), modifier, content = content)
+    SwiftView(119, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Menu.init(_:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, @ContentBuilder content: () -> Content) where Label == Text
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun Menu(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(121, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `MenuButton.init(_:content:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun MenuButton(
+    titleKey: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(124, listOf(titleKey.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `NavigationLink.init(_:destination:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, @ContentBuilder destination: () -> Destination)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationLink(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(132, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `NavigationLink.init(_:value:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<P>(_ titleResource: LocalizedStringResource, value: P?) where Label == Text, P : Hashable
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationLink(
+    titleResource: LocalizedKey,
+    value: Any?,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(141, listOf(titleResource.key, value), modifier)
+}
+
+/**
+ * SwiftUI `NavigationLink.init(_:value:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<P>(_ titleResource: LocalizedStringResource, value: P?) where Label == Text, P : Decodable, P : Encodable, P : Hashable
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationLinkValue(
+    titleResource: LocalizedKey,
+    value: Any?,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(142, listOf(titleResource.key, value), modifier)
+}
+
+/**
+ * SwiftUI `NewDocumentButton.init(_:contentType:source:)`
+ *
+ * ```swift
+ * nonisolated init(_ title: LocalizedStringResource, contentType: UTType? = nil, source: DocumentCreationSource)
+ * ```
+ * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun NewDocumentButton(
+    title: LocalizedKey,
+    source: DocumentCreationSource,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(151, listOf(title.key, source), modifier)
 }
 
 /**
@@ -3423,16 +3734,89 @@ public fun MenuPrimaryAction(
  * ```swift
  * nonisolated init(_ title: LocalizedStringKey, contentType: UTType? = nil, source: DocumentCreationSource)
  * ```
- * Availability: iOS 27.0+, macOS: unavailable (no-op)
+ * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
 @Composable
 public fun NewDocumentButtonSource(
-    title: String,
+    title: LocalizedKey,
     source: DocumentCreationSource,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(122, listOf(title, source), modifier)
+    SwiftView(152, listOf(title.key, source), modifier)
+}
+
+/**
+ * SwiftUI `NewDocumentButton.init(_:contentType:source:)`
+ *
+ * ```swift
+ * nonisolated init(_ label: Text? = nil, contentType: UTType? = nil, source: DocumentCreationSource)
+ * ```
+ * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun NewDocumentButton(
+    source: DocumentCreationSource,
+    modifier: Modifier = Modifier,
+    label: String? = null,
+) {
+    SwiftView(153, listOf(label, source), modifier)
+}
+
+/**
+ * SwiftUI `NewDocumentButton.init(_:contentType:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ title: LocalizedStringResource, contentType: UTType? = nil)
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun NewDocumentButton(
+    title: LocalizedKey,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(155, listOf(title.key), modifier)
+}
+
+/**
+ * SwiftUI `NewDocumentButton.init(_:contentType:)`
+ *
+ * ```swift
+ * nonisolated init(_ label: Text? = nil, contentType: UTType? = nil)
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun NewDocumentButton(
+    modifier: Modifier = Modifier,
+    label: String? = null,
+) {
+    SwiftView(157, listOf(label), modifier)
+}
+
+/**
+ * SwiftUI `Picker.init(_:selection:content:currentValueLabel:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder currentValueLabel: () -> some View)
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Picker(
+    titleResource: LocalizedKey,
+    selection: Any,
+    modifier: Modifier = Modifier,
+    onSelectionChange: (Any) -> Unit,
+    content: @Composable () -> Unit,
+    currentValueLabel: @Composable () -> Unit,
+) {
+    SwiftView(171, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3441,19 +3825,39 @@ public fun NewDocumentButtonSource(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder currentValueLabel: () -> some View)
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
 @HiddenFromObjC
 @Composable
 public fun PickerSelection(
-    titleKey: String,
+    titleKey: LocalizedKey,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(138, listOf(titleKey, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(172, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+}
+
+/**
+ * SwiftUI `Picker.init(_:selection:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Picker(
+    titleResource: LocalizedKey,
+    selection: Any,
+    modifier: Modifier = Modifier,
+    onSelectionChange: (Any) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(174, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3462,18 +3866,40 @@ public fun PickerSelection(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun PickerSelection(
-    titleKey: String,
+    titleKey: LocalizedKey,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(140, listOf(titleKey, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(175, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Picker.init(_:systemImage:selection:content:currentValueLabel:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder currentValueLabel: () -> some View)
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Picker(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    selection: Any,
+    modifier: Modifier = Modifier,
+    onSelectionChange: (Any) -> Unit,
+    content: @Composable () -> Unit,
+    currentValueLabel: @Composable () -> Unit,
+) {
+    SwiftView(177, listOf(titleResource.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3482,12 +3908,12 @@ public fun PickerSelection(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder currentValueLabel: () -> some View)
  * ```
- * Availability: iOS 18.0+, macOS 15.0+
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
 @HiddenFromObjC
 @Composable
 public fun PickerSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     selection: Any,
     modifier: Modifier = Modifier,
@@ -3495,7 +3921,28 @@ public fun PickerSystemImage(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(142, listOf(titleKey, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(178, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+}
+
+/**
+ * SwiftUI `Picker.init(_:systemImage:selection:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Picker(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    selection: Any,
+    modifier: Modifier = Modifier,
+    onSelectionChange: (Any) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(180, listOf(titleResource.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3504,19 +3951,55 @@ public fun PickerSystemImage(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun PickerSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(144, listOf(titleKey, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(181, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `ProgressView.init(_:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource) where Label == Text
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ProgressView(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(188, listOf(titleResource.key), modifier)
+}
+
+/**
+ * SwiftUI `ProgressView.init(_:value:total:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<V>(_ titleResource: LocalizedStringResource, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ProgressView(
+    titleResource: LocalizedKey,
+    value: Double?,
+    modifier: Modifier = Modifier,
+    total: Double = 1.0,
+) {
+    SwiftView(191, listOf(titleResource.key, value, total), modifier)
 }
 
 /**
@@ -3525,17 +4008,37 @@ public fun PickerSystemImage(
  * ```swift
  * nonisolated init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ProgressViewValue(
-    titleKey: String,
+    titleKey: LocalizedKey,
     value: Double?,
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(153, listOf(titleKey, value, total), modifier)
+    SwiftView(192, listOf(titleKey.key, value, total), modifier)
+}
+
+/**
+ * SwiftUI `Section.init(_:isExpanded:content:)`
+ *
+ * ```swift
+ * @export(implementation) init(_ titleResource: LocalizedStringResource, isExpanded: Binding<Bool>, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Section(
+    titleResource: LocalizedKey,
+    isExpanded: Boolean,
+    modifier: Modifier = Modifier,
+    onIsExpandedChange: (Boolean) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(203, listOf(titleResource.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3544,18 +4047,116 @@ public fun ProgressViewValue(
  * ```swift
  * @export(implementation) init(_ titleKey: LocalizedStringKey, isExpanded: Binding<Bool>, @ContentBuilder content: () -> Content)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun SectionIsExpanded(
-    titleKey: String,
+    titleKey: LocalizedKey,
     isExpanded: Boolean,
     modifier: Modifier = Modifier,
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(164, listOf(titleKey, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(204, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Section.init(_:content:)`
+ *
+ * ```swift
+ * @export(implementation) init(_ titleResource: LocalizedStringResource, @ContentBuilder content: () -> Content)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Section(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(206, listOf(titleResource.key), modifier, content = content)
+}
+
+/**
+ * SwiftUI `SecureField.init(text:prompt:label:)`
+ *
+ * ```swift
+ * nonisolated init(text: Binding<String>, prompt: Text? = nil, @ContentBuilder label: () -> Label)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun SecureField(
+    text: String,
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onTextChange: (String) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(213, listOf(text, SValueCallback { onTextChange(it as String) }, prompt), modifier, content = content)
+}
+
+/**
+ * SwiftUI `SecureField.init(_:text:prompt:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, text: Binding<String>, prompt: Text?)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun SecureField(
+    titleResource: LocalizedKey,
+    text: String,
+    prompt: String?,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(214, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+}
+
+/**
+ * SwiftUI `SecureField.init(_:text:prompt:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun SecureFieldText(
+    titleKey: LocalizedKey,
+    text: String,
+    prompt: String?,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(215, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+}
+
+/**
+ * SwiftUI `SecureField.init(_:text:prompt:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, text: Binding<String>, prompt: Text?) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun SecureField(
+    title: String,
+    text: String,
+    prompt: String?,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(216, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -3564,18 +4165,37 @@ public fun SectionIsExpanded(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
-public fun SecureFieldText(
-    titleKey: String,
+public fun SecureField(
+    titleKey: LocalizedKey,
     text: String,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(173, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(217, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+}
+
+/**
+ * SwiftUI `SecureField.init(_:text:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, text: Binding<String>)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun SecureField(
+    titleResource: LocalizedKey,
+    text: String,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(219, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -3584,17 +4204,197 @@ public fun SecureFieldText(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun SecureFieldText(
-    titleKey: String,
+    titleKey: LocalizedKey,
     text: String,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(175, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(220, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(item:subject:message:)`
+ *
+ * ```swift
+ * nonisolated init(item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLink(
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+) {
+    SwiftView(224, listOf(item, subject, message), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(item:subject:message:)`
+ *
+ * ```swift
+ * nonisolated init(item: String, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<String>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLinkItem(
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+) {
+    SwiftView(225, listOf(item, subject, message), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(_:item:subject:message:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLink(
+    titleKey: LocalizedKey,
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+) {
+    SwiftView(226, listOf(titleKey.key, item, subject, message), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(_:item:subject:message:)`
+ *
+ * ```swift
+ * nonisolated init(_ title: Text, item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLink(
+    title: String,
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+) {
+    SwiftView(227, listOf(title, item, subject, message), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(_:item:subject:message:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLinkItem(
+    titleResource: LocalizedKey,
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+) {
+    SwiftView(228, listOf(titleResource.key, item, subject, message), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(_:item:subject:message:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, item: URL, subject: Text? = nil, message: Text? = nil) where Data == CollectionOfOne<URL>, S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLinkItem(
+    title: String,
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+) {
+    SwiftView(229, listOf(title, item, subject, message), modifier)
+}
+
+/**
+ * SwiftUI `ShareLink.init(item:subject:message:label:)`
+ *
+ * ```swift
+ * nonisolated init(item: URL, subject: Text? = nil, message: Text? = nil, @ContentBuilder label: () -> Label) where Data == CollectionOfOne<URL>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLink(
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(234, listOf(item, subject, message), modifier, content = content)
+}
+
+/**
+ * SwiftUI `ShareLink.init(item:subject:message:label:)`
+ *
+ * ```swift
+ * nonisolated init(item: String, subject: Text? = nil, message: Text? = nil, @ContentBuilder label: () -> Label) where Data == CollectionOfOne<String>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ShareLinkItem(
+    item: String,
+    modifier: Modifier = Modifier,
+    subject: String? = null,
+    message: String? = null,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(235, listOf(item, subject, message), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Stepper.init(_:value:in:step:onEditingChanged:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<V>(_ titleResource: LocalizedStringResource, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Stepper(
+    titleResource: LocalizedKey,
+    value: Int,
+    bounds: IntRange,
+    modifier: Modifier = Modifier,
+    step: Int = 1,
+    onValueChange: (Int) -> Unit,
+    onEditingChanged: (Boolean) -> Unit = {},
+) {
+    SwiftView(251, listOf(titleResource.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -3603,12 +4403,12 @@ public fun SecureFieldText(
  * ```swift
  * nonisolated init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun StepperValue(
-    titleKey: String,
+    titleKey: LocalizedKey,
     value: Int,
     bounds: IntRange,
     modifier: Modifier = Modifier,
@@ -3616,7 +4416,28 @@ public fun StepperValue(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(202, listOf(titleKey, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(252, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+}
+
+/**
+ * SwiftUI `Stepper.init(_:value:step:onEditingChanged:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init<V>(_ titleResource: LocalizedStringResource, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Stepper(
+    titleResource: LocalizedKey,
+    value: Int,
+    modifier: Modifier = Modifier,
+    step: Int = 1,
+    onValueChange: (Int) -> Unit,
+    onEditingChanged: (Boolean) -> Unit = {},
+) {
+    SwiftView(254, listOf(titleResource.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -3625,19 +4446,19 @@ public fun StepperValue(
  * ```swift
  * nonisolated init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun StepperValue(
-    titleKey: String,
+    titleKey: LocalizedKey,
     value: Int,
     modifier: Modifier = Modifier,
     step: Int = 1,
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(204, listOf(titleKey, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(255, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -3646,16 +4467,74 @@ public fun StepperValue(
  * ```swift
  * init(_ key: LocalizedStringKey, tableName: String? = nil, bundle: Bundle? = nil, comment: StaticString? = nil)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun Text(
-    key: String,
+    key: LocalizedKey,
     modifier: Modifier = Modifier,
     tableName: String? = null,
 ) {
-    SwiftView(209, listOf(key, tableName), modifier)
+    SwiftView(260, listOf(key.key, tableName), modifier)
+}
+
+/**
+ * SwiftUI `Text.init(_:)`
+ *
+ * ```swift
+ * init(_ resource: LocalizedStringResource)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Text(
+    resource: LocalizedKey,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(261, listOf(resource.key), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(text:prompt:axis:label:)`
+ *
+ * ```swift
+ * nonisolated init(text: Binding<String>, prompt: Text? = nil, axis: Axis, @ContentBuilder label: () -> Label)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    text: String,
+    axis: Axis,
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onTextChange: (String) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(264, listOf(text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier, content = content)
+}
+
+/**
+ * SwiftUI `TextField.init(text:prompt:label:)`
+ *
+ * ```swift
+ * nonisolated init(text: Binding<String>, prompt: Text? = nil, @ContentBuilder label: () -> Label)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    text: String,
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onTextChange: (String) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(265, listOf(text, SValueCallback { onTextChange(it as String) }, prompt), modifier, content = content)
 }
 
 /**
@@ -3664,19 +4543,19 @@ public fun Text(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
-public fun TextFieldText(
-    titleKey: String,
+public fun TextField(
+    titleKey: LocalizedKey,
     text: String,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
     onEditingChanged: (Boolean) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(214, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
+    SwiftView(266, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -3685,18 +4564,38 @@ public fun TextFieldText(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
-public fun TextFieldText(
-    titleKey: String,
+public fun TextField(
+    titleKey: LocalizedKey,
     text: String,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
     onEditingChanged: (Boolean) -> Unit,
 ) {
-    SwiftView(216, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(268, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:axis:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, text: Binding<String>, axis: Axis)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    titleResource: LocalizedKey,
+    text: String,
+    axis: Axis,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(270, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
 }
 
 /**
@@ -3705,18 +4604,141 @@ public fun TextFieldText(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, axis: Axis)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun TextFieldText(
-    titleKey: String,
+    titleKey: LocalizedKey,
     text: String,
     axis: Axis,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(218, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
+    SwiftView(271, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:prompt:axis:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, text: Binding<String>, prompt: Text?, axis: Axis)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    titleResource: LocalizedKey,
+    text: String,
+    prompt: String?,
+    axis: Axis,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(273, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:prompt:axis:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?, axis: Axis)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextFieldText(
+    titleKey: LocalizedKey,
+    text: String,
+    prompt: String?,
+    axis: Axis,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(274, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:prompt:axis:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, text: Binding<String>, prompt: Text?, axis: Axis) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    title: String,
+    text: String,
+    prompt: String?,
+    axis: Axis,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(275, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:prompt:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, text: Binding<String>, prompt: Text?)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    titleResource: LocalizedKey,
+    text: String,
+    prompt: String?,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(276, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:prompt:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextFieldText(
+    titleKey: LocalizedKey,
+    text: String,
+    prompt: String?,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(277, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:prompt:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, text: Binding<String>, prompt: Text?) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    title: String,
+    text: String,
+    prompt: String?,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(278, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -3725,18 +4747,37 @@ public fun TextFieldText(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
-public fun TextFieldText(
-    titleKey: String,
+public fun TextField(
+    titleKey: LocalizedKey,
     text: String,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(220, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(279, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+}
+
+/**
+ * SwiftUI `TextField.init(_:text:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleResource: LocalizedStringResource, text: Binding<String>)
+ * ```
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextField(
+    titleResource: LocalizedKey,
+    text: String,
+    modifier: Modifier = Modifier,
+    onTextChange: (String) -> Unit,
+) {
+    SwiftView(281, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -3745,17 +4786,112 @@ public fun TextFieldText(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, text: Binding<String>)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun TextFieldText(
-    titleKey: String,
+    titleKey: LocalizedKey,
     text: String,
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(222, listOf(titleKey, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(282, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier)
+}
+
+/**
+ * SwiftUI `TextFieldLink.init(prompt:label:onSubmit:)`
+ *
+ * ```swift
+ * nonisolated init(prompt: Text? = nil, @ContentBuilder label: () -> Label, onSubmit: @escaping (String) -> Void)
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextFieldLink(
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onSubmit: (String) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(284, listOf(prompt, SValueCallback { onSubmit(it as String) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `TextFieldLink.init(_:prompt:onSubmit:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, prompt: Text? = nil, onSubmit: @escaping (String) -> Void)
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextFieldLink(
+    titleResource: LocalizedKey,
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onSubmit: (String) -> Unit,
+) {
+    SwiftView(285, listOf(titleResource.key, prompt, SValueCallback { onSubmit(it as String) }), modifier)
+}
+
+/**
+ * SwiftUI `TextFieldLink.init(_:prompt:onSubmit:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, prompt: Text? = nil, onSubmit: @escaping (String) -> Void)
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextFieldLinkPrompt(
+    titleKey: LocalizedKey,
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onSubmit: (String) -> Unit,
+) {
+    SwiftView(286, listOf(titleKey.key, prompt, SValueCallback { onSubmit(it as String) }), modifier)
+}
+
+/**
+ * SwiftUI `TextFieldLink.init(_:prompt:onSubmit:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, prompt: Text? = nil, onSubmit: @escaping (String) -> Void) where S : StringProtocol
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun TextFieldLink(
+    title: String,
+    modifier: Modifier = Modifier,
+    prompt: String? = null,
+    onSubmit: (String) -> Unit,
+) {
+    SwiftView(287, listOf(title, prompt, SValueCallback { onSubmit(it as String) }), modifier)
+}
+
+/**
+ * SwiftUI `Toggle.init(_:isOn:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, isOn: Binding<Bool>)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Toggle(
+    titleResource: LocalizedKey,
+    isOn: Boolean,
+    modifier: Modifier = Modifier,
+    onIsOnChange: (Boolean) -> Unit,
+) {
+    SwiftView(290, listOf(titleResource.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -3764,17 +4900,37 @@ public fun TextFieldText(
  * ```swift
  * nonisolated init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ToggleIsOn(
-    titleKey: String,
+    titleKey: LocalizedKey,
     isOn: Boolean,
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(226, listOf(titleKey, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(291, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+}
+
+/**
+ * SwiftUI `Toggle.init(_:systemImage:isOn:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, systemImage: String, isOn: Binding<Bool>)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun Toggle(
+    titleResource: LocalizedKey,
+    systemImage: String,
+    isOn: Boolean,
+    modifier: Modifier = Modifier,
+    onIsOnChange: (Boolean) -> Unit,
+) {
+    SwiftView(293, listOf(titleResource.key, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -3783,18 +4939,74 @@ public fun ToggleIsOn(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, systemImage: String, isOn: Binding<Bool>)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
 @Composable
 public fun ToggleSystemImage(
-    titleKey: String,
+    titleKey: LocalizedKey,
     systemImage: String,
     isOn: Boolean,
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(228, listOf(titleKey, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(294, listOf(titleKey.key, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+}
+
+/**
+ * SwiftUI `ContentUnavailableView.init(_:image:description:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ title: LocalizedStringResource, image name: String, description: Text? = nil)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ContentUnavailableViewImage(
+    title: LocalizedKey,
+    image: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+) {
+    SwiftView(30, listOf(title.key, image, description), modifier)
+}
+
+/**
+ * SwiftUI `ContentUnavailableView.init(_:image:description:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, image name: String, description: Text? = nil) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ContentUnavailableViewImage(
+    title: String,
+    image: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+) {
+    SwiftView(32, listOf(title, image, description), modifier)
+}
+
+/**
+ * SwiftUI `Label.init(_:image:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, image name: String)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun LabelImage(
+    titleResource: LocalizedKey,
+    image: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(90, listOf(titleResource.key, image), modifier)
 }
 
 /**
@@ -3803,7 +5015,7 @@ public fun ToggleSystemImage(
  * ```swift
  * @export(implementation) nonisolated init<V>(tag: V, selection: Binding<V?>, @ContentBuilder destination: () -> Destination, @ContentBuilder label: () -> Label) where V : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
@@ -3816,7 +5028,7 @@ public fun NavigationLink(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(104, listOf(tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(127, listOf(tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -3825,7 +5037,7 @@ public fun NavigationLink(
  * ```swift
  * @export(implementation) nonisolated init(isActive: Binding<Bool>, @ContentBuilder destination: () -> Destination, @ContentBuilder label: () -> Label)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
@@ -3837,7 +5049,7 @@ public fun NavigationLink(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(105, listOf(isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(128, listOf(isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -3846,12 +5058,12 @@ public fun NavigationLink(
  * ```swift
  * @export(implementation) nonisolated init<S, V>(_ title: S, tag: V, selection: Binding<V?>, @ContentBuilder destination: () -> Destination) where S : StringProtocol, V : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
 @Composable
-public fun NavigationLink(
+public fun NavigationLinkTag(
     title: String,
     tag: Any,
     selection: Any?,
@@ -3859,7 +5071,7 @@ public fun NavigationLink(
     onSelectionChange: (Any?) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(109, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+    SwiftView(136, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
 }
 
 /**
@@ -3868,19 +5080,19 @@ public fun NavigationLink(
  * ```swift
  * @export(implementation) nonisolated init<S>(_ title: S, isActive: Binding<Bool>, @ContentBuilder destination: () -> Destination) where S : StringProtocol
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
 @Composable
-public fun NavigationLink(
+public fun NavigationLinkIsActive(
     title: String,
     isActive: Boolean,
     modifier: Modifier = Modifier,
     onIsActiveChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(111, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+    SwiftView(138, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3889,20 +5101,20 @@ public fun NavigationLink(
  * ```swift
  * @export(implementation) nonisolated init<V>(_ titleKey: LocalizedStringKey, tag: V, selection: Binding<V?>, @ContentBuilder destination: () -> Destination) where V : Hashable
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
 @Composable
-public fun NavigationLinkTag(
-    titleKey: String,
+public fun NavigationLink(
+    titleKey: LocalizedKey,
     tag: Any,
     selection: Any?,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any?) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(108, listOf(titleKey, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+    SwiftView(135, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
 }
 
 /**
@@ -3911,18 +5123,18 @@ public fun NavigationLinkTag(
  * ```swift
  * @export(implementation) nonisolated init(_ titleKey: LocalizedStringKey, isActive: Binding<Bool>, @ContentBuilder destination: () -> Destination)
  * ```
- * Availability: iOS 17.0+, macOS 14.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
 @Composable
-public fun NavigationLinkIsActive(
-    titleKey: String,
+public fun NavigationLink(
+    titleKey: LocalizedKey,
     isActive: Boolean,
     modifier: Modifier = Modifier,
     onIsActiveChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(110, listOf(titleKey, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+    SwiftView(137, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 

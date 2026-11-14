@@ -2,44 +2,122 @@
 import SwiftUI
 
 @MainActor func sm_Image(_ base: Image, _ m: NodeModel) -> Image {
+    // Applies the leading run of modifiers that are methods of Image, like Swift overload resolution.
     var r = base
-    for (index, mod) in m.node.modifiers.enumerated() {
-        let a = Args(node: m.node, values: mod.args, modifierIndex: index)
+    var consumed = 0
+    chain: for (index, mod) in m.modifiers.enumerated() {
+        let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 507:
+        case 600:
             r = r.antialiased(a.bool(0))
-        case 508:
-            guard let p0 = d_Image_Interpolation(a.raw(0)) else { continue }
+        case 601:
+            guard let p0 = d_Image_Interpolation(a.expr(0)) else { break chain }
             r = r.interpolation(p0)
-        case 509:
-            r = r.renderingMode((a.isNil(0) ? nil : d_Image_TemplateRenderingMode(a.raw(0))))
-        case 510:
-            guard let p0 = d_EdgeInsets(a.raw(0)) else { continue }
-            guard let p1 = d_Image_ResizingMode(a.raw(1)) else { continue }
+        case 602:
+            r = r.renderingMode(d_Image_TemplateRenderingMode(a.expr(0)))
+        #if os(iOS) || os(macOS) || os(tvOS)
+        case 109:
+            r = r.allowedDynamicRange(d_Image_DynamicRange(a.expr(0)))
+        #endif
+        case 526:
+            r = r.symbolRenderingMode(d_SymbolRenderingMode(a.expr(0)))
+        case 527:
+            guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
+            r = r.symbolVariableValueMode(d_SymbolVariableValueMode(a.expr(0)))
+        case 524:
+            guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
+            r = r.symbolColorRenderingMode(d_SymbolColorRenderingMode(a.expr(0)))
+        case 603:
+            guard let p0 = d_EdgeInsets(a.expr(0)) else { break chain }
+            guard let p1 = d_Image_ResizingMode(a.expr(1)) else { break chain }
             r = r.resizable(capInsets: p0, resizingMode: p1)
-        default: break
+        default: break chain
         }
+        consumed += 1
     }
+    m.consumedPrefix = consumed
     return r
 }
 
 @MainActor func sm_Text(_ base: Text, _ m: NodeModel) -> Text {
+    // Applies the leading run of modifiers that are methods of Text, like Swift overload resolution.
     var r = base
-    for (index, mod) in m.node.modifiers.enumerated() {
-        let a = Args(node: m.node, values: mod.args, modifierIndex: index)
+    var consumed = 0
+    chain: for (index, mod) in m.modifiers.enumerated() {
+        let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 511:
-            r = r.strikethrough(a.bool(0), color: (a.isNil(1) ? nil : d_Color(a.raw(1))))
-        case 512:
+        case 266:
+            r = r.fontDesign(d_Font_Design(a.expr(0)))
+        case 267:
+            r = r.fontWeight(d_Font_Weight(a.expr(0)))
+        case 357:
+            r = r.monospaced(a.bool(0))
+        case 604:
+            r = r.strikethrough(a.bool(0), color: d_Color(a.expr(1)))
+        case 518:
+            guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
+            r = r.strikethrough(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
+        case 139:
+            r = r.baselineOffset(a.cgFloat(0))
+        case 269:
+            r = r.foregroundColor(d_Color(a.expr(0)))
+        case 270:
+            guard let p0 = dp_ShapeStyle(a.expr(0)) else { break chain }
+            @MainActor func open<Q0: ShapeStyle>(_ q0: Q0) -> Text { r.foregroundStyle(q0) }
+            r = open(p0)
+        case 358:
+            r = r.monospacedDigit()
+        case 507:
+            r = r.speechAdjustedPitch(a.double(0))
+        case 587:
+            guard let p0 = d_TypesettingLanguage(a.expr(0)) else { break chain }
+            r = r.typesettingLanguage(p0, isEnabled: a.bool(1))
+        case 509:
+            r = r.speechAnnouncementsQueued(a.bool(0))
+        case 510:
+            r = r.speechSpellsOutCharacters(a.bool(0))
+        case 508:
+            r = r.speechAlwaysIncludesPunctuation(a.bool(0))
+        case 605:
             r = r.bold()
-        case 513:
+        case 142:
+            r = r.bold(a.bool(0))
+        case 265:
+            r = r.font(d_Font(a.expr(0)))
+        case 606:
             r = r.italic()
-        case 514:
-            r = r.underline(a.bool(0), color: (a.isNil(1) ? nil : d_Color(a.raw(1))))
-        default: break
+        case 313:
+            r = r.italic(a.bool(0))
+        case 314:
+            r = r.kerning(a.cgFloat(0))
+        case 580:
+            r = r.tracking(a.cgFloat(0))
+        case 268:
+            r = r.fontWidth(d_Font_Width(a.expr(0)))
+        case 551:
+            guard let p0 = d_Text_Scale(a.expr(0)) else { break chain }
+            r = r.textScale(p0, isEnabled: a.bool(1))
+        case 607:
+            r = r.underline(a.bool(0), color: d_Color(a.expr(1)))
+        case 588:
+            guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
+            r = r.underline(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
+        case 92:
+            guard let p0 = d_AccessibilityTextContentType(a.expr(0)) else { break chain }
+            r = r.accessibilityTextContentType(p0)
+        case 74:
+            r = r.accessibilityLabel(Text(a.string(0)))
+        case 73:
+            r = r.accessibilityLabel(LocalizedStringResource(String.LocalizationValue(a.string(0))))
+        case 55:
+            guard let p0 = d_AccessibilityHeadingLevel(a.expr(0)) else { break chain }
+            r = r.accessibilityHeading(p0)
+        default: break chain
         }
+        consumed += 1
     }
+    m.consumedPrefix = consumed
     return r
 }
 
-let generatedSelfModifierIds: Set<Int32> = [507, 508, 509, 510, 511, 512, 513, 514]
+let generatedSelfModifierIds: Set<Int32> = [55, 73, 74, 92, 109, 139, 142, 265, 266, 267, 268, 269, 270, 313, 314, 357, 358, 507, 508, 509, 510, 518, 524, 526, 527, 551, 580, 587, 588, 600, 601, 602, 603, 604, 605, 606, 607]

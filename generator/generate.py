@@ -17,7 +17,10 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
 from bridges import Bridge, Classifier, Ctx, Unsupported, kotlin_name, kotlin_param_name  # noqa: E402
-from model import DEPLOYMENT, PLATFORMS, Model  # noqa: E402
+import model as model_module  # noqa: E402
+from model import DEPLOYMENT, OSNAME, Model  # noqa: E402
+
+PLATFORMS = model_module.PLATFORMS
 from swifttypes import parse_type  # noqa: E402
 
 PKG = "dev.composeswiftui"
@@ -76,20 +79,20 @@ def platform_guard(plats):
         return None, None
     ifline = None
     if set(plats) != set(PLATFORMS):
-        ifline = "#if " + " || ".join("os(%s)" % ("iOS" if p == "ios" else "macOS") for p in sorted(plats))
+        ifline = "#if " + " || ".join("os(%s)" % OSNAME[p] for p in sorted(plats))
     need = any(plats[p] > DEPLOYMENT[p] for p in plats)
     avail = None
     if need:
         parts = []
         for p in PLATFORMS:
             v = plats.get(p, DEPLOYMENT[p])
-            parts.append("%s %s" % ("iOS" if p == "ios" else "macOS", vstr(max(v, DEPLOYMENT[p]))))
+            parts.append("%s %s" % (OSNAME[p], vstr(max(v, DEPLOYMENT[p]))))
         avail = ", ".join(parts) + ", *"
     return ifline, avail
 
 
 def avail_doc(plats):
-    names = {"ios": "iOS", "macos": "macOS"}
+    names = OSNAME
     out = []
     for p in PLATFORMS:
         if p in plats:
@@ -141,7 +144,9 @@ class Out:
 
 class Generator:
     def __init__(self, sg_root, project):
+        global PLATFORMS
         self.model = Model(sg_root)
+        PLATFORMS = self.model.platforms
         self.project = project
         rej_path = os.path.join(project, "generator", "rejected.json")
         self.rejected = json.load(open(rej_path)) if os.path.exists(rej_path) else {}
@@ -230,8 +235,10 @@ class Generator:
             if target.kind == "int":
                 return d if "." not in d else None
             return None
-        if d.startswith('"') and target.kind in ("str", "lsk"):
+        if d.startswith('"') and target.kind in ("str", "text"):
             return d
+        if d.startswith('"') and target.kind in ("lsk", "lsr"):
+            return "LocalizedKey(%s)" % d
         if d == "[]" and b.kind in ("list", "set"):
             return "emptyList()" if b.kind == "list" else "emptySet()"
         if target.kind == "value":
@@ -405,7 +412,7 @@ class Generator:
         for p in params:
             refs |= p[2].refs
         if not item.compute_platforms(self, refs):
-            self.status(m, "skipped", "unavailable on iOS/macOS")
+            self.status(m, "skipped", "unavailable on the supported platforms")
             return None
         item.id = self.next_member
         self.next_member += 1
@@ -449,7 +456,7 @@ class Generator:
                 for p in params:
                     refs |= p[2].refs
                 if not item.compute_platforms(self, refs):
-                    self.status(init, "skipped", "unavailable on iOS/macOS")
+                    self.status(init, "skipped", "unavailable on the supported platforms")
                     continue
                 item.id = kind_id
                 kind_id += 1
@@ -467,7 +474,7 @@ class Generator:
         for item, kind, s, params in self.views:
             if kind == "init" and not s.generics.get("parameters"):
                 view_types[s.usr] = s
-        existing = {(i.sym.name, tuple(b.kt for _, _, b, _ in p)) for i, p in self.modifiers}
+        existing = {(i.sym.name, tuple(b.kt for _, _, b, _ in p)): i for i, p in self.modifiers}
         for usr, s in sorted(view_types.items(), key=lambda x: x[1].dotted):
             for m in sorted(s.children, key=lambda x: x.usr):
                 if m.kind == "swift.method" and m.returns() in (s.name, "Self"):
@@ -478,7 +485,18 @@ class Generator:
                         continue
                     sig = (m.name, tuple(b.kt for _, _, b, _ in params))
                     if sig in existing:
-                        self.status(m, "covered", "same as View.%s" % m.name)
+                        # Same Kotlin call as the View modifier: at the head of the chain Swift would pick
+                        # the concrete type's method (Image.symbolRenderingMode, Text.font...), so the view
+                        # factory applies it under the View modifier's id.
+                        shared = Item("selfmod:" + m.usr, m)
+                        refs = set()
+                        for p in params:
+                            refs |= p[2].refs
+                        if shared.compute_platforms(self, refs) and shared.key not in self.rejected:
+                            shared.id = existing[sig].id
+                            shared.self_type = s
+                            self.self_modifiers.setdefault(usr, []).append((shared, params))
+                        self.status(m, "covered", "same as View.%s (applied on %s at the head of the chain)" % (m.name, s.name))
                         continue
                     before = len(self.modifiers)
                     mod_id = self._add_modifier(m, mod_id, s)
@@ -504,7 +522,7 @@ class Generator:
         if self_type is not None:
             refs.add(self_type.usr) if self_type.usr in self.values else None
         if not item.compute_platforms(self, refs):
-            self.status(s, "skipped", "unavailable on iOS/macOS")
+            self.status(s, "skipped", "unavailable on the supported platforms")
             return mod_id
         item.id = mod_id
         self.modifiers.append((item, params))
@@ -585,7 +603,7 @@ class Generator:
         out.add(header)
         seen = set()
         def lsk(params):
-            return any(b.kind == "lsk" or (b.kind == "optional" and b.inner.kind == "lsk") for _, _, b, _ in (params or []))
+            return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in (params or []))
 
         def asset(params):
             # asset-catalog image overloads lose the base name to `systemImage` ones
@@ -672,7 +690,7 @@ class Generator:
             o.add(header)
         seen = set()
         def lsk_m(params):
-            return any(b.kind == "lsk" or (b.kind == "optional" and b.inner.kind == "lsk") for _, _, b, _ in params)
+            return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in params)
         for n, (item, params) in enumerate(sorted(self.modifiers, key=lambda x: (x[0].sym.deprecated, lsk_m(x[1])))):
             decls, encs = self.kt_params(params)
             types = tuple(t.rstrip("?") for _, t, _, _ in decls)
@@ -791,7 +809,7 @@ class Generator:
         i = start
         for n, (label, internal, b, default) in enumerate(params):
             if b.kind == "slot" and view_children is not None and internal == view_children:
-                expr = "{ ChildrenView(m) }"
+                expr = "{ ForEach(m.children, id: \\.nodeId) { NodeView(model: $0) } }"
             elif self.null_default(b, default):
                 swift_t = self.NULL_DEFAULT_KINDS[b.kind] or b.swift_type[2:].replace("_", ".")
                 m = re.match(r"^([A-Z][A-Za-z0-9_]*)(.*)$", default)
@@ -801,7 +819,7 @@ class Generator:
                     if resolved is not None:
                         default = resolved.dotted + m.group(2)
                 if b.kind == "value":
-                    dec = "(%s(%s.raw(%d)) ?? %s)" % (b.swift_type, src, i, default)
+                    dec = "(%s(%s.expr(%d)) ?? %s)" % (b.swift_type, src, i, default)
                 else:
                     _, dec = b.swift_decode(i, "p%d" % n, fallback, src)
                 stmts.append("let p%d: %s = %s.isNil(%d) ? %s : %s" % (n, swift_t, src, i, default, dec))
@@ -822,7 +840,7 @@ class Generator:
             return ["return %s" % expr]
         gens = ", ".join("Q%s: %s" % (q[1:], proto) for _, q, proto in self.opened)
         ps = ", ".join("_ %s: Q%s" % (q, q[1:]) for _, q, _ in self.opened)
-        return ["func open<%s>(%s) -> %s {" % (gens, ps, result_type), "    return %s" % expr, "}",
+        return ["@MainActor func open<%s>(%s) -> %s {" % (gens, ps, result_type), "    return %s" % expr, "}",
                 "return open(%s)" % ", ".join(p for p, _, _ in self.opened)]
 
     def swift_wrap(self, plats, body_lines, fallback_return, indent="        "):
@@ -853,7 +871,7 @@ class Generator:
                 o.add(ifline)
             attr = "@available(%s)\n" % avail if avail else ""
             swift_t = ".".join(vt.sym.path)
-            o.add("%s@MainActor func %s(_ v: Any?) -> %s? {\n    guard let e = v as? SExpr else { return nil }\n    let a = Args(expr: e)\n    switch e.id {" % (
+            o.add("%s@MainActor func %s(_ e: SExpr?) -> %s? {\n    guard let e else { return nil }\n    let a = Args(expr: e)\n    switch e.id {" % (
                 attr, vt.decoder, swift_t), "type:" + vt.usr)
             for item, kind, params, _ in vt.members:
                 try:
@@ -868,7 +886,7 @@ class Generator:
                 elif kind == "init":
                     expr = "%s(%s)" % (swift_t, ", ".join(args))
                 else:
-                    stmts = ["guard let base = %s(a.raw(0)) else { return nil }" % vt.decoder] + stmts
+                    stmts = ["guard let base = %s(a.expr(0)) else { return nil }" % vt.decoder] + stmts
                     expr = "base.%s(%s)" % (self._swift_member(item.sym.name), ", ".join(args))
                 body = stmts + self.open_call(swift_t + "?", expr)
                 # availability relative to the enclosing decoder
@@ -902,7 +920,7 @@ class Generator:
             if ifline:
                 po.add(ifline)
             attr = "@available(%s)\n" % avail if avail else ""
-            po.add("%s@MainActor func %s(_ v: Any?) -> (any %s)? {\n    guard let e = v as? SExpr else { return nil }\n    switch e.id {" % (
+            po.add("%s@MainActor func %s(_ e: SExpr?) -> (any %s)? {\n    guard let e else { return nil }\n    switch e.id {" % (
                 attr, p.decoder, ".".join(p.sym.path)), "type:" + p.usr)
             for vt in p.conformers:
                 ids = [str(it.id) for it, k, prm, _ in vt.members if it.key not in self.rejected]
@@ -920,14 +938,14 @@ class Generator:
                 lines.append("    case %s:" % ", ".join(ids))
                 if rel:
                     _, av = platform_guard({q: both.get(q, DEPLOYMENT[q]) for q in PLATFORMS})
-                    lines.append("        if #available(%s) { return %s(v) }" % (av, vt.decoder))
+                    lines.append("        if #available(%s) { return %s(e) }" % (av, vt.decoder))
                     lines.append("        return nil")
                 else:
-                    lines.append("        return %s(v)" % vt.decoder)
+                    lines.append("        return %s(e)" % vt.decoder)
                 if cif:
                     lines.append("    #endif")
                 po.add("\n".join(lines), "type:" + vt.usr)
-            po.add("    default: return nil\n    }\n}")
+            po.add("    default: return HandwrittenValues.decode(e) as? any %s\n    }\n}" % ".".join(p.sym.path))
             if ifline:
                 po.add("#endif")
         # --- views
@@ -939,8 +957,8 @@ class Generator:
                 continue
             if kind == "valueview":
                 vt = s
-                body = ["let a = m.args", "guard let v = %s(a.raw(0)) else { return AnyView(EmptyView()) }" % vt.decoder,
-                        "return AnyView(v)"]
+                body = ["let a = m.args", "guard let v = %s(a.expr(0)) else { return AnyView(EmptyView()) }" % vt.decoder,
+                        "return ModChain.apply(v, m, 0)"]
                 ifline, lines = self.swift_wrap(item.platforms, body, "return AnyView(EmptyView())", "            ")
             else:
                 slot_params = [(lbl, internal, b) for lbl, internal, b, _ in params if b.kind == "slot"]
@@ -958,8 +976,9 @@ class Generator:
                     continue
                 call = "%s(%s)" % (s.name, ", ".join(args))
                 if s.usr in self.self_modifiers:
+                    # applies the leading concrete-type methods and records how many it consumed
                     call = "sm_%s(%s, m)" % (s.name, call)
-                body = ["let a = m.args"] + stmts + self.open_call("AnyView", "AnyView(%s)" % call)
+                body = ["let a = m.args"] + stmts + self.open_call("AnyView", "ModChain.apply(%s, m, m.consumedPrefix)" % call)
                 ifline, lines = self.swift_wrap(item.platforms, body, "return AnyView(EmptyView())", "            ")
             code = []
             if ifline:
@@ -977,66 +996,74 @@ class Generator:
         all_self_ids = []
         for usr, mods in sorted(self.self_modifiers.items(), key=lambda x: self.model.syms[x[0]].name):
             s = self.model.syms[usr]
-            smo.add("@MainActor func sm_%s(_ base: %s, _ m: NodeModel) -> %s {\n    var r = base\n    for (index, mod) in m.node.modifiers.enumerated() {\n        let a = Args(node: m.node, values: mod.args, modifierIndex: index)\n        switch mod.id {" % (s.name, s.name, s.name))
+            smo.add("@MainActor func sm_%s(_ base: %s, _ m: NodeModel) -> %s {\n    // Applies the leading run of modifiers that are methods of %s, like Swift overload resolution.\n    var r = base\n    var consumed = 0\n    chain: for (index, mod) in m.modifiers.enumerated() {\n        let a = Args(node: m.node, src: mod, modifierIndex: index)\n        switch mod.id {" % (s.name, s.name, s.name, s.name))
+            seen_ids = set()
             for item, params in mods:
+                if item.id in seen_ids:
+                    continue
                 try:
-                    stmts, args = self.swift_call_args(params, "continue")
+                    stmts, args = self.swift_call_args(params, "break chain")
                 except Unsupported as e:
                     self.rejected[item.key] = str(e)
                     continue
+                call = "r.%s(%s)" % (self._swift_member(item.sym.name), ", ".join(args))
                 if self.opened:
-                    self.rejected[item.key] = "self modifier with protocol-typed parameter"
-                    continue
-                body = stmts + ["r = r.%s(%s)" % (self._swift_member(item.sym.name), ", ".join(args))]
+                    # protocol-typed parameter (Text.foregroundStyle<S: ShapeStyle>...): open the existential
+                    gens = ", ".join("Q%s: %s" % (q[1:], proto) for _, q, proto in self.opened)
+                    ps = ", ".join("_ %s: Q%s" % (q, q[1:]) for _, q, _ in self.opened)
+                    body = stmts + ["@MainActor func open<%s>(%s) -> %s { %s }" % (gens, ps, s.name, call),
+                                    "r = open(%s)" % ", ".join(p for p, _, _ in self.opened)]
+                else:
+                    body = stmts + ["r = %s" % call]
                 ifline, avail = platform_guard(item.platforms)
                 lines = []
                 if ifline:
                     lines.append("        " + ifline)
                 lines.append("        case %d:" % item.id)
                 if avail:
-                    lines.append("            if #available(%s) {" % avail)
-                    lines.extend("                " + l for l in body)
-                    lines.append("            }")
-                else:
-                    lines.extend("            " + l for l in body)
+                    lines.append("            guard #available(%s) else { break chain }" % avail)
+                lines.extend("            " + l for l in body)
                 if ifline:
                     lines.append("        #endif")
                 smo.add("\n".join(lines), item.key)
+                seen_ids.add(item.id)
                 all_self_ids.append(item.id)
-            smo.add("        default: break\n        }\n    }\n    return r\n}\n")
-        smo.add("let generatedSelfModifierIds: Set<Int32> = [%s]" % ", ".join(str(i) for i in all_self_ids))
-        # modifiers
-        mo = [Out(os.path.join(root, "GenModifiers%d.swift" % i)) for i in range(8)]
+            smo.add("        default: break chain\n        }\n        consumed += 1\n    }\n    m.consumedPrefix = consumed\n    return r\n}\n")
+        smo.add("let generatedSelfModifierIds: Set<Int32> = [%s]" % ", ".join(str(i) for i in sorted(set(all_self_ids))))
+        # modifiers: generic recursive chain — the concrete view type is kept at every step, so a node
+        # costs a single AnyView whatever the number of modifiers.
+        nchunks = 8
+        mo = [Out(os.path.join(root, "GenModifiers%d.swift" % i)) for i in range(nchunks)]
         for i, o in enumerate(mo):
             o.add(header)
-            o.add("@MainActor enum GeneratedModifiers%d {\n    static func register(_ r: inout [Int: ComposeRegistry.ModifierFactory]) {" % i)
-        self_ids = set(all_self_ids)
-        for n, (item, params) in enumerate(self.modifiers):
-            if item.id in self_ids or getattr(item, "self_type", None) is not None:
+            o.add("@MainActor enum GeneratedChain%d {\n    @_semantics(\"optimize.sil.specialize.generic.never\")\n    static func apply<V: View>(_ v: V, _ id: Int, _ a: Args, _ m: NodeModel, _ i: Int) -> AnyView? {\n        switch id {" % i)
+        next_step = "return ModChain.apply(v, m, i + 1)"
+        for item, params in self.modifiers:
+            if getattr(item, "self_type", None) is not None:
                 continue
-            o = mo[n % len(mo)]
+            o = mo[item.id % nchunks]
             try:
-                stmts, args = self.swift_call_args(params, "return v")
+                stmts, args = self.swift_call_args(params, next_step)
             except Unsupported as e:
                 self.rejected[item.key] = str(e)
                 continue
-            body = stmts + self.open_call("AnyView", "AnyView(v.%s(%s))" % (self._swift_member(item.sym.name), ", ".join(args)))
-            ifline, lines = self.swift_wrap(item.platforms, body, "return v", "            ")
+            body = stmts + self.open_call("AnyView", "ModChain.apply(v.%s(%s), m, i + 1)" % (self._swift_member(item.sym.name), ", ".join(args)))
+            ifline, lines = self.swift_wrap(item.platforms, body, next_step, "            ")
             code = []
             if ifline:
                 code.append(ifline)
-            code.append("        r[%d] = { v, a, m in" % item.id)
+            code.append("        case %d:" % item.id)
             code.extend(lines)
-            code.append("        }")
             if ifline:
                 code.append("#endif")
             o.add("\n".join(code), item.key)
         for o in mo:
-            o.add("    }\n}")
+            o.add("        default: return nil\n        }\n    }\n}")
         reg = Out(os.path.join(root, "GenRegister.swift"))
         reg.add(header)
-        reg.add("public enum ComposeGenerated {\n    @MainActor public static func registerAll() {\n        GeneratedViews.register()\n        var r = ComposeRegistry.modifiers\n%s\n        ComposeRegistry.modifiers = r\n        ComposeRegistry.selfModifierIds = generatedSelfModifierIds\n    }\n}" % "\n".join(
-            "        GeneratedModifiers%d.register(&r)" % i for i in range(len(mo))))
+        reg.add("@MainActor enum GeneratedChain {\n    @_semantics(\"optimize.sil.specialize.generic.never\")\n    static func apply<V: View>(_ v: V, _ id: Int, _ a: Args, _ m: NodeModel, _ i: Int) -> AnyView? {\n        switch id %% %d {\n%s\n        default: return nil\n        }\n    }\n}\n" % (
+            nchunks, "\n".join("        case %d: return GeneratedChain%d.apply(v, id, a, m, i)" % (i, i) for i in range(nchunks))))
+        reg.add("public enum ComposeGenerated {\n    @MainActor public static func registerAll() {\n        GeneratedViews.register()\n        ComposeRegistry.selfModifierIds = generatedSelfModifierIds\n    }\n}")
         for o in dec_outs + [po, vo, smo] + mo + [reg]:
             o.write()
             self.line_map.append((o.path, o.ranges))

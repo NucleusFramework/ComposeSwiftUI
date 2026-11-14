@@ -44,6 +44,20 @@ struct RootView: View {
     /// `-runBench [-only N] [-out PATH]`: run the identity check + benchmarks, then exit.
     private func autoRun() async {
         let args = ProcessInfo.processInfo.arguments
+        if let i = args.firstIndex(of: "-profile"), i + 2 < args.count, let screen = Int(args[i + 1]) {
+            // -profile <screen> <mount|update> [compose|swift]: loops forever, for sampling profilers
+            let impl: Impl = args.contains("swift") ? .swiftUI : .compose
+            let renderer = OffscreenRenderer(size: CGSize(width: 700, height: 900))
+            while true {
+                let vm = BenchRegistry.shared.createViewModel(index: Int32(screen - 1))
+                _ = renderer.mount { ScreenFactory.view(screen - 1, impl, vm) }
+                if args[i + 2] == "update" {
+                    for _ in 0..<200 { vm.mutate(); ComposeSwiftUIHostKt.flushCompose(); renderer.relayout() }
+                }
+                renderer.unmount()
+                try? await Task.sleep(nanoseconds: 1_000_000)
+            }
+        }
         guard args.contains("-runBench") else { return }
         var only: [Int]?
         if let i = args.firstIndex(of: "-only"), i + 1 < args.count {

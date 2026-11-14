@@ -15,12 +15,21 @@ enum Impl: String, CaseIterable, Codable {
 @MainActor
 enum ScreenFactory {
     static var count: Int { Int(BenchRegistry.shared.count()) }
+    static var lastCompositionMs: Double = 0
     static func title(_ i: Int) -> String { BenchRegistry.shared.title(index: Int32(i)) }
 
     static func view(_ i: Int, _ impl: Impl, _ vm: BenchViewModel) -> AnyView {
         switch impl {
         case .swiftUI: return SwiftScreens.make(i, vm)
-        case .compose: return AnyView(ComposeView { BenchRegistry.shared.composeHost(index: Int32(i), vm: vm) })
+        case .compose:
+            return AnyView(ComposeView {
+                // composition is measured separately from the SwiftUI work
+                let t0 = now()
+                let host = BenchRegistry.shared.composeHost(index: Int32(i), vm: vm)
+                host.start()
+                ScreenFactory.lastCompositionMs = (now() - t0) * 1000
+                return host
+            })
         }
     }
 }
@@ -148,6 +157,7 @@ func writePNG(_ image: CGImage, to url: URL) {
 
 struct ImplResult: Codable {
     var mountMs: [Double] = []
+    var compositionMs: [Double] = []
     var updateMs: Double = 0
     var medianMountMs: Double { mountMs.sorted()[mountMs.count / 2] }
 }
@@ -203,7 +213,10 @@ final class BenchRunner {
                 for impl in Impl.allCases {
                     let vm = BenchRegistry.shared.createViewModel(index: Int32(i))
                     let t = renderer.mount { ScreenFactory.view(i, impl, vm) }
-                    if impl == .swiftUI { r.swiftUI.mountMs.append(t * 1000) } else { r.compose.mountMs.append(t * 1000) }
+                    if impl == .swiftUI { r.swiftUI.mountMs.append(t * 1000) } else {
+                        r.compose.mountMs.append(t * 1000)
+                        r.compose.compositionMs.append(ScreenFactory.lastCompositionMs)
+                    }
                     renderer.unmount()
                     await settle(0.02)
                 }
@@ -247,9 +260,10 @@ final class BenchRunner {
                     writePNG(b, to: outDir.appendingPathComponent("\(name)-after-compose.png"))
                 }
             }
-            log(String(format: "[bench] %@  diff=%.4f%% after=%.4f%%  mount swift=%.2fms compose=%.2fms  update swift=%.3fms compose=%.3fms",
+            let comp = r.compose.compositionMs.sorted()
+            log(String(format: "[bench] %@  diff=%.4f%% after=%.4f%%  mount swift=%.2fms compose=%.2fms (kotlin %.2fms)  update swift=%.3fms compose=%.3fms",
                        r.title, r.initialDiff * 100, r.afterUpdateDiff * 100, r.medianMountSwiftUI, r.medianMountCompose,
-                       r.swiftUI.updateMs, r.compose.updateMs))
+                       comp.isEmpty ? 0 : comp[comp.count / 2], r.swiftUI.updateMs, r.compose.updateMs))
             results.append(r)
         }
         let enc = JSONEncoder()

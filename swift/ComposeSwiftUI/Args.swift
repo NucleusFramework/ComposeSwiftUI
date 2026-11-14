@@ -1,40 +1,39 @@
 import SwiftUI
 
-/// Typed access to the arguments Kotlin encoded for a view init or a modifier.
+/// Typed access to the arguments Kotlin encoded for a view init, a modifier or an expression.
+/// Reads go through Kotlin's typed accessors (`SArgs`): no NSArray bridging, no dynamic casts.
 public struct Args {
     let node: SNode?
-    public let values: [Any]
+    let src: any SArgs
     /// nil for view init args, otherwise the index of the modifier in the node's chain.
     let modifierIndex: Int?
 
-    init(node: SNode?, values: [Any], modifierIndex: Int?) {
+    init(node: SNode?, src: any SArgs, modifierIndex: Int?) {
         self.node = node
-        self.values = values
+        self.src = src
         self.modifierIndex = modifierIndex
     }
 
     public init(expr: SExpr) {
-        self.init(node: nil, values: expr.args, modifierIndex: nil)
+        self.init(node: nil, src: expr, modifierIndex: nil)
     }
 
-    @inline(__always) public func raw(_ i: Int) -> Any? {
-        guard i < values.count else { return nil }
-        let value = values[i]
-        return value is NSNull ? nil : value
-    }
+    @inline(__always) private func k(_ i: Int) -> Int32 { Int32(truncatingIfNeeded: i) }
 
-    public func isNil(_ i: Int) -> Bool { raw(i) == nil }
+    public func raw(_ i: Int) -> Any? { src.argAt(index: k(i)) }
+    public func isNil(_ i: Int) -> Bool { src.argIsNull(index: k(i)) }
 
-    public func string(_ i: Int) -> String { raw(i) as? String ?? "" }
-    public func bool(_ i: Int) -> Bool { (raw(i) as? NSNumber)?.boolValue ?? false }
-    public func int(_ i: Int) -> Int { (raw(i) as? NSNumber)?.intValue ?? 0 }
-    public func double(_ i: Int) -> Double { (raw(i) as? NSNumber)?.doubleValue ?? 0 }
-    public func float(_ i: Int) -> Float { (raw(i) as? NSNumber)?.floatValue ?? 0 }
-    public func cgFloat(_ i: Int) -> CGFloat { CGFloat(double(i)) }
-    public func expr(_ i: Int) -> SExpr? { raw(i) as? SExpr }
-    public func list(_ i: Int) -> [Any] { raw(i) as? [Any] ?? [] }
+    public func string(_ i: Int) -> String { src.argString(index: k(i)) ?? "" }
+    public func bool(_ i: Int) -> Bool { src.argBool(index: k(i)) }
+    public func int(_ i: Int) -> Int { Int(src.argInt(index: k(i))) }
+    public func double(_ i: Int) -> Double { src.argDouble(index: k(i)) }
+    public func float(_ i: Int) -> Float { Float(src.argDouble(index: k(i))) }
+    public func cgFloat(_ i: Int) -> CGFloat { CGFloat(src.argDouble(index: k(i))) }
+    public func expr(_ i: Int) -> SExpr? { src.argExpr(index: k(i)) }
+    public func exprList(_ i: Int) -> [SExpr] { src.argExprList(index: k(i)) }
+    public func list(_ i: Int) -> [Any] { src.argList(index: k(i)).map { $0 as Any } }
     public func date(_ i: Int) -> Date { Date(timeIntervalSince1970: double(i)) }
-    public func dateOpt(_ i: Int) -> Date? { doubleOpt(i).map { Date(timeIntervalSince1970: $0) } }
+    public func dateOpt(_ i: Int) -> Date? { isNil(i) ? nil : date(i) }
     public func hashable(_ i: Int) -> AnyHashable { AnyHashable(KHashable(raw(i) as? NSObject ?? NSNull())) }
     public func hashableOpt(_ i: Int) -> AnyHashable? { (raw(i) as? NSObject).map { AnyHashable(KHashable($0)) } }
     public func doubleRange(_ i: Int) -> ClosedRange<Double> {
@@ -50,17 +49,17 @@ public struct Args {
     public func doubleRangeOpt(_ i: Int) -> ClosedRange<Double>? { isNil(i) ? nil : doubleRange(i) }
     public func intRangeOpt(_ i: Int) -> ClosedRange<Int>? { isNil(i) ? nil : intRange(i) }
 
-    public func stringOpt(_ i: Int) -> String? { raw(i) as? String }
-    public func boolOpt(_ i: Int) -> Bool? { (raw(i) as? NSNumber)?.boolValue }
-    public func intOpt(_ i: Int) -> Int? { (raw(i) as? NSNumber)?.intValue }
-    public func doubleOpt(_ i: Int) -> Double? { (raw(i) as? NSNumber)?.doubleValue }
-    public func cgFloatOpt(_ i: Int) -> CGFloat? { doubleOpt(i).map { CGFloat($0) } }
+    public func stringOpt(_ i: Int) -> String? { src.argString(index: k(i)) }
+    public func boolOpt(_ i: Int) -> Bool? { isNil(i) ? nil : bool(i) }
+    public func intOpt(_ i: Int) -> Int? { isNil(i) ? nil : int(i) }
+    public func doubleOpt(_ i: Int) -> Double? { isNil(i) ? nil : double(i) }
+    public func cgFloatOpt(_ i: Int) -> CGFloat? { isNil(i) ? nil : cgFloat(i) }
 
     // MARK: Callbacks
 
     /// A Kotlin `() -> Unit`, followed by a synchronous recomposition.
     public func action(_ i: Int) -> () -> Void {
-        guard let action = raw(i) as? SAction else { return {} }
+        guard let action = src.argAction(index: k(i)) else { return {} }
         return {
             action.invoke()
             ComposeSwiftUIHostKt.flushCompose()
@@ -73,7 +72,7 @@ public struct Args {
 
     /// A Kotlin `(T) -> Unit`; `box` converts the Swift value to its Kotlin representation.
     public func callback<T>(_ i: Int, box: @escaping (T) -> Any? = { $0 }) -> (T) -> Void {
-        guard let callback = raw(i) as? SValueCallback else { return { _ in } }
+        guard let callback = src.argCallback(index: k(i)) else { return { _ in } }
         return {
             callback.invoke(value: box($0))
             ComposeSwiftUIHostKt.flushCompose()
@@ -85,15 +84,15 @@ public struct Args {
     public func binding<T>(_ i: Int, read: @escaping (Args, Int) -> T, box: @escaping (T) -> Any?) -> Binding<T> {
         guard let node = self.node else { return .constant(read(self, i)) }
         let modifierIndex = self.modifierIndex
-        let callback = raw(i + 1) as? SValueCallback
+        let callback = src.argCallback(index: k(i + 1))
         return Binding(
             get: {
                 // Read the live value: it may have been written silently since this render.
                 if let modifierIndex {
-                    let modifier = node.modifiers[modifierIndex]
-                    return read(Args(node: node, values: modifier.args, modifierIndex: modifierIndex), i)
+                    let modifier = node.modifierAt(index: Int32(modifierIndex))
+                    return read(Args(node: node, src: modifier, modifierIndex: modifierIndex), i)
                 }
-                return read(Args(node: node, values: node.args, modifierIndex: nil), i)
+                return read(Args(node: node, src: node, modifierIndex: nil), i)
             },
             set: { newValue in
                 let boxed = box(newValue)
@@ -147,8 +146,9 @@ public struct Args {
     // MARK: Slots
 
     public func slot(_ i: Int) -> SlotView {
-        guard let ref = raw(i) as? SSlotRef, let node else { return SlotView(model: nil) }
-        return SlotView(model: node.slot(index: ref.index).map(NodeModel.of))
+        let index = src.argSlot(index: k(i))
+        guard index >= 0, let node else { return SlotView(model: nil) }
+        return SlotView(model: node.slot(index: index).map(NodeModel.of))
     }
 }
 

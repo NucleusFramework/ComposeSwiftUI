@@ -4,7 +4,9 @@ Compiler-verifies every generated API. Loop:
   generate -> swiftc -typecheck (iOS simulator + macOS) -> map errors to items -> reject -> repeat
 and, with --kotlin, the same for the Kotlin bindings (compileKotlinMacosArm64).
 
-Usage: verify.py <symbolgraph-root> <project-root> <framework-dir-macos> <framework-dir-ios> [--kotlin]
+Usage: verify.py <symbolgraph-root> <project-root> <core-framework-root> [--kotlin]
+  <core-framework-root>/<platform>/BenchShared.framework for each platform to typecheck
+  (built with `./gradlew :runtime:linkDebugFramework<Target> -Pcsui.coreOnly=true`).
 """
 
 import glob
@@ -85,10 +87,15 @@ def reject(project, errs, label):
 
 
 def main():
-    sg, project, fw_mac, fw_ios = [os.path.abspath(x) for x in sys.argv[1:5]]
+    sg, project, fw_root = [os.path.abspath(x) for x in sys.argv[1:4]]
     with_kotlin = "--kotlin" in sys.argv
-    targets = [("arm64-apple-macos14.0", "macosx", fw_mac, "swift-macos"),
-               ("arm64-apple-ios17.0-simulator", "iphonesimulator", fw_ios, "swift-ios")]
+    known = [("macos", "arm64-apple-macos14.0", "macosx"),
+             ("ios", "arm64-apple-ios17.0-simulator", "iphonesimulator"),
+             ("tvos", "arm64-apple-tvos17.0-simulator", "appletvsimulator"),
+             ("watchos", "arm64-apple-watchos10.0-simulator", "watchsimulator")]
+    targets = [(t, sdk_name, os.path.join(fw_root, plat), "swift-" + plat) for plat, t, sdk_name in known
+               if os.path.isdir(os.path.join(fw_root, plat, "BenchShared.framework")) and os.path.isdir(os.path.join(sg, plat))]
+    print("typechecking for:", ", ".join(t[3] for t in targets))
     for iteration in range(80):
         generate(sg, project)
         total = 0

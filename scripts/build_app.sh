@@ -4,6 +4,8 @@
 set -euo pipefail
 PLATFORM=$1; NAME=$2; BUNDLE_ID=$3; FW=$4; OUT=$5; shift 5
 OPT=${SWIFT_OPT:--Onone}
+# Release builds use whole-module optimization, as Xcode does in Release
+[ "$OPT" = "-O" ] && OPT="-O -wmo"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RENDERER=("$ROOT"/swift/ComposeSwiftUI/*.swift "$ROOT"/swift/ComposeSwiftUI/Generated/*.swift)
 if [ "$PLATFORM" = ios ]; then
