@@ -1,0 +1,11 @@
+build/
+.gradle/
+.kotlin/
+.idea/
+local.properties
+*.iml
+.DS_Store
+generator/symbolgraph/
+generator/linemap.json
+generator/__pycache__/
+bench/staging/
