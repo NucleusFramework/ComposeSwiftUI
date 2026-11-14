@@ -118,7 +118,7 @@ private fun Screen28Tile(device: Screen28Device, vm: Screen28ViewModel) {
         spacing = 10.0,
     ) {
         HStack {
-            ImageSystemName(
+            Image(systemName = 
                 device.icon,
                 modifier = Modifier.font(Font.system(size = 18.0, weight = Font.Weight.semibold))
                     .foregroundStyle(Color.white)
@@ -156,7 +156,7 @@ fun Screen28(vm: Screen28ViewModel) {
                         Text(state.summary, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                     }
                     Spacer()
-                    ImageSystemName(
+                    Image(systemName = 
                         "house.lodge.fill",
                         modifier = Modifier.font(Font.title).symbolRenderingMode(SymbolRenderingMode.multicolor),
                     )

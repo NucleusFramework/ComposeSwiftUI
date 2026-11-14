@@ -107,7 +107,7 @@ fun Screen41(vm: Screen41ViewModel) {
                         Label(
                             modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).foregroundStyle(if (state.balanceUp) Color.green else Color.red),
                             title = { Text(verbatim = state.balanceChange) },
-                            icon = { ImageSystemName(if (state.balanceUp) "arrow.up.right.circle.fill" else "arrow.down.right.circle.fill") },
+                            icon = { Image(systemName = if (state.balanceUp) "arrow.up.right.circle.fill" else "arrow.down.right.circle.fill") },
                         )
                     }
                     Picker(title = "Range", selection = state.range, modifier = Modifier.pickerStyle(PickerStyle.segmented).labelsHidden(), onSelectionChange = { vm.setRange(it as String) }) {
@@ -130,7 +130,7 @@ fun Screen41(vm: Screen41ViewModel) {
                 HStack {
                     for (action in state.actions) key(action.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 6.0) {
-                            ImageSystemName(
+                            Image(systemName = 
                                 action.icon,
                                 modifier = Modifier.font(Font.system(size = 17.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(Color.white)
@@ -145,7 +145,7 @@ fun Screen41(vm: Screen41ViewModel) {
             Section(title = "Assets") {
                 for (asset in state.assets) key(asset.id) {
                     HStack(spacing = 12.0) {
-                        ImageSystemName(
+                        Image(systemName = 
                             asset.icon,
                             modifier = Modifier.font(Font.system(size = 18.0, weight = Font.Weight.bold))
                                 .foregroundStyle(Color.white)

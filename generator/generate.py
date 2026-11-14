@@ -602,6 +602,8 @@ class Generator:
         out = Out(os.path.join(root, "GenViews.kt"))
         out.add(header)
         seen = set()
+        merged = {}
+
         def lsk(params):
             return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in (params or []))
 
@@ -664,16 +666,22 @@ class Generator:
             ordered = req + [("modifier", "Modifier", "Modifier")] + opt + acts + slots
             name = s.name
             types = tuple(t.rstrip("?") for _, t, _ in ordered)
+            suffixed = False
             if (name, types) in seen:
-                # Kotlin cannot overload on parameter names: suffix with the first Swift label
+                # Kotlin cannot overload on parameter names: this variant is reachable through the merged
+                # label-dispatch function `Name(label = …)`; the suffixed name stays as a deprecated alias.
                 labels = [lbl for lbl, _, b, _ in params if lbl != "_" and b.kind != "slot"]
                 if labels:
                     name = name + labels[0][0].upper() + labels[0][1:]
+                    suffixed = True
             if (name, types) in seen:
                 self.status(item.sym, "covered", "duplicate Kotlin signature")
                 item.id_dup = True
                 continue
             seen.add((name, types))
+            variant = {"ordered": ordered, "args": args_exprs, "slots": slot_names, "children": children is not None,
+                       "kind": item.id, "item": item, "name": name}
+            merged.setdefault(s.name, {"base": [], "alias": []})["alias" if suffixed else "base"].append(variant)
             plist = ",\n    ".join("%s: %s%s" % (n, t, " = %s" % d if d is not None else "") for n, t, d in ordered)
             call = "SwiftView(%d, listOf(%s), modifier" % (item.id, ", ".join(args_exprs))
             if slot_names:
@@ -681,40 +689,153 @@ class Generator:
             if children is not None:
                 call += ", content = content"
             call += ")"
-            code = "%s\n@HiddenFromObjC\n@Composable\npublic fun %s(\n    %s,\n) {\n    %s\n}\n" % (self.kdoc(item.sym, item.platforms), name, plist, call)
+            deprecation = ""
+            if suffixed and not item.sym.deprecated:
+                deprecation = '@Deprecated("Use %s(%s = …)", level = DeprecationLevel.WARNING)\n' % (s.name, [n for n, _, _ in ordered if n != "modifier"][0])
+            code = "%s\n%s@HiddenFromObjC\n@Composable\npublic fun %s(\n    %s,\n) {\n    %s\n}\n" % (self.kdoc(item.sym, item.platforms), deprecation, name, plist, call)
             out.add(code, item.key)
+        for base_name, groups in sorted(merged.items()):
+            if groups["alias"]:
+                code = self._merged_view(base_name, groups["alias"])
+                if code:
+                    out.add(code)
         outs.append(out)
         # --- modifiers
         mods_out = [Out(os.path.join(root, "GenModifiers%d.kt" % i)) for i in range(4)]
         for o in mods_out:
             o.add(header)
         seen = set()
+        merged_mods = {}
+
         def lsk_m(params):
             return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in params)
         for n, (item, params) in enumerate(sorted(self.modifiers, key=lambda x: (x[0].sym.deprecated, lsk_m(x[1])))):
             decls, encs = self.kt_params(params)
             types = tuple(t.rstrip("?") for _, t, _, _ in decls)
             mname = item.sym.name
+            suffixed = False
             if (mname, types) in seen:
                 labels = [lbl for lbl, _, b, _ in params if lbl != "_"]
                 if labels:
                     mname = mname + labels[0][0].upper() + labels[0][1:]
+                    suffixed = True
             if (mname, types) in seen:
                 self.status(item.sym, "covered", "duplicate Kotlin signature")
                 continue
             seen.add((mname, types))
+            if suffixed:
+                merged_mods.setdefault(item.sym.name, []).append(
+                    {"ordered": [(kn, kt, kd) for kn, kt, kd, _ in decls], "encs": encs, "id": item.id})
             plist = ", ".join("%s: %s%s" % (kn, kt, " = %s" % kd if kd is not None else "") for kn, kt, kd, _ in decls)
             extra = ""
             if getattr(item, "self_type", None) is not None:
                 extra = "Applies to `%s` views only." % item.self_type.name
-            code = "%s\n@HiddenFromObjC\npublic fun Modifier.%s(%s): Modifier = element(%d%s)\n" % (
-                self.kdoc(item.sym, item.platforms, extra), kotlin_name(mname), plist, item.id,
+            deprecation = ""
+            if suffixed and not item.sym.deprecated and decls:
+                deprecation = '@Deprecated("Use %s(%s = …)", level = DeprecationLevel.WARNING)\n' % (item.sym.name, decls[0][0])
+            code = "%s\n%s@HiddenFromObjC\npublic fun Modifier.%s(%s): Modifier = element(%d%s)\n" % (
+                self.kdoc(item.sym, item.platforms, extra), deprecation, kotlin_name(mname), plist, item.id,
                 "".join(", " + e for e in encs))
             mods_out[n % 4].add(code, item.key)
+        for base_name, variants in sorted(merged_mods.items()):
+            code = self._merged_modifier(base_name, variants)
+            if code:
+                mods_out[0].add(code)
         outs.extend(mods_out)
         for o in outs:
             o.write()
             self.line_map.append((o.path, o.ranges))
+
+    def _merged_modifier(self, base_name, variants):
+        """`Modifier.name(labelA = …)` dispatching to the label variant whose parameters were given."""
+        union, order, kept = {}, [], []
+        def base_t(t):
+            return t[:-1] if t.endswith("?") and not t.startswith("(") else t
+        for v in variants:
+            if any(n in union and union[n] != base_t(t) for n, t, d in v["ordered"]):
+                continue
+            kept.append(v)
+            for n, t, d in v["ordered"]:
+                if n not in union:
+                    union[n] = base_t(t)
+                    order.append(n)
+        if not kept:
+            return None
+        def is_lambda(t):
+            return t.startswith("(") or t.startswith("@Composable")
+        names = sorted(order, key=lambda n: is_lambda(union[n]))
+        plist = ", ".join("%s: %s = null" % (n, ("(%s)?" % union[n]) if is_lambda(union[n]) else union[n] + "?") for n in names)
+        branches = []
+        for v in sorted(kept, key=lambda v: (-len([1 for n, t, d in v["ordered"] if d is None and not t.endswith("?")]), len(v["ordered"]))):
+            vn = {n for n, _, _ in v["ordered"]}
+            required = [n for n, t, d in v["ordered"] if d is None and not t.endswith("?")]
+            cond = " && ".join(["%s != null" % n for n in required] + ["%s == null" % n for n in names if n not in vn]) or "true"
+            lets = ["val %s = %s!!" % (n, n) for n in required]
+            lets += ["val %s = %s ?: %s" % (n, n, d) for n, t, d in v["ordered"] if n not in required and d is not None and d != "null"]
+            body = "; ".join(lets + ["element(%d%s)" % (v["id"], "".join(", " + e for e in v["encs"]))])
+            branches.append("        %s -> run { %s }" % (cond, body))
+        branches.append('        else -> error("No SwiftUI %s overload takes this combination of arguments")' % base_name)
+        return ("/** SwiftUI `%s` overloads that differ only by argument labels, selected by the labels you pass. */\n"
+                "@HiddenFromObjC\n@Suppress(\"NAME_SHADOWING\")\npublic fun Modifier.%s(%s): Modifier =\n    when {\n%s\n    }\n") % (
+            base_name, kotlin_name(base_name), plist, "\n".join(branches))
+
+    def _merged_view(self, base_name, variants):
+        """One `Name(labelA = …, labelB = …)` function dispatching at runtime to the label variant whose
+        parameters were given: Kotlin can't overload on parameter names, Swift can."""
+        union, order = {}, []
+        kept = []
+        for v in variants:
+            ok = True
+            for n, t, d in v["ordered"]:
+                base_t = t[:-1] if t.endswith("?") and not t.startswith("(") else t
+                if n in union and union[n] != base_t:
+                    ok = False
+            if not ok:
+                continue
+            kept.append(v)
+            for n, t, d in v["ordered"]:
+                base_t = t[:-1] if t.endswith("?") and not t.startswith("(") else t
+                if n not in union:
+                    union[n] = base_t
+                    order.append(n)
+        if not kept:
+            return None
+        def is_lambda(t):
+            return t.startswith("(") or t.startswith("@Composable")
+        values = [n for n in order if n != "modifier" and not is_lambda(union[n])]
+        lambdas = [n for n in order if is_lambda(union[n]) and n != "content"]
+        tail = ["content"] if "content" in union else []
+        def decl(n):
+            t = union[n]
+            return "%s: %s = null" % (n, ("(%s)?" % t) if is_lambda(t) else t + "?")
+        plist = ",\n    ".join([decl(n) for n in values] + ["modifier: Modifier = Modifier"] + [decl(n) for n in lambdas + tail])
+        branches = []
+        # most required params first; on ties the smallest variant first (exact match before optional extras)
+        for v in sorted(kept, key=lambda v: (-len([1 for n, t, d in v["ordered"] if n != "modifier" and d is None and not t.endswith("?")]), len(v["ordered"]))):
+            names = {n for n, _, _ in v["ordered"]} - {"modifier"}
+            required = [n for n, t, d in v["ordered"] if n != "modifier" and d is None and not t.endswith("?")]
+            others = [n for n in values + lambdas + tail if n not in names]
+            cond = " && ".join(["%s != null" % n for n in required] + ["%s == null" % n for n in others]) or "true"
+            lets = []
+            for n, t, d in v["ordered"]:
+                if n == "modifier":
+                    continue
+                if n in required:
+                    lets.append("val %s = %s!!" % (n, n))
+                elif d is not None and d != "null":
+                    lets.append("val %s = %s ?: %s" % (n, n, d))
+            call = "SwiftView(%d, listOf(%s), modifier" % (v["kind"], ", ".join(v["args"]))
+            if v["slots"]:
+                call += ", slots = listOf(%s)" % ", ".join(v["slots"])
+            if v["children"]:
+                call += ", content = content"
+            call += ")"
+            body = "; ".join(lets + [call])
+            branches.append("        %s -> { %s }" % (cond, body))
+        branches.append('        else -> error("No SwiftUI %s initializer takes this combination of arguments")' % base_name)
+        doc = "/**\n * SwiftUI `%s` initializers that differ only by argument labels, selected by the labels you pass\n * (e.g. `Image(systemName = \"star\")`).\n */" % base_name
+        return "%s\n@HiddenFromObjC\n@Composable\n@Suppress(\"NAME_SHADOWING\")\npublic fun %s(\n    %s,\n) {\n    when {\n%s\n    }\n}\n" % (
+            doc, base_name, plist, "\n".join(branches))
 
     def _expand(self, params):
         out = []

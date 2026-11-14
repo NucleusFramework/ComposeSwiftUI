@@ -95,7 +95,7 @@ fun Screen39(vm: Screen39ViewModel) {
                             alignment = HorizontalAlignment.leading,
                             spacing = 6.0,
                         ) {
-                            ImageSystemName(kpi.icon, modifier = Modifier.font(Font.subheadline).foregroundStyle(kpi.tint.color()))
+                            Image(systemName = kpi.icon, modifier = Modifier.font(Font.subheadline).foregroundStyle(kpi.tint.color()))
                             Text(verbatim = kpi.value, modifier = Modifier.font(Font.headline).monospacedDigit().lineLimit(1).minimumScaleFactor(0.7))
                             Text(verbatim = kpi.title, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
                             Text(verbatim = kpi.delta, modifier = Modifier.font(Font.caption2).bold().foregroundStyle(if (kpi.up) Color.green else Color.red))
@@ -128,7 +128,7 @@ fun Screen39(vm: Screen39ViewModel) {
                             Text(verbatim = row.visitors, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
                             Text(verbatim = row.bounce, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
                             HStack(modifier = Modifier.foregroundStyle(if (row.up) Color.green else Color.red), spacing = 2.0) {
-                                ImageSystemName(if (row.up) "arrow.up.right" else "arrow.down.right", modifier = Modifier.imageScale(Image.Scale.small))
+                                Image(systemName = if (row.up) "arrow.up.right" else "arrow.down.right", modifier = Modifier.imageScale(Image.Scale.small))
                                 Text(verbatim = row.change)
                             }
                         }

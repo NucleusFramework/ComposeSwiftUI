@@ -128,7 +128,7 @@ fun Screen18(vm: Screen18ViewModel) {
                     HStack {
                         Text(state.accountName, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).opacity(0.85))
                         Spacer()
-                        ImageSystemName("creditcard.fill", modifier = Modifier.font(Font.title3))
+                        Image(systemName = "creditcard.fill", modifier = Modifier.font(Font.title3))
                     }
                     Text(state.balance, modifier = Modifier.font(Font.system(size = 36.0, weight = Font.Weight.bold, design = Font.Design.rounded)).monospacedDigit())
                     Text(state.cardNumber, modifier = Modifier.font(Font.footnote).monospaced().opacity(0.8))
@@ -146,7 +146,7 @@ fun Screen18(vm: Screen18ViewModel) {
                 HStack(modifier = Modifier.padding(Edge.Set.vertical, 4.0)) {
                     for (action in state.actions) key(action.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 6.0) {
-                            ImageSystemName(
+                            Image(systemName = 
                                 action.icon,
                                 modifier = Modifier.font(Font.system(size = 17.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(Color.blue)
@@ -161,7 +161,7 @@ fun Screen18(vm: Screen18ViewModel) {
             Section(title = "Savings goals") {
                 for (goal in state.goals) key(goal.id) {
                     HStack(spacing = 12.0) {
-                        ImageSystemName(
+                        Image(systemName = 
                             goal.icon,
                             modifier = Modifier.foregroundStyle(Color.white)
                                 .frame(width = 32.0, height = 32.0)
@@ -190,7 +190,7 @@ fun Screen18(vm: Screen18ViewModel) {
                     content = {
                         for (tx in day.transactions) key(tx.id) {
                             HStack(spacing = 12.0) {
-                                ImageSystemName(
+                                Image(systemName = 
                                     tx.icon,
                                     modifier = Modifier.font(Font.system(size = 15.0, weight = Font.Weight.semibold))
                                         .foregroundStyle(tx.tint.color())

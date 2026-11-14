@@ -129,7 +129,7 @@ fun Screen42(vm: Screen42ViewModel) {
                 }, content = {
                     for (task in section.tasks) key(task.id) {
                         HStack(alignment = VerticalAlignment.top, spacing = 12.0) {
-                            ImageSystemName(
+                            Image(systemName = 
                                 if (task.done) "checkmark.circle.fill" else "circle",
                                 modifier = Modifier.font(Font.title2).foregroundStyle(if (task.done) Color.green else Color.gray),
                             )
@@ -158,7 +158,7 @@ fun Screen42(vm: Screen42ViewModel) {
                             }
                             Spacer()
                             if (task.priority > 0) {
-                                ImageSystemName("flag.fill", modifier = Modifier.font(Font.caption).foregroundStyle(screen42FlagColor(task.priority)))
+                                Image(systemName = "flag.fill", modifier = Modifier.font(Font.caption).foregroundStyle(screen42FlagColor(task.priority)))
                             }
                         }
                     }
@@ -166,7 +166,7 @@ fun Screen42(vm: Screen42ViewModel) {
             }
             Section {
                 HStack {
-                    ImageSystemName("exclamationmark.triangle.fill", modifier = Modifier.foregroundStyle(Color.orange))
+                    Image(systemName = "exclamationmark.triangle.fill", modifier = Modifier.foregroundStyle(Color.orange))
                     Text(state.footer, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                 }
             }

@@ -114,7 +114,7 @@ private fun Screen30Diff(file: Screen30File) {
         spacing = 0.0,
     ) {
         HStack(modifier = Modifier.padding(10.0).background(Color.gray.opacity(0.12)), spacing = 6.0) {
-            ImageSystemName(file.icon, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
+            Image(systemName = file.icon, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
             Text(verbatim = file.path, modifier = Modifier.font(Font.system(style = Font.TextStyle.footnote, design = Font.Design.monospaced)).bold().lineLimit(1).truncationMode(Text.TruncationMode.middle))
             Spacer()
             Text(verbatim = file.stats, modifier = Modifier.font(Font.caption.monospaced()).foregroundStyle(ShapeStyle.secondary))

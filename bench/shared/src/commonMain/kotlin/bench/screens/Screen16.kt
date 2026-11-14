@@ -97,7 +97,7 @@ fun Screen16(vm: Screen16ViewModel) {
             HStack(modifier = Modifier.padding(Edge.Set.horizontal).padding(Edge.Set.bottom, 8.0)) {
                 Label(state.boardName, systemImage = "square.grid.3x2.fill", modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.secondary))
                 Spacer()
-                ImageSystemName("line.3.horizontal.decrease.circle", modifier = Modifier.font(Font.title3).foregroundStyle(Color.blue))
+                Image(systemName = "line.3.horizontal.decrease.circle", modifier = Modifier.font(Font.title3).foregroundStyle(Color.blue))
             }
             ScrollView(axes = Axis.Set.horizontal, showsIndicators = false) {
                 HStack(modifier = Modifier.padding(), alignment = VerticalAlignment.top, spacing = 12.0) {
@@ -121,7 +121,7 @@ fun Screen16(vm: Screen16ViewModel) {
                                         .background(ShapeStyle.background, Capsule()),
                                 )
                                 Spacer()
-                                ImageSystemName("ellipsis", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
+                                Image(systemName = "ellipsis", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
                             }
                             for (card in column.cards) key(card.id) {
                                 VStack(

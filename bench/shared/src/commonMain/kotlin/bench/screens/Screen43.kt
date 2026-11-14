@@ -114,7 +114,7 @@ fun Screen43(vm: Screen43ViewModel) {
                                 Label(title = ticket.time, systemImage = "clock", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                             }
                             Spacer()
-                            ImageSystemName(ticket.icon, modifier = Modifier.font(Font.title2).foregroundStyle(ticket.tint.color()))
+                            Image(systemName = ticket.icon, modifier = Modifier.font(Font.title2).foregroundStyle(ticket.tint.color()))
                         }
                         Divider()
                         HStack(alignment = VerticalAlignment.bottom) {

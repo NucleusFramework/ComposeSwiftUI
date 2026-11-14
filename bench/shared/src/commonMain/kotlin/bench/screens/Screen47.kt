@@ -109,7 +109,7 @@ private fun Screen47Cover(book: Screen47Book, width: Double, height: Double) {
     ) {
         LinearGradientView(LinearGradient(colors = listOf(book.coverTop.color(), book.coverBottom.color()), startPoint = UnitPoint.top, endPoint = UnitPoint.bottom))
         VStack(spacing = 6.0) {
-            ImageSystemName(book.symbol, modifier = Modifier.font(Font.title2).foregroundStyle(Color.white.opacity(0.9)))
+            Image(systemName = book.symbol, modifier = Modifier.font(Font.title2).foregroundStyle(Color.white.opacity(0.9)))
             Text(
                 book.title,
                 modifier = Modifier.font(Font.system(size = 10.0, weight = Font.Weight.bold, design = Font.Design.serif))
@@ -123,7 +123,7 @@ private fun Screen47Cover(book: Screen47Book, width: Double, height: Double) {
 private fun Screen47Stars(stars: List<Screen47Star>) {
     HStack(spacing = 1.0) {
         for (star in stars) key(star.id) {
-            ImageSystemName(star.icon, modifier = Modifier.font(Font.system(size = 9.0)).foregroundStyle(Color.orange))
+            Image(systemName = star.icon, modifier = Modifier.font(Font.system(size = 9.0)).foregroundStyle(Color.orange))
         }
     }
 }

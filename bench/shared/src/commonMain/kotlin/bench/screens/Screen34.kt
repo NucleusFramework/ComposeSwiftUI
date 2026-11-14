@@ -101,7 +101,7 @@ private fun Screen34Thumb(video: Screen34Video, wide: Boolean) {
             alignment = Alignment.bottomLeading,
         ) {
             ShapeView(Rectangle(), fill = LinearGradient(colors = listOf(video.from.color(), video.to.color()), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing))
-            ImageSystemName(
+            Image(systemName = 
                 video.icon,
                 modifier = Modifier.font(Font.system(size = if (wide) 40.0 else 34.0)).foregroundStyle(Color.white.opacity(0.85))
                     .frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY),
@@ -143,7 +143,7 @@ fun Screen34(vm: Screen34ViewModel) {
                             endPoint = UnitPoint.bottomTrailing,
                         ),
                     )
-                    ImageSystemName("sparkles", modifier = Modifier.font(Font.system(size = 90.0)).foregroundStyle(Color.white.opacity(0.25)).frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY, alignment = Alignment.topTrailing).padding(16.0))
+                    Image(systemName = "sparkles", modifier = Modifier.font(Font.system(size = 90.0)).foregroundStyle(Color.white.opacity(0.25)).frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY, alignment = Alignment.topTrailing).padding(16.0))
                     VStack(modifier = Modifier.padding(18.0), alignment = HorizontalAlignment.leading, spacing = 4.0) {
                         Text("FEATURED", modifier = Modifier.font(Font.caption).bold().kerning(1.5).foregroundStyle(Color.white.opacity(0.8)))
                         Text(verbatim = state.featuredTitle, modifier = Modifier.font(Font.title).bold().foregroundStyle(Color.white))
@@ -161,7 +161,7 @@ fun Screen34(vm: Screen34ViewModel) {
                                 Text(verbatim = shelf.subtitle, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                             }
                             Spacer()
-                            ImageSystemName("chevron.right", modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.tertiary))
+                            Image(systemName = "chevron.right", modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.tertiary))
                         }
                         ScrollView(axes = Axis.Set.horizontal, showsIndicators = false) {
                             HStack(modifier = Modifier.padding(Edge.Set.horizontal), alignment = VerticalAlignment.top, spacing = 12.0) {

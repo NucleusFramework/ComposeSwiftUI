@@ -42,8 +42,8 @@ and compiler errors are printed — fix the staged file and re-run. Never edit `
 
 - Package: `import dev.composeswiftui.*`. Views are `@Composable` functions named like SwiftUI; `modifier` param;
   trailing lambda = `@ViewBuilder content`; extra builders are named lambdas (`header = { }`, `label = { }`).
-- Kotlin can't overload on parameter names, so some overloads get a suffix: `ImageSystemName("star")` = `Image(systemName:)`,
-  `LabelImage(...)` = asset `Label(_:image:)`. `Label(title, systemImage)` is the plain one.
+- Overloads that differ only by Swift labels are reached by naming the label, like in Swift:
+  `Image(systemName = "star")`, `Label(title, image = "asset")`.
 - Values: `Font.title`, `Font.system(size = 15.0, weight = Font.Weight.semibold)`, `Color.red`,
   `Color(red =, green =, blue =)`, `Color.blue.opacity(0.2)`, `ShapeStyle.secondary`, `ShapeStyle.tint`,
   `Alignment.leading`, `HorizontalAlignment.leading`, `Edge.Set.horizontal`, `ListStyle.insetGrouped`,

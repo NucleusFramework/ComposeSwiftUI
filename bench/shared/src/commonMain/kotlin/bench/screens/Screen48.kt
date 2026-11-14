@@ -107,7 +107,7 @@ fun Screen48(vm: Screen48ViewModel) {
             Section {
                 VStack(modifier = Modifier.padding(Edge.Set.vertical, 6.0), alignment = HorizontalAlignment.leading, spacing = 12.0) {
                     HStack {
-                        ImageSystemName("car.side.fill", modifier = Modifier.font(Font.system(size = 40.0)).foregroundStyle(Color.teal))
+                        Image(systemName = "car.side.fill", modifier = Modifier.font(Font.system(size = 40.0)).foregroundStyle(Color.teal))
                         Spacer()
                         Label(
                             title = state.status,
@@ -144,7 +144,7 @@ fun Screen48(vm: Screen48ViewModel) {
                                         .background(stat.tint.color().opacity(0.1), RoundedRectangle(cornerRadius = 12.0)),
                                     spacing = 10.0,
                                 ) {
-                                    ImageSystemName(stat.icon, modifier = Modifier.font(Font.title3).foregroundStyle(stat.tint.color()).frame(width = 28.0))
+                                    Image(systemName = stat.icon, modifier = Modifier.font(Font.title3).foregroundStyle(stat.tint.color()).frame(width = 28.0))
                                     VStack(alignment = HorizontalAlignment.leading, spacing = 1.0) {
                                         Text(stat.value, modifier = Modifier.font(Font.subheadline).bold().monospacedDigit())
                                         Text(stat.label, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))

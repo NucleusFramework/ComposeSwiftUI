@@ -108,7 +108,7 @@ fun Screen38(vm: Screen38ViewModel) {
                     HStack {
                         Text(verbatim = state.summary, modifier = Modifier.font(Font.title3).fontWeight(Font.Weight.semibold))
                         Spacer()
-                        ImageSystemName("pills.fill", modifier = Modifier.font(Font.title2).foregroundStyle(Color.mint).symbolRenderingMode(SymbolRenderingMode.hierarchical))
+                        Image(systemName = "pills.fill", modifier = Modifier.font(Font.title2).foregroundStyle(Color.mint).symbolRenderingMode(SymbolRenderingMode.hierarchical))
                     }
                     ProgressView(value = state.progress, modifier = Modifier.tint(Color.mint))
                     Label(state.nextDose, systemImage = "bell.badge.fill", modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))

@@ -130,8 +130,8 @@ fun Screen10(vm: Screen10ViewModel) {
                         bounds = 0.0..1.0,
                         onValueChange = vm::setTextSize,
                         label = { Text("Text size") },
-                        minimumValueLabel = { ImageSystemName("textformat.size.smaller") },
-                        maximumValueLabel = { ImageSystemName("textformat.size.larger") },
+                        minimumValueLabel = { Image(systemName = "textformat.size.smaller") },
+                        maximumValueLabel = { Image(systemName = "textformat.size.larger") },
                     )
                 }
                 LabeledContent(title = "Preview") {
@@ -145,7 +145,7 @@ fun Screen10(vm: Screen10ViewModel) {
                     }
                 }
                 HStack(spacing = 10.0) {
-                    ImageSystemName("speaker.fill", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
+                    Image(systemName = "speaker.fill", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
                     Slider(value = state.volume, bounds = 0.0..1.0, onValueChange = vm::setVolume)
                     Text(state.volumeLabel, modifier = Modifier.monospacedDigit().frame(width = 32.0, alignment = Alignment.trailing))
                 }

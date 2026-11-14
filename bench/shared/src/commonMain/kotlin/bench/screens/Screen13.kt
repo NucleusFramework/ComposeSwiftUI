@@ -100,7 +100,7 @@ fun Screen13(vm: Screen13ViewModel) {
                     Text("Portfolio Value", modifier = Modifier.font(Font.caption).textCase(Text.Case.uppercase).foregroundStyle(ShapeStyle.secondary))
                     Text(state.portfolioValue, modifier = Modifier.font(Font.system(size = 34.0, weight = Font.Weight.bold, design = Font.Design.rounded)).monospacedDigit())
                     HStack(modifier = Modifier.foregroundStyle(if (state.portfolioUp) Color.green else Color.red), spacing = 4.0) {
-                        ImageSystemName(if (state.portfolioUp) "arrow.up.right" else "arrow.down.right", modifier = Modifier.font(Font.caption.bold()))
+                        Image(systemName = if (state.portfolioUp) "arrow.up.right" else "arrow.down.right", modifier = Modifier.font(Font.caption.bold()))
                         Text(verbatim = state.portfolioChange, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.medium)).monospacedDigit())
                     }
                     HStack(modifier = Modifier.padding(Edge.Set.top, 8.0), spacing = 6.0) {

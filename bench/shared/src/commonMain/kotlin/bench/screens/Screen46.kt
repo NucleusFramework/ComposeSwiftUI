@@ -174,7 +174,7 @@ fun Screen46(vm: Screen46ViewModel) {
                             HStack(spacing = 8.0) {
                                 ShapeView(Circle(), modifier = Modifier.frame(width = 10.0, height = 10.0), fill = standing.tint.color())
                                 Text(standing.team, modifier = Modifier.fontWeight(Font.Weight.medium))
-                                ImageSystemName(
+                                Image(systemName = 
                                     if (standing.trendUp) "arrowtriangle.up.fill" else "arrowtriangle.down.fill",
                                     modifier = Modifier.font(Font.system(size = 8.0)).foregroundStyle(if (standing.trendUp) Color.green else Color.red),
                                 )

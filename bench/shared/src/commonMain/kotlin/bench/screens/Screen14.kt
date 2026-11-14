@@ -122,7 +122,7 @@ fun Screen14(vm: Screen14ViewModel) {
                             LinearGradientView(
                                 LinearGradient(colors = article.gradient.map { it.color() }, startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing),
                             )
-                            ImageSystemName(
+                            Image(systemName = 
                                 article.symbol,
                                 modifier = Modifier.font(Font.system(size = 64.0, weight = Font.Weight.light))
                                     .foregroundStyle(Color.white.opacity(0.35))
@@ -155,7 +155,7 @@ fun Screen14(vm: Screen14ViewModel) {
                                 Text(article.time, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                                 Spacer()
                                 Label(article.readTime, systemImage = "clock", modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
-                                ImageSystemName(
+                                Image(systemName = 
                                     if (article.bookmarked) "bookmark.fill" else "bookmark",
                                     modifier = Modifier.foregroundStyle(if (article.bookmarked) Color.orange else Color.gray),
                                 )

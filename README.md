@@ -76,8 +76,10 @@ python3 -I generator/coverage_report.py <apple-doc-index.json> .   # docs/COVERA
 - `docs/COVERAGE.md`: **every entry of Apple's SwiftUI documentation** with its status (generated + compiler-verified,
   covered by an equivalent overload, rejected by the compiler with the error, skipped with the reason, or n/a).
 
-Kotlin naming notes: Kotlin can't overload on parameter names, so when two Swift overloads only differ by labels the
-second one gets the label as suffix (`ImageSystemName("star")` for `Image(systemName:)`). Generated declarations are
+Kotlin naming notes: Kotlin can't overload on parameter names. When Swift overloads only differ by their labels, the
+generator emits one label-dispatch function taking every label as an optional argument, so the Swift spelling works:
+`Image(systemName = "star")`, `Image("photo")`, `Modifier.alert(…, isPresented = …)`. (The former suffixed names such as
+`ImageSystemName` remain as deprecated aliases.) Generated declarations are
 `@HiddenFromObjC`, so the ObjC/Swift header of your framework only exposes the small runtime surface.
 
 ## Benchmark
@@ -160,8 +162,6 @@ copies the renderer sources and writes `KotlinModule.swift` re-exporting your Ko
 
 ## Known differences
 
-- Kotlin can't overload on parameter names: overloads that differ only by Swift labels get the label as suffix
-  (`ImageSystemName("star")` for `Image(systemName:)`).
 - Two benchmark screens show sub-pixel differences on iOS only (an SF Symbol vertically centred 1 px apart in one
   column, and the Liquid Glass search field placeholder after updates); macOS is pixel-identical on all 50 screens.
 - APIs whose Swift types have no Kotlin representation (`UTType`, `Transferable`, `KeyPath`, `AttributedString`…) are

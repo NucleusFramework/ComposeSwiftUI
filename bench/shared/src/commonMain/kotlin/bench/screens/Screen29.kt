@@ -100,20 +100,20 @@ private fun Screen29Row(ep: Screen29Episode) {
                 RoundedRectangle(cornerRadius = 12.0),
                 fill = LinearGradient(colors = listOf(ep.top.color(), ep.bottom.color()), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing),
             )
-            ImageSystemName(ep.symbol, modifier = Modifier.font(Font.title2).foregroundStyle(Color.white).shadow(radius = 2.0))
+            Image(systemName = ep.symbol, modifier = Modifier.font(Font.title2).foregroundStyle(Color.white).shadow(radius = 2.0))
         }
         VStack(alignment = HorizontalAlignment.leading, spacing = 4.0) {
             Text(ep.date, modifier = Modifier.font(Font.caption2).fontWeight(Font.Weight.semibold).textCase(Text.Case.uppercase).foregroundStyle(ShapeStyle.secondary))
             Text(ep.title, modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).lineLimit(2).foregroundStyle(if (ep.played) Color.secondary else Color.primary))
             Text(ep.summary, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary).lineLimit(2))
             HStack(spacing = 6.0) {
-                ImageSystemName(if (ep.played) "checkmark.circle" else "play.circle.fill", modifier = Modifier.font(Font.title3).foregroundStyle(Color.purple))
+                Image(systemName = if (ep.played) "checkmark.circle" else "play.circle.fill", modifier = Modifier.font(Font.title3).foregroundStyle(Color.purple))
                 Text(ep.duration, modifier = Modifier.font(Font.caption.monospacedDigit()).fontWeight(Font.Weight.medium))
                 if (ep.progress > 0.0 && !ep.played) {
                     ProgressView(value = ep.progress, modifier = Modifier.frame(width = 54.0).tint(Color.purple))
                 }
                 Spacer()
-                ImageSystemName(ep.downloadIcon, modifier = Modifier.font(Font.body).foregroundStyle(ep.downloadTint.color()))
+                Image(systemName = ep.downloadIcon, modifier = Modifier.font(Font.body).foregroundStyle(ep.downloadTint.color()))
                 Menu(
                     modifier = Modifier.menuIndicator(Visibility.hidden).fixedSize(),
                     content = {
@@ -124,7 +124,7 @@ private fun Screen29Row(ep: Screen29Episode) {
                         Button(title = "Remove Download", systemImage = "trash", role = ButtonRole.destructive, action = {})
                     },
                     label = {
-                        ImageSystemName("ellipsis", modifier = Modifier.font(Font.body).frame(width = 26.0, height = 26.0).background(Color.gray.opacity(0.12), Circle()))
+                        Image(systemName = "ellipsis", modifier = Modifier.font(Font.body).frame(width = 26.0, height = 26.0).background(Color.gray.opacity(0.12), Circle()))
                     },
                 )
             }
@@ -139,7 +139,7 @@ fun Screen29(vm: Screen29ViewModel) {
         List(modifier = Modifier.listStyle(ListStyle.plain).navigationTitle("Podcasts")) {
             Section {
                 HStack(spacing = 14.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         "waveform.and.mic",
                         modifier = Modifier.font(Font.system(size = 38.0, weight = Font.Weight.semibold))
                             .foregroundStyle(Color.white)

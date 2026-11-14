@@ -99,8 +99,8 @@ fun Screen07(vm: Screen07ViewModel) {
                     Text(state.month, modifier = Modifier.font(Font.title2.bold()))
                     Spacer()
                     HStack(spacing = 18.0, modifier = Modifier.font(Font.headline).foregroundStyle(Color.red)) {
-                        ImageSystemName("chevron.left")
-                        ImageSystemName("chevron.right")
+                        Image(systemName = "chevron.left")
+                        Image(systemName = "chevron.right")
                     }
                 }
                 Grid(horizontalSpacing = 4.0, verticalSpacing = 6.0) {
@@ -153,7 +153,7 @@ fun Screen07(vm: Screen07ViewModel) {
                         VStack(alignment = HorizontalAlignment.trailing, spacing = 6.0) {
                             Text(event.duration, modifier = Modifier.font(Font.caption.bold()).foregroundStyle(event.tint.color()))
                             HStack(spacing = 2.0, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary)) {
-                                ImageSystemName("person.2.fill")
+                                Image(systemName = "person.2.fill")
                                 Text(event.attendees)
                             }
                         }

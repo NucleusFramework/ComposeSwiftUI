@@ -105,7 +105,7 @@ fun Screen32(vm: Screen32ViewModel) {
                         Spacer()
                         ZStack(modifier = Modifier.frame(width = 44.0, height = 44.0)) {
                             ShapeView(Circle(), fill = Color.orange.opacity(0.15))
-                            ImageSystemName("flame.fill", modifier = Modifier.font(Font.title3).foregroundStyle(Color.orange))
+                            Image(systemName = "flame.fill", modifier = Modifier.font(Font.title3).foregroundStyle(Color.orange))
                         }
                     }
                     ProgressView(value = state.progress, modifier = Modifier.tint(Color.green))
@@ -125,7 +125,7 @@ fun Screen32(vm: Screen32ViewModel) {
             }, footer = { Text(verbatim = state.tip) }, content = {
                 for (habit in state.habits) key(habit.id) {
                     HStack(spacing = 12.0) {
-                        ImageSystemName(
+                        Image(systemName = 
                             habit.icon,
                             modifier = Modifier.font(Font.system(size = 16.0, weight = Font.Weight.semibold))
                                 .foregroundStyle(habit.tint.color())
@@ -135,7 +135,7 @@ fun Screen32(vm: Screen32ViewModel) {
                         VStack(alignment = HorizontalAlignment.leading, spacing = 3.0) {
                             Text(verbatim = habit.name, modifier = Modifier.font(Font.body).lineLimit(1))
                             HStack(modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary).lineLimit(1), spacing = 4.0) {
-                                ImageSystemName("flame", modifier = Modifier.imageScale(Image.Scale.small))
+                                Image(systemName = "flame", modifier = Modifier.imageScale(Image.Scale.small))
                                 Text(verbatim = habit.streak, modifier = Modifier.monospacedDigit())
                                 Text(verbatim = "· ${habit.goal}")
                             }
@@ -150,7 +150,7 @@ fun Screen32(vm: Screen32ViewModel) {
                                 )
                             }
                         }
-                        ImageSystemName(
+                        Image(systemName = 
                             if (habit.doneToday) "checkmark.circle.fill" else "circle",
                             modifier = Modifier.font(Font.title2)
                                 .foregroundStyle(if (habit.doneToday) Color.green else Color.gray.opacity(0.5))

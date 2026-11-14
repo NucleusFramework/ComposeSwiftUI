@@ -94,7 +94,7 @@ fun Screen35(vm: Screen35ViewModel) {
         List(modifier = Modifier.listStyle(ListStyle.insetGrouped).navigationTitle("Course")) {
             Section {
                 HStack(spacing = 14.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         "swift",
                         modifier = Modifier.font(Font.system(size = 28.0, weight = Font.Weight.bold))
                             .foregroundStyle(Color.white)
@@ -122,13 +122,13 @@ fun Screen35(vm: Screen35ViewModel) {
                         content = {
                             for (lesson in module.lessons) key(lesson.id) {
                                 HStack(spacing = 12.0) {
-                                    ImageSystemName(lesson.kind, modifier = Modifier.foregroundStyle(ShapeStyle.secondary).frame(width = 22.0))
+                                    Image(systemName = lesson.kind, modifier = Modifier.foregroundStyle(ShapeStyle.secondary).frame(width = 22.0))
                                     VStack(alignment = HorizontalAlignment.leading, spacing = 1.0) {
                                         Text(verbatim = lesson.title, modifier = Modifier.font(Font.subheadline).foregroundStyle(if (lesson.locked) ShapeStyle.secondary else ShapeStyle.primary))
                                         Text(verbatim = lesson.duration, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.tertiary))
                                     }
                                     Spacer()
-                                    ImageSystemName(
+                                    Image(systemName = 
                                         when {
                                             lesson.locked -> "lock.fill"
                                             lesson.done -> "checkmark.circle.fill"

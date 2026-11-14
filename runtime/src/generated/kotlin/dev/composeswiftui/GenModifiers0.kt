@@ -797,6 +797,7 @@ public fun Modifier.onHover(perform: (Boolean) -> Unit): Modifier = element(395,
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use onLongPressGesture(minimumDuration = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.onLongPressGestureMinimumDuration(minimumDuration: Double = 0.5, maximumDistance: Double = 10.0, perform: () -> Unit): Modifier = element(399, minimumDuration, maximumDistance, SAction(perform))
 
@@ -1338,6 +1339,7 @@ public fun Modifier.underline(isActive: Boolean = true, color: Color? = null): M
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use accessibilityAction(named = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.accessibilityActionNamed(named: String, handler: () -> Unit): Modifier = element(14, named, SAction(handler))
 
@@ -1360,6 +1362,7 @@ public fun Modifier.accessibilityCustomContent(key: AccessibilityCustomContentKe
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use accessibilityDragPoint(point = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.accessibilityDragPointDescription(point: UnitPoint, description: String, isEnabled: Boolean): Modifier = element(42, point, description, isEnabled)
 
@@ -1382,6 +1385,7 @@ public fun Modifier.accessibilityDropPoint(point: UnitPoint, description: Locali
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use accessibilityDropPoint(point = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.accessibilityDropPointDescription(point: UnitPoint, description: LocalizedKey, isEnabled: Boolean): Modifier = element(52, point, description.key, isEnabled)
 
@@ -1393,6 +1397,7 @@ public fun Modifier.accessibilityDropPointDescription(point: UnitPoint, descript
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
+@Deprecated("Use accessibilityHint(hint = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.accessibilityHintIsEnabled(hint: String, isEnabled: Boolean): Modifier = element(62, hint, isEnabled)
 
@@ -1415,6 +1420,7 @@ public fun Modifier.accessibilityLabel(labelKey: LocalizedKey): Modifier = eleme
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
+@Deprecated("Use accessibilityLabel(label = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.accessibilityLabelIsEnabled(label: LocalizedKey, isEnabled: Boolean): Modifier = element(77, label.key, isEnabled)
 
@@ -1437,6 +1443,7 @@ public fun Modifier.accessibilityValue(valueKey: LocalizedKey, isEnabled: Boolea
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use alert(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.alertIsPresented(title: String, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit): Modifier = element(104, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions))
 
@@ -1448,6 +1455,7 @@ public fun Modifier.alertIsPresented(title: String, isPresented: Boolean, onIsPr
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use confirmationDialog(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.confirmationDialogIsPresented(titleResource: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit): Modifier = element(157, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions))
 
@@ -1459,6 +1467,7 @@ public fun Modifier.confirmationDialogIsPresented(titleResource: LocalizedKey, i
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use confirmationDialog(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.confirmationDialogIsPresented(title: String, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(163, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message))
 
@@ -1481,6 +1490,7 @@ public fun Modifier.dismissalConfirmationDialog(titleKey: LocalizedKey, shouldPr
  * ```
  * Availability: iOS 27.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use dismissalConfirmationDialog(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.dismissalConfirmationDialogShouldPresent(titleResource: LocalizedKey, shouldPresent: Boolean, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(220, titleResource.key, shouldPresent, slotContent(actions), slotContent(message))
 
@@ -1514,6 +1524,7 @@ public fun Modifier.navigationTitle(titleKey: LocalizedKey): Modifier = element(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use searchable(text = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: LocalizedKey): Modifier = element(490, text, SValueCallback { onTextChange(it as String) }, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, placement, prompt.key)
 
@@ -1525,6 +1536,7 @@ public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit,
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use searchable(text = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: String? = null, suggestions: @Composable () -> Unit): Modifier = element(496, text, SValueCallback { onTextChange(it as String) }, placement, prompt, slotContent(suggestions))
 
@@ -1551,4 +1563,155 @@ public fun Modifier.contextMenu(menuItems: @Composable () -> Unit): Modifier = e
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
 public fun Modifier.previewDevice(value: PreviewDevice?): Modifier = element(440, value)
+
+/** SwiftUI `accessibility` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibility(removeTraits: AccessibilityTraits? = null): Modifier =
+    when {
+        removeTraits != null -> run { val removeTraits = removeTraits!!; element(9, removeTraits) }
+        else -> error("No SwiftUI accessibility overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityAction` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityAction(named: String? = null, handler: (() -> Unit)? = null): Modifier =
+    when {
+        named != null && handler != null -> run { val named = named!!; val handler = handler!!; element(14, named, SAction(handler)) }
+        else -> error("No SwiftUI accessibilityAction overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityDragPoint` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityDragPoint(point: UnitPoint? = null, description: String? = null, isEnabled: Boolean? = null): Modifier =
+    when {
+        point != null && description != null && isEnabled != null -> run { val point = point!!; val description = description!!; val isEnabled = isEnabled!!; element(42, point, description, isEnabled) }
+        point != null && description != null && isEnabled == null -> run { val point = point!!; val description = description!!; element(38, point, description) }
+        else -> error("No SwiftUI accessibilityDragPoint overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityDropPoint` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityDropPoint(point: UnitPoint? = null, description: String? = null, isEnabled: Boolean? = null): Modifier =
+    when {
+        point != null && description != null && isEnabled != null -> run { val point = point!!; val description = description!!; val isEnabled = isEnabled!!; element(50, point, description, isEnabled) }
+        point != null && description != null && isEnabled == null -> run { val point = point!!; val description = description!!; element(46, point, description) }
+        else -> error("No SwiftUI accessibilityDropPoint overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityHint` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityHint(hint: String? = null, isEnabled: Boolean? = null): Modifier =
+    when {
+        hint != null && isEnabled != null -> run { val hint = hint!!; val isEnabled = isEnabled!!; element(62, hint, isEnabled) }
+        else -> error("No SwiftUI accessibilityHint overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityLabel` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityLabel(label: String? = null, isEnabled: Boolean? = null): Modifier =
+    when {
+        label != null && isEnabled != null -> run { val label = label!!; val isEnabled = isEnabled!!; element(75, label, isEnabled) }
+        else -> error("No SwiftUI accessibilityLabel overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityScrollStatus` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityScrollStatus(status: String? = null, isEnabled: Boolean? = null): Modifier =
+    when {
+        status != null -> run { val status = status!!; val isEnabled = isEnabled ?: true; element(85, status, isEnabled) }
+        else -> error("No SwiftUI accessibilityScrollStatus overload takes this combination of arguments")
+    }
+
+/** SwiftUI `accessibilityValue` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.accessibilityValue(valueDescription: String? = null, isEnabled: Boolean? = null, valueResource: LocalizedKey? = null): Modifier =
+    when {
+        valueDescription != null && isEnabled != null && valueResource == null -> run { val valueDescription = valueDescription!!; val isEnabled = isEnabled!!; element(97, valueDescription, isEnabled) }
+        valueResource != null && isEnabled != null && valueDescription == null -> run { val valueResource = valueResource!!; val isEnabled = isEnabled!!; element(99, valueResource.key, isEnabled) }
+        else -> error("No SwiftUI accessibilityValue overload takes this combination of arguments")
+    }
+
+/** SwiftUI `alert` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.alert(titleResource: LocalizedKey? = null, isPresented: Boolean? = null, title: String? = null, onIsPresentedChange: ((Boolean) -> Unit)? = null, actions: (@Composable () -> Unit)? = null, message: (@Composable () -> Unit)? = null): Modifier =
+    when {
+        titleResource != null && isPresented != null && onIsPresentedChange != null && actions != null && message != null && title == null -> run { val titleResource = titleResource!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; val message = message!!; element(106, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions), slotContent(message)) }
+        title != null && isPresented != null && onIsPresentedChange != null && actions != null && message != null && titleResource == null -> run { val title = title!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; val message = message!!; element(108, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions), slotContent(message)) }
+        titleResource != null && isPresented != null && onIsPresentedChange != null && actions != null && title == null && message == null -> run { val titleResource = titleResource!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; element(102, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions)) }
+        title != null && isPresented != null && onIsPresentedChange != null && actions != null && titleResource == null && message == null -> run { val title = title!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; element(104, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions)) }
+        else -> error("No SwiftUI alert overload takes this combination of arguments")
+    }
+
+/** SwiftUI `confirmationDialog` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.confirmationDialog(titleResource: LocalizedKey? = null, isPresented: Boolean? = null, titleVisibility: Visibility? = null, title: String? = null, onIsPresentedChange: ((Boolean) -> Unit)? = null, actions: (@Composable () -> Unit)? = null, message: (@Composable () -> Unit)? = null): Modifier =
+    when {
+        titleResource != null && isPresented != null && onIsPresentedChange != null && actions != null && message != null && title == null -> run { val titleResource = titleResource!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; val message = message!!; val titleVisibility = titleVisibility ?: Visibility.automatic; element(161, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message)) }
+        title != null && isPresented != null && onIsPresentedChange != null && actions != null && message != null && titleResource == null -> run { val title = title!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; val message = message!!; val titleVisibility = titleVisibility ?: Visibility.automatic; element(163, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message)) }
+        titleResource != null && isPresented != null && onIsPresentedChange != null && actions != null && title == null && message == null -> run { val titleResource = titleResource!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; val titleVisibility = titleVisibility ?: Visibility.automatic; element(157, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions)) }
+        title != null && isPresented != null && onIsPresentedChange != null && actions != null && titleResource == null && message == null -> run { val title = title!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val actions = actions!!; val titleVisibility = titleVisibility ?: Visibility.automatic; element(159, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions)) }
+        else -> error("No SwiftUI confirmationDialog overload takes this combination of arguments")
+    }
+
+/** SwiftUI `dialogSuppressionToggle` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.dialogSuppressionToggle(titleResource: LocalizedKey? = null, isSuppressed: Boolean? = null, label: String? = null, onIsSuppressedChange: ((Boolean) -> Unit)? = null): Modifier =
+    when {
+        titleResource != null && isSuppressed != null && onIsSuppressedChange != null && label == null -> run { val titleResource = titleResource!!; val isSuppressed = isSuppressed!!; val onIsSuppressedChange = onIsSuppressedChange!!; element(200, titleResource.key, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) }) }
+        label != null && isSuppressed != null && onIsSuppressedChange != null && titleResource == null -> run { val label = label!!; val isSuppressed = isSuppressed!!; val onIsSuppressedChange = onIsSuppressedChange!!; element(202, label, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) }) }
+        else -> error("No SwiftUI dialogSuppressionToggle overload takes this combination of arguments")
+    }
+
+/** SwiftUI `dismissalConfirmationDialog` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.dismissalConfirmationDialog(titleResource: LocalizedKey? = null, shouldPresent: Boolean? = null, title: String? = null, actions: (@Composable () -> Unit)? = null, message: (@Composable () -> Unit)? = null): Modifier =
+    when {
+        titleResource != null && shouldPresent != null && actions != null && message != null && title == null -> run { val titleResource = titleResource!!; val shouldPresent = shouldPresent!!; val actions = actions!!; val message = message!!; element(220, titleResource.key, shouldPresent, slotContent(actions), slotContent(message)) }
+        title != null && shouldPresent != null && actions != null && message != null && titleResource == null -> run { val title = title!!; val shouldPresent = shouldPresent!!; val actions = actions!!; val message = message!!; element(222, title, shouldPresent, slotContent(actions), slotContent(message)) }
+        titleResource != null && shouldPresent != null && actions != null && title == null && message == null -> run { val titleResource = titleResource!!; val shouldPresent = shouldPresent!!; val actions = actions!!; element(216, titleResource.key, shouldPresent, slotContent(actions)) }
+        title != null && shouldPresent != null && actions != null && titleResource == null && message == null -> run { val title = title!!; val shouldPresent = shouldPresent!!; val actions = actions!!; element(218, title, shouldPresent, slotContent(actions)) }
+        else -> error("No SwiftUI dismissalConfirmationDialog overload takes this combination of arguments")
+    }
+
+/** SwiftUI `navigationBarTitle` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.navigationBarTitle(title: String? = null, displayMode: NavigationBarItem.TitleDisplayMode? = null): Modifier =
+    when {
+        title != null && displayMode != null -> run { val title = title!!; val displayMode = displayMode!!; element(367, title, displayMode) }
+        else -> error("No SwiftUI navigationBarTitle overload takes this combination of arguments")
+    }
+
+/** SwiftUI `onLongPressGesture` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.onLongPressGesture(minimumDuration: Double? = null, maximumDistance: Double? = null, perform: (() -> Unit)? = null): Modifier =
+    when {
+        perform != null && maximumDistance == null -> run { val perform = perform!!; val minimumDuration = minimumDuration ?: 0.5; element(401, minimumDuration, SAction(perform)) }
+        perform != null -> run { val perform = perform!!; val minimumDuration = minimumDuration ?: 0.5; val maximumDistance = maximumDistance ?: 10.0; element(399, minimumDuration, maximumDistance, SAction(perform)) }
+        else -> error("No SwiftUI onLongPressGesture overload takes this combination of arguments")
+    }
+
+/** SwiftUI `searchable` overloads that differ only by argument labels, selected by the labels you pass. */
+@HiddenFromObjC
+@Suppress("NAME_SHADOWING")
+public fun Modifier.searchable(text: String? = null, isPresented: Boolean? = null, placement: SearchFieldPlacement? = null, prompt: String? = null, onTextChange: ((String) -> Unit)? = null, onIsPresentedChange: ((Boolean) -> Unit)? = null, suggestions: (@Composable () -> Unit)? = null): Modifier =
+    when {
+        text != null && onTextChange != null && isPresented != null && onIsPresentedChange != null && suggestions == null -> run { val text = text!!; val onTextChange = onTextChange!!; val isPresented = isPresented!!; val onIsPresentedChange = onIsPresentedChange!!; val placement = placement ?: SearchFieldPlacement.automatic; element(488, text, SValueCallback { onTextChange(it as String) }, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, placement, prompt) }
+        text != null && onTextChange != null && suggestions != null && isPresented == null && onIsPresentedChange == null -> run { val text = text!!; val onTextChange = onTextChange!!; val suggestions = suggestions!!; val placement = placement ?: SearchFieldPlacement.automatic; element(496, text, SValueCallback { onTextChange(it as String) }, placement, prompt, slotContent(suggestions)) }
+        text != null && onTextChange != null && isPresented == null && onIsPresentedChange == null && suggestions == null -> run { val text = text!!; val onTextChange = onTextChange!!; val placement = placement ?: SearchFieldPlacement.automatic; element(492, text, SValueCallback { onTextChange(it as String) }, placement, prompt) }
+        else -> error("No SwiftUI searchable overload takes this combination of arguments")
+    }
 

@@ -112,7 +112,7 @@ fun Screen06(vm: Screen06ViewModel) {
                 content = {
                     for (item in state.items) key(item.id) {
                         HStack(spacing = 12.0) {
-                            ImageSystemName(
+                            Image(systemName = 
                                 item.icon,
                                 modifier = Modifier.font(Font.title2).foregroundStyle(Color.white)
                                     .frame(width = 58.0, height = 58.0)
@@ -141,7 +141,7 @@ fun Screen06(vm: Screen06ViewModel) {
             )
             Section(title = "Promotions") {
                 HStack {
-                    ImageSystemName("tag.fill", modifier = Modifier.foregroundStyle(Color.green))
+                    Image(systemName = "tag.fill", modifier = Modifier.foregroundStyle(Color.green))
                     Text(state.promoCode, modifier = Modifier.font(Font.body.monospaced()))
                     Spacer()
                     Text(verbatim = state.promoAmount, modifier = Modifier.foregroundStyle(Color.green))

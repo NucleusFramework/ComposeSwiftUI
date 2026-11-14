@@ -110,7 +110,7 @@ private fun Screen27Timeline(steps: List<Screen27Step>) {
                         if (step.isCurrent) {
                             ShapeView(Circle(), modifier = Modifier.frame(width = 34.0, height = 34.0), stroke = step.circleTint.color().opacity(0.3), lineWidth = 4.0)
                         }
-                        ImageSystemName(step.icon, modifier = Modifier.font(Font.system(size = 11.0, weight = Font.Weight.bold)).foregroundStyle(step.iconTint.color()))
+                        Image(systemName = step.icon, modifier = Modifier.font(Font.system(size = 11.0, weight = Font.Weight.bold)).foregroundStyle(step.iconTint.color()))
                     }
                     if (!step.isLast) {
                         ShapeView(Rectangle(), modifier = Modifier.frame(width = 3.0, height = 34.0), fill = step.lineTint.color())
@@ -134,7 +134,7 @@ fun Screen27(vm: Screen27ViewModel) {
         ScrollView(modifier = Modifier.navigationTitle("Tracking")) {
             VStack(modifier = Modifier.padding(), alignment = HorizontalAlignment.leading, spacing = 18.0) {
                 HStack(spacing = 14.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         "shippingbox.fill",
                         modifier = Modifier.font(Font.title2)
                             .foregroundStyle(Color.white)
@@ -167,7 +167,7 @@ fun Screen27(vm: Screen27ViewModel) {
                 }
                 Screen27Timeline(state.steps)
                 HStack(spacing = 12.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         "person.crop.circle.fill",
                         modifier = Modifier.font(Font.system(size = 44.0)).symbolRenderingMode(SymbolRenderingMode.hierarchical).foregroundStyle(Color.indigo),
                     )
@@ -175,16 +175,16 @@ fun Screen27(vm: Screen27ViewModel) {
                         Text(state.courier, modifier = Modifier.font(Font.headline))
                         Text(state.vehicle, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                         HStack(spacing = 3.0) {
-                            ImageSystemName("star.fill", modifier = Modifier.foregroundStyle(Color.yellow))
+                            Image(systemName = "star.fill", modifier = Modifier.foregroundStyle(Color.yellow))
                             Text(state.rating, modifier = Modifier.monospacedDigit())
                         }
                     }
                     Spacer()
                     Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.bordered).buttonBorderShape(ButtonBorderShape.circle)) {
-                        ImageSystemName("message.fill")
+                        Image(systemName = "message.fill")
                     }
                     Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.borderedProminent).buttonBorderShape(ButtonBorderShape.circle).tint(Color.green)) {
-                        ImageSystemName("phone.fill")
+                        Image(systemName = "phone.fill")
                     }
                 }
             }

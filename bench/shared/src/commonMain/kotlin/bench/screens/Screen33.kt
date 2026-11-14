@@ -150,7 +150,7 @@ fun Screen33(vm: Screen33ViewModel) {
                 VStack(spacing = 12.0) {
                     for (expense in state.expenses) key(expense.id) {
                         HStack(spacing = 12.0) {
-                            ImageSystemName(
+                            Image(systemName = 
                                 expense.icon,
                                 modifier = Modifier.font(Font.system(size = 15.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(Color.white)

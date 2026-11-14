@@ -113,7 +113,7 @@ fun Screen44(vm: Screen44ViewModel) {
                     HStack(alignment = VerticalAlignment.top, spacing = 12.0) {
                         ZStack(modifier = Modifier.frame(width = 48.0, height = 48.0)) {
                             ShapeView(RoundedRectangle(cornerRadius = 12.0), fill = job.logo.color().opacity(0.18))
-                            ImageSystemName(job.logoIcon, modifier = Modifier.font(Font.title3).foregroundStyle(job.logo.color()))
+                            Image(systemName = job.logoIcon, modifier = Modifier.font(Font.title3).foregroundStyle(job.logo.color()))
                         }
                         VStack(alignment = HorizontalAlignment.leading, spacing = 3.0) {
                             HStack(spacing = 6.0) {
@@ -133,7 +133,7 @@ fun Screen44(vm: Screen44ViewModel) {
                             Label(title = job.location, systemImage = "mappin", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                         }
                         Spacer()
-                        ImageSystemName(
+                        Image(systemName = 
                             if (job.bookmarked) "bookmark.fill" else "bookmark",
                             modifier = Modifier.font(Font.title3).foregroundStyle(if (job.bookmarked) Color.blue else Color.gray),
                         )

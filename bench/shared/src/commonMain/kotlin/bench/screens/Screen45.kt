@@ -99,7 +99,7 @@ fun Screen45(vm: Screen45ViewModel) {
             VStack(modifier = Modifier.padding(), alignment = HorizontalAlignment.leading, spacing = 18.0) {
                 ZStack(modifier = Modifier.frame(height = 210.0).clipShape(RoundedRectangle(cornerRadius = 20.0)), alignment = Alignment.bottomLeading) {
                     LinearGradientView(LinearGradient(colors = state.gradient.map { it.color() }, startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing))
-                    ImageSystemName(
+                    Image(systemName = 
                         "house.lodge.fill",
                         modifier = Modifier.font(Font.system(size = 72.0)).foregroundStyle(Color.white.opacity(0.85))
                             .frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY),
@@ -134,7 +134,7 @@ fun Screen45(vm: Screen45ViewModel) {
                         Text(state.priceNote, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.tertiary))
                     }
                     Spacer()
-                    ImageSystemName(
+                    Image(systemName = 
                         if (state.favorite) "heart.fill" else "heart",
                         modifier = Modifier.font(Font.title2).foregroundStyle(if (state.favorite) Color.pink else Color.gray)
                             .frame(width = 44.0, height = 44.0)
@@ -148,7 +148,7 @@ fun Screen45(vm: Screen45ViewModel) {
                 ) {
                     for (spec in state.specs) key(spec.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 4.0) {
-                            ImageSystemName(spec.icon, modifier = Modifier.font(Font.title3).foregroundStyle(Color.indigo))
+                            Image(systemName = spec.icon, modifier = Modifier.font(Font.title3).foregroundStyle(Color.indigo))
                             Text(spec.value, modifier = Modifier.font(Font.headline).monospacedDigit())
                             Text(spec.label, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary).textCase(Text.Case.uppercase))
                         }
@@ -183,8 +183,8 @@ fun Screen45(vm: Screen45ViewModel) {
                         Label(title = state.rating, systemImage = "star.fill", modifier = Modifier.font(Font.caption2).foregroundStyle(Color.orange))
                     }
                     Spacer()
-                    ImageSystemName("phone.fill", modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.green, Circle()))
-                    ImageSystemName("message.fill", modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.blue, Circle()))
+                    Image(systemName = "phone.fill", modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.green, Circle()))
+                    Image(systemName = "message.fill", modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.blue, Circle()))
                 }
                 Label(title = state.views, systemImage = "eye", modifier = Modifier.font(Font.footnote).monospacedDigit().foregroundStyle(ShapeStyle.secondary))
             }

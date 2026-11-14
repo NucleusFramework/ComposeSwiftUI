@@ -120,7 +120,7 @@ private fun Screen22Canvas(state: Screen22State) {
         }
         for (pin in state.pins) key(pin.id) {
             VStack(modifier = Modifier.offset(x = pin.x, y = pin.y), spacing = 4.0) {
-                ImageSystemName(
+                Image(systemName = 
                     pin.icon,
                     modifier = Modifier.font(Font.system(size = if (pin.selected) 18.0 else 13.0, weight = Font.Weight.semibold))
                         .foregroundStyle(Color.white)
@@ -161,7 +161,7 @@ private fun Screen22Card(place: Screen22Place) {
                 Text(place.category, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
             }
             Spacer()
-            ImageSystemName("xmark.circle.fill", modifier = Modifier.font(Font.title2).symbolRenderingMode(SymbolRenderingMode.hierarchical).foregroundStyle(Color.gray))
+            Image(systemName = "xmark.circle.fill", modifier = Modifier.font(Font.title2).symbolRenderingMode(SymbolRenderingMode.hierarchical).foregroundStyle(Color.gray))
         }
         HStack(spacing = 14.0) {
             Label(place.rating, systemImage = "star.fill", modifier = Modifier.foregroundStyle(Color.orange))
@@ -175,10 +175,10 @@ private fun Screen22Card(place: Screen22Place) {
                 Label("Directions", systemImage = "arrow.triangle.turn.up.right.diamond.fill", modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY))
             }
             Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.bordered)) {
-                ImageSystemName("phone.fill")
+                Image(systemName = "phone.fill")
             }
             Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.bordered)) {
-                ImageSystemName("square.and.arrow.up")
+                Image(systemName = "square.and.arrow.up")
             }
         }
     }

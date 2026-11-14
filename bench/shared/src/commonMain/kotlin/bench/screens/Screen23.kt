@@ -164,7 +164,7 @@ fun Screen23(vm: Screen23ViewModel) {
                     Text("Summary", modifier = Modifier.font(Font.headline).padding(Edge.Set.bottom, 8.0))
                     for (row in state.summary) key(row.id) {
                         HStack(modifier = Modifier.padding(Edge.Set.vertical, 10.0), spacing = 12.0) {
-                            ImageSystemName(
+                            Image(systemName = 
                                 row.icon,
                                 modifier = Modifier.font(Font.system(size = 14.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(row.tint.color())

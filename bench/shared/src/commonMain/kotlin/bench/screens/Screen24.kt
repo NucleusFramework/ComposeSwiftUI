@@ -85,7 +85,7 @@ private fun Screen24Card(plan: Screen24Plan) {
         spacing = 12.0,
     ) {
         HStack(spacing = 10.0) {
-            ImageSystemName(
+            Image(systemName = 
                 plan.icon,
                 modifier = Modifier.font(Font.system(size = 16.0, weight = Font.Weight.bold))
                     .foregroundStyle(Color.white)
@@ -114,7 +114,7 @@ private fun Screen24Card(plan: Screen24Plan) {
         VStack(alignment = HorizontalAlignment.leading, spacing = 8.0) {
             for (feature in plan.features) key(feature.id) {
                 HStack(spacing = 8.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         if (feature.included) "checkmark.circle.fill" else "xmark.circle",
                         modifier = Modifier.foregroundStyle(if (feature.included) plan.tint.color() else Color.gray.opacity(0.5)),
                     )
@@ -146,7 +146,7 @@ fun Screen24(vm: Screen24ViewModel) {
         ScrollView(modifier = Modifier.navigationTitle("Plans")) {
             VStack(modifier = Modifier.padding(), spacing = 16.0) {
                 VStack(spacing = 6.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         "crown.fill",
                         modifier = Modifier.font(Font.system(size = 34.0)).symbolRenderingMode(SymbolRenderingMode.multicolor),
                     )

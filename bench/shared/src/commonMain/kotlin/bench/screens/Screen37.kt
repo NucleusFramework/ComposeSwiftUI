@@ -108,7 +108,7 @@ fun Screen37(vm: Screen37ViewModel) {
                                     for (i in 0 until 3) key(i) {
                                         ShapeView(Circle(), modifier = Modifier.frame(width = 4.0, height = 4.0), fill = Color.white.opacity(0.6))
                                     }
-                                    ImageSystemName("airplane", modifier = Modifier.font(Font.title2))
+                                    Image(systemName = "airplane", modifier = Modifier.font(Font.title2))
                                     for (i in 3 until 6) key(i) {
                                         ShapeView(Circle(), modifier = Modifier.frame(width = 4.0, height = 4.0), fill = Color.white.opacity(0.6))
                                     }

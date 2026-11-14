@@ -109,7 +109,7 @@ fun Screen11(vm: Screen11ViewModel) {
                             .padding(edges = Edge.Set.horizontal, length = 12.0)
                             .padding(edges = Edge.Set.vertical, length = 7.0)
                             .background(if (album.id == state.activeAlbum) Color.blue else Color.gray.opacity(0.15), Capsule())) {
-                            ImageSystemName(album.icon)
+                            Image(systemName = album.icon)
                             Text(album.title)
                             Text(album.count, modifier = Modifier.font(Font.caption).opacity(0.7))
                         }
@@ -123,23 +123,23 @@ fun Screen11(vm: Screen11ViewModel) {
                             fill = LinearGradient(colors = listOf(tile.from.color(), tile.to.color()), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing),
                             modifier = Modifier.aspectRatio(1.0, contentMode = ContentMode.fit)
                                 .overlay {
-                                    ImageSystemName(tile.icon, modifier = Modifier.font(Font.title).foregroundStyle(Color.white.opacity(0.85)))
+                                    Image(systemName = tile.icon, modifier = Modifier.font(Font.title).foregroundStyle(Color.white.opacity(0.85)))
                                 }
                                 .overlay(alignment = Alignment.topTrailing) {
                                     ZStack(modifier = Modifier.frame(width = 22.0, height = 22.0).padding(6.0)) {
                                         ShapeView(Circle(), fill = if (tile.selected) Color.blue else Color.black.opacity(0.15), stroke = Color.white, lineWidth = 1.5)
                                         if (tile.selected) {
-                                            ImageSystemName("checkmark", modifier = Modifier.font(Font.caption2.bold()).foregroundStyle(Color.white))
+                                            Image(systemName = "checkmark", modifier = Modifier.font(Font.caption2.bold()).foregroundStyle(Color.white))
                                         }
                                     }
                                 }
                                 .overlay(alignment = Alignment.bottomLeading) {
                                     HStack(spacing = 4.0, modifier = Modifier.font(Font.caption2.bold()).foregroundStyle(Color.white).padding(6.0)) {
                                         if (tile.favorite) {
-                                            ImageSystemName("heart.fill")
+                                            Image(systemName = "heart.fill")
                                         }
                                         if (tile.duration.isNotEmpty()) {
-                                            ImageSystemName("video.fill")
+                                            Image(systemName = "video.fill")
                                             Text(tile.duration)
                                         }
                                     }

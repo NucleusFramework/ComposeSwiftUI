@@ -91,7 +91,7 @@ fun Screen01(vm: Screen01ViewModel) {
             Section(header = { Text("General") }, footer = { Text(state.footer) }, content = {
                 for (row in state.rows) key(row.id) {
                     HStack(spacing = 12.0) {
-                        ImageSystemName(
+                        Image(systemName = 
                             row.icon,
                             modifier = Modifier.font(Font.system(size = 15.0, weight = Font.Weight.semibold))
                                 .foregroundStyle(Color.white)

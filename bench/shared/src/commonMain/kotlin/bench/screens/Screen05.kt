@@ -113,7 +113,7 @@ fun Screen05(vm: Screen05ViewModel) {
                                 for (hour in state.hours) key(hour.id) {
                                     VStack(spacing = 8.0) {
                                         Text(hour.time, modifier = Modifier.font(Font.footnote.weight(Font.Weight.semibold)))
-                                        ImageSystemName(hour.icon, modifier = Modifier.symbolRenderingMode(SymbolRenderingMode.multicolor).font(Font.title3).frame(height = 26.0))
+                                        Image(systemName = hour.icon, modifier = Modifier.symbolRenderingMode(SymbolRenderingMode.multicolor).font(Font.title3).frame(height = 26.0))
                                         Text(verbatim = hour.rain, modifier = Modifier.font(Font.caption2.bold()).foregroundStyle(Color.cyan))
                                         Text(verbatim = hour.temp, modifier = Modifier.font(Font.headline))
                                     }
@@ -128,7 +128,7 @@ fun Screen05(vm: Screen05ViewModel) {
                             Divider(modifier = Modifier.overlay(Color.white.opacity(0.4)))
                             HStack(spacing = 10.0) {
                                 Text(day.day, modifier = Modifier.font(Font.body.weight(Font.Weight.medium)).frame(width = 56.0, alignment = Alignment.leading))
-                                ImageSystemName(day.icon, modifier = Modifier.symbolRenderingMode(SymbolRenderingMode.multicolor).frame(width = 30.0))
+                                Image(systemName = day.icon, modifier = Modifier.symbolRenderingMode(SymbolRenderingMode.multicolor).frame(width = 30.0))
                                 Text(day.low, modifier = Modifier.opacity(0.7).frame(width = 36.0, alignment = Alignment.trailing))
                                 ZStack(alignment = Alignment.leading, modifier = Modifier.frame(width = 100.0)) {
                                     ShapeView(Capsule(), fill = Color.black.opacity(0.18), modifier = Modifier.frame(height = 5.0))

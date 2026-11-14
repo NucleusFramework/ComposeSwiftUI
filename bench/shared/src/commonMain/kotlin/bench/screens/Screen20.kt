@@ -136,7 +136,7 @@ fun Screen20(vm: Screen20ViewModel) {
                                 }
                                 Spacer(minLength = 0.0)
                                 if (contact.favorite) {
-                                    ImageSystemName("star.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.yellow))
+                                    Image(systemName = "star.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.yellow))
                                 }
                             }
                         }

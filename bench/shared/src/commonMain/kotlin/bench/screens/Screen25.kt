@@ -96,13 +96,13 @@ fun Screen25(vm: Screen25ViewModel) {
                         endPoint = UnitPoint.bottomTrailing,
                     ),
                 )
-                ImageSystemName(
+                Image(systemName = 
                     page.symbol,
                     modifier = Modifier.font(Font.system(size = 92.0, weight = Font.Weight.medium))
                         .symbolRenderingMode(SymbolRenderingMode.hierarchical)
                         .foregroundStyle(page.tint.color()),
                 )
-                ImageSystemName(
+                Image(systemName = 
                     "sparkle",
                     modifier = Modifier.font(Font.system(size = 22.0)).foregroundStyle(page.accent.color()).offset(x = 96.0, y = -84.0),
                 )
@@ -117,7 +117,7 @@ fun Screen25(vm: Screen25ViewModel) {
                         modifier = Modifier.frame(width = 96.0, height = 72.0).background(Color.gray.opacity(0.1), RoundedRectangle(cornerRadius = 14.0)),
                         spacing = 6.0,
                     ) {
-                        ImageSystemName(
+                        Image(systemName = 
                             h.icon,
                             modifier = Modifier.font(Font.title3)
                                 .symbolRenderingMode(SymbolRenderingMode.palette)

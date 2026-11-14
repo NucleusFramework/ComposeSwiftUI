@@ -951,6 +951,7 @@ public fun Image(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Image(systemName = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ImageSystemName(
@@ -969,6 +970,7 @@ public fun ImageSystemName(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Image(systemName = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ImageSystemName(
@@ -986,6 +988,7 @@ public fun ImageSystemName(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Image(name = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ImageVariableValue(
@@ -1469,6 +1472,7 @@ public fun NavigationLink(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use NavigationLink(value = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun NavigationLinkValue(
@@ -1505,6 +1509,7 @@ public fun NavigationLink(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use NavigationLink(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun NavigationLinkValue(
@@ -2376,6 +2381,7 @@ public fun Slider(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use Slider(value = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun SliderValue(
@@ -2398,6 +2404,7 @@ public fun SliderValue(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use Slider(value = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun SliderValue(
@@ -2499,6 +2506,7 @@ public fun Stepper(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use Stepper(value = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun StepperValue(
@@ -2542,6 +2550,7 @@ public fun Stepper(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use Stepper(value = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun StepperValue(
@@ -2950,6 +2959,7 @@ public fun ZStack(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Label(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun LabelImage(
@@ -2987,6 +2997,7 @@ public fun Button(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Button(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ButtonRole(
@@ -3024,6 +3035,7 @@ public fun Button(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Button(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ButtonAction(
@@ -3062,6 +3074,7 @@ public fun Button(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Button(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ButtonSystemImage(
@@ -3101,6 +3114,7 @@ public fun Button(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Button(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ButtonSystemImage(
@@ -3139,6 +3153,7 @@ public fun ContentUnavailableView(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use ContentUnavailableView(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ContentUnavailableViewSystemImage(
@@ -3196,6 +3211,7 @@ public fun ControlGroup(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
+@Deprecated("Use ControlGroup(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ControlGroupSystemImage(
@@ -3253,6 +3269,7 @@ public fun DatePicker(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use DatePicker(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun DatePickerSelection(
@@ -3293,6 +3310,7 @@ public fun DisclosureGroup(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use DisclosureGroup(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun DisclosureGroupIsExpanded(
@@ -3404,6 +3422,7 @@ public fun Label(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Label(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun LabelSystemImage(
@@ -3458,6 +3477,7 @@ public fun LabeledContent(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use LabeledContent(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun LabeledContentValue(
@@ -3494,6 +3514,7 @@ public fun Link(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Link(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun LinkDestination(
@@ -3532,6 +3553,7 @@ public fun Menu(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
+@Deprecated("Use Menu(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun MenuSystemImage(
@@ -3571,6 +3593,7 @@ public fun Menu(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
+@Deprecated("Use Menu(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun MenuSystemImage(
@@ -3609,6 +3632,7 @@ public fun Menu(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
+@Deprecated("Use Menu(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun MenuPrimaryAction(
@@ -3700,6 +3724,7 @@ public fun NavigationLink(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use NavigationLink(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun NavigationLinkValue(
@@ -3736,6 +3761,7 @@ public fun NewDocumentButton(
  * ```
  * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use NewDocumentButton(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun NewDocumentButtonSource(
@@ -3827,6 +3853,7 @@ public fun Picker(
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
+@Deprecated("Use Picker(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun PickerSelection(
@@ -3868,6 +3895,7 @@ public fun Picker(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Picker(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun PickerSelection(
@@ -3910,6 +3938,7 @@ public fun Picker(
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
+@Deprecated("Use Picker(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun PickerSystemImage(
@@ -3953,6 +3982,7 @@ public fun Picker(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Picker(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun PickerSystemImage(
@@ -4010,6 +4040,7 @@ public fun ProgressView(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use ProgressView(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ProgressViewValue(
@@ -4049,6 +4080,7 @@ public fun Section(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Section(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun SectionIsExpanded(
@@ -4127,6 +4159,7 @@ public fun SecureField(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use SecureField(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun SecureFieldText(
@@ -4206,6 +4239,7 @@ public fun SecureField(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use SecureField(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun SecureFieldText(
@@ -4244,6 +4278,7 @@ public fun ShareLink(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use ShareLink(item = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ShareLinkItem(
@@ -4303,6 +4338,7 @@ public fun ShareLink(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use ShareLink(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ShareLinkItem(
@@ -4323,6 +4359,7 @@ public fun ShareLinkItem(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use ShareLink(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ShareLinkItem(
@@ -4363,6 +4400,7 @@ public fun ShareLink(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use ShareLink(item = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ShareLinkItem(
@@ -4405,6 +4443,7 @@ public fun Stepper(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use Stepper(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun StepperValue(
@@ -4448,6 +4487,7 @@ public fun Stepper(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use Stepper(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun StepperValue(
@@ -4606,6 +4646,7 @@ public fun TextField(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use TextField(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun TextFieldText(
@@ -4647,6 +4688,7 @@ public fun TextField(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use TextField(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun TextFieldText(
@@ -4709,6 +4751,7 @@ public fun TextField(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use TextField(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun TextFieldText(
@@ -4788,6 +4831,7 @@ public fun TextField(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use TextField(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun TextFieldText(
@@ -4845,6 +4889,7 @@ public fun TextFieldLink(
  * ```
  * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
  */
+@Deprecated("Use TextFieldLink(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun TextFieldLinkPrompt(
@@ -4902,6 +4947,7 @@ public fun Toggle(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Toggle(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ToggleIsOn(
@@ -4941,6 +4987,7 @@ public fun Toggle(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Toggle(titleKey = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ToggleSystemImage(
@@ -4961,6 +5008,7 @@ public fun ToggleSystemImage(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use ContentUnavailableView(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ContentUnavailableViewImage(
@@ -4980,6 +5028,7 @@ public fun ContentUnavailableViewImage(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use ContentUnavailableView(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun ContentUnavailableViewImage(
@@ -4999,6 +5048,7 @@ public fun ContentUnavailableViewImage(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use Label(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
 public fun LabelImage(
@@ -5136,5 +5186,480 @@ public fun NavigationLink(
     content: @Composable () -> Unit,
 ) {
     SwiftView(137, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Button` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Button(
+    titleKey: LocalizedKey? = null,
+    role: ButtonRole? = null,
+    systemImage: String? = null,
+    modifier: Modifier = Modifier,
+    action: (() -> Unit)? = null,
+) {
+    when {
+        titleKey != null && systemImage != null && action != null && role == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val action = action!!; SwiftView(18, listOf(titleKey.key, systemImage, SAction(action)), modifier) }
+        titleKey != null && systemImage != null && action != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val action = action!!; SwiftView(15, listOf(titleKey.key, systemImage, role, SAction(action)), modifier) }
+        titleKey != null && action != null && role == null && systemImage == null -> { val titleKey = titleKey!!; val action = action!!; SwiftView(12, listOf(titleKey.key, SAction(action)), modifier) }
+        titleKey != null && action != null && systemImage == null -> { val titleKey = titleKey!!; val action = action!!; SwiftView(9, listOf(titleKey.key, role, SAction(action)), modifier) }
+        else -> error("No SwiftUI Button initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `ContentUnavailableView` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun ContentUnavailableView(
+    title: LocalizedKey? = null,
+    systemImage: String? = null,
+    description: String? = null,
+    image: String? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        title != null && systemImage != null && image == null -> { val title = title!!; val systemImage = systemImage!!; SwiftView(28, listOf(title.key, systemImage, description), modifier) }
+        title != null && image != null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(30, listOf(title.key, image, description), modifier) }
+        else -> error("No SwiftUI ContentUnavailableView initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `ControlGroup` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun ControlGroup(
+    titleKey: LocalizedKey? = null,
+    systemImage: String? = null,
+    modifier: Modifier = Modifier,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        titleKey != null && systemImage != null && content != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(36, listOf(titleKey.key, systemImage), modifier, content = content) }
+        else -> error("No SwiftUI ControlGroup initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `DatePicker` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun DatePicker(
+    titleKey: LocalizedKey? = null,
+    selection: Double? = null,
+    displayedComponents: DatePickerComponents? = null,
+    modifier: Modifier = Modifier,
+    onSelectionChange: ((Double) -> Unit)? = null,
+) {
+    when {
+        titleKey != null && selection != null && onSelectionChange != null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; SwiftView(43, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier) }
+        else -> error("No SwiftUI DatePicker initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `DisclosureGroup` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun DisclosureGroup(
+    titleKey: LocalizedKey? = null,
+    isExpanded: Boolean? = null,
+    modifier: Modifier = Modifier,
+    onIsExpandedChange: ((Boolean) -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        titleKey != null && isExpanded != null && onIsExpandedChange != null && content != null -> { val titleKey = titleKey!!; val isExpanded = isExpanded!!; val onIsExpandedChange = onIsExpandedChange!!; val content = content!!; SwiftView(50, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content) }
+        else -> error("No SwiftUI DisclosureGroup initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Image` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Image(
+    systemName: String? = null,
+    variableValue: Double? = null,
+    name: String? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        systemName != null && variableValue == null && name == null -> { val systemName = systemName!!; SwiftView(81, listOf(systemName), modifier) }
+        systemName != null && name == null -> { val systemName = systemName!!; SwiftView(80, listOf(systemName, variableValue), modifier) }
+        name != null && systemName == null -> { val name = name!!; SwiftView(83, listOf(name, variableValue), modifier) }
+        else -> error("No SwiftUI Image initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Label` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Label(
+    title: String? = null,
+    image: String? = null,
+    titleKey: LocalizedKey? = null,
+    systemImage: String? = null,
+    titleResource: LocalizedKey? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        title != null && image != null && titleKey == null && systemImage == null && titleResource == null -> { val title = title!!; val image = image!!; SwiftView(92, listOf(title, image), modifier) }
+        titleKey != null && systemImage != null && title == null && image == null && titleResource == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; SwiftView(88, listOf(titleKey.key, systemImage), modifier) }
+        titleResource != null && image != null && title == null && titleKey == null && systemImage == null -> { val titleResource = titleResource!!; val image = image!!; SwiftView(90, listOf(titleResource.key, image), modifier) }
+        else -> error("No SwiftUI Label initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `LabeledContent` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun LabeledContent(
+    titleKey: LocalizedKey? = null,
+    value: String? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        titleKey != null && value != null -> { val titleKey = titleKey!!; val value = value!!; SwiftView(97, listOf(titleKey.key, value), modifier) }
+        else -> error("No SwiftUI LabeledContent initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Link` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Link(
+    titleKey: LocalizedKey? = null,
+    destination: String? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        titleKey != null && destination != null -> { val titleKey = titleKey!!; val destination = destination!!; SwiftView(107, listOf(titleKey.key, destination), modifier) }
+        else -> error("No SwiftUI Link initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Menu` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Menu(
+    titleKey: LocalizedKey? = null,
+    systemImage: String? = null,
+    modifier: Modifier = Modifier,
+    primaryAction: (() -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        titleKey != null && systemImage != null && primaryAction != null && content != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(114, listOf(titleKey.key, systemImage, SAction(primaryAction)), modifier, content = content) }
+        titleKey != null && systemImage != null && content != null && primaryAction == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(116, listOf(titleKey.key, systemImage), modifier, content = content) }
+        titleKey != null && primaryAction != null && content != null && systemImage == null -> { val titleKey = titleKey!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(119, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content) }
+        else -> error("No SwiftUI Menu initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `NavigationLink` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun NavigationLink(
+    value: Any? = null,
+    title: String? = null,
+    titleResource: LocalizedKey? = null,
+    tag: Any? = null,
+    selection: Any? = null,
+    isActive: Boolean? = null,
+    modifier: Modifier = Modifier,
+    onSelectionChange: ((Any?) -> Unit)? = null,
+    onIsActiveChange: ((Boolean) -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        title != null && isActive != null && onIsActiveChange != null && content != null && value == null && titleResource == null && tag == null && selection == null && onSelectionChange == null -> { val title = title!!; val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val content = content!!; SwiftView(138, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content) }
+        title != null && tag != null && onSelectionChange != null && content != null && value == null && titleResource == null && isActive == null && onIsActiveChange == null -> { val title = title!!; val tag = tag!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(136, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content) }
+        content != null && title == null && titleResource == null && tag == null && selection == null && isActive == null && onSelectionChange == null && onIsActiveChange == null -> { val content = content!!; SwiftView(140, listOf(value), modifier, content = content) }
+        title != null && titleResource == null && tag == null && selection == null && isActive == null && onSelectionChange == null && onIsActiveChange == null && content == null -> { val title = title!!; SwiftView(146, listOf(title, value), modifier) }
+        titleResource != null && title == null && tag == null && selection == null && isActive == null && onSelectionChange == null && onIsActiveChange == null && content == null -> { val titleResource = titleResource!!; SwiftView(142, listOf(titleResource.key, value), modifier) }
+        else -> error("No SwiftUI NavigationLink initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `NewDocumentButton` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun NewDocumentButton(
+    title: LocalizedKey? = null,
+    source: DocumentCreationSource? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        title != null && source != null -> { val title = title!!; val source = source!!; SwiftView(152, listOf(title.key, source), modifier) }
+        else -> error("No SwiftUI NewDocumentButton initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Picker` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Picker(
+    titleKey: LocalizedKey? = null,
+    selection: Any? = null,
+    systemImage: String? = null,
+    modifier: Modifier = Modifier,
+    onSelectionChange: ((Any) -> Unit)? = null,
+    currentValueLabel: (@Composable () -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(178, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
+        titleKey != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && systemImage == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(172, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
+        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(181, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
+        titleKey != null && selection != null && onSelectionChange != null && content != null && systemImage == null && currentValueLabel == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(175, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
+        else -> error("No SwiftUI Picker initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `ProgressView` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun ProgressView(
+    titleKey: LocalizedKey? = null,
+    value: Double? = null,
+    total: Double? = null,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        titleKey != null -> { val titleKey = titleKey!!; val total = total ?: 1.0; SwiftView(192, listOf(titleKey.key, value, total), modifier) }
+        else -> error("No SwiftUI ProgressView initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Section` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Section(
+    titleKey: LocalizedKey? = null,
+    isExpanded: Boolean? = null,
+    modifier: Modifier = Modifier,
+    onIsExpandedChange: ((Boolean) -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        titleKey != null && isExpanded != null && onIsExpandedChange != null && content != null -> { val titleKey = titleKey!!; val isExpanded = isExpanded!!; val onIsExpandedChange = onIsExpandedChange!!; val content = content!!; SwiftView(204, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content) }
+        else -> error("No SwiftUI Section initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `SecureField` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun SecureField(
+    titleKey: LocalizedKey? = null,
+    text: String? = null,
+    prompt: String? = null,
+    modifier: Modifier = Modifier,
+    onTextChange: ((String) -> Unit)? = null,
+) {
+    when {
+        titleKey != null && text != null && onTextChange != null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(220, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier) }
+        titleKey != null && text != null && onTextChange != null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(215, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier) }
+        else -> error("No SwiftUI SecureField initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `ShareLink` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun ShareLink(
+    item: String? = null,
+    subject: String? = null,
+    message: String? = null,
+    titleResource: LocalizedKey? = null,
+    title: String? = null,
+    modifier: Modifier = Modifier,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        titleResource != null && item != null && title == null && content == null -> { val titleResource = titleResource!!; val item = item!!; SwiftView(228, listOf(titleResource.key, item, subject, message), modifier) }
+        title != null && item != null && titleResource == null && content == null -> { val title = title!!; val item = item!!; SwiftView(229, listOf(title, item, subject, message), modifier) }
+        item != null && content != null && titleResource == null && title == null -> { val item = item!!; val content = content!!; SwiftView(235, listOf(item, subject, message), modifier, content = content) }
+        item != null && titleResource == null && title == null && content == null -> { val item = item!!; SwiftView(225, listOf(item, subject, message), modifier) }
+        else -> error("No SwiftUI ShareLink initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Slider` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Slider(
+    value: Double? = null,
+    bounds: ClosedFloatingPointRange<Double>? = null,
+    step: Double? = null,
+    modifier: Modifier = Modifier,
+    onValueChange: ((Double) -> Unit)? = null,
+    onEditingChanged: ((Boolean) -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        value != null && bounds != null && onValueChange != null && content != null && step == null -> { val value = value!!; val bounds = bounds!!; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(243, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        value != null && bounds != null && onValueChange != null && content != null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1.0; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(242, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        else -> error("No SwiftUI Slider initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Stepper` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Stepper(
+    value: Int? = null,
+    bounds: IntRange? = null,
+    step: Int? = null,
+    titleKey: LocalizedKey? = null,
+    modifier: Modifier = Modifier,
+    onValueChange: ((Int) -> Unit)? = null,
+    onEditingChanged: ((Boolean) -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null,
+) {
+    when {
+        value != null && bounds != null && onValueChange != null && content != null && titleKey == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(248, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        titleKey != null && value != null && bounds != null && onValueChange != null && content == null -> { val titleKey = titleKey!!; val value = value!!; val bounds = bounds!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; SwiftView(252, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier) }
+        value != null && onValueChange != null && content != null && bounds == null && titleKey == null -> { val value = value!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(250, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        titleKey != null && value != null && onValueChange != null && bounds == null && content == null -> { val titleKey = titleKey!!; val value = value!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; SwiftView(255, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier) }
+        else -> error("No SwiftUI Stepper initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `TextField` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun TextField(
+    titleKey: LocalizedKey? = null,
+    text: String? = null,
+    axis: Axis? = null,
+    prompt: String? = null,
+    modifier: Modifier = Modifier,
+    onTextChange: ((String) -> Unit)? = null,
+) {
+    when {
+        titleKey != null && text != null && axis != null && onTextChange != null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val axis = axis!!; val onTextChange = onTextChange!!; SwiftView(271, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier) }
+        titleKey != null && text != null && axis != null && onTextChange != null -> { val titleKey = titleKey!!; val text = text!!; val axis = axis!!; val onTextChange = onTextChange!!; SwiftView(274, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier) }
+        titleKey != null && text != null && onTextChange != null && axis == null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(282, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier) }
+        titleKey != null && text != null && onTextChange != null && axis == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(277, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier) }
+        else -> error("No SwiftUI TextField initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `TextFieldLink` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun TextFieldLink(
+    titleKey: LocalizedKey? = null,
+    prompt: String? = null,
+    modifier: Modifier = Modifier,
+    onSubmit: ((String) -> Unit)? = null,
+) {
+    when {
+        titleKey != null && onSubmit != null -> { val titleKey = titleKey!!; val onSubmit = onSubmit!!; SwiftView(286, listOf(titleKey.key, prompt, SValueCallback { onSubmit(it as String) }), modifier) }
+        else -> error("No SwiftUI TextFieldLink initializer takes this combination of arguments")
+    }
+}
+
+/**
+ * SwiftUI `Toggle` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = "star")`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun Toggle(
+    titleKey: LocalizedKey? = null,
+    isOn: Boolean? = null,
+    systemImage: String? = null,
+    modifier: Modifier = Modifier,
+    onIsOnChange: ((Boolean) -> Unit)? = null,
+) {
+    when {
+        titleKey != null && systemImage != null && isOn != null && onIsOnChange != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(294, listOf(titleKey.key, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
+        titleKey != null && isOn != null && onIsOnChange != null && systemImage == null -> { val titleKey = titleKey!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(291, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
+        else -> error("No SwiftUI Toggle initializer takes this combination of arguments")
+    }
 }
 

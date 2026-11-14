@@ -96,7 +96,7 @@ private fun Screen31Header(state: Screen31State) {
             modifier = Modifier.frame(height = 130.0),
             fill = LinearGradient(colors = listOf(Color.orange, Color.pink, Color.purple), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing),
         )
-        ImageSystemName(
+        Image(systemName = 
             "mountain.2.fill",
             modifier = Modifier.font(Font.system(size = 70.0)).foregroundStyle(Color.white.opacity(0.25)).offset(x = 250.0, y = -20.0),
         )
@@ -123,7 +123,7 @@ fun Screen31(vm: Screen31ViewModel) {
                     VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
                         HStack(spacing = 4.0) {
                             Text(state.name, modifier = Modifier.font(Font.title2.bold()))
-                            ImageSystemName("checkmark.seal.fill", modifier = Modifier.foregroundStyle(Color.blue))
+                            Image(systemName = "checkmark.seal.fill", modifier = Modifier.foregroundStyle(Color.blue))
                         }
                         Text(verbatim = state.handle, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                     }
@@ -165,17 +165,17 @@ fun Screen31(vm: Screen31ViewModel) {
                             Rectangle(),
                             modifier = Modifier.aspectRatio(1.0, contentMode = ContentMode.fit)
                                 .overlay {
-                                    ImageSystemName(post.symbol, modifier = Modifier.font(Font.title).foregroundStyle(Color.white.opacity(0.9)))
+                                    Image(systemName = post.symbol, modifier = Modifier.font(Font.title).foregroundStyle(Color.white.opacity(0.9)))
                                 }
                                 .overlay(alignment = Alignment.bottomLeading) {
                                     HStack(modifier = Modifier.font(Font.caption2.bold()).foregroundStyle(Color.white).padding(6.0), spacing = 3.0) {
-                                        ImageSystemName("heart.fill")
+                                        Image(systemName = "heart.fill")
                                         Text(verbatim = post.likes)
                                     }
                                 }
                                 .overlay(alignment = Alignment.topTrailing) {
                                     if (post.pinned) {
-                                        ImageSystemName("pin.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.white).rotationEffect(Angle(degrees = 45.0)).padding(6.0))
+                                        Image(systemName = "pin.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.white).rotationEffect(Angle(degrees = 45.0)).padding(6.0))
                                     }
                                 },
                             fill = LinearGradient(colors = listOf(post.top.color(), post.bottom.color()), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing),

@@ -109,13 +109,13 @@ fun Screen40(vm: Screen40ViewModel) {
                 .toolbarItem(placement = ToolbarItemPlacement.navigation) { Button(title = "Info", systemImage = "info.circle", action = {}) }
                 .toolbarItem(placement = ToolbarItemPlacement.primaryAction) {
                     Button(action = {}) {
-                        Label(modifier = Modifier.labelStyle(LabelStyle.titleAndIcon), title = { Text(verbatim = state.cartLabel, modifier = Modifier.monospacedDigit()) }, icon = { ImageSystemName("bag.fill") })
+                        Label(modifier = Modifier.labelStyle(LabelStyle.titleAndIcon), title = { Text(verbatim = state.cartLabel, modifier = Modifier.monospacedDigit()) }, icon = { Image(systemName = "bag.fill") })
                     }
                 },
         ) {
             Section {
                 HStack(modifier = Modifier.padding(Edge.Set.vertical, 6.0), spacing = 14.0) {
-                    ImageSystemName(
+                    Image(systemName = 
                         "fork.knife.circle.fill",
                         modifier = Modifier.font(Font.system(size = 44.0)).foregroundStyle(Color.white, Color.red).symbolRenderingMode(SymbolRenderingMode.palette),
                     )
@@ -138,7 +138,7 @@ fun Screen40(vm: Screen40ViewModel) {
                                 HStack(spacing = 6.0) {
                                     Text(verbatim = dish.name, modifier = Modifier.font(Font.headline))
                                     if (dish.popular) {
-                                        ImageSystemName("flame.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
+                                        Image(systemName = "flame.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
                                     }
                                 }
                                 Text(verbatim = dish.blurb, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary).lineLimit(2))
@@ -156,7 +156,7 @@ fun Screen40(vm: Screen40ViewModel) {
                             }
                             Spacer()
                             ZStack(modifier = Modifier.frame(width = 64.0, height = 64.0), alignment = Alignment.topTrailing) {
-                                ImageSystemName(
+                                Image(systemName = 
                                     dish.icon,
                                     modifier = Modifier.font(Font.title2).foregroundStyle(Color.red.opacity(0.7))
                                         .frame(width = 64.0, height = 64.0)

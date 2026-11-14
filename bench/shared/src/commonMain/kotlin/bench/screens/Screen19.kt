@@ -103,7 +103,7 @@ fun Screen19(vm: Screen19ViewModel) {
                             Text(state.fromCity, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                         }
                         Spacer()
-                        ImageSystemName(
+                        Image(systemName = 
                             "arrow.left.arrow.right",
                             modifier = Modifier.font(Font.headline)
                                 .foregroundStyle(Color.white)
@@ -165,7 +165,7 @@ fun Screen19(vm: Screen19ViewModel) {
                                         stroke = Color.gray.opacity(0.6),
                                         strokeStyle = StrokeStyle(lineWidth = 1.0, dash = listOf(4.0, 3.0)),
                                     )
-                                    ImageSystemName(
+                                    Image(systemName = 
                                         "airplane",
                                         modifier = Modifier.font(Font.caption)
                                             .foregroundStyle(flight.tint.color())
