@@ -4,7 +4,7 @@ import SwiftUI
 /// Observable model backing one Kotlin `SNode`. Kotlin notifies it when the node changes, which
 /// invalidates only the `NodeView` rendering this node.
 @Observable
-public final class NodeModel: NSObject, SNodeObserver {
+public final class NodeModel: NSObject, SNodeObserver, Identifiable {
     @ObservationIgnored public let node: SNode
 
     /// Bumped on every Kotlin change notification; views read it to subscribe (Observation framework:
@@ -36,7 +36,9 @@ public final class NodeModel: NSObject, SNodeObserver {
     /// Number of leading modifiers already applied by the view factory (concrete-type methods).
     @ObservationIgnored public var consumedPrefix = 0
 
-    public var nodeId: Int64 { node.id }
+    public var nodeId: Int64 { id }
+    /// Cached node id (Identifiable): avoids a Kotlin call per ForEach element.
+    @ObservationIgnored public lazy var id: Int64 = node.id
     public var kind: Int32 { node.kind }
     public var args: Args { Args(node: node, src: node, modifierIndex: nil) }
 

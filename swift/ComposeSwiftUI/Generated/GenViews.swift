@@ -27,11 +27,11 @@ import SwiftUI
         }
         r[5] = { m in
             let a = m.args
-            return ModChain.apply(Button(role: d_ButtonRole(a.expr(0)), action: a.action(1), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Button(role: d_ButtonRole(a.expr(0)), action: a.action(1), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[6] = { m in
             let a = m.args
-            return ModChain.apply(Button(action: a.action(0), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Button(action: a.action(0), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[7] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
@@ -149,50 +149,50 @@ import SwiftUI
 #if os(iOS) || os(macOS) || os(tvOS)
         r[33] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[34] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[35] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[36] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[37] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(a.string(0), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(a.string(0), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[38] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[40] = { m in
             let a = m.args
-            return ModChain.apply(ControlGroup(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ControlGroup(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[41] = { m in
             let a = m.args
             let p1: DatePickerComponents = a.isNil(2) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(2)) ?? [.hourAndMinute, .date])
-            return ModChain.apply(DatePicker(selection: a.dateBinding(0), displayedComponents: p1, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(DatePicker(selection: a.dateBinding(0), displayedComponents: p1, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -237,43 +237,43 @@ import SwiftUI
 #if os(iOS) || os(macOS)
         r[47] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(isExpanded: a.boolBinding(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(2) }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(isExpanded: a.boolBinding(0), content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(2) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[48] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[49] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), isExpanded: a.boolBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), isExpanded: a.boolBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[50] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(LocalizedStringKey(a.string(0)), isExpanded: a.boolBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(LocalizedStringKey(a.string(0)), isExpanded: a.boolBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[51] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(a.string(0), isExpanded: a.boolBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(a.string(0), isExpanded: a.boolBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[52] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[54] = { m in
             let a = m.args
-            return ModChain.apply(DisclosureGroup(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(DisclosureGroup(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[55] = { m in
@@ -303,7 +303,7 @@ import SwiftUI
         }
         r[60] = { m in
             let a = m.args
-            return ModChain.apply(Form(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Form(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS) || os(watchOS)
         r[61] = { m in
@@ -332,63 +332,63 @@ import SwiftUI
 #if os(iOS) || os(macOS) || os(watchOS)
         r[65] = { m in
             let a = m.args
-            return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[66] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
-                return ModChain.apply(GlassEffectContainer(spacing: a.cgFloatOpt(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+                return ModChain.apply(GlassEffectContainer(spacing: a.cgFloatOpt(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[67] = { m in
             let a = m.args
             guard let p0 = d_Alignment(a.expr(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(Grid(alignment: p0, horizontalSpacing: a.cgFloatOpt(1), verticalSpacing: a.cgFloatOpt(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Grid(alignment: p0, horizontalSpacing: a.cgFloatOpt(1), verticalSpacing: a.cgFloatOpt(2), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[68] = { m in
             let a = m.args
-            return ModChain.apply(GridRow(alignment: d_VerticalAlignment(a.expr(0)), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(GridRow(alignment: d_VerticalAlignment(a.expr(0)), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[69] = { m in
             let a = m.args
-            return ModChain.apply(Group(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Group(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS)
         r[70] = { m in
             let a = m.args
-            return ModChain.apply(GroupBox(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
+            return ModChain.apply(GroupBox(content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[71] = { m in
             let a = m.args
-            return ModChain.apply(GroupBox(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(GroupBox(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[73] = { m in
             let a = m.args
-            return ModChain.apply(GroupBox(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(GroupBox(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
         r[74] = { m in
             let a = m.args
-            return ModChain.apply(GroupBox(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(GroupBox(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
         r[75] = { m in
             let a = m.args
-            return ModChain.apply(HSplitView(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(HSplitView(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[76] = { m in
             let a = m.args
             guard let p0 = d_VerticalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(HStack(alignment: p0, spacing: a.cgFloatOpt(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(HStack(alignment: p0, spacing: a.cgFloatOpt(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #if os(macOS)
         r[77] = { m in
@@ -452,13 +452,13 @@ import SwiftUI
         r[93] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
-                return ModChain.apply(LabeledContent(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+                return ModChain.apply(LabeledContent(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[95] = { m in
             let a = m.args
-            return ModChain.apply(LabeledContent(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(LabeledContent(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[96] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
@@ -477,31 +477,31 @@ import SwiftUI
         }
         r[99] = { m in
             let a = m.args
-            return ModChain.apply(LabeledContent(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
+            return ModChain.apply(LabeledContent(content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
         r[100] = { m in
             let a = m.args
             guard let p1 = d_VerticalAlignment(a.expr(1)) else { return AnyView(EmptyView()) }
             let p3: PinnedScrollableViews = a.isNil(3) ? .init() : (d_PinnedScrollableViews(a.expr(3)) ?? .init())
-            return ModChain.apply(LazyHGrid(rows: a.exprList(0).compactMap { d_GridItem($0) }, alignment: p1, spacing: a.cgFloatOpt(2), pinnedViews: p3, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(LazyHGrid(rows: a.exprList(0).compactMap { d_GridItem($0) }, alignment: p1, spacing: a.cgFloatOpt(2), pinnedViews: p3, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[101] = { m in
             let a = m.args
             guard let p0 = d_VerticalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
             let p2: PinnedScrollableViews = a.isNil(2) ? .init() : (d_PinnedScrollableViews(a.expr(2)) ?? .init())
-            return ModChain.apply(LazyHStack(alignment: p0, spacing: a.cgFloatOpt(1), pinnedViews: p2, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(LazyHStack(alignment: p0, spacing: a.cgFloatOpt(1), pinnedViews: p2, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[102] = { m in
             let a = m.args
             guard let p1 = d_HorizontalAlignment(a.expr(1)) else { return AnyView(EmptyView()) }
             let p3: PinnedScrollableViews = a.isNil(3) ? .init() : (d_PinnedScrollableViews(a.expr(3)) ?? .init())
-            return ModChain.apply(LazyVGrid(columns: a.exprList(0).compactMap { d_GridItem($0) }, alignment: p1, spacing: a.cgFloatOpt(2), pinnedViews: p3, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(LazyVGrid(columns: a.exprList(0).compactMap { d_GridItem($0) }, alignment: p1, spacing: a.cgFloatOpt(2), pinnedViews: p3, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[103] = { m in
             let a = m.args
             guard let p0 = d_HorizontalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
             let p2: PinnedScrollableViews = a.isNil(2) ? .init() : (d_PinnedScrollableViews(a.expr(2)) ?? .init())
-            return ModChain.apply(LazyVStack(alignment: p0, spacing: a.cgFloatOpt(1), pinnedViews: p2, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(LazyVStack(alignment: p0, spacing: a.cgFloatOpt(1), pinnedViews: p2, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[104] = { m in
             let a = m.args
@@ -511,7 +511,7 @@ import SwiftUI
         r[105] = { m in
             let a = m.args
             guard let p0 = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(Link(destination: p0, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Link(destination: p0, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[106] = { m in
             let a = m.args
@@ -531,95 +531,95 @@ import SwiftUI
 #if os(macOS)
         r[109] = { m in
             let a = m.args
-            return ModChain.apply(List(selection: a.hashableBinding(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(List(selection: a.hashableBinding(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[110] = { m in
             let a = m.args
-            return ModChain.apply(List(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(List(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS) || os(tvOS)
         r[111] = { m in
             let a = m.args
-            return ModChain.apply(Menu(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(0) }, primaryAction: a.action(1)), m, m.consumedPrefix)
+            return ModChain.apply(Menu(content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(0) }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[112] = { m in
             let a = m.args
-            return ModChain.apply(Menu(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
+            return ModChain.apply(Menu(content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[113] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, primaryAction: a.action(2)), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }, primaryAction: a.action(2)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[114] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, primaryAction: a.action(2)), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }, primaryAction: a.action(2)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[115] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[116] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[117] = { m in
             let a = m.args
-            return ModChain.apply(Menu(a.string(0), systemImage: a.string(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Menu(a.string(0), systemImage: a.string(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[118] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, primaryAction: a.action(1)), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[119] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, primaryAction: a.action(1)), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), content: { ForEach(m.children) { NodeView(model: $0) } }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[120] = { m in
             let a = m.args
-            return ModChain.apply(Menu(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, primaryAction: a.action(1)), m, m.consumedPrefix)
+            return ModChain.apply(Menu(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[121] = { m in
             let a = m.args
-            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
         r[123] = { m in
             let a = m.args
-            return ModChain.apply(Menu(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Menu(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
         r[124] = { m in
             let a = m.args
-            return ModChain.apply(MenuButton(LocalizedStringKey(a.string(0)), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(MenuButton(LocalizedStringKey(a.string(0)), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
         r[125] = { m in
             let a = m.args
-            return ModChain.apply(MenuButton(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(MenuButton(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[126] = { m in
@@ -637,48 +637,48 @@ import SwiftUI
 #if os(watchOS)
         r[129] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(destinationName: a.string(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(destinationName: a.string(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
         r[130] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(destinationName: a.string(0), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(destinationName: a.string(0), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
         r[131] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(destinationName: a.string(0), isActive: a.boolBinding(1), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(destinationName: a.string(0), isActive: a.boolBinding(1), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[132] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), destination: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), destination: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[135] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), tag: a.hashable(1), selection: a.optionalHashableBinding(2), destination: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), tag: a.hashable(1), selection: a.optionalHashableBinding(2), destination: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[136] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(a.string(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), destination: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(a.string(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), destination: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[137] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), isActive: a.boolBinding(1), destination: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), isActive: a.boolBinding(1), destination: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[138] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(a.string(0), isActive: a.boolBinding(1), destination: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(a.string(0), isActive: a.boolBinding(1), destination: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[139] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(value: a.hashableOpt(0), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(value: a.hashableOpt(0), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[140] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(value: a.hashableOpt(0), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(value: a.hashableOpt(0), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[141] = { m in
             let a = m.args
@@ -702,15 +702,15 @@ import SwiftUI
         }
         r[148] = { m in
             let a = m.args
-            return ModChain.apply(NavigationSplitView(sidebar: { a.slot(0) }, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, detail: { a.slot(1) }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationSplitView(sidebar: { a.slot(0) }, content: { ForEach(m.children) { NodeView(model: $0) } }, detail: { a.slot(1) }), m, m.consumedPrefix)
         }
         r[149] = { m in
             let a = m.args
-            return ModChain.apply(NavigationStack(root: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationStack(root: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[150] = { m in
             let a = m.args
-            return ModChain.apply(NavigationView(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationView(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #if os(iOS)
         r[151] = { m in
@@ -796,79 +796,79 @@ import SwiftUI
         r[169] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(selection: a.hashableBinding(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(2) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(selection: a.hashableBinding(0), content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(2) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[170] = { m in
             let a = m.args
-            return ModChain.apply(Picker(selection: a.hashableBinding(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, label: { a.slot(2) }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(selection: a.hashableBinding(0), content: { ForEach(m.children) { NodeView(model: $0) } }, label: { a.slot(2) }), m, m.consumedPrefix)
         }
         r[171] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.hashableBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.hashableBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[172] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), selection: a.hashableBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), selection: a.hashableBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[173] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(a.string(0), selection: a.hashableBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(a.string(0), selection: a.hashableBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[174] = { m in
             let a = m.args
-            return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.hashableBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.hashableBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[175] = { m in
             let a = m.args
-            return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), selection: a.hashableBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), selection: a.hashableBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[176] = { m in
             let a = m.args
-            return ModChain.apply(Picker(a.string(0), selection: a.hashableBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(a.string(0), selection: a.hashableBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[177] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children) { NodeView(model: $0) } }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[178] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children) { NodeView(model: $0) } }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[179] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
-                return ModChain.apply(Picker(a.string(0), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
+                return ModChain.apply(Picker(a.string(0), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children) { NodeView(model: $0) } }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
         r[180] = { m in
             let a = m.args
-            return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[181] = { m in
             let a = m.args
-            return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[182] = { m in
             let a = m.args
-            return ModChain.apply(Picker(a.string(0), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Picker(a.string(0), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[183] = { m in
             let a = m.args
@@ -876,7 +876,7 @@ import SwiftUI
         }
         r[184] = { m in
             let a = m.args
-            return ModChain.apply(ProgressView(value: a.doubleOpt(0), total: a.double(1), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ProgressView(value: a.doubleOpt(0), total: a.double(1), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[185] = { m in
             let a = m.args
@@ -884,7 +884,7 @@ import SwiftUI
         }
         r[186] = { m in
             let a = m.args
-            return ModChain.apply(ProgressView(label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ProgressView(label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[187] = { m in
             let a = m.args
@@ -952,52 +952,52 @@ import SwiftUI
         r[200] = { m in
             let a = m.args
             guard let p0 = d_Axis_Set(a.expr(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ScrollView(p0, showsIndicators: a.bool(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ScrollView(p0, showsIndicators: a.bool(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[201] = { m in
             let a = m.args
             guard let p0 = d_Axis_Set(a.expr(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ScrollView(p0, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ScrollView(p0, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[202] = { m in
             let a = m.args
-            return ModChain.apply(Section(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, header: { a.slot(0) }, footer: { a.slot(1) }), m, m.consumedPrefix)
+            return ModChain.apply(Section(content: { ForEach(m.children) { NodeView(model: $0) } }, header: { a.slot(0) }, footer: { a.slot(1) }), m, m.consumedPrefix)
         }
         r[203] = { m in
             let a = m.args
-            return ModChain.apply(Section(LocalizedStringResource(String.LocalizationValue(a.string(0))), isExpanded: a.boolBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Section(LocalizedStringResource(String.LocalizationValue(a.string(0))), isExpanded: a.boolBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[204] = { m in
             let a = m.args
-            return ModChain.apply(Section(LocalizedStringKey(a.string(0)), isExpanded: a.boolBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Section(LocalizedStringKey(a.string(0)), isExpanded: a.boolBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[205] = { m in
             let a = m.args
-            return ModChain.apply(Section(a.string(0), isExpanded: a.boolBinding(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Section(a.string(0), isExpanded: a.boolBinding(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[206] = { m in
             let a = m.args
-            return ModChain.apply(Section(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Section(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[208] = { m in
             let a = m.args
-            return ModChain.apply(Section(a.string(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Section(a.string(0), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[209] = { m in
             let a = m.args
-            return ModChain.apply(Section(isExpanded: a.boolBinding(0), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, header: { a.slot(2) }), m, m.consumedPrefix)
+            return ModChain.apply(Section(isExpanded: a.boolBinding(0), content: { ForEach(m.children) { NodeView(model: $0) } }, header: { a.slot(2) }), m, m.consumedPrefix)
         }
         r[210] = { m in
             let a = m.args
-            return ModChain.apply(Section(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, header: { a.slot(0) }), m, m.consumedPrefix)
+            return ModChain.apply(Section(content: { ForEach(m.children) { NodeView(model: $0) } }, header: { a.slot(0) }), m, m.consumedPrefix)
         }
         r[211] = { m in
             let a = m.args
-            return ModChain.apply(Section(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Section(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[213] = { m in
             let a = m.args
-            return ModChain.apply(SecureField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(SecureField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[214] = { m in
             let a = m.args
@@ -1034,7 +1034,7 @@ import SwiftUI
 #if os(macOS)
         r[222] = { m in
             let a = m.args
-            return ModChain.apply(SettingsLink(label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(SettingsLink(label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
@@ -1088,13 +1088,13 @@ import SwiftUI
         r[234] = { m in
             let a = m.args
             guard let p0 = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(item: p0, subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ShareLink(item: p0, subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[235] = { m in
             let a = m.args
-            return ModChain.apply(ShareLink(item: a.string(0), subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ShareLink(item: a.string(0), subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -1130,25 +1130,25 @@ import SwiftUI
 #if os(iOS) || os(macOS) || os(watchOS)
         r[240] = { m in
             let a = m.args
-            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), onEditingChanged: a.callback(3, box: KBox.bool), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), onEditingChanged: a.callback(3, box: KBox.bool), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[241] = { m in
             let a = m.args
-            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), onEditingChanged: a.callback(4, box: KBox.bool), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), onEditingChanged: a.callback(4, box: KBox.bool), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[242] = { m in
             let a = m.args
-            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
+            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), label: { ForEach(m.children) { NodeView(model: $0) } }, onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[243] = { m in
             let a = m.args
-            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
+            return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), label: { ForEach(m.children) { NodeView(model: $0) } }, onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -1170,25 +1170,25 @@ import SwiftUI
 #if os(iOS) || os(macOS) || os(watchOS)
         r[247] = { m in
             let a = m.args
-            return ModChain.apply(Stepper(value: a.intBinding(0), in: a.intRange(2), step: a.int(3), onEditingChanged: a.callback(4, box: KBox.bool), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Stepper(value: a.intBinding(0), in: a.intRange(2), step: a.int(3), onEditingChanged: a.callback(4, box: KBox.bool), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[248] = { m in
             let a = m.args
-            return ModChain.apply(Stepper(value: a.intBinding(0), in: a.intRange(2), step: a.int(3), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
+            return ModChain.apply(Stepper(value: a.intBinding(0), in: a.intRange(2), step: a.int(3), label: { ForEach(m.children) { NodeView(model: $0) } }, onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[249] = { m in
             let a = m.args
-            return ModChain.apply(Stepper(value: a.intBinding(0), step: a.int(2), onEditingChanged: a.callback(3, box: KBox.bool), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Stepper(value: a.intBinding(0), step: a.int(2), onEditingChanged: a.callback(3, box: KBox.bool), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[250] = { m in
             let a = m.args
-            return ModChain.apply(Stepper(value: a.intBinding(0), step: a.int(2), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
+            return ModChain.apply(Stepper(value: a.intBinding(0), step: a.int(2), label: { ForEach(m.children) { NodeView(model: $0) } }, onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -1229,7 +1229,7 @@ import SwiftUI
 #endif
         r[257] = { m in
             let a = m.args
-            return ModChain.apply(TabView(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(TabView(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[258] = { m in
             let a = m.args
@@ -1258,11 +1258,11 @@ import SwiftUI
         r[264] = { m in
             let a = m.args
             guard let p2 = d_Axis(a.expr(3)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(TextField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, axis: p2, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(TextField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, axis: p2, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[265] = { m in
             let a = m.args
-            return ModChain.apply(TextField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(TextField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[266] = { m in
             let a = m.args
@@ -1348,7 +1348,7 @@ import SwiftUI
 #if os(watchOS)
         r[284] = { m in
             let a = m.args
-            return ModChain.apply(TextFieldLink(prompt: a.stringOpt(0).map { Text($0) }, label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }, onSubmit: a.callback(1, box: KBox.string)), m, m.consumedPrefix)
+            return ModChain.apply(TextFieldLink(prompt: a.stringOpt(0).map { Text($0) }, label: { ForEach(m.children) { NodeView(model: $0) } }, onSubmit: a.callback(1, box: KBox.string)), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
@@ -1379,7 +1379,7 @@ import SwiftUI
         }
         r[289] = { m in
             let a = m.args
-            return ModChain.apply(Toggle(isOn: a.boolBinding(0), label: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(Toggle(isOn: a.boolBinding(0), label: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[290] = { m in
             let a = m.args
@@ -1413,18 +1413,18 @@ import SwiftUI
 #if os(macOS)
         r[297] = { m in
             let a = m.args
-            return ModChain.apply(VSplitView(content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(VSplitView(content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #endif
         r[298] = { m in
             let a = m.args
             guard let p0 = d_HorizontalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(VStack(alignment: p0, spacing: a.cgFloatOpt(1), content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(VStack(alignment: p0, spacing: a.cgFloatOpt(1), content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         r[299] = { m in
             let a = m.args
             let p0: Axis.Set = a.isNil(0) ? [.horizontal, .vertical] : (d_Axis_Set(a.expr(0)) ?? [.horizontal, .vertical])
-            return ModChain.apply(ViewThatFits(in: p0, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ViewThatFits(in: p0, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
 #if os(macOS)
         r[300] = { m in
@@ -1438,7 +1438,7 @@ import SwiftUI
         r[301] = { m in
             let a = m.args
             guard let p0 = d_Alignment(a.expr(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ZStack(alignment: p0, content: { ForEach(m.children, id: \.nodeId) { NodeView(model: $0) } }), m, m.consumedPrefix)
+            return ModChain.apply(ZStack(alignment: p0, content: { ForEach(m.children) { NodeView(model: $0) } }), m, m.consumedPrefix)
         }
         ComposeRegistry.views = r
     }
