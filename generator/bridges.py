@@ -51,6 +51,8 @@ class Bridge:
         self.cb_kind = cb_kind
         # slot passed to Swift as a view value (`V`) instead of a `() -> V` builder closure
         self.bare = False
+        # Swift type built from the base kind (see CONVS): (type name, conversion template, failable)
+        self.conv = None
 
     @property
     def nargs(self):
@@ -102,6 +104,13 @@ class Bridge:
 
     def swift_decode(self, i, var, fallback, src="a"):
         """Returns (statements, expression) decoding Kotlin arg(s) starting at index i."""
+        if self.conv:
+            _, tpl, failable = self.conv
+            base = Bridge(self.kind, self.kt)
+            stmts, expr = base.swift_decode(i, var, fallback, src)
+            if failable:
+                return stmts + ["guard let %s = %s else { %s }" % (var, tpl % expr, fallback)], var
+            return stmts, tpl % expr
         k = self.kind
         simple = {
             "str": "%s.string(%d)", "bool": "%s.bool(%d)", "int": "%s.int(%d)", "double": "%s.double(%d)",
@@ -131,6 +140,8 @@ class Bridge:
             el = self.inner
             if el.kind == "value":
                 expr = "%s.exprList(%d).compactMap { %s($0) }" % (src, i, el.swift_type)
+            elif el.kind == "str" and el.conv:
+                expr = "%s.list(%d).compactMap { ($0 as? String).flatMap { %s } }" % (src, i, el.conv[1] % "$0")
             elif el.kind == "str":
                 expr = "%s.list(%d).compactMap { $0 as? String }" % (src, i)
             elif el.kind in ("double", "cgfloat"):
@@ -141,6 +152,10 @@ class Bridge:
             return [], ("Set(%s)" % expr) if k == "set" else expr
         if k == "optional":
             inner = self.inner
+            if inner.conv:
+                base = Bridge("optional", self.kt, inner=Bridge(inner.kind, inner.kt))
+                _, expr = base.swift_decode(i, var, fallback, src)
+                return [], "%s.%s { %s }" % (expr, "flatMap" if inner.conv[2] else "map", inner.conv[1] % "$0")
             opt = {
                 "str": "%s.stringOpt(%d)", "bool": "%s.boolOpt(%d)", "int": "%s.intOpt(%d)",
                 "double": "%s.doubleOpt(%d)", "cgfloat": "%s.cgFloatOpt(%d)", "action": "%s.actionOpt(%d)",
@@ -179,6 +194,17 @@ PRIMS = {
     "LocalizedStringKey": ("lsk", "LocalizedKey"), "LocalizedStringResource": ("lsr", "LocalizedKey"),
     "Text": ("text", "String"), "URL": ("url", "String"),
     "Date": ("date", "Double"),
+}
+
+# Swift types carried as a Kotlin primitive: name -> (base kind, Swift conversion of the base value, failable)
+CONVS = {
+    **{t: ("int", t + "(truncatingIfNeeded: %s)", False)
+       for t in ("Int8", "Int16", "Int32", "Int64", "UInt", "UInt8", "UInt16", "UInt32", "UInt64")},
+    "Character": ("str", "(%s.first ?? \" \")", False),
+    "AttributedString": ("str", "AttributedString(%s)", False),
+    "Locale": ("str", "Locale(identifier: %s)", False),
+    "Locale.Language": ("str", "Locale.Language(identifier: %s)", False),
+    "UTType": ("str", "UTType(%s)", True),
 }
 
 GENERIC_PRIMS = {
@@ -250,7 +276,7 @@ class Classifier:
             return self._constrained(ctx.conf.get(name, []), ctx, t)
         if name == "Binding" and t.args:
             inner = self.classify(t.args[0], ctx, top=False)
-            ok = inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
+            ok = not inner.conv and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
                 inner.kind == "optional" and inner.inner.kind == "hash")
             if not ok:
                 raise Unsupported("Binding<%s>" % inner.kind)
@@ -261,7 +287,7 @@ class Classifier:
                 return Bridge("drange", "ClosedFloatingPointRange<Double>")
             if inner.kind == "date":
                 raise Unsupported("ClosedRange<Date>")
-            if inner.kind == "int":
+            if inner.kind == "int" and not inner.conv:
                 return Bridge("irange", "IntRange")
             raise Unsupported("ClosedRange<%s>" % inner.kind)
         # `V.Stride` / `V.Value` of a generic numeric parameter: same bridge as V
@@ -272,6 +298,11 @@ class Classifier:
         if name in PRIMS:
             kind, kt = PRIMS[name]
             return Bridge(kind, kt)
+        if name in CONVS:
+            kind, tpl, failable = CONVS[name]
+            b = Bridge(kind, PRIMS["Int" if kind == "int" else "String"][1])
+            b.conv = (name, tpl, failable)
+            return b
         if name == "Self" and ctx.scope:
             sym = self.model.lookup_type(".".join(ctx.scope))
         else:
@@ -319,7 +350,7 @@ class Classifier:
                 return Bridge("async_action" if t.is_async else "action", "() -> Unit")
             if len(t.params) == 1 and not t.is_async:
                 inner = self.classify(t.params[0], ctx, top=False)
-                if inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date"):
+                if not inner.conv and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date"):
                     return Bridge("callback", "(%s) -> Unit" % inner.kt, inner=inner)
                 raise Unsupported("callback of %s" % inner.kind)
             raise Unsupported("closure with %d params" % len(t.params))

@@ -594,8 +594,8 @@
   "usr": "s:7SwiftUI31AccessibilityDirectTouchOptionsV8rawValueACSu_tcfc",
   "path": "AccessibilityDirectTouchOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt",
+  "status": "generated",
+  "detail": "value member of AccessibilityDirectTouchOptions",
   "platforms": [
    "ios",
    "macos",
@@ -8615,8 +8615,8 @@
   "usr": "s:7SwiftUI24AttributedTextFormattingOAAE12TransferableV",
   "path": "AttributedTextFormatting.Transferable",
   "kind": "swift.struct",
-  "status": "skipped",
-  "detail": "type not constructible from Kotlin (generic or no bridgeable members)",
+  "status": "generated",
+  "detail": "Kotlin value class",
   "platforms": [
    "ios",
    "macos",
@@ -8641,8 +8641,8 @@
   "usr": "s:7SwiftUI24AttributedTextFormattingOAAE12TransferableV4text2inAE10Foundation0C6StringV_AA17EnvironmentValuesVtcfc",
   "path": "AttributedTextFormatting.Transferable.init(text:in:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "not a view, modifier or value-producing member",
+  "status": "generated",
+  "detail": "value member of AttributedTextFormatting.Transferable",
   "platforms": [
    "ios",
    "macos",
@@ -9853,8 +9853,8 @@
   "usr": "s:7SwiftUI4AxisO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "Axis.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of Axis.Set",
   "platforms": [
    "ios",
    "macos",
@@ -19765,8 +19765,8 @@
   "usr": "s:7SwiftUI20DatePickerComponentsV8rawValueACSu_tcfc",
   "path": "DatePickerComponents.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt",
+  "status": "generated",
+  "detail": "value member of DatePickerComponents",
   "platforms": [
    "ios",
    "macos",
@@ -22788,7 +22788,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22798,7 +22798,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22808,7 +22808,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22818,7 +22818,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22828,7 +22828,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22838,7 +22838,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22848,7 +22848,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22858,7 +22858,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22868,7 +22868,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22878,7 +22878,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22888,7 +22888,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22898,7 +22898,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22908,7 +22908,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22918,7 +22918,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22928,7 +22928,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22938,7 +22938,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22948,7 +22948,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22958,7 +22958,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22968,7 +22968,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22978,7 +22978,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:background:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22988,7 +22988,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -22998,7 +22998,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23008,7 +23008,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23018,7 +23018,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23028,7 +23028,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23038,7 +23038,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23048,7 +23048,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23058,7 +23058,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23068,7 +23068,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23078,7 +23078,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23088,7 +23088,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23098,7 +23098,7 @@
   "path": "DocumentLaunchView.init(_:for:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23108,7 +23108,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23118,7 +23118,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23128,7 +23128,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23138,7 +23138,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23148,7 +23148,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23158,7 +23158,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23168,7 +23168,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23178,7 +23178,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23188,7 +23188,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23198,7 +23198,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23208,7 +23208,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23218,7 +23218,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23228,7 +23228,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23238,7 +23238,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23248,7 +23248,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -23258,7 +23258,7 @@
   "path": "DocumentLaunchView.init(_:for:backgroundStyle:_:onDocumentOpen:overlayAccessoryView:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onDocumentOpen: builder with parameters",
   "platforms": [
    "ios"
   ]
@@ -25790,8 +25790,8 @@
   "usr": "s:7SwiftUI4EdgeO6CornerO3SetV8rawValueAGs4Int8V_tcfc",
   "path": "Edge.Corner.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of Edge.Corner.Set",
   "platforms": [
    "ios",
    "macos",
@@ -26362,8 +26362,8 @@
   "usr": "s:7SwiftUI4EdgeO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "Edge.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of Edge.Set",
   "platforms": [
    "ios",
    "macos",
@@ -34505,8 +34505,8 @@
   "usr": "s:7SwiftUI20FrameResizeDirectionO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "FrameResizeDirection.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of FrameResizeDirection.Set",
   "platforms": [
    "macos"
   ]
@@ -35674,8 +35674,8 @@
   "usr": "s:7SwiftUI17GestureInputKindsV8rawValueACs4Int8V_tcfc",
   "path": "GestureInputKinds.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of GestureInputKinds",
   "platforms": [
    "ios",
    "macos",
@@ -35804,8 +35804,8 @@
   "usr": "s:7SwiftUI11GestureMaskV8rawValueACs6UInt32V_tcfc",
   "path": "GestureMask.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of GestureMask",
   "platforms": [
    "ios",
    "macos",
@@ -36992,8 +36992,8 @@
   "usr": "s:7SwiftUI15GraphicsContextV9BlendModeV8rawValueAEs5Int32V_tcfc",
   "path": "GraphicsContext.BlendMode.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int32",
+  "status": "generated",
+  "detail": "value member of GraphicsContext.BlendMode",
   "platforms": [
    "ios",
    "macos",
@@ -37265,8 +37265,8 @@
   "usr": "s:7SwiftUI15GraphicsContextV11BlurOptionsV8rawValueAEs6UInt32V_tcfc",
   "path": "GraphicsContext.BlurOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of GraphicsContext.BlurOptions",
   "platforms": [
    "ios",
    "macos",
@@ -37356,8 +37356,8 @@
   "usr": "s:7SwiftUI15GraphicsContextV11ClipOptionsV8rawValueAEs6UInt32V_tcfc",
   "path": "GraphicsContext.ClipOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of GraphicsContext.ClipOptions",
   "platforms": [
    "ios",
    "macos",
@@ -37691,8 +37691,8 @@
   "usr": "s:7SwiftUI15GraphicsContextV13FilterOptionsV8rawValueAEs6UInt32V_tcfc",
   "path": "GraphicsContext.FilterOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of GraphicsContext.FilterOptions",
   "platforms": [
    "ios",
    "macos",
@@ -37782,8 +37782,8 @@
   "usr": "s:7SwiftUI15GraphicsContextV15GradientOptionsV8rawValueAEs6UInt32V_tcfc",
   "path": "GraphicsContext.GradientOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of GraphicsContext.GradientOptions",
   "platforms": [
    "ios",
    "macos",
@@ -38301,8 +38301,8 @@
   "usr": "s:7SwiftUI15GraphicsContextV13ShadowOptionsV8rawValueAEs6UInt32V_tcfc",
   "path": "GraphicsContext.ShadowOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of GraphicsContext.ShadowOptions",
   "platforms": [
    "ios",
    "macos",
@@ -40551,8 +40551,8 @@
   "usr": "s:7SwiftUI19HorizontalDirectionO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "HorizontalDirection.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of HorizontalDirection.Set",
   "platforms": [
    "ios",
    "macos",
@@ -40785,8 +40785,8 @@
   "usr": "s:7SwiftUI14HorizontalEdgeO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "HorizontalEdge.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of HorizontalEdge.Set",
   "platforms": [
    "ios",
    "macos",
@@ -43413,8 +43413,8 @@
   "usr": "s:7SwiftUI13KeyEquivalentVyACSJcfc",
   "path": "KeyEquivalent.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param character: unknown type Character",
+  "status": "generated",
+  "detail": "value member of KeyEquivalent",
   "platforms": [
    "ios",
    "macos",
@@ -43425,8 +43425,8 @@
   "usr": "s:7SwiftUI13KeyEquivalentV30extendedGraphemeClusterLiteralACSJ_tcfc",
   "path": "KeyEquivalent.init(extendedGraphemeClusterLiteral:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param extendedGraphemeClusterLiteral: unknown type Character",
+  "status": "generated",
+  "detail": "value member of KeyEquivalent",
   "platforms": [
    "ios",
    "macos",
@@ -48556,8 +48556,8 @@
   "usr": "s:7SwiftUI25MatchedGeometryPropertiesV8rawValueACs6UInt32V_tcfc",
   "path": "MatchedGeometryProperties.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of MatchedGeometryProperties",
   "platforms": [
    "ios",
    "macos",
@@ -56080,8 +56080,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType07prepareD3URLACyAEG10Foundation23LocalizedStringResourceV_07UniformH11Identifiers6UTTypeVAI0J0VSgyYaKctcfc",
   "path": "NewDocumentButton.init(_:contentType:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -56091,8 +56091,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType07prepareD3URLACyAEGAA18LocalizedStringKeyV_07UniformH11Identifiers6UTTypeV10Foundation0J0VSgyYaKctcfc",
   "path": "NewDocumentButton.init(_:contentType:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -56102,8 +56102,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType07prepareD3URLACyAEGAESg_07UniformH11Identifiers6UTTypeV10Foundation0J0VSgyYaKctcfc",
   "path": "NewDocumentButton.init(_:contentType:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -56113,8 +56113,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType07prepareD3URLACyAEGqd___07UniformH11Identifiers6UTTypeV10Foundation0J0VSgyYaKctcSyRd__lufc",
   "path": "NewDocumentButton.init(_:contentType:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -56164,8 +56164,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType6source_ACyAEGAESg_07UniformH11Identifiers6UTTypeVAA0D14CreationSourceV10Foundation3URLVSgyYaKctcfc",
   "path": "NewDocumentButton.init(_:contentType:source:_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios"
   ]
@@ -56174,8 +56174,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType6source07prepareD3URLACyAEG10Foundation23LocalizedStringResourceV_07UniformH11Identifiers6UTTypeVAA0D14CreationSourceVAJ0K0VSgyYaKctcfc",
   "path": "NewDocumentButton.init(_:contentType:source:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios"
   ]
@@ -56184,8 +56184,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType6source07prepareD3URLACyAEGAA18LocalizedStringKeyV_07UniformH11Identifiers6UTTypeVAA0D14CreationSourceV10Foundation0K0VSgyYaKctcfc",
   "path": "NewDocumentButton.init(_:contentType:source:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios"
   ]
@@ -56194,8 +56194,8 @@
   "usr": "s:7SwiftUI17NewDocumentButtonVA2A4TextVRszrlE_11contentType6source07prepareD3URLACyAEGqd___07UniformH11Identifiers6UTTypeVAA0D14CreationSourceV10Foundation0K0VSgyYaKctcSyRd__lufc",
   "path": "NewDocumentButton.init(_:contentType:source:prepareDocumentURL:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param contentType: unknown type UTType",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios"
   ]
@@ -58081,7 +58081,7 @@
   "path": "PasteButton.init(supportedContentTypes:payloadAction:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param payloadAction: unknown type NSItemProvider",
   "platforms": [
    "ios",
    "macos"
@@ -58092,7 +58092,7 @@
   "path": "PasteButton.init(supportedContentTypes:validator:payloadAction:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param validator: builder with parameters",
   "platforms": [
    "macos"
   ]
@@ -60131,8 +60131,8 @@
   "usr": "s:7SwiftUI21PinnedScrollableViewsV8rawValueACs6UInt32V_tcfc",
   "path": "PinnedScrollableViews.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of PinnedScrollableViews",
   "platforms": [
    "ios",
    "macos",
@@ -66335,8 +66335,8 @@
   "usr": "s:7SwiftUI15SafeAreaRegionsV8rawValueACSu_tcfc",
   "path": "SafeAreaRegions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt",
+  "status": "generated",
+  "detail": "value member of SafeAreaRegions",
   "platforms": [
    "ios",
    "macos",
@@ -81153,8 +81153,8 @@
   "usr": "s:7SwiftUI17SystemFormatStyleO10DateOffsetV6localeyAE10Foundation6LocaleVF",
   "path": "SystemFormatStyle.DateOffset.locale(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param locale: unknown type Locale",
+  "status": "generated",
+  "detail": "value member of SystemFormatStyle.DateOffset",
   "platforms": [
    "ios",
    "macos",
@@ -81361,8 +81361,8 @@
   "usr": "s:7SwiftUI17SystemFormatStyleO13DateReferenceV6localeyAE10Foundation6LocaleVF",
   "path": "SystemFormatStyle.DateReference.locale(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param locale: unknown type Locale",
+  "status": "generated",
+  "detail": "value member of SystemFormatStyle.DateReference",
   "platforms": [
    "ios",
    "macos",
@@ -81530,8 +81530,8 @@
   "usr": "s:7SwiftUI17SystemFormatStyleO9StopwatchV6localeyAE10Foundation6LocaleVF",
   "path": "SystemFormatStyle.Stopwatch.locale(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param locale: unknown type Locale",
+  "status": "generated",
+  "detail": "value member of SystemFormatStyle.Stopwatch",
   "platforms": [
    "ios",
    "macos",
@@ -81543,8 +81543,8 @@
   "usr": "s:7SwiftUI17SystemFormatStyleO5TimerV",
   "path": "SystemFormatStyle.Timer",
   "kind": "swift.struct",
-  "status": "skipped",
-  "detail": "type not constructible from Kotlin (generic or no bridgeable members)",
+  "status": "generated",
+  "detail": "Kotlin value class",
   "platforms": [
    "ios",
    "macos",
@@ -81674,7 +81674,7 @@
   "path": "SystemFormatStyle.Timer.init(countingDownIn:showsHours:maxFieldCount:maxPrecision:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "not a view, modifier or value-producing member",
+  "detail": "param interval: unknown type Range",
   "platforms": [
    "ios",
    "macos",
@@ -81687,7 +81687,7 @@
   "path": "SystemFormatStyle.Timer.init(countingUpIn:showsHours:maxFieldCount:maxPrecision:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "not a view, modifier or value-producing member",
+  "detail": "param interval: unknown type Range",
   "platforms": [
    "ios",
    "macos",
@@ -81700,7 +81700,7 @@
   "path": "SystemFormatStyle.Timer.init(from:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "not a view, modifier or value-producing member",
+  "detail": "param decoder: generic constrained to ['Decoder']",
   "platforms": [
    "ios",
    "macos",
@@ -81712,8 +81712,8 @@
   "usr": "s:7SwiftUI17SystemFormatStyleO5TimerV6localeyAE10Foundation6LocaleVF",
   "path": "SystemFormatStyle.Timer.locale(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "not a view, modifier or value-producing member",
+  "status": "generated",
+  "detail": "value member of SystemFormatStyle.Timer",
   "platforms": [
    "ios",
    "macos",
@@ -88789,8 +88789,8 @@
   "usr": "s:7SwiftUI4TextV6LayoutV14DrawingOptionsV8rawValueAGs6UInt32V_tcfc",
   "path": "Text.Layout.DrawingOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt32",
+  "status": "generated",
+  "detail": "value member of Text.Layout.DrawingOptions",
   "platforms": [
    "ios",
    "macos",
@@ -90375,8 +90375,8 @@
   "usr": "s:7SwiftUI4TextVyAC10Foundation16AttributedStringVcfc",
   "path": "Text.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param attributedContent: unknown type AttributedString",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -90752,8 +90752,8 @@
   "usr": "s:7SwiftUI4TextV19typesettingLanguage_9isEnabledAC10Foundation6LocaleV0E0V_SbtF",
   "path": "Text.typesettingLanguage(_:isEnabled:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param language: unknown type Locale.Language",
+  "status": "covered",
+  "detail": "same as View.typesettingLanguage (applied on Text at the head of the chain)",
   "platforms": [
    "ios",
    "macos",
@@ -91023,7 +91023,7 @@
   "path": "TextEditor.init(text:selection:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param text: unknown type AttributedString",
+  "detail": "param text: Binding<str>",
   "platforms": [
    "ios",
    "macos"
@@ -92327,8 +92327,8 @@
   "usr": "s:7SwiftUI35TextInputFormattingControlPlacementV3SetV8rawValueAESu_tcfc",
   "path": "TextInputFormattingControlPlacement.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type UInt",
+  "status": "generated",
+  "detail": "value member of TextInputFormattingControlPlacement.Set",
   "platforms": [
    "ios",
    "macos",
@@ -97493,8 +97493,8 @@
   "usr": "s:7SwiftUI19TypesettingLanguageV8explicityAC10Foundation6LocaleV0D0VFZ",
   "path": "TypesettingLanguage.explicit(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "param language: unknown type Locale.Language",
+  "status": "generated",
+  "detail": "value member of TypesettingLanguage",
   "platforms": [
    "ios",
    "macos",
@@ -100388,8 +100388,8 @@
   "usr": "s:7SwiftUI17VerticalDirectionO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "VerticalDirection.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of VerticalDirection.Set",
   "platforms": [
    "ios",
    "macos",
@@ -100622,8 +100622,8 @@
   "usr": "s:7SwiftUI12VerticalEdgeO3SetV8rawValueAEs4Int8V_tcfc",
   "path": "VerticalEdge.Set.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param rawValue: unknown type Int8",
+  "status": "generated",
+  "detail": "value member of VerticalEdge.Set",
   "platforms": [
    "ios",
    "macos",
@@ -105350,7 +105350,7 @@
   "path": "View.exportsItemProviders(_:onExport:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onExport: closure returning [NSItemProvider]",
   "platforms": [
    "macos"
   ]
@@ -105360,7 +105360,7 @@
   "path": "View.exportsItemProviders(_:onExport:onEdit:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onExport: closure returning [NSItemProvider]",
   "platforms": [
    "macos"
   ]
@@ -105689,7 +105689,7 @@
   "path": "View.fileImporter(isPresented:allowedContentTypes:allowsMultipleSelection:onCompletion:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param allowedContentTypes: unknown type UTType",
+  "detail": "param onCompletion: unknown type Result",
   "platforms": [
    "ios",
    "macos"
@@ -105700,7 +105700,7 @@
   "path": "View.fileImporter(isPresented:allowedContentTypes:allowsMultipleSelection:onCompletion:onCancellation:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param allowedContentTypes: unknown type UTType",
+  "detail": "param onCompletion: unknown type Result",
   "platforms": [
    "ios",
    "macos"
@@ -105711,7 +105711,7 @@
   "path": "View.fileImporter(isPresented:allowedContentTypes:onCompletion:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param allowedContentTypes: unknown type UTType",
+  "detail": "param onCompletion: unknown type Result",
   "platforms": [
    "ios",
    "macos"
@@ -106719,7 +106719,7 @@
   "path": "View.importsItemProviders(_:onImport:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param contentTypes: unknown type UTType",
+  "detail": "param onImport: builder with parameters",
   "platforms": [
    "macos"
   ]
@@ -108237,7 +108237,7 @@
   "path": "View.onDrop(of:delegate:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param delegate: generic constrained to ['DropDelegate']",
   "platforms": [
    "ios",
    "macos"
@@ -108259,7 +108259,7 @@
   "path": "View.onDrop(of:isTargeted:perform:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param isTargeted: optional binding",
   "platforms": [
    "ios",
    "macos"
@@ -108270,7 +108270,7 @@
   "path": "View.onDrop(of:isTargeted:perform:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param isTargeted: optional binding",
   "platforms": [
    "ios",
    "macos"
@@ -108561,7 +108561,7 @@
   "path": "View.onPasteCommand(of:perform:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param payloadAction: unknown type NSItemProvider",
   "platforms": [
    "macos"
   ]
@@ -108581,7 +108581,7 @@
   "path": "View.onPasteCommand(of:validator:perform:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param supportedContentTypes: unknown type UTType",
+  "detail": "param validator: builder with parameters",
   "platforms": [
    "macos"
   ]
@@ -111978,8 +111978,8 @@
   "usr": "s:7SwiftUI4ViewPAAE19typesettingLanguage_9isEnabledQr10Foundation6LocaleV0E0V_SbtF",
   "path": "View.typesettingLanguage(_:isEnabled:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param language: unknown type Locale.Language",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",

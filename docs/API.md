@@ -78,10 +78,13 @@ NavigationSplitView(modifier: Modifier = Modifier, sidebar: @Composable () -> Un
 NavigationSplitView(modifier: Modifier = Modifier, sidebar: @Composable () -> Unit, content: @Composable () -> Unit, detail: @Composable () -> Unit,)
 NavigationStack(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 NavigationView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
-NewDocumentButton(title: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
-NewDocumentButton(title: String, modifier: Modifier = Modifier,)
+NewDocumentButton(title: String, contentType: String, modifier: Modifier = Modifier,)
+NewDocumentButton(title: String, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
+NewDocumentButton(title: String, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButton(title: String, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButtonContentType(title: String, modifier: Modifier = Modifier, contentType: String? = null,)
 OffsetShape(shape: Shape, offset: CGSize, modifier: Modifier = Modifier,)
-PathView(path: Path, modifier: Modifier = Modifier) { SwiftView(182, listOf(path), modifier) } /** * SwiftUI `Picker.init(selection:content:label:currentValueLabel:)` * * ```swift * nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View) * ``` * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+ */ @HiddenFromObjC @Composable public fun Picker(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
+PathView(path: Path, modifier: Modifier = Modifier) { SwiftView(190, listOf(path), modifier) } /** * SwiftUI `Picker.init(selection:content:label:currentValueLabel:)` * * ```swift * nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View) * ``` * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+ */ @HiddenFromObjC @Composable public fun Picker(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 Picker(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit,)
 Picker(title: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 Picker(title: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
@@ -94,9 +97,9 @@ ProgressView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 ProgressView(modifier: Modifier = Modifier,)
 ProgressView(title: String, modifier: Modifier = Modifier,)
 ProgressView(title: String, value: Double?, modifier: Modifier = Modifier, total: Double = 1.0,)
-RadialGradientView(radialGradient: RadialGradient, modifier: Modifier = Modifier) { SwiftView(209, listOf(radialGradient), modifier) } /** * SwiftUI `Rectangle` * * ```swift * @frozen struct Rectangle * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) { SwiftView(210, listOf(rectangle), modifier) } /** * SwiftUI `RenameButton.init()` * * ```swift * nonisolated init() where Label == Label<Text, Image> * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun RenameButton(modifier: Modifier = Modifier,)
+RadialGradientView(radialGradient: RadialGradient, modifier: Modifier = Modifier) { SwiftView(217, listOf(radialGradient), modifier) } /** * SwiftUI `Rectangle` * * ```swift * @frozen struct Rectangle * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) { SwiftView(218, listOf(rectangle), modifier) } /** * SwiftUI `RenameButton.init()` * * ```swift * nonisolated init() where Label == Label<Text, Image> * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun RenameButton(modifier: Modifier = Modifier,)
 RotatedShape(shape: Shape, angle: Angle, modifier: Modifier = Modifier, anchor: UnitPoint = UnitPoint.center,)
-RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Modifier = Modifier) { SwiftView(213, listOf(roundedRectangle), modifier) } /** * SwiftUI `ScaledShape.init(shape:scale:anchor:)` * * ```swift * init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun ScaledShape(shape: Shape, scale: CGSize, modifier: Modifier = Modifier, anchor: UnitPoint = UnitPoint.center,)
+RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Modifier = Modifier) { SwiftView(221, listOf(roundedRectangle), modifier) } /** * SwiftUI `ScaledShape.init(shape:scale:anchor:)` * * ```swift * init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun ScaledShape(shape: Shape, scale: CGSize, modifier: Modifier = Modifier, anchor: UnitPoint = UnitPoint.center,)
 ScrollView(modifier: Modifier = Modifier, axes: Axis.Set = Axis.Set.vertical, showsIndicators: Boolean = true, content: @Composable () -> Unit,)
 ScrollView(modifier: Modifier = Modifier, axes: Axis.Set = Axis.Set.vertical, content: @Composable () -> Unit,)
 Section(modifier: Modifier = Modifier, content: @Composable () -> Unit, header: @Composable () -> Unit, footer: @Composable () -> Unit,)
@@ -129,15 +132,15 @@ Stepper(title: String, value: Int, modifier: Modifier = Modifier, step: Int = 1,
 TabView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 Text(verbatim: String, modifier: Modifier = Modifier,)
 Text(date: Double, style: Text.DateStyle, modifier: Modifier = Modifier,)
-TextEditorView(textEditor: TextEditor, modifier: Modifier = Modifier) { SwiftView(285, listOf(textEditor), modifier) } /** * SwiftUI `TextField.init(_:text:onEditingChanged:onCommit:)` * * ```swift * nonisolated init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) where S : StringProtocol * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onEditingChanged: (Boolean) -> Unit, onCommit: () -> Unit,)
+TextEditorView(textEditor: TextEditor, modifier: Modifier = Modifier) { SwiftView(294, listOf(textEditor), modifier) } /** * SwiftUI `TextField.init(_:text:onEditingChanged:onCommit:)` * * ```swift * nonisolated init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) where S : StringProtocol * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onEditingChanged: (Boolean) -> Unit, onCommit: () -> Unit,)
 TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onEditingChanged: (Boolean) -> Unit,)
 TextField(title: String, text: String, axis: Axis, modifier: Modifier = Modifier, onTextChange: (String) -> Unit,)
 TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onCommit: () -> Unit,)
 TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit,)
-TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, modifier: Modifier = Modifier) { SwiftView(310, listOf(textInputBorderShape), modifier) } /** * SwiftUI `Toggle.init(isOn:label:)` * * ```swift * nonisolated init(isOn: Binding<Bool>, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Toggle(isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit, content: @Composable () -> Unit,)
+TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, modifier: Modifier = Modifier) { SwiftView(319, listOf(textInputBorderShape), modifier) } /** * SwiftUI `Toggle.init(isOn:label:)` * * ```swift * nonisolated init(isOn: Binding<Bool>, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Toggle(isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit, content: @Composable () -> Unit,)
 Toggle(title: String, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
 Toggle(title: String, systemImage: SFSymbol, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
-UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRectangle, modifier: Modifier = Modifier) { SwiftView(318, listOf(unevenRoundedRectangle), modifier) } /** * SwiftUI `VSplitView.init(content:)` * * ```swift * nonisolated init(@ContentBuilder content: () -> Content) * ``` * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op) */ @HiddenFromObjC @Composable public fun VSplitView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRectangle, modifier: Modifier = Modifier) { SwiftView(327, listOf(unevenRoundedRectangle), modifier) } /** * SwiftUI `VSplitView.init(content:)` * * ```swift * nonisolated init(@ContentBuilder content: () -> Content) * ``` * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op) */ @HiddenFromObjC @Composable public fun VSplitView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 VStack(modifier: Modifier = Modifier, alignment: HorizontalAlignment = HorizontalAlignment.center, spacing: Double? = null, content: @Composable () -> Unit,)
 ViewThatFits(modifier: Modifier = Modifier, axes: Axis.Set? = null, content: @Composable () -> Unit,)
 WindowVisibilityToggle(windowID: String, modifier: Modifier = Modifier,)
@@ -183,11 +186,18 @@ MenuButton(titleKey: LocalizedKey, modifier: Modifier = Modifier, content: @Comp
 NavigationLink(titleResource: LocalizedKey, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 NavigationLink(titleResource: LocalizedKey, value: Any?, modifier: Modifier = Modifier,)
 NavigationLinkValue(titleResource: LocalizedKey, value: Any?, modifier: Modifier = Modifier,)
-NewDocumentButton(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier,)
-NewDocumentButtonSource(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier,)
-NewDocumentButton(source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null,)
-NewDocumentButton(title: LocalizedKey, modifier: Modifier = Modifier,)
-NewDocumentButton(modifier: Modifier = Modifier, label: String? = null,)
+NewDocumentButton(title: LocalizedKey, contentType: String, modifier: Modifier = Modifier,)
+NewDocumentButtonContentType(title: LocalizedKey, contentType: String, modifier: Modifier = Modifier,)
+NewDocumentButton(title: LocalizedKey, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
+NewDocumentButtonContentType(title: LocalizedKey, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
+NewDocumentButton(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButtonContentType(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButton(source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
+NewDocumentButtonContentType(contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null,)
+NewDocumentButton(title: LocalizedKey, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButtonContentType(title: LocalizedKey, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButton(modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
+NewDocumentButtonContentType(modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
 Picker(titleResource: LocalizedKey, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 PickerSelection(titleKey: LocalizedKey, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 Picker(titleResource: LocalizedKey, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
@@ -280,7 +290,7 @@ LabeledContent(titleKey: LocalizedKey? = null, value: String? = null, modifier: 
 Link(titleKey: LocalizedKey? = null, destination: String? = null, modifier: Modifier = Modifier,)
 Menu(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, primaryAction: (() -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 NavigationLink(value: Any? = null, title: String? = null, titleResource: LocalizedKey? = null, tag: Any? = null, selection: Any? = null, isActive: Boolean? = null, titleKey: LocalizedKey? = null, modifier: Modifier = Modifier, onSelectionChange: ((Any?) -> Unit)? = null, onIsActiveChange: ((Boolean) -> Unit)? = null, destination: (@Composable () -> Unit)? = null, label: (@Composable () -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
-NewDocumentButton(title: LocalizedKey? = null, source: DocumentCreationSource? = null, modifier: Modifier = Modifier,)
+NewDocumentButton(title: String? = null, contentType: String? = null, source: DocumentCreationSource? = null, label: String? = null, modifier: Modifier = Modifier,)
 Picker(titleKey: LocalizedKey? = null, selection: Any? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, onSelectionChange: ((Any) -> Unit)? = null, currentValueLabel: (@Composable () -> Unit)? = null, label: (@Composable () -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 ProgressView(titleKey: LocalizedKey? = null, value: Double? = null, total: Double? = null, modifier: Modifier = Modifier,)
 Section(titleKey: LocalizedKey? = null, isExpanded: Boolean? = null, modifier: Modifier = Modifier, onIsExpandedChange: ((Boolean) -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
@@ -926,6 +936,7 @@ Modifier.transition(t: AnyTransition)
 Modifier.truncationMode(mode: Text.TruncationMode)
 Modifier.typeSelectEquivalent(string: String)
 Modifier.typeSelectEquivalent(stringKey: LocalizedKey)
+Modifier.typesettingLanguage(language: String, isEnabled: Boolean = true)
 Modifier.typesettingLanguage(language: TypesettingLanguage, isEnabled: Boolean = true)
 Modifier.underline(isActive: Boolean = true, color: Color? = null)
 Modifier.underline(isActive: Boolean = true, pattern: Text.LineStyle.Pattern = Text.LineStyle.Pattern.solid, color: Color? = null)
@@ -980,6 +991,447 @@ Modifier.zIndex(value: Double)
   - `AnimationCompletionCriteria.removed`
 - `AnyShapeStyle` (class)
   - `AnyShapeStyle(style: ShapeStyle)`
+- `AutomaticArrangementViewStyle` (class)
+  - `AutomaticArrangementViewStyle()`
+- `AutomaticLabeledContentStyle` (class)
+  - `AutomaticLabeledContentStyle()`
+- `AutomaticTextEditorStyle` (class)
+  - `AutomaticTextEditorStyle()`
+- `BlendMode` (class)
+  - `BlendMode.colorDodge`
+  - `BlendMode.difference`
+  - `BlendMode.luminosity`
+  - `BlendMode.plusDarker`
+  - `BlendMode.saturation`
+  - `BlendMode.sourceAtop`
+  - `BlendMode.plusLighter`
+  - `BlendMode.destinationOut`
+  - `BlendMode.destinationOver`
+  - `BlendMode.hue`
+  - `BlendMode.color`
+  - `BlendMode.darken`
+  - `BlendMode.normal`
+  - `BlendMode.screen`
+  - `BlendMode.lighten`
+  - `BlendMode.overlay`
+  - `BlendMode.multiply`
+  - `BlendMode.colorBurn`
+  - `BlendMode.exclusion`
+  - `BlendMode.hardLight`
+  - `BlendMode.softLight`
+- `BorderedTableStyle` (class)
+  - `BorderedTableStyle(alternatesRowBackgrounds: Boolean)`
+  - `BorderedTableStyle()`
+- `ButtonBorderShape` (class)
+  - `ButtonBorderShape.roundedRectangle(radius: Double): ButtonBorderShape`
+  - `ButtonBorderShape.roundedRectangle`
+  - `ButtonBorderShape.circle`
+  - `ButtonBorderShape.capsule`
+  - `ButtonBorderShape.automatic`
+- `Capsule` (class)
+  - `Capsule(style: RoundedCornerStyle = RoundedCornerStyle.continuous)`
+- `Circle` (class)
+  - `Circle()`
+- `ColorScheme` (class)
+  - `ColorScheme.dark`
+  - `ColorScheme.light`
+- `CompactMenuControlGroupStyle` (class)
+  - `CompactMenuControlGroupStyle()`
+- `ContentMode` (class)
+  - `ContentMode.fit`
+  - `ContentMode.fill`
+- `ControlGroupStyle` (interface)
+  - `ControlGroupStyle.navigation`
+  - `ControlGroupStyle.compactMenu`
+  - `ControlGroupStyle.menu`
+  - `ControlGroupStyle.palette`
+  - `ControlGroupStyle.automatic`
+- `CrossFadeNavigationTransition` (class)
+- `DefaultDocumentGroupLaunchActions` (class)
+  - `DefaultDocumentGroupLaunchActions()`
+- `DefaultListStyle` (class)
+  - `DefaultListStyle()`
+- `DefaultTabViewStyle` (class)
+  - `DefaultTabViewStyle()`
+- `DeviceHinge` (object)
+- `DeviceHinge.Status` (class)
+  - `DeviceHinge.Status.partiallyOpen`
+  - `DeviceHinge.Status.closed`
+  - `DeviceHinge.Status.fullyOpen`
+- `DocumentCreationSource` (class)
+  - `DocumentCreationSource(id: String)`
+- `DropConfiguration` (class)
+  - `DropConfiguration(operation: DropOperation)`
+- `EdgeInsets` (class)
+  - `EdgeInsets(top: Double, leading: Double, bottom: Double, trailing: Double)`
+  - `EdgeInsets.inset(corners: RectangleCornerInsets, edges: Edge.Set`
+  - `EdgeInsets()`
+- `EmptyAnimatableData` (class)
+  - `EmptyAnimatableData()`
+  - `EmptyAnimatableData.zero`
+- `EmptyWidgetConfiguration` (class)
+  - `EmptyWidgetConfiguration()`
+- `FieldDatePickerStyle` (class)
+  - `FieldDatePickerStyle()`
+- `FocusInteractions` (class)
+  - `FocusInteractions(rawValue: Int)`
+  - `FocusInteractions.edit`
+  - `FocusInteractions.activate`
+  - `FocusInteractions.automatic`
+- `FrameResizePosition` (class)
+  - `FrameResizePosition.topLeading`
+  - `FrameResizePosition.topTrailing`
+  - `FrameResizePosition.bottomLeading`
+  - `FrameResizePosition.bottomTrailing`
+  - `FrameResizePosition.top`
+  - `FrameResizePosition.bottom`
+  - `FrameResizePosition.leading`
+  - `FrameResizePosition.trailing`
+- `GlassButtonStyle` (class)
+  - `GlassButtonStyle()`
+  - `GlassButtonStyle(glass: Glass)`
+- `GraphicsContext` (object)
+- `GraphicsContext.BlendMode` (class)
+  - `GraphicsContext.BlendMode(rawValue: Int)`
+  - `GraphicsContext.BlendMode.colorDodge`
+  - `GraphicsContext.BlendMode.difference`
+  - `GraphicsContext.BlendMode.luminosity`
+  - `GraphicsContext.BlendMode.plusDarker`
+  - `GraphicsContext.BlendMode.saturation`
+  - `GraphicsContext.BlendMode.sourceAtop`
+  - `GraphicsContext.BlendMode.plusLighter`
+  - `GraphicsContext.BlendMode.destinationIn`
+  - `GraphicsContext.BlendMode.destinationOut`
+  - `GraphicsContext.BlendMode.destinationAtop`
+  - `GraphicsContext.BlendMode.destinationOver`
+  - `GraphicsContext.BlendMode.hue`
+  - `GraphicsContext.BlendMode.xor`
+  - `GraphicsContext.BlendMode.copy`
+  - `GraphicsContext.BlendMode.clear`
+  - `GraphicsContext.BlendMode.color`
+  - `GraphicsContext.BlendMode.darken`
+  - `GraphicsContext.BlendMode.normal`
+  - `GraphicsContext.BlendMode.screen`
+  - `GraphicsContext.BlendMode.lighten`
+  - `GraphicsContext.BlendMode.overlay`
+  - `GraphicsContext.BlendMode.multiply`
+  - `GraphicsContext.BlendMode.sourceIn`
+  - `GraphicsContext.BlendMode.colorBurn`
+  - `GraphicsContext.BlendMode.exclusion`
+  - `GraphicsContext.BlendMode.hardLight`
+  - `GraphicsContext.BlendMode.softLight`
+  - `GraphicsContext.BlendMode.sourceOut`
+- `GraphicsContext.BlurOptions` (class)
+  - `GraphicsContext.BlurOptions(rawValue: Int)`
+  - `GraphicsContext.BlurOptions.dithersResult`
+  - `GraphicsContext.BlurOptions.opaque`
+- `GraphicsContext.ClipOptions` (class)
+  - `GraphicsContext.ClipOptions(rawValue: Int)`
+  - `GraphicsContext.ClipOptions.inverse`
+- `GraphicsContext.Filter` (class)
+  - `GraphicsContext.Filter.brightness(amount: Double): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.saturation(amount: Double): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.colorInvert(amount: Double`
+  - `GraphicsContext.Filter.colorMatrix(matrix: ColorMatrix, isPremultiplied: Boolean): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.colorMatrix(matrix: ColorMatrix): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.colorShader(shader: Shader): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.hueRotation(angle: Angle): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.layerShader(shader: Shader, maxSampleOffset: CGSize): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.alphaMultiply(color: Color): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.colorMultiply(color: Color): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.alphaThreshold(min: Double, max: Double`
+  - `GraphicsContext.Filter.distortionShader(shader: Shader, maxSampleOffset: CGSize): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.luminanceToAlpha`
+  - `GraphicsContext.Filter.projectionTransform(matrix: ProjectionTransform): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.blur(radius: Double, options: GraphicsContext.BlurOptions?`
+  - `GraphicsContext.Filter.shadow(color: Color?`
+  - `GraphicsContext.Filter.contrast(amount: Double): GraphicsContext.Filter`
+  - `GraphicsContext.Filter.grayscale(amount: Double): GraphicsContext.Filter`
+- `GraphicsContext.FilterOptions` (class)
+  - `GraphicsContext.FilterOptions(rawValue: Int)`
+  - `GraphicsContext.FilterOptions.linearColor`
+- `GraphicsContext.GradientOptions` (class)
+  - `GraphicsContext.GradientOptions(rawValue: Int)`
+  - `GraphicsContext.GradientOptions.linearColor`
+  - `GraphicsContext.GradientOptions.mirror`
+  - `GraphicsContext.GradientOptions.repeat`
+- `GraphicsContext.Shading` (class)
+  - `GraphicsContext.Shading.foreground`
+  - `GraphicsContext.Shading.conicGradient(gradient: AnyGradient, center: CGPoint, angle: Angle`
+  - `GraphicsContext.Shading.conicGradient(gradient: Gradient, center: CGPoint, angle: Angle`
+  - `GraphicsContext.Shading.linearGradient(gradient: AnyGradient, startPoint: CGPoint, endPoint: CGPoint, options: GraphicsContext.GradientOptions?`
+  - `GraphicsContext.Shading.linearGradient(gradient: Gradient, startPoint: CGPoint, endPoint: CGPoint, options: GraphicsContext.GradientOptions?`
+  - `GraphicsContext.Shading.radialGradient(gradient: AnyGradient, startCenter: CGPoint, startRadius: Double, endCenter: CGPoint, endRadius: Double, options: GraphicsContext.GradientOptions?`
+  - `GraphicsContext.Shading.radialGradient(gradient: Gradient, startCenter: CGPoint, startRadius: Double, endCenter: CGPoint, endRadius: Double, options: GraphicsContext.GradientOptions?`
+  - `GraphicsContext.Shading.radialGradient(gradient: AnyGradient, center: CGPoint, startRadius: Double, endRadius: Double, options: GraphicsContext.GradientOptions?`
+  - `GraphicsContext.Shading.radialGradient(gradient: Gradient, center: CGPoint, startRadius: Double, endRadius: Double, options: GraphicsContext.GradientOptions?`
+  - `GraphicsContext.Shading.color(colorSpace: Color.RGBColorSpace`
+  - `GraphicsContext.Shading.color(colorSpace: Color.RGBColorSpace`
+  - `GraphicsContext.Shading.color(color: Color): GraphicsContext.Shading`
+  - `GraphicsContext.Shading.style(style: ShapeStyle): GraphicsContext.Shading`
+  - `GraphicsContext.Shading.shader(shader: Shader, bounds: CGRect?`
+  - `GraphicsContext.Shading.palette(array: List<GraphicsContext.Shading>): GraphicsContext.Shading`
+  - `GraphicsContext.Shading.backdrop`
+- `GraphicsContext.ShadowOptions` (class)
+  - `GraphicsContext.ShadowOptions(rawValue: Int)`
+  - `GraphicsContext.ShadowOptions.shadowOnly`
+  - `GraphicsContext.ShadowOptions.shadowAbove`
+  - `GraphicsContext.ShadowOptions.invertsAlpha`
+  - `GraphicsContext.ShadowOptions.disablesGroup`
+- `GroupedTabViewStyle` (class)
+  - `GroupedTabViewStyle()`
+- `HighlightHoverEffect` (class)
+  - `HighlightHoverEffect()`
+- `IconOnlyLabelStyle` (class)
+  - `IconOnlyLabelStyle()`
+- `InlinePickerStyle` (class)
+  - `InlinePickerStyle()`
+- `InterfaceOrientation` (class)
+  - `InterfaceOrientation.landscapeLeft`
+  - `InterfaceOrientation.landscapeRight`
+  - `InterfaceOrientation.portraitUpsideDown`
+  - `InterfaceOrientation.portrait`
+- `LayoutDirection` (class)
+  - `LayoutDirection.leftToRight`
+  - `LayoutDirection.rightToLeft`
+- `LinearGaugeStyle` (class)
+  - `LinearGaugeStyle(tint: Color)`
+  - `LinearGaugeStyle(tint: Gradient)`
+  - `LinearGaugeStyle()`
+- `ListSectionSpacing` (class)
+  - `ListSectionSpacing.custom(spacing: Double): ListSectionSpacing`
+  - `ListSectionSpacing.compact`
+  - `ListSectionSpacing.default`
+- `MagnifyGesture` (class)
+  - `MagnifyGesture(minimumScaleDelta: Double = 0.01, inputKinds: GestureInputKinds = GestureInputKinds.all)`
+  - `MagnifyGesture(minimumScaleDelta: Double = 0.01)`
+- `MenuButtonStyle` (interface)
+- `MoveCommandDirection` (class)
+  - `MoveCommandDirection.up`
+  - `MoveCommandDirection.down`
+  - `MoveCommandDirection.left`
+  - `MoveCommandDirection.right`
+- `NavigationBarItem` (object)
+- `NavigationBarItem.TitleDisplayMode` (class)
+  - `NavigationBarItem.TitleDisplayMode.large`
+  - `NavigationBarItem.TitleDisplayMode.inline`
+  - `NavigationBarItem.TitleDisplayMode.automatic`
+- `NavigationSplitViewVisibility` (class)
+  - `NavigationSplitViewVisibility.detailOnly`
+  - `NavigationSplitViewVisibility.doubleColumn`
+  - `NavigationSplitViewVisibility.all`
+  - `NavigationSplitViewVisibility.automatic`
+- `OpenURLAction` (object)
+- `OpenURLAction.Result` (class)
+  - `OpenURLAction.Result.systemAction`
+  - `OpenURLAction.Result.systemAction(url: String?`
+  - `OpenURLAction.Result.systemAction(url: String): OpenURLAction.Result`
+  - `OpenURLAction.Result.handled`
+  - `OpenURLAction.Result.discarded`
+- `PagingScrollTargetBehavior` (class)
+  - `PagingScrollTargetBehavior()`
+- `PencilSqueezeGesturePhase` (class)
+  - `PencilSqueezeGesturePhase.failed`
+- `PlainListStyle` (class)
+  - `PlainListStyle()`
+- `PopoverAttachmentAnchor` (class)
+  - `PopoverAttachmentAnchor.point(p0: UnitPoint): PopoverAttachmentAnchor`
+- `PresentationSizing` (interface)
+  - `PresentationSizing.form`
+  - `PresentationSizing.page`
+  - `PresentationSizing.fitted`
+  - `PresentationSizing.automatic`
+- `ProgressiveImmersionStyle` (class)
+  - `ProgressiveImmersionStyle(immersion: ClosedFloatingPointRange<Double>, initialAmount: Double? = null)`
+  - `ProgressiveImmersionStyle()`
+- `PullDownMenuButtonStyle` (class)
+  - `PullDownMenuButtonStyle()`
+- `RectangleCornerRadii` (class)
+  - `RectangleCornerRadii(topLeading: Double = 0.0, bottomLeading: Double = 0.0, bottomTrailing: Double = 0.0, topTrailing: Double = 0.0)`
+- `RoundedCornerStyle` (class)
+  - `RoundedCornerStyle.continuous`
+  - `RoundedCornerStyle.circular`
+- `SceneLaunchBehavior` (class)
+  - `SceneLaunchBehavior.suppressed`
+  - `SceneLaunchBehavior.automatic`
+  - `SceneLaunchBehavior.presented`
+- `ScrollContentOffsetAdjustmentBehavior` (class)
+  - `ScrollContentOffsetAdjustmentBehavior.disabled`
+  - `ScrollContentOffsetAdjustmentBehavior.automatic`
+- `ScrollInputKind` (class)
+  - `ScrollInputKind.handGestureShortcut`
+- `ScrollTransitionPhase` (class)
+  - `ScrollTransitionPhase.topLeading`
+  - `ScrollTransitionPhase.bottomTrailing`
+  - `ScrollTransitionPhase.identity`
+- `SegmentedPickerStyle` (class)
+  - `SegmentedPickerStyle()`
+- `ShaderLibrary` (class)
+  - `ShaderLibrary(url: String)`
+  - `ShaderLibrary.default`
+- `SidebarCommands` (class)
+  - `SidebarCommands()`
+- `SnapshotResponse` (class)
+  - `SnapshotResponse(restoredDefaultState: Boolean = false, estimatedSnapshotExpiration: Double? = null, identifier: String? = null)`
+- `Spring` (class)
+  - `Spring(settlingDuration: Double, dampingRatio: Double, epsilon: Double = 0.001)`
+  - `Spring(mass: Double = 1.0, stiffness: Double, damping: Double, allowOverDamping: Boolean = false)`
+  - `Spring(duration: Double = 0.5, bounce: Double = 0.0)`
+  - `Spring.bouncy(duration: Double`
+  - `Spring.bouncy`
+  - `Spring.smooth(duration: Double`
+  - `Spring.smooth`
+  - `Spring.snappy(duration: Double`
+  - `Spring.snappy`
+- `SubmitLabel` (class)
+  - `SubmitLabel.go`
+  - `SubmitLabel.done`
+  - `SubmitLabel.join`
+  - `SubmitLabel.next`
+  - `SubmitLabel.send`
+  - `SubmitLabel.route`
+  - `SubmitLabel.`return``
+  - `SubmitLabel.search`
+  - `SubmitLabel.`continue``
+- `SymbolEffectTransition` (class)
+- `TabBarOnlyTabViewStyle` (class)
+  - `TabBarOnlyTabViewStyle()`
+- `TabSectionExpansion` (class)
+  - `TabSectionExpansion.expanded`
+  - `TabSectionExpansion.automatic`
+  - `TabSectionExpansion.collapsed`
+- `TableStyle` (interface)
+  - `TableStyle.inset(alternatesRowBackgrounds: Boolean): InsetTableStyle`
+  - `TableStyle.inset`
+  - `TableStyle.bordered(alternatesRowBackgrounds: Boolean): BorderedTableStyle`
+  - `TableStyle.bordered`
+  - `TableStyle.automatic`
+- `TextEditor` (class)
+  - `TextEditor(text: String, onTextChange: (String) -> Unit)`
+- `TextInputDictationActivation` (class)
+  - `TextInputDictationActivation.onLook`
+  - `TextInputDictationActivation.onSelect`
+- `TimelineSchedule` (interface)
+  - `TimelineSchedule.everyMinute`
+  - `TimelineSchedule.periodic(startDate: Double, interval: Double): PeriodicTimelineSchedule`
+  - `TimelineSchedule.animation(minimumInterval: Double?`
+  - `TimelineSchedule.animation`
+- `ToggleStyle` (interface)
+  - `ToggleStyle.button`
+  - `ToggleStyle.switch`
+  - `ToggleStyle.automatic`
+  - `ToggleStyle.checkbox`
+- `ToolbarItemPlacement` (class)
+  - `ToolbarItemPlacement(id: Any)`
+  - `ToolbarItemPlacement.largeTitle`
+  - `ToolbarItemPlacement.navigation`
+  - `ToolbarItemPlacement.accessoryBar(id: Any): ToolbarItemPlacement`
+  - `ToolbarItemPlacement.largeSubtitle`
+  - `ToolbarItemPlacement.primaryAction`
+  - `ToolbarItemPlacement.secondaryAction`
+  - `ToolbarItemPlacement.destructiveAction`
+  - `ToolbarItemPlacement.cancellationAction`
+  - `ToolbarItemPlacement.confirmationAction`
+  - `ToolbarItemPlacement.navigationBarLeading`
+  - `ToolbarItemPlacement.topBarPinnedTrailing`
+  - `ToolbarItemPlacement.navigationBarTrailing`
+  - `ToolbarItemPlacement.title`
+  - `ToolbarItemPlacement.status`
+  - `ToolbarItemPlacement.keyboard`
+  - `ToolbarItemPlacement.subtitle`
+  - `ToolbarItemPlacement.automatic`
+  - `ToolbarItemPlacement.bottomBar`
+  - `ToolbarItemPlacement.principal`
+- `ToolbarPlacement` (class)
+  - `ToolbarPlacement(id: Any)`
+  - `ToolbarPlacement.windowToolbar`
+  - `ToolbarPlacement.accessoryBar(id: Any): ToolbarPlacement`
+  - `ToolbarPlacement.navigationBar`
+  - `ToolbarPlacement.tabBar`
+  - `ToolbarPlacement.automatic`
+  - `ToolbarPlacement.bottomBar`
+  - `ToolbarPlacement.statusBar`
+- `ToolbarVerticalCompressionBehavior` (class)
+  - `ToolbarVerticalCompressionBehavior.prefersToolbarItems`
+  - `ToolbarVerticalCompressionBehavior.prefersTabBar`
+  - `ToolbarVerticalCompressionBehavior.automatic`
+- `UIHostingControllerSizingOptions` (class)
+  - `UIHostingControllerSizingOptions(rawValue: Int)`
+  - `UIHostingControllerSizingOptions.intrinsicContentSize`
+  - `UIHostingControllerSizingOptions.preferredContentSize`
+- `UserInterfaceSizeClass` (class)
+  - `UserInterfaceSizeClass.compact`
+  - `UserInterfaceSizeClass.regular`
+- `ViewAlignedScrollTargetBehavior` (class)
+  - `ViewAlignedScrollTargetBehavior(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior, anchor: UnitPoint?)`
+  - `ViewAlignedScrollTargetBehavior(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior = ViewAlignedScrollTargetBehavior.LimitBehavior.automatic)`
+  - `ViewAlignedScrollTargetBehavior(anchor: UnitPoint?)`
+- `ViewAlignedScrollTargetBehavior.LimitBehavior` (class)
+  - `ViewAlignedScrollTargetBehavior.LimitBehavior.alwaysByFew`
+  - `ViewAlignedScrollTargetBehavior.LimitBehavior.alwaysByOne`
+  - `ViewAlignedScrollTargetBehavior.LimitBehavior.never`
+  - `ViewAlignedScrollTargetBehavior.LimitBehavior.always`
+  - `ViewAlignedScrollTargetBehavior.LimitBehavior.automatic`
+- `WindowBackgroundShapeStyle` (class)
+  - `WindowBackgroundShapeStyle()`
+- `WindowMenuBarExtraStyle` (class)
+  - `WindowMenuBarExtraStyle()`
+- `WorldRecenterPhase` (class)
+  - `WorldRecenterPhase.began`
+  - `WorldRecenterPhase.ended`
+- `AccessibilityActionKind` (class)
+  - `AccessibilityActionKind(named: String)`
+  - `AccessibilityActionKind.delete`
+  - `AccessibilityActionKind.escape`
+  - `AccessibilityActionKind.default`
+  - `AccessibilityActionKind.magicTap`
+  - `AccessibilityActionKind.showMenu`
+- `AccessibilityLabeledPairRole` (class)
+  - `AccessibilityLabeledPairRole.label`
+  - `AccessibilityLabeledPairRole.content`
+- `AccessibilityTextContentType` (class)
+  - `AccessibilityTextContentType.fileSystem`
+  - `AccessibilityTextContentType.sourceCode`
+  - `AccessibilityTextContentType.spreadsheet`
+  - `AccessibilityTextContentType.wordProcessing`
+  - `AccessibilityTextContentType.plain`
+  - `AccessibilityTextContentType.console`
+  - `AccessibilityTextContentType.messaging`
+  - `AccessibilityTextContentType.narrative`
+- `AccessoryCircularGaugeStyle` (class)
+  - `AccessoryCircularGaugeStyle()`
+- `Alignment` (class)
+  - `Alignment(horizontal: HorizontalAlignment, vertical: VerticalAlignment)`
+  - `Alignment.topLeading`
+  - `Alignment.topTrailing`
+  - `Alignment.bottomLeading`
+  - `Alignment.bottomTrailing`
+  - `Alignment.centerLastTextBaseline`
+  - `Alignment.centerFirstTextBaseline`
+  - `Alignment.leadingLastTextBaseline`
+  - `Alignment.leadingFirstTextBaseline`
+  - `Alignment.trailingLastTextBaseline`
+  - `Alignment.trailingFirstTextBaseline`
+  - `Alignment.top`
+  - `Alignment.bottom`
+  - `Alignment.center`
+  - `Alignment.leading`
+  - `Alignment.trailing`
+- `AnimationTimelineSchedule` (class)
+  - `AnimationTimelineSchedule(minimumInterval: Double? = null, paused: Boolean = false)`
+- `AnyTransition` (class)
+  - `AnyTransition.combined(other: AnyTransition): AnyTransition`
+  - `AnyTransition.animation(animation: Animation?): AnyTransition`
+  - `AnyTransition.asymmetric(insertion: AnyTransition, removal: AnyTransition): AnyTransition`
+  - `AnyTransition.move(edge: Edge): AnyTransition`
+  - `AnyTransition.push(edge: Edge): AnyTransition`
+  - `AnyTransition.scale`
+  - `AnyTransition.scale(scale: Double, anchor: UnitPoint`
+  - `AnyTransition.slide`
+  - `AnyTransition.offset(x: Double`
+  - `AnyTransition.offset(offset: CGSize): AnyTransition`
+  - `AnyTransition.opacity`
+  - `AnyTransition.identity`
 - `AutomaticControlGroupStyle` (class)
 - `AutomaticMenuBarExtraStyle` (class)
   - `AutomaticMenuBarExtraStyle()`
@@ -987,6 +1439,7 @@ Modifier.zIndex(value: Double)
   - `Axis.horizontal`
   - `Axis.vertical`
 - `Axis.Set` (class)
+  - `Axis.Set(rawValue: Int)`
   - `Axis.Set.horizontal`
   - `Axis.Set.vertical`
 - `BlurReplaceTransition` (class)
@@ -1167,6 +1620,7 @@ Modifier.zIndex(value: Double)
 - `InsetGroupedListStyle` (class)
   - `InsetGroupedListStyle()`
 - `KeyEquivalent` (class)
+  - `KeyEquivalent(extendedGraphemeClusterLiteral: String)`
   - `KeyEquivalent.rightArrow`
   - `KeyEquivalent.deleteForward`
   - `KeyEquivalent.end`
@@ -1203,6 +1657,7 @@ Modifier.zIndex(value: Double)
   - `ListStyle.bordered`
   - `ListStyle.carousel`
 - `MatchedGeometryProperties` (class)
+  - `MatchedGeometryProperties(rawValue: Int)`
   - `MatchedGeometryProperties.size`
   - `MatchedGeometryProperties.frame`
   - `MatchedGeometryProperties.position`
@@ -1349,59 +1804,45 @@ Modifier.zIndex(value: Double)
 - `WorldTrackingLimitation` (class)
   - `WorldTrackingLimitation.orientation`
   - `WorldTrackingLimitation.translation`
-- `AccessibilityActionKind` (class)
-  - `AccessibilityActionKind(named: String)`
-  - `AccessibilityActionKind.delete`
-  - `AccessibilityActionKind.escape`
-  - `AccessibilityActionKind.default`
-  - `AccessibilityActionKind.magicTap`
-  - `AccessibilityActionKind.showMenu`
-- `AccessibilityLabeledPairRole` (class)
-  - `AccessibilityLabeledPairRole.label`
-  - `AccessibilityLabeledPairRole.content`
-- `AccessibilityTextContentType` (class)
-  - `AccessibilityTextContentType.fileSystem`
-  - `AccessibilityTextContentType.sourceCode`
-  - `AccessibilityTextContentType.spreadsheet`
-  - `AccessibilityTextContentType.wordProcessing`
-  - `AccessibilityTextContentType.plain`
-  - `AccessibilityTextContentType.console`
-  - `AccessibilityTextContentType.messaging`
-  - `AccessibilityTextContentType.narrative`
-- `AccessoryCircularGaugeStyle` (class)
-  - `AccessoryCircularGaugeStyle()`
-- `Alignment` (class)
-  - `Alignment(horizontal: HorizontalAlignment, vertical: VerticalAlignment)`
-  - `Alignment.topLeading`
-  - `Alignment.topTrailing`
-  - `Alignment.bottomLeading`
-  - `Alignment.bottomTrailing`
-  - `Alignment.centerLastTextBaseline`
-  - `Alignment.centerFirstTextBaseline`
-  - `Alignment.leadingLastTextBaseline`
-  - `Alignment.leadingFirstTextBaseline`
-  - `Alignment.trailingLastTextBaseline`
-  - `Alignment.trailingFirstTextBaseline`
-  - `Alignment.top`
-  - `Alignment.bottom`
-  - `Alignment.center`
-  - `Alignment.leading`
-  - `Alignment.trailing`
-- `AnimationTimelineSchedule` (class)
-  - `AnimationTimelineSchedule(minimumInterval: Double? = null, paused: Boolean = false)`
-- `AnyTransition` (class)
-  - `AnyTransition.combined(other: AnyTransition): AnyTransition`
-  - `AnyTransition.animation(animation: Animation?): AnyTransition`
-  - `AnyTransition.asymmetric(insertion: AnyTransition, removal: AnyTransition): AnyTransition`
-  - `AnyTransition.move(edge: Edge): AnyTransition`
-  - `AnyTransition.push(edge: Edge): AnyTransition`
-  - `AnyTransition.scale`
-  - `AnyTransition.scale(scale: Double, anchor: UnitPoint`
-  - `AnyTransition.slide`
-  - `AnyTransition.offset(x: Double`
-  - `AnyTransition.offset(offset: CGSize): AnyTransition`
-  - `AnyTransition.opacity`
-  - `AnyTransition.identity`
+- `AccessibilityAdjustmentDirection` (class)
+  - `AccessibilityAdjustmentDirection.decrement`
+  - `AccessibilityAdjustmentDirection.increment`
+- `AccessibilityQuickActionOutlineStyle` (class)
+- `AccessibilityTraits` (class)
+  - `AccessibilityTraits.intersection(other: AccessibilityTraits): AccessibilityTraits`
+  - `AccessibilityTraits.symmetricDifference(other: AccessibilityTraits): AccessibilityTraits`
+  - `AccessibilityTraits.union(other: AccessibilityTraits): AccessibilityTraits`
+  - `AccessibilityTraits()`
+  - `AccessibilityTraits.isSelected`
+  - `AccessibilityTraits.playsSound`
+  - `AccessibilityTraits.isStaticText`
+  - `AccessibilityTraits.isKeyboardKey`
+  - `AccessibilityTraits.isSearchField`
+  - `AccessibilityTraits.causesPageTurn`
+  - `AccessibilityTraits.isSummaryElement`
+  - `AccessibilityTraits.updatesFrequently`
+  - `AccessibilityTraits.startsMediaSession`
+  - `AccessibilityTraits.allowsDirectInteraction`
+  - `AccessibilityTraits.isLink`
+  - `AccessibilityTraits.isImage`
+  - `AccessibilityTraits.isModal`
+  - `AccessibilityTraits.isButton`
+  - `AccessibilityTraits.isHeader`
+  - `AccessibilityTraits.isTabBar`
+  - `AccessibilityTraits.isToggle`
+- `AccessoryLinearCapacityGaugeStyle` (class)
+  - `AccessoryLinearCapacityGaugeStyle()`
+- `AlternatingRowBackgroundBehavior` (class)
+  - `AlternatingRowBackgroundBehavior.enabled`
+  - `AlternatingRowBackgroundBehavior.disabled`
+  - `AlternatingRowBackgroundBehavior.automatic`
+- `AnyGradient` (class)
+  - `AnyGradient.colorSpace(space: Gradient.ColorSpace): AnyGradient`
+  - `AnyGradient(gradient: Gradient)`
+- `ArrangementViewStyle` (interface)
+  - `ArrangementViewStyle.split`
+  - `ArrangementViewStyle.overlay`
+  - `ArrangementViewStyle.automatic`
 - `AutomaticDisclosureGroupStyle` (class)
   - `AutomaticDisclosureGroupStyle()`
 - `AutomaticNavigationSplitViewStyle` (class)
@@ -1443,6 +1884,7 @@ Modifier.zIndex(value: Double)
   - `ContentSizeCategory.medium`
 - `ControlWidgetConfiguration` (interface)
 - `DatePickerComponents` (class)
+  - `DatePickerComponents(rawValue: Int)`
   - `DatePickerComponents.hourAndMinute`
   - `DatePickerComponents.hourMinuteAndSecond`
   - `DatePickerComponents.date`
@@ -1500,6 +1942,7 @@ Modifier.zIndex(value: Double)
   - `HorizontalDirection.leading`
   - `HorizontalDirection.trailing`
 - `HorizontalDirection.Set` (class)
+  - `HorizontalDirection.Set(rawValue: Int)`
   - `HorizontalDirection.Set(direction: HorizontalDirection)`
   - `HorizontalDirection.Set.all`
   - `HorizontalDirection.Set.leading`
@@ -1730,6 +2173,7 @@ Modifier.zIndex(value: Double)
   - `TextFieldStyle.bordered`
 - `TextInputFormattingControlPlacement` (object)
 - `TextInputFormattingControlPlacement.Set` (class)
+  - `TextInputFormattingControlPlacement.Set(rawValue: Int)`
   - `TextInputFormattingControlPlacement.Set.contextMenu`
   - `TextInputFormattingControlPlacement.Set.accessoryBar`
   - `TextInputFormattingControlPlacement.Set.inputAssistant`
@@ -1778,45 +2222,27 @@ Modifier.zIndex(value: Double)
   - `WritingToolsBehavior.complete`
   - `WritingToolsBehavior.disabled`
   - `WritingToolsBehavior.automatic`
-- `AccessibilityAdjustmentDirection` (class)
-  - `AccessibilityAdjustmentDirection.decrement`
-  - `AccessibilityAdjustmentDirection.increment`
-- `AccessibilityQuickActionOutlineStyle` (class)
-- `AccessibilityTraits` (class)
-  - `AccessibilityTraits.intersection(other: AccessibilityTraits): AccessibilityTraits`
-  - `AccessibilityTraits.symmetricDifference(other: AccessibilityTraits): AccessibilityTraits`
-  - `AccessibilityTraits.union(other: AccessibilityTraits): AccessibilityTraits`
-  - `AccessibilityTraits()`
-  - `AccessibilityTraits.isSelected`
-  - `AccessibilityTraits.playsSound`
-  - `AccessibilityTraits.isStaticText`
-  - `AccessibilityTraits.isKeyboardKey`
-  - `AccessibilityTraits.isSearchField`
-  - `AccessibilityTraits.causesPageTurn`
-  - `AccessibilityTraits.isSummaryElement`
-  - `AccessibilityTraits.updatesFrequently`
-  - `AccessibilityTraits.startsMediaSession`
-  - `AccessibilityTraits.allowsDirectInteraction`
-  - `AccessibilityTraits.isLink`
-  - `AccessibilityTraits.isImage`
-  - `AccessibilityTraits.isModal`
-  - `AccessibilityTraits.isButton`
-  - `AccessibilityTraits.isHeader`
-  - `AccessibilityTraits.isTabBar`
-  - `AccessibilityTraits.isToggle`
-- `AccessoryLinearCapacityGaugeStyle` (class)
-  - `AccessoryLinearCapacityGaugeStyle()`
-- `AlternatingRowBackgroundBehavior` (class)
-  - `AlternatingRowBackgroundBehavior.enabled`
-  - `AlternatingRowBackgroundBehavior.disabled`
-  - `AlternatingRowBackgroundBehavior.automatic`
-- `AnyGradient` (class)
-  - `AnyGradient.colorSpace(space: Gradient.ColorSpace): AnyGradient`
-  - `AnyGradient(gradient: Gradient)`
-- `ArrangementViewStyle` (interface)
-  - `ArrangementViewStyle.split`
-  - `ArrangementViewStyle.overlay`
-  - `ArrangementViewStyle.automatic`
+- `AccessibilityChildBehavior` (class)
+  - `AccessibilityChildBehavior.ignore`
+  - `AccessibilityChildBehavior.combine`
+  - `AccessibilityChildBehavior.contain`
+- `AccessibilityQuickActionPromptStyle` (class)
+- `AccessibilityZoomGestureAction` (object)
+- `AccessibilityZoomGestureAction.Direction` (class)
+  - `AccessibilityZoomGestureAction.Direction.zoomIn`
+  - `AccessibilityZoomGestureAction.Direction.zoomOut`
+- `AccessoryLinearGaugeStyle` (class)
+  - `AccessoryLinearGaugeStyle()`
+- `Angle` (class)
+  - `Angle(degrees: Double)`
+  - `Angle()`
+  - `Angle.zero`
+  - `Angle.degrees(degrees: Double): Angle`
+  - `Angle.radians(radians: Double): Angle`
+- `AnyNavigationTransition` (class)
+  - `AnyNavigationTransition(transition: NavigationTransition)`
+- `AsyncImagePhase` (class)
+  - `AsyncImagePhase.empty`
 - `AutomaticFormStyle` (class)
   - `AutomaticFormStyle()`
 - `AutomaticNavigationTransition` (class)
@@ -1925,6 +2351,7 @@ Modifier.zIndex(value: Double)
   - `FillStyle(eoFill: Boolean = false, antialiased: Boolean = true)`
 - `FormPresentationSizing` (class)
 - `GestureInputKinds` (class)
+  - `GestureInputKinds(rawValue: Int)`
   - `GestureInputKinds.directTouch`
   - `GestureInputKinds.indirectTouch`
   - `GestureInputKinds.all`
@@ -1941,6 +2368,7 @@ Modifier.zIndex(value: Double)
   - `HorizontalEdge.leading`
   - `HorizontalEdge.trailing`
 - `HorizontalEdge.Set` (class)
+  - `HorizontalEdge.Set(rawValue: Int)`
   - `HorizontalEdge.Set(edge: HorizontalEdge)`
   - `HorizontalEdge.Set.all`
   - `HorizontalEdge.Set.leading`
@@ -2004,6 +2432,7 @@ Modifier.zIndex(value: Double)
   - `PaletteSelectionEffect.custom`
   - `PaletteSelectionEffect.automatic`
 - `PinnedScrollableViews` (class)
+  - `PinnedScrollableViews(rawValue: Int)`
   - `PinnedScrollableViews.sectionFooters`
   - `PinnedScrollableViews.sectionHeaders`
 - `PlainWindowStyle` (class)
@@ -2111,6 +2540,7 @@ Modifier.zIndex(value: Double)
 - `Text.Layout.CharacterIndex` (class)
   - `Text.Layout.CharacterIndex.advanced(n: Int): Text.Layout.CharacterIndex`
 - `Text.Layout.DrawingOptions` (class)
+  - `Text.Layout.DrawingOptions(rawValue: Int)`
   - `Text.Layout.DrawingOptions.disablesSubpixelQuantization`
 - `Text.Layout.TypographicBounds` (class)
   - `Text.Layout.TypographicBounds()`
@@ -2164,6 +2594,7 @@ Modifier.zIndex(value: Double)
   - `VerticalDirection.up`
   - `VerticalDirection.down`
 - `VerticalDirection.Set` (class)
+  - `VerticalDirection.Set(rawValue: Int)`
   - `VerticalDirection.Set(direction: VerticalDirection)`
   - `VerticalDirection.Set.up`
   - `VerticalDirection.Set.all`
@@ -2180,27 +2611,29 @@ Modifier.zIndex(value: Double)
   - `WindowStyle.titleBar`
 - `ZStackLayout` (class)
   - `ZStackLayout(alignment: Alignment = Alignment.center)`
-- `AccessibilityChildBehavior` (class)
-  - `AccessibilityChildBehavior.ignore`
-  - `AccessibilityChildBehavior.combine`
-  - `AccessibilityChildBehavior.contain`
-- `AccessibilityQuickActionPromptStyle` (class)
-- `AccessibilityZoomGestureAction` (object)
-- `AccessibilityZoomGestureAction.Direction` (class)
-  - `AccessibilityZoomGestureAction.Direction.zoomIn`
-  - `AccessibilityZoomGestureAction.Direction.zoomOut`
-- `AccessoryLinearGaugeStyle` (class)
-  - `AccessoryLinearGaugeStyle()`
-- `Angle` (class)
-  - `Angle(degrees: Double)`
-  - `Angle()`
-  - `Angle.zero`
-  - `Angle.degrees(degrees: Double): Angle`
-  - `Angle.radians(radians: Double): Angle`
-- `AnyNavigationTransition` (class)
-  - `AnyNavigationTransition(transition: NavigationTransition)`
-- `AsyncImagePhase` (class)
-  - `AsyncImagePhase.empty`
+- `AccessibilityCustomContentKey` (class)
+  - `AccessibilityCustomContentKey(label: LocalizedKey, id: String)`
+  - `AccessibilityCustomContentKey(label: String, id: String)`
+  - `AccessibilityCustomContentKey(label: LocalizedKey)`
+- `AccessibilityQuickActionStyle` (interface)
+  - `AccessibilityQuickActionStyle.prompt`
+  - `AccessibilityQuickActionStyle.outline`
+- `AccessoryBarActionButtonStyle` (class)
+  - `AccessoryBarActionButtonStyle()`
+- `ActionSheet` (class)
+  - `ActionSheet(title: String, message: String? = null, buttons: List<Alert.Button>)`
+- `AngularGradient` (class)
+  - `AngularGradient(stops: List<Gradient.Stop>, center: UnitPoint, startAngle: Angle, endAngle: Angle)`
+  - `AngularGradient(stops: List<Gradient.Stop>, center: UnitPoint, angle: Angle = Angle.zero)`
+  - `AngularGradient(colors: List<Color>, center: UnitPoint, startAngle: Angle, endAngle: Angle)`
+  - `AngularGradient(colors: List<Color>, center: UnitPoint, angle: Angle = Angle.zero)`
+  - `AngularGradient(gradient: Gradient, center: UnitPoint, startAngle: Angle = Angle.zero, endAngle: Angle = Angle.zero)`
+  - `AngularGradient(gradient: Gradient, center: UnitPoint, angle: Angle = Angle.zero)`
+- `AnyScrollTargetBehavior` (class)
+  - `AnyScrollTargetBehavior(base: ScrollTargetBehavior)`
+- `AttributedTextFormatting` (object)
+- `AttributedTextFormatting.Transferable` (class)
+  - `AttributedTextFormatting.Transferable(text: String, environment: EnvironmentValues)`
 - `AutomaticHoverEffect` (class)
   - `AutomaticHoverEffect()`
 - `AutomaticPresentationSizing` (class)
@@ -2296,6 +2729,7 @@ Modifier.zIndex(value: Double)
   - `FormStyle.grouped`
   - `FormStyle.automatic`
 - `GestureMask` (class)
+  - `GestureMask(rawValue: Int)`
   - `GestureMask.all`
   - `GestureMask.none`
   - `GestureMask.gesture`
@@ -2412,6 +2846,7 @@ Modifier.zIndex(value: Double)
 - `RotationGesture` (class)
   - `RotationGesture(minimumAngleDelta: Angle? = null)`
 - `SafeAreaRegions` (class)
+  - `SafeAreaRegions(rawValue: Int)`
   - `SafeAreaRegions.all`
   - `SafeAreaRegions.keyboard`
   - `SafeAreaRegions.container`
@@ -2518,10 +2953,15 @@ Modifier.zIndex(value: Double)
 - `SystemFormatStyle` (object)
 - `SystemFormatStyle.DateOffset` (class)
   - `SystemFormatStyle.DateOffset(anchor: Double, maxFieldCount: Int = 2)`
+  - `SystemFormatStyle.DateOffset.locale(locale: String): SystemFormatStyle.DateOffset`
 - `SystemFormatStyle.DateReference` (class)
   - `SystemFormatStyle.DateReference(date: Double, maxFieldCount: Int = 2)`
+  - `SystemFormatStyle.DateReference.locale(locale: String): SystemFormatStyle.DateReference`
 - `SystemFormatStyle.Stopwatch` (class)
   - `SystemFormatStyle.Stopwatch(startingAt: Double, showsHours: Boolean = true, maxFieldCount: Int = 4)`
+  - `SystemFormatStyle.Stopwatch.locale(locale: String): SystemFormatStyle.Stopwatch`
+- `SystemFormatStyle.Timer` (class)
+  - `SystemFormatStyle.Timer.locale(locale: String): SystemFormatStyle.Timer`
 - `TabRole` (class)
   - `TabRole.search`
   - `TabRole.prominent`
@@ -2574,6 +3014,7 @@ Modifier.zIndex(value: Double)
   - `VerticalEdge.top`
   - `VerticalEdge.bottom`
 - `VerticalEdge.Set` (class)
+  - `VerticalEdge.Set(rawValue: Int)`
   - `VerticalEdge.Set(e: VerticalEdge)`
   - `VerticalEdge.Set.all`
   - `VerticalEdge.Set.top`
@@ -2589,26 +3030,64 @@ Modifier.zIndex(value: Double)
   - `WindowToolbarFullScreenVisibility.onHover`
   - `WindowToolbarFullScreenVisibility.visible`
   - `WindowToolbarFullScreenVisibility.automatic`
-- `AccessibilityCustomContentKey` (class)
-  - `AccessibilityCustomContentKey(label: LocalizedKey, id: String)`
-  - `AccessibilityCustomContentKey(label: String, id: String)`
-  - `AccessibilityCustomContentKey(label: LocalizedKey)`
-- `AccessibilityQuickActionStyle` (interface)
-  - `AccessibilityQuickActionStyle.prompt`
-  - `AccessibilityQuickActionStyle.outline`
-- `AccessoryBarActionButtonStyle` (class)
-  - `AccessoryBarActionButtonStyle()`
-- `ActionSheet` (class)
-  - `ActionSheet(title: String, message: String? = null, buttons: List<Alert.Button>)`
-- `AngularGradient` (class)
-  - `AngularGradient(stops: List<Gradient.Stop>, center: UnitPoint, startAngle: Angle, endAngle: Angle)`
-  - `AngularGradient(stops: List<Gradient.Stop>, center: UnitPoint, angle: Angle = Angle.zero)`
-  - `AngularGradient(colors: List<Color>, center: UnitPoint, startAngle: Angle, endAngle: Angle)`
-  - `AngularGradient(colors: List<Color>, center: UnitPoint, angle: Angle = Angle.zero)`
-  - `AngularGradient(gradient: Gradient, center: UnitPoint, startAngle: Angle = Angle.zero, endAngle: Angle = Angle.zero)`
-  - `AngularGradient(gradient: Gradient, center: UnitPoint, angle: Angle = Angle.zero)`
-- `AnyScrollTargetBehavior` (class)
-  - `AnyScrollTargetBehavior(base: ScrollTargetBehavior)`
+- `AccessibilityDirectTouchOptions` (class)
+  - `AccessibilityDirectTouchOptions(rawValue: Int)`
+  - `AccessibilityDirectTouchOptions.silentOnTouch`
+  - `AccessibilityDirectTouchOptions.requiresActivation`
+- `AccessibilitySystemRotor` (class)
+  - `AccessibilitySystemRotor.italicText`
+  - `AccessibilitySystemRotor.textFields`
+  - `AccessibilitySystemRotor.underlineText`
+  - `AccessibilitySystemRotor.misspelledWords`
+  - `AccessibilitySystemRotor.links(visited: Boolean): AccessibilitySystemRotor`
+  - `AccessibilitySystemRotor.links`
+  - `AccessibilitySystemRotor.lists`
+  - `AccessibilitySystemRotor.images`
+  - `AccessibilitySystemRotor.tables`
+  - `AccessibilitySystemRotor.boldText`
+  - `AccessibilitySystemRotor.headings(level: AccessibilityHeadingLevel): AccessibilitySystemRotor`
+  - `AccessibilitySystemRotor.headings`
+  - `AccessibilitySystemRotor.landmarks`
+- `AccessoryBarButtonStyle` (class)
+  - `AccessoryBarButtonStyle()`
+- `AdaptableTabBarPlacement` (class)
+  - `AdaptableTabBarPlacement.tabBar`
+  - `AdaptableTabBarPlacement.sidebar`
+  - `AdaptableTabBarPlacement.automatic`
+- `Animation` (class)
+  - `Animation.repeatCount(repeatCount: Int, autoreverses: Boolean`
+  - `Animation.repeatForever(autoreverses: Boolean`
+  - `Animation.logicallyComplete(after: Double): Animation`
+  - `Animation.delay(delay: Double): Animation`
+  - `Animation.speed(speed: Double): Animation`
+  - `Animation.timingCurve(curve: UnitCurve, duration: Double): Animation`
+  - `Animation.timingCurve(p1x: Double, p1y: Double, p2x: Double, p2y: Double, duration: Double`
+  - `Animation.interactiveSpring(duration: Double`
+  - `Animation.interactiveSpring`
+  - `Animation.interpolatingSpring(mass: Double`
+  - `Animation.interpolatingSpring(duration: Double`
+  - `Animation.interpolatingSpring`
+  - `Animation.interpolatingSpring(spring: Spring, initialVelocity: Double`
+  - `Animation.bouncy(duration: Double`
+  - `Animation.bouncy`
+  - `Animation.easeIn(duration: Double): Animation`
+  - `Animation.easeIn`
+  - `Animation.linear(duration: Double): Animation`
+  - `Animation.linear`
+  - `Animation.smooth(duration: Double`
+  - `Animation.smooth`
+  - `Animation.snappy(duration: Double`
+  - `Animation.snappy`
+  - `Animation.spring(duration: Double`
+  - `Animation.spring`
+  - `Animation.spring(spring: Spring, blendDuration: Double`
+  - `Animation.default`
+  - `Animation.easeOut(duration: Double): Animation`
+  - `Animation.easeOut`
+  - `Animation.easeInOut(duration: Double): Animation`
+  - `Animation.easeInOut`
+- `AnyShape` (class)
+  - `AnyShape(shape: Shape)`
 - `AttributedTextSelection` (class)
   - `AttributedTextSelection()`
 - `AutomaticImmersionStyle` (class)
@@ -2674,6 +3153,7 @@ Modifier.zIndex(value: Double)
   - `Edge.Corner.bottomLeading`
   - `Edge.Corner.bottomTrailing`
 - `Edge.Corner.Set` (class)
+  - `Edge.Corner.Set(rawValue: Int)`
   - `Edge.Corner.Set(corner: Edge.Corner)`
   - `Edge.Corner.Set.topLeading`
   - `Edge.Corner.Set.topTrailing`
@@ -2694,6 +3174,7 @@ Modifier.zIndex(value: Double)
 - `Edge.Corner.Style.AnimatableData` (class)
   - `Edge.Corner.Style.AnimatableData.zero`
 - `Edge.Set` (class)
+  - `Edge.Set(rawValue: Int)`
   - `Edge.Set(e: Edge)`
   - `Edge.Set.horizontal`
   - `Edge.Set.all`
@@ -2713,6 +3194,7 @@ Modifier.zIndex(value: Double)
   - `FrameResizeDirection.inward`
   - `FrameResizeDirection.outward`
 - `FrameResizeDirection.Set` (class)
+  - `FrameResizeDirection.Set(rawValue: Int)`
   - `FrameResizeDirection.Set(direction: FrameResizeDirection)`
   - `FrameResizeDirection.Set.all`
   - `FrameResizeDirection.Set.inward`
@@ -2890,6 +3372,7 @@ Modifier.zIndex(value: Double)
   - `ToolbarVerticalBehavior.disabled`
   - `ToolbarVerticalBehavior.automatic`
 - `TypesettingLanguage` (class)
+  - `TypesettingLanguage.explicit(language: String): TypesettingLanguage`
   - `TypesettingLanguage.automatic`
 - `UnitPoint` (class)
   - `UnitPoint(x: Double, y: Double)`
@@ -2924,442 +3407,3 @@ Modifier.zIndex(value: Double)
   - `WindowToolbarStyle.unified(showsTitle: Boolean): UnifiedWindowToolbarStyle`
   - `WindowToolbarStyle.unified`
   - `WindowToolbarStyle.expanded`
-- `AccessibilityDirectTouchOptions` (class)
-  - `AccessibilityDirectTouchOptions.silentOnTouch`
-  - `AccessibilityDirectTouchOptions.requiresActivation`
-- `AccessibilitySystemRotor` (class)
-  - `AccessibilitySystemRotor.italicText`
-  - `AccessibilitySystemRotor.textFields`
-  - `AccessibilitySystemRotor.underlineText`
-  - `AccessibilitySystemRotor.misspelledWords`
-  - `AccessibilitySystemRotor.links(visited: Boolean): AccessibilitySystemRotor`
-  - `AccessibilitySystemRotor.links`
-  - `AccessibilitySystemRotor.lists`
-  - `AccessibilitySystemRotor.images`
-  - `AccessibilitySystemRotor.tables`
-  - `AccessibilitySystemRotor.boldText`
-  - `AccessibilitySystemRotor.headings(level: AccessibilityHeadingLevel): AccessibilitySystemRotor`
-  - `AccessibilitySystemRotor.headings`
-  - `AccessibilitySystemRotor.landmarks`
-- `AccessoryBarButtonStyle` (class)
-  - `AccessoryBarButtonStyle()`
-- `AdaptableTabBarPlacement` (class)
-  - `AdaptableTabBarPlacement.tabBar`
-  - `AdaptableTabBarPlacement.sidebar`
-  - `AdaptableTabBarPlacement.automatic`
-- `Animation` (class)
-  - `Animation.repeatCount(repeatCount: Int, autoreverses: Boolean`
-  - `Animation.repeatForever(autoreverses: Boolean`
-  - `Animation.logicallyComplete(after: Double): Animation`
-  - `Animation.delay(delay: Double): Animation`
-  - `Animation.speed(speed: Double): Animation`
-  - `Animation.timingCurve(curve: UnitCurve, duration: Double): Animation`
-  - `Animation.timingCurve(p1x: Double, p1y: Double, p2x: Double, p2y: Double, duration: Double`
-  - `Animation.interactiveSpring(duration: Double`
-  - `Animation.interactiveSpring`
-  - `Animation.interpolatingSpring(mass: Double`
-  - `Animation.interpolatingSpring(duration: Double`
-  - `Animation.interpolatingSpring`
-  - `Animation.interpolatingSpring(spring: Spring, initialVelocity: Double`
-  - `Animation.bouncy(duration: Double`
-  - `Animation.bouncy`
-  - `Animation.easeIn(duration: Double): Animation`
-  - `Animation.easeIn`
-  - `Animation.linear(duration: Double): Animation`
-  - `Animation.linear`
-  - `Animation.smooth(duration: Double`
-  - `Animation.smooth`
-  - `Animation.snappy(duration: Double`
-  - `Animation.snappy`
-  - `Animation.spring(duration: Double`
-  - `Animation.spring`
-  - `Animation.spring(spring: Spring, blendDuration: Double`
-  - `Animation.default`
-  - `Animation.easeOut(duration: Double): Animation`
-  - `Animation.easeOut`
-  - `Animation.easeInOut(duration: Double): Animation`
-  - `Animation.easeInOut`
-- `AnyShape` (class)
-  - `AnyShape(shape: Shape)`
-- `AutomaticArrangementViewStyle` (class)
-  - `AutomaticArrangementViewStyle()`
-- `AutomaticLabeledContentStyle` (class)
-  - `AutomaticLabeledContentStyle()`
-- `AutomaticTextEditorStyle` (class)
-  - `AutomaticTextEditorStyle()`
-- `BlendMode` (class)
-  - `BlendMode.colorDodge`
-  - `BlendMode.difference`
-  - `BlendMode.luminosity`
-  - `BlendMode.plusDarker`
-  - `BlendMode.saturation`
-  - `BlendMode.sourceAtop`
-  - `BlendMode.plusLighter`
-  - `BlendMode.destinationOut`
-  - `BlendMode.destinationOver`
-  - `BlendMode.hue`
-  - `BlendMode.color`
-  - `BlendMode.darken`
-  - `BlendMode.normal`
-  - `BlendMode.screen`
-  - `BlendMode.lighten`
-  - `BlendMode.overlay`
-  - `BlendMode.multiply`
-  - `BlendMode.colorBurn`
-  - `BlendMode.exclusion`
-  - `BlendMode.hardLight`
-  - `BlendMode.softLight`
-- `BorderedTableStyle` (class)
-  - `BorderedTableStyle(alternatesRowBackgrounds: Boolean)`
-  - `BorderedTableStyle()`
-- `ButtonBorderShape` (class)
-  - `ButtonBorderShape.roundedRectangle(radius: Double): ButtonBorderShape`
-  - `ButtonBorderShape.roundedRectangle`
-  - `ButtonBorderShape.circle`
-  - `ButtonBorderShape.capsule`
-  - `ButtonBorderShape.automatic`
-- `Capsule` (class)
-  - `Capsule(style: RoundedCornerStyle = RoundedCornerStyle.continuous)`
-- `Circle` (class)
-  - `Circle()`
-- `ColorScheme` (class)
-  - `ColorScheme.dark`
-  - `ColorScheme.light`
-- `CompactMenuControlGroupStyle` (class)
-  - `CompactMenuControlGroupStyle()`
-- `ContentMode` (class)
-  - `ContentMode.fit`
-  - `ContentMode.fill`
-- `ControlGroupStyle` (interface)
-  - `ControlGroupStyle.navigation`
-  - `ControlGroupStyle.compactMenu`
-  - `ControlGroupStyle.menu`
-  - `ControlGroupStyle.palette`
-  - `ControlGroupStyle.automatic`
-- `CrossFadeNavigationTransition` (class)
-- `DefaultDocumentGroupLaunchActions` (class)
-  - `DefaultDocumentGroupLaunchActions()`
-- `DefaultListStyle` (class)
-  - `DefaultListStyle()`
-- `DefaultTabViewStyle` (class)
-  - `DefaultTabViewStyle()`
-- `DeviceHinge` (object)
-- `DeviceHinge.Status` (class)
-  - `DeviceHinge.Status.partiallyOpen`
-  - `DeviceHinge.Status.closed`
-  - `DeviceHinge.Status.fullyOpen`
-- `DocumentCreationSource` (class)
-  - `DocumentCreationSource(id: String)`
-- `DropConfiguration` (class)
-  - `DropConfiguration(operation: DropOperation)`
-- `EdgeInsets` (class)
-  - `EdgeInsets(top: Double, leading: Double, bottom: Double, trailing: Double)`
-  - `EdgeInsets.inset(corners: RectangleCornerInsets, edges: Edge.Set`
-  - `EdgeInsets()`
-- `EmptyAnimatableData` (class)
-  - `EmptyAnimatableData()`
-  - `EmptyAnimatableData.zero`
-- `EmptyWidgetConfiguration` (class)
-  - `EmptyWidgetConfiguration()`
-- `FieldDatePickerStyle` (class)
-  - `FieldDatePickerStyle()`
-- `FocusInteractions` (class)
-  - `FocusInteractions(rawValue: Int)`
-  - `FocusInteractions.edit`
-  - `FocusInteractions.activate`
-  - `FocusInteractions.automatic`
-- `FrameResizePosition` (class)
-  - `FrameResizePosition.topLeading`
-  - `FrameResizePosition.topTrailing`
-  - `FrameResizePosition.bottomLeading`
-  - `FrameResizePosition.bottomTrailing`
-  - `FrameResizePosition.top`
-  - `FrameResizePosition.bottom`
-  - `FrameResizePosition.leading`
-  - `FrameResizePosition.trailing`
-- `GlassButtonStyle` (class)
-  - `GlassButtonStyle()`
-  - `GlassButtonStyle(glass: Glass)`
-- `GraphicsContext` (object)
-- `GraphicsContext.BlendMode` (class)
-  - `GraphicsContext.BlendMode.colorDodge`
-  - `GraphicsContext.BlendMode.difference`
-  - `GraphicsContext.BlendMode.luminosity`
-  - `GraphicsContext.BlendMode.plusDarker`
-  - `GraphicsContext.BlendMode.saturation`
-  - `GraphicsContext.BlendMode.sourceAtop`
-  - `GraphicsContext.BlendMode.plusLighter`
-  - `GraphicsContext.BlendMode.destinationIn`
-  - `GraphicsContext.BlendMode.destinationOut`
-  - `GraphicsContext.BlendMode.destinationAtop`
-  - `GraphicsContext.BlendMode.destinationOver`
-  - `GraphicsContext.BlendMode.hue`
-  - `GraphicsContext.BlendMode.xor`
-  - `GraphicsContext.BlendMode.copy`
-  - `GraphicsContext.BlendMode.clear`
-  - `GraphicsContext.BlendMode.color`
-  - `GraphicsContext.BlendMode.darken`
-  - `GraphicsContext.BlendMode.normal`
-  - `GraphicsContext.BlendMode.screen`
-  - `GraphicsContext.BlendMode.lighten`
-  - `GraphicsContext.BlendMode.overlay`
-  - `GraphicsContext.BlendMode.multiply`
-  - `GraphicsContext.BlendMode.sourceIn`
-  - `GraphicsContext.BlendMode.colorBurn`
-  - `GraphicsContext.BlendMode.exclusion`
-  - `GraphicsContext.BlendMode.hardLight`
-  - `GraphicsContext.BlendMode.softLight`
-  - `GraphicsContext.BlendMode.sourceOut`
-- `GraphicsContext.BlurOptions` (class)
-  - `GraphicsContext.BlurOptions.dithersResult`
-  - `GraphicsContext.BlurOptions.opaque`
-- `GraphicsContext.ClipOptions` (class)
-  - `GraphicsContext.ClipOptions.inverse`
-- `GraphicsContext.Filter` (class)
-  - `GraphicsContext.Filter.brightness(amount: Double): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.saturation(amount: Double): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.colorInvert(amount: Double`
-  - `GraphicsContext.Filter.colorMatrix(matrix: ColorMatrix, isPremultiplied: Boolean): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.colorMatrix(matrix: ColorMatrix): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.colorShader(shader: Shader): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.hueRotation(angle: Angle): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.layerShader(shader: Shader, maxSampleOffset: CGSize): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.alphaMultiply(color: Color): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.colorMultiply(color: Color): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.alphaThreshold(min: Double, max: Double`
-  - `GraphicsContext.Filter.distortionShader(shader: Shader, maxSampleOffset: CGSize): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.luminanceToAlpha`
-  - `GraphicsContext.Filter.projectionTransform(matrix: ProjectionTransform): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.blur(radius: Double, options: GraphicsContext.BlurOptions?`
-  - `GraphicsContext.Filter.shadow(color: Color?`
-  - `GraphicsContext.Filter.contrast(amount: Double): GraphicsContext.Filter`
-  - `GraphicsContext.Filter.grayscale(amount: Double): GraphicsContext.Filter`
-- `GraphicsContext.FilterOptions` (class)
-  - `GraphicsContext.FilterOptions.linearColor`
-- `GraphicsContext.GradientOptions` (class)
-  - `GraphicsContext.GradientOptions.linearColor`
-  - `GraphicsContext.GradientOptions.mirror`
-  - `GraphicsContext.GradientOptions.repeat`
-- `GraphicsContext.Shading` (class)
-  - `GraphicsContext.Shading.foreground`
-  - `GraphicsContext.Shading.conicGradient(gradient: AnyGradient, center: CGPoint, angle: Angle`
-  - `GraphicsContext.Shading.conicGradient(gradient: Gradient, center: CGPoint, angle: Angle`
-  - `GraphicsContext.Shading.linearGradient(gradient: AnyGradient, startPoint: CGPoint, endPoint: CGPoint, options: GraphicsContext.GradientOptions?`
-  - `GraphicsContext.Shading.linearGradient(gradient: Gradient, startPoint: CGPoint, endPoint: CGPoint, options: GraphicsContext.GradientOptions?`
-  - `GraphicsContext.Shading.radialGradient(gradient: AnyGradient, startCenter: CGPoint, startRadius: Double, endCenter: CGPoint, endRadius: Double, options: GraphicsContext.GradientOptions?`
-  - `GraphicsContext.Shading.radialGradient(gradient: Gradient, startCenter: CGPoint, startRadius: Double, endCenter: CGPoint, endRadius: Double, options: GraphicsContext.GradientOptions?`
-  - `GraphicsContext.Shading.radialGradient(gradient: AnyGradient, center: CGPoint, startRadius: Double, endRadius: Double, options: GraphicsContext.GradientOptions?`
-  - `GraphicsContext.Shading.radialGradient(gradient: Gradient, center: CGPoint, startRadius: Double, endRadius: Double, options: GraphicsContext.GradientOptions?`
-  - `GraphicsContext.Shading.color(colorSpace: Color.RGBColorSpace`
-  - `GraphicsContext.Shading.color(colorSpace: Color.RGBColorSpace`
-  - `GraphicsContext.Shading.color(color: Color): GraphicsContext.Shading`
-  - `GraphicsContext.Shading.style(style: ShapeStyle): GraphicsContext.Shading`
-  - `GraphicsContext.Shading.shader(shader: Shader, bounds: CGRect?`
-  - `GraphicsContext.Shading.palette(array: List<GraphicsContext.Shading>): GraphicsContext.Shading`
-  - `GraphicsContext.Shading.backdrop`
-- `GraphicsContext.ShadowOptions` (class)
-  - `GraphicsContext.ShadowOptions.shadowOnly`
-  - `GraphicsContext.ShadowOptions.shadowAbove`
-  - `GraphicsContext.ShadowOptions.invertsAlpha`
-  - `GraphicsContext.ShadowOptions.disablesGroup`
-- `GroupedTabViewStyle` (class)
-  - `GroupedTabViewStyle()`
-- `HighlightHoverEffect` (class)
-  - `HighlightHoverEffect()`
-- `IconOnlyLabelStyle` (class)
-  - `IconOnlyLabelStyle()`
-- `InlinePickerStyle` (class)
-  - `InlinePickerStyle()`
-- `InterfaceOrientation` (class)
-  - `InterfaceOrientation.landscapeLeft`
-  - `InterfaceOrientation.landscapeRight`
-  - `InterfaceOrientation.portraitUpsideDown`
-  - `InterfaceOrientation.portrait`
-- `LayoutDirection` (class)
-  - `LayoutDirection.leftToRight`
-  - `LayoutDirection.rightToLeft`
-- `LinearGaugeStyle` (class)
-  - `LinearGaugeStyle(tint: Color)`
-  - `LinearGaugeStyle(tint: Gradient)`
-  - `LinearGaugeStyle()`
-- `ListSectionSpacing` (class)
-  - `ListSectionSpacing.custom(spacing: Double): ListSectionSpacing`
-  - `ListSectionSpacing.compact`
-  - `ListSectionSpacing.default`
-- `MagnifyGesture` (class)
-  - `MagnifyGesture(minimumScaleDelta: Double = 0.01, inputKinds: GestureInputKinds = GestureInputKinds.all)`
-  - `MagnifyGesture(minimumScaleDelta: Double = 0.01)`
-- `MenuButtonStyle` (interface)
-- `MoveCommandDirection` (class)
-  - `MoveCommandDirection.up`
-  - `MoveCommandDirection.down`
-  - `MoveCommandDirection.left`
-  - `MoveCommandDirection.right`
-- `NavigationBarItem` (object)
-- `NavigationBarItem.TitleDisplayMode` (class)
-  - `NavigationBarItem.TitleDisplayMode.large`
-  - `NavigationBarItem.TitleDisplayMode.inline`
-  - `NavigationBarItem.TitleDisplayMode.automatic`
-- `NavigationSplitViewVisibility` (class)
-  - `NavigationSplitViewVisibility.detailOnly`
-  - `NavigationSplitViewVisibility.doubleColumn`
-  - `NavigationSplitViewVisibility.all`
-  - `NavigationSplitViewVisibility.automatic`
-- `OpenURLAction` (object)
-- `OpenURLAction.Result` (class)
-  - `OpenURLAction.Result.systemAction`
-  - `OpenURLAction.Result.systemAction(url: String?`
-  - `OpenURLAction.Result.systemAction(url: String): OpenURLAction.Result`
-  - `OpenURLAction.Result.handled`
-  - `OpenURLAction.Result.discarded`
-- `PagingScrollTargetBehavior` (class)
-  - `PagingScrollTargetBehavior()`
-- `PencilSqueezeGesturePhase` (class)
-  - `PencilSqueezeGesturePhase.failed`
-- `PlainListStyle` (class)
-  - `PlainListStyle()`
-- `PopoverAttachmentAnchor` (class)
-  - `PopoverAttachmentAnchor.point(p0: UnitPoint): PopoverAttachmentAnchor`
-- `PresentationSizing` (interface)
-  - `PresentationSizing.form`
-  - `PresentationSizing.page`
-  - `PresentationSizing.fitted`
-  - `PresentationSizing.automatic`
-- `ProgressiveImmersionStyle` (class)
-  - `ProgressiveImmersionStyle(immersion: ClosedFloatingPointRange<Double>, initialAmount: Double? = null)`
-  - `ProgressiveImmersionStyle()`
-- `PullDownMenuButtonStyle` (class)
-  - `PullDownMenuButtonStyle()`
-- `RectangleCornerRadii` (class)
-  - `RectangleCornerRadii(topLeading: Double = 0.0, bottomLeading: Double = 0.0, bottomTrailing: Double = 0.0, topTrailing: Double = 0.0)`
-- `RoundedCornerStyle` (class)
-  - `RoundedCornerStyle.continuous`
-  - `RoundedCornerStyle.circular`
-- `SceneLaunchBehavior` (class)
-  - `SceneLaunchBehavior.suppressed`
-  - `SceneLaunchBehavior.automatic`
-  - `SceneLaunchBehavior.presented`
-- `ScrollContentOffsetAdjustmentBehavior` (class)
-  - `ScrollContentOffsetAdjustmentBehavior.disabled`
-  - `ScrollContentOffsetAdjustmentBehavior.automatic`
-- `ScrollInputKind` (class)
-  - `ScrollInputKind.handGestureShortcut`
-- `ScrollTransitionPhase` (class)
-  - `ScrollTransitionPhase.topLeading`
-  - `ScrollTransitionPhase.bottomTrailing`
-  - `ScrollTransitionPhase.identity`
-- `SegmentedPickerStyle` (class)
-  - `SegmentedPickerStyle()`
-- `ShaderLibrary` (class)
-  - `ShaderLibrary(url: String)`
-  - `ShaderLibrary.default`
-- `SidebarCommands` (class)
-  - `SidebarCommands()`
-- `SnapshotResponse` (class)
-  - `SnapshotResponse(restoredDefaultState: Boolean = false, estimatedSnapshotExpiration: Double? = null, identifier: String? = null)`
-- `Spring` (class)
-  - `Spring(settlingDuration: Double, dampingRatio: Double, epsilon: Double = 0.001)`
-  - `Spring(mass: Double = 1.0, stiffness: Double, damping: Double, allowOverDamping: Boolean = false)`
-  - `Spring(duration: Double = 0.5, bounce: Double = 0.0)`
-  - `Spring.bouncy(duration: Double`
-  - `Spring.bouncy`
-  - `Spring.smooth(duration: Double`
-  - `Spring.smooth`
-  - `Spring.snappy(duration: Double`
-  - `Spring.snappy`
-- `SubmitLabel` (class)
-  - `SubmitLabel.go`
-  - `SubmitLabel.done`
-  - `SubmitLabel.join`
-  - `SubmitLabel.next`
-  - `SubmitLabel.send`
-  - `SubmitLabel.route`
-  - `SubmitLabel.`return``
-  - `SubmitLabel.search`
-  - `SubmitLabel.`continue``
-- `SymbolEffectTransition` (class)
-- `TabBarOnlyTabViewStyle` (class)
-  - `TabBarOnlyTabViewStyle()`
-- `TabSectionExpansion` (class)
-  - `TabSectionExpansion.expanded`
-  - `TabSectionExpansion.automatic`
-  - `TabSectionExpansion.collapsed`
-- `TableStyle` (interface)
-  - `TableStyle.inset(alternatesRowBackgrounds: Boolean): InsetTableStyle`
-  - `TableStyle.inset`
-  - `TableStyle.bordered(alternatesRowBackgrounds: Boolean): BorderedTableStyle`
-  - `TableStyle.bordered`
-  - `TableStyle.automatic`
-- `TextEditor` (class)
-  - `TextEditor(text: String, onTextChange: (String) -> Unit)`
-- `TextInputDictationActivation` (class)
-  - `TextInputDictationActivation.onLook`
-  - `TextInputDictationActivation.onSelect`
-- `TimelineSchedule` (interface)
-  - `TimelineSchedule.everyMinute`
-  - `TimelineSchedule.periodic(startDate: Double, interval: Double): PeriodicTimelineSchedule`
-  - `TimelineSchedule.animation(minimumInterval: Double?`
-  - `TimelineSchedule.animation`
-- `ToggleStyle` (interface)
-  - `ToggleStyle.button`
-  - `ToggleStyle.switch`
-  - `ToggleStyle.automatic`
-  - `ToggleStyle.checkbox`
-- `ToolbarItemPlacement` (class)
-  - `ToolbarItemPlacement(id: Any)`
-  - `ToolbarItemPlacement.largeTitle`
-  - `ToolbarItemPlacement.navigation`
-  - `ToolbarItemPlacement.accessoryBar(id: Any): ToolbarItemPlacement`
-  - `ToolbarItemPlacement.largeSubtitle`
-  - `ToolbarItemPlacement.primaryAction`
-  - `ToolbarItemPlacement.secondaryAction`
-  - `ToolbarItemPlacement.destructiveAction`
-  - `ToolbarItemPlacement.cancellationAction`
-  - `ToolbarItemPlacement.confirmationAction`
-  - `ToolbarItemPlacement.navigationBarLeading`
-  - `ToolbarItemPlacement.topBarPinnedTrailing`
-  - `ToolbarItemPlacement.navigationBarTrailing`
-  - `ToolbarItemPlacement.title`
-  - `ToolbarItemPlacement.status`
-  - `ToolbarItemPlacement.keyboard`
-  - `ToolbarItemPlacement.subtitle`
-  - `ToolbarItemPlacement.automatic`
-  - `ToolbarItemPlacement.bottomBar`
-  - `ToolbarItemPlacement.principal`
-- `ToolbarPlacement` (class)
-  - `ToolbarPlacement(id: Any)`
-  - `ToolbarPlacement.windowToolbar`
-  - `ToolbarPlacement.accessoryBar(id: Any): ToolbarPlacement`
-  - `ToolbarPlacement.navigationBar`
-  - `ToolbarPlacement.tabBar`
-  - `ToolbarPlacement.automatic`
-  - `ToolbarPlacement.bottomBar`
-  - `ToolbarPlacement.statusBar`
-- `ToolbarVerticalCompressionBehavior` (class)
-  - `ToolbarVerticalCompressionBehavior.prefersToolbarItems`
-  - `ToolbarVerticalCompressionBehavior.prefersTabBar`
-  - `ToolbarVerticalCompressionBehavior.automatic`
-- `UIHostingControllerSizingOptions` (class)
-  - `UIHostingControllerSizingOptions(rawValue: Int)`
-  - `UIHostingControllerSizingOptions.intrinsicContentSize`
-  - `UIHostingControllerSizingOptions.preferredContentSize`
-- `UserInterfaceSizeClass` (class)
-  - `UserInterfaceSizeClass.compact`
-  - `UserInterfaceSizeClass.regular`
-- `ViewAlignedScrollTargetBehavior` (class)
-  - `ViewAlignedScrollTargetBehavior(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior, anchor: UnitPoint?)`
-  - `ViewAlignedScrollTargetBehavior(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior = ViewAlignedScrollTargetBehavior.LimitBehavior.automatic)`
-  - `ViewAlignedScrollTargetBehavior(anchor: UnitPoint?)`
-- `ViewAlignedScrollTargetBehavior.LimitBehavior` (class)
-  - `ViewAlignedScrollTargetBehavior.LimitBehavior.alwaysByFew`
-  - `ViewAlignedScrollTargetBehavior.LimitBehavior.alwaysByOne`
-  - `ViewAlignedScrollTargetBehavior.LimitBehavior.never`
-  - `ViewAlignedScrollTargetBehavior.LimitBehavior.always`
-  - `ViewAlignedScrollTargetBehavior.LimitBehavior.automatic`
-- `WindowBackgroundShapeStyle` (class)
-  - `WindowBackgroundShapeStyle()`
-- `WindowMenuBarExtraStyle` (class)
-  - `WindowMenuBarExtraStyle()`
-- `WorldRecenterPhase` (class)
-  - `WorldRecenterPhase.began`
-  - `WorldRecenterPhase.ended`
