@@ -1,0 +1,79 @@
+# Contributing
+
+## Project layout
+
+| Path | Contents |
+|---|---|
+| `runtime/` | Kotlin Multiplatform library: node tree, Compose applier, host, `Modifier`, `viewModel { }` |
+| `runtime/src/generated/` | Generated Kotlin bindings. Don't edit by hand. |
+| `runtime/src/extras/` | Hand-written Kotlin APIs (`NavigationStack(path)`, `EnvironmentReader`, gestures…) |
+| `swift/ComposeSwiftUI/` | Swift renderer. `Generated/` is generated; the other files are hand-written. |
+| `gradle-plugin/` | The `dev.nucleusframework.compose-swiftui` Gradle plugin |
+| `generator/` | Python scripts that generate the bindings from the SwiftUI SDK |
+| `bench/` | 50 screens written twice, and the benchmark app |
+| `samples/kmp-app/` | A standalone KMP app that uses the plugin |
+
+## Regenerating the bindings
+
+The generator reads Apple's symbol graphs for SwiftUI and SwiftUICore, emits the Kotlin API and the Swift renderer,
+then compiles both. When the Swift compiler rejects an API on any platform, `verify.py` records the error in
+`generator/rejected.json`, drops that API and regenerates. It loops until everything compiles.
+
+```bash
+# 1. Symbol graphs of the installed Xcode SDKs (iOS, macOS, tvOS, watchOS)
+generator/extract.sh /tmp/sg
+
+# 2. Runtime-only frameworks, used to typecheck the generated Swift
+./gradlew :runtime:linkDebugFrameworkMacosArm64 :runtime:linkDebugFrameworkIosSimulatorArm64 \
+  :runtime:linkDebugFrameworkTvosSimulatorArm64 :runtime:linkDebugFrameworkWatchosSimulatorArm64 -Pcsui.coreOnly=true
+# copy each runtime/build/bin/<target>/debugFramework/BenchShared.framework to /tmp/corefw/<platform>/
+# (platform = macos, ios, tvos or watchos)
+
+# 3. Generate and verify (Swift on 4 platforms, then Kotlin)
+python3 -I generator/verify.py /tmp/sg . /tmp/corefw --kotlin
+
+# 4. Reference docs
+python3 -I generator/api_index.py .                                 # docs/API.md
+python3 -I generator/coverage_report.py <apple-doc-index.json> .    # docs/COVERAGE.md
+```
+
+`<apple-doc-index.json>` is the documentation index from
+`https://developer.apple.com/tutorials/data/index/swiftui`.
+
+## Running the benchmark
+
+Each screen lives in two files: `bench/shared/.../screens/ScreenNN.kt` (Compose SwiftUI) and
+`bench/app/Screens/ScreenNNView.swift` (plain SwiftUI). Both read the same Kotlin `ViewModel`.
+[bench/BENCH_GUIDE.md](../bench/BENCH_GUIDE.md) covers the rules for writing a screen.
+
+```bash
+# One screen, debug build, iOS simulator and macOS: pixel diff and timings
+python3 -I scripts/check_screens.py 7
+
+# All 50 screens, release builds; writes ../bench-results/full/report.html
+scripts/run_full_bench.sh
+```
+
+The iOS runs need a booted simulator.
+
+## Publishing a release
+
+Pushing a tag `vX.Y.Z` runs two workflows:
+
+- `publish-maven.yaml` publishes `dev.nucleusframework:compose-swiftui` to Maven Central.
+- `publish-plugin.yaml` publishes the `dev.nucleusframework.compose-swiftui` plugin to the Gradle Plugin Portal.
+
+Both use the tag as the version. They need these repository secrets:
+
+| Secret | Used for |
+|---|---|
+| `MAVENCENTRALUSERNAME`, `MAVENCENTRALPASSWORD` | Sonatype Central Portal token |
+| `SIGNINGINMEMORYKEY`, `SIGNINGKEYID`, `SIGNINGPASSWORD` | GPG signing of the Maven artifacts |
+| `GRADLE_PUBLISH_KEY`, `GRADLE_PUBLISH_SECRET` | Gradle Plugin Portal API key |
+
+To test a release locally, publish to Maven Local and build the sample:
+
+```bash
+./gradlew :runtime:publishToMavenLocal :gradle-plugin:publishToMavenLocal --no-configuration-cache
+cd samples/kmp-app/iosApp && xcodegen generate && open iosApp.xcodeproj
+```
