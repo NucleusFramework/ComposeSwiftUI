@@ -3,7 +3,7 @@
 import glob, os, re, sys
 
 root = sys.argv[1]
-gen = os.path.join(root, "runtime/src/generated/kotlin/dev/composeswiftui")
+gen = os.path.join(root, "runtime/src/generated/kotlin/dev/nucleusframework/composeswiftui")
 out = ["# Compose SwiftUI — generated Kotlin API index", "",
        "Generated from the SwiftUI symbol graphs. Every entry is compiler-verified on iOS and macOS.", ""]
 
@@ -16,7 +16,7 @@ for m in re.finditer(r"public fun (\w+)\((.*?)\n\) \{", views, re.S):
     out.append(collapse("%s(%s)" % (m.group(1), m.group(2))))
 for m in re.finditer(r"public fun (\w+View)\(([^)]*)\)", views):
     out.append(collapse("%s(%s)" % (m.group(1), m.group(2))))
-hand = open(os.path.join(root, "runtime/src/extras/kotlin/dev/composeswiftui/Handwritten.kt")).read()
+hand = open(os.path.join(root, "runtime/src/extras/kotlin/dev/nucleusframework/composeswiftui/Handwritten.kt")).read()
 for m in re.finditer(r"public fun (ShapeView)\((.*?)\n\) \{", hand, re.S):
     out.append(collapse("%s(%s)" % (m.group(1), m.group(2))))
 out += ["```", "", "## Modifiers", "", "```kotlin"]

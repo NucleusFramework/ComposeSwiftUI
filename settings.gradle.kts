@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 }
 
 include(":runtime")
+include(":gradle-plugin")
 include(":bench:shared")

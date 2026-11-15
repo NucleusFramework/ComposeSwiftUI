@@ -40,7 +40,7 @@ and compiler errors are printed — fix the staged file and re-run. Never edit `
 
 ## Kotlin API cheat-sheet (full list: `docs/API.md`, grep it)
 
-- Package: `import dev.composeswiftui.*`. Views are `@Composable` functions named like SwiftUI; `modifier` param;
+- Package: `import dev.nucleusframework.composeswiftui.*`. Views are `@Composable` functions named like SwiftUI; `modifier` param;
   trailing lambda = `@ViewBuilder content`; extra builders are named lambdas (`header = { }`, `label = { }`).
 - Overloads that differ only by Swift labels are reached by naming the label, like in Swift:
   `Image(systemName = "star")`, `Label(title, image = "asset")`.

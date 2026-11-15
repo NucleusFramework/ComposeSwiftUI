@@ -1,6 +1,6 @@
 package bench
 
-import dev.composeswiftui.Color
+import dev.nucleusframework.composeswiftui.Color
 
 /** RGB color shared by both implementations (Swift: `Color(red:green:blue:)`). */
 data class Rgb(val r: Double, val g: Double, val b: Double) {

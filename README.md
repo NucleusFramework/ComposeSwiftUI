@@ -97,11 +97,54 @@ See `bench/BENCH_GUIDE.md` to write screens.
 
 ## Using it in your app
 
-1. Add `runtime` to your shared Kotlin module and `export` it from your framework (see `bench/shared/build.gradle.kts`).
-2. Add the files of `swift/ComposeSwiftUI` (+ `Generated/`) to your app target; `KotlinModule.swift` re-exports your
-   framework module (rename `BenchShared` there).
-3. Call `ComposeGenerated.setUp()` once at startup, then use `ComposeView { YourKt.yourScreen() }` anywhere in SwiftUI.
-4. Plain SwiftUI code can observe the same view models with `watchFlow` (see `bench/app/FlowState.swift`).
+**1. Shared Kotlin module** — one plugin line (Kotlin 2.4.20+):
+
+```kotlin
+plugins {
+    kotlin("multiplatform")
+    id("dev.nucleusframework.compose-swiftui") version "1.0.0"
+}
+
+kotlin {
+    listOf(iosArm64(), iosSimulatorArm64()).forEach {
+        it.binaries.framework { baseName = "Shared" }
+    }
+}
+```
+
+The plugin adds `dev.nucleusframework:compose-swiftui`, applies the Compose compiler, exports the library from your
+Apple frameworks, and writes the Swift renderer into `iosApp/ComposeSwiftUI` on every Xcode build (it hooks the
+standard `embedAndSignAppleFrameworkForXcode` build phase of KMP apps).
+
+**2. Xcode, once** — add the `ComposeSwiftUI` folder to your app target (drag it into the project).
+
+**3. Swift**
+
+```swift
+ComposeView { CounterScreenKt.counterScreen() }
+```
+
+```kotlin
+import dev.nucleusframework.composeswiftui.*
+
+fun counterScreen() = composeSwiftUI {
+    val vm = viewModel { CounterViewModel() }
+    val count by vm.count.collectAsState()
+    VStack(spacing = 16.0) {
+        Text("Count: $count", modifier = Modifier.font(Font.title))
+        Button("Increment", action = vm::increment)
+    }
+}
+```
+
+Options: `composeSwiftUI { swiftOutputDir = …; frameworkName = "Shared" }`. A complete project lives in
+[samples/kmp-app](samples/kmp-app) (`xcodegen` spec in `iosApp/project.yml`).
+
+### Publishing (maintainers)
+
+Tag `vX.Y.Z`: `publish-maven.yaml` publishes the library to Maven Central, `publish-plugin.yaml` the plugin to the
+Gradle Plugin Portal. Repository secrets: `MAVENCENTRALUSERNAME`, `MAVENCENTRALPASSWORD`, `SIGNINGINMEMORYKEY`,
+`SIGNINGKEYID`, `SIGNINGPASSWORD`, `GRADLE_PUBLISH_KEY`, `GRADLE_PUBLISH_SECRET`.
 
 ## Beyond the generated API (hand-written, `Extras.kt` / `Handwritten.swift`)
 

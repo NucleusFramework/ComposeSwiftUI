@@ -9,3 +9,10 @@ generator/symbolgraph/
 generator/linemap.json
 generator/__pycache__/
 bench/staging/
+samples/kmp-app/iosApp/ComposeSwiftUI/
+samples/kmp-app/iosApp/iosApp.xcodeproj/
+samples/kmp-app/iosApp/build/
+samples/kmp-app/build/
+samples/kmp-app/shared/build/
+samples/kmp-app/.gradle/
+samples/kmp-app/.kotlin/

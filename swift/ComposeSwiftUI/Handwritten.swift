@@ -71,7 +71,14 @@ import SwiftUI
 }
 
 extension ComposeGenerated {
-    /// Registers generated + hand-written renderers. Call once at app start.
+    @MainActor private static let once: Void = setUp()
+
+    /// Registers the renderers on first use (called by ComposeView; calling it yourself is optional).
+    @MainActor public static func ensureSetUp() {
+        _ = once
+    }
+
+    /// Registers generated + hand-written renderers.
     @MainActor public static func setUp() {
         registerAll()
         HandwrittenRenderers.register()

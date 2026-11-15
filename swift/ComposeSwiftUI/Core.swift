@@ -138,11 +138,13 @@ public struct ComposeView: View {
     private let input: AnyHashable?
 
     public init(_ makeHost: @escaping () -> ComposeSwiftUIHost) {
+        ComposeGenerated.ensureSetUp()
         _holder = StateObject(wrappedValue: HostHolder(host: makeHost()))
         input = nil
     }
 
     public init<Input: Hashable>(input: Input, _ makeHost: @escaping () -> ComposeSwiftUIHost) {
+        ComposeGenerated.ensureSetUp()
         _holder = StateObject(wrappedValue: HostHolder(host: makeHost(), input: AnyHashable(input)))
         self.input = AnyHashable(input)
     }

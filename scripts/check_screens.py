@@ -57,7 +57,7 @@ def main():
     print("kotlin ok (%.0fs)" % (time.time() - t), flush=True)
     swift_files = sorted(glob.glob(os.path.join(ROOT, "bench/app/*.swift")) + glob.glob(os.path.join(SW, "*.swift")))
     for plat, fw in (("macos", "macosArm64"), ("ios", "iosSimulatorArm64")):
-        b = run(["scripts/build_app.sh", plat, "Bench", "dev.composeswiftui.bench",
+        b = run(["scripts/build_app.sh", plat, "Bench", "dev.nucleusframework.composeswiftui.bench",
                  "bench/shared/build/bin/%s/debugFramework" % fw, "build/" + plat] + swift_files)
         if b.returncode != 0 or not b.stdout.strip().endswith("Bench.app"):
             errs = "\n".join(l for l in b.stdout.splitlines() if " error" in l) or b.stdout
@@ -73,13 +73,13 @@ def main():
     log = "/tmp/compose-swiftui-ios-bench.log"
     with open(log, "w") as f:
         p = subprocess.Popen(["xcrun", "simctl", "launch", "--console-pty", "--terminate-running-process", "booted",
-                              "dev.composeswiftui.bench", "-runBench", "-only", only], stdout=f, stderr=subprocess.STDOUT, cwd=ROOT)
+                              "dev.nucleusframework.composeswiftui.bench", "-runBench", "-only", only], stdout=f, stderr=subprocess.STDOUT, cwd=ROOT)
     deadline = time.time() + 60 + 30 * len(nums)
     while time.time() < deadline and "DONE" not in open(log).read():
         time.sleep(1)
     p.kill()
     print("\n".join("iOS   " + l for l in open(log).read().splitlines() if "[bench]" in l and "DONE" not in l))
-    data = run(["xcrun", "simctl", "get_app_container", "booted", "dev.composeswiftui.bench", "data"]).stdout.strip()
+    data = run(["xcrun", "simctl", "get_app_container", "booted", "dev.nucleusframework.composeswiftui.bench", "data"]).stdout.strip()
     os.makedirs(os.path.join(OUT, "ios"), exist_ok=True)
     for f in glob.glob(os.path.join(data, "Documents/bench/*.png")):
         shutil.copy(f, os.path.join(OUT, "ios"))

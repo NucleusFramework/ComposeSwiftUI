@@ -2,9 +2,9 @@ package bench
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
-import dev.composeswiftui.ComposeSwiftUIHost
-import dev.composeswiftui.composeSwiftUI
-import dev.composeswiftui.viewModel
+import dev.nucleusframework.composeswiftui.ComposeSwiftUIHost
+import dev.nucleusframework.composeswiftui.composeSwiftUI
+import dev.nucleusframework.composeswiftui.viewModel
 
 /** Base class of every benchmark screen's view model, shared by the SwiftUI and Compose versions. */
 abstract class BenchViewModel : ViewModel() {
