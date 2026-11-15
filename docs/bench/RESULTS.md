@@ -1,6 +1,6 @@
 # Benchmark: SwiftUI vs Compose SwiftUI
 
-## iOS simulator — 50 screens
+## iOS simulator: 50 screens
 
 - Pixel-identical (≤0.01% before and after 30 updates): **48 / 50**
 - Mount (median per screen, then mean): SwiftUI **24.08 ms**, Compose SwiftUI **26.06 ms** (×1.08)
@@ -59,7 +59,7 @@
 | 49 | 49 · Sleep tracker | 0.0000% | 0.0000% | 27.49 | 30.35 | 1.883 | 1.125 |
 | 50 | 50 · System status | 0.0000% | 0.0000% | 23.73 | 24.78 | 1.857 | 1.581 |
 
-## macOS — 50 screens
+## macOS: 50 screens
 
 - Pixel-identical (≤0.01% before and after 30 updates): **50 / 50**
 - Mount (median per screen, then mean): SwiftUI **14.44 ms**, Compose SwiftUI **17.06 ms** (×1.18)
@@ -118,7 +118,7 @@
 | 49 | 49 · Sleep tracker | 0.0000% | 0.0000% | 17.28 | 20.94 | 1.549 | 0.976 |
 | 50 | 50 · System status | 0.0000% | 0.0000% | 12.05 | 15.17 | 2.166 | 1.678 |
 
-## Scenarios — iOS simulator
+## Scenarios: iOS simulator
 
 `scripts/run_scenarios.sh -sizes 1000,10000 [-lazy]`. Plain SwiftUI uses native `@Observable` models (one object per
 row); Compose SwiftUI uses an immutable list in one Kotlin state, as a `ViewModel` would. Every case is pixel-identical.
@@ -138,7 +138,7 @@ updates and 60 scrolled pages.
 | 60 animated bars: apply one change | 5.12 ms | 7.54 ms | — |
 | 60 animated bars: frames / hitches over 10 animations | 254 / 0 | 254 / 0 | — |
 
-## Scenarios — macOS
+## Scenarios: macOS
 
 Same scenarios in a 700×900 window. The frame sampler on macOS is a 120 Hz timer on the main run loop, so its hitch
 count is only indicative.
