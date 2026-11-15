@@ -24,6 +24,7 @@ sealed interface Route : NavKey {
     data object Counter : Route
     data object Chart : Route
     data object Paragraph : Route
+    data object LongList : Route
 }
 
 enum class AppTab { Examples, Text }
@@ -74,6 +75,7 @@ private fun SampleNavigation(onShowText: () -> Unit) {
         entry<Route.Counter> { CounterScreen() }
         entry<Route.Chart> { ChartScreen() }
         entry<Route.Paragraph> { ParagraphScreen() }
+        entry<Route.LongList> { LongListScreen() }
     }
     NavDisplay(backStack) { route -> entries(route).Content() }
 }
@@ -82,6 +84,7 @@ private fun HomeScreenRows() = listOf(
     Triple(Route.Counter, "Counter", "plusminus.circle.fill"),
     Triple(Route.Chart, "Compose Multiplatform chart", "chart.bar.fill"),
     Triple(Route.Paragraph, "UIKit paragraph", "text.alignleft"),
+    Triple(Route.LongList, "Long list (5,000 rows)", "list.number"),
 )
 
 @androidx.compose.runtime.Composable
@@ -190,4 +193,22 @@ fun CounterScreenPreview() {
 @Preview(name = "Styled text")
 fun StyledTextScreenPreview() {
     StyledTextScreen()
+}
+
+@androidx.compose.runtime.Composable
+private fun LongListScreen() {
+    var starred by remember { mutableStateOf(setOf<Int>()) }
+    val rows = remember { (1..5000).toList() }
+    // LazyForEach composes only the rows SwiftUI shows
+    List(modifier = Modifier.navigationTitle("Long list")) {
+        LazyForEach(rows, key = { it }) { n ->
+            Button(action = { starred = if (n in starred) starred - n else starred + n }) {
+                HStack {
+                    Text("Row $n")
+                    Spacer()
+                    Image(systemName = if (n in starred) "star.fill" else "star", modifier = Modifier.foregroundStyle(Color.orange))
+                }
+            }
+        }
+    }
 }

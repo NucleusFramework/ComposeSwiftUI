@@ -52,9 +52,18 @@ python3 -I scripts/check_screens.py 7
 
 # All 50 screens, release builds; writes ../bench-results/full/report.html
 scripts/run_full_bench.sh
+
+# Scenarios: long lists, one-row change, animations, against plain SwiftUI with native @Observable models
+scripts/run_scenarios.sh -sizes 1000,10000 -lazy
 ```
 
-The iOS runs need a booted simulator.
+The iOS runs need a booted simulator. Both scripts take `SIM=<udid>` to pick one and `PLATFORMS=ios` to skip macOS.
+
+To typecheck the Swift renderer on the four platforms after changing it:
+
+```bash
+scripts/typecheck_swift.sh /tmp/corefw      # the frameworks from step 2 of "Regenerating the bindings"
+```
 
 ## Publishing a release
 

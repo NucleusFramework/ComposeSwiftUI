@@ -33,7 +33,7 @@ Supported platforms: iOS 17+, macOS 14+, tvOS 17+ and watchOS 10+. Requires Kotl
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.2.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.3.0"
    }
 
    kotlin {
@@ -92,7 +92,7 @@ translation:
 | `Image(systemName: "star")` | `Image(systemName = "star")` |
 | `Section { … } header: { Text("A") }` | `Section(header = { Text("A") }, content = { … })` |
 | `Toggle("Wi-Fi", isOn: $on)` | `Toggle("Wi-Fi", isOn = on, onIsOnChange = { on = it })` |
-| `ForEach(items, id: \.id) { … }` | `for (item in items) key(item.id) { … }` or `ForEach(items, key = { it.id }) { … }` |
+| `ForEach(items, id: \.id) { … }` | `for (item in items) key(item.id) { … }`, or `LazyForEach(items, key = { it.id }) { … }` for long lists |
 | `Color.red.opacity(0.5)`, `.secondary` | `Color.red.opacity(0.5)`, `ShapeStyle.secondary` |
 | `CGFloat` | `Double` |
 | `"**Bold**"` or a localization key | `LocalizedKey("hello.title")`. A plain `String` is shown verbatim. |
@@ -120,6 +120,22 @@ API:
 | `Circle().trim(from:to:).stroke(…)` | `ShapeView(Circle(), stroke = …, trimFrom = 0.0, trimTo = 0.7)` |
 | A Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map")` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
 | Values passed from Swift | `ComposeView(input: value) { … }` + `hostInput<T>()` in Kotlin |
+
+### Long lists
+
+A Kotlin loop composes every row up front. For a long list, use `LazyForEach`: inside a `List`, each row is composed
+only while SwiftUI shows it, and disposed when it scrolls away.
+
+```kotlin
+List {
+    LazyForEach(messages, key = { it.id }) { message ->
+        MessageRow(message)
+    }
+}
+```
+
+A row recomposes when its item changes, so prefer immutable items such as data classes. Each row should be one view
+(wrap several in an `HStack` or `VStack`). The list is fastest when the `LazyForEach` is the only child of its `List`.
 
 ## Previews
 
@@ -241,25 +257,41 @@ SDKs. Every generated API is compiled for all four platforms before it ships.
 
 ## Performance
 
-A benchmark of 50 screens, each written once in plain SwiftUI and once in Compose SwiftUI with the same `ViewModel`
-(release builds, mean of per-screen medians):
+Two benchmarks compare Compose SwiftUI with plain SwiftUI (release builds). Full results are in
+[docs/bench/RESULTS.md](docs/bench/RESULTS.md).
+
+**50 screens**, each written once in plain SwiftUI and once in Compose SwiftUI, reading the same Kotlin `ViewModel`
+(mean of per-screen medians). The SwiftUI version observes the whole screen state through one `ObservableObject`, the
+usual way to bridge a `StateFlow` in a KMP app:
 
 | | Pixel-identical | Mount: SwiftUI → Compose SwiftUI | Update: SwiftUI → Compose SwiftUI |
 |---|---|---|---|
-| iOS simulator | 48 / 50 | 24.3 → 25.8 ms | 1.81 → 1.49 ms |
+| iOS simulator | 48 / 50 | 24.1 → 26.1 ms | 1.92 → 1.48 ms |
 | macOS | 50 / 50 | 15.0 → 17.2 ms | 2.15 → 2.13 ms |
 
-Updates are as fast as plain SwiftUI or faster, because only the views whose data changed re-render. Mounting a screen
-costs 6% more on iOS and 14% more on macOS. Composition itself takes about 0.3 ms; the rest comes from SwiftUI building
-one type-erased view per node, because the tree is built at runtime. Full results are in
-[docs/bench/RESULTS.md](docs/bench/RESULTS.md).
+**Scenarios** that the 50 screens don't cover, against plain SwiftUI with native `@Observable` models (one object per
+row, so a change re-evaluates only the views that read it). iOS simulator, list rows with an icon, two lines of text and
+an unread dot, all pixel-identical:
+
+| | Plain SwiftUI | Compose SwiftUI, `LazyForEach` | Compose SwiftUI, Kotlin loop |
+|---|---|---|---|
+| 10,000-row `List`: mount | 23.5 ms | 28.2 ms | 818.8 ms |
+| 10,000 rows: one row changes | 0.16 ms | 0.41 ms | 3.24 ms |
+| 10,000 rows: every row changes | 4.0 ms | 4.5 ms | 78.5 ms |
+| Scrolling, per page of rows | 9.7 ms | 13.8 ms | 22.9 ms |
+| 60 bars, animated change: apply | 5.1 ms | 7.5 ms (same frame count, no hitches) | — |
+
+Updates of a regular screen are as fast as plain SwiftUI or faster, because only the views whose data changed
+re-render. Mounting costs 8% to 14% more, and a new row costs about 40% more while scrolling: SwiftUI builds one
+type-erased view per node because the tree is built at runtime. For long lists, use `LazyForEach`: with a Kotlin loop,
+every row is composed and kept up to date even off screen.
 
 ## Limitations
 
 - visionOS isn't supported: Kotlin/Native has no visionOS target.
 - APIs that take Swift-only types (`UTType`, `Transferable`, `KeyPath`…) aren't available. For mixed-style
   text, use `Text(StyledString)` instead of `AttributedString`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
-- Data-driven containers such as `List(data)` and `Table` take Kotlin loops instead of a collection.
+- Data-driven containers such as `List(data)` and `Table` take a Kotlin loop or `LazyForEach` instead of a collection.
 - On iOS, two benchmark screens differ from plain SwiftUI by less than a pixel (one SF Symbol, and the search field
   placeholder after updates).
 

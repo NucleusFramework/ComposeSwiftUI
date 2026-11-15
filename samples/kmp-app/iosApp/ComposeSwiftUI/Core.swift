@@ -92,8 +92,21 @@ public struct ChildrenView: View {
     public var body: some View {
         // reading `version` re-runs the ForEach when children are inserted / removed / moved
         let _ = model.version
-        return ForEach(model.children, id: \.nodeId) { child in
-            NodeView(model: child)
+        let children = model.children
+        // The common case of a List holding only a LazyForEach: no outer ForEach, which makes SwiftUI handle
+        // the rows several times faster than as a nested ForEach.
+        if children.count == 1, children[0].kind == LazyForEachContent.kind {
+            LazyForEachContent(model: children[0])
+        } else {
+            ForEach(children, id: \.nodeId) { child in
+                // A LazyForEach is expanded here, with static types: behind the node's AnyView, a List would build
+                // every row up front instead of only the visible ones.
+                if child.kind == LazyForEachContent.kind {
+                    LazyForEachContent(model: child)
+                } else {
+                    NodeView(model: child)
+                }
+            }
         }
     }
 }

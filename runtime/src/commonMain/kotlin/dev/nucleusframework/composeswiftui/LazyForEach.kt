@@ -13,10 +13,9 @@ import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.native.HiddenFromObjC
 
 /**
- * SwiftUI `ForEach(items, id:)` whose rows are composed only while SwiftUI shows them. Inside a `List`, a lazy stack
- * or a `ScrollView` with a lazy stack, SwiftUI creates rows as they scroll into view: each row then gets its own
- * small composition, disposed when the row leaves the screen. Use it for long lists; a plain Kotlin loop composes
- * every row up front.
+ * SwiftUI `ForEach(items, id:)` whose rows are composed only while SwiftUI shows them. Inside a `List`, SwiftUI
+ * creates rows as they scroll into view: each row then gets its own small composition, disposed when the row leaves
+ * the screen. Use it for long lists; a plain Kotlin loop composes every row up front. Each row should be one view.
  *
  * A row recomposes when its item changes (by `equals`), so prefer immutable items such as data classes.
  */

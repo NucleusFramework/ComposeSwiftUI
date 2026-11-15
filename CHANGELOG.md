@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
 ### Added
 
@@ -8,7 +8,17 @@
   parameterless `@Preview @Composable` functions (any annotation named `Preview` works) and writes
   `ComposeSwiftUIPreviews.swift` next to the renderer, with one Swift `#Preview` per function and a
   `ComposeSwiftUIPreviewGallery` view that lists them all. The task is `generateComposeSwiftUIPreviews`.
-- The sample app has two previews and opens the gallery from its home screen.
+- `LazyForEach(items, key) { item -> }` for long lists: inside a `List` or a lazy stack, a row is composed only while
+  SwiftUI shows it, and disposed when it scrolls away. A 10,000-row list now mounts in 28 ms instead of 909 ms on the
+  iOS simulator, and a one-row change takes 0.4 ms instead of 4.5 ms.
+- A scenario benchmark (`scripts/run_scenarios.sh`): long lists (mount, scrolling, one-row change, every row changed)
+  and animations, compared with plain SwiftUI using native `@Observable` models.
+- The sample app has two previews, a 5,000-row list and opens the preview gallery from its home screen.
+
+### Changed
+
+- Generated containers render their content through `ChildrenView`, and `flushCompose()` runs up to four passes so that
+  state written by effects is shown in the same SwiftUI update.
 
 ## 0.2.1
 

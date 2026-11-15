@@ -9,6 +9,11 @@ Every screen exists twice and must render **pixel-identical** on iOS and macOS:
 
 Template: `bench/shared/src/commonMain/kotlin/bench/screens/Screen01.kt` + `bench/app/Screens/Screen01View.swift`.
 
+The 50 screens compare the two implementations on the same Kotlin `ViewModel`: the SwiftUI twin observes its whole
+state through one `ObservableObject` (`FlowState`), as a KMP app bridging a `StateFlow` usually does. Workloads that
+need native Swift models, long lists or animations are in the scenario benchmark instead
+(`bench/app/Scenarios.swift`, `bench/shared/.../scenarios/Scenarios.kt`, `scripts/run_scenarios.sh`).
+
 ## Check loop
 
 ```bash
