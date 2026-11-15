@@ -185,44 +185,70 @@ private struct TimelineDateView: View {
 private struct TableRowRef: Identifiable {
     let model: NodeModel
     var id: Int64 { model.nodeId }
+    /// Cells, without the group of child rows (Kotlin `Table(children:)`).
+    var cells: [NodeModel] { model.children.filter { $0.kind != 100_061 } }
+    var children: [TableRowRef]? {
+        model.children.first { $0.kind == 100_061 }.map { $0.children.map(TableRowRef.init) }
+    }
 }
 
 #if os(iOS) || os(macOS)
 private struct KotlinTable: View {
     let m: NodeModel
+    @State private var customization = TableColumnCustomization<TableRowRef>()
 
     var body: some View {
         let _ = m.version
         let a = m.args
+        let rows = m.children.map(TableRowRef.init)
+        if #available(iOS 17.4, macOS 14.4, *) {
+            let selectable = !a.isNil(3)
+            let onSelect = a.callback(3, box: { (keys: [AnyHashable]) -> Any? in
+                keys.map { ($0.base as? KHashable)?.object ?? NSNull() } as NSArray
+            })
+            let selectedKeys = Set(a.list(2).map { AnyHashable(KHashable($0 as? NSObject ?? NSNull())) })
+            let all = { () -> [TableRowRef] in
+                var out: [TableRowRef] = []
+                func walk(_ r: [TableRowRef]) { for x in r { out.append(x); walk(x.children ?? []) } }
+                walk(rows)
+                return out
+            }
+            let selection = Binding<Set<Int64>>(
+                get: { Set(all().filter { selectedKeys.contains($0.model.args.hashable(0)) }.map(\.id)) },
+                set: { ids in onSelect(all().filter { ids.contains($0.id) }.map { $0.model.args.hashable(0) }) }
+            )
+            let bound = selectable ? selection : .constant([])
+            if a.bool(4) {
+                Table(rows, children: \.children, selection: bound, columnCustomization: $customization) { columns(a) }
+            } else {
+                Table(rows, selection: bound, columnCustomization: $customization) { columns(a) }
+            }
+        } else {
+            List(rows) { row in
+                HStack { ForEach(row.cells, id: \.nodeId) { NodeView(model: $0) } }
+            }
+        }
+    }
+
+    @available(iOS 17.4, macOS 14.4, *)
+    @TableColumnBuilder<TableRowRef, Never>
+    private func columns(_ a: Args) -> some TableColumnContent<TableRowRef, Never> {
         let titles = a.list(0).map { $0 as? String ?? "" }
         let widths = a.list(1).map { w -> [CGFloat?] in
             ((w as? [Any]) ?? []).map { ($0 as? NSNumber).map { CGFloat($0.doubleValue) } }
         }
-        let rows = m.children.map(TableRowRef.init)
-        let selectable = !a.isNil(3)
-        let onSelect = a.callback(3, box: { (keys: [AnyHashable]) -> Any? in
-            keys.map { ($0.base as? KHashable)?.object ?? NSNull() } as NSArray
-        })
-        let selectedKeys = Set(a.list(2).map { AnyHashable(KHashable($0 as? NSObject ?? NSNull())) })
-        let selection = Binding<Set<Int64>>(
-            get: { Set(rows.filter { selectedKeys.contains($0.model.args.hashable(0)) }.map(\.id)) },
-            set: { ids in onSelect(rows.filter { ids.contains($0.id) }.map { $0.model.args.hashable(0) }) }
-        )
-        if #available(iOS 17.4, macOS 14.4, *) {
-            Table(rows, selection: selectable ? selection : .constant([])) {
-                TableColumnForEach(Array(titles.indices), id: \.self) { c in
-                    let w = c < widths.count ? widths[c] : []
-                    TableColumn(titles[c]) { (row: TableRowRef) in
-                        let cells = row.model.children
-                        if c < cells.count { NodeView(model: cells[c]) }
-                    }
-                    .width(min: w.count > 0 ? w[0] : nil, ideal: w.count > 1 ? w[1] : nil, max: w.count > 2 ? w[2] : nil)
-                }
+        let alignments = a.list(5).map { d_TableColumnAlignment($0 as? SExpr) }
+        let customizable = a.bool(6)
+        TableColumnForEach(Array(titles.indices), id: \.self) { c in
+            let w = c < widths.count ? widths[c] : []
+            TableColumn(titles[c]) { (row: TableRowRef) in
+                let cells = row.cells
+                if c < cells.count { NodeView(model: cells[c]) }
             }
-        } else {
-            List(rows) { row in
-                HStack { ForEach(row.model.children, id: \.nodeId) { NodeView(model: $0) } }
-            }
+            .width(min: w.count > 0 ? w[0] : nil, ideal: w.count > 1 ? w[1] : nil, max: w.count > 2 ? w[2] : nil)
+            .alignment((c < alignments.count ? alignments[c] : nil) ?? .automatic)
+            .customizationID(titles[c])
+            .disabledCustomizationBehavior(customizable ? [] : .all)
         }
     }
 }
@@ -313,7 +339,7 @@ private func effectValues(_ list: [NSNumber]) -> [Double] { list.map(\.doubleVal
         #else
         ComposeRegistry.views[100_025] = { m in
             ModChain.apply(List(m.children.map(TableRowRef.init)) { row in
-                HStack { ForEach(row.model.children, id: \.nodeId) { NodeView(model: $0) } }
+                HStack { ForEach(row.cells, id: \.nodeId) { NodeView(model: $0) } }
             }, m, 0)
         }
         #endif
@@ -620,7 +646,7 @@ private struct KotlinTextDocument: FileDocument {
 }
 #endif
 
-private func applyViewEffects(_ content: some View, _ v: [Double]) -> some View {
+func applyViewEffects(_ content: some View, _ v: [Double]) -> some View {
     func at(_ i: Int, _ d: Double) -> Double { i < v.count ? v[i] : d }
     return content
         .opacity(at(0, 1))

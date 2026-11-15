@@ -347,32 +347,23 @@ import UniformTypeIdentifiers
             guard let p0 = d_ColorScheme(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.colorScheme, p0), m, i + 1)
         case 634:
-            guard let p0 = d_DynamicTypeSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.dynamicTypeSize, p0), m, i + 1)
-#if os(macOS)
+            return ModChain.apply(v.environment(\.backgroundStyle, d_AnyShapeStyle(a.expr(0))), m, i + 1)
         case 642:
-            guard let p0 = d_ControlActiveState(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.controlActiveState, p0), m, i + 1)
-#endif
+            return ModChain.apply(v.environment(\.verticalSizeClass, d_UserInterfaceSizeClass(a.expr(0))), m, i + 1)
         case 650:
-            if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
-                return ModChain.apply(v.environment(\.splitArrangementAxis, d_Axis(a.expr(0))), m, i + 1)
+            return ModChain.apply(v.environment(\.accessibilityEnabled, a.bool(0)), m, i + 1)
+        case 658:
+            if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+                return ModChain.apply(v.environment(\.symbolColorRenderingMode, d_SymbolColorRenderingMode(a.expr(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-        case 658:
-            return ModChain.apply(v.environment(\.font, d_Font(a.expr(0))), m, i + 1)
-#if os(iOS)
         case 666:
-            return ModChain.apply(v.environment(\.isSceneCaptured, a.bool(0)), m, i + 1)
-#endif
-#if os(iOS) || os(macOS) || os(tvOS)
+            return ModChain.apply(v.environment(\.isEnabled, a.bool(0)), m, i + 1)
         case 674:
-            guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.menuIndicatorVisibility, p0), m, i + 1)
-#endif
+            return ModChain.apply(v.environment(\.isFocusEffectEnabled, a.bool(0)), m, i + 1)
         case 682:
-            guard let p0 = d_ScrollIndicatorVisibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.verticalScrollIndicatorVisibility, p0), m, i + 1)
+            guard let p0 = d_ScrollDismissesKeyboardMode(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.scrollDismissesKeyboardMode, p0), m, i + 1)
         default: return nil
         }
     }

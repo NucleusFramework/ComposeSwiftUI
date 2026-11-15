@@ -233,7 +233,8 @@ simulator or device, for example from a debug menu:
   iOS-only app. A preview in `iosMain` is skipped if the module also has macOS targets.
 - If you added the `ComposeSwiftUI` folder to Xcode as a group before this version, add the new
   `ComposeSwiftUIPreviews.swift` file to the app target once.
-- If the folder is a group, add `Interactive.swift` and `Generated/GenEncoders.swift` to the app target once when you
+- If the folder is a group, add `Interactive.swift`, `Advanced.swift`, `Completions.swift` and
+  `Generated/GenEncoders.swift` to the app target once when you
   upgrade past 0.4.1.
 
 ## Using it with other Compose libraries
@@ -360,11 +361,12 @@ every row is composed and kept up to date even off screen.
 ## Limitations
 
 - visionOS isn't supported: Kotlin/Native has no visionOS target.
-- APIs built on Swift types or protocols that the app itself implements aren't available: `FileDocument`,
-  `DropDelegate`, `Transferable` types other than text, preference keys, `Publisher`, `ObservableObject`, custom
-  `Layout` caches, `TextRenderer`, `CustomAnimation`, key paths. An
-  `AttributedString` parameter or binding takes a plain `String` (attributes are dropped); for mixed-style text, use
-  `Text(StyledString)`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
+- Swift protocols with a Kotlin implementation are hand-written (preference keys, container values, custom
+  animations, transitions, text renderers, drop delegates, alignment IDs, presentation detents). Those tied to Swift
+  data models aren't available: `FileDocument`, `Transferable` types other than text and URLs, `Publisher`,
+  `ObservableObject`, key paths. An `AttributedString` parameter or binding takes a plain `String` (attributes are
+  dropped); for mixed-style text, use `Text(StyledString)`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for
+  each one.
 - Data-driven containers take Kotlin lists: a loop or `LazyForEach` for `List(data)` / `ForEach(data)`, and the Kotlin
   `Table(rows)`, `OutlineGroup(items, children)` and `searchable(tokens)`.
 - On iOS, two benchmark screens differ from plain SwiftUI by less than a pixel (one SF Symbol, and the search field

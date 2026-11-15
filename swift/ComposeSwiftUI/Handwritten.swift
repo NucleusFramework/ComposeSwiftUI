@@ -106,6 +106,8 @@ extension ComposeGenerated {
         HandwrittenRenderers.register()
         ExtraRenderers.register()
         InteractiveRenderers.register()
+        AdvancedRenderers.register()
+        CompletionRenderers.register()
         PlatformViewRenderers.register()
     }
 }
@@ -122,6 +124,8 @@ extension ComposeGenerated {
         case 3: return d_CGRect(e)
         case 4: return d_CGVector(e)
         case 6: return d_CGAffineTransform(e)
+        case 7: return AdvancedValues.decode(e)
+        case 8, 9, 10, 11, 12: return CompletionValues.decode(e)
         case 5: return KotlinPathShape(commands: Args(expr: e).list(0).compactMap { ($0 as? NSNumber)?.doubleValue })
         default: return nil
         }
@@ -291,7 +295,13 @@ struct KotlinLayout: Layout {
     let policy: LayoutPolicy
 
     private func sizes(_ subviews: Subviews) -> [LayoutSize] {
-        subviews.map { let s = $0.sizeThatFits(.unspecified); return LayoutSize(width: Double(s.width), height: Double(s.height)) }
+        subviews.map {
+            let s = $0.sizeThatFits(.unspecified)
+            let size = LayoutSize(width: Double(s.width), height: Double(s.height))
+            let values = $0[KotlinLayoutValuesKey.self]
+            if !values.isEmpty { size.values = values.mapValues { $0.object } }
+            return size
+        }
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
@@ -393,6 +403,15 @@ struct KotlinLayout: Layout {
             AnyView(v.modifier(TransitionSourceModifier(id: KHashable(a.raw(0) as? NSObject ?? NSNull()), namespace: Int64(a.int(1)), zoom: true)))
         }
 
+        SwiftUIBridge.shared.animationCompletionRunner = { expr, block, completion in
+            withAnimation(d_Animation(expr), completionCriteria: .logicallyComplete) {
+                _ = block()
+                ComposeSwiftUIHostKt.flushCompose()
+            } completion: {
+                _ = completion()
+                ComposeSwiftUIHostKt.flushCompose()
+            }
+        }
         SwiftUIBridge.shared.animationRunner = { expr, block in
             withAnimation(d_Animation(expr)) {
                 _ = block()
@@ -401,6 +420,51 @@ struct KotlinLayout: Layout {
         }
     }
 }
+
+/// TabView with the iOS 18 `Tab` / `TabSection` API, used when Kotlin declares a `TabSection`.
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+private struct KotlinTabs: View {
+    let m: NodeModel
+    @Binding var selection: AnyHashable
+
+    var body: some View {
+        let _ = m.version
+        TabView(selection: $selection) {
+            ForEach(m.children, id: \.nodeId) { child in
+                if child.kind == 100_059 {
+                    TabSection(child.args.string(0)) {
+                        ForEach(child.children, id: \.nodeId) { kotlinTab($0) }
+                    }
+                } else {
+                    kotlinTab(child)
+                }
+            }
+        }
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@TabContentBuilder<AnyHashable>
+private func kotlinTab(_ c: NodeModel) -> some TabContent<AnyHashable> {
+    if let symbol = c.args.stringOpt(1) {
+        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2)) { ZStack { ChildrenView(c) } }
+    } else {
+        Tab(c.args.string(0), image: "", value: c.args.hashable(2)) { ZStack { ChildrenView(c) } }
+    }
+}
+
+/// Calendars by identifier name, for `Calendar` parameters (Kotlin strings).
+func kotlinCalendar(_ name: String) -> Calendar {
+    let ids: [String: Calendar.Identifier] = [
+        "gregorian": .gregorian, "iso8601": .iso8601, "buddhist": .buddhist, "chinese": .chinese, "coptic": .coptic,
+        "ethiopicAmeteAlem": .ethiopicAmeteAlem, "ethiopicAmeteMihret": .ethiopicAmeteMihret, "hebrew": .hebrew,
+        "indian": .indian, "islamic": .islamic, "islamicCivil": .islamicCivil, "islamicTabular": .islamicTabular,
+        "islamicUmmAlQura": .islamicUmmAlQura, "japanese": .japanese, "persian": .persian, "republicOfChina": .republicOfChina,
+    ]
+    return ids[name].map { Calendar(identifier: $0) } ?? .current
+}
+
+func kotlinCalendarName(_ calendar: Calendar) -> String { "\(calendar.identifier)" }
 
 // MARK: - Platform view embedding (UIKitViews.kt / AppKitViews.kt)
 
@@ -574,6 +638,18 @@ struct KotlinTabView: View {
     }
 
     var body: some View {
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *), m.children.contains(where: { $0.kind == 100_059 }) {
+            KotlinTabs(m: m, selection: $selection)
+                .onChange(of: kotlinSelection) { _, new in selection = new }
+                .onChange(of: selection) { _, new in
+                    if new != m.args.hashable(0) { m.args.hashableBinding(0).wrappedValue = new }
+                }
+        } else {
+            legacy
+        }
+    }
+
+    private var legacy: some View {
         TabView(selection: $selection) { ChildrenView(m) }
             .onChange(of: kotlinSelection) { _, new in selection = new }
             .onChange(of: selection) { _, new in

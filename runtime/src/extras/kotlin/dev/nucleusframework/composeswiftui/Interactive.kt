@@ -72,6 +72,7 @@ internal object InteractiveIds {
 // ---- AsyncImage --------------------------------------------------------------------------------
 
 /** Load state of an [AsyncImage]. */
+@HiddenFromObjC
 public enum class AsyncImageState { Empty, Success, Failure }
 
 /**
@@ -105,6 +106,7 @@ public fun AsyncImageContent(modifier: Modifier = Modifier) {
 // ---- ScrollViewReader --------------------------------------------------------------------------
 
 /** SwiftUI `ScrollViewProxy`: scrolls the enclosing scroll view to the view marked `Modifier.id(id)`. */
+@HiddenFromObjC
 public class ScrollProxy internal constructor(private val handle: () -> ScrollProxyHandle?) {
     public fun scrollTo(id: Any, anchor: UnitPoint? = null) {
         handle()?.scrollTo(id, anchor)
@@ -140,6 +142,7 @@ public fun TimelineView(schedule: TimelineSchedule, modifier: Modifier = Modifie
 // ---- onKeyPress --------------------------------------------------------------------------------
 
 /** A key press seen by [onKeyPress]. */
+@HiddenFromObjC
 public class KeyPressEvent internal constructor(
     /** The characters the key produces (with modifiers applied). */
     public val characters: String,
@@ -154,6 +157,7 @@ public class KeyPressEvent internal constructor(
     public val command: Boolean get() = modifierBits and (1 shl 20) != 0
 }
 
+@HiddenFromObjC
 public enum class KeyPressPhase { Down, Repeat, Up }
 
 /**
@@ -181,6 +185,7 @@ public fun Modifier.onKeyPress(
  * Drawing commands of a [Canvas], in points. State changes (translate, scale, rotate, opacity, clip) apply to
  * the following commands; wrap them in [withState] to scope them.
  */
+@HiddenFromObjC
 public class DrawScope internal constructor(public val width: Double, public val height: Double) {
     internal val commands = ArrayList<Any?>()
 
@@ -235,10 +240,12 @@ public fun Canvas(modifier: Modifier = Modifier, opaque: Boolean = false, onDraw
 // ---- Table -------------------------------------------------------------------------------------
 
 /** Columns of a [Table]: one [column] call per column, in order. */
+@HiddenFromObjC
 public class TableColumns<T> internal constructor() {
     internal class Column<T>(
         val title: String,
         val width: List<Double?>,
+        val alignment: TableColumnAlignment?,
         val content: @Composable (T) -> Unit,
     )
 
@@ -249,9 +256,10 @@ public class TableColumns<T> internal constructor() {
         width: Double? = null,
         minWidth: Double? = null,
         maxWidth: Double? = null,
+        alignment: TableColumnAlignment? = null,
         content: @Composable (T) -> Unit,
     ) {
-        columns += Column(title, listOf(minWidth, width, maxWidth), content)
+        columns += Column(title, listOf(minWidth, width, maxWidth), alignment, content)
     }
 }
 
@@ -268,8 +276,11 @@ public fun <T> Table(
     modifier: Modifier = Modifier,
     selection: Set<Any> = emptySet(),
     onSelectionChange: ((Set<Any>) -> Unit)? = null,
+    children: ((T) -> List<T>?)? = null,
+    customizable: Boolean = false,
     columns: TableColumns<T>.() -> Unit,
 ) {
+    // children: SwiftUI `Table(_:children:…)` disclosure rows; customizable: columns the user can hide and reorder
     val cols = TableColumns<T>().apply(columns).columns
     SwiftView(
         InteractiveIds.TABLE,
@@ -278,15 +289,23 @@ public fun <T> Table(
             cols.map { it.width },
             selection.toList(),
             onSelectionChange?.let { cb -> SValueCallback { cb((it as List<*>).filterNotNull().toSet()) } },
+            children != null,
+            cols.map { it.alignment },
+            customizable,
         ),
         modifier,
-    ) {
-        for (row in rows) {
-            val k = key(row)
-            key(k) {
-                SwiftView(InteractiveIds.TABLE_ROW, listOf(k), Modifier) {
-                    for (col in cols) SwiftView(InteractiveIds.GROUP, emptyList(), Modifier) { col.content(row) }
-                }
+    ) { TableRows(rows, key, children, cols) }
+}
+
+@Composable
+private fun <T> TableRows(rows: List<T>, key: (T) -> Any, children: ((T) -> List<T>?)?, cols: List<TableColumns.Column<T>>) {
+    for (row in rows) {
+        val k = key(row)
+        key(k) {
+            SwiftView(InteractiveIds.TABLE_ROW, listOf(k), Modifier) {
+                for (col in cols) SwiftView(InteractiveIds.GROUP, emptyList(), Modifier) { col.content(row) }
+                val sub = children?.invoke(row)
+                if (sub != null) SwiftView(CompletionIds.TABLE_CHILD_ROWS, emptyList(), Modifier) { TableRows(sub, key, children, cols) }
             }
         }
     }
@@ -327,6 +346,7 @@ public fun <T> OutlineGroup(
 // ---- scroll transitions, visual effects, alignment guides --------------------------------------
 
 /** Effects returned by [scrollTransition] / [visualEffect]; defaults leave the view unchanged. */
+@HiddenFromObjC
 public data class VisualEffects(
     val opacity: Double = 1.0,
     val scale: Double = 1.0,
@@ -339,6 +359,7 @@ public data class VisualEffects(
 }
 
 /** Geometry of a view for [visualEffect]: its size and its frame origin in the global coordinate space. */
+@HiddenFromObjC
 public class EffectGeometry internal constructor(
     public val width: Double,
     public val height: Double,
@@ -482,6 +503,7 @@ public fun <T> Modifier.searchable(
 )
 
 /** Number style of a [NumberField]. */
+@HiddenFromObjC
 public sealed class NumberFormat(internal val code: String?) {
     public object Number : NumberFormat(null)
     public object Percent : NumberFormat(null)
@@ -558,6 +580,7 @@ public fun Modifier.onGeometryChange(action: (frame: CGRect) -> Unit): Modifier 
     element(InteractiveIds.GEOMETRY_CHANGE, SValueCallback { (it as? SExpr)?.let { e -> action(cgValue(e) as CGRect) } })
 
 /** Scroll position of a scroll view, for [onScrollGeometryChange]. */
+@HiddenFromObjC
 public data class ScrollMetrics(
     val contentOffset: CGPoint,
     val contentSize: CGSize,
@@ -663,6 +686,7 @@ public fun Modifier.phaseAnimator(phases: List<VisualEffects>, trigger: Any? = n
     element(InteractiveIds.PHASE_ANIMATOR, phases.map { it.toList() }, trigger, animation)
 
 /** SF Symbol animations for [symbolEffect]. */
+@HiddenFromObjC
 public enum class SymbolEffectKind { Bounce, Pulse, VariableColor, Scale, Appear, Disappear, Wiggle, Rotate, Breathe }
 
 /** SwiftUI `symbolEffect(_:options:isActive:)`: a continuous symbol animation while [isActive]. */
@@ -692,6 +716,7 @@ public fun MeshGradient(
 // ---- keyboard and text input --------------------------------------------------------------------
 
 /** UIKit keyboards for [keyboardType] (iOS, tvOS). */
+@HiddenFromObjC
 public enum class KeyboardType {
     Default, AsciiCapable, NumbersAndPunctuation, Url, NumberPad, PhonePad, NamePhonePad, EmailAddress, DecimalPad,
     Twitter, WebSearch, AsciiCapableNumberPad,
@@ -702,6 +727,7 @@ public enum class KeyboardType {
 public fun Modifier.keyboardType(type: KeyboardType): Modifier = element(InteractiveIds.KEYBOARD_TYPE, type.ordinal)
 
 /** Semantic content of a text field, for [textContentType] (AutoFill, keyboard suggestions). */
+@HiddenFromObjC
 public enum class TextContentType {
     Username, Password, NewPassword, OneTimeCode, EmailAddress, TelephoneNumber, Name, GivenName, FamilyName,
     FullStreetAddress, PostalCode, AddressCity, Url, CreditCardNumber,
@@ -714,6 +740,7 @@ public fun Modifier.textContentType(type: TextContentType): Modifier = element(I
 // ---- MultiDatePicker ---------------------------------------------------------------------------
 
 /** A calendar day, for [MultiDatePicker]. */
+@HiddenFromObjC
 public data class Day(val year: Int, val month: Int, val day: Int)
 
 /** SwiftUI `MultiDatePicker(_:selection:)` (iOS; nothing elsewhere): pick several days. */

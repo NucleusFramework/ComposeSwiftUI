@@ -325,28 +325,33 @@ import UniformTypeIdentifiers
         case 624:
             return ModChain.apply(v.zIndex(a.double(0)), m, i + 1)
         case 632:
-            guard let p0 = d_Text_TruncationMode(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.truncationMode, p0), m, i + 1)
+            guard let p0 = d_SymbolVariants(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.symbolVariants, p0), m, i + 1)
         case 640:
-            guard let p0 = d_ContentTransition(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.contentTransition, p0), m, i + 1)
+            guard let p0 = d_RedactionReasons(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.redactionReasons, p0), m, i + 1)
         case 648:
-            guard let p0 = d_BackgroundProminence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.backgroundProminence, p0), m, i + 1)
+            return ModChain.apply(v.environment(\.horizontalSizeClass, d_UserInterfaceSizeClass(a.expr(0))), m, i + 1)
         case 656:
-            return ModChain.apply(v.environment(\.contentTransitionAddsDrawingGroup, a.bool(0)), m, i + 1)
-        case 664:
-            guard let p0 = d_SidebarRowSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.sidebarRowSize, p0), m, i + 1)
-        case 672:
-            if #available(iOS 27.2, macOS 27.2, tvOS 27.2, watchOS 27.2, *) {
-                guard let p0 = d_ToolbarTitleAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.environment(\.toolbarTitleAlignment, p0), m, i + 1)
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
+                guard let p0 = d_MaterialActiveAppearance(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.environment(\.materialActiveAppearance, p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+        case 664:
+            return ModChain.apply(v.environment(\.textCase, d_Text_Case(a.expr(0))), m, i + 1)
+        case 672:
+            return ModChain.apply(v.environment(\.isScrollEnabled, a.bool(0)), m, i + 1)
+#if os(macOS)
         case 680:
-            guard let p0 = d_ScrollBounceBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.horizontalScrollBounceBehavior, p0), m, i + 1)
+            if #available(iOS 17.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
+                return ModChain.apply(v.environment(\.worldTrackingLimitations, Set(a.exprList(0).compactMap { d_WorldTrackingLimitation($0) })), m, i + 1)
+            }
+            return ModChain.apply(v, m, i + 1)
+#endif
+        case 688:
+            guard let p0 = d_ScrollIndicatorVisibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.horizontalScrollIndicatorVisibility, p0), m, i + 1)
         default: return nil
         }
     }

@@ -1384,450 +1384,456 @@ public fun Modifier.zIndex(value: Double): Modifier = element(624, value)
 public fun Modifier.environment(lineSpacing: Double): Modifier = element(628, lineSpacing)
 
 /**
- * SwiftUI `EnvironmentValues.truncationMode`
+ * SwiftUI `EnvironmentValues.symbolVariants`
  *
  * ```swift
- * var truncationMode: Text.TruncationMode { get set }
+ * var symbolVariants: SymbolVariants { get set }
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.environment(truncationMode: Text.TruncationMode): Modifier = element(632, truncationMode)
+public fun Modifier.environment(symbolVariants: SymbolVariants): Modifier = element(632, symbolVariants)
 
 /**
- * SwiftUI `EnvironmentValues.allowsTightening`
+ * SwiftUI `EnvironmentValues.layoutDirection`
  *
  * ```swift
- * var allowsTightening: Bool { get set }
+ * var layoutDirection: LayoutDirection { get set }
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.environment(allowsTightening: Boolean): Modifier = element(636, allowsTightening)
+public fun Modifier.environment(layoutDirection: LayoutDirection): Modifier = element(636, layoutDirection)
 
 /**
- * SwiftUI `EnvironmentValues.contentTransition`
+ * SwiftUI `EnvironmentValues.redactionReasons`
  *
  * ```swift
- * var contentTransition: ContentTransition { get set }
+ * var redactionReasons: RedactionReasons { get set }
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.environment(contentTransition: ContentTransition): Modifier = element(640, contentTransition)
+public fun Modifier.environment(redactionReasons: RedactionReasons): Modifier = element(640, redactionReasons)
 
 /**
- * SwiftUI `EnvironmentValues.minimumScaleFactor`
+ * SwiftUI `EnvironmentValues.controlActiveState`
  *
  * ```swift
- * var minimumScaleFactor: CGFloat { get set }
+ * var controlActiveState: ControlActiveState { get set }
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.environment(controlActiveState: ControlActiveState): Modifier = element(644, controlActiveState)
+
+/**
+ * SwiftUI `EnvironmentValues.horizontalSizeClass`
+ *
+ * ```swift
+ * var horizontalSizeClass: UserInterfaceSizeClass? { get set }
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use environment(minimumScaleFactor = …)", level = DeprecationLevel.WARNING)
+@Deprecated("Use environment(horizontalSizeClass = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.environmentMinimumScaleFactor(minimumScaleFactor: Double): Modifier = element(644, minimumScaleFactor)
+public fun Modifier.environmentHorizontalSizeClass(horizontalSizeClass: UserInterfaceSizeClass?): Modifier = element(648, horizontalSizeClass)
 
 /**
- * SwiftUI `EnvironmentValues.backgroundProminence`
+ * SwiftUI `EnvironmentValues.isHoverEffectEnabled`
  *
  * ```swift
- * var backgroundProminence: BackgroundProminence { get set }
+ * var isHoverEffectEnabled: Bool { get set }
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@Deprecated("Use environment(isHoverEffectEnabled = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentIsHoverEffectEnabled(isHoverEffectEnabled: Boolean): Modifier = element(652, isHoverEffectEnabled)
+
+/**
+ * SwiftUI `EnvironmentValues.materialActiveAppearance`
+ *
+ * ```swift
+ * var materialActiveAppearance: MaterialActiveAppearance { get set }
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC
+public fun Modifier.environment(materialActiveAppearance: MaterialActiveAppearance): Modifier = element(656, materialActiveAppearance)
+
+/**
+ * SwiftUI `EnvironmentValues.accessibilityPrefersCrossFadeTransitions`
+ *
+ * ```swift
+ * var accessibilityPrefersCrossFadeTransitions: Bool { get set }
+ * ```
+ * Availability: iOS 26.4+, macOS 26.4+, tvOS 26.4+, watchOS 26.4+
+ */
+@Deprecated("Use environment(accessibilityPrefersCrossFadeTransitions = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentAccessibilityPrefersCrossFadeTransitions(accessibilityPrefersCrossFadeTransitions: Boolean): Modifier = element(660, accessibilityPrefersCrossFadeTransitions)
+
+/**
+ * SwiftUI `EnvironmentValues.lineLimit`
+ *
+ * ```swift
+ * var lineLimit: Int? { get set }
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use environment(lineLimit = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentLineLimit(lineLimit: Int?): Modifier = element(667, lineLimit)
+
+/**
+ * SwiftUI `EnvironmentValues.isSceneCaptured`
+ *
+ * ```swift
+ * var isSceneCaptured: Bool { get set }
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@Deprecated("Use environment(isSceneCaptured = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentIsSceneCaptured(isSceneCaptured: Boolean): Modifier = element(671, isSceneCaptured)
+
+/**
+ * SwiftUI `EnvironmentValues.disableAutocorrection`
+ *
+ * ```swift
+ * var disableAutocorrection: Bool? { get set }
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use environment(disableAutocorrection = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentDisableAutocorrection(disableAutocorrection: Boolean?): Modifier = element(675, disableAutocorrection)
+
+/**
+ * SwiftUI `EnvironmentValues.menuIndicatorVisibility`
+ *
+ * ```swift
+ * var menuIndicatorVisibility: Visibility { get set }
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@Deprecated("Use environment(menuIndicatorVisibility = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentMenuIndicatorVisibility(menuIndicatorVisibility: Visibility): Modifier = element(679, menuIndicatorVisibility)
+
+/**
+ * SwiftUI `EnvironmentValues.defaultWheelPickerItemHeight`
+ *
+ * ```swift
+ * var defaultWheelPickerItemHeight: CGFloat { get set }
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@Deprecated("Use environment(defaultWheelPickerItemHeight = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.environmentDefaultWheelPickerItemHeight(defaultWheelPickerItemHeight: Double): Modifier = element(683, defaultWheelPickerItemHeight)
+
+/**
+ * SwiftUI `EnvironmentValues.verticalScrollIndicatorVisibility`
+ *
+ * ```swift
+ * var verticalScrollIndicatorVisibility: ScrollIndicatorVisibility { get set }
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.environment(backgroundProminence: BackgroundProminence): Modifier = element(648, backgroundProminence)
+public fun Modifier.environment(verticalScrollIndicatorVisibility: ScrollIndicatorVisibility): Modifier = element(687, verticalScrollIndicatorVisibility)
 
 /**
- * SwiftUI `EnvironmentValues.symbolVariableValueMode`
+ * SwiftUI `Image.interpolation(_:)`
  *
  * ```swift
- * var symbolVariableValueMode: SymbolVariableValueMode? { get set }
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.environment(symbolVariableValueMode: SymbolVariableValueMode?): Modifier = element(652, symbolVariableValueMode)
-
-/**
- * SwiftUI `EnvironmentValues.contentTransitionAddsDrawingGroup`
- *
- * ```swift
- * var contentTransitionAddsDrawingGroup: Bool { get set }
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use environment(contentTransitionAddsDrawingGroup = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.environmentContentTransitionAddsDrawingGroup(contentTransitionAddsDrawingGroup: Boolean): Modifier = element(656, contentTransitionAddsDrawingGroup)
-
-/**
- * SwiftUI `EnvironmentValues.isEnabled`
- *
- * ```swift
- * var isEnabled: Bool { get set }
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use environment(isEnabled = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.environmentIsEnabled(isEnabled: Boolean): Modifier = element(661, isEnabled)
-
-/**
- * SwiftUI `EnvironmentValues.badgeProminence`
- *
- * ```swift
- * var badgeProminence: BadgeProminence { get set }
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.environment(badgeProminence: BadgeProminence): Modifier = element(665, badgeProminence)
-
-/**
- * SwiftUI `EnvironmentValues.isFocusEffectEnabled`
- *
- * ```swift
- * var isFocusEffectEnabled: Bool { get set }
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use environment(isFocusEffectEnabled = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.environmentIsFocusEffectEnabled(isFocusEffectEnabled: Boolean): Modifier = element(669, isFocusEffectEnabled)
-
-/**
- * SwiftUI `EnvironmentValues.defaultMinListRowHeight`
- *
- * ```swift
- * var defaultMinListRowHeight: CGFloat { get set }
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use environment(defaultMinListRowHeight = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.environmentDefaultMinListRowHeight(defaultMinListRowHeight: Double): Modifier = element(673, defaultMinListRowHeight)
-
-/**
- * SwiftUI `EnvironmentValues.scrollDismissesKeyboardMode`
- *
- * ```swift
- * var scrollDismissesKeyboardMode: ScrollDismissesKeyboardMode { get set }
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.environment(scrollDismissesKeyboardMode: ScrollDismissesKeyboardMode): Modifier = element(677, scrollDismissesKeyboardMode)
-
-/**
- * SwiftUI `EnvironmentValues.systemPrefersReducedResourceUsage`
- *
- * ```swift
- * var systemPrefersReducedResourceUsage: Bool { get set }
- * ```
- * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
- */
-@Deprecated("Use environment(systemPrefersReducedResourceUsage = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.environmentSystemPrefersReducedResourceUsage(systemPrefersReducedResourceUsage: Boolean): Modifier = element(681, systemPrefersReducedResourceUsage)
-
-/**
- * SwiftUI `Image.antialiased(_:)`
- *
- * ```swift
- * func antialiased(_ isAntialiased: Bool) -> Image
+ * func interpolation(_ interpolation: Image.Interpolation) -> Image
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Applies to `Image` views only.
  */
 @HiddenFromObjC
-public fun Modifier.antialiased(isAntialiased: Boolean): Modifier = element(685, isAntialiased)
+public fun Modifier.interpolation(interpolation: Image.Interpolation): Modifier = element(691, interpolation)
 
 /**
- * SwiftUI `Text.strikethrough(_:color:)`
+ * SwiftUI `Text.bold()`
  *
  * ```swift
- * nonisolated func strikethrough(_ isActive: Bool = true, color: Color? = nil) -> Text
+ * nonisolated func bold() -> Text
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  * Applies to `Text` views only.
  */
 @HiddenFromObjC
-public fun Modifier.strikethrough(isActive: Boolean = true, color: Color? = null): Modifier = element(689, isActive, color)
+public fun Modifier.bold(): Modifier = element(695)
 
 /**
  * SwiftUI `View.accessibilityAction(named:_:)`
  *
  * ```swift
- * nonisolated func accessibilityAction(named nameKey: LocalizedStringKey, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * @export(implementation) nonisolated func accessibilityAction(named nameResource: LocalizedStringResource, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use accessibilityAction(named = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.accessibilityAction(named: LocalizedKey, handler: () -> Unit): Modifier = element(15, named.key, SAction(handler))
+public fun Modifier.accessibilityActionNamed(named: LocalizedKey, handler: () -> Unit): Modifier = element(16, named.key, SAction(handler))
 
 /**
  * SwiftUI `View.accessibilityCustomContent(_:_:importance:)`
  *
  * ```swift
- * nonisolated func accessibilityCustomContent(_ labelKey: LocalizedStringKey, _ valueKey: LocalizedStringKey, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * nonisolated func accessibilityCustomContent(_ label: Text, _ value: Text, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.accessibilityCustomContent(labelKey: LocalizedKey, valueKey: LocalizedKey): Modifier = element(34, labelKey.key, valueKey.key)
+public fun Modifier.accessibilityCustomContent(label: String, value: String): Modifier = element(31, label, value)
 
 /**
  * SwiftUI `View.accessibilityDragPoint(_:description:)`
  *
  * ```swift
- * nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@Deprecated("Use accessibilityDragPoint(point = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.accessibilityDragPointDescription(point: UnitPoint, description: String): Modifier = element(39, point, description)
+public fun Modifier.accessibilityDragPoint(point: UnitPoint, description: LocalizedKey): Modifier = element(40, point, description.key)
 
 /**
  * SwiftUI `View.accessibilityDragPoint(_:description:isEnabled:)`
  *
  * ```swift
- * nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: LocalizedStringKey, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * @export(implementation) nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: LocalizedStringResource, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use accessibilityDragPoint(point = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.accessibilityDragPoint(point: UnitPoint, description: LocalizedKey, isEnabled: Boolean): Modifier = element(44, point, description.key, isEnabled)
+public fun Modifier.accessibilityDragPointDescription(point: UnitPoint, description: LocalizedKey, isEnabled: Boolean): Modifier = element(45, point, description.key, isEnabled)
 
 /**
- * SwiftUI `View.accessibilityDropPoint(_:description:)`
+ * SwiftUI `View.accessibilityDropPoint(_:description:isEnabled:)`
  *
  * ```swift
- * @export(implementation) nonisolated func accessibilityDropPoint(_ point: UnitPoint, description: LocalizedStringResource) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * nonisolated func accessibilityDropPoint(_ point: UnitPoint, description: Text, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @Deprecated("Use accessibilityDropPoint(point = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.accessibilityDropPointDescription(point: UnitPoint, description: LocalizedKey): Modifier = element(49, point, description.key)
+public fun Modifier.accessibilityDropPointDescription(point: UnitPoint, description: String, isEnabled: Boolean): Modifier = element(51, point, description, isEnabled)
+
+/**
+ * SwiftUI `View.accessibilityHint(_:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityHint(_ hintKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.accessibilityHint(hintKey: LocalizedKey): Modifier = element(60, hintKey.key)
 
 /**
  * SwiftUI `View.accessibilityHint(_:isEnabled:)`
  *
  * ```swift
- * nonisolated func accessibilityHint(_ hintKey: LocalizedStringKey, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * @export(implementation) nonisolated func accessibilityHint(_ hint: LocalizedStringResource, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
  * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
  */
+@Deprecated("Use accessibilityHint(hint = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.accessibilityHint(hintKey: LocalizedKey, isEnabled: Boolean): Modifier = element(64, hintKey.key, isEnabled)
+public fun Modifier.accessibilityHintIsEnabled(hint: LocalizedKey, isEnabled: Boolean): Modifier = element(65, hint.key, isEnabled)
+
+/**
+ * SwiftUI `View.accessibilityLabel(_:isEnabled:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityLabel(_ label: Text, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@Deprecated("Use accessibilityLabel(label = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.accessibilityLabelIsEnabled(label: String, isEnabled: Boolean): Modifier = element(76, label, isEnabled)
 
 /**
  * SwiftUI `View.accessibilityScrollStatus(_:isEnabled:)`
  *
  * ```swift
- * nonisolated func accessibilityScrollStatus(_ status: Text, isEnabled: Bool = true) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * nonisolated func accessibilityScrollStatus(_ statusKey: LocalizedStringKey, isEnabled: Bool = true) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
  * ```
  * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
-@Deprecated("Use accessibilityScrollStatus(status = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.accessibilityScrollStatusIsEnabled(status: String, isEnabled: Boolean = true): Modifier = element(87, status, isEnabled)
+public fun Modifier.accessibilityScrollStatus(statusKey: LocalizedKey, isEnabled: Boolean = true): Modifier = element(88, statusKey.key, isEnabled)
 
 /**
- * SwiftUI `View.accessibilityValue(_:)`
+ * SwiftUI `View.alert(_:isPresented:actions:)`
  *
  * ```swift
- * nonisolated func accessibilityValue(_ valueKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * nonisolated func alert<A>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A) -> some View where A : View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.accessibilityValue(valueKey: LocalizedKey): Modifier = element(96, valueKey.key)
-
-/**
- * SwiftUI `View.accessibilityValue(_:isEnabled:)`
- *
- * ```swift
- * @export(implementation) nonisolated func accessibilityValue(_ valueResource: LocalizedStringResource, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@Deprecated("Use accessibilityValue(valueResource = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.accessibilityValueIsEnabled(valueResource: LocalizedKey, isEnabled: Boolean): Modifier = element(101, valueResource.key, isEnabled)
+public fun Modifier.alert(titleKey: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit): Modifier = element(103, titleKey.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions))
 
 /**
  * SwiftUI `View.alert(_:isPresented:actions:message:)`
  *
  * ```swift
- * nonisolated func alert<A, M>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * @export(implementation) nonisolated func alert<A, M>(_ titleResource: LocalizedStringResource, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use alert(titleResource = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.alertIsPresented(titleResource: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(108, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions), slotContent(message))
+
+/**
+ * SwiftUI `View.confirmationDialog(_:isPresented:titleVisibility:actions:message:)`
+ *
+ * ```swift
+ * nonisolated func confirmationDialog<A, M>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.alert(titleKey: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(107, titleKey.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions), slotContent(message))
-
-/**
- * SwiftUI `View.badge(_:)`
- *
- * ```swift
- * nonisolated func badge(_ key: LocalizedStringKey?) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.badge(key: LocalizedKey?): Modifier = element(138, key?.key)
-
-/**
- * SwiftUI `View.confirmationDialog(_:isPresented:titleVisibility:actions:)`
- *
- * ```swift
- * nonisolated func confirmationDialog<A>(_ title: Text, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ContentBuilder actions: () -> A) -> some View where A : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use confirmationDialog(title = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.confirmationDialogIsPresented(title: String, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit): Modifier = element(162, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions))
+public fun Modifier.confirmationDialog(titleKey: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(163, titleKey.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message))
 
 /**
  * SwiftUI `View.dialogSuppressionToggle(_:isSuppressed:)`
  *
  * ```swift
- * nonisolated func dialogSuppressionToggle(_ titleKey: LocalizedStringKey, isSuppressed: Binding<Bool>) -> some View
+ * @export(implementation) nonisolated func dialogSuppressionToggle(_ titleResource: LocalizedStringResource, isSuppressed: Binding<Bool>) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use dialogSuppressionToggle(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.dialogSuppressionToggle(titleKey: LocalizedKey, isSuppressed: Boolean, onIsSuppressedChange: (Boolean) -> Unit): Modifier = element(202, titleKey.key, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) })
+public fun Modifier.dialogSuppressionToggleIsSuppressed(titleResource: LocalizedKey, isSuppressed: Boolean, onIsSuppressedChange: (Boolean) -> Unit): Modifier = element(203, titleResource.key, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) })
 
 /**
  * SwiftUI `View.dismissalConfirmationDialog(_:shouldPresent:actions:)`
  *
  * ```swift
- * @export(implementation) nonisolated func dismissalConfirmationDialog<A>(_ titleResource: LocalizedStringResource, shouldPresent: Bool, @ContentBuilder actions: () -> A) -> some View where A : View
- * ```
- * Availability: iOS 27.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@Deprecated("Use dismissalConfirmationDialog(titleResource = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.dismissalConfirmationDialogShouldPresent(titleResource: LocalizedKey, shouldPresent: Boolean, actions: @Composable () -> Unit): Modifier = element(219, titleResource.key, shouldPresent, slotContent(actions))
-
-/**
- * SwiftUI `View.dismissalConfirmationDialog(_:shouldPresent:actions:message:)`
- *
- * ```swift
- * nonisolated func dismissalConfirmationDialog<A, M>(_ title: Text, shouldPresent: Bool, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * nonisolated func dismissalConfirmationDialog<A>(_ title: Text, shouldPresent: Bool, @ContentBuilder actions: () -> A) -> some View where A : View
  * ```
  * Availability: iOS 27.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @Deprecated("Use dismissalConfirmationDialog(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.dismissalConfirmationDialogShouldPresent(title: String, shouldPresent: Boolean, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(225, title, shouldPresent, slotContent(actions), slotContent(message))
+public fun Modifier.dismissalConfirmationDialogShouldPresent(title: String, shouldPresent: Boolean, actions: @Composable () -> Unit): Modifier = element(221, title, shouldPresent, slotContent(actions))
 
 /**
- * SwiftUI `View.fileDialogConfirmationLabel(_:)`
+ * SwiftUI `View.documentLaunchTitle(_:)`
  *
  * ```swift
- * nonisolated func fileDialogConfirmationLabel(_ labelKey: LocalizedStringKey) -> some View
+ * nonisolated func documentLaunchTitle(_ titleKey: LocalizedStringKey) -> some View
+ * ```
+ * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.documentLaunchTitle(titleKey: LocalizedKey): Modifier = element(232, titleKey.key)
+
+/**
+ * SwiftUI `View.navigationBarTitle(_:displayMode:)`
+ *
+ * ```swift
+ * nonisolated func navigationBarTitle(_ title: Text, displayMode: NavigationBarItem.TitleDisplayMode) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@Deprecated("Use navigationBarTitle(title = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.navigationBarTitleDisplayMode(title: String, displayMode: NavigationBarItem.TitleDisplayMode): Modifier = element(375, title, displayMode)
+
+/**
+ * SwiftUI `View.searchable(text:isPresented:placement:prompt:)`
+ *
+ * ```swift
+ * nonisolated func searchable(text: Binding<String>, isPresented: Binding<Bool>, placement: SearchFieldPlacement = .automatic, prompt: Text? = nil) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
+@Deprecated("Use searchable(text = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.fileDialogConfirmationLabel(labelKey: LocalizedKey): Modifier = element(245, labelKey.key)
-
-/**
- * SwiftUI `View.help(_:)`
- *
- * ```swift
- * nonisolated func help(_ textKey: LocalizedStringKey) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.help(textKey: LocalizedKey): Modifier = element(294, textKey.key)
-
-/**
- * SwiftUI `View.navigationBarTitle(_:)`
- *
- * ```swift
- * nonisolated func navigationBarTitle(_ titleKey: LocalizedStringKey) -> some View
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.navigationBarTitle(titleKey: LocalizedKey): Modifier = element(373, titleKey.key)
-
-/**
- * SwiftUI `View.navigationSubtitle(_:)`
- *
- * ```swift
- * nonisolated func navigationSubtitle(_ subtitleKey: LocalizedStringKey) -> some View
- * ```
- * Availability: iOS 26.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.navigationSubtitle(subtitleKey: LocalizedKey): Modifier = element(387, subtitleKey.key)
+public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: String? = null): Modifier = element(511, text, SValueCallback { onTextChange(it as String) }, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, placement, prompt)
 
 /**
  * SwiftUI `View.searchable(text:placement:prompt:)`
  *
  * ```swift
- * nonisolated func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: Text? = nil) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use searchable(text = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: String? = null): Modifier = element(515, text, SValueCallback { onTextChange(it as String) }, placement, prompt)
-
-/**
- * SwiftUI `View.searchable(text:placement:prompt:suggestions:)`
- *
- * ```swift
- * nonisolated func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey, @ContentBuilder suggestions: () -> S) -> some View where S : View
+ * nonisolated func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.searchable(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: LocalizedKey, suggestions: @Composable () -> Unit): Modifier = element(520, text, SValueCallback { onTextChange(it as String) }, placement, prompt.key, slotContent(suggestions))
+public fun Modifier.searchable(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: LocalizedKey): Modifier = element(516, text, SValueCallback { onTextChange(it as String) }, placement, prompt.key)
 
 /**
- * SwiftUI `View.typeSelectEquivalent(_:)`
+ * SwiftUI `View.navigationBarItems(leading:)`
  *
  * ```swift
- * @export(implementation) nonisolated func typeSelectEquivalent(_ stringKey: LocalizedStringKey) -> some View
+ * nonisolated func navigationBarItems<L>(leading: L) -> some View where L : View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.navigationBarItems(leading: @Composable () -> Unit): Modifier = element(369, slotContent(leading))
+
+/**
+ * SwiftUI `View.overlay(_:alignment:)`
+ *
+ * ```swift
+ * nonisolated func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.typeSelectEquivalent(stringKey: LocalizedKey): Modifier = element(608, stringKey.key)
+public fun Modifier.overlay(overlay: @Composable () -> Unit, alignment: Alignment = Alignment.center): Modifier = element(430, slotContent(overlay), alignment)
 
 /**
- * SwiftUI `View.mask(_:)`
+ * SwiftUI `EnvironmentValues.timeZone`
  *
  * ```swift
- * nonisolated func mask<Mask>(_ mask: Mask) -> some View where Mask : View
+ * var timeZone: TimeZone { get set }
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
+@Deprecated("Use environment(timeZone = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.mask(mask: @Composable () -> Unit): Modifier = element(352, slotContent(mask))
+public fun Modifier.environmentTimeZone(timeZone: String): Modifier = element(665, timeZone)
 
 /**
- * SwiftUI `View.onChange(of:perform:)`
+ * SwiftUI `View.frame()`
  *
  * ```swift
- * nonisolated func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some View where V : Equatable
+ * nonisolated func frame() -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
-public fun Modifier.onChange(value: Any, perform: (Any) -> Unit): Modifier = element(403, value, SValueCallback { perform(it as Any) })
+public fun Modifier.frame(): Modifier = element(277)
+
+/**
+ * SwiftUI `View.previewInterfaceOrientation(_:)`
+ *
+ * ```swift
+ * nonisolated func previewInterfaceOrientation(_ value: InterfaceOrientation) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Deprecated in SwiftUI")
+@HiddenFromObjC
+public fun Modifier.previewInterfaceOrientation(value: InterfaceOrientation): Modifier = element(465, value)
 
 /** SwiftUI `accessibility` overloads that differ only by argument labels, selected by the labels you pass. */
 @HiddenFromObjC
@@ -1953,28 +1959,32 @@ public fun Modifier.dismissalConfirmationDialog(titleResource: LocalizedKey? = n
 /** SwiftUI `environment` overloads that differ only by argument labels, selected by the labels you pass. */
 @HiddenFromObjC
 @Suppress("NAME_SHADOWING")
-public fun Modifier.environment(displayScale: Double? = null, isLuminanceReduced: Boolean? = null, minimumScaleFactor: Double? = null, accessibilityEnabled: Boolean? = null, isHoverEffectEnabled: Boolean? = null, contentTransitionAddsDrawingGroup: Boolean? = null, accessibilityPrefersCrossFadeTransitions: Boolean? = null, isEnabled: Boolean? = null, lineLimit: Int? = null, isSceneCaptured: Boolean? = null, isScrollEnabled: Boolean? = null, isFocusEffectEnabled: Boolean? = null, disableAutocorrection: Boolean? = null, defaultMinListRowHeight: Double? = null, menuIndicatorVisibility: Visibility? = null, defaultMinListHeaderHeight: Double? = null, defaultWheelPickerItemHeight: Double? = null, horizontalScrollBounceBehavior: ScrollBounceBehavior? = null, systemPrefersReducedResourceUsage: Boolean? = null, horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility? = null): Modifier =
+public fun Modifier.environment(displayScale: Double? = null, allowsTightening: Boolean? = null, isLuminanceReduced: Boolean? = null, minimumScaleFactor: Double? = null, horizontalSizeClass: UserInterfaceSizeClass? = null, accessibilityEnabled: Boolean? = null, isHoverEffectEnabled: Boolean? = null, contentTransitionAddsDrawingGroup: Boolean? = null, accessibilityPrefersCrossFadeTransitions: Boolean? = null, isEnabled: Boolean? = null, lineLimit: Int? = null, isSceneCaptured: Boolean? = null, isScrollEnabled: Boolean? = null, isFocusEffectEnabled: Boolean? = null, disableAutocorrection: Boolean? = null, defaultMinListRowHeight: Double? = null, menuIndicatorVisibility: Visibility? = null, defaultMinListHeaderHeight: Double? = null, defaultWheelPickerItemHeight: Double? = null, horizontalScrollBounceBehavior: ScrollBounceBehavior? = null, systemPrefersReducedResourceUsage: Boolean? = null, horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility? = null, calendar: String? = null, timeZone: String? = null): Modifier =
     when {
-        displayScale != null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val displayScale = displayScale!!; element(629, displayScale) }
-        isLuminanceReduced != null && displayScale == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val isLuminanceReduced = isLuminanceReduced!!; element(643, isLuminanceReduced) }
-        minimumScaleFactor != null && displayScale == null && isLuminanceReduced == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val minimumScaleFactor = minimumScaleFactor!!; element(644, minimumScaleFactor) }
-        accessibilityEnabled != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val accessibilityEnabled = accessibilityEnabled!!; element(647, accessibilityEnabled) }
-        isHoverEffectEnabled != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val isHoverEffectEnabled = isHoverEffectEnabled!!; element(649, isHoverEffectEnabled) }
-        contentTransitionAddsDrawingGroup != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val contentTransitionAddsDrawingGroup = contentTransitionAddsDrawingGroup!!; element(656, contentTransitionAddsDrawingGroup) }
-        accessibilityPrefersCrossFadeTransitions != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val accessibilityPrefersCrossFadeTransitions = accessibilityPrefersCrossFadeTransitions!!; element(657, accessibilityPrefersCrossFadeTransitions) }
-        isEnabled != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val isEnabled = isEnabled!!; element(661, isEnabled) }
-        isSceneCaptured != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val isSceneCaptured = isSceneCaptured!!; element(666, isSceneCaptured) }
-        isScrollEnabled != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val isScrollEnabled = isScrollEnabled!!; element(667, isScrollEnabled) }
-        isFocusEffectEnabled != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val isFocusEffectEnabled = isFocusEffectEnabled!!; element(669, isFocusEffectEnabled) }
-        defaultMinListRowHeight != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val defaultMinListRowHeight = defaultMinListRowHeight!!; element(673, defaultMinListRowHeight) }
-        menuIndicatorVisibility != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val menuIndicatorVisibility = menuIndicatorVisibility!!; element(674, menuIndicatorVisibility) }
-        defaultWheelPickerItemHeight != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val defaultWheelPickerItemHeight = defaultWheelPickerItemHeight!!; element(678, defaultWheelPickerItemHeight) }
-        horizontalScrollBounceBehavior != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { val horizontalScrollBounceBehavior = horizontalScrollBounceBehavior!!; element(680, horizontalScrollBounceBehavior) }
-        systemPrefersReducedResourceUsage != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && horizontalScrollIndicatorVisibility == null -> run { val systemPrefersReducedResourceUsage = systemPrefersReducedResourceUsage!!; element(681, systemPrefersReducedResourceUsage) }
-        horizontalScrollIndicatorVisibility != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null -> run { val horizontalScrollIndicatorVisibility = horizontalScrollIndicatorVisibility!!; element(683, horizontalScrollIndicatorVisibility) }
-        displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { element(662, lineLimit) }
-        displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { element(670, disableAutocorrection) }
-        displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null -> run { element(676, defaultMinListHeaderHeight) }
+        displayScale != null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val displayScale = displayScale!!; element(629, displayScale) }
+        allowsTightening != null && displayScale == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val allowsTightening = allowsTightening!!; element(637, allowsTightening) }
+        isLuminanceReduced != null && displayScale == null && allowsTightening == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val isLuminanceReduced = isLuminanceReduced!!; element(645, isLuminanceReduced) }
+        minimumScaleFactor != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val minimumScaleFactor = minimumScaleFactor!!; element(646, minimumScaleFactor) }
+        accessibilityEnabled != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val accessibilityEnabled = accessibilityEnabled!!; element(650, accessibilityEnabled) }
+        isHoverEffectEnabled != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val isHoverEffectEnabled = isHoverEffectEnabled!!; element(652, isHoverEffectEnabled) }
+        contentTransitionAddsDrawingGroup != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val contentTransitionAddsDrawingGroup = contentTransitionAddsDrawingGroup!!; element(659, contentTransitionAddsDrawingGroup) }
+        accessibilityPrefersCrossFadeTransitions != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val accessibilityPrefersCrossFadeTransitions = accessibilityPrefersCrossFadeTransitions!!; element(660, accessibilityPrefersCrossFadeTransitions) }
+        isEnabled != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val isEnabled = isEnabled!!; element(666, isEnabled) }
+        isSceneCaptured != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val isSceneCaptured = isSceneCaptured!!; element(671, isSceneCaptured) }
+        isScrollEnabled != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val isScrollEnabled = isScrollEnabled!!; element(672, isScrollEnabled) }
+        isFocusEffectEnabled != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val isFocusEffectEnabled = isFocusEffectEnabled!!; element(674, isFocusEffectEnabled) }
+        defaultMinListRowHeight != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val defaultMinListRowHeight = defaultMinListRowHeight!!; element(678, defaultMinListRowHeight) }
+        menuIndicatorVisibility != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val menuIndicatorVisibility = menuIndicatorVisibility!!; element(679, menuIndicatorVisibility) }
+        defaultWheelPickerItemHeight != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val defaultWheelPickerItemHeight = defaultWheelPickerItemHeight!!; element(683, defaultWheelPickerItemHeight) }
+        horizontalScrollBounceBehavior != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val horizontalScrollBounceBehavior = horizontalScrollBounceBehavior!!; element(685, horizontalScrollBounceBehavior) }
+        systemPrefersReducedResourceUsage != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { val systemPrefersReducedResourceUsage = systemPrefersReducedResourceUsage!!; element(686, systemPrefersReducedResourceUsage) }
+        horizontalScrollIndicatorVisibility != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && calendar == null && timeZone == null -> run { val horizontalScrollIndicatorVisibility = horizontalScrollIndicatorVisibility!!; element(688, horizontalScrollIndicatorVisibility) }
+        calendar != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && timeZone == null -> run { val calendar = calendar!!; element(663, calendar) }
+        timeZone != null && displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null -> run { val timeZone = timeZone!!; element(665, timeZone) }
+        displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { element(648, horizontalSizeClass) }
+        displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { element(667, lineLimit) }
+        displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultMinListHeaderHeight == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { element(675, disableAutocorrection) }
+        displayScale == null && allowsTightening == null && isLuminanceReduced == null && minimumScaleFactor == null && horizontalSizeClass == null && accessibilityEnabled == null && isHoverEffectEnabled == null && contentTransitionAddsDrawingGroup == null && accessibilityPrefersCrossFadeTransitions == null && isEnabled == null && lineLimit == null && isSceneCaptured == null && isScrollEnabled == null && isFocusEffectEnabled == null && disableAutocorrection == null && defaultMinListRowHeight == null && menuIndicatorVisibility == null && defaultWheelPickerItemHeight == null && horizontalScrollBounceBehavior == null && systemPrefersReducedResourceUsage == null && horizontalScrollIndicatorVisibility == null && calendar == null && timeZone == null -> run { element(681, defaultMinListHeaderHeight) }
         else -> error("No SwiftUI environment overload takes this combination of arguments")
     }
 

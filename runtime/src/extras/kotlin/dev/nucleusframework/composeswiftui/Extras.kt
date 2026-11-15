@@ -39,8 +39,33 @@ internal object ExtraIds {
 /** SwiftUI `ForEach(items, id:)`: one keyed child group per item (identity = [key]). */
 @HiddenFromObjC
 @Composable
-public fun <T> ForEach(items: List<T>, key: (T) -> Any, content: @Composable (T) -> Unit) {
-    for (item in items) key(key(item)) { content(item) }
+public fun <T> ForEach(
+    items: List<T>,
+    key: (T) -> Any,
+    onDelete: ((indices: Set<Int>) -> Unit)? = null,
+    onMove: ((indices: Set<Int>, destination: Int) -> Unit)? = null,
+    content: @Composable (T) -> Unit,
+) {
+    if (onDelete == null && onMove == null) {
+        for (item in items) key(key(item)) { content(item) }
+        return
+    }
+    // SwiftUI `ForEach(data).onDelete(perform:).onMove(perform:)`: swipe to delete and drag to reorder in a List
+    SwiftView(
+        CompletionIds.EDITABLE_FOR_EACH,
+        listOf(
+            onDelete?.let { cb -> SValueCallback { cb((it as List<*>).map { i -> (i as Number).toInt() }.toSet()) } },
+            onMove?.let { cb ->
+                SValueCallback {
+                    val l = it as List<*>
+                    cb((l[0] as List<*>).map { i -> (i as Number).toInt() }.toSet(), (l[1] as Number).toInt())
+                }
+            },
+        ),
+        Modifier,
+    ) {
+        for (item in items) key(key(item)) { SwiftView(InteractiveIds.GROUP, emptyList(), Modifier) { content(item) } }
+    }
 }
 
 /**
@@ -206,7 +231,7 @@ public data class DragGestureValue(
     val velocityY: Double,
 )
 
-private fun dragValue(value: Any?): DragGestureValue {
+internal fun dragValue(value: Any?): DragGestureValue {
     val v = (value as List<*>).map { (it as Number).toDouble() }
     return DragGestureValue(v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9])
 }
@@ -292,6 +317,14 @@ public fun Modifier.zoomTransition(sourceId: Any, namespace: NamespaceId): Modif
  * SwiftUI `withAnimation(animation) { }`: state changes made in [block] (and the resulting
  * recomposition) are applied inside one animated SwiftUI transaction.
  */
+@HiddenFromObjC
+public fun withAnimation(animation: Animation? = Animation.default, completion: () -> Unit, block: () -> Unit) {
+    // SwiftUI `withAnimation(_:completionCriteria:_:completion:)`
+    val runner = SwiftUIBridge.animationCompletionRunner ?: run { block(); completion(); return }
+    runner(animation, block, completion)
+}
+
+/** SwiftUI `withAnimation(_:_:)`. */
 @HiddenFromObjC
 public fun <R> withAnimation(animation: Animation? = Animation.default, block: () -> R): R {
     val runner = SwiftUIBridge.animationRunner ?: return block()
@@ -382,8 +415,18 @@ public fun <T : Any> TabView(
 }
 
 /**
- * SwiftUI `Tab(_:systemImage:value:)`, for use in a [TabView]. [value] is the tag compared with the
- * `TabView` selection; leave it null when the `TabView` has no selection.
+ * SwiftUI `TabSection(_:content:)` (iOS 18, macOS 15): groups [Tab]s in the sidebar of an adaptable [TabView]
+ * (`Modifier.tabViewStyle(TabViewStyle.sidebarAdaptable)`). Every tab needs a [Tab] `value` then.
+ */
+@HiddenFromObjC
+@Composable
+public fun TabSection(title: String, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    SwiftView(CompletionIds.TAB_SECTION, listOf(title), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Tab(_:systemImage:value:)`, for use in a [TabView] or a [TabSection]. [value] is the tag compared with
+ * the `TabView` selection; leave it null when the `TabView` has no selection.
  */
 @HiddenFromObjC
 @Composable

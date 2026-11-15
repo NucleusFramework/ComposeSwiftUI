@@ -4,47 +4,47 @@ import UniformTypeIdentifiers
 
 #if os(iOS) || os(macOS) || os(tvOS)
 @MainActor func e_HoverPhase(_ v: HoverPhase) -> SExpr? {
-    if case .ended = v { return SExpr(id: 1805, args: []) }
-    if case .active(let x0) = v { return SExpr(id: 1806, args: [(e_CGPoint(x0) ?? NSNull())]) }
+    if case .ended = v { return SExpr(id: 1807, args: []) }
+    if case .active(let x0) = v { return SExpr(id: 1808, args: [(e_CGPoint(x0) ?? NSNull())]) }
     return nil
 }
 #endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
 @MainActor func e_ScrollPhase(_ v: ScrollPhase) -> SExpr? {
-    if case .interacting = v { return SExpr(id: 2167, args: []) }
-    if case .decelerating = v { return SExpr(id: 2168, args: []) }
-    if case .idle = v { return SExpr(id: 2169, args: []) }
-    if case .tracking = v { return SExpr(id: 2170, args: []) }
-    if case .animating = v { return SExpr(id: 2171, args: []) }
+    if case .interacting = v { return SExpr(id: 2169, args: []) }
+    if case .decelerating = v { return SExpr(id: 2170, args: []) }
+    if case .idle = v { return SExpr(id: 2171, args: []) }
+    if case .tracking = v { return SExpr(id: 2172, args: []) }
+    if case .animating = v { return SExpr(id: 2173, args: []) }
     return nil
 }
 #if os(macOS) || os(tvOS)
 @MainActor func e_MoveCommandDirection(_ v: MoveCommandDirection) -> SExpr? {
-    if case .up = v { return SExpr(id: 1936, args: []) }
-    if case .down = v { return SExpr(id: 1937, args: []) }
-    if case .left = v { return SExpr(id: 1938, args: []) }
-    if case .right = v { return SExpr(id: 1939, args: []) }
+    if case .up = v { return SExpr(id: 1938, args: []) }
+    if case .down = v { return SExpr(id: 1939, args: []) }
+    if case .left = v { return SExpr(id: 1940, args: []) }
+    if case .right = v { return SExpr(id: 1941, args: []) }
     return nil
 }
 #endif
 @MainActor func e_NavigationSplitViewColumn(_ v: NavigationSplitViewColumn) -> SExpr? {
-    if v == .detail { return SExpr(id: 1959, args: []) }
-    if v == .content { return SExpr(id: 1960, args: []) }
-    if v == .sidebar { return SExpr(id: 1961, args: []) }
+    if v == .detail { return SExpr(id: 1961, args: []) }
+    if v == .content { return SExpr(id: 1962, args: []) }
+    if v == .sidebar { return SExpr(id: 1963, args: []) }
     return nil
 }
 #if os(iOS) || os(macOS)
 @available(iOS 17.5, macOS 14.5, tvOS 17.0, watchOS 10.0, *)
 @MainActor func e_PencilSqueezeGesturePhase(_ v: PencilSqueezeGesturePhase) -> SExpr? {
-    if case .failed = v { return SExpr(id: 2024, args: []) }
+    if case .failed = v { return SExpr(id: 2026, args: []) }
     return nil
 }
 #endif
 @MainActor func e_NavigationSplitViewVisibility(_ v: NavigationSplitViewVisibility) -> SExpr? {
-    if v == .detailOnly { return SExpr(id: 1962, args: []) }
-    if v == .doubleColumn { return SExpr(id: 1963, args: []) }
-    if v == .all { return SExpr(id: 1964, args: []) }
-    if v == .automatic { return SExpr(id: 1965, args: []) }
+    if v == .detailOnly { return SExpr(id: 1964, args: []) }
+    if v == .doubleColumn { return SExpr(id: 1965, args: []) }
+    if v == .all { return SExpr(id: 1966, args: []) }
+    if v == .automatic { return SExpr(id: 1967, args: []) }
     return nil
 }
 @MainActor func e_AccessibilityAdjustmentDirection(_ v: AccessibilityAdjustmentDirection) -> SExpr? {
@@ -79,22 +79,22 @@ import UniformTypeIdentifiers
     if v == .yellow { return SExpr(id: 1297, args: []) }
     if v == .primary { return SExpr(id: 1299, args: []) }
     if v == .secondary { return SExpr(id: 1301, args: []) }
-    if v == .red { return SExpr(id: 2702, args: []) }
-    if v == .blue { return SExpr(id: 2703, args: []) }
-    if v == .cyan { return SExpr(id: 2704, args: []) }
-    if v == .gray { return SExpr(id: 2705, args: []) }
-    if v == .mint { return SExpr(id: 2706, args: []) }
-    if v == .pink { return SExpr(id: 2707, args: []) }
-    if v == .teal { return SExpr(id: 2708, args: []) }
-    if v == .black { return SExpr(id: 2709, args: []) }
-    if v == .brown { return SExpr(id: 2710, args: []) }
-    if v == .clear { return SExpr(id: 2711, args: []) }
-    if v == .green { return SExpr(id: 2712, args: []) }
-    if v == .white { return SExpr(id: 2713, args: []) }
-    if v == .indigo { return SExpr(id: 2714, args: []) }
-    if v == .orange { return SExpr(id: 2715, args: []) }
-    if v == .purple { return SExpr(id: 2716, args: []) }
-    if v == .yellow { return SExpr(id: 2717, args: []) }
+    if v == .red { return SExpr(id: 2708, args: []) }
+    if v == .blue { return SExpr(id: 2709, args: []) }
+    if v == .cyan { return SExpr(id: 2710, args: []) }
+    if v == .gray { return SExpr(id: 2711, args: []) }
+    if v == .mint { return SExpr(id: 2712, args: []) }
+    if v == .pink { return SExpr(id: 2713, args: []) }
+    if v == .teal { return SExpr(id: 2714, args: []) }
+    if v == .black { return SExpr(id: 2715, args: []) }
+    if v == .brown { return SExpr(id: 2716, args: []) }
+    if v == .clear { return SExpr(id: 2717, args: []) }
+    if v == .green { return SExpr(id: 2718, args: []) }
+    if v == .white { return SExpr(id: 2719, args: []) }
+    if v == .indigo { return SExpr(id: 2720, args: []) }
+    if v == .orange { return SExpr(id: 2721, args: []) }
+    if v == .purple { return SExpr(id: 2722, args: []) }
+    if v == .yellow { return SExpr(id: 2723, args: []) }
     let r = v.resolve(in: EnvironmentValues())
     return SExpr(id: 1302, args: [e_Color_RGBColorSpace(.sRGB) ?? NSNull(), KBox.double(Double(r.red)), KBox.double(Double(r.green)), KBox.double(Double(r.blue)), KBox.double(Double(r.opacity))])
 }

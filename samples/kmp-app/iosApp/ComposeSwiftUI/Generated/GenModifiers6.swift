@@ -323,22 +323,27 @@ import UniformTypeIdentifiers
             guard let p0 = d_ContentSizeCategory(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.sizeCategory, p0), m, i + 1)
         case 638:
-            return ModChain.apply(v.environment(\.legibilityWeight, d_LegibilityWeight(a.expr(0))), m, i + 1)
+            guard let p0 = d_Prominence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.headerProminence, p0), m, i + 1)
         case 646:
-            return ModChain.apply(v.environment(\.symbolRenderingMode, d_SymbolRenderingMode(a.expr(0))), m, i + 1)
+            return ModChain.apply(v.environment(\.minimumScaleFactor, a.cgFloat(0)), m, i + 1)
         case 654:
-            if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
-                return ModChain.apply(v.environment(\.overlayArrangementZIndex, a.int(0)), m, i + 1)
+            guard let p0 = d_TextAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.multilineTextAlignment, p0), m, i + 1)
+        case 662:
+            return ModChain.apply(v.environment(\.locale, Locale(identifier: a.string(0))), m, i + 1)
+#if os(iOS) || os(macOS)
+        case 670:
+            guard let p0 = d_BadgeProminence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.badgeProminence, p0), m, i + 1)
+#endif
+        case 678:
+            return ModChain.apply(v.environment(\.defaultMinListRowHeight, a.cgFloat(0)), m, i + 1)
+        case 686:
+            if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
+                return ModChain.apply(v.environment(\.systemPrefersReducedResourceUsage, a.bool(0)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-        case 662:
-            return ModChain.apply(v.environment(\.lineLimit, a.intOpt(0)), m, i + 1)
-        case 670:
-            return ModChain.apply(v.environment(\.disableAutocorrection, a.boolOpt(0)), m, i + 1)
-#if os(watchOS)
-        case 678:
-            return ModChain.apply(v.environment(\.defaultWheelPickerItemHeight, a.cgFloat(0)), m, i + 1)
-#endif
         default: return nil
         }
     }

@@ -10,7 +10,7 @@ import UniformTypeIdentifiers
         return .decrement
     case 1013:
         return .increment
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AccessibilityAdjustmentDirection
     }
 }
 #if os(watchOS)
@@ -18,9 +18,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2857:
+    case 2863:
         return .outline
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AccessibilityQuickActionOutlineStyle
     }
 }
 #endif
@@ -32,7 +32,7 @@ import UniformTypeIdentifiers
         return .zoomIn
     case 1083:
         return .zoomOut
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AccessibilityZoomGestureAction.Direction
     }
 }
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -42,9 +42,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1089:
         return AccessoryLinearGaugeStyle()
-    case 2662:
+    case 2668:
         return .accessoryLinear
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AccessoryLinearGaugeStyle
     }
 }
 #endif
@@ -59,7 +59,7 @@ import UniformTypeIdentifiers
         return .disabled
     case 1119:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AlternatingRowBackgroundBehavior
     }
 }
 #endif
@@ -74,7 +74,7 @@ import UniformTypeIdentifiers
     case 1169:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         return AnyGradient(p0)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AnyGradient
     }
 }
 @MainActor func d_AsyncImagePhase(_ e: SExpr?) -> AsyncImagePhase? {
@@ -83,7 +83,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1186:
         return .empty
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AsyncImagePhase
     }
 }
 @MainActor func d_AutomaticFormStyle(_ e: SExpr?) -> AutomaticFormStyle? {
@@ -92,9 +92,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1191:
         return AutomaticFormStyle()
-    case 2874:
+    case 2880:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AutomaticFormStyle
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -102,9 +102,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2827:
+    case 2833:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? AutomaticNavigationTransition
     }
 }
 @MainActor func d_BackgroundProminence(_ e: SExpr?) -> BackgroundProminence? {
@@ -115,7 +115,7 @@ import UniformTypeIdentifiers
         return .standard
     case 1204:
         return .increased
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? BackgroundProminence
     }
 }
 @MainActor func d_BlurReplaceTransition_Configuration(_ e: SExpr?) -> BlurReplaceTransition.Configuration? {
@@ -126,7 +126,7 @@ import UniformTypeIdentifiers
         return .upUp
     case 1233:
         return .downUp
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? BlurReplaceTransition.Configuration
     }
 }
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
@@ -136,9 +136,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1242:
         return BorderedTextFieldStyle()
-    case 2780:
+    case 2786:
         return .bordered
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? BorderedTextFieldStyle
     }
 }
 #if os(iOS) || os(macOS) || os(tvOS)
@@ -148,9 +148,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1253:
         return ButtonMenuStyle()
-    case 2888:
+    case 2894:
         return .button
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ButtonMenuStyle
     }
 }
 #endif
@@ -161,9 +161,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1266:
         return CardButtonStyle()
-    case 2834:
+    case 2840:
         return .card
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? CardButtonStyle
     }
 }
 #endif
@@ -180,9 +180,9 @@ import UniformTypeIdentifiers
         return CircularGaugeStyle(tint: p0)
     case 1275:
         return CircularGaugeStyle()
-    case 2668:
+    case 2674:
         return .circular
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? CircularGaugeStyle
     }
 }
 #endif
@@ -192,7 +192,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1313:
         return ColorMatrix()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ColorMatrix
     }
 }
 #if os(iOS) || os(macOS)
@@ -244,7 +244,7 @@ import UniformTypeIdentifiers
         return .undoRedo
     case 1341:
         return .printItem
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? CommandGroupPlacement
     }
 }
 #endif
@@ -254,9 +254,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1358:
         return ContainerRelativeShape()
-    case 2860:
+    case 2866:
         return .containerRelative
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ContainerRelativeShape
     }
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, *)
@@ -268,7 +268,7 @@ import UniformTypeIdentifiers
     case 1384:
         return .tabViewSidebar
     #endif
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ContentToolbarPlacement
     }
 }
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -286,7 +286,7 @@ import UniformTypeIdentifiers
         return .date
     case 1404:
         return DatePickerComponents(rawValue: UInt(truncatingIfNeeded: a.int(0)))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DatePickerComponents
     }
 }
 #endif
@@ -297,7 +297,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1411:
         return DefaultGlassEffectShape()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DefaultGlassEffectShape
     }
 }
 @MainActor func d_DefaultNavigationViewStyle(_ e: SExpr?) -> DefaultNavigationViewStyle? {
@@ -306,9 +306,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1417:
         return DefaultNavigationViewStyle()
-    case 2822:
+    case 2828:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DefaultNavigationViewStyle
     }
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
@@ -320,7 +320,7 @@ import UniformTypeIdentifiers
         guard let p0 = d_ToolbarDefaultItemKind(a.expr(0)) else { return nil }
         guard let p1 = d_ToolbarItemPlacement(a.expr(1)) else { return nil }
         return DefaultToolbarItem(kind: p0, placement: p1)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DefaultToolbarItem
     }
 }
 #if os(iOS) || os(macOS)
@@ -328,9 +328,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2808:
+    case 2814:
         return .disabled
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DisabledTextSelectability
     }
 }
 #endif
@@ -348,7 +348,7 @@ import UniformTypeIdentifiers
     case 1445:
         return DragConfiguration.OperationsWithinApp(allowMove: a.bool(0))
     #endif
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DragConfiguration.OperationsWithinApp
     }
 }
 #endif
@@ -376,7 +376,7 @@ import UniformTypeIdentifiers
         return DropOperation.Set(rawValue: a.int(0))
     case 1472:
         return .forbidden
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? DropOperation.Set
     }
 }
 #endif
@@ -410,7 +410,7 @@ import UniformTypeIdentifiers
     case 1511:
         guard let p0 = d_Edge_Corner(a.expr(0)) else { return nil }
         return Edge.Corner.Set(p0)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Edge.Corner.Set
     }
 }
 #if os(iOS) || os(tvOS)
@@ -424,7 +424,7 @@ import UniformTypeIdentifiers
         return .inactive
     case 1533:
         return .transient
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? EditMode
     }
 }
 #endif
@@ -436,7 +436,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1542:
         return EmptyControlWidgetConfiguration()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? EmptyControlWidgetConfiguration
     }
 }
 #endif
@@ -446,7 +446,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1548:
         return EnvironmentValues()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? EnvironmentValues
     }
 }
 @MainActor func d_FillShapeStyle(_ e: SExpr?) -> FillShapeStyle? {
@@ -455,9 +455,9 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1565:
         return FillShapeStyle()
-    case 2682:
+    case 2688:
         return .fill
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? FillShapeStyle
     }
 }
 @MainActor func d_Font_Design(_ e: SExpr?) -> Font.Design? {
@@ -472,7 +472,7 @@ import UniformTypeIdentifiers
         return .`default`
     case 1611:
         return .rounded
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Font.Design
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -480,9 +480,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2809:
+    case 2815:
         return .form
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? FormPresentationSizing
     }
 }
 @MainActor func d_GestureMask(_ e: SExpr?) -> GestureMask? {
@@ -499,7 +499,7 @@ import UniformTypeIdentifiers
         return GestureMask(rawValue: UInt32(truncatingIfNeeded: a.int(0)))
     case 1667:
         return .subviews
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? GestureMask
     }
 }
 @MainActor func d_Gradient(_ e: SExpr?) -> Gradient? {
@@ -510,7 +510,7 @@ import UniformTypeIdentifiers
         return Gradient(stops: a.exprList(0).compactMap { d_Gradient_Stop($0) })
     case 1681:
         return Gradient(colors: a.exprList(0).compactMap { d_Color($0) })
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Gradient
     }
 }
 @MainActor func d_GraphicsContext_ClipOptions(_ e: SExpr?) -> GraphicsContext.ClipOptions? {
@@ -521,7 +521,7 @@ import UniformTypeIdentifiers
         return .inverse
     case 1719:
         return GraphicsContext.ClipOptions(rawValue: UInt32(truncatingIfNeeded: a.int(0)))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? GraphicsContext.ClipOptions
     }
 }
 @MainActor func d_GridItem(_ e: SExpr?) -> GridItem? {
@@ -529,19 +529,19 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     case 1765:
-        let p0: GridItem.Size = a.isNil(0) ? .flexible() : (d_GridItem_Size(a.expr(0)) ?? .flexible())
+        guard let p0 = d_GridItem_Size(a.expr(0)) else { return nil }
         return GridItem(p0, spacing: a.cgFloatOpt(1), alignment: d_Alignment(a.expr(2)))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? GridItem
     }
 }
 @MainActor func d_HStackLayout(_ e: SExpr?) -> HStackLayout? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1771:
+    case 1773:
         guard let p0 = d_VerticalAlignment(a.expr(0)) else { return nil }
         return HStackLayout(alignment: p0, spacing: a.cgFloatOpt(1))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? HStackLayout
     }
 }
 @MainActor func d_HorizontalAlignment(_ e: SExpr?) -> HorizontalAlignment? {
@@ -549,20 +549,20 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS) || os(macOS)
-    case 1782:
+    case 1784:
         return .listRowSeparatorLeading
     #endif
     #if os(iOS) || os(macOS)
-    case 1783:
+    case 1785:
         return .listRowSeparatorTrailing
     #endif
-    case 1784:
-        return .center
-    case 1785:
-        return .leading
     case 1786:
+        return .center
+    case 1787:
+        return .leading
+    case 1788:
         return .trailing
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? HorizontalAlignment
     }
 }
 #if os(iOS) || os(macOS) || os(tvOS)
@@ -570,12 +570,12 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1805:
+    case 1807:
         return .ended
-    case 1806:
+    case 1808:
         guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
         return .active(p0)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? HoverPhase
     }
 }
 #endif
@@ -583,11 +583,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1824:
+    case 1826:
         return .tile
-    case 1825:
+    case 1827:
         return .stretch
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Image.ResizingMode
     }
 }
 #if os(iOS) || os(macOS)
@@ -596,18 +596,18 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 1834:
+    case 1836:
         return InsetListStyle(alternatesRowBackgrounds: a.bool(0))
     #endif
-    case 1835:
+    case 1837:
         return InsetListStyle()
     #if os(macOS)
-    case 2877:
+    case 2883:
         return .inset(alternatesRowBackgrounds: a.bool(0))
     #endif
-    case 2878:
+    case 2884:
         return .inset
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? InsetListStyle
     }
 }
 #endif
@@ -616,11 +616,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1865:
+    case 1867:
         return .handled
-    case 1866:
+    case 1868:
         return .ignored
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? KeyPress.Result
     }
 }
 #endif
@@ -628,11 +628,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1880:
+    case 1882:
         return .bold
-    case 1881:
+    case 1883:
         return .regular
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? LegibilityWeight
     }
 }
 #if os(macOS)
@@ -640,11 +640,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1892:
+    case 1894:
         return LinkButtonStyle()
-    case 2835:
+    case 2841:
         return .link
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? LinkButtonStyle
     }
 }
 #endif
@@ -652,9 +652,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1904:
+    case 1906:
         return LocalizedStringKey.StringInterpolation(literalCapacity: a.int(0), interpolationCount: a.int(1))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? LocalizedStringKey.StringInterpolation
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -662,17 +662,17 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1922:
+    case 1924:
         return .matchWindow
-    case 1923:
+    case 1925:
         return .active
     #if os(macOS)
-    case 1924:
+    case 1926:
         return .inactive
     #endif
-    case 1925:
+    case 1927:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? MaterialActiveAppearance
     }
 }
 #if os(macOS) || os(tvOS)
@@ -680,15 +680,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1936:
-        return .up
-    case 1937:
-        return .down
     case 1938:
-        return .left
+        return .up
     case 1939:
+        return .down
+    case 1940:
+        return .left
+    case 1941:
         return .right
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? MoveCommandDirection
     }
 }
 #endif
@@ -698,14 +698,14 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS) || os(watchOS)
-    case 1953:
+    case 1955:
         return .large
     #endif
-    case 1954:
+    case 1956:
         return .inline
-    case 1955:
+    case 1957:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? NavigationBarItem.TitleDisplayMode
     }
 }
 #endif
@@ -713,15 +713,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1966:
+    case 1968:
         guard let p0 = d_CGSize(a.expr(0)) else { return nil }
         return OffsetTransition(p0)
-    case 2737:
+    case 2743:
         return .offset(x: a.cgFloat(0), y: a.cgFloat(1))
-    case 2738:
+    case 2744:
         guard let p0 = d_CGSize(a.expr(0)) else { return nil }
         return .offset(p0)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? OffsetTransition
     }
 }
 #if os(iOS) || os(tvOS) || os(watchOS)
@@ -729,15 +729,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1980:
+    case 1982:
         guard let p0 = d_PageIndexViewStyle_BackgroundDisplayMode(a.expr(0)) else { return nil }
         return PageIndexViewStyle(backgroundDisplayMode: p0)
-    case 2774:
+    case 2780:
         guard let p0 = d_PageIndexViewStyle_BackgroundDisplayMode(a.expr(0)) else { return nil }
         return .page(backgroundDisplayMode: p0)
-    case 2775:
+    case 2781:
         return .page
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? PageIndexViewStyle
     }
 }
 #endif
@@ -746,11 +746,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1990:
+    case 1992:
         return PaletteControlGroupStyle()
-    case 2796:
+    case 2802:
         return .palette
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? PaletteControlGroupStyle
     }
 }
 #endif
@@ -760,9 +760,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2024:
+    case 2026:
         return .failed
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? PencilSqueezeGesturePhase
     }
 }
 #endif
@@ -771,11 +771,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2032:
+    case 2034:
         return PlainTextEditorStyle()
-    case 2787:
+    case 2793:
         return .plain
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? PlainTextEditorStyle
     }
 }
 #endif
@@ -783,61 +783,61 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2052:
-        return .fullScreenCover
-    case 2053:
-        return .none
     case 2054:
-        return .sheet
+        return .fullScreenCover
     case 2055:
-        return .popover
+        return .none
     case 2056:
+        return .sheet
+    case 2057:
+        return .popover
+    case 2058:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? PresentationAdaptation
     }
 }
 @MainActor func d_PreviewPlatform(_ e: SExpr?) -> PreviewPlatform? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2074:
-        return .iOS
-    case 2075:
-        return .tvOS
     case 2076:
-        return .macOS
+        return .iOS
     case 2077:
+        return .tvOS
+    case 2078:
+        return .macOS
+    case 2079:
         return .watchOS
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? PreviewPlatform
     }
 }
 @MainActor func d_ProposedViewSize(_ e: SExpr?) -> ProposedViewSize? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2090:
-        return .unspecified
-    case 2091:
-        return .zero
     case 2092:
-        return ProposedViewSize(width: a.cgFloatOpt(0), height: a.cgFloatOpt(1))
+        return .unspecified
     case 2093:
-        return .infinity
+        return .zero
     case 2094:
+        return ProposedViewSize(width: a.cgFloatOpt(0), height: a.cgFloatOpt(1))
+    case 2095:
+        return .infinity
+    case 2096:
         guard let p0 = d_CGSize(a.expr(0)) else { return nil }
         return ProposedViewSize(p0)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ProposedViewSize
     }
 }
 @MainActor func d_Rectangle(_ e: SExpr?) -> Rectangle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2102:
+    case 2104:
         return Rectangle()
-    case 2871:
+    case 2877:
         return .rect
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Rectangle
     }
 }
 #if os(iOS) || os(macOS)
@@ -845,17 +845,17 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2114:
+    case 2116:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
             let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
             guard let p1 = d_GestureInputKinds(a.expr(1)) else { return nil }
             return RotateGesture(minimumAngleDelta: p0, inputKinds: p1)
         }
         return nil
-    case 2115:
+    case 2117:
         let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
         return RotateGesture(minimumAngleDelta: p0)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? RotateGesture
     }
 }
 #endif
@@ -864,9 +864,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2127:
+    case 2129:
         return .zero
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? RoundedRectangularShapeCorners.AnimatableData
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -875,12 +875,12 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 2141:
+    case 2143:
         return .disabled
     #endif
-    case 2142:
+    case 2144:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SceneRestorationBehavior
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -888,13 +888,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2158:
+    case 2160:
         guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
         guard let p1 = d_CGSize(a.expr(1)) else { return nil }
         guard let p2 = d_EdgeInsets(a.expr(2)) else { return nil }
         guard let p3 = d_CGSize(a.expr(3)) else { return nil }
         return ScrollGeometry(contentOffset: p0, contentSize: p1, contentInsets: p2, containerSize: p3)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ScrollGeometry
     }
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, *)
@@ -902,9 +902,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2178:
+    case 2180:
         return ScrollTargetBehaviorProperties()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ScrollTargetBehaviorProperties
     }
 }
 @available(iOS 17.1, macOS 14.1, tvOS 17.1, watchOS 10.1, *)
@@ -912,11 +912,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2203:
+    case 2205:
         return .avoidHidingContent
-    case 2204:
+    case 2206:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SearchPresentationToolbarBehavior
     }
 }
 #if os(iOS) || os(macOS)
@@ -924,11 +924,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2217:
+    case 2219:
         return SelectionShapeStyle()
-    case 2685:
+    case 2691:
         return .selection
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SelectionShapeStyle
     }
 }
 #endif
@@ -936,13 +936,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2248:
-        return .heavy
-    case 2249:
-        return .light
     case 2250:
+        return .heavy
+    case 2251:
+        return .light
+    case 2252:
         return .medium
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SensoryFeedback.Weight
     }
 }
 #if os(iOS) || os(macOS) || os(tvOS)
@@ -950,12 +950,12 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2268:
+    case 2270:
         guard let p0 = URL(string: a.string(0)) else { return nil }
         return ShaderLibrary(url: p0)
-    case 2269:
+    case 2271:
         return .`default`
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ShaderLibrary
     }
 }
 #endif
@@ -963,13 +963,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2278:
-        return .large
-    case 2279:
-        return .small
     case 2280:
+        return .large
+    case 2281:
+        return .small
+    case 2282:
         return .medium
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SidebarRowSize
     }
 }
 #if os(iOS) || os(macOS) || os(watchOS)
@@ -979,23 +979,23 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 2290:
+    case 2292:
         if #available(iOS 17.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
             return .indirectPinch
         }
         return nil
     #endif
-    case 2291:
+    case 2293:
         return .touch
     #if os(iOS)
-    case 2292:
+    case 2294:
         return .pencil
     #endif
     #if os(iOS) || os(macOS)
-    case 2293:
+    case 2295:
         return .pointer
     #endif
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SpatialEventCollection.Event.Kind
     }
 }
 #endif
@@ -1003,41 +1003,41 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2313:
-        return .enabled
-    case 2314:
-        return .disabled
     case 2315:
+        return .enabled
+    case 2316:
+        return .disabled
+    case 2317:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SpringLoadingBehavior
     }
 }
 @MainActor func d_SubmitTriggers(_ e: SExpr?) -> SubmitTriggers? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2329:
-        return .text
-    case 2330:
-        return .search
     case 2331:
+        return .text
+    case 2332:
+        return .search
+    case 2333:
         return SubmitTriggers(rawValue: a.int(0))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SubmitTriggers
     }
 }
 @MainActor func d_SymbolRenderingMode(_ e: SExpr?) -> SymbolRenderingMode? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2343:
-        return .monochrome
-    case 2344:
-        return .multicolor
     case 2345:
-        return .hierarchical
+        return .monochrome
     case 2346:
+        return .multicolor
+    case 2347:
+        return .hierarchical
+    case 2348:
         return .palette
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SymbolRenderingMode
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -1045,10 +1045,10 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2361:
+    case 2365:
         guard let base = d_SystemFormatStyle_Timer(a.expr(0)) else { return nil }
         return base.locale(Locale(identifier: a.string(1)))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? SystemFormatStyle.Timer
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -1056,14 +1056,14 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2378:
+    case 2382:
         return .search
-    case 2379:
+    case 2383:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
             return .prominent
         }
         return nil
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? TabRole
     }
 }
 #if os(iOS) || os(macOS)
@@ -1071,29 +1071,29 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2393:
+    case 2397:
         return .visibility
-    case 2394:
+    case 2398:
         guard let base = d_TableColumnCustomizationBehavior(a.expr(0)) else { return nil }
         guard let p0 = d_TableColumnCustomizationBehavior(a.expr(1)) else { return nil }
         return base.intersection(p0)
-    case 2395:
+    case 2399:
         guard let base = d_TableColumnCustomizationBehavior(a.expr(0)) else { return nil }
         guard let p0 = d_TableColumnCustomizationBehavior(a.expr(1)) else { return nil }
         return base.symmetricDifference(p0)
-    case 2396:
+    case 2400:
         return .all
-    case 2397:
+    case 2401:
         guard let base = d_TableColumnCustomizationBehavior(a.expr(0)) else { return nil }
         guard let p0 = d_TableColumnCustomizationBehavior(a.expr(1)) else { return nil }
         return base.union(p0)
-    case 2398:
+    case 2402:
         return .resize
-    case 2399:
+    case 2403:
         return .reorder
-    case 2400:
+    case 2404:
         return TableColumnCustomizationBehavior()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? TableColumnCustomizationBehavior
     }
 }
 #endif
@@ -1101,23 +1101,23 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2414:
+    case 2418:
         guard let base = d_Text_Layout_CharacterIndex(a.expr(0)) else { return nil }
         return base.advanced(by: a.int(1))
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Text.Layout.CharacterIndex
     }
 }
 @MainActor func d_Text_TruncationMode(_ e: SExpr?) -> Text.TruncationMode? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2427:
+    case 2431:
         return .head
-    case 2428:
+    case 2432:
         return .tail
-    case 2429:
+    case 2433:
         return .middle
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Text.TruncationMode
     }
 }
 #if os(iOS) || os(tvOS) || os(watchOS)
@@ -1125,15 +1125,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2440:
+    case 2444:
         return .characters
-    case 2441:
+    case 2445:
         return .never
-    case 2442:
+    case 2446:
         return .words
-    case 2443:
+    case 2447:
         return .sentences
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? TextInputAutocapitalization
     }
 }
 #endif
@@ -1141,24 +1141,24 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2461:
+    case 2465:
         return .lowFrequency
-    case 2462:
+    case 2466:
         return .normal
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? TimelineScheduleMode
     }
 }
 @MainActor func d_ToolbarCustomizationBehavior(_ e: SExpr?) -> ToolbarCustomizationBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2468:
+    case 2472:
         return .reorderable
-    case 2469:
+    case 2473:
         return .`default`
-    case 2470:
+    case 2474:
         return .disabled
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ToolbarCustomizationBehavior
     }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
@@ -1167,20 +1167,20 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 2504:
+    case 2510:
         return .titleAndIcon
     #endif
     #if os(macOS)
-    case 2505:
+    case 2511:
         return .iconOnly
     #endif
-    case 2506:
+    case 2512:
         return .automatic
     #if os(macOS)
-    case 2507:
+    case 2513:
         return .titleOnly
     #endif
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ToolbarLabelStyle
     }
 }
 #if os(iOS) || os(macOS)
@@ -1189,11 +1189,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2529:
+    case 2535:
         guard let p0 = d_SpacerSizing(a.expr(0)) else { return nil }
         guard let p1 = d_ToolbarItemPlacement(a.expr(1)) else { return nil }
         return ToolbarSpacer(p0, placement: p1)
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? ToolbarSpacer
     }
 }
 #endif
@@ -1201,11 +1201,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2545:
+    case 2551:
         return Transaction(animation: d_Animation(a.expr(0)))
-    case 2546:
+    case 2552:
         return Transaction()
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? Transaction
     }
 }
 #if os(macOS)
@@ -1213,15 +1213,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2558:
+    case 2564:
         return UnifiedCompactWindowToolbarStyle(showsTitle: a.bool(0))
-    case 2559:
+    case 2565:
         return UnifiedCompactWindowToolbarStyle()
-    case 2813:
+    case 2819:
         return .unifiedCompact(showsTitle: a.bool(0))
-    case 2814:
+    case 2820:
         return .unifiedCompact
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? UnifiedCompactWindowToolbarStyle
     }
 }
 #endif
@@ -1229,17 +1229,17 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2586:
+    case 2592:
         return .lastTextBaseline
-    case 2587:
+    case 2593:
         return .firstTextBaseline
-    case 2588:
+    case 2594:
         return .top
-    case 2589:
+    case 2595:
         return .bottom
-    case 2590:
+    case 2596:
         return .center
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? VerticalAlignment
     }
 }
 #if os(watchOS)
@@ -1247,13 +1247,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2607:
+    case 2613:
         return .blur
-    case 2608:
+    case 2614:
         return .identity
-    case 2609:
+    case 2615:
         return .automatic
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? VerticalPageTabViewStyle.TransitionStyle
     }
 }
 #endif
@@ -1262,11 +1262,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2625:
+    case 2631:
         return WheelPickerStyle()
-    case 2745:
+    case 2751:
         return .wheel
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? WheelPickerStyle
     }
 }
 #endif
@@ -1276,16 +1276,16 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 2638:
+    case 2644:
         return .associated
     #endif
-    case 2639:
+    case 2645:
         return .automatic
     #if os(macOS)
-    case 2640:
+    case 2646:
         return .principal
     #endif
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? WindowManagerRole
     }
 }
 #if os(macOS)
@@ -1294,11 +1294,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2654:
+    case 2660:
         return .orientation
-    case 2655:
+    case 2661:
         return .translation
-    default: return nil
+    default: return HandwrittenValues.decode(e) as? WorldTrackingLimitation
     }
 }
 #endif

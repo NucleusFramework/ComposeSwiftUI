@@ -1,6 +1,7 @@
 """Loads SwiftUI symbol graphs (iOS, macOS, tvOS, watchOS) into a merged, queryable model."""
 
 import glob
+import re
 import json
 import os
 
@@ -27,6 +28,9 @@ class Sym:
         self.path = tuple(raw["pathComponents"])
         self.title = raw["names"]["title"]
         self.decl = "".join(f["spelling"] for f in raw.get("declarationFragments", []))
+        # leading attribute lines (`@backDeployed(before: iOS 17.0)`) would be read as part of the signature
+        while "\n" in self.decl and re.match(r"^@\w+(\([^)]*\))?\s*$", self.decl.split("\n", 1)[0]):
+            self.decl = self.decl.split("\n", 1)[1]
         self.fragments = raw.get("declarationFragments", [])
         self.generics = raw.get("swiftGenerics") or {}
         self.extension = raw.get("swiftExtension") or {}
@@ -116,11 +120,14 @@ def _case_params(decl):
     from swifttypes import split_top
     for i, raw in enumerate(split_top(inner)):
         raw = raw.strip()
+        default = None
+        if " = " in raw:
+            raw, default = [x.strip() for x in raw.split(" = ", 1)]
         if ":" in raw and not raw.startswith("("):
             label, t = raw.split(":", 1)
-            out.append((label.strip(), label.strip(), t.strip(), None, []))
+            out.append((label.strip(), label.strip(), t.strip(), default, []))
         else:
-            out.append(("_", "p%d" % i, raw, None, []))
+            out.append(("_", "p%d" % i, raw, default, []))
     return out
 
 

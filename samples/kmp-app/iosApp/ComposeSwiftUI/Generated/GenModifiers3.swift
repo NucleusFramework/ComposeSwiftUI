@@ -370,27 +370,23 @@ import UniformTypeIdentifiers
             guard let p0 = d_ControlSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.controlSize, p0), m, i + 1)
         case 635:
-            guard let p0 = d_LayoutDirection(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.layoutDirection, p0), m, i + 1)
+            guard let p0 = d_DynamicTypeSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.dynamicTypeSize, p0), m, i + 1)
         case 643:
-            return ModChain.apply(v.environment(\.isLuminanceReduced, a.bool(0)), m, i + 1)
+            return ModChain.apply(v.environment(\.backgroundMaterial, d_Material(a.expr(0))), m, i + 1)
         case 651:
-            guard let p0 = d_TextAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.multilineTextAlignment, p0), m, i + 1)
+            guard let p0 = d_BackgroundProminence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.backgroundProminence, p0), m, i + 1)
         case 659:
-            return ModChain.apply(v.environment(\.locale, Locale(identifier: a.string(0))), m, i + 1)
+            return ModChain.apply(v.environment(\.contentTransitionAddsDrawingGroup, a.bool(0)), m, i + 1)
         case 667:
-            return ModChain.apply(v.environment(\.isScrollEnabled, a.bool(0)), m, i + 1)
-#if os(macOS)
+            return ModChain.apply(v.environment(\.lineLimit, a.intOpt(0)), m, i + 1)
         case 675:
-            if #available(iOS 17.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
-                return ModChain.apply(v.environment(\.worldTrackingLimitations, Set(a.exprList(0).compactMap { d_WorldTrackingLimitation($0) })), m, i + 1)
-            }
-            return ModChain.apply(v, m, i + 1)
-#endif
+            return ModChain.apply(v.environment(\.disableAutocorrection, a.boolOpt(0)), m, i + 1)
+#if os(watchOS)
         case 683:
-            guard let p0 = d_ScrollIndicatorVisibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.horizontalScrollIndicatorVisibility, p0), m, i + 1)
+            return ModChain.apply(v.environment(\.defaultWheelPickerItemHeight, a.cgFloat(0)), m, i + 1)
+#endif
         default: return nil
         }
     }

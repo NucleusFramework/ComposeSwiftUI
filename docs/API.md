@@ -651,7 +651,7 @@ Modifier.dropPreviewsFormation(formation: DragDropPreviewsFormation)
 Modifier.dynamicTypeSize(size: DynamicTypeSize)
 Modifier.edgesIgnoringSafeArea(edges: Edge.Set)
 Modifier.environment(allowedDynamicRange: Image.DynamicRange?)
-Modifier.environment(allowsTightening: Boolean)
+Modifier.environment(appearsActive: Boolean)
 Modifier.environment(backgroundMaterial: Material?)
 Modifier.environment(backgroundProminence: BackgroundProminence)
 Modifier.environment(backgroundStyle: AnyShapeStyle?)
@@ -660,7 +660,7 @@ Modifier.environment(colorScheme: ColorScheme)
 Modifier.environment(contentTransition: ContentTransition)
 Modifier.environment(controlActiveState: ControlActiveState)
 Modifier.environment(controlSize: ControlSize)
-Modifier.environment(displayScale: Double? = null, isLuminanceReduced: Boolean? = null, minimumScaleFactor: Double? = null, accessibilityEnabled: Boolean? = null, isHoverEffectEnabled: Boolean? = null, contentTransitionAddsDrawingGroup: Boolean? = null, accessibilityPrefersCrossFadeTransitions: Boolean? = null, isEnabled: Boolean? = null, lineLimit: Int? = null, isSceneCaptured: Boolean? = null, isScrollEnabled: Boolean? = null, isFocusEffectEnabled: Boolean? = null, disableAutocorrection: Boolean? = null, defaultMinListRowHeight: Double? = null, menuIndicatorVisibility: Visibility? = null, defaultMinListHeaderHeight: Double? = null, defaultWheelPickerItemHeight: Double? = null, horizontalScrollBounceBehavior: ScrollBounceBehavior? = null, systemPrefersReducedResourceUsage: Boolean? = null, horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility? = null)
+Modifier.environment(displayScale: Double? = null, allowsTightening: Boolean? = null, isLuminanceReduced: Boolean? = null, minimumScaleFactor: Double? = null, horizontalSizeClass: UserInterfaceSizeClass? = null, accessibilityEnabled: Boolean? = null, isHoverEffectEnabled: Boolean? = null, contentTransitionAddsDrawingGroup: Boolean? = null, accessibilityPrefersCrossFadeTransitions: Boolean? = null, isEnabled: Boolean? = null, lineLimit: Int? = null, isSceneCaptured: Boolean? = null, isScrollEnabled: Boolean? = null, isFocusEffectEnabled: Boolean? = null, disableAutocorrection: Boolean? = null, defaultMinListRowHeight: Double? = null, menuIndicatorVisibility: Visibility? = null, defaultMinListHeaderHeight: Double? = null, defaultWheelPickerItemHeight: Double? = null, horizontalScrollBounceBehavior: ScrollBounceBehavior? = null, systemPrefersReducedResourceUsage: Boolean? = null, horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility? = null, calendar: String? = null, timeZone: String? = null)
 Modifier.environment(dynamicTypeSize: DynamicTypeSize)
 Modifier.environment(font: Font?)
 Modifier.environment(headerProminence: Prominence)
@@ -690,9 +690,12 @@ Modifier.environment(toolbarTitleAlignment: ToolbarTitleAlignment)
 Modifier.environment(truncationMode: Text.TruncationMode)
 Modifier.environment(verticalScrollBounceBehavior: ScrollBounceBehavior)
 Modifier.environment(verticalScrollIndicatorVisibility: ScrollIndicatorVisibility)
+Modifier.environment(verticalSizeClass: UserInterfaceSizeClass?)
 Modifier.environment(worldTrackingLimitations: Set<WorldTrackingLimitation>)
 Modifier.environmentAccessibilityEnabled(accessibilityEnabled: Boolean)
 Modifier.environmentAccessibilityPrefersCrossFadeTransitions(accessibilityPrefersCrossFadeTransitions: Boolean)
+Modifier.environmentAllowsTightening(allowsTightening: Boolean)
+Modifier.environmentCalendar(calendar: String)
 Modifier.environmentContentTransitionAddsDrawingGroup(contentTransitionAddsDrawingGroup: Boolean)
 Modifier.environmentDefaultMinListHeaderHeight(defaultMinListHeaderHeight: Double?)
 Modifier.environmentDefaultMinListRowHeight(defaultMinListRowHeight: Double)
@@ -701,6 +704,7 @@ Modifier.environmentDisableAutocorrection(disableAutocorrection: Boolean?)
 Modifier.environmentDisplayScale(displayScale: Double)
 Modifier.environmentHorizontalScrollBounceBehavior(horizontalScrollBounceBehavior: ScrollBounceBehavior)
 Modifier.environmentHorizontalScrollIndicatorVisibility(horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility)
+Modifier.environmentHorizontalSizeClass(horizontalSizeClass: UserInterfaceSizeClass?)
 Modifier.environmentIsEnabled(isEnabled: Boolean)
 Modifier.environmentIsFocusEffectEnabled(isFocusEffectEnabled: Boolean)
 Modifier.environmentIsHoverEffectEnabled(isHoverEffectEnabled: Boolean)
@@ -711,6 +715,7 @@ Modifier.environmentLineLimit(lineLimit: Int?)
 Modifier.environmentMenuIndicatorVisibility(menuIndicatorVisibility: Visibility)
 Modifier.environmentMinimumScaleFactor(minimumScaleFactor: Double)
 Modifier.environmentSystemPrefersReducedResourceUsage(systemPrefersReducedResourceUsage: Boolean)
+Modifier.environmentTimeZone(timeZone: String)
 Modifier.fileDialogBrowserOptions(options: FileDialogBrowserOptions)
 Modifier.fileDialogConfirmationLabel(label: String)
 Modifier.fileDialogConfirmationLabel(labelKey: LocalizedKey)
@@ -1464,6 +1469,8 @@ Modifier.zIndex(value: Double)
   - `ToolbarItemPlacement.accessoryBar(id: Any): ToolbarItemPlacement`
   - `ToolbarItemPlacement.largeSubtitle`
   - `ToolbarItemPlacement.primaryAction`
+  - `ToolbarItemPlacement.topBarLeading`
+  - `ToolbarItemPlacement.topBarTrailing`
   - `ToolbarItemPlacement.secondaryAction`
   - `ToolbarItemPlacement.destructiveAction`
   - `ToolbarItemPlacement.cancellationAction`
@@ -1740,9 +1747,11 @@ Modifier.zIndex(value: Double)
   - `GlassEffectTransition.matchedGeometry`
   - `GlassEffectTransition.identity`
 - `GridItem` (class)
-  - `GridItem(size: GridItem.Size? = null, spacing: Double? = null, alignment: Alignment? = null)`
+  - `GridItem(size: GridItem.Size = GridItem.Size.flexible(), spacing: Double? = null, alignment: Alignment? = null)`
 - `GridItem.Size` (class)
   - `GridItem.Size.fixed(p0: Double): GridItem.Size`
+  - `GridItem.Size.adaptive(minimum: Double, maximum: Double?`
+  - `GridItem.Size.flexible(minimum: Double`
 - `HStackLayout` (class)
   - `HStackLayout(alignment: VerticalAlignment = VerticalAlignment.center, spacing: Double? = null)`
 - `HorizontalAlignment` (class)
@@ -3093,9 +3102,11 @@ Modifier.zIndex(value: Double)
 - `SystemFormatStyle.DateOffset` (class)
   - `SystemFormatStyle.DateOffset(anchor: Double, maxFieldCount: Int = 2)`
   - `SystemFormatStyle.DateOffset.locale(locale: String): SystemFormatStyle.DateOffset`
+  - `SystemFormatStyle.DateOffset.calendar(calendar: String): SystemFormatStyle.DateOffset`
 - `SystemFormatStyle.DateReference` (class)
   - `SystemFormatStyle.DateReference(date: Double, maxFieldCount: Int = 2)`
   - `SystemFormatStyle.DateReference.locale(locale: String): SystemFormatStyle.DateReference`
+  - `SystemFormatStyle.DateReference.calendar(calendar: String): SystemFormatStyle.DateReference`
 - `SystemFormatStyle.Stopwatch` (class)
   - `SystemFormatStyle.Stopwatch(startingAt: Double, showsHours: Boolean = true, maxFieldCount: Int = 4)`
   - `SystemFormatStyle.Stopwatch.locale(locale: String): SystemFormatStyle.Stopwatch`

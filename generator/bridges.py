@@ -288,6 +288,8 @@ CONVS = {
     "Locale": ("str", "Locale(identifier: %s)", "%s.identifier", None),
     "Locale.Language": ("str", "Locale.Language(identifier: %s)", "%s.maximalIdentifier", None),
     "UTType": ("str", "UTType(%s)", "%s.identifier", ".item"),
+    "TimeZone": ("str", "(TimeZone(identifier: %s) ?? .current)", "%s.identifier", None),
+    "Calendar": ("str", "kotlinCalendar(%s)", "kotlinCalendarName(%s)", None),
     # asset-catalog resources of the main bundle, by name
     "ImageResource": ("str", "ImageResource(name: %s, bundle: .main)", None, None),
     "ColorResource": ("str", "ColorResource(name: %s, bundle: .main)", None, None),

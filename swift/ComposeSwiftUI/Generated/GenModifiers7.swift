@@ -331,30 +331,35 @@ import UniformTypeIdentifiers
             return ModChain.apply(v, m, i + 1)
 #endif
         case 631:
-            guard let p0 = d_SymbolVariants(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.symbolVariants, p0), m, i + 1)
+            if #available(iOS 18.0, macOS 14.0, tvOS 18.0, watchOS 11.0, *) {
+                return ModChain.apply(v.environment(\.appearsActive, a.bool(0)), m, i + 1)
+            }
+            return ModChain.apply(v, m, i + 1)
         case 639:
-            guard let p0 = d_RedactionReasons(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.redactionReasons, p0), m, i + 1)
+            return ModChain.apply(v.environment(\.legibilityWeight, d_LegibilityWeight(a.expr(0))), m, i + 1)
+#if os(iOS) || os(macOS) || os(tvOS)
         case 647:
-            return ModChain.apply(v.environment(\.accessibilityEnabled, a.bool(0)), m, i + 1)
+            return ModChain.apply(v.environment(\.allowedDynamicRange, d_Image_DynamicRange(a.expr(0))), m, i + 1)
+#endif
         case 655:
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
-                return ModChain.apply(v.environment(\.symbolColorRenderingMode, d_SymbolColorRenderingMode(a.expr(0))), m, i + 1)
+                return ModChain.apply(v.environment(\.symbolVariableValueMode, d_SymbolVariableValueMode(a.expr(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
         case 663:
-            guard let p0 = d_ScenePhase(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.scenePhase, p0), m, i + 1)
+            return ModChain.apply(v.environment(\.calendar, kotlinCalendar(a.string(0))), m, i + 1)
+#if os(iOS)
         case 671:
-            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
-                guard let p0 = d_TextSelectionAffinity(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.environment(\.textSelectionAffinity, p0), m, i + 1)
-            }
-            return ModChain.apply(v, m, i + 1)
+            return ModChain.apply(v.environment(\.isSceneCaptured, a.bool(0)), m, i + 1)
+#endif
+#if os(iOS) || os(macOS) || os(tvOS)
         case 679:
-            guard let p0 = d_ScrollBounceBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.verticalScrollBounceBehavior, p0), m, i + 1)
+            guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.menuIndicatorVisibility, p0), m, i + 1)
+#endif
+        case 687:
+            guard let p0 = d_ScrollIndicatorVisibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.verticalScrollIndicatorVisibility, p0), m, i + 1)
         default: return nil
         }
     }

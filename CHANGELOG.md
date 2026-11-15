@@ -43,6 +43,26 @@
 - Optional closures (`Stepper(onIncrement, onDecrement)`, `onDeleteCommand`, `onExitCommand`, `onMoveCommand`, the
   `onDismiss` of `sheet`/`fullScreenCover`, `onPressingChanged` of `onLongPressGesture`) and callbacks with several
   parameters (`onScrollPhaseChange { old, new -> }`, `onChange(value) { old, new -> }`).
+- Protocols implemented in Kotlin: `PreferenceKey` with `preference`/`onPreferenceChange` and `anchorPreference`
+  (`AnchorPreferenceReader`), `ContainerValueKey` with `containerValue` and `SubviewsReader`/`Subview` (SwiftUI's
+  `Group(subviews:)`), `customAnimation { time, duration -> progress }`, `transition { stage -> Modifier }`,
+  `keyframeAnimator`, `textRenderer`, `DropDelegate` (`onDrop`), `customHorizontalAlignment`/`customVerticalAlignment`,
+  `customPresentationDetent`, `layoutValue`, `accessibilityRotor`, `accessibilityChartDescriptor` and
+  `ExplicitTimelineSchedule`.
+- Composed gestures: `Modifier.gesture(GestureSpec, priority)` with `simultaneously`, `sequenced` and `exclusively`.
+- `ForEach(items, key, onDelete, onMove)` (swipe to delete and drag to reorder in a `List`), `withAnimation(…,
+  completion)`, `TabSection`, `ShareLink(url)`/`ShareLink(text)` with a preview, `draggableUrl`, `dropDestinationUrls`,
+  `fileExporter` with binary data, `fileMover`.
+- Custom styles written in Kotlin for `GroupBox`, `LabeledContent`, `ControlGroup`, `Form`, `Menu` and `ProgressView`
+  (`StyleContent`, `StyleProgressFill`).
+- `TextField`/`TextEditor` with a text selection (`TextRange`), `Toggle(sources)` and `Picker(sources)` (mixed
+  state), `AsyncImage(url, headers)`, `Slider` with ticks, `lineHeight`, `editMode`, `onOpenUrlAction`,
+  `pointerImage`, `dialogIcon`, `ContentUnavailableSearch`, `ImagePaintStyle`, `onHingeChange`, `reorderContainer`,
+  `dragContainer`, `onDragSessionUpdated`/`onDropSessionUpdated`, `dropConfiguration`, and the macOS commands
+  (`copyable`, `cuttable`, `pasteDestination`, `onCopyCommand`, `onCutCommand`, `onPasteCommand`,
+  `exportableToServices`, `importableFromServices`, `onModifierKeysChanged`), plus `onPencilDoubleTap`.
+- Every entry of Apple's SwiftUI documentation that builds UI is now generated or hand-written;
+  [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one that doesn't apply to Kotlin.
 
 ### Changed
 
@@ -50,8 +70,9 @@
   `Stepper(…) { }` pass it to `onValueChange` (it used to go to `onEditingChanged`), and optional closures such as
   `onPressingChanged` come before `perform`.
 - `NewDocumentButtonSource` (deprecated alias) is now `NewDocumentButtonContentType`.
-- The Swift renderer has two new files, `Interactive.swift` and `Generated/GenEncoders.swift`. If you added the
-  `ComposeSwiftUI` folder to Xcode as a group, add them to the app target once.
+- The Swift renderer has four new files, `Interactive.swift`, `Advanced.swift`, `Completions.swift` and
+  `Generated/GenEncoders.swift`. If you added the `ComposeSwiftUI` folder to Xcode as a group, add them to the app
+  target once.
 
 ## 0.4.1
 

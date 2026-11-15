@@ -21,8 +21,10 @@
 		4D00BF741965F7CC509DE13A /* GenModifiers5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC69AC5162C37FDE60343ED9 /* GenModifiers5.swift */; };
 		61AD0E2DD2F5AA85B95935D7 /* GenModifiers6.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0933C891C8EA8CFF5A7BC /* GenModifiers6.swift */; };
 		68442AA27F477A45C0F0456C /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6A2FFB790A722FB7483E0 /* Core.swift */; };
+		7341E38E6DA69FB718B5F5B9 /* Advanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658E158C28D65D4F777378D2 /* Advanced.swift */; };
 		737296F002F5B67C6F1D2CD5 /* GenProtocolDecoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */; };
 		73FCDE488110E3A62FDE604E /* GenRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8307DB050CF205CFCDF88 /* GenRegister.swift */; };
+		82683F56A036CBA92DB2A9E0 /* Completions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41810E46B72AB528C3D17A8 /* Completions.swift */; };
 		969A04FEB5DAFB89BFB8115E /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925158699FD68A25A62EC10A /* Interactive.swift */; };
 		994A9E71457DEA41A9E0BFCE /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE8394311ADAF4BC0A3255D /* SampleApp.swift */; };
 		AB21215B33B73BFF7D1597C5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 686260C240CD9512D9CB71A8 /* README.txt */; };
@@ -47,6 +49,7 @@
 		52A9162FBC423C6E1219DFC0 /* Args.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Args.swift; sourceTree = "<group>"; };
 		54B3F59F0C39D675D94A1434 /* GenViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenViews.swift; sourceTree = "<group>"; };
 		56C6A2FFB790A722FB7483E0 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		658E158C28D65D4F777378D2 /* Advanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced.swift; sourceTree = "<group>"; };
 		677996633148E100CF8B6B87 /* GenDecoders2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders2.swift; sourceTree = "<group>"; };
 		686260C240CD9512D9CB71A8 /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers3.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders3.swift; sourceTree = "<group>"; };
 		BFC8CB8E396099504DC1E6A6 /* GenDecoders0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders0.swift; sourceTree = "<group>"; };
 		C117AD187833E2513BD2F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C41810E46B72AB528C3D17A8 /* Completions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completions.swift; sourceTree = "<group>"; };
 		CC69AC5162C37FDE60343ED9 /* GenModifiers5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers5.swift; sourceTree = "<group>"; };
 		D6B672764C3827C8295175CB /* GenDecoders5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders5.swift; sourceTree = "<group>"; };
 		DED8307DB050CF205CFCDF88 /* GenRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenRegister.swift; sourceTree = "<group>"; };
@@ -124,7 +128,9 @@
 		A6166B2840EC6AD2EC294CD2 /* ComposeSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				658E158C28D65D4F777378D2 /* Advanced.swift */,
 				52A9162FBC423C6E1219DFC0 /* Args.swift */,
+				C41810E46B72AB528C3D17A8 /* Completions.swift */,
 				8FBF537FE7FCA9FB5840325E /* ComposeSwiftUIPreviews.swift */,
 				56C6A2FFB790A722FB7483E0 /* Core.swift */,
 				36383731CAECE4330150F7E2 /* Handwritten.swift */,
@@ -226,7 +232,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7341E38E6DA69FB718B5F5B9 /* Advanced.swift in Sources */,
 				03346C3D10B81C7E89C8440A /* Args.swift in Sources */,
+				82683F56A036CBA92DB2A9E0 /* Completions.swift in Sources */,
 				3B2691FAF6C5BA7FBCA163F1 /* ComposeSwiftUIPreviews.swift in Sources */,
 				68442AA27F477A45C0F0456C /* Core.swift in Sources */,
 				E2CE26B31D71548D81A75399 /* GenDecoders0.swift in Sources */,

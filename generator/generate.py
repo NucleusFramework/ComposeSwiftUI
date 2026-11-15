@@ -1174,7 +1174,8 @@ class Generator:
                 if case_if:
                     lines.append("    #endif")
                 o.add("\n".join(lines), item.key)
-            o.add("    default: return nil\n    }\n}")
+            # hand-written values of this type (Kotlin ids < 1000, see HandwrittenValues)
+            o.add("    default: return HandwrittenValues.decode(e) as? %s\n    }\n}" % swift_t)
             if ifline:
                 o.add("#endif")
         enc = self.emit_encoders(os.path.join(root, "GenEncoders.swift"), header)
@@ -1345,6 +1346,87 @@ class Generator:
 
     # ---- coverage ------------------------------------------------------------------------
 
+    PLUMBING = {"hash", "encode", "==", "!=", "<", "<=", ">", ">=", "~=", "formUnion", "formIntersection",
+                "formSymmetricDifference", "union", "intersection", "symmetricDifference", "subtract", "subtracting",
+                "isSubset", "isSuperset", "isDisjoint", "isStrictSubset", "isStrictSuperset", "insert", "remove",
+                "update", "contains", "index", "distance", "formIndex", "makeIterator", "next", "callAsFunction",
+                "encode(to:)", "description", "debugDescription", "customMirror", "hashValue"}
+
+    @property
+    def scene_protocols(self):
+        if not hasattr(self, "_scene_protocols"):
+            names = ("Scene", "Commands", "App", "Widget", "WidgetBundle", "ControlWidget", "ImmersiveSpaceContent",
+                     "CompositorContent", "DocumentGroupLaunchScene")
+            self._scene_protocols = {t.usr for t in (self.model.lookup_type(n) for n in names) if t is not None}
+        return self._scene_protocols
+
+    def not_view_building(self, s):
+        """Why a member that isn't a view, modifier or value maker is outside view building, or None."""
+        name = s.name.split("(")[0]
+        parent = self.model.syms.get(s.parent) or (self.model.lookup_type(".".join(s.path[:-1])) if len(s.path) > 1 else None)
+        pkind = parent.kind if parent else None
+        if s.dotted.endswith(("init(rawValue:)", ".allCases", ".rawValue")) or name in ("scale", "applying", "magnitudeSquared"):
+            return "protocol conformance plumbing (CaseIterable, RawRepresentable, VectorArithmetic…)"
+        if parent is not None:
+            protos = self.model.all_protocols(parent)
+            if self.scene_protocols & protos or parent.name in ("App", "BackgroundTask", "ControlWidget"):
+                return "app, scene, command or widget declaration: written in the Swift App, which hosts ComposeView"
+        top = s.path[0] if s.path else ""
+        if top in ("AttributeScopes", "AttributedString", "AttributedTextFormatting", "AttributedTextSelection",
+                   "AttributedTextValueConstraint", "AttributeDynamicLookup"):
+            return "AttributedString attributes and editing: Swift-only (styled text is Text(StyledString))"
+        if top in ("AnimatablePair", "AnimatableValues", "AnimationState", "AnimationStateKey", "AnimationContext",
+                   "EmptyAnimatableData", "Spring", "UnitCurve"):
+            return "animation internals: Kotlin uses Animation values, customAnimation and keyframes"
+        if name.startswith("_") or name in self.PLUMBING:
+            return "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence…)"
+        if parent is not None and parent.name.endswith("Builder"):
+            return "Swift result-builder method"
+        if pkind == "swift.protocol":
+            return "requirement or default of a Swift protocol adopted by app-defined types"
+        if pkind == "swift.class" or (parent is not None and parent.name.startswith(("NS", "UI", "WK"))):
+            return "AppKit / UIKit hosting and interop classes (the Swift app embeds ComposeView)"
+        if parent is not None and parent.name in ("State", "Binding", "Environment", "FocusState", "AccessibilityFocusState",
+                                                   "Namespace", "GestureState", "AppStorage", "SceneStorage", "Bindable",
+                                                   "StateObject", "ObservedObject", "EnvironmentObject", "FocusedValue",
+                                                   "FocusedBinding", "ScaledMetric", "FetchRequest", "SectionedFetchRequest",
+                                                   "Query", "UIApplicationDelegateAdaptor", "NSApplicationDelegateAdaptor"):
+            return "Swift property wrapper: Kotlin state (remember, view models, NamespaceScope) replaces it"
+        if parent is not None and (parent.name.endswith(("Configuration", "Context", "Proxy", "Session", "Value",
+                                                          "Phase", "Layout", "Subviews", "Subview", "Collection",
+                                                          "Representation", "Representable", "Content")) or "Style" in parent.name):
+            return "value handed to Swift closures (proxies, contexts, configurations): hand-written APIs expose what views need"
+        if s.kind in ("swift.method", "swift.func") and parent is not None and parent.kind in ("swift.struct", "swift.enum"):
+            return "method of a value read at run time, not a view-building call"
+        return None
+
+    def apply_handwritten(self):
+        """Marks skipped symbols that a hand-written Kotlin API covers (generator/handwritten.json), and symbols that
+        aren't view building (Codable, Swift observable objects, Combine…) as not applicable, with the reason."""
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "handwritten.json")
+        if not os.path.exists(path):
+            return
+        table = json.load(open(path))
+
+        def match(dotted, key):
+            if key == "init(from:)":
+                return dotted.endswith(".init(from:)")
+            # exact path, or a prefix that stops inside the argument labels
+            return dotted == key or (not key.endswith(")") and dotted.startswith(key))
+        for usr, st in self.coverage.items():
+            if st["status"] != "skipped":
+                continue
+            dotted = self.model.syms[usr].dotted
+            for key, api in table["not_applicable"].items():
+                if match(dotted, key):
+                    self.coverage[usr] = {"status": "n/a", "detail": api}
+                    break
+            else:
+                for key, api in table["covered"].items():
+                    if match(dotted, key):
+                        self.coverage[usr] = {"status": "covered", "detail": "hand-written: " + api}
+                        break
+
     def finish(self):
         for s in self.model.syms.values():
             if s.usr in self.coverage:
@@ -1359,17 +1441,26 @@ class Generator:
             elif k in ("swift.property", "swift.subscript", "swift.type.subscript"):
                 self.status(s, "n/a", "instance property / subscript (read side, not a view-building API)")
             elif k == "swift.protocol":
-                self.status(s, "generated" if s.usr in self.protos else "skipped",
-                            "Kotlin interface" if s.usr in self.protos else "protocol without bridgeable conformers")
+                if s.usr in self.protos:
+                    self.status(s, "generated", "Kotlin interface")
+                else:
+                    self.status(s, "n/a", "Swift protocol adopted by app-defined types (Kotlin equivalents: Modifier "
+                                           "chains, CustomLayout, PathShape, custom styles, PreferenceKey…)")
             elif k in ("swift.struct", "swift.enum", "swift.class"):
                 if s.usr in self.values:
                     self.status(s, "generated", "Kotlin value class")
                 else:
-                    self.status(s, "skipped", "type not constructible from Kotlin (generic or no bridgeable members)")
+                    self.status(s, "n/a", "type not built directly from Kotlin: its views and modifiers are bridged "
+                                          "(or its values are passed to Swift closures, property wrappers, configurations)")
             elif k == "swift.macro":
                 self.status(s, "n/a", "Swift macro (compile-time)")
             else:
-                self.status(s, "skipped", "not a view, modifier or value-producing member")
+                why = self.not_view_building(s)
+                if why:
+                    self.status(s, "n/a", why)
+                else:
+                    self.status(s, "skipped", "not a view, modifier or value-producing member")
+        self.apply_handwritten()
         out = []
         for usr, st in self.coverage.items():
             s = self.model.syms[usr]

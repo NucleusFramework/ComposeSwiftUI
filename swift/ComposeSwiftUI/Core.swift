@@ -97,12 +97,17 @@ public struct ChildrenView: View {
         // the rows several times faster than as a nested ForEach.
         if children.count == 1, children[0].kind == LazyForEachContent.kind {
             LazyForEachContent(model: children[0])
+        } else if children.count == 1, children[0].kind == EditableForEach.kind {
+            // static type, so that List sees the ForEach and offers swipe-to-delete and reordering
+            EditableForEach(model: children[0])
         } else {
             ForEach(children, id: \.nodeId) { child in
                 // A LazyForEach is expanded here, with static types: behind the node's AnyView, a List would build
                 // every row up front instead of only the visible ones.
                 if child.kind == LazyForEachContent.kind {
                     LazyForEachContent(model: child)
+                } else if child.kind == EditableForEach.kind {
+                    EditableForEach(model: child)
                 } else {
                     NodeView(model: child)
                 }

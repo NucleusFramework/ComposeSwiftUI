@@ -348,30 +348,31 @@ import UniformTypeIdentifiers
             guard let p0 = d_Image_Scale(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.imageScale, p0), m, i + 1)
         case 633:
-            return ModChain.apply(v.environment(\.backgroundStyle, d_AnyShapeStyle(a.expr(0))), m, i + 1)
+            guard let p0 = d_Text_TruncationMode(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.truncationMode, p0), m, i + 1)
         case 641:
-            return ModChain.apply(v.environment(\.backgroundMaterial, d_Material(a.expr(0))), m, i + 1)
-#if os(iOS) || os(tvOS)
+            guard let p0 = d_ContentTransition(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.contentTransition, p0), m, i + 1)
         case 649:
-            return ModChain.apply(v.environment(\.isHoverEffectEnabled, a.bool(0)), m, i + 1)
-#endif
+            return ModChain.apply(v.environment(\.symbolRenderingMode, d_SymbolRenderingMode(a.expr(0))), m, i + 1)
         case 657:
-            if #available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, *) {
-                return ModChain.apply(v.environment(\.accessibilityPrefersCrossFadeTransitions, a.bool(0)), m, i + 1)
+            if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
+                return ModChain.apply(v.environment(\.overlayArrangementZIndex, a.int(0)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-#if os(iOS) || os(macOS)
         case 665:
-            guard let p0 = d_BadgeProminence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.badgeProminence, p0), m, i + 1)
-#endif
+            return ModChain.apply(v.environment(\.timeZone, (TimeZone(identifier: a.string(0)) ?? .current)), m, i + 1)
         case 673:
-            return ModChain.apply(v.environment(\.defaultMinListRowHeight, a.cgFloat(0)), m, i + 1)
-        case 681:
-            if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
-                return ModChain.apply(v.environment(\.systemPrefersReducedResourceUsage, a.bool(0)), m, i + 1)
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
+                guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.environment(\.labelsVisibility, p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+        case 681:
+            return ModChain.apply(v.environment(\.defaultMinListHeaderHeight, a.cgFloatOpt(0)), m, i + 1)
+        case 689:
+            guard let p0 = d_MenuOrder(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.menuOrder, p0), m, i + 1)
         default: return nil
         }
     }

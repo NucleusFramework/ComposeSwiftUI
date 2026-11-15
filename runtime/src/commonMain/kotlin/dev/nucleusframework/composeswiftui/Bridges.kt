@@ -15,10 +15,16 @@ interface SwiftAction {
 object SwiftUIBridge {
     /** Runs `block` inside `withAnimation(animation)`; the animation is a generated `Animation` value. */
     var animationRunner: ((SExpr?, () -> Unit) -> Unit)? = null
+
+    /** Like [animationRunner], then runs the completion when the animation is logically complete. */
+    var animationCompletionRunner: ((SExpr?, () -> Unit, () -> Unit) -> Unit)? = null
 }
 
 /** Size of a subview as measured by SwiftUI, passed to a [LayoutPolicy]. */
-data class LayoutSize(val width: Double, val height: Double)
+data class LayoutSize(val width: Double, val height: Double) {
+    /** Values attached to the subview with `Modifier.layoutValue(key, value)` (SwiftUI `LayoutValueKey`). */
+    var values: Map<String, Any?> = emptyMap()
+}
 
 /** Top-leading position of a subview inside the layout bounds. */
 data class LayoutPlacement(val x: Double, val y: Double)
@@ -122,4 +128,35 @@ interface DropHandler {
 /** `containerRelativeFrame` length computed in Kotlin from the container length along [axis] (0 horizontal, 1 vertical). */
 interface LengthProvider {
     fun length(length: Double, axis: Int): Double
+}
+
+/** Progress (0…1, may overshoot) of a Kotlin animation curve at [t], the fraction of its duration elapsed. */
+interface AnimationCurve {
+    fun progress(t: Double): Double
+}
+
+/** A SwiftUI `DropDelegate` implemented in Kotlin; locations are in the view's coordinate space. */
+interface DropDelegateHandler {
+    fun validateDrop(x: Double, y: Double): Boolean
+    fun dropEntered(x: Double, y: Double)
+    /** A generated `DropOperation` value, or null for the default operation. */
+    fun dropUpdated(x: Double, y: Double): Any?
+    fun dropExited()
+    /** The dropped text items and file URLs, loaded asynchronously; returns whether the drop is accepted. */
+    fun performDrop(x: Double, y: Double, texts: List<String>, urls: List<String>): Boolean
+}
+
+/** Text items produced on demand (copy, cut, Services export). */
+interface TextItemsProvider {
+    fun items(): List<String>
+}
+
+/** Text payload of a dragged container item, by item id (`dragContainer`). */
+interface TextForIdProvider {
+    fun text(id: Any): String
+}
+
+/** `dropConfiguration`: a generated `DropOperation` for a drop at (x, y) of [itemsCount] items, or null. */
+interface DropOperationProvider {
+    fun operation(x: Double, y: Double, itemsCount: Int): Any?
 }

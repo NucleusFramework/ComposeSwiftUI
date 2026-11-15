@@ -330,25 +330,28 @@ import UniformTypeIdentifiers
         case 629:
             return ModChain.apply(v.environment(\.displayScale, a.cgFloat(0)), m, i + 1)
         case 637:
-            guard let p0 = d_Prominence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.headerProminence, p0), m, i + 1)
-#if os(iOS) || os(macOS) || os(tvOS)
+            return ModChain.apply(v.environment(\.allowsTightening, a.bool(0)), m, i + 1)
         case 645:
-            return ModChain.apply(v.environment(\.allowedDynamicRange, d_Image_DynamicRange(a.expr(0))), m, i + 1)
-#endif
+            return ModChain.apply(v.environment(\.isLuminanceReduced, a.bool(0)), m, i + 1)
         case 653:
-            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
-                guard let p0 = d_MaterialActiveAppearance(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.environment(\.materialActiveAppearance, p0), m, i + 1)
+            if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
+                return ModChain.apply(v.environment(\.splitArrangementAxis, d_Axis(a.expr(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
         case 661:
-            return ModChain.apply(v.environment(\.isEnabled, a.bool(0)), m, i + 1)
+            return ModChain.apply(v.environment(\.font, d_Font(a.expr(0))), m, i + 1)
         case 669:
-            return ModChain.apply(v.environment(\.isFocusEffectEnabled, a.bool(0)), m, i + 1)
+            guard let p0 = d_SidebarRowSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.sidebarRowSize, p0), m, i + 1)
         case 677:
-            guard let p0 = d_ScrollDismissesKeyboardMode(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.environment(\.scrollDismissesKeyboardMode, p0), m, i + 1)
+            if #available(iOS 27.2, macOS 27.2, tvOS 27.2, watchOS 27.2, *) {
+                guard let p0 = d_ToolbarTitleAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.environment(\.toolbarTitleAlignment, p0), m, i + 1)
+            }
+            return ModChain.apply(v, m, i + 1)
+        case 685:
+            guard let p0 = d_ScrollBounceBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.environment(\.horizontalScrollBounceBehavior, p0), m, i + 1)
         default: return nil
         }
     }
