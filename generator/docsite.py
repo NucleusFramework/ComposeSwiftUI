@@ -461,7 +461,15 @@ def layout(title, body, depth=0, current=None, kind="Article", description=SUMMA
 <div class="wrap">%s<main id="main" data-pagefind-body data-pagefind-meta="kind:%s">%s<footer data-pagefind-ignore>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps. <a href="%slegal.html">Legal and privacy</a></footer></main></div></body></html>
 """ % (esc(title), meta, up, ASSETS_V, up, up, up, up, up, ASSETS_V, SIDE_TOGGLE, up, REPO, VERSION, esc(VERSION), SEARCH_BOX, up, up, REPO, THEME_SWITCH, sidebar(up, current), kind, body, up)
 
+CLEAN = re.compile(r'(href="|\]\(|<loc>)((?:https?://[^"\s)<]*?nucleusframework\.github\.io/[^"\s)<]*?|(?!https?:|#|mailto:)[^"\s)<]*?))(index)?\.html(?=[#")<])')
+
+def clean_urls(text):
+    """Links without ".html" (GitHub Pages serves /guide from guide.html); "index.html" becomes its folder."""
+    return CLEAN.sub(lambda m: m.group(1) + (m.group(2) or ("./" if m.group(3) and m.group(1) == 'href="' else "")), text)
+
 def write(rel, content):
+    if rel.endswith((".html", ".txt", ".xml")):
+        content = clean_urls(content)
     path = os.path.join(OUT, rel)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").write(content)
@@ -581,7 +589,7 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
     rel = page_url(key)
     cats[p["category"]].append((p["title"], rel))
     display = p["title"] if p["category"] != "Modifiers" else p["title"] + "(_:)"
-    search.append({"n": display, "u": rel})
+    search.append({"n": display, "u": rel[:-len(".html")]})
     abstract, overview, example = CONTENT.get(key, ("", "", ""))
     first = p["entries"][0]
     if not abstract:
@@ -685,11 +693,12 @@ const internal = a => {
   const url = new URL(a.href);
   return url.origin === location.origin && url.pathname.startsWith(BASE.pathname) && !a.target && !/\.(txt|json|xml|png)$/.test(url.pathname) ? url : null;
 };
+const cleanPath = p => p.replace(/(index)?\.html$/, '');
 function markCurrent() {
-  const path = location.pathname.replace(/\/$/, '/index.html');
+  const path = cleanPath(location.pathname);
   const side = document.querySelector('.side');
   side.querySelectorAll('a.on').forEach(a => { a.classList.remove('on'); a.removeAttribute('aria-current') });
-  const current = [...side.querySelectorAll('#tree a[href]')].find(a => new URL(a.href).pathname.replace(/\/$/, '/index.html') === path);
+  const current = [...side.querySelectorAll('#tree a[href]')].find(a => cleanPath(new URL(a.href).pathname) === path);
   current?.classList.add('on');
   current?.setAttribute('aria-current', 'page');
   current?.scrollIntoView({block: 'nearest'});
@@ -768,7 +777,7 @@ async function runSearch(query) {
   list.innerHTML = hits.map((d, i) => {
     const sub = d.sub_results?.find(s => s.url !== d.url);  // a heading inside an article
     const title = sub ? `${escHtml(d.meta.title)} <i>› ${escHtml(sub.title)}</i>` : escHtml(d.meta.title);
-    return `<a class="hit" id="hit-${i}" role="option" href="${(sub || d).url}"><span class="ic">${badge(d.meta.kind)}</span>` +
+    return `<a class="hit" id="hit-${i}" role="option" href="${(sub || d).url.replace(/(index)?\.html(?=#|$)/, '')}"><span class="ic">${badge(d.meta.kind)}</span>` +
       `<span><span class="t">${title}</span><span class="x">${(sub || d).excerpt}</span></span></a>`;
   }).join('') || `<div class="msg">No results for “${escHtml(query)}”</div>`;
   select(list.querySelector('.hit'));
@@ -857,9 +866,10 @@ self.addEventListener('activate', e => e.waitUntil(
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  e.respondWith(caches.open(VERSION)
-    .then(c => c.match(e.request, {ignoreSearch: true}))
-    .then(r => r || fetch(e.request)));
+  const path = new URL(e.request.url).pathname;
+  const file = path.endsWith('/') ? path + 'index.html' : /\.\w+$/.test(path) ? null : path + '.html';
+  e.respondWith(caches.open(VERSION).then(async c =>
+    await c.match(e.request, {ignoreSearch: true}) || file && await c.match(file) || fetch(e.request)));
 });
 """
 
