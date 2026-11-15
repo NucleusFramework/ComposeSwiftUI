@@ -25,6 +25,7 @@ for f in sorted(glob.glob(os.path.join(gen, "GenModifiers*.kt"))):
     for m in re.finditer(r"public fun Modifier\.(`?\w+`?)\((.*?)\): Modifier =", open(f).read()):
         mods.append("Modifier.%s(%s)" % (m.group(1), re.sub(r"SValueCallback.*", "", m.group(2))))
 mods.append("Modifier.toolbarItem(placement: ToolbarItemPlacement = ToolbarItemPlacement.automatic, content: @Composable () -> Unit)")
+mods.append("Modifier.listRowBackground(content: @Composable () -> Unit)")
 out += sorted(mods, key=str.lower) + ["```", "", "## Value types (static members, factories, constructors)", ""]
 for f in sorted(glob.glob(os.path.join(gen, "GenTypes*.kt"))):
     stack = []
