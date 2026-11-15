@@ -11,11 +11,11 @@ import UniformTypeIdentifiers
 #endif
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
 @MainActor func e_ScrollPhase(_ v: ScrollPhase) -> SExpr? {
-    if case .interacting = v { return SExpr(id: 2169, args: []) }
-    if case .decelerating = v { return SExpr(id: 2170, args: []) }
-    if case .idle = v { return SExpr(id: 2171, args: []) }
-    if case .tracking = v { return SExpr(id: 2172, args: []) }
-    if case .animating = v { return SExpr(id: 2173, args: []) }
+    if case .interacting = v { return SExpr(id: 2170, args: []) }
+    if case .decelerating = v { return SExpr(id: 2171, args: []) }
+    if case .idle = v { return SExpr(id: 2172, args: []) }
+    if case .tracking = v { return SExpr(id: 2173, args: []) }
+    if case .animating = v { return SExpr(id: 2174, args: []) }
     return nil
 }
 #if os(macOS) || os(tvOS)
@@ -36,7 +36,7 @@ import UniformTypeIdentifiers
 #if os(iOS) || os(macOS)
 @available(iOS 17.5, macOS 14.5, tvOS 17.0, watchOS 10.0, *)
 @MainActor func e_PencilSqueezeGesturePhase(_ v: PencilSqueezeGesturePhase) -> SExpr? {
-    if case .failed = v { return SExpr(id: 2026, args: []) }
+    if case .failed = v { return SExpr(id: 2027, args: []) }
     return nil
 }
 #endif
@@ -79,22 +79,22 @@ import UniformTypeIdentifiers
     if v == .yellow { return SExpr(id: 1297, args: []) }
     if v == .primary { return SExpr(id: 1299, args: []) }
     if v == .secondary { return SExpr(id: 1301, args: []) }
-    if v == .red { return SExpr(id: 2708, args: []) }
-    if v == .blue { return SExpr(id: 2709, args: []) }
-    if v == .cyan { return SExpr(id: 2710, args: []) }
-    if v == .gray { return SExpr(id: 2711, args: []) }
-    if v == .mint { return SExpr(id: 2712, args: []) }
-    if v == .pink { return SExpr(id: 2713, args: []) }
-    if v == .teal { return SExpr(id: 2714, args: []) }
-    if v == .black { return SExpr(id: 2715, args: []) }
-    if v == .brown { return SExpr(id: 2716, args: []) }
-    if v == .clear { return SExpr(id: 2717, args: []) }
-    if v == .green { return SExpr(id: 2718, args: []) }
-    if v == .white { return SExpr(id: 2719, args: []) }
-    if v == .indigo { return SExpr(id: 2720, args: []) }
-    if v == .orange { return SExpr(id: 2721, args: []) }
-    if v == .purple { return SExpr(id: 2722, args: []) }
-    if v == .yellow { return SExpr(id: 2723, args: []) }
+    if v == .red { return SExpr(id: 2709, args: []) }
+    if v == .blue { return SExpr(id: 2710, args: []) }
+    if v == .cyan { return SExpr(id: 2711, args: []) }
+    if v == .gray { return SExpr(id: 2712, args: []) }
+    if v == .mint { return SExpr(id: 2713, args: []) }
+    if v == .pink { return SExpr(id: 2714, args: []) }
+    if v == .teal { return SExpr(id: 2715, args: []) }
+    if v == .black { return SExpr(id: 2716, args: []) }
+    if v == .brown { return SExpr(id: 2717, args: []) }
+    if v == .clear { return SExpr(id: 2718, args: []) }
+    if v == .green { return SExpr(id: 2719, args: []) }
+    if v == .white { return SExpr(id: 2720, args: []) }
+    if v == .indigo { return SExpr(id: 2721, args: []) }
+    if v == .orange { return SExpr(id: 2722, args: []) }
+    if v == .purple { return SExpr(id: 2723, args: []) }
+    if v == .yellow { return SExpr(id: 2724, args: []) }
     let r = v.resolve(in: EnvironmentValues())
     return SExpr(id: 1302, args: [e_Color_RGBColorSpace(.sRGB) ?? NSNull(), KBox.double(Double(r.red)), KBox.double(Double(r.green)), KBox.double(Double(r.blue)), KBox.double(Double(r.opacity))])
 }

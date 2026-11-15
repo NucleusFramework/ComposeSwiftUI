@@ -1,14 +1,7 @@
 {
- "member:s:7SwiftUI4PathV4path2inACSo6CGRectV_tF": "kotlin: Names _, __, ___, ... are reserved in Kotlin.",
  "member:s:7SwiftUI4PathVyACyACzXEcfc": "swift-macos: cannot convert value of type '(Path) -> Void' to expected argument type '(inout Path) -> ()'",
  "member:s:7SwiftUI5ColorVyACxcSHRzAA10ShapeStyleRzAC11ResolvedHDRV0F0AaDPRtzlufc": "swift-macos: no exact matches in call to initializer ",
  "member:s:7SwiftUI5ColorVyACxcSHRzAA10ShapeStyleRzAC8ResolvedVAeaDPRtzlufc": "swift-macos: no exact matches in call to initializer ",
- "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect17uniformTopCorners0g6BottomI0AeA4EdgeO6CornerO5StyleV_ANtFZ": "kotlin: Conflicting overloads:",
- "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect17uniformTopCorners19bottomLeadingCorner0j8TrailingL0AeA4EdgeO0L0O5StyleV_A2OtFZ": "kotlin: Conflicting overloads:",
- "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect20uniformBottomCorners16topLeadingCorner0j8TrailingL0AeA4EdgeO0L0O5StyleV_A2OtFZ": "kotlin: Conflicting overloads:",
- "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect21uniformLeadingCorners0g8TrailingI0AeA4EdgeO6CornerO5StyleV_ANtFZ": "kotlin: Conflicting overloads:",
- "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect21uniformLeadingCorners17topTrailingCorner06bottomkL0AeA4EdgeO0L0O5StyleV_A2OtFZ": "kotlin: Conflicting overloads:",
- "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect22uniformTrailingCorners16topLeadingCorner06bottomkL0AeA4EdgeO0L0O5StyleV_A2OtFZ": "kotlin: Conflicting overloads:",
  "mod:s:7SwiftUI4ViewPAASQRzrlE9equatableAA09EquatableC0VyxGyF": "swift-macos: referencing instance method 'equatable()' on 'View' requires that 'AnyView' conform to 'Equatable'",
  "view:s:7SwiftUI13EquatableViewV7contentACyxGx_tcfc": "swift-macos: generic struct 'EquatableView' requires that 'AnyHashable' conform to 'View'"
 }

@@ -567,7 +567,8 @@ class Generator:
     PREPOSITIONS = {"_", "in", "of", "for", "at", "by", "with", "to", "from", "on", "into", "as", "using", "is"}
 
     def kt_name_for(self, label, internal):
-        return kotlin_param_name(internal if label in self.PREPOSITIONS else label)
+        name = internal if label in self.PREPOSITIONS and internal not in ("_", "") else label
+        return kotlin_param_name(name if name not in ("_", "") else "value")
 
     NULL_DEFAULT_KINDS = {"value": None, "str": "String", "bool": "Bool", "int": "Int", "double": "Double",
                           "cgfloat": "CGFloat", "float": "Float"}
@@ -929,8 +930,16 @@ class Generator:
                     continue
                 decls, encs = self.kt_params(params)
                 group = "static" if kind in ("static", "case", "sfunc", "casefn") else kind
-                sig = (group, item.sym.name if kind != "init" else "<init>",
-                       tuple(kt.rstrip("?") for _, kt, _, _ in decls) if kind not in ("static", "case") else ("<val>",))
+                types = tuple(kt.rstrip("?") for _, kt, _, _ in decls)
+                sig = (group, item.sym.name if kind != "init" else "<init>", types if kind not in ("static", "case") else ("<val>",))
+                alt = None
+                if sig in seen_sigs and decls and kind in ("init", "sfunc", "casefn", "method"):
+                    # Kotlin cannot overload on parameter names: name the variant after its first label
+                    # (`init(uniformBottomCorners:…)` → companion `uniformBottomCorners(…)`, `rect(uniformTop…)` →
+                    # `rectUniformTopCorners(…)`)
+                    first = decls[0][0]
+                    alt = first if kind == "init" else item.sym.name + first[0].upper() + first[1:]
+                    sig = ("static" if kind == "init" else group, alt, types)
                 if sig in seen_sigs:
                     self.status(item.sym, "covered", "duplicate Kotlin signature")
                     continue
@@ -938,8 +947,10 @@ class Generator:
                 plist = ", ".join("%s: %s%s" % (kn, kt, " = %s" % kd if kd is not None else "") for kn, kt, kd, _ in decls)
                 args = "listOf(%s)" % ", ".join(encs) if encs else "emptyList()"
                 doc = self._indent(self.kdoc(item.sym, item.platforms), ind + "        ")
-                nm = kotlin_name(item.sym.name)
-                if kind in ("static", "case"):
+                nm = kotlin_name(alt or item.sym.name)
+                if alt is not None and kind == "init":
+                    statics.append(("%s\n%s        public fun %s(%s): %s = %s(%d, %s)" % (doc, ind, nm, plist, vt.kt_name, vt.kt_name, item.id, args), item.key))
+                elif kind in ("static", "case"):
                     statics.append(("%s\n%s        public val %s: %s get() = %s(%d, emptyList())" % (doc, ind, nm, vt.kt_name, vt.kt_name, item.id), item.key))
                 elif kind in ("sfunc", "casefn"):
                     statics.append(("%s\n%s        public fun %s(%s): %s = %s(%d, %s)" % (doc, ind, nm, plist, vt.kt_name, vt.kt_name, item.id, args), item.key))
@@ -961,6 +972,7 @@ class Generator:
                                                          (" : " + ", ".join(supers)) if supers else ""), "type:" + p.usr)
             if p.statics:
                 out.add("%s    public companion object {" % ind)
+                pseen = set()
                 for item, target, kind in p.statics:
                     vt = target
                     params = [m[2] for m in vt.members if m[0] is item][0]
@@ -968,7 +980,15 @@ class Generator:
                     plist = ", ".join("%s: %s%s" % (kn, kt, " = %s" % kd if kd is not None else "") for kn, kt, kd, _ in decls)
                     args = "listOf(%s)" % ", ".join(encs) if encs else "emptyList()"
                     doc = self._indent(self.kdoc(item.sym, item.platforms), ind + "        ")
-                    nm = kotlin_name(item.sym.name)
+                    pname = item.sym.name
+                    psig = (pname, tuple(kt.rstrip("?") for _, kt, _, _ in decls) if kind != "pstatic" else ("<val>",))
+                    if psig in pseen and decls and kind != "pstatic":
+                        pname = pname + decls[0][0][0].upper() + decls[0][0][1:]
+                        psig = (pname, psig[1])
+                    if psig in pseen:
+                        continue
+                    pseen.add(psig)
+                    nm = kotlin_name(pname)
                     if kind == "pstatic":
                         out.add("%s\n%s        public val %s: %s get() = %s(%d, emptyList())" % (doc, ind, nm, vt.kt_name, vt.kt_name, item.id), item.key)
                     else:
@@ -1414,18 +1434,20 @@ class Generator:
             # exact path, or a prefix that stops inside the argument labels
             return dotted == key or (not key.endswith(")") and dotted.startswith(key))
         for usr, st in self.coverage.items():
-            if st["status"] != "skipped":
+            if st["status"] not in ("skipped", "n/a", "rejected"):
                 continue
             dotted = self.model.syms[usr].dotted
+            # a hand-written API wins over a generic "not applicable" rule
+            hit = next((api for key, api in table["covered"].items() if match(dotted, key)), None)
+            if hit is not None:
+                self.coverage[usr] = {"status": "covered", "detail": "hand-written: " + hit}
+                continue
+            if st["status"] != "skipped":
+                continue
             for key, api in table["not_applicable"].items():
                 if match(dotted, key):
                     self.coverage[usr] = {"status": "n/a", "detail": api}
                     break
-            else:
-                for key, api in table["covered"].items():
-                    if match(dotted, key):
-                        self.coverage[usr] = {"status": "covered", "detail": "hand-written: " + api}
-                        break
 
     def finish(self):
         for s in self.model.syms.values():

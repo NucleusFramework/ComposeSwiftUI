@@ -296,6 +296,11 @@ enum CompletionValues {
     @MainActor static func decode(_ e: SExpr) -> Any? {
         let a = Args(expr: e)
         switch e.id {
+        case 13: return shapeOperation(a)
+        case 14:
+            guard let g = d_Gradient(a.expr(0)), let space = d_Gradient_ColorSpace(a.expr(1)) else { return nil }
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) { return g.colorSpace(space) }
+            return AnyGradient(g)
         case 8: return HorizontalAlignment(horizontalIDs[min(max(a.int(0), 0), 7)])
         case 9: return VerticalAlignment(verticalIDs[min(max(a.int(0), 0), 7)])
         case 10: return ExplicitTimelineSchedule(a.list(0).compactMap { ($0 as? NSNumber).map { Date(timeIntervalSince1970: $0.doubleValue) } })
@@ -396,6 +401,13 @@ private func dragPhase(_ p: Any) -> Int {
 @MainActor enum CompletionRenderers {
     static func register() {
         registerNewest()
+        ComposeRegistry.views[100_062] = { m in
+            let text = Text(LocalizedStringKey(m.args.string(0)))
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *), let v = dp_TextVariantPreference(m.args.expr(1)) {
+                return ModChain.apply(text.textVariant(v), m, 0)
+            }
+            return ModChain.apply(text, m, 0)
+        }
         ComposeRegistry.views[100_060] = { m in
             let text = m.args.stringOpt(0)
             return ModChain.apply(text.map { ContentUnavailableView.search(text: $0) } ?? ContentUnavailableView.search, m, 0)
@@ -621,5 +633,49 @@ extension CompletionRenderers {
             return ModChain.apply(Slider(value: value, in: bounds) { Text(a.string(0)) }, m, 0)
         }
         #endif
+    }
+}
+
+// MARK: - Shape operations
+
+/// Kotlin `Shape.offset`, `rotation`, `union`…: the result keeps its concrete type, so an inset shape stays
+/// insettable.
+@MainActor private func shapeOperation(_ a: Args) -> Any? {
+    let op = a.int(0)
+    if op == 12 {
+        guard let base = dp_InsettableShape(a.expr(1)) else { return nil }
+        return base.inset(by: a.cgFloat(2))
+    }
+    guard let base = dp_Shape(a.expr(1)) else { return nil }
+    return shapeOperation(op, base, a)
+}
+
+@MainActor private func shapeOperation<S: Shape>(_ op: Int, _ s: S, _ a: Args) -> Any? {
+    switch op {
+    case 0: return s.offset(x: a.cgFloat(2), y: a.cgFloat(3))
+    case 1: return s.rotation(d_Angle(a.expr(2)) ?? .zero, anchor: d_UnitPoint(a.expr(3)) ?? .center)
+    case 2: return s.scale(x: a.cgFloat(2), y: a.cgFloat(3), anchor: d_UnitPoint(a.expr(4)) ?? .center)
+    case 3: return s.trim(from: a.cgFloat(2), to: a.cgFloat(3))
+    case 4: return s.transform(d_CGAffineTransform(a.expr(2)) ?? .identity)
+    case 5:
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
+            return s.size(width: a.cgFloat(2), height: a.cgFloat(3), anchor: d_UnitPoint(a.expr(4)) ?? .topLeading)
+        }
+        return s.size(width: a.cgFloat(2), height: a.cgFloat(3))
+    case 6...11:
+        guard let other = dp_Shape(a.expr(2)) else { return nil }
+        guard #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) else { return s }
+        let eo = a.bool(3)
+        switch op {
+        case 6: return s.union(other, eoFill: eo)
+        case 7: return s.intersection(other, eoFill: eo)
+        case 8: return s.subtracting(other, eoFill: eo)
+        case 9: return s.symmetricDifference(other, eoFill: eo)
+        case 10: return s.lineIntersection(other, eoFill: eo)
+        default: return s.lineSubtraction(other, eoFill: eo)
+        }
+    case 13: return s.stroke(lineWidth: a.cgFloat(2))
+    case 14: return s.stroke(style: d_StrokeStyle(a.expr(2)) ?? StrokeStyle())
+    default: return nil
     }
 }

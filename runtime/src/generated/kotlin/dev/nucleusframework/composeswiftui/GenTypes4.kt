@@ -44,6 +44,26 @@ import kotlin.native.HiddenFromObjC
      * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
      */
     public constructor(label: LocalizedKey) : this(1020, listOf(label.key))
+    public companion object {
+/**
+         * SwiftUI `AccessibilityCustomContentKey.init(_:id:)`
+         *
+         * ```swift
+         * init(_ labelKey: LocalizedStringKey, id: String)
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun labelKey(labelKey: LocalizedKey, id: String): AccessibilityCustomContentKey = AccessibilityCustomContentKey(1018, listOf(labelKey.key, id))
+/**
+         * SwiftUI `AccessibilityCustomContentKey.init(_:)`
+         *
+         * ```swift
+         * init(_ labelKey: LocalizedStringKey)
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun labelKey(labelKey: LocalizedKey): AccessibilityCustomContentKey = AccessibilityCustomContentKey(1021, listOf(labelKey.key))
+    }
 }
 
 /**
@@ -64,7 +84,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
          */
-        public val prompt: AccessibilityQuickActionPromptStyle get() = AccessibilityQuickActionPromptStyle(2862, emptyList())
+        public val prompt: AccessibilityQuickActionPromptStyle get() = AccessibilityQuickActionPromptStyle(2863, emptyList())
 /**
          * SwiftUI `AccessibilityQuickActionStyle.outline`
          *
@@ -73,7 +93,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
          */
-        public val outline: AccessibilityQuickActionOutlineStyle get() = AccessibilityQuickActionOutlineStyle(2863, emptyList())
+        public val outline: AccessibilityQuickActionOutlineStyle get() = AccessibilityQuickActionOutlineStyle(2864, emptyList())
     }
 }
 
@@ -837,7 +857,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val automatic: AutomaticDisclosureGroupStyle get() = AutomaticDisclosureGroupStyle(2832, emptyList())
+        public val automatic: AutomaticDisclosureGroupStyle get() = AutomaticDisclosureGroupStyle(2833, emptyList())
     }
 }
 
@@ -1118,7 +1138,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val columns: ColumnsFormStyle get() = ColumnsFormStyle(2878, emptyList())
+        public val columns: ColumnsFormStyle get() = ColumnsFormStyle(2885, emptyList())
 /**
          * SwiftUI `FormStyle.grouped`
          *
@@ -1127,7 +1147,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val grouped: GroupedFormStyle get() = GroupedFormStyle(2879, emptyList())
+        public val grouped: GroupedFormStyle get() = GroupedFormStyle(2886, emptyList())
 /**
          * SwiftUI `FormStyle.automatic`
          *
@@ -1136,7 +1156,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val automatic: AutomaticFormStyle get() = AutomaticFormStyle(2880, emptyList())
+        public val automatic: AutomaticFormStyle get() = AutomaticFormStyle(2887, emptyList())
     }
 }
 
@@ -1416,7 +1436,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val titleAndIcon: TitleAndIconLabelStyle get() = TitleAndIconLabelStyle(2675, emptyList())
+        public val titleAndIcon: TitleAndIconLabelStyle get() = TitleAndIconLabelStyle(2676, emptyList())
 /**
          * SwiftUI `LabelStyle.automatic`
          *
@@ -1425,7 +1445,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val automatic: DefaultLabelStyle get() = DefaultLabelStyle(2676, emptyList())
+        public val automatic: DefaultLabelStyle get() = DefaultLabelStyle(2677, emptyList())
 /**
          * SwiftUI `LabelStyle.iconOnly`
          *
@@ -1434,7 +1454,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val iconOnly: IconOnlyLabelStyle get() = IconOnlyLabelStyle(2677, emptyList())
+        public val iconOnly: IconOnlyLabelStyle get() = IconOnlyLabelStyle(2678, emptyList())
 /**
          * SwiftUI `LabelStyle.titleOnly`
          *
@@ -1443,7 +1463,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val titleOnly: TitleOnlyLabelStyle get() = TitleOnlyLabelStyle(2678, emptyList())
+        public val titleOnly: TitleOnlyLabelStyle get() = TitleOnlyLabelStyle(2679, emptyList())
     }
 }
 
@@ -1583,7 +1603,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val borderedButton: BorderedButtonMenuStyle get() = BorderedButtonMenuStyle(2892, emptyList())
+        public val borderedButton: BorderedButtonMenuStyle get() = BorderedButtonMenuStyle(2899, emptyList())
 /**
          * SwiftUI `MenuStyle.borderlessButton`
          *
@@ -1592,7 +1612,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
          */
-        public val borderlessButton: BorderlessButtonMenuStyle get() = BorderlessButtonMenuStyle(2893, emptyList())
+        public val borderlessButton: BorderlessButtonMenuStyle get() = BorderlessButtonMenuStyle(2900, emptyList())
 /**
          * SwiftUI `MenuStyle.button`
          *
@@ -1601,7 +1621,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
          */
-        public val button: ButtonMenuStyle get() = ButtonMenuStyle(2894, emptyList())
+        public val button: ButtonMenuStyle get() = ButtonMenuStyle(2901, emptyList())
 /**
          * SwiftUI `MenuStyle.automatic`
          *
@@ -1610,7 +1630,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
          */
-        public val automatic: DefaultMenuStyle get() = DefaultMenuStyle(2895, emptyList())
+        public val automatic: DefaultMenuStyle get() = DefaultMenuStyle(2902, emptyList())
     }
 }
 
@@ -1829,6 +1849,15 @@ import kotlin.native.HiddenFromObjC
      */
     public fun symmetricDifference(other: Path, eoFill: Boolean = false): Path = Path(2007, listOf(this, other, eoFill))
 /**
+     * SwiftUI `Path.path(in:)`
+     *
+     * ```swift
+     * nonisolated func path(in _: CGRect) -> Path
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public fun path(inValue: CGRect): Path = Path(2008, listOf(this, inValue))
+/**
      * SwiftUI `Path.union(_:eoFill:)`
      *
      * ```swift
@@ -1836,7 +1865,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public fun union(other: Path, eoFill: Boolean = false): Path = Path(2008, listOf(this, other, eoFill))
+    public fun union(other: Path, eoFill: Boolean = false): Path = Path(2009, listOf(this, other, eoFill))
 /**
      * SwiftUI `Path.applying(_:)`
      *
@@ -1845,7 +1874,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public fun applying(transform: CGAffineTransform): Path = Path(2009, listOf(this, transform))
+    public fun applying(transform: CGAffineTransform): Path = Path(2010, listOf(this, transform))
 /**
      * SwiftUI `Path.offsetBy(dx:dy:)`
      *
@@ -1854,7 +1883,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public fun offsetBy(dx: Double, dy: Double): Path = Path(2010, listOf(this, dx, dy))
+    public fun offsetBy(dx: Double, dy: Double): Path = Path(2011, listOf(this, dx, dy))
 /**
      * SwiftUI `Path.init(ellipseIn:)`
      *
@@ -1863,7 +1892,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(ellipseIn: CGRect) : this(2011, listOf(ellipseIn))
+    public constructor(ellipseIn: CGRect) : this(2012, listOf(ellipseIn))
 /**
      * SwiftUI `Path.init()`
      *
@@ -1872,7 +1901,18 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor() : this(2012, emptyList())
+    public constructor() : this(2013, emptyList())
+    public companion object {
+/**
+         * SwiftUI `Path.init(_:)`
+         *
+         * ```swift
+         * init(_ rect: CGRect)
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun rect(rect: CGRect): Path = Path(2014, listOf(rect))
+    }
     /**
      * SwiftUI `Path.Element`
      *
@@ -1891,7 +1931,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public val closeSubpath: Path.Element get() = Path.Element(2014, emptyList())
+            public val closeSubpath: Path.Element get() = Path.Element(2015, emptyList())
 /**
              * SwiftUI `Path.Element.line(to:)`
              *
@@ -1900,7 +1940,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun line(to: CGPoint): Path.Element = Path.Element(2015, listOf(to))
+            public fun line(to: CGPoint): Path.Element = Path.Element(2016, listOf(to))
 /**
              * SwiftUI `Path.Element.move(to:)`
              *
@@ -1909,7 +1949,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun move(to: CGPoint): Path.Element = Path.Element(2016, listOf(to))
+            public fun move(to: CGPoint): Path.Element = Path.Element(2017, listOf(to))
 /**
              * SwiftUI `Path.Element.curve(to:control1:control2:)`
              *
@@ -1918,7 +1958,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun curve(to: CGPoint, control1: CGPoint, control2: CGPoint): Path.Element = Path.Element(2017, listOf(to, control1, control2))
+            public fun curve(to: CGPoint, control1: CGPoint, control2: CGPoint): Path.Element = Path.Element(2018, listOf(to, control1, control2))
 /**
              * SwiftUI `Path.Element.quadCurve(to:control:)`
              *
@@ -1927,7 +1967,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun quadCurve(to: CGPoint, control: CGPoint): Path.Element = Path.Element(2018, listOf(to, control))
+            public fun quadCurve(to: CGPoint, control: CGPoint): Path.Element = Path.Element(2019, listOf(to, control))
         }
     }
 
@@ -1950,7 +1990,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor() : this(2031, emptyList())
+    public constructor() : this(2032, emptyList())
 }
 
 /**
@@ -1971,7 +2011,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val grabActive: PointerStyle get() = PointerStyle(2037, emptyList())
+        public val grabActive: PointerStyle get() = PointerStyle(2038, emptyList())
 /**
          * SwiftUI `PointerStyle.frameResize(position:directions:)`
          *
@@ -1980,7 +2020,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public fun frameResize(position: FrameResizePosition, directions: FrameResizeDirection.Set = FrameResizeDirection.Set.all): PointerStyle = PointerStyle(2038, listOf(position, directions))
+        public fun frameResize(position: FrameResizePosition, directions: FrameResizeDirection.Set = FrameResizeDirection.Set.all): PointerStyle = PointerStyle(2039, listOf(position, directions))
 /**
          * SwiftUI `PointerStyle.columnResize(directions:)`
          *
@@ -1989,7 +2029,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public fun columnResize(directions: HorizontalDirection.Set): PointerStyle = PointerStyle(2039, listOf(directions))
+        public fun columnResize(directions: HorizontalDirection.Set): PointerStyle = PointerStyle(2040, listOf(directions))
 /**
          * SwiftUI `PointerStyle.columnResize`
          *
@@ -1998,7 +2038,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val columnResize: PointerStyle get() = PointerStyle(2040, emptyList())
+        public val columnResize: PointerStyle get() = PointerStyle(2041, emptyList())
 /**
          * SwiftUI `PointerStyle.verticalText`
          *
@@ -2007,7 +2047,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val verticalText: PointerStyle get() = PointerStyle(2041, emptyList())
+        public val verticalText: PointerStyle get() = PointerStyle(2042, emptyList())
 /**
          * SwiftUI `PointerStyle.rectSelection`
          *
@@ -2016,7 +2056,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val rectSelection: PointerStyle get() = PointerStyle(2042, emptyList())
+        public val rectSelection: PointerStyle get() = PointerStyle(2043, emptyList())
 /**
          * SwiftUI `PointerStyle.horizontalText`
          *
@@ -2025,7 +2065,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val horizontalText: PointerStyle get() = PointerStyle(2043, emptyList())
+        public val horizontalText: PointerStyle get() = PointerStyle(2044, emptyList())
 /**
          * SwiftUI `PointerStyle.link`
          *
@@ -2034,7 +2074,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val link: PointerStyle get() = PointerStyle(2044, emptyList())
+        public val link: PointerStyle get() = PointerStyle(2045, emptyList())
 /**
          * SwiftUI `PointerStyle.zoomIn`
          *
@@ -2043,7 +2083,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val zoomIn: PointerStyle get() = PointerStyle(2046, emptyList())
+        public val zoomIn: PointerStyle get() = PointerStyle(2047, emptyList())
 /**
          * SwiftUI `PointerStyle.default`
          *
@@ -2052,7 +2092,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val default: PointerStyle get() = PointerStyle(2047, emptyList())
+        public val default: PointerStyle get() = PointerStyle(2048, emptyList())
 /**
          * SwiftUI `PointerStyle.zoomOut`
          *
@@ -2061,7 +2101,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val zoomOut: PointerStyle get() = PointerStyle(2048, emptyList())
+        public val zoomOut: PointerStyle get() = PointerStyle(2049, emptyList())
 /**
          * SwiftUI `PointerStyle.grabIdle`
          *
@@ -2070,7 +2110,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val grabIdle: PointerStyle get() = PointerStyle(2049, emptyList())
+        public val grabIdle: PointerStyle get() = PointerStyle(2050, emptyList())
 /**
          * SwiftUI `PointerStyle.rowResize(directions:)`
          *
@@ -2079,7 +2119,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public fun rowResize(directions: VerticalDirection.Set): PointerStyle = PointerStyle(2050, listOf(directions))
+        public fun rowResize(directions: VerticalDirection.Set): PointerStyle = PointerStyle(2051, listOf(directions))
 /**
          * SwiftUI `PointerStyle.rowResize`
          *
@@ -2088,7 +2128,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val rowResize: PointerStyle get() = PointerStyle(2051, emptyList())
+        public val rowResize: PointerStyle get() = PointerStyle(2052, emptyList())
 /**
          * SwiftUI `PointerStyle.image(_:hotSpot:)`
          *
@@ -2097,7 +2137,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public fun image(resource: String, hotSpot: UnitPoint): PointerStyle = PointerStyle(2045, listOf(resource, hotSpot))
+        public fun image(resource: String, hotSpot: UnitPoint): PointerStyle = PointerStyle(2046, listOf(resource, hotSpot))
     }
 }
 
@@ -2119,7 +2159,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val large: PresentationDetent get() = PresentationDetent(2066, emptyList())
+        public val large: PresentationDetent get() = PresentationDetent(2067, emptyList())
 /**
          * SwiftUI `PresentationDetent.height(_:)`
          *
@@ -2128,7 +2168,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun height(height: Double): PresentationDetent = PresentationDetent(2067, listOf(height))
+        public fun height(height: Double): PresentationDetent = PresentationDetent(2068, listOf(height))
 /**
          * SwiftUI `PresentationDetent.medium`
          *
@@ -2137,7 +2177,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val medium: PresentationDetent get() = PresentationDetent(2068, emptyList())
+        public val medium: PresentationDetent get() = PresentationDetent(2069, emptyList())
 /**
          * SwiftUI `PresentationDetent.fraction(_:)`
          *
@@ -2146,7 +2186,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun fraction(fraction: Double): PresentationDetent = PresentationDetent(2069, listOf(fraction))
+        public fun fraction(fraction: Double): PresentationDetent = PresentationDetent(2070, listOf(fraction))
     }
 }
 
@@ -2168,7 +2208,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val linear: LinearProgressViewStyle get() = LinearProgressViewStyle(2810, emptyList())
+        public val linear: LinearProgressViewStyle get() = LinearProgressViewStyle(2811, emptyList())
 /**
          * SwiftUI `ProgressViewStyle.automatic`
          *
@@ -2177,7 +2217,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val automatic: DefaultProgressViewStyle get() = DefaultProgressViewStyle(2811, emptyList())
+        public val automatic: DefaultProgressViewStyle get() = DefaultProgressViewStyle(2812, emptyList())
 /**
          * SwiftUI `ProgressViewStyle.circular`
          *
@@ -2186,7 +2226,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val circular: CircularProgressViewStyle get() = CircularProgressViewStyle(2812, emptyList())
+        public val circular: CircularProgressViewStyle get() = CircularProgressViewStyle(2813, emptyList())
     }
 }
 
@@ -2207,7 +2247,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(width: Double?, height: Double?) : this(2094, listOf(width, height))
+    public constructor(width: Double?, height: Double?) : this(2095, listOf(width, height))
 /**
      * SwiftUI `ProposedViewSize.init(_:)`
      *
@@ -2216,7 +2256,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(size: CGSize) : this(2096, listOf(size))
+    public constructor(size: CGSize) : this(2097, listOf(size))
     public companion object {
 /**
          * SwiftUI `ProposedViewSize.unspecified`
@@ -2226,7 +2266,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val unspecified: ProposedViewSize get() = ProposedViewSize(2092, emptyList())
+        public val unspecified: ProposedViewSize get() = ProposedViewSize(2093, emptyList())
 /**
          * SwiftUI `ProposedViewSize.zero`
          *
@@ -2235,7 +2275,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val zero: ProposedViewSize get() = ProposedViewSize(2093, emptyList())
+        public val zero: ProposedViewSize get() = ProposedViewSize(2094, emptyList())
 /**
          * SwiftUI `ProposedViewSize.infinity`
          *
@@ -2244,7 +2284,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val infinity: ProposedViewSize get() = ProposedViewSize(2095, emptyList())
+        public val infinity: ProposedViewSize get() = ProposedViewSize(2096, emptyList())
     }
 }
 
@@ -2265,7 +2305,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor() : this(2104, emptyList())
+    public constructor() : this(2105, emptyList())
 }
 
 /**
@@ -2285,7 +2325,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
-    public constructor(minimumAngleDelta: Angle? = null) : this(2118, listOf(minimumAngleDelta))
+    public constructor(minimumAngleDelta: Angle? = null) : this(2119, listOf(minimumAngleDelta))
 }
 
 /**
@@ -2305,7 +2345,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(rawValue: Int) : this(2132, listOf(rawValue))
+    public constructor(rawValue: Int) : this(2133, listOf(rawValue))
     public companion object {
 /**
          * SwiftUI `SafeAreaRegions.all`
@@ -2315,7 +2355,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val all: SafeAreaRegions get() = SafeAreaRegions(2130, emptyList())
+        public val all: SafeAreaRegions get() = SafeAreaRegions(2131, emptyList())
 /**
          * SwiftUI `SafeAreaRegions.keyboard`
          *
@@ -2324,7 +2364,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val keyboard: SafeAreaRegions get() = SafeAreaRegions(2131, emptyList())
+        public val keyboard: SafeAreaRegions get() = SafeAreaRegions(2132, emptyList())
 /**
          * SwiftUI `SafeAreaRegions.container`
          *
@@ -2333,7 +2373,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val container: SafeAreaRegions get() = SafeAreaRegions(2133, emptyList())
+        public val container: SafeAreaRegions get() = SafeAreaRegions(2134, emptyList())
     }
 }
 
@@ -2355,7 +2395,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val sizeChanges: ScrollAnchorRole get() = ScrollAnchorRole(2145, emptyList())
+        public val sizeChanges: ScrollAnchorRole get() = ScrollAnchorRole(2146, emptyList())
 /**
          * SwiftUI `ScrollAnchorRole.initialOffset`
          *
@@ -2364,7 +2404,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val initialOffset: ScrollAnchorRole get() = ScrollAnchorRole(2146, emptyList())
+        public val initialOffset: ScrollAnchorRole get() = ScrollAnchorRole(2147, emptyList())
 /**
          * SwiftUI `ScrollAnchorRole.alignment`
          *
@@ -2373,7 +2413,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val alignment: ScrollAnchorRole get() = ScrollAnchorRole(2147, emptyList())
+        public val alignment: ScrollAnchorRole get() = ScrollAnchorRole(2148, emptyList())
     }
 }
 
@@ -2395,7 +2435,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val never: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2161, emptyList())
+        public val never: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2162, emptyList())
 /**
          * SwiftUI `ScrollIndicatorVisibility.hidden`
          *
@@ -2404,7 +2444,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val hidden: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2162, emptyList())
+        public val hidden: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2163, emptyList())
 /**
          * SwiftUI `ScrollIndicatorVisibility.visible`
          *
@@ -2413,7 +2453,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val visible: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2163, emptyList())
+        public val visible: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2164, emptyList())
 /**
          * SwiftUI `ScrollIndicatorVisibility.automatic`
          *
@@ -2422,7 +2462,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val automatic: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2164, emptyList())
+        public val automatic: ScrollIndicatorVisibility get() = ScrollIndicatorVisibility(2165, emptyList())
     }
 }
 
@@ -2443,7 +2483,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 18.4+, macOS 15.4+, tvOS 18.4+, watchOS 11.4+
      */
-    public constructor() : this(2180, emptyList())
+    public constructor() : this(2181, emptyList())
 }
 
 /**
@@ -2464,7 +2504,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val menu: SearchSuggestionsPlacement get() = SearchSuggestionsPlacement(2210, emptyList())
+        public val menu: SearchSuggestionsPlacement get() = SearchSuggestionsPlacement(2211, emptyList())
 /**
          * SwiftUI `SearchSuggestionsPlacement.content`
          *
@@ -2473,7 +2513,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val content: SearchSuggestionsPlacement get() = SearchSuggestionsPlacement(2211, emptyList())
+        public val content: SearchSuggestionsPlacement get() = SearchSuggestionsPlacement(2212, emptyList())
 /**
          * SwiftUI `SearchSuggestionsPlacement.automatic`
          *
@@ -2482,7 +2522,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val automatic: SearchSuggestionsPlacement get() = SearchSuggestionsPlacement(2212, emptyList())
+        public val automatic: SearchSuggestionsPlacement get() = SearchSuggestionsPlacement(2213, emptyList())
     }
     /**
      * SwiftUI `SearchSuggestionsPlacement.Set`
@@ -2501,7 +2541,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public constructor(rawValue: Int) : this(2215, listOf(rawValue))
+        public constructor(rawValue: Int) : this(2216, listOf(rawValue))
         public companion object {
 /**
              * SwiftUI `SearchSuggestionsPlacement.Set.menu`
@@ -2511,7 +2551,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public val menu: SearchSuggestionsPlacement.Set get() = SearchSuggestionsPlacement.Set(2213, emptyList())
+            public val menu: SearchSuggestionsPlacement.Set get() = SearchSuggestionsPlacement.Set(2214, emptyList())
 /**
              * SwiftUI `SearchSuggestionsPlacement.Set.content`
              *
@@ -2520,7 +2560,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public val content: SearchSuggestionsPlacement.Set get() = SearchSuggestionsPlacement.Set(2214, emptyList())
+            public val content: SearchSuggestionsPlacement.Set get() = SearchSuggestionsPlacement.Set(2215, emptyList())
         }
     }
 
@@ -2543,7 +2583,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
      */
-    public constructor(function: ShaderFunction, arguments: List<Shader.Argument>) : this(2254, listOf(function, arguments.toList()))
+    public constructor(function: ShaderFunction, arguments: List<Shader.Argument>) : this(2255, listOf(function, arguments.toList()))
     /**
      * SwiftUI `Shader.Argument`
      *
@@ -2562,7 +2602,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun colorArray(array: List<Color>): Shader.Argument = Shader.Argument(2255, listOf(array.toList()))
+            public fun colorArray(array: List<Color>): Shader.Argument = Shader.Argument(2256, listOf(array.toList()))
 /**
              * SwiftUI `Shader.Argument.boundingRect`
              *
@@ -2571,7 +2611,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public val boundingRect: Shader.Argument get() = Shader.Argument(2256, emptyList())
+            public val boundingRect: Shader.Argument get() = Shader.Argument(2257, emptyList())
 /**
              * SwiftUI `Shader.Argument.color(_:)`
              *
@@ -2580,7 +2620,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun color(color: Color): Shader.Argument = Shader.Argument(2257, listOf(color))
+            public fun color(color: Color): Shader.Argument = Shader.Argument(2258, listOf(color))
 /**
              * SwiftUI `Shader.Argument.float(_:)`
              *
@@ -2589,7 +2629,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float(x: Double): Shader.Argument = Shader.Argument(2258, listOf(x))
+            public fun float(x: Double): Shader.Argument = Shader.Argument(2259, listOf(x))
 /**
              * SwiftUI `Shader.Argument.float2(_:)`
              *
@@ -2598,7 +2638,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float2(size: CGSize): Shader.Argument = Shader.Argument(2259, listOf(size))
+            public fun float2(size: CGSize): Shader.Argument = Shader.Argument(2260, listOf(size))
 /**
              * SwiftUI `Shader.Argument.float2(_:)`
              *
@@ -2607,7 +2647,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float2(point: CGPoint): Shader.Argument = Shader.Argument(2260, listOf(point))
+            public fun float2(point: CGPoint): Shader.Argument = Shader.Argument(2261, listOf(point))
 /**
              * SwiftUI `Shader.Argument.float2(_:)`
              *
@@ -2616,7 +2656,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float2(vector: CGVector): Shader.Argument = Shader.Argument(2261, listOf(vector))
+            public fun float2(vector: CGVector): Shader.Argument = Shader.Argument(2262, listOf(vector))
 /**
              * SwiftUI `Shader.Argument.float2(_:_:)`
              *
@@ -2625,7 +2665,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float2(x: Double, y: Double): Shader.Argument = Shader.Argument(2262, listOf(x, y))
+            public fun float2(x: Double, y: Double): Shader.Argument = Shader.Argument(2263, listOf(x, y))
 /**
              * SwiftUI `Shader.Argument.float3(_:_:_:)`
              *
@@ -2634,7 +2674,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float3(x: Double, y: Double, z: Double): Shader.Argument = Shader.Argument(2263, listOf(x, y, z))
+            public fun float3(x: Double, y: Double, z: Double): Shader.Argument = Shader.Argument(2264, listOf(x, y, z))
 /**
              * SwiftUI `Shader.Argument.float4(_:_:_:_:)`
              *
@@ -2643,7 +2683,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
              */
-            public fun float4(x: Double, y: Double, z: Double, w: Double): Shader.Argument = Shader.Argument(2264, listOf(x, y, z, w))
+            public fun float4(x: Double, y: Double, z: Double, w: Double): Shader.Argument = Shader.Argument(2265, listOf(x, y, z, w))
         }
     }
 
@@ -2665,7 +2705,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
              */
-            public val shapeStyle: Shader.UsageType get() = Shader.UsageType(2265, emptyList())
+            public val shapeStyle: Shader.UsageType get() = Shader.UsageType(2266, emptyList())
 /**
              * SwiftUI `Shader.UsageType.colorEffect`
              *
@@ -2674,7 +2714,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
              */
-            public val colorEffect: Shader.UsageType get() = Shader.UsageType(2266, emptyList())
+            public val colorEffect: Shader.UsageType get() = Shader.UsageType(2267, emptyList())
 /**
              * SwiftUI `Shader.UsageType.layerEffect`
              *
@@ -2683,7 +2723,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
              */
-            public val layerEffect: Shader.UsageType get() = Shader.UsageType(2267, emptyList())
+            public val layerEffect: Shader.UsageType get() = Shader.UsageType(2268, emptyList())
 /**
              * SwiftUI `Shader.UsageType.distortionEffect`
              *
@@ -2692,7 +2732,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
              */
-            public val distortionEffect: Shader.UsageType get() = Shader.UsageType(2268, emptyList())
+            public val distortionEffect: Shader.UsageType get() = Shader.UsageType(2269, emptyList())
         }
     }
 
@@ -2716,7 +2756,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val background: BackgroundStyle get() = BackgroundStyle(2679, emptyList())
+        public val background: BackgroundStyle get() = BackgroundStyle(2680, emptyList())
 /**
          * SwiftUI `ShapeStyle.foreground`
          *
@@ -2725,7 +2765,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val foreground: ForegroundStyle get() = ForegroundStyle(2680, emptyList())
+        public val foreground: ForegroundStyle get() = ForegroundStyle(2681, emptyList())
 /**
          * SwiftUI `ShapeStyle.quaternary`
          *
@@ -2734,7 +2774,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val quaternary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2681, emptyList())
+        public val quaternary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2682, emptyList())
 /**
          * SwiftUI `ShapeStyle.primary`
          *
@@ -2743,7 +2783,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val primary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2682, emptyList())
+        public val primary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2683, emptyList())
 /**
          * SwiftUI `ShapeStyle.quinary`
          *
@@ -2752,7 +2792,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val quinary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2683, emptyList())
+        public val quinary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2684, emptyList())
 /**
          * SwiftUI `ShapeStyle.tertiary`
          *
@@ -2761,7 +2801,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val tertiary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2684, emptyList())
+        public val tertiary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2685, emptyList())
 /**
          * SwiftUI `ShapeStyle.secondary`
          *
@@ -2770,7 +2810,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val secondary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2685, emptyList())
+        public val secondary: HierarchicalShapeStyle get() = HierarchicalShapeStyle(2686, emptyList())
 /**
          * SwiftUI `ShapeStyle.placeholder`
          *
@@ -2779,7 +2819,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val placeholder: PlaceholderTextShapeStyle get() = PlaceholderTextShapeStyle(2686, emptyList())
+        public val placeholder: PlaceholderTextShapeStyle get() = PlaceholderTextShapeStyle(2687, emptyList())
 /**
          * SwiftUI `ShapeStyle.windowBackground`
          *
@@ -2788,7 +2828,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val windowBackground: WindowBackgroundShapeStyle get() = WindowBackgroundShapeStyle(2687, emptyList())
+        public val windowBackground: WindowBackgroundShapeStyle get() = WindowBackgroundShapeStyle(2688, emptyList())
 /**
          * SwiftUI `ShapeStyle.fill`
          *
@@ -2797,7 +2837,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val fill: FillShapeStyle get() = FillShapeStyle(2688, emptyList())
+        public val fill: FillShapeStyle get() = FillShapeStyle(2689, emptyList())
 /**
          * SwiftUI `ShapeStyle.link`
          *
@@ -2806,7 +2846,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val link: LinkShapeStyle get() = LinkShapeStyle(2689, emptyList())
+        public val link: LinkShapeStyle get() = LinkShapeStyle(2690, emptyList())
 /**
          * SwiftUI `ShapeStyle.tint`
          *
@@ -2815,7 +2855,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val tint: TintShapeStyle get() = TintShapeStyle(2690, emptyList())
+        public val tint: TintShapeStyle get() = TintShapeStyle(2691, emptyList())
 /**
          * SwiftUI `ShapeStyle.selection`
          *
@@ -2824,7 +2864,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val selection: SelectionShapeStyle get() = SelectionShapeStyle(2691, emptyList())
+        public val selection: SelectionShapeStyle get() = SelectionShapeStyle(2692, emptyList())
 /**
          * SwiftUI `ShapeStyle.separator`
          *
@@ -2833,7 +2873,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val separator: SeparatorShapeStyle get() = SeparatorShapeStyle(2692, emptyList())
+        public val separator: SeparatorShapeStyle get() = SeparatorShapeStyle(2693, emptyList())
 /**
          * SwiftUI `ShapeStyle.linearGradient(stops:startPoint:endPoint:)`
          *
@@ -2842,7 +2882,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun linearGradient(stops: List<Gradient.Stop>, startPoint: UnitPoint, endPoint: UnitPoint): LinearGradient = LinearGradient(2693, listOf(stops.toList(), startPoint, endPoint))
+        public fun linearGradient(stops: List<Gradient.Stop>, startPoint: UnitPoint, endPoint: UnitPoint): LinearGradient = LinearGradient(2694, listOf(stops.toList(), startPoint, endPoint))
 /**
          * SwiftUI `ShapeStyle.linearGradient(colors:startPoint:endPoint:)`
          *
@@ -2851,7 +2891,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun linearGradient(colors: List<Color>, startPoint: UnitPoint, endPoint: UnitPoint): LinearGradient = LinearGradient(2694, listOf(colors.toList(), startPoint, endPoint))
+        public fun linearGradient(colors: List<Color>, startPoint: UnitPoint, endPoint: UnitPoint): LinearGradient = LinearGradient(2695, listOf(colors.toList(), startPoint, endPoint))
 /**
          * SwiftUI `ShapeStyle.linearGradient(_:startPoint:endPoint:)`
          *
@@ -2860,7 +2900,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun linearGradient(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint): LinearGradient = LinearGradient(2695, listOf(gradient, startPoint, endPoint))
+        public fun linearGradient(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint): LinearGradient = LinearGradient(2696, listOf(gradient, startPoint, endPoint))
 /**
          * SwiftUI `ShapeStyle.radialGradient(stops:center:startRadius:endRadius:)`
          *
@@ -2869,7 +2909,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun radialGradient(stops: List<Gradient.Stop>, center: UnitPoint, startRadius: Double, endRadius: Double): RadialGradient = RadialGradient(2696, listOf(stops.toList(), center, startRadius, endRadius))
+        public fun radialGradient(stops: List<Gradient.Stop>, center: UnitPoint, startRadius: Double, endRadius: Double): RadialGradient = RadialGradient(2697, listOf(stops.toList(), center, startRadius, endRadius))
 /**
          * SwiftUI `ShapeStyle.radialGradient(colors:center:startRadius:endRadius:)`
          *
@@ -2878,7 +2918,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun radialGradient(colors: List<Color>, center: UnitPoint, startRadius: Double, endRadius: Double): RadialGradient = RadialGradient(2697, listOf(colors.toList(), center, startRadius, endRadius))
+        public fun radialGradient(colors: List<Color>, center: UnitPoint, startRadius: Double, endRadius: Double): RadialGradient = RadialGradient(2698, listOf(colors.toList(), center, startRadius, endRadius))
 /**
          * SwiftUI `ShapeStyle.radialGradient(_:center:startRadius:endRadius:)`
          *
@@ -2887,7 +2927,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun radialGradient(gradient: Gradient, center: UnitPoint, startRadius: Double, endRadius: Double): RadialGradient = RadialGradient(2698, listOf(gradient, center, startRadius, endRadius))
+        public fun radialGradient(gradient: Gradient, center: UnitPoint, startRadius: Double, endRadius: Double): RadialGradient = RadialGradient(2699, listOf(gradient, center, startRadius, endRadius))
 /**
          * SwiftUI `ShapeStyle.conicGradient(stops:center:angle:)`
          *
@@ -2896,7 +2936,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun conicGradient(stops: List<Gradient.Stop>, center: UnitPoint, angle: Angle = Angle.zero): AngularGradient = AngularGradient(2699, listOf(stops.toList(), center, angle))
+        public fun conicGradient(stops: List<Gradient.Stop>, center: UnitPoint, angle: Angle = Angle.zero): AngularGradient = AngularGradient(2700, listOf(stops.toList(), center, angle))
 /**
          * SwiftUI `ShapeStyle.conicGradient(colors:center:angle:)`
          *
@@ -2905,7 +2945,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun conicGradient(colors: List<Color>, center: UnitPoint, angle: Angle = Angle.zero): AngularGradient = AngularGradient(2700, listOf(colors.toList(), center, angle))
+        public fun conicGradient(colors: List<Color>, center: UnitPoint, angle: Angle = Angle.zero): AngularGradient = AngularGradient(2701, listOf(colors.toList(), center, angle))
 /**
          * SwiftUI `ShapeStyle.conicGradient(_:center:angle:)`
          *
@@ -2914,7 +2954,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun conicGradient(gradient: Gradient, center: UnitPoint, angle: Angle = Angle.zero): AngularGradient = AngularGradient(2701, listOf(gradient, center, angle))
+        public fun conicGradient(gradient: Gradient, center: UnitPoint, angle: Angle = Angle.zero): AngularGradient = AngularGradient(2702, listOf(gradient, center, angle))
 /**
          * SwiftUI `ShapeStyle.angularGradient(stops:center:startAngle:endAngle:)`
          *
@@ -2923,7 +2963,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun angularGradient(stops: List<Gradient.Stop>, center: UnitPoint, startAngle: Angle, endAngle: Angle): AngularGradient = AngularGradient(2702, listOf(stops.toList(), center, startAngle, endAngle))
+        public fun angularGradient(stops: List<Gradient.Stop>, center: UnitPoint, startAngle: Angle, endAngle: Angle): AngularGradient = AngularGradient(2703, listOf(stops.toList(), center, startAngle, endAngle))
 /**
          * SwiftUI `ShapeStyle.angularGradient(colors:center:startAngle:endAngle:)`
          *
@@ -2932,7 +2972,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun angularGradient(colors: List<Color>, center: UnitPoint, startAngle: Angle, endAngle: Angle): AngularGradient = AngularGradient(2703, listOf(colors.toList(), center, startAngle, endAngle))
+        public fun angularGradient(colors: List<Color>, center: UnitPoint, startAngle: Angle, endAngle: Angle): AngularGradient = AngularGradient(2704, listOf(colors.toList(), center, startAngle, endAngle))
 /**
          * SwiftUI `ShapeStyle.angularGradient(_:center:startAngle:endAngle:)`
          *
@@ -2941,7 +2981,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun angularGradient(gradient: Gradient, center: UnitPoint, startAngle: Angle, endAngle: Angle): AngularGradient = AngularGradient(2704, listOf(gradient, center, startAngle, endAngle))
+        public fun angularGradient(gradient: Gradient, center: UnitPoint, startAngle: Angle, endAngle: Angle): AngularGradient = AngularGradient(2705, listOf(gradient, center, startAngle, endAngle))
 /**
          * SwiftUI `ShapeStyle.ellipticalGradient(stops:center:startRadiusFraction:endRadiusFraction:)`
          *
@@ -2950,7 +2990,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun ellipticalGradient(stops: List<Gradient.Stop>, center: UnitPoint = UnitPoint.center, startRadiusFraction: Double = 0.0, endRadiusFraction: Double = 0.5): EllipticalGradient = EllipticalGradient(2705, listOf(stops.toList(), center, startRadiusFraction, endRadiusFraction))
+        public fun ellipticalGradient(stops: List<Gradient.Stop>, center: UnitPoint = UnitPoint.center, startRadiusFraction: Double = 0.0, endRadiusFraction: Double = 0.5): EllipticalGradient = EllipticalGradient(2706, listOf(stops.toList(), center, startRadiusFraction, endRadiusFraction))
 /**
          * SwiftUI `ShapeStyle.ellipticalGradient(colors:center:startRadiusFraction:endRadiusFraction:)`
          *
@@ -2959,7 +2999,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun ellipticalGradient(colors: List<Color>, center: UnitPoint = UnitPoint.center, startRadiusFraction: Double = 0.0, endRadiusFraction: Double = 0.5): EllipticalGradient = EllipticalGradient(2706, listOf(colors.toList(), center, startRadiusFraction, endRadiusFraction))
+        public fun ellipticalGradient(colors: List<Color>, center: UnitPoint = UnitPoint.center, startRadiusFraction: Double = 0.0, endRadiusFraction: Double = 0.5): EllipticalGradient = EllipticalGradient(2707, listOf(colors.toList(), center, startRadiusFraction, endRadiusFraction))
 /**
          * SwiftUI `ShapeStyle.ellipticalGradient(_:center:startRadiusFraction:endRadiusFraction:)`
          *
@@ -2968,7 +3008,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun ellipticalGradient(gradient: Gradient, center: UnitPoint = UnitPoint.center, startRadiusFraction: Double = 0.0, endRadiusFraction: Double = 0.5): EllipticalGradient = EllipticalGradient(2707, listOf(gradient, center, startRadiusFraction, endRadiusFraction))
+        public fun ellipticalGradient(gradient: Gradient, center: UnitPoint = UnitPoint.center, startRadiusFraction: Double = 0.0, endRadiusFraction: Double = 0.5): EllipticalGradient = EllipticalGradient(2708, listOf(gradient, center, startRadiusFraction, endRadiusFraction))
 /**
          * SwiftUI `ShapeStyle.red`
          *
@@ -2977,7 +3017,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val red: Color get() = Color(2708, emptyList())
+        public val red: Color get() = Color(2709, emptyList())
 /**
          * SwiftUI `ShapeStyle.blue`
          *
@@ -2986,7 +3026,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val blue: Color get() = Color(2709, emptyList())
+        public val blue: Color get() = Color(2710, emptyList())
 /**
          * SwiftUI `ShapeStyle.cyan`
          *
@@ -2995,7 +3035,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val cyan: Color get() = Color(2710, emptyList())
+        public val cyan: Color get() = Color(2711, emptyList())
 /**
          * SwiftUI `ShapeStyle.gray`
          *
@@ -3004,7 +3044,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val gray: Color get() = Color(2711, emptyList())
+        public val gray: Color get() = Color(2712, emptyList())
 /**
          * SwiftUI `ShapeStyle.mint`
          *
@@ -3013,7 +3053,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val mint: Color get() = Color(2712, emptyList())
+        public val mint: Color get() = Color(2713, emptyList())
 /**
          * SwiftUI `ShapeStyle.pink`
          *
@@ -3022,7 +3062,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val pink: Color get() = Color(2713, emptyList())
+        public val pink: Color get() = Color(2714, emptyList())
 /**
          * SwiftUI `ShapeStyle.teal`
          *
@@ -3031,7 +3071,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val teal: Color get() = Color(2714, emptyList())
+        public val teal: Color get() = Color(2715, emptyList())
 /**
          * SwiftUI `ShapeStyle.black`
          *
@@ -3040,7 +3080,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val black: Color get() = Color(2715, emptyList())
+        public val black: Color get() = Color(2716, emptyList())
 /**
          * SwiftUI `ShapeStyle.brown`
          *
@@ -3049,7 +3089,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val brown: Color get() = Color(2716, emptyList())
+        public val brown: Color get() = Color(2717, emptyList())
 /**
          * SwiftUI `ShapeStyle.clear`
          *
@@ -3058,7 +3098,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val clear: Color get() = Color(2717, emptyList())
+        public val clear: Color get() = Color(2718, emptyList())
 /**
          * SwiftUI `ShapeStyle.green`
          *
@@ -3067,7 +3107,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val green: Color get() = Color(2718, emptyList())
+        public val green: Color get() = Color(2719, emptyList())
 /**
          * SwiftUI `ShapeStyle.white`
          *
@@ -3076,7 +3116,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val white: Color get() = Color(2719, emptyList())
+        public val white: Color get() = Color(2720, emptyList())
 /**
          * SwiftUI `ShapeStyle.indigo`
          *
@@ -3085,7 +3125,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val indigo: Color get() = Color(2720, emptyList())
+        public val indigo: Color get() = Color(2721, emptyList())
 /**
          * SwiftUI `ShapeStyle.orange`
          *
@@ -3094,7 +3134,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val orange: Color get() = Color(2721, emptyList())
+        public val orange: Color get() = Color(2722, emptyList())
 /**
          * SwiftUI `ShapeStyle.purple`
          *
@@ -3103,7 +3143,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val purple: Color get() = Color(2722, emptyList())
+        public val purple: Color get() = Color(2723, emptyList())
 /**
          * SwiftUI `ShapeStyle.yellow`
          *
@@ -3112,7 +3152,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val yellow: Color get() = Color(2723, emptyList())
+        public val yellow: Color get() = Color(2724, emptyList())
 /**
          * SwiftUI `ShapeStyle.ultraThickMaterial`
          *
@@ -3121,7 +3161,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val ultraThickMaterial: Material get() = Material(2724, emptyList())
+        public val ultraThickMaterial: Material get() = Material(2725, emptyList())
 /**
          * SwiftUI `ShapeStyle.thinMaterial`
          *
@@ -3130,7 +3170,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val thinMaterial: Material get() = Material(2725, emptyList())
+        public val thinMaterial: Material get() = Material(2726, emptyList())
 /**
          * SwiftUI `ShapeStyle.thickMaterial`
          *
@@ -3139,7 +3179,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val thickMaterial: Material get() = Material(2726, emptyList())
+        public val thickMaterial: Material get() = Material(2727, emptyList())
 /**
          * SwiftUI `ShapeStyle.regularMaterial`
          *
@@ -3148,7 +3188,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val regularMaterial: Material get() = Material(2727, emptyList())
+        public val regularMaterial: Material get() = Material(2728, emptyList())
 /**
          * SwiftUI `ShapeStyle.ultraThinMaterial`
          *
@@ -3157,7 +3197,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val ultraThinMaterial: Material get() = Material(2728, emptyList())
+        public val ultraThinMaterial: Material get() = Material(2729, emptyList())
 /**
          * SwiftUI `ShapeStyle.bar`
          *
@@ -3166,7 +3206,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val bar: Material get() = Material(2729, emptyList())
+        public val bar: Material get() = Material(2730, emptyList())
     }
 }
 
@@ -3187,7 +3227,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor() : this(2283, emptyList())
+    public constructor() : this(2284, emptyList())
 }
 
 /**
@@ -3207,7 +3247,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS 27.0+
      */
-    public constructor(count: Int = 1, coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local, inputKinds: GestureInputKinds = GestureInputKinds.all) : this(2300, listOf(count, coordinateSpace, inputKinds))
+    public constructor(count: Int = 1, coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local, inputKinds: GestureInputKinds = GestureInputKinds.all) : this(2301, listOf(count, coordinateSpace, inputKinds))
 /**
      * SwiftUI `SpatialTapGesture.init(count:coordinateSpace:)`
      *
@@ -3216,7 +3256,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
      */
-    public constructor(count: Int = 1, coordinateSpace: CoordinateSpace = CoordinateSpace.local) : this(2301, listOf(count, coordinateSpace))
+    public constructor(count: Int = 1, coordinateSpace: CoordinateSpace = CoordinateSpace.local) : this(2302, listOf(count, coordinateSpace))
 /**
      * SwiftUI `SpatialTapGesture.init(count:coordinateSpace:)`
      *
@@ -3225,7 +3265,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
      */
-    public constructor(count: Int = 1, coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local) : this(2302, listOf(count, coordinateSpace))
+    public constructor(count: Int = 1, coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local) : this(2303, listOf(count, coordinateSpace))
 }
 
 /**
@@ -3245,7 +3285,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
-    public constructor() : this(2320, emptyList())
+    public constructor() : this(2321, emptyList())
 }
 
 /**
@@ -3265,7 +3305,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
      */
-    public constructor(tint: Color) : this(2341, listOf(tint))
+    public constructor(tint: Color) : this(2342, listOf(tint))
 /**
      * SwiftUI `SwitchToggleStyle.init()`
      *
@@ -3274,7 +3314,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 18.0+, watchOS 10.0+
      */
-    public constructor() : this(2342, emptyList())
+    public constructor() : this(2343, emptyList())
 }
 
 /** Namespace for SwiftUI `SystemFormatStyle` nested types. */
@@ -3296,7 +3336,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public constructor(anchor: Double, maxFieldCount: Int = 2) : this(2357, listOf(anchor, maxFieldCount))
+        public constructor(anchor: Double, maxFieldCount: Int = 2) : this(2358, listOf(anchor, maxFieldCount))
 /**
          * SwiftUI `SystemFormatStyle.DateOffset.locale(_:)`
          *
@@ -3305,7 +3345,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public fun locale(locale: String): SystemFormatStyle.DateOffset = SystemFormatStyle.DateOffset(2358, listOf(this, locale))
+        public fun locale(locale: String): SystemFormatStyle.DateOffset = SystemFormatStyle.DateOffset(2359, listOf(this, locale))
 /**
          * SwiftUI `SystemFormatStyle.DateOffset.calendar(_:)`
          *
@@ -3314,7 +3354,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public fun calendar(calendar: String): SystemFormatStyle.DateOffset = SystemFormatStyle.DateOffset(2359, listOf(this, calendar))
+        public fun calendar(calendar: String): SystemFormatStyle.DateOffset = SystemFormatStyle.DateOffset(2360, listOf(this, calendar))
     }
 
     /**
@@ -3334,7 +3374,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public constructor(date: Double, maxFieldCount: Int = 2) : this(2360, listOf(date, maxFieldCount))
+        public constructor(date: Double, maxFieldCount: Int = 2) : this(2361, listOf(date, maxFieldCount))
 /**
          * SwiftUI `SystemFormatStyle.DateReference.locale(_:)`
          *
@@ -3343,7 +3383,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public fun locale(locale: String): SystemFormatStyle.DateReference = SystemFormatStyle.DateReference(2361, listOf(this, locale))
+        public fun locale(locale: String): SystemFormatStyle.DateReference = SystemFormatStyle.DateReference(2362, listOf(this, locale))
 /**
          * SwiftUI `SystemFormatStyle.DateReference.calendar(_:)`
          *
@@ -3352,7 +3392,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public fun calendar(calendar: String): SystemFormatStyle.DateReference = SystemFormatStyle.DateReference(2362, listOf(this, calendar))
+        public fun calendar(calendar: String): SystemFormatStyle.DateReference = SystemFormatStyle.DateReference(2363, listOf(this, calendar))
     }
 
     /**
@@ -3372,7 +3412,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public constructor(startingAt: Double, showsHours: Boolean = true, maxFieldCount: Int = 4) : this(2363, listOf(startingAt, showsHours, maxFieldCount))
+        public constructor(startingAt: Double, showsHours: Boolean = true, maxFieldCount: Int = 4) : this(2364, listOf(startingAt, showsHours, maxFieldCount))
 /**
          * SwiftUI `SystemFormatStyle.Stopwatch.locale(_:)`
          *
@@ -3381,7 +3421,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public fun locale(locale: String): SystemFormatStyle.Stopwatch = SystemFormatStyle.Stopwatch(2364, listOf(this, locale))
+        public fun locale(locale: String): SystemFormatStyle.Stopwatch = SystemFormatStyle.Stopwatch(2365, listOf(this, locale))
     }
 
     /**
@@ -3401,7 +3441,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public fun locale(locale: String): SystemFormatStyle.Timer = SystemFormatStyle.Timer(2365, listOf(this, locale))
+        public fun locale(locale: String): SystemFormatStyle.Timer = SystemFormatStyle.Timer(2366, listOf(this, locale))
     }
 
 }
@@ -3424,7 +3464,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val search: TabRole get() = TabRole(2382, emptyList())
+        public val search: TabRole get() = TabRole(2383, emptyList())
 /**
          * SwiftUI `TabRole.prominent`
          *
@@ -3433,7 +3473,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
          */
-        public val prominent: TabRole get() = TabRole(2383, emptyList())
+        public val prominent: TabRole get() = TabRole(2384, emptyList())
     }
 }
 
@@ -3455,7 +3495,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val center: TableColumnAlignment get() = TableColumnAlignment(2392, emptyList())
+        public val center: TableColumnAlignment get() = TableColumnAlignment(2393, emptyList())
 /**
          * SwiftUI `TableColumnAlignment.leading`
          *
@@ -3464,7 +3504,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val leading: TableColumnAlignment get() = TableColumnAlignment(2393, emptyList())
+        public val leading: TableColumnAlignment get() = TableColumnAlignment(2394, emptyList())
 /**
          * SwiftUI `TableColumnAlignment.numeric`
          *
@@ -3473,7 +3513,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val numeric: TableColumnAlignment get() = TableColumnAlignment(2394, emptyList())
+        public val numeric: TableColumnAlignment get() = TableColumnAlignment(2395, emptyList())
 /**
          * SwiftUI `TableColumnAlignment.trailing`
          *
@@ -3482,7 +3522,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val trailing: TableColumnAlignment get() = TableColumnAlignment(2395, emptyList())
+        public val trailing: TableColumnAlignment get() = TableColumnAlignment(2396, emptyList())
 /**
          * SwiftUI `TableColumnAlignment.automatic`
          *
@@ -3491,7 +3531,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val automatic: TableColumnAlignment get() = TableColumnAlignment(2396, emptyList())
+        public val automatic: TableColumnAlignment get() = TableColumnAlignment(2397, emptyList())
     }
 }
 
@@ -3513,7 +3553,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val center: TextAlignment get() = TextAlignment(2437, emptyList())
+        public val center: TextAlignment get() = TextAlignment(2438, emptyList())
 /**
          * SwiftUI `TextAlignment.leading`
          *
@@ -3522,7 +3562,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val leading: TextAlignment get() = TextAlignment(2438, emptyList())
+        public val leading: TextAlignment get() = TextAlignment(2439, emptyList())
 /**
          * SwiftUI `TextAlignment.trailing`
          *
@@ -3531,7 +3571,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val trailing: TextAlignment get() = TextAlignment(2439, emptyList())
+        public val trailing: TextAlignment get() = TextAlignment(2440, emptyList())
     }
 }
 
@@ -3553,7 +3593,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
          */
-        public val characters: TextInputAutocapitalization get() = TextInputAutocapitalization(2444, emptyList())
+        public val characters: TextInputAutocapitalization get() = TextInputAutocapitalization(2445, emptyList())
 /**
          * SwiftUI `TextInputAutocapitalization.never`
          *
@@ -3562,7 +3602,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
          */
-        public val never: TextInputAutocapitalization get() = TextInputAutocapitalization(2445, emptyList())
+        public val never: TextInputAutocapitalization get() = TextInputAutocapitalization(2446, emptyList())
 /**
          * SwiftUI `TextInputAutocapitalization.words`
          *
@@ -3571,7 +3611,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
          */
-        public val words: TextInputAutocapitalization get() = TextInputAutocapitalization(2446, emptyList())
+        public val words: TextInputAutocapitalization get() = TextInputAutocapitalization(2447, emptyList())
 /**
          * SwiftUI `TextInputAutocapitalization.sentences`
          *
@@ -3580,7 +3620,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
          */
-        public val sentences: TextInputAutocapitalization get() = TextInputAutocapitalization(2447, emptyList())
+        public val sentences: TextInputAutocapitalization get() = TextInputAutocapitalization(2448, emptyList())
     }
 }
 
@@ -3602,7 +3642,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val downstream: TextSelectionAffinity get() = TextSelectionAffinity(2462, emptyList())
+        public val downstream: TextSelectionAffinity get() = TextSelectionAffinity(2463, emptyList())
 /**
          * SwiftUI `TextSelectionAffinity.upstream`
          *
@@ -3611,7 +3651,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val upstream: TextSelectionAffinity get() = TextSelectionAffinity(2463, emptyList())
+        public val upstream: TextSelectionAffinity get() = TextSelectionAffinity(2464, emptyList())
 /**
          * SwiftUI `TextSelectionAffinity.automatic`
          *
@@ -3620,7 +3660,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val automatic: TextSelectionAffinity get() = TextSelectionAffinity(2464, emptyList())
+        public val automatic: TextSelectionAffinity get() = TextSelectionAffinity(2465, emptyList())
     }
 }
 
@@ -3641,7 +3681,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
-    public constructor() : this(2469, emptyList())
+    public constructor() : this(2470, emptyList())
 }
 
 /**
@@ -3662,7 +3702,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val sidebarToggle: ToolbarDefaultItemKind get() = ToolbarDefaultItemKind(2477, emptyList())
+        public val sidebarToggle: ToolbarDefaultItemKind get() = ToolbarDefaultItemKind(2478, emptyList())
 /**
          * SwiftUI `ToolbarDefaultItemKind.title`
          *
@@ -3671,7 +3711,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val title: ToolbarDefaultItemKind get() = ToolbarDefaultItemKind(2478, emptyList())
+        public val title: ToolbarDefaultItemKind get() = ToolbarDefaultItemKind(2479, emptyList())
 /**
          * SwiftUI `ToolbarDefaultItemKind.search`
          *
@@ -3680,7 +3720,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val search: ToolbarDefaultItemKind get() = ToolbarDefaultItemKind(2479, emptyList())
+        public val search: ToolbarDefaultItemKind get() = ToolbarDefaultItemKind(2480, emptyList())
     }
 }
 
@@ -3702,7 +3742,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val atScrollEdge: ToolbarMinimizationRestoration get() = ToolbarMinimizationRestoration(2518, emptyList())
+        public val atScrollEdge: ToolbarMinimizationRestoration get() = ToolbarMinimizationRestoration(2519, emptyList())
 /**
          * SwiftUI `ToolbarMinimizationRestoration.automatic`
          *
@@ -3711,7 +3751,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
          */
-        public val automatic: ToolbarMinimizationRestoration get() = ToolbarMinimizationRestoration(2519, emptyList())
+        public val automatic: ToolbarMinimizationRestoration get() = ToolbarMinimizationRestoration(2520, emptyList())
     }
 }
 
@@ -3733,7 +3773,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val inlineLarge: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2539, emptyList())
+        public val inlineLarge: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2540, emptyList())
 /**
          * SwiftUI `ToolbarTitleDisplayMode.large`
          *
@@ -3742,7 +3782,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
          */
-        public val large: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2540, emptyList())
+        public val large: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2541, emptyList())
 /**
          * SwiftUI `ToolbarTitleDisplayMode.inline`
          *
@@ -3751,7 +3791,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val inline: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2541, emptyList())
+        public val inline: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2542, emptyList())
 /**
          * SwiftUI `ToolbarTitleDisplayMode.automatic`
          *
@@ -3760,7 +3800,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val automatic: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2542, emptyList())
+        public val automatic: ToolbarTitleDisplayMode get() = ToolbarTitleDisplayMode(2543, emptyList())
     }
 }
 
@@ -3781,7 +3821,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(hasMotion: Boolean = true) : this(2556, listOf(hasMotion))
+    public constructor(hasMotion: Boolean = true) : this(2557, listOf(hasMotion))
 }
 
 /**
@@ -3802,7 +3842,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val circularEaseIn: UnitCurve get() = UnitCurve(2569, emptyList())
+        public val circularEaseIn: UnitCurve get() = UnitCurve(2570, emptyList())
 /**
          * SwiftUI `UnitCurve.circularEaseOut`
          *
@@ -3811,7 +3851,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val circularEaseOut: UnitCurve get() = UnitCurve(2570, emptyList())
+        public val circularEaseOut: UnitCurve get() = UnitCurve(2571, emptyList())
 /**
          * SwiftUI `UnitCurve.circularEaseInOut`
          *
@@ -3820,7 +3860,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val circularEaseInOut: UnitCurve get() = UnitCurve(2571, emptyList())
+        public val circularEaseInOut: UnitCurve get() = UnitCurve(2572, emptyList())
 /**
          * SwiftUI `UnitCurve.bezier(startControlPoint:endControlPoint:)`
          *
@@ -3829,7 +3869,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public fun bezier(startControlPoint: UnitPoint, endControlPoint: UnitPoint): UnitCurve = UnitCurve(2572, listOf(startControlPoint, endControlPoint))
+        public fun bezier(startControlPoint: UnitPoint, endControlPoint: UnitPoint): UnitCurve = UnitCurve(2573, listOf(startControlPoint, endControlPoint))
 /**
          * SwiftUI `UnitCurve.easeIn`
          *
@@ -3838,7 +3878,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val easeIn: UnitCurve get() = UnitCurve(2573, emptyList())
+        public val easeIn: UnitCurve get() = UnitCurve(2574, emptyList())
 /**
          * SwiftUI `UnitCurve.linear`
          *
@@ -3847,7 +3887,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val linear: UnitCurve get() = UnitCurve(2574, emptyList())
+        public val linear: UnitCurve get() = UnitCurve(2575, emptyList())
 /**
          * SwiftUI `UnitCurve.easeOut`
          *
@@ -3856,7 +3896,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val easeOut: UnitCurve get() = UnitCurve(2575, emptyList())
+        public val easeOut: UnitCurve get() = UnitCurve(2576, emptyList())
 /**
          * SwiftUI `UnitCurve.easeInOut`
          *
@@ -3865,7 +3905,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val easeInOut: UnitCurve get() = UnitCurve(2576, emptyList())
+        public val easeInOut: UnitCurve get() = UnitCurve(2577, emptyList())
 /**
          * SwiftUI `UnitCurve.easeInEaseOut`
          *
@@ -3875,7 +3915,7 @@ import kotlin.native.HiddenFromObjC
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
         @Deprecated("Deprecated in SwiftUI")
-        public val easeInEaseOut: UnitCurve get() = UnitCurve(2568, emptyList())
+        public val easeInEaseOut: UnitCurve get() = UnitCurve(2569, emptyList())
     }
 }
 
@@ -3897,7 +3937,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val top: VerticalEdge get() = VerticalEdge(2604, emptyList())
+        public val top: VerticalEdge get() = VerticalEdge(2605, emptyList())
 /**
          * SwiftUI `VerticalEdge.bottom`
          *
@@ -3906,7 +3946,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val bottom: VerticalEdge get() = VerticalEdge(2605, emptyList())
+        public val bottom: VerticalEdge get() = VerticalEdge(2606, emptyList())
     }
     /**
      * SwiftUI `VerticalEdge.Set`
@@ -3925,7 +3965,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public constructor(e: VerticalEdge) : this(2610, listOf(e))
+        public constructor(e: VerticalEdge) : this(2611, listOf(e))
 /**
          * SwiftUI `VerticalEdge.Set.init(rawValue:)`
          *
@@ -3934,7 +3974,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public constructor(rawValue: Int) : this(2609, listOf(rawValue))
+        public constructor(rawValue: Int) : this(2610, listOf(rawValue))
         public companion object {
 /**
              * SwiftUI `VerticalEdge.Set.all`
@@ -3944,7 +3984,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public val all: VerticalEdge.Set get() = VerticalEdge.Set(2606, emptyList())
+            public val all: VerticalEdge.Set get() = VerticalEdge.Set(2607, emptyList())
 /**
              * SwiftUI `VerticalEdge.Set.top`
              *
@@ -3953,7 +3993,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public val top: VerticalEdge.Set get() = VerticalEdge.Set(2607, emptyList())
+            public val top: VerticalEdge.Set get() = VerticalEdge.Set(2608, emptyList())
 /**
              * SwiftUI `VerticalEdge.Set.bottom`
              *
@@ -3962,7 +4002,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public val bottom: VerticalEdge.Set get() = VerticalEdge.Set(2608, emptyList())
+            public val bottom: VerticalEdge.Set get() = VerticalEdge.Set(2609, emptyList())
         }
     }
 
@@ -3985,7 +4025,7 @@ import kotlin.native.HiddenFromObjC
      * ```
      * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
      */
-    public constructor() : this(2630, emptyList())
+    public constructor() : this(2631, emptyList())
 }
 
 /**
@@ -4006,7 +4046,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val normal: WindowLevel get() = WindowLevel(2640, emptyList())
+        public val normal: WindowLevel get() = WindowLevel(2641, emptyList())
 /**
          * SwiftUI `WindowLevel.desktop`
          *
@@ -4015,7 +4055,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val desktop: WindowLevel get() = WindowLevel(2641, emptyList())
+        public val desktop: WindowLevel get() = WindowLevel(2642, emptyList())
 /**
          * SwiftUI `WindowLevel.floating`
          *
@@ -4024,7 +4064,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val floating: WindowLevel get() = WindowLevel(2642, emptyList())
+        public val floating: WindowLevel get() = WindowLevel(2643, emptyList())
 /**
          * SwiftUI `WindowLevel.automatic`
          *
@@ -4033,7 +4073,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val automatic: WindowLevel get() = WindowLevel(2643, emptyList())
+        public val automatic: WindowLevel get() = WindowLevel(2644, emptyList())
     }
 }
 
@@ -4055,7 +4095,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val onHover: WindowToolbarFullScreenVisibility get() = WindowToolbarFullScreenVisibility(2655, emptyList())
+        public val onHover: WindowToolbarFullScreenVisibility get() = WindowToolbarFullScreenVisibility(2656, emptyList())
 /**
          * SwiftUI `WindowToolbarFullScreenVisibility.visible`
          *
@@ -4064,7 +4104,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val visible: WindowToolbarFullScreenVisibility get() = WindowToolbarFullScreenVisibility(2656, emptyList())
+        public val visible: WindowToolbarFullScreenVisibility get() = WindowToolbarFullScreenVisibility(2657, emptyList())
 /**
          * SwiftUI `WindowToolbarFullScreenVisibility.automatic`
          *
@@ -4073,7 +4113,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
          */
-        public val automatic: WindowToolbarFullScreenVisibility get() = WindowToolbarFullScreenVisibility(2657, emptyList())
+        public val automatic: WindowToolbarFullScreenVisibility get() = WindowToolbarFullScreenVisibility(2658, emptyList())
     }
 }
 

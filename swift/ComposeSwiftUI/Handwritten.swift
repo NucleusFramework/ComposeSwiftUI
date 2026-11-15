@@ -125,7 +125,7 @@ extension ComposeGenerated {
         case 4: return d_CGVector(e)
         case 6: return d_CGAffineTransform(e)
         case 7: return AdvancedValues.decode(e)
-        case 8, 9, 10, 11, 12: return CompletionValues.decode(e)
+        case 8, 9, 10, 11, 12, 13, 14: return CompletionValues.decode(e)
         case 5: return KotlinPathShape(commands: Args(expr: e).list(0).compactMap { ($0 as? NSNumber)?.doubleValue })
         default: return nil
         }
@@ -139,6 +139,7 @@ struct KotlinPathShape: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
         func pt(_ x: Double, _ y: Double) -> CGPoint { CGPoint(x: rect.minX + x * rect.width, y: rect.minY + y * rect.height) }
+        let side = min(rect.width, rect.height)
         var i = 0
         let c = commands
         while i < c.count {
@@ -150,6 +151,20 @@ struct KotlinPathShape: Shape {
             case 4: p.closeSubpath(); i += 1
             case 5: p.addEllipse(in: CGRect(origin: pt(c[i + 1], c[i + 2]), size: CGSize(width: c[i + 3] * rect.width, height: c[i + 4] * rect.height))); i += 5
             case 6: p.addRect(CGRect(origin: pt(c[i + 1], c[i + 2]), size: CGSize(width: c[i + 3] * rect.width, height: c[i + 4] * rect.height))); i += 5
+            case 7:
+                p.addArc(center: pt(c[i + 1], c[i + 2]), radius: c[i + 3] * side, startAngle: .degrees(c[i + 4]),
+                         endAngle: .degrees(c[i + 5]), clockwise: c[i + 6] != 0)
+                i += 7
+            case 8:
+                p.addRelativeArc(center: pt(c[i + 1], c[i + 2]), radius: c[i + 3] * side, startAngle: .degrees(c[i + 4]), delta: .degrees(c[i + 5]))
+                i += 6
+            case 9: p.addArc(tangent1End: pt(c[i + 1], c[i + 2]), tangent2End: pt(c[i + 3], c[i + 4]), radius: c[i + 5] * side); i += 6
+            case 10:
+                let r = CGRect(origin: pt(c[i + 1], c[i + 2]), size: CGSize(width: c[i + 3] * rect.width, height: c[i + 4] * rect.height))
+                let radii = RectangleCornerRadii(topLeading: c[i + 5] * side, bottomLeading: c[i + 6] * side,
+                                                 bottomTrailing: c[i + 7] * side, topTrailing: c[i + 8] * side)
+                p.addRoundedRect(in: r, cornerRadii: radii, style: c[i + 9] == 0 ? .circular : .continuous)
+                i += 10
             default: i = c.count
             }
         }

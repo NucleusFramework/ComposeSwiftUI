@@ -48,6 +48,7 @@ internal object CompletionIds {
     const val TAB_SECTION = 100_059
     const val SEARCH_UNAVAILABLE = 100_060
     const val TABLE_CHILD_ROWS = 100_061
+    const val TEXT_VARIANT = 100_062
 
     const val LINE_HEIGHT = 100_102
     const val ARRANGEMENT_STYLE = 100_103
@@ -67,6 +68,8 @@ internal object CompletionIds {
     const val EXPLICIT_SCHEDULE = 10
     const val IMAGE_PAINT = 11
     const val CUSTOM_DETENT = 12
+    const val SHAPE_OPERATION = 13
+    const val GRADIENT_COLOR_SPACE = 14
 }
 
 private fun textItems(block: () -> List<String>) = object : TextItemsProvider {
@@ -489,3 +492,88 @@ public fun customPresentationDetent(index: Int, height: (maxDetentValue: Double)
     PresentationDetent(CompletionIds.CUSTOM_DETENT, listOf(index.coerceIn(0, 3), object : AlignmentGuideProvider {
         override fun compute(width: Double, height: Double): Double = height(width) ?: Double.NaN
     }))
+
+// ---- shape operations -----------------------------------------------------------------------------
+
+/** A [Shape] derived from another one by a SwiftUI shape method (`offset`, `rotation`, `union`…). */
+@HiddenFromObjC
+public class ShapeOperation internal constructor(op: Int, args: List<Any?>) :
+    SExpr(CompletionIds.SHAPE_OPERATION, listOf(op) + args), Shape
+
+/** SwiftUI `InsettableShape.inset(by:)`: still insettable, so `strokeBorder` works on it. */
+@HiddenFromObjC
+public class InsetShapeOperation internal constructor(base: InsettableShape, amount: Double) :
+    SExpr(CompletionIds.SHAPE_OPERATION, listOf(12, base, amount)), InsettableShape
+
+/** SwiftUI `Shape.offset(x:y:)`. */
+public fun Shape.offset(x: Double = 0.0, y: Double = 0.0): Shape = ShapeOperation(0, listOf(this, x, y))
+
+/** SwiftUI `Shape.offset(_:)` with a `CGSize`. */
+public fun Shape.offset(offset: CGSize): Shape = offset(offset.width, offset.height)
+
+/** SwiftUI `Shape.offset(_:)` with a `CGPoint`. */
+public fun Shape.offset(offset: CGPoint): Shape = offset(offset.x, offset.y)
+
+/** SwiftUI `Shape.rotation(_:anchor:)`. */
+public fun Shape.rotation(angle: Angle, anchor: UnitPoint = UnitPoint.center): Shape = ShapeOperation(1, listOf(this, angle, anchor))
+
+/** SwiftUI `Shape.scale(x:y:anchor:)`. */
+public fun Shape.scale(x: Double = 1.0, y: Double = 1.0, anchor: UnitPoint = UnitPoint.center): Shape =
+    ShapeOperation(2, listOf(this, x, y, anchor))
+
+/** SwiftUI `Shape.scale(_:anchor:)`. */
+public fun Shape.scale(scale: Double, anchor: UnitPoint = UnitPoint.center): Shape = scale(scale, scale, anchor)
+
+/** SwiftUI `Shape.trim(from:to:)`. */
+public fun Shape.trim(from: Double = 0.0, to: Double = 1.0): Shape = ShapeOperation(3, listOf(this, from, to))
+
+/** SwiftUI `Shape.transform(_:)`. */
+public fun Shape.transform(transform: CGAffineTransform): Shape = ShapeOperation(4, listOf(this, transform))
+
+/** SwiftUI `Shape.size(width:height:anchor:)` (the anchor needs iOS 18 / macOS 15; earlier, the top leading corner). */
+public fun Shape.size(width: Double, height: Double, anchor: UnitPoint = UnitPoint.topLeading): Shape =
+    ShapeOperation(5, listOf(this, width, height, anchor))
+
+/** SwiftUI `Shape.size(_:anchor:)`. */
+public fun Shape.size(size: CGSize, anchor: UnitPoint = UnitPoint.topLeading): Shape = size(size.width, size.height, anchor)
+
+/** SwiftUI `Shape.union(_:eoFill:)` (iOS 17, macOS 14). */
+public fun Shape.union(other: Shape, eoFill: Boolean = false): Shape = ShapeOperation(6, listOf(this, other, eoFill))
+
+/** SwiftUI `Shape.intersection(_:eoFill:)` (iOS 17, macOS 14). */
+public fun Shape.intersection(other: Shape, eoFill: Boolean = false): Shape = ShapeOperation(7, listOf(this, other, eoFill))
+
+/** SwiftUI `Shape.subtracting(_:eoFill:)` (iOS 17, macOS 14). */
+public fun Shape.subtracting(other: Shape, eoFill: Boolean = false): Shape = ShapeOperation(8, listOf(this, other, eoFill))
+
+/** SwiftUI `Shape.symmetricDifference(_:eoFill:)` (iOS 17, macOS 14). */
+public fun Shape.symmetricDifference(other: Shape, eoFill: Boolean = false): Shape = ShapeOperation(9, listOf(this, other, eoFill))
+
+/** SwiftUI `Shape.lineIntersection(_:eoFill:)` (iOS 17, macOS 14). */
+public fun Shape.lineIntersection(other: Shape, eoFill: Boolean = false): Shape = ShapeOperation(10, listOf(this, other, eoFill))
+
+/** SwiftUI `Shape.lineSubtraction(_:eoFill:)` (iOS 17, macOS 14). */
+public fun Shape.lineSubtraction(other: Shape, eoFill: Boolean = false): Shape = ShapeOperation(11, listOf(this, other, eoFill))
+
+/** SwiftUI `InsettableShape.inset(by:)`. */
+public fun InsettableShape.inset(by: Double): InsettableShape = InsetShapeOperation(this, by)
+
+/** SwiftUI `Shape.stroke(lineWidth:)` as a shape (the outline of this shape). */
+public fun Shape.strokedShape(lineWidth: Double = 1.0): Shape = ShapeOperation(13, listOf(this, lineWidth))
+
+/** SwiftUI `Shape.stroke(style:)` as a shape (the outline of this shape). */
+public fun Shape.strokedShape(style: StrokeStyle): Shape = ShapeOperation(14, listOf(this, style))
+
+/** SwiftUI `Gradient.colorSpace(_:)`: the gradient interpolated in [space]. */
+public fun Gradient.colorSpace(space: Gradient.ColorSpace): AnyGradient =
+    AnyGradient(CompletionIds.GRADIENT_COLOR_SPACE, listOf(this, space))
+
+/**
+ * SwiftUI `Text(_:).textVariant(_:)` (iOS 18, macOS 15): the text picks its variant from [variant], e.g.
+ * `FixedTextVariant.sizeDependent` shortens a date to fit.
+ */
+@HiddenFromObjC
+@Composable
+public fun Text(text: String, variant: TextVariantPreference, modifier: Modifier = Modifier) {
+    SwiftView(CompletionIds.TEXT_VARIANT, listOf(text, variant), modifier)
+}

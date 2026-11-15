@@ -10,6 +10,14 @@ extract() { # platform sdk target
     xcrun swift-symbolgraph-extract -module-name $m -target "$3" -sdk "$SDK" -output-dir "$OUT/$1" \
       -minimum-access-level public -skip-synthesized-members
   done
+  # SwiftUI overlays of other frameworks (MapKit, StoreKit…) and Charts: classified for the coverage report
+  mkdir -p "$OUT/overlays/$1"
+  local OVERLAYS; OVERLAYS=$(ls "$SDK/System/Library/Frameworks" | sed -n 's/^\(_.*_SwiftUI\)\.framework$/\1/p')
+  for m in $OVERLAYS Charts; do
+    [ -d "$SDK/System/Library/Frameworks/$m.framework" ] || continue
+    xcrun swift-symbolgraph-extract -module-name "$m" -target "$3" -sdk "$SDK" -output-dir "$OUT/overlays/$1" \
+      -minimum-access-level public -skip-synthesized-members 2>/dev/null || true
+  done
 }
 extract macos macosx arm64-apple-macos27.0
 extract ios iphonesimulator arm64-apple-ios27.0-simulator

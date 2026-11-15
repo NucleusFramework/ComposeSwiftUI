@@ -356,6 +356,58 @@ public class PathBuilder internal constructor() {
     public fun close() { commands += 4.0 }
     public fun ellipse(x: Double, y: Double, width: Double, height: Double) { commands += listOf(5.0, x, y, width, height) }
     public fun rect(x: Double, y: Double, width: Double, height: Double) { commands += listOf(6.0, x, y, width, height) }
+
+    /**
+     * SwiftUI `Path.addArc(center:radius:startAngle:endAngle:clockwise:)`. Angles are in degrees; [radius] is a
+     * fraction of the shorter side of the frame.
+     */
+    public fun arc(centerX: Double, centerY: Double, radius: Double, startDegrees: Double, endDegrees: Double, clockwise: Boolean) {
+        commands += listOf(7.0, centerX, centerY, radius, startDegrees, endDegrees, if (clockwise) 1.0 else 0.0)
+    }
+
+    /** SwiftUI `Path.addRelativeArc(center:radius:startAngle:delta:)` (degrees, radius as in [arc]). */
+    public fun relativeArc(centerX: Double, centerY: Double, radius: Double, startDegrees: Double, deltaDegrees: Double) {
+        commands += listOf(8.0, centerX, centerY, radius, startDegrees, deltaDegrees)
+    }
+
+    /** SwiftUI `Path.addArc(tangent1End:tangent2End:radius:)` (radius as in [arc]). */
+    public fun tangentArc(x1: Double, y1: Double, x2: Double, y2: Double, radius: Double) {
+        commands += listOf(9.0, x1, y1, x2, y2, radius)
+    }
+
+    /**
+     * SwiftUI `Path.addRoundedRect(in:cornerSize:style:)` with equal corners ([cornerRadius] as a fraction of the
+     * shorter side of the frame).
+     */
+    public fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double, style: RoundedCornerStyle = RoundedCornerStyle.continuous) {
+        commands += listOf(10.0, x, y, width, height, cornerRadius, cornerRadius, cornerRadius, cornerRadius, styleCode(style))
+    }
+
+    /** SwiftUI `Path.addRoundedRect(in:cornerRadii:style:)` (radii as in [roundedRect]). */
+    public fun roundedRect(
+        x: Double, y: Double, width: Double, height: Double,
+        topLeading: Double, bottomLeading: Double, bottomTrailing: Double, topTrailing: Double,
+        style: RoundedCornerStyle = RoundedCornerStyle.continuous,
+    ) {
+        commands += listOf(10.0, x, y, width, height, topLeading, bottomLeading, bottomTrailing, topTrailing, styleCode(style))
+    }
+
+    /** SwiftUI `Path.addLines(_:)`: a polyline through [points] (x, y pairs). */
+    public fun lines(vararg points: Pair<Double, Double>) {
+        points.forEachIndexed { i, (x, y) -> if (i == 0) moveTo(x, y) else lineTo(x, y) }
+    }
+
+    /** SwiftUI `Path.addRects(_:)`. */
+    public fun rects(vararg rects: List<Double>) {
+        rects.forEach { (x, y, w, h) -> rect(x, y, w, h) }
+    }
+
+    /** SwiftUI `Path.addPath(_:)`: appends the commands of another path. */
+    public fun path(build: PathBuilder.() -> Unit) {
+        commands += PathBuilder().apply(build).commands
+    }
+
+    private fun styleCode(style: RoundedCornerStyle) = if (style == RoundedCornerStyle.circular) 0.0 else 1.0
 }
 
 /**
