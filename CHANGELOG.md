@@ -29,6 +29,12 @@
   (a Kotlin `DrawScope`), `Table` with columns and selection (iOS 17.4+, macOS 14.4+), `OutlineGroup`,
   `Modifier.onKeyPress`, `scrollTransition`, `visualEffect`, `alignmentGuide`, `navigationDestination(item:)`, and
   custom button, toggle and label styles written in Kotlin (`StyleLabel`, `StyleIcon`).
+- `List(selectedKeys, onSelectedKeysChange)` (multiple selection), `searchable` with tokens, `NumberField`
+  (`TextField(value:format:)`), `focused(value, focusedValue)`, `searchFocused`, `accessibilityFocused`,
+  `glassEffectID`/`glassEffectUnion`, `focusScope`, `onGeometryChange`, `onScrollGeometryChange`,
+  `onScrollTargetVisibilityChange`, `fileImporter`, `fileExporter` (text), `PasteButton`, `draggable`/`dropDestination`
+  (text), `phaseAnimator`, `symbolEffect`, `MeshGradient`, `keyboardType`, `textContentType`, `MultiDatePicker`, and
+  `Image(uiImage)` / `Image(nsImage)` in the platform source sets.
 - `Modifier.environment(name = value)` for the 60 settable `EnvironmentValues` (`colorScheme`, `locale`, `font`,
   `lineLimit`, `controlSize`…), SwiftUI's `.environment(\.name, value)`.
 - Optional closures (`Stepper(onIncrement, onDecrement)`, `onDeleteCommand`, `onExitCommand`, `onMoveCommand`, the

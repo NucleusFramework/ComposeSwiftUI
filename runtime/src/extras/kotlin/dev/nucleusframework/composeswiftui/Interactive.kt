@@ -36,6 +36,30 @@ internal object InteractiveIds {
     const val BUTTON_STYLE = 100_025
     const val TOGGLE_STYLE = 100_026
     const val LABEL_STYLE = 100_027
+
+    const val MULTI_SELECTION_LIST = 100_030
+    const val NUMBER_FIELD = 100_031
+    const val PASTE_BUTTON = 100_032
+    const val MESH_GRADIENT = 100_033
+    const val MULTI_DATE_PICKER = 100_034
+
+    const val SEARCH_TOKENS = 100_028
+    const val SEARCH_FOCUSED = 100_029
+    const val ACCESSIBILITY_FOCUSED = 100_030
+    const val GLASS_EFFECT_ID = 100_031
+    const val GLASS_EFFECT_UNION = 100_032
+    const val FOCUS_SCOPE = 100_033
+    const val GEOMETRY_CHANGE = 100_034
+    const val SCROLL_GEOMETRY_CHANGE = 100_035
+    const val SCROLL_TARGET_VISIBILITY = 100_036
+    const val FILE_IMPORTER = 100_037
+    const val FILE_EXPORTER = 100_038
+    const val DROP_DESTINATION = 100_039
+    const val DRAGGABLE = 100_040
+    const val PHASE_ANIMATOR = 100_041
+    const val SYMBOL_EFFECT = 100_042
+    const val KEYBOARD_TYPE = 100_043
+    const val TEXT_CONTENT_TYPE = 100_044
 }
 
 // ---- AsyncImage --------------------------------------------------------------------------------
@@ -402,3 +426,310 @@ public fun Modifier.toggleStyle(body: @Composable (isOn: Boolean) -> Unit): Modi
 @HiddenFromObjC
 public fun Modifier.labelStyle(body: @Composable () -> Unit): Modifier =
     element(InteractiveIds.LABEL_STYLE, slotContent(body))
+
+// ---- selection, search tokens, number fields ---------------------------------------------------
+
+/**
+ * SwiftUI `List(selection: Binding<Set<…>>)`: rows marked `Modifier.tag(key)` can be selected together (on iOS, in
+ * edit mode: add an `EditButton`). Single selection is `List(selection, onSelectionChange)`.
+ */
+@HiddenFromObjC
+@Composable
+public fun List(
+    selectedKeys: Set<Any>,
+    onSelectedKeysChange: (Set<Any>) -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(
+        InteractiveIds.MULTI_SELECTION_LIST,
+        listOf(selectedKeys.toList(), SValueCallback { onSelectedKeysChange((it as List<*>).filterNotNull().toSet()) }),
+        modifier,
+        content = content,
+    )
+}
+
+/**
+ * SwiftUI `searchable(text:tokens:prompt:token:)` (iOS, macOS): search text plus [tokens] shown as chips by [token];
+ * the user removes a token with backspace, which calls [onTokensChange].
+ */
+@HiddenFromObjC
+public fun <T> Modifier.searchable(
+    text: String,
+    onTextChange: (String) -> Unit,
+    tokens: List<T>,
+    onTokensChange: (List<T>) -> Unit,
+    key: (T) -> Any,
+    prompt: String? = null,
+    token: @Composable (T) -> Unit,
+): Modifier = element(
+    InteractiveIds.SEARCH_TOKENS,
+    text,
+    SValueCallback { onTextChange(it as String) },
+    tokens.size,
+    SValueCallback { kept -> onTokensChange((kept as List<*>).map { tokens[(it as Number).toInt()] }) },
+    prompt,
+    slotContent {
+        for (t in tokens) key(key(t)) { SwiftView(InteractiveIds.GROUP, emptyList(), Modifier) { token(t) } }
+    },
+)
+
+/** Number style of a [NumberField]. */
+public sealed class NumberFormat(internal val code: String?) {
+    public object Number : NumberFormat(null)
+    public object Percent : NumberFormat(null)
+    /** A currency amount, [currencyCode] being an ISO 4217 code such as "EUR". */
+    public class Currency(currencyCode: String) : NumberFormat(currencyCode)
+
+    internal val kind: Int get() = when (this) { Number -> 0; Percent -> 1; is Currency -> 2 }
+}
+
+/**
+ * SwiftUI `TextField(_:value:format:prompt:)` for a number: SwiftUI parses and formats the text with [format] and
+ * calls [onValueChange] when the user commits a valid value.
+ */
+@HiddenFromObjC
+@Composable
+public fun NumberField(
+    title: String,
+    value: Double,
+    onValueChange: (Double) -> Unit,
+    modifier: Modifier = Modifier,
+    format: NumberFormat = NumberFormat.Number,
+    prompt: String? = null,
+) {
+    SwiftView(
+        InteractiveIds.NUMBER_FIELD,
+        listOf(title, value, SValueCallback { onValueChange((it as Number).toDouble()) }, format.kind, format.code, prompt),
+        modifier,
+    )
+}
+
+// ---- focus -------------------------------------------------------------------------------------
+
+/**
+ * SwiftUI `focused(_:equals:)`: this field is focused while [focusedValue] equals [value]; focusing it calls
+ * [onFocusChange] with [value], leaving it with null.
+ */
+@HiddenFromObjC
+public fun Modifier.focused(value: Any, focusedValue: Any?, onFocusChange: (Any?) -> Unit): Modifier =
+    focused(isFocused = focusedValue == value, onFocusChange = { focused ->
+        if (focused) onFocusChange(value) else if (focusedValue == value) onFocusChange(null)
+    })
+
+/** SwiftUI `searchFocused(_:)` (iOS 18, macOS 15): focus of the search field of the enclosing `searchable`. */
+@HiddenFromObjC
+public fun Modifier.searchFocused(isFocused: Boolean, onFocusChange: (Boolean) -> Unit): Modifier =
+    element(InteractiveIds.SEARCH_FOCUSED, isFocused, SValueCallback { onFocusChange(it as Boolean) })
+
+/** SwiftUI `accessibilityFocused(_:)`: VoiceOver focus of this view. */
+@HiddenFromObjC
+public fun Modifier.accessibilityFocused(isFocused: Boolean, onFocusChange: (Boolean) -> Unit): Modifier =
+    element(InteractiveIds.ACCESSIBILITY_FOCUSED, isFocused, SValueCallback { onFocusChange(it as Boolean) })
+
+// ---- namespaces: Liquid Glass, focus scopes -----------------------------------------------------
+
+/** SwiftUI `glassEffectID(_:in:)` (iOS 26): glass shapes with an id morph into each other inside a `GlassEffectContainer`. */
+@HiddenFromObjC
+public fun Modifier.glassEffectID(id: Any, namespace: NamespaceId): Modifier =
+    element(InteractiveIds.GLASS_EFFECT_ID, id, namespace.id)
+
+/** SwiftUI `glassEffectUnion(id:namespace:)` (iOS 26): views with the same id share one glass shape. */
+@HiddenFromObjC
+public fun Modifier.glassEffectUnion(id: Any, namespace: NamespaceId): Modifier =
+    element(InteractiveIds.GLASS_EFFECT_UNION, id, namespace.id)
+
+/** SwiftUI `focusScope(_:)` (macOS, tvOS, watchOS): limits default focus to this view, for `prefersDefaultFocus`. */
+@HiddenFromObjC
+public fun Modifier.focusScope(namespace: NamespaceId): Modifier = element(InteractiveIds.FOCUS_SCOPE, namespace.id)
+
+// ---- geometry ----------------------------------------------------------------------------------
+
+/** SwiftUI `onGeometryChange(for:of:action:)`: [action] receives the view frame in the global coordinate space. */
+@HiddenFromObjC
+public fun Modifier.onGeometryChange(action: (frame: CGRect) -> Unit): Modifier =
+    element(InteractiveIds.GEOMETRY_CHANGE, SValueCallback { (it as? SExpr)?.let { e -> action(cgValue(e) as CGRect) } })
+
+/** Scroll position of a scroll view, for [onScrollGeometryChange]. */
+public data class ScrollMetrics(
+    val contentOffset: CGPoint,
+    val contentSize: CGSize,
+    val containerSize: CGSize,
+)
+
+/** SwiftUI `onScrollGeometryChange(for:of:action:)` (iOS 18, macOS 15): offset and sizes while scrolling. */
+@HiddenFromObjC
+public fun Modifier.onScrollGeometryChange(action: (ScrollMetrics) -> Unit): Modifier =
+    element(InteractiveIds.SCROLL_GEOMETRY_CHANGE, SValueCallback {
+        val d = (it as List<*>).map { v -> (v as Number).toDouble() }
+        action(ScrollMetrics(CGPoint(d[0], d[1]), CGSize(d[2], d[3]), CGSize(d[4], d[5])))
+    })
+
+/**
+ * SwiftUI `onScrollTargetVisibilityChange(idType:threshold:_:)` (iOS 18, macOS 15): the ids (`Modifier.id`) of the
+ * scroll view's children that are at least [threshold] visible.
+ */
+@HiddenFromObjC
+public fun Modifier.onScrollTargetVisibilityChange(threshold: Double = 0.5, action: (List<Any>) -> Unit): Modifier =
+    element(InteractiveIds.SCROLL_TARGET_VISIBILITY, threshold, SValueCallback { action((it as List<*>).filterNotNull()) })
+
+// ---- files, pasteboard, drag and drop -----------------------------------------------------------
+
+/**
+ * SwiftUI `fileImporter(isPresented:allowedContentTypes:allowsMultipleSelection:onCompletion:)` (iOS, macOS):
+ * [onCompletion] receives the picked file URLs, which are security-scoped (start accessing them before reading).
+ */
+@HiddenFromObjC
+public fun Modifier.fileImporter(
+    isPresented: Boolean,
+    onIsPresentedChange: (Boolean) -> Unit,
+    allowedContentTypes: List<String>,
+    allowsMultipleSelection: Boolean = false,
+    onFailure: (message: String) -> Unit = {},
+    onCompletion: (urls: List<String>) -> Unit,
+): Modifier = element(
+    InteractiveIds.FILE_IMPORTER,
+    isPresented,
+    SValueCallback { onIsPresentedChange(it as Boolean) },
+    allowedContentTypes,
+    allowsMultipleSelection,
+    SValueCallback { onCompletion((it as List<*>).map { u -> u as String }) },
+    SValueCallback { onFailure(it as String) },
+)
+
+/** SwiftUI `fileExporter(isPresented:document:contentType:defaultFilename:onCompletion:)` for a text file (iOS, macOS). */
+@HiddenFromObjC
+public fun Modifier.fileExporter(
+    isPresented: Boolean,
+    onIsPresentedChange: (Boolean) -> Unit,
+    text: String,
+    contentType: String = "public.plain-text",
+    defaultFilename: String? = null,
+    onFailure: (message: String) -> Unit = {},
+    onCompletion: (url: String) -> Unit = {},
+): Modifier = element(
+    InteractiveIds.FILE_EXPORTER,
+    isPresented,
+    SValueCallback { onIsPresentedChange(it as Boolean) },
+    text,
+    contentType,
+    defaultFilename,
+    SValueCallback { onCompletion(it as String) },
+    SValueCallback { onFailure(it as String) },
+)
+
+/** SwiftUI `PasteButton(payloadType: String.self)` (iOS, macOS): pastes the pasteboard's text items. */
+@HiddenFromObjC
+@Composable
+public fun PasteButton(modifier: Modifier = Modifier, onPaste: (List<String>) -> Unit) {
+    SwiftView(InteractiveIds.PASTE_BUTTON, listOf(SValueCallback { onPaste((it as List<*>).map { s -> s as String }) }), modifier)
+}
+
+/** SwiftUI `draggable(_:)` with a text payload (iOS, macOS). */
+@HiddenFromObjC
+public fun Modifier.draggable(text: String): Modifier = element(InteractiveIds.DRAGGABLE, text)
+
+/**
+ * SwiftUI `dropDestination(for: String.self, action:isTargeted:)` (iOS, macOS): [onDrop] receives the dropped text
+ * items and the drop location, and returns whether it accepted them.
+ */
+@HiddenFromObjC
+public fun Modifier.dropDestination(
+    isTargeted: (Boolean) -> Unit = {},
+    onDrop: (items: List<String>, location: CGPoint) -> Boolean,
+): Modifier = element(
+    InteractiveIds.DROP_DESTINATION,
+    object : DropHandler {
+        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = onDrop(items, CGPoint(x, y))
+    },
+    SValueCallback { isTargeted(it as Boolean) },
+)
+
+// ---- animations and symbols --------------------------------------------------------------------
+
+/**
+ * SwiftUI `phaseAnimator(_:trigger:content:animation:)`: the view goes through [phases] in order, animated with
+ * [animation]; it loops while [trigger] is null, and runs once each time [trigger] changes otherwise.
+ */
+@HiddenFromObjC
+public fun Modifier.phaseAnimator(phases: List<VisualEffects>, trigger: Any? = null, animation: Animation? = null): Modifier =
+    element(InteractiveIds.PHASE_ANIMATOR, phases.map { it.toList() }, trigger, animation)
+
+/** SF Symbol animations for [symbolEffect]. */
+public enum class SymbolEffectKind { Bounce, Pulse, VariableColor, Scale, Appear, Disappear, Wiggle, Rotate, Breathe }
+
+/** SwiftUI `symbolEffect(_:options:isActive:)`: a continuous symbol animation while [isActive]. */
+@HiddenFromObjC
+public fun Modifier.symbolEffect(effect: SymbolEffectKind, isActive: Boolean = true): Modifier =
+    element(InteractiveIds.SYMBOL_EFFECT, effect.ordinal, isActive, null, false)
+
+/** SwiftUI `symbolEffect(_:options:value:)`: plays [effect] once each time [value] changes. */
+@HiddenFromObjC
+public fun Modifier.symbolEffect(effect: SymbolEffectKind, value: Any): Modifier =
+    element(InteractiveIds.SYMBOL_EFFECT, effect.ordinal, true, value, true)
+
+/** A mesh of colors (SwiftUI `MeshGradient`, iOS 18): [points] are `x, y` pairs in unit space, row by row. */
+@HiddenFromObjC
+@Composable
+public fun MeshGradient(
+    width: Int,
+    height: Int,
+    points: List<Double>,
+    colors: List<Color>,
+    modifier: Modifier = Modifier,
+    smoothsColors: Boolean = true,
+) {
+    SwiftView(InteractiveIds.MESH_GRADIENT, listOf(width, height, points, colors, smoothsColors), modifier)
+}
+
+// ---- keyboard and text input --------------------------------------------------------------------
+
+/** UIKit keyboards for [keyboardType] (iOS, tvOS). */
+public enum class KeyboardType {
+    Default, AsciiCapable, NumbersAndPunctuation, Url, NumberPad, PhonePad, NamePhonePad, EmailAddress, DecimalPad,
+    Twitter, WebSearch, AsciiCapableNumberPad,
+}
+
+/** SwiftUI `keyboardType(_:)` (iOS, tvOS; ignored elsewhere). */
+@HiddenFromObjC
+public fun Modifier.keyboardType(type: KeyboardType): Modifier = element(InteractiveIds.KEYBOARD_TYPE, type.ordinal)
+
+/** Semantic content of a text field, for [textContentType] (AutoFill, keyboard suggestions). */
+public enum class TextContentType {
+    Username, Password, NewPassword, OneTimeCode, EmailAddress, TelephoneNumber, Name, GivenName, FamilyName,
+    FullStreetAddress, PostalCode, AddressCity, Url, CreditCardNumber,
+}
+
+/** SwiftUI `textContentType(_:)` (iOS, tvOS, macOS; macOS knows username, password and one-time code). */
+@HiddenFromObjC
+public fun Modifier.textContentType(type: TextContentType): Modifier = element(InteractiveIds.TEXT_CONTENT_TYPE, type.ordinal)
+
+// ---- MultiDatePicker ---------------------------------------------------------------------------
+
+/** A calendar day, for [MultiDatePicker]. */
+public data class Day(val year: Int, val month: Int, val day: Int)
+
+/** SwiftUI `MultiDatePicker(_:selection:)` (iOS; nothing elsewhere): pick several days. */
+@HiddenFromObjC
+@Composable
+public fun MultiDatePicker(
+    title: String,
+    selection: Set<Day>,
+    onSelectionChange: (Set<Day>) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(
+        InteractiveIds.MULTI_DATE_PICKER,
+        listOf(
+            title,
+            selection.map { listOf(it.year, it.month, it.day) },
+            SValueCallback { days ->
+                onSelectionChange((days as List<*>).map { d ->
+                    val c = (d as List<*>).map { (it as Number).toInt() }
+                    Day(c[0], c[1], c[2])
+                }.toSet())
+            },
+        ),
+        modifier,
+    )
+}

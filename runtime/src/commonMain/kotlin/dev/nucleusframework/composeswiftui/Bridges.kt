@@ -80,6 +80,8 @@ internal object NativeViewKinds {
     const val UI_VIEW = 100_011
     const val NS_VIEW_CONTROLLER = 100_012
     const val NS_VIEW = 100_013
+    const val UI_IMAGE = 100_015
+    const val NS_IMAGE = 100_016
 }
 
 // ---- Kotlin code that Swift calls synchronously (Interactive.kt) -----------------------------------
@@ -110,4 +112,9 @@ interface EffectsProvider {
 /** `alignmentGuide` value computed in Kotlin from the view size. */
 interface AlignmentGuideProvider {
     fun compute(width: Double, height: Double): Double
+}
+
+/** `dropDestination` handler: returns true when the dropped text items are accepted. */
+interface DropHandler {
+    fun onDrop(items: List<String>, x: Double, y: Double): Boolean
 }

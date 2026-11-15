@@ -1,4 +1,10 @@
 import SwiftUI
+import UniformTypeIdentifiers
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 // Renderers of Interactive.kt: views whose content depends on values only SwiftUI has (load phases, scroll proxies,
 // timeline dates, key presses, drawing contexts, table rows, style states). View kinds and modifier ids 100_020….
@@ -372,6 +378,361 @@ private func effectValues(_ list: [NSNumber]) -> [Double] { list.map(\.doubleVal
         }
         ComposeRegistry.modifiers[100_027] = { v, a, m in
             AnyView(v.labelStyle(KotlinLabelStyle(body: a.slotModel(0))))
+        }
+        registerSelectionAndInput()
+        registerEffectsAndFiles()
+    }
+}
+
+// MARK: - Selection, search tokens, focus, number fields
+
+private struct TokenRef: Identifiable {
+    let id: Int
+}
+
+private func kotlinKeys(_ keys: [AnyHashable]) -> NSArray {
+    keys.map { ($0.base as? KHashable)?.object ?? NSNull() } as NSArray
+}
+
+private func swiftKeys(_ list: [Any]) -> Set<AnyHashable> {
+    Set(list.map { AnyHashable(KHashable($0 as? NSObject ?? NSNull())) })
+}
+
+private struct SearchFocusBridge: ViewModifier {
+    let isFocused: Bool
+    let onChange: (Bool) -> Void
+    @FocusState private var focused: Bool
+
+    func body(content: Content) -> some View {
+        #if os(iOS) || os(macOS)
+        if #available(iOS 18.0, macOS 15.0, *) {
+            content
+                .searchFocused($focused)
+                .onAppear { focused = isFocused }
+                .onChange(of: isFocused) { _, value in focused = value }
+                .onChange(of: focused) { _, value in if value != isFocused { onChange(value) } }
+        } else {
+            content
+        }
+        #else
+        content
+        #endif
+    }
+}
+
+private struct AccessibilityFocusBridge: ViewModifier {
+    let isFocused: Bool
+    let onChange: (Bool) -> Void
+    @AccessibilityFocusState private var focused: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityFocused($focused)
+            .onAppear { focused = isFocused }
+            .onChange(of: isFocused) { _, value in focused = value }
+            .onChange(of: focused) { _, value in if value != isFocused { onChange(value) } }
+    }
+}
+
+/// Glass ids must be Sendable; Kotlin keys are only read on the main actor.
+private struct GlassID: Hashable, @unchecked Sendable {
+    let value: KHashable
+}
+
+private struct NamespacedModifier: ViewModifier {
+    enum Kind { case glassID, glassUnion, focusScope }
+    let kind: Kind
+    let id: KHashable
+    let namespace: Int64
+    @Environment(\.composeNamespaces) private var namespaces
+
+    func body(content: Content) -> some View {
+        if let ns = namespaces[namespace] {
+            switch kind {
+            case .glassID, .glassUnion:
+                if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+                    if kind == .glassID {
+                        content.glassEffectID(GlassID(value: id), in: ns)
+                    } else {
+                        content.glassEffectUnion(id: GlassID(value: id), namespace: ns)
+                    }
+                } else {
+                    content
+                }
+            case .focusScope:
+                #if os(iOS)
+                content
+                #else
+                content.focusScope(ns)
+                #endif
+            }
+        } else {
+            content
+        }
+    }
+}
+
+extension InteractiveRenderers {
+    static func registerSelectionAndInput() {
+        ComposeRegistry.views[100_030] = { m in
+            let report = m.args.callback(1, box: { (keys: [AnyHashable]) -> Any? in kotlinKeys(keys) })
+            let selection = Binding<Set<AnyHashable>>(get: { swiftKeys(m.args.list(0)) }, set: { report(Array($0)) })
+            #if os(watchOS)
+            _ = selection
+            return ModChain.apply(List { ChildrenView(m) }, m, 0)
+            #else
+            return ModChain.apply(List(selection: selection) { ChildrenView(m) }, m, 0)
+            #endif
+        }
+        ComposeRegistry.views[100_031] = { m in
+            let a = m.args
+            let report = a.callback(2, box: KBox.double)
+            let value = Binding<Double>(get: { m.args.double(1) }, set: { report($0) })
+            let title = a.string(0)
+            let prompt = a.stringOpt(5).map { Text($0) }
+            switch a.int(3) {
+            case 1: return ModChain.apply(TextField(title, value: value, format: .percent, prompt: prompt), m, 0)
+            case 2: return ModChain.apply(TextField(title, value: value, format: .currency(code: a.stringOpt(4) ?? "USD"), prompt: prompt), m, 0)
+            default: return ModChain.apply(TextField(title, value: value, format: .number, prompt: prompt), m, 0)
+            }
+        }
+        #if os(iOS)
+        ComposeRegistry.views[100_034] = { m in
+            let calendar = Calendar.current
+            let report = m.args.callback(2, box: { (days: [[Int]]) -> Any? in
+                days.map { $0.map { KotlinInt(value: Int32($0)) } as NSArray } as NSArray
+            })
+            let selection = Binding<Set<DateComponents>>(
+                get: {
+                    Set(m.args.list(1).compactMap { raw -> DateComponents? in
+                        let c = (raw as? [Any] ?? []).compactMap { ($0 as? NSNumber)?.intValue }
+                        guard c.count == 3, let date = calendar.date(from: DateComponents(year: c[0], month: c[1], day: c[2])) else { return nil }
+                        return calendar.dateComponents([.calendar, .era, .year, .month, .day], from: date)
+                    })
+                },
+                set: { set in
+                    report(set.compactMap { d in d.year.flatMap { y in d.month.flatMap { mo in d.day.map { [y, mo, $0] } } } })
+                }
+            )
+            return ModChain.apply(MultiDatePicker(m.args.string(0), selection: selection), m, 0)
+        }
+        #else
+        ComposeRegistry.views[100_034] = { _ in AnyView(EmptyView()) }
+        #endif
+        #if os(iOS) || os(macOS)
+        ComposeRegistry.views[100_032] = { m in
+            let report = m.args.callback(0, box: { (items: [String]) -> Any? in items as NSArray })
+            return ModChain.apply(PasteButton(payloadType: String.self) { items in
+                Task { @MainActor in report(items) }
+            }, m, 0)
+        }
+        ComposeRegistry.modifiers[100_028] = { v, a, _ in
+            let count = a.int(2)
+            let report = a.callback(3, box: { (ids: [Int]) -> Any? in ids.map { KotlinInt(value: Int32($0)) } as NSArray })
+            let tokens = Binding<[TokenRef]>(get: { (0..<count).map(TokenRef.init) }, set: { report($0.map(\.id)) })
+            let slot = a.slotModel(5)
+            return AnyView(v.searchable(text: a.stringBinding(0), tokens: tokens, prompt: a.stringOpt(4).map { Text($0) }) { token in
+                if let slot, token.id < slot.children.count { NodeView(model: slot.children[token.id]) }
+            })
+        }
+        #else
+        ComposeRegistry.views[100_032] = { _ in AnyView(EmptyView()) }
+        #endif
+        #if os(iOS)
+        ComposeRegistry.views[100_015] = { m in
+            let image = Image(uiImage: m.args.raw(0) as? UIImage ?? UIImage())
+            return ModChain.apply(sm_Image(image, m), m, m.consumedPrefix)
+        }
+        #elseif os(macOS)
+        ComposeRegistry.views[100_016] = { m in
+            let image = Image(nsImage: m.args.raw(0) as? NSImage ?? NSImage())
+            return ModChain.apply(sm_Image(image, m), m, m.consumedPrefix)
+        }
+        #endif
+        ComposeRegistry.modifiers[100_029] = { v, a, _ in
+            AnyView(v.modifier(SearchFocusBridge(isFocused: a.bool(0), onChange: a.callback(1, box: KBox.bool))))
+        }
+        ComposeRegistry.modifiers[100_030] = { v, a, _ in
+            AnyView(v.modifier(AccessibilityFocusBridge(isFocused: a.bool(0), onChange: a.callback(1, box: KBox.bool))))
+        }
+        ComposeRegistry.modifiers[100_031] = { v, a, _ in
+            AnyView(v.modifier(NamespacedModifier(kind: .glassID, id: KHashable(a.raw(0) as? NSObject ?? NSNull()), namespace: Int64(a.int(1)))))
+        }
+        ComposeRegistry.modifiers[100_032] = { v, a, _ in
+            AnyView(v.modifier(NamespacedModifier(kind: .glassUnion, id: KHashable(a.raw(0) as? NSObject ?? NSNull()), namespace: Int64(a.int(1)))))
+        }
+        ComposeRegistry.modifiers[100_033] = { v, a, _ in
+            AnyView(v.modifier(NamespacedModifier(kind: .focusScope, id: KHashable(NSNull()), namespace: Int64(a.int(0)))))
+        }
+        #if os(iOS) || os(tvOS)
+        ComposeRegistry.modifiers[100_043] = { v, a, _ in
+            AnyView(v.keyboardType(UIKeyboardType(rawValue: a.int(0)) ?? .default))
+        }
+        ComposeRegistry.modifiers[100_044] = { v, a, _ in
+            let types: [UITextContentType] = [.username, .password, .newPassword, .oneTimeCode, .emailAddress, .telephoneNumber,
+                                              .name, .givenName, .familyName, .fullStreetAddress, .postalCode, .addressCity, .URL,
+                                              .creditCardNumber]
+            let i = a.int(0)
+            return i < types.count ? AnyView(v.textContentType(types[i])) : v
+        }
+        #elseif os(macOS)
+        ComposeRegistry.modifiers[100_044] = { v, a, _ in
+            switch a.int(0) {
+            case 0: return AnyView(v.textContentType(.username))
+            case 1, 2: return AnyView(v.textContentType(.password))
+            case 3: return AnyView(v.textContentType(.oneTimeCode))
+            default: return v
+            }
+        }
+        #endif
+    }
+}
+
+// MARK: - Geometry, files, drag and drop, animations, symbols
+
+#if os(iOS) || os(macOS)
+private struct KotlinTextDocument: FileDocument {
+    static var readableContentTypes: [UTType] { [.plainText, .utf8PlainText, .text, .json, .commaSeparatedText, .xml, .html, .data] }
+    let text: String
+
+    init(text: String) { self.text = text }
+
+    init(configuration: ReadConfiguration) throws {
+        text = String(decoding: configuration.file.regularFileContents ?? Data(), as: UTF8.self)
+    }
+
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        FileWrapper(regularFileWithContents: Data(text.utf8))
+    }
+}
+#endif
+
+private func applyViewEffects(_ content: some View, _ v: [Double]) -> some View {
+    func at(_ i: Int, _ d: Double) -> Double { i < v.count ? v[i] : d }
+    return content
+        .opacity(at(0, 1))
+        .scaleEffect(at(1, 1))
+        .offset(x: at(2, 0), y: at(3, 0))
+        .rotationEffect(.degrees(at(4, 0)))
+        .blur(radius: at(5, 0))
+}
+
+@MainActor private func indefiniteSymbolEffect(_ v: AnyView, _ kind: Int, _ active: Bool) -> AnyView {
+    switch kind {
+    case 1: return AnyView(v.symbolEffect(.pulse, isActive: active))
+    case 2: return AnyView(v.symbolEffect(.variableColor, isActive: active))
+    case 3: return AnyView(v.symbolEffect(.scale, isActive: active))
+    case 4: return AnyView(v.symbolEffect(.appear, isActive: active))
+    case 5: return AnyView(v.symbolEffect(.disappear, isActive: active))
+    default: break
+    }
+    if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
+        switch kind {
+        case 0: return AnyView(v.symbolEffect(.bounce, isActive: active))
+        case 6: return AnyView(v.symbolEffect(.wiggle, isActive: active))
+        case 7: return AnyView(v.symbolEffect(.rotate, isActive: active))
+        case 8: return AnyView(v.symbolEffect(.breathe, isActive: active))
+        default: break
+        }
+    }
+    return v
+}
+
+@MainActor private func discreteSymbolEffect(_ v: AnyView, _ kind: Int, _ value: AnyHashable) -> AnyView {
+    switch kind {
+    case 0: return AnyView(v.symbolEffect(.bounce, value: value))
+    case 1: return AnyView(v.symbolEffect(.pulse, value: value))
+    case 2: return AnyView(v.symbolEffect(.variableColor, value: value))
+    default: break
+    }
+    if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
+        switch kind {
+        case 6: return AnyView(v.symbolEffect(.wiggle, value: value))
+        case 7: return AnyView(v.symbolEffect(.rotate, value: value))
+        case 8: return AnyView(v.symbolEffect(.breathe, value: value))
+        default: break
+        }
+    }
+    return v
+}
+
+extension InteractiveRenderers {
+    static func registerEffectsAndFiles() {
+        ComposeRegistry.views[100_033] = { m in
+            let a = m.args
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
+                let p = a.list(2).compactMap { ($0 as? NSNumber)?.floatValue }
+                let points = stride(from: 0, to: p.count - 1, by: 2).map { SIMD2<Float>(p[$0], p[$0 + 1]) }
+                let colors = a.exprList(3).compactMap { d_Color($0) }
+                guard points.count == a.int(0) * a.int(1), colors.count == points.count else { return AnyView(EmptyView()) }
+                return ModChain.apply(MeshGradient(width: a.int(0), height: a.int(1), points: points, colors: colors, smoothsColors: a.bool(4)), m, 0)
+            }
+            return AnyView(EmptyView())
+        }
+        ComposeRegistry.modifiers[100_034] = { v, a, _ in
+            let report = a.callback(0, box: { (r: CGRect) -> Any? in e_CGRect(r) })
+            return AnyView(v.onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { report($0) })
+        }
+        ComposeRegistry.modifiers[100_035] = { v, a, _ in
+            guard #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) else { return v }
+            let report = a.callback(0, box: { (d: [CGFloat]) -> Any? in d.map { KotlinDouble(value: Double($0)) } as NSArray })
+            return AnyView(v.onScrollGeometryChange(for: [CGFloat].self) { g in
+                [g.contentOffset.x, g.contentOffset.y, g.contentSize.width, g.contentSize.height, g.containerSize.width, g.containerSize.height]
+            } action: { _, new in report(new) })
+        }
+        ComposeRegistry.modifiers[100_036] = { v, a, _ in
+            guard #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) else { return v }
+            let report = a.callback(1, box: { (ids: [AnyHashable]) -> Any? in kotlinKeys(ids) })
+            return AnyView(v.onScrollTargetVisibilityChange(idType: AnyHashable.self, threshold: a.double(0)) { report($0) })
+        }
+        #if os(iOS) || os(macOS)
+        ComposeRegistry.modifiers[100_037] = { v, a, _ in
+            let types = a.list(2).compactMap { ($0 as? String).flatMap { UTType($0) } }
+            let done = a.callback(4, box: { (urls: [String]) -> Any? in urls as NSArray })
+            let fail = a.callback(5, box: KBox.string)
+            return AnyView(v.fileImporter(isPresented: a.boolBinding(0), allowedContentTypes: types,
+                                          allowsMultipleSelection: a.bool(3)) { result in
+                switch result {
+                case .success(let urls): done(urls.map(\.absoluteString))
+                case .failure(let error): fail(error.localizedDescription)
+                }
+            })
+        }
+        ComposeRegistry.modifiers[100_038] = { v, a, _ in
+            let done = a.callback(5, box: KBox.string)
+            let fail = a.callback(6, box: KBox.string)
+            return AnyView(v.fileExporter(isPresented: a.boolBinding(0), document: KotlinTextDocument(text: a.string(2)),
+                                          contentType: UTType(a.string(3)) ?? .plainText, defaultFilename: a.stringOpt(4)) { result in
+                switch result {
+                case .success(let url): done(url.absoluteString)
+                case .failure(let error): fail(error.localizedDescription)
+                }
+            })
+        }
+        ComposeRegistry.modifiers[100_039] = { v, a, _ in
+            guard let handler = a.raw(0) as? DropHandler else { return v }
+            let targeted = a.callback(1, box: KBox.bool)
+            return AnyView(v.dropDestination(for: String.self) { items, location in
+                handler.onDrop(items: items, x: Double(location.x), y: Double(location.y))
+            } isTargeted: { targeted($0) })
+        }
+        ComposeRegistry.modifiers[100_040] = { v, a, _ in AnyView(v.draggable(a.string(0))) }
+        #endif
+        ComposeRegistry.modifiers[100_041] = { v, a, _ in
+            let phases = a.list(0).map { ($0 as? [Any] ?? []).compactMap { ($0 as? NSNumber)?.doubleValue } }
+            guard !phases.isEmpty else { return v }
+            let animation = a.isNil(2) ? Animation.default : (d_Animation(a.expr(2)) ?? .default)
+            if a.isNil(1) {
+                return AnyView(v.phaseAnimator(Array(phases.indices)) { content, i in
+                    applyViewEffects(content, phases[i])
+                } animation: { _ in animation })
+            }
+            return AnyView(v.phaseAnimator(Array(phases.indices), trigger: a.hashable(1)) { content, i in
+                applyViewEffects(content, phases[i])
+            } animation: { _ in animation })
+        }
+        ComposeRegistry.modifiers[100_042] = { v, a, _ in
+            a.bool(3) ? discreteSymbolEffect(v, a.int(0), a.hashable(2)) : indefiniteSymbolEffect(v, a.int(0), a.bool(1))
         }
     }
 }

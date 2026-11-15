@@ -144,6 +144,16 @@ API:
 | `alignmentGuide(.leading) { d in … }` | `Modifier.alignmentGuide(HorizontalAlignment.leading) { width, height -> width / 2 }` |
 | `navigationDestination(item:)` | `Modifier.navigationDestination(item, onDismiss) { item -> }` |
 | Custom `ButtonStyle`, `ToggleStyle`, `LabelStyle` | `Modifier.buttonStyle { isPressed -> StyleLabel(…) }`, `toggleStyle { isOn -> }`, `labelStyle { StyleIcon(); StyleLabel() }` |
+| `List(selection: $set)` (multiple) | `List(selectedKeys, onSelectedKeysChange) { Text("A", Modifier.tag("a")) }` |
+| `searchable(text:tokens:token:)` | `Modifier.searchable(text, onTextChange, tokens, onTokensChange, key = { it.id }) { Text(it.name) }` |
+| `TextField(_:value:format:)` | `NumberField("Amount", value, onValueChange, format = NumberFormat.Currency("EUR"))` |
+| `focused($field, equals: .email)` | `Modifier.focused(value = Field.Email, focusedValue = field, onFocusChange = { field = it })` |
+| `glassEffectID(_:in:)`, `glassEffectUnion` | `NamespaceScope { ns -> … Modifier.glassEffectID("a", ns) }` |
+| `onGeometryChange`, `onScrollGeometryChange`, `onScrollTargetVisibilityChange` | `Modifier.onGeometryChange { frame -> }`, `onScrollGeometryChange { g -> }`, `onScrollTargetVisibilityChange { ids -> }` |
+| `fileImporter`, `fileExporter` (text), `PasteButton`, `draggable`, `dropDestination` (text) | `Modifier.fileImporter(…) { urls -> }`, `PasteButton { strings -> }`, `Modifier.dropDestination { items, location -> true }` |
+| `phaseAnimator`, `symbolEffect`, `MeshGradient` | `Modifier.phaseAnimator(listOf(VisualEffects(), VisualEffects(scale = 1.2)))`, `Modifier.symbolEffect(SymbolEffectKind.Bounce, value = count)`, `MeshGradient(2, 2, points, colors)` |
+| `keyboardType`, `textContentType` | `Modifier.keyboardType(KeyboardType.EmailAddress)`, `Modifier.textContentType(TextContentType.OneTimeCode)` |
+| `Image(uiImage:)`, `Image(nsImage:)`, `MultiDatePicker` | `Image(uiImage)` in `iosMain`, `Image(nsImage)` in `macosMain`, `MultiDatePicker("Days", selection, onSelectionChange)` |
 | A Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map")` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
 | Values passed from Swift | `ComposeView(input: value) { … }` + `hostInput<T>()` in Kotlin |
 
@@ -346,10 +356,13 @@ every row is composed and kept up to date even off screen.
 ## Limitations
 
 - visionOS isn't supported: Kotlin/Native has no visionOS target.
-- APIs that take Swift-only types (`Transferable`, `KeyPath`, `DateComponents`, `Range`…) aren't available. An
+- APIs built on Swift types or protocols that the app itself implements aren't available: `FileDocument`,
+  `DropDelegate`, `Transferable` types other than text, preference keys, `Publisher`, `ObservableObject`, custom
+  `Layout` caches, `TextRenderer`, `CustomAnimation`, key paths. An
   `AttributedString` parameter or binding takes a plain `String` (attributes are dropped); for mixed-style text, use
   `Text(StyledString)`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
-- Data-driven containers such as `List(data)` and `Table` take a Kotlin loop or `LazyForEach` instead of a collection.
+- Data-driven containers take Kotlin lists: a loop or `LazyForEach` for `List(data)` / `ForEach(data)`, and the Kotlin
+  `Table(rows)`, `OutlineGroup(items, children)` and `searchable(tokens)`.
 - On iOS, two benchmark screens differ from plain SwiftUI by less than a pixel (one SF Symbol, and the search field
   placeholder after updates).
 

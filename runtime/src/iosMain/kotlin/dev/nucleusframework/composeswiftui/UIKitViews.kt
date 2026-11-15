@@ -50,3 +50,9 @@ fun UIKitView(
 ) {
     SwiftView(NativeViewKinds.UI_VIEW, listOf(UIViewFactory(factory, update), sizing.ordinal), modifier)
 }
+
+/** SwiftUI `Image(uiImage:)`: a decoded or downloaded `UIImage`. Image modifiers (`resizable()`…) apply. */
+@Composable
+fun Image(uiImage: platform.UIKit.UIImage, modifier: Modifier = Modifier) {
+    SwiftView(NativeViewKinds.UI_IMAGE, listOf(uiImage), modifier)
+}
