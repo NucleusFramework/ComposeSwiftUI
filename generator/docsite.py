@@ -40,11 +40,12 @@ def parse_file(path, kind_hint):
                 doc.append(re.sub(r"^\s*\* ?", "", lines[i]))
                 i += 1
             i += 1
-            while i < len(lines) and lines[i].strip().startswith("@"):
+            # Skip annotation-only lines (a declaration may also start with an annotation on its own line)
+            while i < len(lines) and lines[i].strip().startswith("@") and " public " not in lines[i]:
                 i += 1
             decl = [lines[i]] if i < len(lines) else []
             # A composable's parameters span several lines, up to ") {"; other declarations fit on one line.
-            if i < len(lines) and re.match(r"\s*public fun \w+\($", lines[i].rstrip()):
+            if i < len(lines) and re.match(r"\s*(@\w+ )*public fun \w+\($", lines[i].rstrip()):
                 while i + 1 < len(lines) and not lines[i].rstrip().endswith(") {"):
                     i += 1
                     decl.append(lines[i])
