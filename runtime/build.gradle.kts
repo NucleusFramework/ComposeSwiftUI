@@ -5,6 +5,8 @@ plugins {
 }
 
 // Release version comes from the `vX.Y.Z` tag that triggers the publish workflow.
+group = "dev.nucleusframework"
+
 val publishVersion =
     providers
         .environmentVariable("GITHUB_REF")

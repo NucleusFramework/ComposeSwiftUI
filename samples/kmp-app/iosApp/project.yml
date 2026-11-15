@@ -11,10 +11,14 @@ targets:
       - iosApp
       - path: ComposeSwiftUI          # written by the Gradle plugin; add once to the app target
         createIntermediateGroups: true
+    info:
+      path: iosApp/Info.plist
+      properties:
+        UILaunchScreen: {}
+        # Required by Compose Multiplatform (used by the chart page)
+        CADisableMinimumFrameDurationOnPhone: true
     settings:
       base:
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
         ENABLE_USER_SCRIPT_SANDBOXING: NO
         FRAMEWORK_SEARCH_PATHS: $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
         OTHER_LDFLAGS: [-framework, Shared]

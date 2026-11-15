@@ -51,3 +51,11 @@ data class LocalizedKey(val key: String)
 
 /** `"settings.title".localized` == `LocalizedKey("settings.title")`. */
 val String.localized: LocalizedKey get() = LocalizedKey(this)
+
+/** View kinds of the platform view embeddings (UIKit / AppKit), rendered by the Swift renderer. */
+internal object NativeViewKinds {
+    const val UI_VIEW_CONTROLLER = 100_010
+    const val UI_VIEW = 100_011
+    const val NS_VIEW_CONTROLLER = 100_012
+    const val NS_VIEW = 100_013
+}

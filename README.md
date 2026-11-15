@@ -66,7 +66,10 @@ Supported platforms: iOS 17+, macOS 14+, tvOS 17+ and watchOS 10+. Requires Kotl
    ```
 
 `ComposeView` is a regular SwiftUI view, so you can put it in a `TabView`, a `sheet` or next to SwiftUI views.
-[samples/kmp-app](samples/kmp-app) is a complete project you can build and run.
+
+To try it without setting anything up, open `samples/kmp-app/iosApp/iosApp.xcodeproj` and run it. The sample builds
+the library and the plugin from the sources of this repository and shows Navigation 3, a `ViewModel`, Compose
+Multiplatform content and Compose Multiplatform string resources.
 
 To change where the renderer is written or which framework it imports:
 
@@ -116,7 +119,57 @@ API:
 | A Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map")` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
 | Values passed from Swift | `ComposeView(input: value) { … }` + `hostInput<T>()` in Kotlin |
 
-Reference:
+## Using it with other Compose libraries
+
+### Navigation 3
+
+`NavDisplay` shows any observable back stack with SwiftUI navigation, so you can keep the Navigation 3 runtime
+(`NavKey`, `entryProvider`, your back stack) and get the native push animation and swipe back:
+
+```kotlin
+val backStack = remember { mutableStateListOf<Route>(Route.Home) }
+val entries = entryProvider<Route> {
+    entry<Route.Home> { HomeScreen(onOpen = { backStack.add(it) }) }
+    entry<Route.Detail> { key -> DetailScreen(key.id) }
+}
+NavDisplay(backStack) { route -> entries(route).Content() }
+```
+
+Push with `backStack.add(...)`. The SwiftUI back button and swipe remove keys from the back stack. `NavDisplay` from
+`navigation3-ui` draws with Compose UI, so use this one instead.
+
+### Compose Multiplatform content (iOS)
+
+Embed a Compose Multiplatform screen in a Compose SwiftUI screen the same way you would in SwiftUI, through its view
+controller:
+
+```kotlin
+// iosMain
+UIViewControllerView(modifier = Modifier.frame(height = 260.0)) {
+    ComposeUIViewController { SalesChart() }
+}
+```
+
+The embedded content has its own composition. Share state between the two through a `ViewModel` or a `StateFlow`.
+Your app's `Info.plist` needs `CADisableMinimumFrameDurationOnPhone` set to `true`, as for any Compose Multiplatform
+app. `UIKitView`, `NSViewControllerView` and `AppKitView` embed other UIKit and AppKit views the same way.
+
+### Compose Multiplatform resources
+
+`stringResource(Res.string.title)` works in Compose SwiftUI screens once you provide Compose UI's `LocalDensity`,
+which Compose Multiplatform resources read:
+
+```kotlin
+fun app() = composeSwiftUI {
+    CompositionLocalProvider(LocalDensity provides Density(UIScreen.mainScreen.scale.toFloat())) {
+        Text(stringResource(Res.string.title))
+    }
+}
+```
+
+The suspending `getString(Res.string.title)` works without it, for example in a `ViewModel`.
+
+## Reference
 
 - [docs/API.md](docs/API.md) lists every generated composable, modifier and value type.
 - [docs/COVERAGE.md](docs/COVERAGE.md) lists every entry of Apple's SwiftUI documentation with its status: generated,

@@ -63,7 +63,8 @@ Pushing a tag `vX.Y.Z` runs two workflows:
 - `publish-maven.yaml` publishes `dev.nucleusframework:compose-swiftui` to Maven Central.
 - `publish-plugin.yaml` publishes the `dev.nucleusframework.compose-swiftui` plugin to the Gradle Plugin Portal.
 
-Both use the tag as the version. They need these repository secrets:
+Both use the tag as the version, and `release.yaml` creates the GitHub release. The publish workflows need these
+repository secrets:
 
 | Secret | Used for |
 |---|---|
@@ -71,9 +72,11 @@ Both use the tag as the version. They need these repository secrets:
 | `SIGNINGINMEMORYKEY`, `SIGNINGKEYID`, `SIGNINGPASSWORD` | GPG signing of the Maven artifacts |
 | `GRADLE_PUBLISH_KEY`, `GRADLE_PUBLISH_SECRET` | Gradle Plugin Portal API key |
 
-To test a release locally, publish to Maven Local and build the sample:
+The sample builds the library and the plugin from source, so you can open it directly. To test the published
+artifacts instead, publish them to Maven Local:
 
 ```bash
-./gradlew :runtime:publishToMavenLocal :gradle-plugin:publishToMavenLocal --no-configuration-cache
-cd samples/kmp-app/iosApp && xcodegen generate && open iosApp.xcodeproj
+./gradlew :runtime:publishToMavenLocal --no-configuration-cache
+./gradlew --project-dir gradle-plugin publishToMavenLocal
+
 ```

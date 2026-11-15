@@ -34,7 +34,7 @@ kotlin {
 
 // ---- Embed the Swift renderer sources (swift/ComposeSwiftUI) as plugin resources ----------------
 
-val rendererDir = rootProject.layout.projectDirectory.dir("swift/ComposeSwiftUI")
+val rendererDir = layout.projectDirectory.dir("../swift/ComposeSwiftUI")
 val rendererResources = layout.buildDirectory.dir("generated/renderer-resources")
 val rendererResourcePath = "dev/nucleusframework/composeswiftui/renderer"
 

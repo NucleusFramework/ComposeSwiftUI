@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03346C3D10B81C7E89C8440A /* Args.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9162FBC423C6E1219DFC0 /* Args.swift */; };
+		0BCE0353D92A7E27251A4941 /* GenDecoders3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */; };
+		10F64A9EB87F4345C0B21CF4 /* Handwritten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36383731CAECE4330150F7E2 /* Handwritten.swift */; };
+		21AB3B491D7F1897EEAFEBF8 /* GenModifiers0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62214446A931E287D2C5C3F /* GenModifiers0.swift */; };
+		27E9579F32EF243F0B197A44 /* KotlinModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC5F5DDDE53545B4B33D2A5 /* KotlinModule.swift */; };
+		2A5D78DA81F110F6F49C1392 /* GenModifiers7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F68E222CAB8EBE41ED74 /* GenModifiers7.swift */; };
+		3ABD26950B1C28076A3C5328 /* GenModifiers1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D65B8660062301F7F5709 /* GenModifiers1.swift */; };
+		3AD878629C38BE47968DA6DE /* GenDecoders5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B672764C3827C8295175CB /* GenDecoders5.swift */; };
+		41DB7488E445FC4CDA7CD009 /* GenDecoders2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677996633148E100CF8B6B87 /* GenDecoders2.swift */; };
+		45AAA8005478C84018E9D104 /* GenModifiers3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */; };
+		4D00BF741965F7CC509DE13A /* GenModifiers5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC69AC5162C37FDE60343ED9 /* GenModifiers5.swift */; };
+		61AD0E2DD2F5AA85B95935D7 /* GenModifiers6.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0933C891C8EA8CFF5A7BC /* GenModifiers6.swift */; };
+		68442AA27F477A45C0F0456C /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6A2FFB790A722FB7483E0 /* Core.swift */; };
+		737296F002F5B67C6F1D2CD5 /* GenProtocolDecoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */; };
+		73FCDE488110E3A62FDE604E /* GenRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8307DB050CF205CFCDF88 /* GenRegister.swift */; };
+		994A9E71457DEA41A9E0BFCE /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE8394311ADAF4BC0A3255D /* SampleApp.swift */; };
+		AB21215B33B73BFF7D1597C5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 686260C240CD9512D9CB71A8 /* README.txt */; };
+		B3FC7C9DEA0DB1395C5E0E52 /* GenSelfModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BD079EBB00000146783D64 /* GenSelfModifiers.swift */; };
+		D2260FE9021483D273A1EC5A /* GenDecoders1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1977DA372940747763528 /* GenDecoders1.swift */; };
+		D23E402C854FB3C10A79DDA3 /* GenModifiers2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70F6192110CD19B0C779 /* GenModifiers2.swift */; };
+		DD28BE26585D2A2292EBCA62 /* GenDecoders4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0991D4F451D94E831DEA15 /* GenDecoders4.swift */; };
+		DE4477830BFD36B059829026 /* GenModifiers4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C4EE2E95CEF5BB454A9107 /* GenModifiers4.swift */; };
+		E2CE26B31D71548D81A75399 /* GenDecoders0.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8CB8E396099504DC1E6A6 /* GenDecoders0.swift */; };
+		E6C13D1C556D7406AFCD9ECA /* GenViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B3F59F0C39D675D94A1434 /* GenViews.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0F0991D4F451D94E831DEA15 /* GenDecoders4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders4.swift; sourceTree = "<group>"; };
+		1BE8394311ADAF4BC0A3255D /* SampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleApp.swift; sourceTree = "<group>"; };
+		3390F68E222CAB8EBE41ED74 /* GenModifiers7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers7.swift; sourceTree = "<group>"; };
+		36383731CAECE4330150F7E2 /* Handwritten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handwritten.swift; sourceTree = "<group>"; };
+		385A70F6192110CD19B0C779 /* GenModifiers2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers2.swift; sourceTree = "<group>"; };
+		48C4EE2E95CEF5BB454A9107 /* GenModifiers4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers4.swift; sourceTree = "<group>"; };
+		50E1977DA372940747763528 /* GenDecoders1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders1.swift; sourceTree = "<group>"; };
+		52A9162FBC423C6E1219DFC0 /* Args.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Args.swift; sourceTree = "<group>"; };
+		54B3F59F0C39D675D94A1434 /* GenViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenViews.swift; sourceTree = "<group>"; };
+		56C6A2FFB790A722FB7483E0 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		677996633148E100CF8B6B87 /* GenDecoders2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders2.swift; sourceTree = "<group>"; };
+		686260C240CD9512D9CB71A8 /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers3.swift; sourceTree = "<group>"; };
+		7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenProtocolDecoders.swift; sourceTree = "<group>"; };
+		86038AE1032E284E79B32AD6 /* iosApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A56D65B8660062301F7F5709 /* GenModifiers1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers1.swift; sourceTree = "<group>"; };
+		AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders3.swift; sourceTree = "<group>"; };
+		BFC8CB8E396099504DC1E6A6 /* GenDecoders0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders0.swift; sourceTree = "<group>"; };
+		C117AD187833E2513BD2F553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CC69AC5162C37FDE60343ED9 /* GenModifiers5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers5.swift; sourceTree = "<group>"; };
+		D6B672764C3827C8295175CB /* GenDecoders5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders5.swift; sourceTree = "<group>"; };
+		DED8307DB050CF205CFCDF88 /* GenRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenRegister.swift; sourceTree = "<group>"; };
+		E62214446A931E287D2C5C3F /* GenModifiers0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers0.swift; sourceTree = "<group>"; };
+		ECB0933C891C8EA8CFF5A7BC /* GenModifiers6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers6.swift; sourceTree = "<group>"; };
+		EFC5F5DDDE53545B4B33D2A5 /* KotlinModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinModule.swift; sourceTree = "<group>"; };
+		F2BD079EBB00000146783D64 /* GenSelfModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenSelfModifiers.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1DB4B685CAEE8BEFEBBAEF94 /* iosApp */ = {
+			isa = PBXGroup;
+			children = (
+				C117AD187833E2513BD2F553 /* Info.plist */,
+				1BE8394311ADAF4BC0A3255D /* SampleApp.swift */,
+			);
+			path = iosApp;
+			sourceTree = "<group>";
+		};
+		38B69C3F79CD97858CF7B609 = {
+			isa = PBXGroup;
+			children = (
+				A6166B2840EC6AD2EC294CD2 /* ComposeSwiftUI */,
+				1DB4B685CAEE8BEFEBBAEF94 /* iosApp */,
+				94C98B8B3A2BFC1966447269 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		87F3A55CCF164FEFCC854FF2 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8CB8E396099504DC1E6A6 /* GenDecoders0.swift */,
+				50E1977DA372940747763528 /* GenDecoders1.swift */,
+				677996633148E100CF8B6B87 /* GenDecoders2.swift */,
+				AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */,
+				0F0991D4F451D94E831DEA15 /* GenDecoders4.swift */,
+				D6B672764C3827C8295175CB /* GenDecoders5.swift */,
+				E62214446A931E287D2C5C3F /* GenModifiers0.swift */,
+				A56D65B8660062301F7F5709 /* GenModifiers1.swift */,
+				385A70F6192110CD19B0C779 /* GenModifiers2.swift */,
+				6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */,
+				48C4EE2E95CEF5BB454A9107 /* GenModifiers4.swift */,
+				CC69AC5162C37FDE60343ED9 /* GenModifiers5.swift */,
+				ECB0933C891C8EA8CFF5A7BC /* GenModifiers6.swift */,
+				3390F68E222CAB8EBE41ED74 /* GenModifiers7.swift */,
+				7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */,
+				DED8307DB050CF205CFCDF88 /* GenRegister.swift */,
+				F2BD079EBB00000146783D64 /* GenSelfModifiers.swift */,
+				54B3F59F0C39D675D94A1434 /* GenViews.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		94C98B8B3A2BFC1966447269 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				86038AE1032E284E79B32AD6 /* iosApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A6166B2840EC6AD2EC294CD2 /* ComposeSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				52A9162FBC423C6E1219DFC0 /* Args.swift */,
+				56C6A2FFB790A722FB7483E0 /* Core.swift */,
+				36383731CAECE4330150F7E2 /* Handwritten.swift */,
+				EFC5F5DDDE53545B4B33D2A5 /* KotlinModule.swift */,
+				686260C240CD9512D9CB71A8 /* README.txt */,
+				87F3A55CCF164FEFCC854FF2 /* Generated */,
+			);
+			path = ComposeSwiftUI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		78B53CC79860CBFC2F5543C6 /* iosApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29DCA9F0B3A40325067EB163 /* Build configuration list for PBXNativeTarget "iosApp" */;
+			buildPhases = (
+				4B44A75E2FD10EFE3C97FCF5 /* Compile Kotlin Framework */,
+				297B59D9CE634556D6007C40 /* Sources */,
+				1623B02D10928C8101C1F806 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iosApp;
+			packageProductDependencies = (
+			);
+			productName = iosApp;
+			productReference = 86038AE1032E284E79B32AD6 /* iosApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		242FB5348943441C388468CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = FF7CA1CA754D017066F1822F /* Build configuration list for PBXProject "iosApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 38B69C3F79CD97858CF7B609;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 94C98B8B3A2BFC1966447269 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78B53CC79860CBFC2F5543C6 /* iosApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1623B02D10928C8101C1F806 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB21215B33B73BFF7D1597C5 /* README.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4B44A75E2FD10EFE3C97FCF5 /* Compile Kotlin Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Kotlin Framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		297B59D9CE634556D6007C40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03346C3D10B81C7E89C8440A /* Args.swift in Sources */,
+				68442AA27F477A45C0F0456C /* Core.swift in Sources */,
+				E2CE26B31D71548D81A75399 /* GenDecoders0.swift in Sources */,
+				D2260FE9021483D273A1EC5A /* GenDecoders1.swift in Sources */,
+				41DB7488E445FC4CDA7CD009 /* GenDecoders2.swift in Sources */,
+				0BCE0353D92A7E27251A4941 /* GenDecoders3.swift in Sources */,
+				DD28BE26585D2A2292EBCA62 /* GenDecoders4.swift in Sources */,
+				3AD878629C38BE47968DA6DE /* GenDecoders5.swift in Sources */,
+				21AB3B491D7F1897EEAFEBF8 /* GenModifiers0.swift in Sources */,
+				3ABD26950B1C28076A3C5328 /* GenModifiers1.swift in Sources */,
+				D23E402C854FB3C10A79DDA3 /* GenModifiers2.swift in Sources */,
+				45AAA8005478C84018E9D104 /* GenModifiers3.swift in Sources */,
+				DE4477830BFD36B059829026 /* GenModifiers4.swift in Sources */,
+				4D00BF741965F7CC509DE13A /* GenModifiers5.swift in Sources */,
+				61AD0E2DD2F5AA85B95935D7 /* GenModifiers6.swift in Sources */,
+				2A5D78DA81F110F6F49C1392 /* GenModifiers7.swift in Sources */,
+				737296F002F5B67C6F1D2CD5 /* GenProtocolDecoders.swift in Sources */,
+				73FCDE488110E3A62FDE604E /* GenRegister.swift in Sources */,
+				B3FC7C9DEA0DB1395C5E0E52 /* GenSelfModifiers.swift in Sources */,
+				E6C13D1C556D7406AFCD9ECA /* GenViews.swift in Sources */,
+				10F64A9EB87F4345C0B21CF4 /* Handwritten.swift in Sources */,
+				27E9579F32EF243F0B197A44 /* KotlinModule.swift in Sources */,
+				994A9E71457DEA41A9E0BFCE /* SampleApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		11814011E7D6EC822BFBC66D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6C824A6EB4BAD43AE2A4BB29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9221A1FDC06803E8A2FC6E61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				INFOPLIST_FILE = iosApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Shared,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.nucleusframework.sample.iosApp;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AF835BFF1220CA5AB5B867E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				INFOPLIST_FILE = iosApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Shared,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.nucleusframework.sample.iosApp;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29DCA9F0B3A40325067EB163 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9221A1FDC06803E8A2FC6E61 /* Debug */,
+				AF835BFF1220CA5AB5B867E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FF7CA1CA754D017066F1822F /* Build configuration list for PBXProject "iosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C824A6EB4BAD43AE2A4BB29 /* Debug */,
+				11814011E7D6EC822BFBC66D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 242FB5348943441C388468CE /* Project object */;
+}

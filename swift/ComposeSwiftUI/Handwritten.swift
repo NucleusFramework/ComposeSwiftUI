@@ -1,4 +1,9 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 // Hand-written renderers complementing the generated ones (ids >= 100_000).
 
@@ -83,6 +88,7 @@ extension ComposeGenerated {
         registerAll()
         HandwrittenRenderers.register()
         ExtraRenderers.register()
+        PlatformViewRenderers.register()
     }
 }
 
@@ -360,5 +366,45 @@ struct KotlinLayout: Layout {
                 ComposeSwiftUIHostKt.flushCompose()
             }
         }
+    }
+}
+
+// MARK: - Platform view embedding (UIKitViews.kt / AppKitViews.kt)
+
+#if os(iOS)
+private struct EmbeddedViewController: UIViewControllerRepresentable {
+    let factory: UIViewControllerFactory?
+    func makeUIViewController(context: Context) -> UIViewController { factory?.create() ?? UIViewController() }
+    func updateUIViewController(_ controller: UIViewController, context: Context) {}
+}
+
+private struct EmbeddedUIView: UIViewRepresentable {
+    let factory: UIViewFactory?
+    func makeUIView(context: Context) -> UIView { factory?.create() ?? UIView() }
+    func updateUIView(_ view: UIView, context: Context) {}
+}
+#elseif os(macOS)
+private struct EmbeddedViewController: NSViewControllerRepresentable {
+    let factory: NSViewControllerFactory?
+    func makeNSViewController(context: Context) -> NSViewController { factory?.create() ?? NSViewController() }
+    func updateNSViewController(_ controller: NSViewController, context: Context) {}
+}
+
+private struct EmbeddedNSView: NSViewRepresentable {
+    let factory: NSViewFactory?
+    func makeNSView(context: Context) -> NSView { factory?.create() ?? NSView() }
+    func updateNSView(_ view: NSView, context: Context) {}
+}
+#endif
+
+@MainActor enum PlatformViewRenderers {
+    static func register() {
+        #if os(iOS)
+        ComposeRegistry.views[100_010] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? UIViewControllerFactory), m, 0) }
+        ComposeRegistry.views[100_011] = { m in ModChain.apply(EmbeddedUIView(factory: m.args.raw(0) as? UIViewFactory), m, 0) }
+        #elseif os(macOS)
+        ComposeRegistry.views[100_012] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? NSViewControllerFactory), m, 0) }
+        ComposeRegistry.views[100_013] = { m in ModChain.apply(EmbeddedNSView(factory: m.args.raw(0) as? NSViewFactory), m, 0) }
+        #endif
     }
 }

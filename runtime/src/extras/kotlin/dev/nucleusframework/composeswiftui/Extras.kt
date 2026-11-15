@@ -315,3 +315,25 @@ public class PathShape internal constructor(commands: List<Double>) : SExpr(5, l
 public fun NativeView(key: String, modifier: Modifier = Modifier, vararg args: Any?) {
     SwiftView(ExtraIds.NATIVE_VIEW, listOf(key) + args.toList(), modifier)
 }
+
+/**
+ * Displays a back stack with SwiftUI navigation (push animation, back button, swipe back): the first key is
+ * the root, the others are pushed. Works with any observable list, including a Navigation 3 `NavBackStack`
+ * or `mutableStateListOf(...)`. Push with `backStack.add(key)`; SwiftUI back navigation removes keys.
+ */
+@HiddenFromObjC
+@Composable
+public fun <T : Any> NavDisplay(
+    backStack: MutableList<T>,
+    modifier: Modifier = Modifier,
+    entryProvider: @Composable (T) -> Unit,
+) {
+    NavigationStack(
+        path = backStack.drop(1),
+        onPathChange = { path -> while (backStack.size > path.size + 1) backStack.removeAt(backStack.lastIndex) },
+        modifier = modifier,
+        destination = entryProvider,
+    ) {
+        backStack.firstOrNull()?.let { entryProvider(it) }
+    }
+}

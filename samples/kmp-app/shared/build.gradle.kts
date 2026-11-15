@@ -1,8 +1,10 @@
 plugins {
     kotlin("multiplatform") version "2.4.20"
-    // The only Compose SwiftUI line: adds the library, the Compose compiler, the framework export,
-    // and keeps the Swift renderer in iosApp/ComposeSwiftUI up to date on every Xcode build.
-    id("dev.nucleusframework.compose-swiftui") version "0.1.0"
+    // Compose SwiftUI: adds the library, the Compose compiler and the framework export, and writes the Swift
+    // renderer into iosApp/ComposeSwiftUI on every Xcode build.
+    id("dev.nucleusframework.compose-swiftui")
+    // Only needed for the Compose Multiplatform page of the sample.
+    id("org.jetbrains.compose") version "1.12.1"
 }
 
 kotlin {
@@ -10,6 +12,17 @@ kotlin {
         it.binaries.framework {
             baseName = "Shared"
             isStatic = true
+        }
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            // Compose Multiplatform resources (strings.xml), used from Compose SwiftUI screens
+            implementation("org.jetbrains.compose.components:components-resources:1.12.1")
+        }
+        iosMain.dependencies {
+            implementation("androidx.navigation3:navigation3-runtime:1.3.0-alpha04")
+            implementation("org.jetbrains.compose.foundation:foundation:1.12.1")
         }
     }
 }
