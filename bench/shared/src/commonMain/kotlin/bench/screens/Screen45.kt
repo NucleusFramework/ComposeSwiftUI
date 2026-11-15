@@ -100,7 +100,7 @@ fun Screen45(vm: Screen45ViewModel) {
                 ZStack(modifier = Modifier.frame(height = 210.0).clipShape(RoundedRectangle(cornerRadius = 20.0)), alignment = Alignment.bottomLeading) {
                     LinearGradientView(LinearGradient(colors = state.gradient.map { it.color() }, startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing))
                     Image(systemName = 
-                        "house.lodge.fill",
+                        SFSymbol.houseLodgeFill,
                         modifier = Modifier.font(Font.system(size = 72.0)).foregroundStyle(Color.white.opacity(0.85))
                             .frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY),
                     )
@@ -114,7 +114,7 @@ fun Screen45(vm: Screen45ViewModel) {
                         Spacer()
                         Label(
                             title = state.photoCount,
-                            systemImage = "photo.on.rectangle",
+                            systemImage = SFSymbol.photoOnRectangle,
                             modifier = Modifier.font(Font.caption).monospacedDigit().foregroundStyle(Color.white)
                                 .padding(Edge.Set.horizontal, 10.0).padding(Edge.Set.vertical, 5.0)
                                 .background(Color.black.opacity(0.35), Capsule()),
@@ -126,7 +126,7 @@ fun Screen45(vm: Screen45ViewModel) {
                         HStack(spacing = 8.0) {
                             Text(state.price, modifier = Modifier.font(Font.title).fontWeight(Font.Weight.bold).monospacedDigit())
                             if (state.priceReduced) {
-                                Label(title = "Reduced", systemImage = "arrow.down", modifier = Modifier.font(Font.caption).fontWeight(Font.Weight.semibold).foregroundStyle(Color.red))
+                                Label(title = "Reduced", systemImage = SFSymbol.arrowDown, modifier = Modifier.font(Font.caption).fontWeight(Font.Weight.semibold).foregroundStyle(Color.red))
                             }
                         }
                         Text(state.address, modifier = Modifier.font(Font.headline))
@@ -135,7 +135,7 @@ fun Screen45(vm: Screen45ViewModel) {
                     }
                     Spacer()
                     Image(systemName = 
-                        if (state.favorite) "heart.fill" else "heart",
+                        if (state.favorite) SFSymbol.heartFill else SFSymbol.heart,
                         modifier = Modifier.font(Font.title2).foregroundStyle(if (state.favorite) Color.pink else Color.gray)
                             .frame(width = 44.0, height = 44.0)
                             .background(Color.gray.opacity(0.12), Circle()),
@@ -148,7 +148,7 @@ fun Screen45(vm: Screen45ViewModel) {
                 ) {
                     for (spec in state.specs) key(spec.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 4.0) {
-                            Image(systemName = spec.icon, modifier = Modifier.font(Font.title3).foregroundStyle(Color.indigo))
+                            Image(systemName = SFSymbol(spec.icon), modifier = Modifier.font(Font.title3).foregroundStyle(Color.indigo))
                             Text(spec.value, modifier = Modifier.font(Font.headline).monospacedDigit())
                             Text(spec.label, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary).textCase(Text.Case.uppercase))
                         }
@@ -162,7 +162,7 @@ fun Screen45(vm: Screen45ViewModel) {
                     for (rowIndex in 0 until (state.features.size + 1) / 2) key(rowIndex) {
                         GridRow {
                             for (feature in state.features.drop(rowIndex * 2).take(2)) key(feature.id) {
-                                Label(title = feature.title, systemImage = feature.icon, modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.primary))
+                                Label(title = feature.title, systemImage = SFSymbol(feature.icon), modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.primary))
                             }
                         }
                     }
@@ -180,13 +180,13 @@ fun Screen45(vm: Screen45ViewModel) {
                     VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
                         Text(state.agentName, modifier = Modifier.font(Font.headline))
                         Text(state.agency, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
-                        Label(title = state.rating, systemImage = "star.fill", modifier = Modifier.font(Font.caption2).foregroundStyle(Color.orange))
+                        Label(title = state.rating, systemImage = SFSymbol.starFill, modifier = Modifier.font(Font.caption2).foregroundStyle(Color.orange))
                     }
                     Spacer()
-                    Image(systemName = "phone.fill", modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.green, Circle()))
-                    Image(systemName = "message.fill", modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.blue, Circle()))
+                    Image(systemName = SFSymbol.phoneFill, modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.green, Circle()))
+                    Image(systemName = SFSymbol.messageFill, modifier = Modifier.foregroundStyle(Color.white).frame(width = 36.0, height = 36.0).background(Color.blue, Circle()))
                 }
-                Label(title = state.views, systemImage = "eye", modifier = Modifier.font(Font.footnote).monospacedDigit().foregroundStyle(ShapeStyle.secondary))
+                Label(title = state.views, systemImage = SFSymbol.eye, modifier = Modifier.font(Font.footnote).monospacedDigit().foregroundStyle(ShapeStyle.secondary))
             }
         }
     }

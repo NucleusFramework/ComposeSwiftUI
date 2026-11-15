@@ -97,7 +97,7 @@ fun Screen41(vm: Screen41ViewModel) {
     NavigationStack {
         List(
             modifier = Modifier.listStyle(ListStyle.insetGrouped).navigationTitle("Wallet")
-                .toolbarItem(placement = ToolbarItemPlacement.primaryAction) { Button(title = "Scan", systemImage = "qrcode.viewfinder", action = {}) },
+                .toolbarItem(placement = ToolbarItemPlacement.primaryAction) { Button(title = "Scan", systemImage = SFSymbol.qrcodeViewfinder, action = {}) },
         ) {
             Section {
                 VStack(modifier = Modifier.padding(Edge.Set.vertical, 6.0), alignment = HorizontalAlignment.leading, spacing = 12.0) {
@@ -107,7 +107,7 @@ fun Screen41(vm: Screen41ViewModel) {
                         Label(
                             modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).foregroundStyle(if (state.balanceUp) Color.green else Color.red),
                             title = { Text(verbatim = state.balanceChange) },
-                            icon = { Image(systemName = if (state.balanceUp) "arrow.up.right.circle.fill" else "arrow.down.right.circle.fill") },
+                            icon = { Image(systemName = if (state.balanceUp) SFSymbol.arrowUpRightCircleFill else SFSymbol.arrowDownRightCircleFill) },
                         )
                     }
                     Picker(title = "Range", selection = state.range, modifier = Modifier.pickerStyle(PickerStyle.segmented).labelsHidden(), onSelectionChange = { vm.setRange(it as String) }) {
@@ -131,7 +131,7 @@ fun Screen41(vm: Screen41ViewModel) {
                     for (action in state.actions) key(action.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 6.0) {
                             Image(systemName = 
-                                action.icon,
+                                SFSymbol(action.icon),
                                 modifier = Modifier.font(Font.system(size = 17.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(Color.white)
                                     .frame(width = 44.0, height = 44.0)
@@ -146,7 +146,7 @@ fun Screen41(vm: Screen41ViewModel) {
                 for (asset in state.assets) key(asset.id) {
                     HStack(spacing = 12.0) {
                         Image(systemName = 
-                            asset.icon,
+                            SFSymbol(asset.icon),
                             modifier = Modifier.font(Font.system(size = 18.0, weight = Font.Weight.bold))
                                 .foregroundStyle(Color.white)
                                 .frame(width = 40.0, height = 40.0)

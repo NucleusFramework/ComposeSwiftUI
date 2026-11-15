@@ -57,10 +57,10 @@ private fun AppTabs() {
     // The selected tab is Kotlin state: the Examples tab can switch to the Styled text tab.
     var tab by remember { mutableStateOf(AppTab.Examples) }
     TabView(selection = tab, onSelectionChange = { tab = it }) {
-        Tab("Examples", systemImage = "list.bullet", value = AppTab.Examples) {
+        Tab("Examples", systemImage = SFSymbol.listBullet, value = AppTab.Examples) {
             SampleNavigation(onShowText = { tab = AppTab.Text })
         }
-        Tab("Styled text", systemImage = "textformat", value = AppTab.Text) {
+        Tab("Styled text", systemImage = SFSymbol.textformat, value = AppTab.Text) {
             StyledTextScreen()
         }
     }
@@ -81,10 +81,10 @@ private fun SampleNavigation(onShowText: () -> Unit) {
 }
 
 private fun HomeScreenRows() = listOf(
-    Triple(Route.Counter, "Counter", "plusminus.circle.fill"),
-    Triple(Route.Chart, "Compose Multiplatform chart", "chart.bar.fill"),
-    Triple(Route.Paragraph, "UIKit paragraph", "text.alignleft"),
-    Triple(Route.LongList, "Long list (5,000 rows)", "list.number"),
+    Triple(Route.Counter, "Counter", SFSymbol.plusminusCircleFill),
+    Triple(Route.Chart, "Compose Multiplatform chart", SFSymbol.chartBarFill),
+    Triple(Route.Paragraph, "UIKit paragraph", SFSymbol.textAlignleft),
+    Triple(Route.LongList, "Long list (5,000 rows)", SFSymbol.listNumber),
 )
 
 @androidx.compose.runtime.Composable
@@ -105,10 +105,10 @@ private fun HomeScreen(onOpen: (Route) -> Unit, onShowText: () -> Unit) {
                 }
             }
             Button(action = onShowText) {
-                Label("Open the Styled text tab", systemImage = "arrow.right.circle.fill")
+                Label("Open the Styled text tab", systemImage = SFSymbol.arrowRightCircleFill)
             }
             Button(action = { showPreviews = true }) {
-                Label("Browse the @Preview composables", systemImage = "eye")
+                Label("Browse the @Preview composables", systemImage = SFSymbol.eye)
             }
         }
     }
@@ -119,7 +119,7 @@ private fun CounterScreen() {
     val vm = viewModel { CounterViewModel() }
     val count by vm.count.collectAsState()
     VStack(spacing = 16.0, modifier = Modifier.navigationTitle(stringResource(Res.string.counter_title))) {
-        Image(systemName = "swift", modifier = Modifier.font(Font.system(size = 64.0)).foregroundStyle(Color.orange))
+        Image(systemName = SFSymbol.swift, modifier = Modifier.font(Font.system(size = 64.0)).foregroundStyle(Color.red))
         Text(stringResource(Res.string.count_label, count), modifier = Modifier.font(Font.title).monospacedDigit())
         Button("Increment", action = vm::increment)
     }
@@ -206,7 +206,7 @@ private fun LongListScreen() {
                 HStack {
                     Text("Row $n")
                     Spacer()
-                    Image(systemName = if (n in starred) "star.fill" else "star", modifier = Modifier.foregroundStyle(Color.orange))
+                    Image(systemName = if (n in starred) SFSymbol.starFill else SFSymbol.star, modifier = Modifier.foregroundStyle(Color.orange))
                 }
             }
         }

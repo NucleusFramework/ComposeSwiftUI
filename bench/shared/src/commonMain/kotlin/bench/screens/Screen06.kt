@@ -113,7 +113,7 @@ fun Screen06(vm: Screen06ViewModel) {
                     for (item in state.items) key(item.id) {
                         HStack(spacing = 12.0) {
                             Image(systemName = 
-                                item.icon,
+                                SFSymbol(item.icon),
                                 modifier = Modifier.font(Font.title2).foregroundStyle(Color.white)
                                     .frame(width = 58.0, height = 58.0)
                                     .background(
@@ -129,7 +129,7 @@ fun Screen06(vm: Screen06ViewModel) {
                                 }
                                 Text(item.variant, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                                 if (item.lowStock) {
-                                    Label(title = "Only 2 left", systemImage = "exclamationmark.triangle.fill", modifier = Modifier.font(Font.caption2).foregroundStyle(Color.orange))
+                                    Label(title = "Only 2 left", systemImage = SFSymbol.exclamationmarkTriangleFill, modifier = Modifier.font(Font.caption2).foregroundStyle(Color.orange))
                                 }
                                 Stepper(value = item.quantity, bounds = 1..9, onValueChange = { vm.setQuantity(item.id, it) }, modifier = Modifier.font(Font.subheadline)) {
                                     Text(item.quantityLabel)
@@ -141,7 +141,7 @@ fun Screen06(vm: Screen06ViewModel) {
             )
             Section(title = "Promotions") {
                 HStack {
-                    Image(systemName = "tag.fill", modifier = Modifier.foregroundStyle(Color.green))
+                    Image(systemName = SFSymbol.tagFill, modifier = Modifier.foregroundStyle(Color.green))
                     Text(state.promoCode, modifier = Modifier.font(Font.body.monospaced()))
                     Spacer()
                     Text(verbatim = state.promoAmount, modifier = Modifier.foregroundStyle(Color.green))
@@ -150,7 +150,7 @@ fun Screen06(vm: Screen06ViewModel) {
             }
             Section(
                 header = { Text("Summary") },
-                footer = { Label(title = state.delivery, systemImage = "shippingbox") },
+                footer = { Label(title = state.delivery, systemImage = SFSymbol.shippingbox) },
                 content = {
                     LabeledContent(title = "Subtotal", value = state.subtotal)
                     LabeledContent(title = "Shipping", value = state.shipping)
@@ -165,7 +165,7 @@ fun Screen06(vm: Screen06ViewModel) {
                     action = {},
                     modifier = Modifier.buttonStyle(PrimitiveButtonStyle.borderedProminent).controlSize(ControlSize.large).tint(Color.indigo),
                 ) {
-                    Label(title = "Check Out", systemImage = "lock.fill", modifier = Modifier.font(Font.headline).frame(maxWidth = Double.POSITIVE_INFINITY))
+                    Label(title = "Check Out", systemImage = SFSymbol.lockFill, modifier = Modifier.font(Font.headline).frame(maxWidth = Double.POSITIVE_INFINITY))
                 }
             }
         }

@@ -97,13 +97,13 @@ fun Screen25(vm: Screen25ViewModel) {
                     ),
                 )
                 Image(systemName = 
-                    page.symbol,
+                    SFSymbol(page.symbol),
                     modifier = Modifier.font(Font.system(size = 92.0, weight = Font.Weight.medium))
                         .symbolRenderingMode(SymbolRenderingMode.hierarchical)
                         .foregroundStyle(page.tint.color()),
                 )
                 Image(systemName = 
-                    "sparkle",
+                    SFSymbol.sparkle,
                     modifier = Modifier.font(Font.system(size = 22.0)).foregroundStyle(page.accent.color()).offset(x = 96.0, y = -84.0),
                 )
             }
@@ -118,7 +118,7 @@ fun Screen25(vm: Screen25ViewModel) {
                         spacing = 6.0,
                     ) {
                         Image(systemName = 
-                            h.icon,
+                            SFSymbol(h.icon),
                             modifier = Modifier.font(Font.title3)
                                 .symbolRenderingMode(SymbolRenderingMode.palette)
                                 .foregroundStyle(page.tint.color(), page.accent.color()),

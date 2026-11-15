@@ -152,7 +152,7 @@ fun Screen46(vm: Screen46ViewModel) {
                             Spacer()
                             Screen46TeamColumn(match.away, HorizontalAlignment.center)
                         }
-                        Label(title = match.venue, systemImage = "sportscourt", modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
+                        Label(title = match.venue, systemImage = SFSymbol.sportscourt, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
                     }
                 }
             })
@@ -175,7 +175,7 @@ fun Screen46(vm: Screen46ViewModel) {
                                 ShapeView(Circle(), modifier = Modifier.frame(width = 10.0, height = 10.0), fill = standing.tint.color())
                                 Text(standing.team, modifier = Modifier.fontWeight(Font.Weight.medium))
                                 Image(systemName = 
-                                    if (standing.trendUp) "arrowtriangle.up.fill" else "arrowtriangle.down.fill",
+                                    if (standing.trendUp) SFSymbol.arrowtriangleUpFill else SFSymbol.arrowtriangleDownFill,
                                     modifier = Modifier.font(Font.system(size = 8.0)).foregroundStyle(if (standing.trendUp) Color.green else Color.red),
                                 )
                             }

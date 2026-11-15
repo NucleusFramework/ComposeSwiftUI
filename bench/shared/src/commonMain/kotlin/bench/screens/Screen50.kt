@@ -117,7 +117,7 @@ fun Screen50(vm: Screen50ViewModel) {
                         .background(state.bannerTint.color().opacity(0.14), RoundedRectangle(cornerRadius = 14.0)),
                     spacing = 12.0,
                 ) {
-                    Image(systemName = state.bannerIcon, modifier = Modifier.font(Font.title).foregroundStyle(state.bannerTint.color()))
+                    Image(systemName = SFSymbol(state.bannerIcon), modifier = Modifier.font(Font.title).foregroundStyle(state.bannerTint.color()))
                     VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
                         Text(state.bannerTitle, modifier = Modifier.font(Font.headline))
                         Text(state.bannerDetail, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
@@ -153,7 +153,7 @@ fun Screen50(vm: Screen50ViewModel) {
                         }
                     }, label = {
                         HStack {
-                            Label(title = group.title, systemImage = group.icon)
+                            Label(title = group.title, systemImage = SFSymbol(group.icon))
                             Spacer()
                             Text(group.region, modifier = Modifier.font(Font.caption).monospaced().foregroundStyle(ShapeStyle.secondary))
                         }
@@ -164,7 +164,7 @@ fun Screen50(vm: Screen50ViewModel) {
                     for (incident in state.incidents) key(incident.id) {
                         HStack(modifier = Modifier.padding(Edge.Set.vertical, 10.0), alignment = VerticalAlignment.top, spacing = 12.0) {
                             Image(systemName = 
-                                incident.icon,
+                                SFSymbol(incident.icon),
                                 modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.white)
                                     .frame(width = 32.0, height = 32.0)
                                     .background(incident.tint.color(), RoundedRectangle(cornerRadius = 8.0)),

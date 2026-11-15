@@ -98,7 +98,7 @@ private fun Screen26Podium(players: List<Screen26Player>) {
                             .overlay { ShapeView(Circle(), stroke = p.medalTint.color(), lineWidth = 3.0) },
                     )
                     Image(systemName = 
-                        "medal.fill",
+                        SFSymbol.medalFill,
                         modifier = Modifier.font(Font.system(size = 16.0))
                             .symbolRenderingMode(SymbolRenderingMode.palette)
                             .foregroundStyle(p.medalTint.color(), Color.red)
@@ -145,7 +145,7 @@ fun Screen26(vm: Screen26ViewModel) {
                         VStack(alignment = HorizontalAlignment.leading, spacing = 5.0) {
                             HStack(spacing = 4.0) {
                                 Text(p.name, modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold))
-                                Image(systemName = p.trendIcon, modifier = Modifier.font(Font.system(size = 8.0)).foregroundStyle(p.trendTint.color()))
+                                Image(systemName = SFSymbol(p.trendIcon), modifier = Modifier.font(Font.system(size = 8.0)).foregroundStyle(p.trendTint.color()))
                             }
                             ProgressView(value = p.progress, modifier = Modifier.tint(p.color.color()))
                         }

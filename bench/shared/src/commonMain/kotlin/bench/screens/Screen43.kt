@@ -110,11 +110,11 @@ fun Screen43(vm: Screen43ViewModel) {
                             }
                             VStack(alignment = HorizontalAlignment.leading, spacing = 4.0) {
                                 Text(ticket.title, modifier = Modifier.font(Font.headline).lineLimit(1))
-                                Label(title = ticket.venue, systemImage = "mappin.and.ellipse", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
-                                Label(title = ticket.time, systemImage = "clock", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                                Label(title = ticket.venue, systemImage = SFSymbol.mappinAndEllipse, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                                Label(title = ticket.time, systemImage = SFSymbol.clock, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                             }
                             Spacer()
-                            Image(systemName = ticket.icon, modifier = Modifier.font(Font.title2).foregroundStyle(ticket.tint.color()))
+                            Image(systemName = SFSymbol(ticket.icon), modifier = Modifier.font(Font.title2).foregroundStyle(ticket.tint.color()))
                         }
                         Divider()
                         HStack(alignment = VerticalAlignment.bottom) {
@@ -129,7 +129,7 @@ fun Screen43(vm: Screen43ViewModel) {
                                 }
                                 Label(
                                     title = ticket.status,
-                                    systemImage = if (ticket.checkedIn) "checkmark.seal.fill" else "qrcode.viewfinder",
+                                    systemImage = if (ticket.checkedIn) SFSymbol.checkmarkSealFill else SFSymbol.qrcodeViewfinder,
                                     modifier = Modifier.font(Font.caption).fontWeight(Font.Weight.semibold)
                                         .foregroundStyle(if (ticket.checkedIn) Color.green else ticket.tint.color())
                                         .padding(Edge.Set.horizontal, 8.0)

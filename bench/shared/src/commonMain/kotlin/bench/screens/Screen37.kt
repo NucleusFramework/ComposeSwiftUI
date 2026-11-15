@@ -92,7 +92,7 @@ fun Screen37(vm: Screen37ViewModel) {
                         spacing = 16.0,
                     ) {
                         HStack {
-                            Label(state.airline, systemImage = "airplane.circle.fill", modifier = Modifier.font(Font.headline).kerning(1.0))
+                            Label(state.airline, systemImage = SFSymbol.airplaneCircleFill, modifier = Modifier.font(Font.headline).kerning(1.0))
                             Spacer()
                             Text(verbatim = state.flight, modifier = Modifier.font(Font.caption).opacity(0.85))
                         }
@@ -108,7 +108,7 @@ fun Screen37(vm: Screen37ViewModel) {
                                     for (i in 0 until 3) key(i) {
                                         ShapeView(Circle(), modifier = Modifier.frame(width = 4.0, height = 4.0), fill = Color.white.opacity(0.6))
                                     }
-                                    Image(systemName = "airplane", modifier = Modifier.font(Font.title2))
+                                    Image(systemName = SFSymbol.airplane, modifier = Modifier.font(Font.title2))
                                     for (i in 3 until 6) key(i) {
                                         ShapeView(Circle(), modifier = Modifier.frame(width = 4.0, height = 4.0), fill = Color.white.opacity(0.6))
                                     }
@@ -142,7 +142,7 @@ fun Screen37(vm: Screen37ViewModel) {
                             }
                         }
                         HStack {
-                            Label(state.status, systemImage = if (state.onTime) "checkmark.seal.fill" else "clock.badge.exclamationmark.fill", modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).foregroundStyle(if (state.onTime) Color.green else Color.orange))
+                            Label(state.status, systemImage = if (state.onTime) SFSymbol.checkmarkSealFill else SFSymbol.clockBadgeExclamationmarkFill, modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).foregroundStyle(if (state.onTime) Color.green else Color.orange))
                             Spacer()
                         }
                         VStack(spacing = 6.0) {
@@ -155,7 +155,7 @@ fun Screen37(vm: Screen37ViewModel) {
                         }
                     }
                 }
-                Label("Add to Apple Wallet", systemImage = "wallet.pass.fill", modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).foregroundStyle(Color.white).frame(maxWidth = Double.POSITIVE_INFINITY).padding(Edge.Set.vertical, 12.0).background(Color.black, RoundedRectangle(cornerRadius = 12.0)))
+                Label("Add to Apple Wallet", systemImage = SFSymbol.walletPassFill, modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.semibold).foregroundStyle(Color.white).frame(maxWidth = Double.POSITIVE_INFINITY).padding(Edge.Set.vertical, 12.0).background(Color.black, RoundedRectangle(cornerRadius = 12.0)))
             }
         }
     }

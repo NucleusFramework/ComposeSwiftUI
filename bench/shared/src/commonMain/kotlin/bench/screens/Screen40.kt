@@ -106,26 +106,26 @@ fun Screen40(vm: Screen40ViewModel) {
     NavigationStack {
         List(
             modifier = Modifier.listStyle(ListStyle.plain).navigationTitle("Menu")
-                .toolbarItem(placement = ToolbarItemPlacement.navigation) { Button(title = "Info", systemImage = "info.circle", action = {}) }
+                .toolbarItem(placement = ToolbarItemPlacement.navigation) { Button(title = "Info", systemImage = SFSymbol.infoCircle, action = {}) }
                 .toolbarItem(placement = ToolbarItemPlacement.primaryAction) {
                     Button(action = {}) {
-                        Label(modifier = Modifier.labelStyle(LabelStyle.titleAndIcon), title = { Text(verbatim = state.cartLabel, modifier = Modifier.monospacedDigit()) }, icon = { Image(systemName = "bag.fill") })
+                        Label(modifier = Modifier.labelStyle(LabelStyle.titleAndIcon), title = { Text(verbatim = state.cartLabel, modifier = Modifier.monospacedDigit()) }, icon = { Image(systemName = SFSymbol.bagFill) })
                     }
                 },
         ) {
             Section {
                 HStack(modifier = Modifier.padding(Edge.Set.vertical, 6.0), spacing = 14.0) {
                     Image(systemName = 
-                        "fork.knife.circle.fill",
+                        SFSymbol.forkKnifeCircleFill,
                         modifier = Modifier.font(Font.system(size = 44.0)).foregroundStyle(Color.white, Color.red).symbolRenderingMode(SymbolRenderingMode.palette),
                     )
                     VStack(alignment = HorizontalAlignment.leading, spacing = 4.0) {
                         Text(verbatim = state.restaurant, modifier = Modifier.font(Font.title2).bold())
                         Text(verbatim = state.cuisine, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                         HStack(modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary), spacing = 10.0) {
-                            Label(state.rating, systemImage = "star.fill")
-                            Label(state.eta, systemImage = "bicycle")
-                            Label("Open", systemImage = "clock")
+                            Label(state.rating, systemImage = SFSymbol.starFill)
+                            Label(state.eta, systemImage = SFSymbol.bicycle)
+                            Label("Open", systemImage = SFSymbol.clock)
                         }
                     }
                 }
@@ -138,7 +138,7 @@ fun Screen40(vm: Screen40ViewModel) {
                                 HStack(spacing = 6.0) {
                                     Text(verbatim = dish.name, modifier = Modifier.font(Font.headline))
                                     if (dish.popular) {
-                                        Image(systemName = "flame.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
+                                        Image(systemName = SFSymbol.flameFill, modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
                                     }
                                 }
                                 Text(verbatim = dish.blurb, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary).lineLimit(2))
@@ -157,7 +157,7 @@ fun Screen40(vm: Screen40ViewModel) {
                             Spacer()
                             ZStack(modifier = Modifier.frame(width = 64.0, height = 64.0), alignment = Alignment.topTrailing) {
                                 Image(systemName = 
-                                    dish.icon,
+                                    SFSymbol(dish.icon),
                                     modifier = Modifier.font(Font.title2).foregroundStyle(Color.red.opacity(0.7))
                                         .frame(width = 64.0, height = 64.0)
                                         .background(Color.orange.opacity(0.12), RoundedRectangle(cornerRadius = 12.0)),

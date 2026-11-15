@@ -100,7 +100,7 @@ fun Screen38(vm: Screen38ViewModel) {
     NavigationStack {
         List(
             modifier = Modifier.listStyle(ListStyle.insetGrouped).navigationTitle("Medications")
-                .toolbarItem(placement = ToolbarItemPlacement.primaryAction) { Button(title = "Add", systemImage = "plus", action = {}) },
+                .toolbarItem(placement = ToolbarItemPlacement.primaryAction) { Button(title = "Add", systemImage = SFSymbol.plus, action = {}) },
         ) {
             Section {
                 VStack(modifier = Modifier.padding(Edge.Set.vertical, 4.0), alignment = HorizontalAlignment.leading, spacing = 8.0) {
@@ -108,16 +108,16 @@ fun Screen38(vm: Screen38ViewModel) {
                     HStack {
                         Text(verbatim = state.summary, modifier = Modifier.font(Font.title3).fontWeight(Font.Weight.semibold))
                         Spacer()
-                        Image(systemName = "pills.fill", modifier = Modifier.font(Font.title2).foregroundStyle(Color.mint).symbolRenderingMode(SymbolRenderingMode.hierarchical))
+                        Image(systemName = SFSymbol.pillsFill, modifier = Modifier.font(Font.title2).foregroundStyle(Color.mint).symbolRenderingMode(SymbolRenderingMode.hierarchical))
                     }
                     ProgressView(value = state.progress, modifier = Modifier.tint(Color.mint))
-                    Label(state.nextDose, systemImage = "bell.badge.fill", modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
+                    Label(state.nextDose, systemImage = SFSymbol.bellBadgeFill, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                 }
             }
             for (slot in state.slots) key(slot.id) {
                 Section(header = {
                     HStack {
-                        Label(slot.title, systemImage = slot.icon, modifier = Modifier.foregroundStyle(slot.tint.color()))
+                        Label(slot.title, systemImage = SFSymbol(slot.icon), modifier = Modifier.foregroundStyle(slot.tint.color()))
                         Spacer()
                         Text(verbatim = slot.count, modifier = Modifier.monospacedDigit())
                     }
@@ -138,9 +138,9 @@ fun Screen38(vm: Screen38ViewModel) {
                                 Text(verbatim = dose.name, modifier = Modifier.font(Font.body).fontWeight(Font.Weight.medium).strikethrough(dose.taken, color = Color.secondary))
                                 Text(verbatim = dose.dosage, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                                 HStack(modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.tertiary), spacing = 6.0) {
-                                    Label(dose.time, systemImage = "clock")
+                                    Label(dose.time, systemImage = SFSymbol.clock)
                                     if (dose.withFood) {
-                                        Label("With food", systemImage = "fork.knife")
+                                        Label("With food", systemImage = SFSymbol.forkKnife)
                                     }
                                 }
                             }
@@ -151,7 +151,7 @@ fun Screen38(vm: Screen38ViewModel) {
                 })
             }
             Section {
-                Label(state.refill, systemImage = "exclamationmark.triangle.fill", modifier = Modifier.font(Font.footnote).foregroundStyle(Color.orange))
+                Label(state.refill, systemImage = SFSymbol.exclamationmarkTriangleFill, modifier = Modifier.font(Font.footnote).foregroundStyle(Color.orange))
             }
         }
     }

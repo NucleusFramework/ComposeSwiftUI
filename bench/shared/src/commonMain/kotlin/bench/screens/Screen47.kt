@@ -109,7 +109,7 @@ private fun Screen47Cover(book: Screen47Book, width: Double, height: Double) {
     ) {
         LinearGradientView(LinearGradient(colors = listOf(book.coverTop.color(), book.coverBottom.color()), startPoint = UnitPoint.top, endPoint = UnitPoint.bottom))
         VStack(spacing = 6.0) {
-            Image(systemName = book.symbol, modifier = Modifier.font(Font.title2).foregroundStyle(Color.white.opacity(0.9)))
+            Image(systemName = SFSymbol(book.symbol), modifier = Modifier.font(Font.title2).foregroundStyle(Color.white.opacity(0.9)))
             Text(
                 book.title,
                 modifier = Modifier.font(Font.system(size = 10.0, weight = Font.Weight.bold, design = Font.Design.serif))
@@ -123,7 +123,7 @@ private fun Screen47Cover(book: Screen47Book, width: Double, height: Double) {
 private fun Screen47Stars(stars: List<Screen47Star>) {
     HStack(spacing = 1.0) {
         for (star in stars) key(star.id) {
-            Image(systemName = star.icon, modifier = Modifier.font(Font.system(size = 9.0)).foregroundStyle(Color.orange))
+            Image(systemName = SFSymbol(star.icon), modifier = Modifier.font(Font.system(size = 9.0)).foregroundStyle(Color.orange))
         }
     }
 }
@@ -164,7 +164,7 @@ fun Screen47(vm: Screen47ViewModel) {
                     VStack(alignment = HorizontalAlignment.leading, spacing = 4.0) {
                         Text("2026 Reading Goal", modifier = Modifier.font(Font.headline))
                         Text(state.goalCaption, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
-                        Label(title = state.streak, systemImage = "flame.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
+                        Label(title = state.streak, systemImage = SFSymbol.flameFill, modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
                     }
                     Spacer()
                 }

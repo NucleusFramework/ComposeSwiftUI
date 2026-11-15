@@ -89,7 +89,7 @@ fun Screen04(vm: Screen04ViewModel) {
                     fill = LinearGradient(colors = listOf(state.artFrom.color(), state.artTo.color()), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing),
                 )
                 ShapeView(Circle(), stroke = Color.white.opacity(0.25), lineWidth = 2.0, modifier = Modifier.frame(width = 170.0, height = 170.0))
-                Image(systemName = "music.note", modifier = Modifier.font(Font.system(size = 84.0, weight = Font.Weight.semibold)).foregroundStyle(Color.white.opacity(0.9)))
+                Image(systemName = SFSymbol.musicNote, modifier = Modifier.font(Font.system(size = 84.0, weight = Font.Weight.semibold)).foregroundStyle(Color.white.opacity(0.9)))
                 Text(state.album, modifier = Modifier.font(Font.caption.weight(Font.Weight.semibold)).foregroundStyle(Color.white.opacity(0.8))
                     .frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY, alignment = Alignment.bottomLeading)
                     .padding(16.0))
@@ -100,7 +100,7 @@ fun Screen04(vm: Screen04ViewModel) {
                     Text(state.artist, modifier = Modifier.font(Font.title3).foregroundStyle(ShapeStyle.secondary))
                 }
                 Spacer()
-                Image(systemName = if (state.liked) "heart.fill" else "heart", modifier = Modifier.font(Font.title2).foregroundStyle(Color.pink))
+                Image(systemName = if (state.liked) SFSymbol.heartFill else SFSymbol.heart, modifier = Modifier.font(Font.title2).foregroundStyle(Color.pink))
             }
             VStack(spacing = 6.0) {
                 Slider(value = state.progress, bounds = 0.0..1.0, onValueChange = vm::setProgress, modifier = Modifier.tint(Color.primary))
@@ -111,21 +111,21 @@ fun Screen04(vm: Screen04ViewModel) {
                 }
             }
             HStack(spacing = 44.0) {
-                Image(systemName = "shuffle", modifier = Modifier.font(Font.body).foregroundStyle(if (state.shuffle) Color.pink else Color.secondary))
-                Image(systemName = "backward.fill", modifier = Modifier.font(Font.title))
-                Image(systemName = if (state.playing) "pause.circle.fill" else "play.circle.fill", modifier = Modifier.font(Font.system(size = 64.0)).symbolRenderingMode(SymbolRenderingMode.hierarchical))
-                Image(systemName = "forward.fill", modifier = Modifier.font(Font.title))
-                Image(systemName = "repeat", modifier = Modifier.font(Font.body).foregroundStyle(ShapeStyle.secondary))
+                Image(systemName = SFSymbol.shuffle, modifier = Modifier.font(Font.body).foregroundStyle(if (state.shuffle) Color.pink else Color.secondary))
+                Image(systemName = SFSymbol.backwardFill, modifier = Modifier.font(Font.title))
+                Image(systemName = if (state.playing) SFSymbol.pauseCircleFill else SFSymbol.playCircleFill, modifier = Modifier.font(Font.system(size = 64.0)).symbolRenderingMode(SymbolRenderingMode.hierarchical))
+                Image(systemName = SFSymbol.forwardFill, modifier = Modifier.font(Font.title))
+                Image(systemName = SFSymbol.repeat, modifier = Modifier.font(Font.body).foregroundStyle(ShapeStyle.secondary))
             }
             HStack(spacing = 12.0, modifier = Modifier.foregroundStyle(ShapeStyle.secondary)) {
-                Image(systemName = "speaker.fill", modifier = Modifier.font(Font.caption))
+                Image(systemName = SFSymbol.speakerFill, modifier = Modifier.font(Font.caption))
                 Slider(value = state.volume, bounds = 0.0..1.0, onValueChange = vm::setVolume, modifier = Modifier.tint(Color.gray))
-                Image(systemName = "speaker.wave.3.fill", modifier = Modifier.font(Font.caption))
+                Image(systemName = SFSymbol.speakerWave3Fill, modifier = Modifier.font(Font.caption))
             }
             HStack {
                 for (action in state.actions) key(action.id) {
                     VStack(spacing = 4.0, modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY)) {
-                        Image(systemName = action.icon, modifier = Modifier.font(Font.title3))
+                        Image(systemName = SFSymbol(action.icon), modifier = Modifier.font(Font.title3))
                         Text(action.label, modifier = Modifier.font(Font.caption2))
                     }
                 }

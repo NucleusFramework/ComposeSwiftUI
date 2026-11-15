@@ -12,7 +12,7 @@ fun counterScreen() = composeSwiftUI {
     val count by vm.count.collectAsState()
     NavigationStack {
         VStack(spacing = 16.0, modifier = Modifier.navigationTitle("Counter")) {
-            Image(systemName = "swift", modifier = Modifier.font(Font.largeTitle).foregroundStyle(Color.orange))
+            Image(systemName = SFSymbol.swift, modifier = Modifier.font(Font.largeTitle).foregroundStyle(Color.orange))
             Text("Count: $count", modifier = Modifier.font(Font.title))
             Button("Increment", action = vm::increment)
         }
@@ -43,7 +43,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.3.2"
+       id("dev.nucleusframework.compose-swiftui") version "0.4.0"
    }
 
    kotlin {
@@ -99,7 +99,7 @@ translation:
 |---|---|
 | `Text("Hi").font(.title).padding()` | `Text("Hi", modifier = Modifier.font(Font.title).padding())` |
 | `VStack(spacing: 8) { … }` | `VStack(spacing = 8.0) { … }` |
-| `Image(systemName: "star")` | `Image(systemName = "star")` |
+| `Image(systemName: "star")` | `Image(systemName = SFSymbol.star)` |
 | `Section { … } header: { Text("A") }` | `Section(header = { Text("A") }, content = { … })` |
 | `Toggle("Wi-Fi", isOn: $on)` | `Toggle("Wi-Fi", isOn = on, onIsOnChange = { on = it })` |
 | `ForEach(items, id: \.id) { … }` | `for (item in items) key(item.id) { … }`, or `LazyForEach(items, key = { it.id }) { … }` for long lists |
@@ -114,7 +114,7 @@ API:
 
 | SwiftUI | Compose SwiftUI |
 |---|---|
-| `TabView(selection:)` + `Tab(_:systemImage:value:)` | `TabView(selection, onSelectionChange) { Tab("Home", systemImage = "house", value = AppTab.Home) { … } }` |
+| `TabView(selection:)` + `Tab(_:systemImage:value:)` | `TabView(selection, onSelectionChange) { Tab("Home", systemImage = SFSymbol.house, value = AppTab.Home) { … } }` |
 | `Text` concatenation, `AttributedString` | `Text(buildStyledString { withStyle(SpanStyle(color = Color.gray, fontSize = 13.0)) { append("…") } })` |
 | `NavigationStack(path:)` + `navigationDestination(for:)` | `NavigationStack(path, onPathChange, destination = { value -> }) { … }` |
 | `sheet(item:)`, `fullScreenCover(item:)`, `popover(item:)` | `Modifier.sheet(item, onDismiss) { item -> }`, same for the others |

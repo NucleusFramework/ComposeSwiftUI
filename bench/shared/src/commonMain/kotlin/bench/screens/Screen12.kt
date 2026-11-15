@@ -85,7 +85,7 @@ fun Screen12(vm: Screen12ViewModel) {
                 HStack {
                     Text(state.dateLine, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                     Spacer()
-                    Label(state.streak, systemImage = "bolt.heart.fill", modifier = Modifier.font(Font.caption.weight(Font.Weight.semibold)).foregroundStyle(Color.orange))
+                    Label(state.streak, systemImage = SFSymbol.boltHeartFill, modifier = Modifier.font(Font.caption.weight(Font.Weight.semibold)).foregroundStyle(Color.orange))
                 }
                 HStack(modifier = Modifier.padding(Edge.Set.vertical, 16.0), spacing = 12.0) {
                     for (ring in state.rings) key(ring.id) {
@@ -95,7 +95,7 @@ fun Screen12(vm: Screen12ViewModel) {
                                 bounds = 0.0..1.0,
                                 modifier = Modifier.gaugeStyle(GaugeStyle.accessoryCircularCapacity).tint(ring.tint.color()).scaleEffect(1.2),
                                 label = { Text(ring.title) },
-                                currentValueLabel = { Image(systemName = ring.icon, modifier = Modifier.foregroundStyle(ring.tint.color())) },
+                                currentValueLabel = { Image(systemName = SFSymbol(ring.icon), modifier = Modifier.foregroundStyle(ring.tint.color())) },
                             )
                             VStack(spacing = 0.0) {
                                 Text(ring.valueText, modifier = Modifier.font(Font.headline).monospacedDigit())
@@ -117,7 +117,7 @@ fun Screen12(vm: Screen12ViewModel) {
                                     spacing = 6.0,
                                 ) {
                                     HStack(spacing = 6.0) {
-                                        Image(systemName = stat.icon, modifier = Modifier.font(Font.caption.weight(Font.Weight.bold)).foregroundStyle(stat.tint.color()))
+                                        Image(systemName = SFSymbol(stat.icon), modifier = Modifier.font(Font.caption.weight(Font.Weight.bold)).foregroundStyle(stat.tint.color()))
                                         Text(stat.label, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                                     }
                                     HStack(alignment = VerticalAlignment.firstTextBaseline, spacing = 4.0) {
@@ -138,7 +138,7 @@ fun Screen12(vm: Screen12ViewModel) {
                     for ((index, workout) in state.workouts.withIndex()) key(workout.id) {
                         HStack(modifier = Modifier.padding(Edge.Set.horizontal, 12.0).padding(Edge.Set.vertical, 10.0), spacing = 12.0) {
                             Image(systemName = 
-                                workout.icon,
+                                SFSymbol(workout.icon),
                                 modifier = Modifier.font(Font.system(size = 18.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(workout.tint.color())
                                     .frame(width = 40.0, height = 40.0)

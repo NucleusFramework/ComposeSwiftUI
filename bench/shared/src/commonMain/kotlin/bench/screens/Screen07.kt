@@ -99,8 +99,8 @@ fun Screen07(vm: Screen07ViewModel) {
                     Text(state.month, modifier = Modifier.font(Font.title2.bold()))
                     Spacer()
                     HStack(spacing = 18.0, modifier = Modifier.font(Font.headline).foregroundStyle(Color.red)) {
-                        Image(systemName = "chevron.left")
-                        Image(systemName = "chevron.right")
+                        Image(systemName = SFSymbol.chevronLeft)
+                        Image(systemName = SFSymbol.chevronRight)
                     }
                 }
                 Grid(horizontalSpacing = 4.0, verticalSpacing = 6.0) {
@@ -146,14 +146,14 @@ fun Screen07(vm: Screen07ViewModel) {
                         ShapeView(RoundedRectangle(cornerRadius = 2.0), fill = event.tint.color(), modifier = Modifier.frame(width = 4.0))
                         VStack(alignment = HorizontalAlignment.leading, spacing = 4.0) {
                             Text(event.title, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)))
-                            Label(title = event.time, systemImage = "clock", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
-                            Label(title = event.location, systemImage = "mappin.and.ellipse", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                            Label(title = event.time, systemImage = SFSymbol.clock, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                            Label(title = event.location, systemImage = SFSymbol.mappinAndEllipse, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                         }
                         Spacer()
                         VStack(alignment = HorizontalAlignment.trailing, spacing = 6.0) {
                             Text(event.duration, modifier = Modifier.font(Font.caption.bold()).foregroundStyle(event.tint.color()))
                             HStack(spacing = 2.0, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary)) {
-                                Image(systemName = "person.2.fill")
+                                Image(systemName = SFSymbol.person2Fill)
                                 Text(event.attendees)
                             }
                         }

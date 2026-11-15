@@ -120,7 +120,7 @@ class Screen15ViewModel : BenchViewModel() {
 @Composable
 private fun Screen15FileRow(file: Screen15File) {
     HStack(spacing = 10.0) {
-        Image(systemName = file.icon, modifier = Modifier.font(Font.title3).foregroundStyle(file.tint.color()).frame(width = 28.0))
+        Image(systemName = SFSymbol(file.icon), modifier = Modifier.font(Font.title3).foregroundStyle(file.tint.color()).frame(width = 28.0))
         VStack(alignment = HorizontalAlignment.leading, spacing = 1.0) {
             Text(file.name, modifier = Modifier.font(Font.subheadline).lineLimit(1).truncationMode(Text.TruncationMode.middle))
             Text(file.date, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
@@ -139,7 +139,7 @@ fun Screen15(vm: Screen15ViewModel) {
                 for (location in state.locations) key(location.id) {
                     HStack(spacing = 12.0) {
                         Image(systemName = 
-                            location.icon,
+                            SFSymbol(location.icon),
                             modifier = Modifier.font(Font.system(size = 16.0, weight = Font.Weight.semibold))
                                 .foregroundStyle(location.tint.color())
                                 .frame(width = 32.0, height = 32.0)
@@ -173,7 +173,7 @@ fun Screen15(vm: Screen15ViewModel) {
                                     },
                                     label = {
                                         HStack {
-                                            Label(sub.name, systemImage = "folder", modifier = Modifier.font(Font.subheadline))
+                                            Label(sub.name, systemImage = SFSymbol.folder, modifier = Modifier.font(Font.subheadline))
                                             Spacer()
                                             Text(sub.count, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.tertiary))
                                         }
@@ -189,7 +189,7 @@ fun Screen15(vm: Screen15ViewModel) {
                                 Label(
                                     modifier = Modifier.font(Font.headline),
                                     title = { Text(folder.name) },
-                                    icon = { Image(systemName = folder.icon, modifier = Modifier.foregroundStyle(folder.tint.color())) },
+                                    icon = { Image(systemName = SFSymbol(folder.icon), modifier = Modifier.foregroundStyle(folder.tint.color())) },
                                 )
                                 Spacer()
                                 Text(

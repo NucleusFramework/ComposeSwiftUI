@@ -95,7 +95,7 @@ fun Screen35(vm: Screen35ViewModel) {
             Section {
                 HStack(spacing = 14.0) {
                     Image(systemName = 
-                        "swift",
+                        SFSymbol.swift,
                         modifier = Modifier.font(Font.system(size = 28.0, weight = Font.Weight.bold))
                             .foregroundStyle(Color.white)
                             .frame(width = 60.0, height = 60.0)
@@ -122,7 +122,7 @@ fun Screen35(vm: Screen35ViewModel) {
                         content = {
                             for (lesson in module.lessons) key(lesson.id) {
                                 HStack(spacing = 12.0) {
-                                    Image(systemName = lesson.kind, modifier = Modifier.foregroundStyle(ShapeStyle.secondary).frame(width = 22.0))
+                                    Image(systemName = SFSymbol(lesson.kind), modifier = Modifier.foregroundStyle(ShapeStyle.secondary).frame(width = 22.0))
                                     VStack(alignment = HorizontalAlignment.leading, spacing = 1.0) {
                                         Text(verbatim = lesson.title, modifier = Modifier.font(Font.subheadline).foregroundStyle(if (lesson.locked) ShapeStyle.secondary else ShapeStyle.primary))
                                         Text(verbatim = lesson.duration, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.tertiary))
@@ -130,9 +130,9 @@ fun Screen35(vm: Screen35ViewModel) {
                                     Spacer()
                                     Image(systemName = 
                                         when {
-                                            lesson.locked -> "lock.fill"
-                                            lesson.done -> "checkmark.circle.fill"
-                                            else -> "circle"
+                                            lesson.locked -> SFSymbol.lockFill
+                                            lesson.done -> SFSymbol.checkmarkCircleFill
+                                            else -> SFSymbol.circle
                                         },
                                         modifier = Modifier.foregroundStyle(
                                             when {

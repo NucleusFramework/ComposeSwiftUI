@@ -38,16 +38,16 @@ CONTENT = {
         'Text("Hello, world")\nText(LocalizedKey("welcome.title"), modifier = Modifier.font(Font.title))'),
     "type-Label": ("A title next to an icon, laid out the way the platform expects.",
         "Lists, menus and toolbars adapt a label automatically: they may show the title, the icon or both.",
-        'Label("Favorites", systemImage = "star.fill")'),
+        'Label("Favorites", systemImage = SFSymbol.starFill)'),
     "type-Image": ("A view that displays an image, an SF Symbol or an asset.",
         "Use `systemName` for SF Symbols. Symbols scale with the font of their context, so `Modifier.font` sets "
         "their size; color them with `Modifier.foregroundStyle`.",
-        'Image(systemName = "cloud.sun.fill", modifier = Modifier.font(Font.largeTitle))'),
+        'Image(systemName = SFSymbol.cloudSunFill, modifier = Modifier.font(Font.largeTitle))'),
     "type-Link": ("A control that opens a URL.", "", 'Link("Terms of service", destination = "https://example.com/terms")'),
     "type-Button": ("A control that runs an action when the user taps or clicks it.",
         "Give a button a title, a title and an SF Symbol, or any composable content as its label. The action is a "
         "plain Kotlin lambda, so it can call your `ViewModel` directly.",
-        'Button("Increment", action = vm::increment)\n\nButton(action = { vm.delete(item) }) {\n    Label("Delete", systemImage = "trash")\n}'),
+        'Button("Increment", action = vm::increment)\n\nButton(action = { vm.delete(item) }) {\n    Label("Delete", systemImage = SFSymbol.trash)\n}'),
     "type-Toggle": ("A control that switches between on and off.",
         "Compose SwiftUI replaces the Swift binding with a value and a callback: pass the current state in `isOn` "
         "and update it in `onIsOnChange`.",
@@ -102,7 +102,7 @@ CONTENT = {
     "type-TabView": ("A view that switches between child views with a tab bar.",
         "Give each child a `Tab`. With `TabView(selection, onSelectionChange)` the selected tab is Kotlin state, so "
         "your code can switch tabs.",
-        'TabView(selection = tab, onSelectionChange = { tab = it }) {\n    Tab("Home", systemImage = "house", value = AppTab.Home) { HomeScreen() }\n    Tab("Settings", systemImage = "gear", value = AppTab.Settings) { SettingsScreen() }\n}'),
+        'TabView(selection = tab, onSelectionChange = { tab = it }) {\n    Tab("Home", systemImage = SFSymbol.house, value = AppTab.Home) { HomeScreen() }\n    Tab("Settings", systemImage = SFSymbol.gear, value = AppTab.Settings) { SettingsScreen() }\n}'),
     "type-DisclosureGroup": ("A view that shows or hides its content behind a disclosure control.", "", ""),
     "type-ContentUnavailableView": ("A view for empty states, such as no results.", "", ""),
     "type-Color": ("A color value, also usable as a view or a shape style.",
@@ -132,7 +132,7 @@ CONTENT = {
         'Text("New", modifier = Modifier.padding().background(Color.blue.opacity(0.2), Capsule()))'),
     "modifier-overlay": ("Draws a view in front of a view.", "", ""),
     "modifier-clipShape": ("Clips a view to a shape.", "",
-        'Image(systemName = "person.fill", modifier = Modifier.frame(width = 48.0, height = 48.0).clipShape(Circle()))'),
+        'Image(systemName = SFSymbol.personFill, modifier = Modifier.frame(width = 48.0, height = 48.0).clipShape(Circle()))'),
     "modifier-cornerRadius": ("Rounds the corners of a view.", "Prefer `clipShape(RoundedRectangle(cornerRadius = …))`.", ""),
     "modifier-shadow": ("Draws a shadow behind a view.", "", ""),
     "modifier-opacity": ("Sets the transparency of a view.", "", ""),

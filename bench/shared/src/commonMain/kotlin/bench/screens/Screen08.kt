@@ -69,11 +69,11 @@ fun Screen08(vm: Screen08ViewModel) {
                     HStack(spacing = 10.0, modifier = Modifier.padding(edges = Edge.Set.horizontal, length = 12.0)
                         .padding(edges = Edge.Set.vertical, length = 8.0)
                         .background(Color.gray.opacity(0.12))) {
-                        Image(systemName = "plus.circle.fill", modifier = Modifier.font(Font.title2).foregroundStyle(Color.gray))
+                        Image(systemName = SFSymbol.plusCircleFill, modifier = Modifier.font(Font.title2).foregroundStyle(Color.gray))
                         TextField(title = "Message", text = state.draft, onTextChange = vm::setDraft, modifier = Modifier.padding(edges = Edge.Set.horizontal, length = 12.0)
                             .padding(edges = Edge.Set.vertical, length = 8.0)
                             .background(Color.gray.opacity(0.15), Capsule()))
-                        Image(systemName = "arrow.up.circle.fill", modifier = Modifier.font(Font.title2).foregroundStyle(Color.blue))
+                        Image(systemName = SFSymbol.arrowUpCircleFill, modifier = Modifier.font(Font.title2).foregroundStyle(Color.blue))
                     }
                 }
                 .navigationTitle(state.contact)
@@ -111,7 +111,7 @@ fun Screen08(vm: Screen08ViewModel) {
                                 Text(msg.time)
                                 if (msg.mine) {
                                     Image(systemName = 
-                                        if (msg.read) "checkmark.circle.fill" else "checkmark.circle",
+                                        if (msg.read) SFSymbol.checkmarkCircleFill else SFSymbol.checkmarkCircle,
                                         modifier = Modifier.foregroundStyle(if (msg.read) Color.blue else Color.gray),
                                     )
                                 }

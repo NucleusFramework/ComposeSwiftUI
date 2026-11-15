@@ -121,7 +121,7 @@ private fun Screen22Canvas(state: Screen22State) {
         for (pin in state.pins) key(pin.id) {
             VStack(modifier = Modifier.offset(x = pin.x, y = pin.y), spacing = 4.0) {
                 Image(systemName = 
-                    pin.icon,
+                    SFSymbol(pin.icon),
                     modifier = Modifier.font(Font.system(size = if (pin.selected) 18.0 else 13.0, weight = Font.Weight.semibold))
                         .foregroundStyle(Color.white)
                         .frame(width = if (pin.selected) 44.0 else 30.0, height = if (pin.selected) 44.0 else 30.0)
@@ -161,24 +161,24 @@ private fun Screen22Card(place: Screen22Place) {
                 Text(place.category, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
             }
             Spacer()
-            Image(systemName = "xmark.circle.fill", modifier = Modifier.font(Font.title2).symbolRenderingMode(SymbolRenderingMode.hierarchical).foregroundStyle(Color.gray))
+            Image(systemName = SFSymbol.xmarkCircleFill, modifier = Modifier.font(Font.title2).symbolRenderingMode(SymbolRenderingMode.hierarchical).foregroundStyle(Color.gray))
         }
         HStack(spacing = 14.0) {
-            Label(place.rating, systemImage = "star.fill", modifier = Modifier.foregroundStyle(Color.orange))
-            Label(place.distance, systemImage = "location.fill")
-            Label(place.eta, systemImage = "figure.walk")
+            Label(place.rating, systemImage = SFSymbol.starFill, modifier = Modifier.foregroundStyle(Color.orange))
+            Label(place.distance, systemImage = SFSymbol.locationFill)
+            Label(place.eta, systemImage = SFSymbol.figureWalk)
         }
         Text(place.open, modifier = Modifier.font(Font.footnote).foregroundStyle(Color.green))
         Text(place.address, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
         HStack(spacing = 10.0) {
             Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.borderedProminent)) {
-                Label("Directions", systemImage = "arrow.triangle.turn.up.right.diamond.fill", modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY))
+                Label("Directions", systemImage = SFSymbol.arrowTriangleTurnUpRightDiamondFill, modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY))
             }
             Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.bordered)) {
-                Image(systemName = "phone.fill")
+                Image(systemName = SFSymbol.phoneFill)
             }
             Button(action = {}, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.bordered)) {
-                Image(systemName = "square.and.arrow.up")
+                Image(systemName = SFSymbol.squareAndArrowUp)
             }
         }
     }

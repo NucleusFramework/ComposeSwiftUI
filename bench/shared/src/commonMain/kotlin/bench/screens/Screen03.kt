@@ -105,14 +105,14 @@ fun Screen03(vm: Screen03ViewModel) {
                                 RoundedRectangle(cornerRadius = 16.0),
                             )) {
                             HStack {
-                                Image(systemName = kpi.icon, modifier = Modifier.font(Font.title3).foregroundStyle(Color.white))
+                                Image(systemName = SFSymbol(kpi.icon), modifier = Modifier.font(Font.title3).foregroundStyle(Color.white))
                                 Spacer()
                                 HStack(spacing = 2.0, modifier = Modifier.font(Font.caption2.weight(Font.Weight.bold))
                                     .foregroundStyle(Color.white)
                                     .padding(edges = Edge.Set.horizontal, length = 6.0)
                                     .padding(edges = Edge.Set.vertical, length = 3.0)
                                     .background(Color.white.opacity(0.22), Capsule())) {
-                                    Image(systemName = if (kpi.up) "arrow.up.right" else "arrow.down.right")
+                                    Image(systemName = if (kpi.up) SFSymbol.arrowUpRight else SFSymbol.arrowDownRight)
                                     Text(verbatim = kpi.delta)
                                 }
                             }

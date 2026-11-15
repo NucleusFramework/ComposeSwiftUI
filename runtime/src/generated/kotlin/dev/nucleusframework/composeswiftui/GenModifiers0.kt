@@ -182,7 +182,7 @@ public fun Modifier.animation(animation: Animation?, value: Any): Modifier = ele
  * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
 @HiddenFromObjC
-public fun Modifier.assistiveAccessNavigationIcon(systemImage: String): Modifier = element(121, systemImage)
+public fun Modifier.assistiveAccessNavigationIcon(systemImage: SFSymbol): Modifier = element(121, systemImage.name)
 
 /**
  * SwiftUI `View.background(_:in:fillStyle:)`

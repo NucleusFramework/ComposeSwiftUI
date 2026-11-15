@@ -104,7 +104,7 @@ fun Screen19(vm: Screen19ViewModel) {
                         }
                         Spacer()
                         Image(systemName = 
-                            "arrow.left.arrow.right",
+                            SFSymbol.arrowLeftArrowRight,
                             modifier = Modifier.font(Font.headline)
                                 .foregroundStyle(Color.white)
                                 .frame(width = 40.0, height = 40.0)
@@ -119,9 +119,9 @@ fun Screen19(vm: Screen19ViewModel) {
                     }
                     Divider()
                     HStack(modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary)) {
-                        Label(state.dates, systemImage = "calendar")
+                        Label(state.dates, systemImage = SFSymbol.calendar)
                         Spacer()
-                        Label(state.passengers, systemImage = "person.2.fill")
+                        Label(state.passengers, systemImage = SFSymbol.person2Fill)
                     }
                 }
                 Text(state.resultsLabel, modifier = Modifier.font(Font.headline))
@@ -166,7 +166,7 @@ fun Screen19(vm: Screen19ViewModel) {
                                         strokeStyle = StrokeStyle(lineWidth = 1.0, dash = listOf(4.0, 3.0)),
                                     )
                                     Image(systemName = 
-                                        "airplane",
+                                        SFSymbol.airplane,
                                         modifier = Modifier.font(Font.caption)
                                             .foregroundStyle(flight.tint.color())
                                             .padding(Edge.Set.horizontal, 4.0)
@@ -182,7 +182,7 @@ fun Screen19(vm: Screen19ViewModel) {
                         }
                         Divider()
                         HStack {
-                            Label(flight.baggage, systemImage = "suitcase.rolling.fill", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                            Label(flight.baggage, systemImage = SFSymbol.suitcaseRollingFill, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                             Spacer()
                             Text("per person", modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
                             Text(flight.price, modifier = Modifier.font(Font.title3.bold()).monospacedDigit().foregroundStyle(Color.blue))

@@ -92,7 +92,7 @@ fun Screen01(vm: Screen01ViewModel) {
                 for (row in state.rows) key(row.id) {
                     HStack(spacing = 12.0) {
                         Image(systemName = 
-                            row.icon,
+                            SFSymbol(row.icon),
                             modifier = Modifier.font(Font.system(size = 15.0, weight = Font.Weight.semibold))
                                 .foregroundStyle(Color.white)
                                 .frame(width = 30.0, height = 30.0)

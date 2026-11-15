@@ -104,14 +104,14 @@ fun Screen21(vm: Screen21ViewModel) {
                         .background(ShapeStyle.ultraThinMaterial, Capsule()),
                     spacing = 8.0,
                 ) {
-                    Image(systemName = "moon.fill", modifier = Modifier.foregroundStyle(Color.indigo))
+                    Image(systemName = SFSymbol.moonFill, modifier = Modifier.foregroundStyle(Color.indigo))
                     Text(state.focus, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.medium)))
                 }
                 HStack(modifier = Modifier.padding(Edge.Set.top, 6.0)) {
                     Text("Notification Centre", modifier = Modifier.font(Font.title3.bold()).foregroundStyle(Color.white))
                     Spacer()
                     Image(systemName = 
-                        "xmark",
+                        SFSymbol.xmark,
                         modifier = Modifier.font(Font.caption.weight(Font.Weight.bold))
                             .frame(width = 28.0, height = 28.0)
                             .background(ShapeStyle.ultraThinMaterial, Circle()),
@@ -126,7 +126,7 @@ fun Screen21(vm: Screen21ViewModel) {
                         ) {
                             HStack(spacing = 8.0) {
                                 Image(systemName = 
-                                    group.icon,
+                                    SFSymbol(group.icon),
                                     modifier = Modifier.font(Font.system(size = 11.0, weight = Font.Weight.semibold))
                                         .foregroundStyle(Color.white)
                                         .frame(width = 22.0, height = 22.0)

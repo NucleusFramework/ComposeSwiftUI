@@ -104,7 +104,7 @@ fun Screen17(vm: Screen17ViewModel) {
                         ),
                     )
                     Image(systemName = 
-                        "fork.knife.circle.fill",
+                        SFSymbol.forkKnifeCircleFill,
                         modifier = Modifier.font(Font.system(size = 110.0))
                             .foregroundStyle(Color.white.opacity(0.25))
                             .frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY, alignment = Alignment.topTrailing)
@@ -122,7 +122,7 @@ fun Screen17(vm: Screen17ViewModel) {
                         Text(state.title, modifier = Modifier.font(Font.title.bold()).foregroundStyle(Color.white))
                         HStack(modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.white.opacity(0.9)), spacing = 12.0) {
                             Text(state.author)
-                            Label(state.rating, systemImage = "star.fill")
+                            Label(state.rating, systemImage = SFSymbol.starFill)
                         }
                     }
                 }
@@ -130,7 +130,7 @@ fun Screen17(vm: Screen17ViewModel) {
                     HStack(modifier = Modifier.padding(Edge.Set.vertical, 12.0).background(Color.gray.opacity(0.08), RoundedRectangle(cornerRadius = 14.0))) {
                         for (fact in state.facts) key(fact.id) {
                             VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 4.0) {
-                                Image(systemName = fact.icon, modifier = Modifier.font(Font.title3).foregroundStyle(accent))
+                                Image(systemName = SFSymbol(fact.icon), modifier = Modifier.font(Font.title3).foregroundStyle(accent))
                                 Text(fact.value, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).monospacedDigit())
                                 Text(fact.label, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
                             }
@@ -146,7 +146,7 @@ fun Screen17(vm: Screen17ViewModel) {
                         for (ingredient in state.ingredients) key(ingredient.id) {
                             HStack(modifier = Modifier.padding(Edge.Set.vertical, 10.0), spacing = 12.0) {
                                 Image(systemName = 
-                                    if (ingredient.checked) "checkmark.circle.fill" else "circle",
+                                    if (ingredient.checked) SFSymbol.checkmarkCircleFill else SFSymbol.circle,
                                     modifier = Modifier.font(Font.title3).foregroundStyle(if (ingredient.checked) Color.green else Color.gray.opacity(0.5)),
                                 )
                                 Text(ingredient.name, modifier = Modifier.strikethrough(isActive = ingredient.checked, pattern = Text.LineStyle.Pattern.solid, color = null).foregroundStyle(if (ingredient.checked) Color.secondary else Color.primary))
@@ -170,7 +170,7 @@ fun Screen17(vm: Screen17ViewModel) {
                                 HStack {
                                     Text(step.title, modifier = Modifier.font(Font.headline))
                                     Spacer()
-                                    Label(step.timer, systemImage = "timer", modifier = Modifier.font(Font.caption).foregroundStyle(accent))
+                                    Label(step.timer, systemImage = SFSymbol.timer, modifier = Modifier.font(Font.caption).foregroundStyle(accent))
                                 }
                                 Text(step.text, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary).fixedSize(horizontal = false, vertical = true))
                             }

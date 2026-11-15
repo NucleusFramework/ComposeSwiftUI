@@ -119,17 +119,17 @@ public fun <T : Any> Modifier.confirmationDialog(
 
 /** SwiftUI environment values read at the position of an [EnvironmentReader]. */
 public data class SwiftUIEnvironment(
-    val colorScheme: String = "light",
-    val dynamicTypeSize: String = "large",
-    val horizontalSizeClass: String? = null,
-    val verticalSizeClass: String? = null,
+    val colorScheme: ColorScheme = ColorScheme.light,
+    val dynamicTypeSize: DynamicTypeSize = DynamicTypeSize.large,
+    val horizontalSizeClass: UserInterfaceSizeClass? = null,
+    val verticalSizeClass: UserInterfaceSizeClass? = null,
     val locale: String = "",
-    val layoutDirection: String = "leftToRight",
+    val layoutDirection: LayoutDirection = LayoutDirection.leftToRight,
     val isEnabled: Boolean = true,
     val isPresented: Boolean = false,
     val dismiss: () -> Unit = {},
 ) {
-    val isDark: Boolean get() = colorScheme == "dark"
+    val isDark: Boolean get() = colorScheme == ColorScheme.dark
 }
 
 /**
@@ -147,12 +147,12 @@ public fun EnvironmentReader(modifier: Modifier = Modifier, content: @Composable
             val v = value as List<*>
             val dismiss = v[8] as? SwiftAction
             val new = SwiftUIEnvironment(
-                colorScheme = v[0] as String,
-                dynamicTypeSize = v[1] as String,
-                horizontalSizeClass = v[2] as? String,
-                verticalSizeClass = v[3] as? String,
+                colorScheme = if (v[0] == "dark") ColorScheme.dark else ColorScheme.light,
+                dynamicTypeSize = dynamicTypeSizeOf(v[1] as String),
+                horizontalSizeClass = sizeClassOf(v[2] as? String),
+                verticalSizeClass = sizeClassOf(v[3] as? String),
                 locale = v[4] as String,
-                layoutDirection = v[5] as String,
+                layoutDirection = if (v[5] == "rightToLeft") LayoutDirection.rightToLeft else LayoutDirection.leftToRight,
                 isEnabled = v[6] as Boolean,
                 isPresented = v[7] as Boolean,
                 dismiss = { dismiss?.run() },
@@ -161,6 +161,28 @@ public fun EnvironmentReader(modifier: Modifier = Modifier, content: @Composable
         }),
         modifier,
     ) { content(env) }
+}
+
+// Swift sends `String(describing:)` of the case; unknown future cases fall back to the default.
+private fun dynamicTypeSizeOf(name: String): DynamicTypeSize = when (name) {
+    "xSmall" -> DynamicTypeSize.xSmall
+    "small" -> DynamicTypeSize.small
+    "medium" -> DynamicTypeSize.medium
+    "xLarge" -> DynamicTypeSize.xLarge
+    "xxLarge" -> DynamicTypeSize.xxLarge
+    "xxxLarge" -> DynamicTypeSize.xxxLarge
+    "accessibility1" -> DynamicTypeSize.accessibility1
+    "accessibility2" -> DynamicTypeSize.accessibility2
+    "accessibility3" -> DynamicTypeSize.accessibility3
+    "accessibility4" -> DynamicTypeSize.accessibility4
+    "accessibility5" -> DynamicTypeSize.accessibility5
+    else -> DynamicTypeSize.large
+}
+
+private fun sizeClassOf(name: String?): UserInterfaceSizeClass? = when (name) {
+    "compact" -> UserInterfaceSizeClass.compact
+    "regular" -> UserInterfaceSizeClass.regular
+    else -> null
 }
 
 // ---- focus & gestures -------------------------------------------------------------------------
@@ -367,12 +389,12 @@ public fun <T : Any> TabView(
 @Composable
 public fun Tab(
     title: String,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     value: Any? = null,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(ExtraIds.TAB, listOf(title, systemImage, value), modifier, content = content)
+    SwiftView(ExtraIds.TAB, listOf(title, systemImage?.name, value), modifier, content = content)
 }
 
 // ---- mixed-style text ----------------------------------------------------------------------------

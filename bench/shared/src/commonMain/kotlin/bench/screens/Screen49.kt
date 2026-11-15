@@ -164,7 +164,7 @@ fun Screen49(vm: Screen49ViewModel) {
                 HStack {
                     for (stat in state.stats) key(stat.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 3.0) {
-                            Image(systemName = stat.icon, modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.indigo))
+                            Image(systemName = SFSymbol(stat.icon), modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.indigo))
                             Text(stat.value, modifier = Modifier.font(Font.headline).monospacedDigit())
                             Text(stat.label, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
                         }
@@ -195,7 +195,7 @@ fun Screen49(vm: Screen49ViewModel) {
                     LabeledContent(content = {
                         Text(vital.value, modifier = Modifier.monospacedDigit())
                     }, label = {
-                        Label(title = vital.title, systemImage = vital.icon)
+                        Label(title = vital.title, systemImage = SFSymbol(vital.icon))
                     })
                 }
             }

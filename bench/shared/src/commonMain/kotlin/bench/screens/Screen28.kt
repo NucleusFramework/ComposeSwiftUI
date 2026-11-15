@@ -119,7 +119,7 @@ private fun Screen28Tile(device: Screen28Device, vm: Screen28ViewModel) {
     ) {
         HStack {
             Image(systemName = 
-                device.icon,
+                SFSymbol(device.icon),
                 modifier = Modifier.font(Font.system(size = 18.0, weight = Font.Weight.semibold))
                     .foregroundStyle(Color.white)
                     .frame(width = 40.0, height = 40.0)
@@ -157,7 +157,7 @@ fun Screen28(vm: Screen28ViewModel) {
                     }
                     Spacer()
                     Image(systemName = 
-                        "house.lodge.fill",
+                        SFSymbol.houseLodgeFill,
                         modifier = Modifier.font(Font.title).symbolRenderingMode(SymbolRenderingMode.multicolor),
                     )
                 }
@@ -166,7 +166,7 @@ fun Screen28(vm: Screen28ViewModel) {
                         for (scene in state.scenes) key(scene.id) {
                             Label(
                                 scene.name,
-                                systemImage = scene.icon,
+                                systemImage = SFSymbol(scene.icon),
                                 modifier = Modifier.font(Font.subheadline.weight(Font.Weight.medium))
                                     .foregroundStyle(scene.fg.color())
                                     .padding(Edge.Set.horizontal, 14.0)
@@ -182,7 +182,7 @@ fun Screen28(vm: Screen28ViewModel) {
                     spacing = 10.0,
                 ) {
                     HStack {
-                        Label("Thermostat", systemImage = "thermometer.medium", modifier = Modifier.font(Font.headline).foregroundStyle(Color.orange))
+                        Label("Thermostat", systemImage = SFSymbol.thermometerMedium, modifier = Modifier.font(Font.headline).foregroundStyle(Color.orange))
                         Spacer()
                         Text(state.temperatureText, modifier = Modifier.font(Font.system(size = 28.0, weight = Font.Weight.semibold, design = Font.Design.rounded)).monospacedDigit())
                     }

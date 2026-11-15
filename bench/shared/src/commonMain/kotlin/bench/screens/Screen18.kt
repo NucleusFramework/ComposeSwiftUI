@@ -128,17 +128,17 @@ fun Screen18(vm: Screen18ViewModel) {
                     HStack {
                         Text(state.accountName, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).opacity(0.85))
                         Spacer()
-                        Image(systemName = "creditcard.fill", modifier = Modifier.font(Font.title3))
+                        Image(systemName = SFSymbol.creditcardFill, modifier = Modifier.font(Font.title3))
                     }
                     Text(state.balance, modifier = Modifier.font(Font.system(size = 36.0, weight = Font.Weight.bold, design = Font.Design.rounded)).monospacedDigit())
                     Text(state.cardNumber, modifier = Modifier.font(Font.footnote).monospaced().opacity(0.8))
                     HStack(spacing = 24.0) {
                         VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
-                            Label("Income", systemImage = "arrow.down.circle.fill", modifier = Modifier.font(Font.caption).opacity(0.8))
+                            Label("Income", systemImage = SFSymbol.arrowDownCircleFill, modifier = Modifier.font(Font.caption).opacity(0.8))
                             Text(state.income, modifier = Modifier.font(Font.headline).monospacedDigit())
                         }
                         VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
-                            Label("Spent", systemImage = "arrow.up.circle.fill", modifier = Modifier.font(Font.caption).opacity(0.8))
+                            Label("Spent", systemImage = SFSymbol.arrowUpCircleFill, modifier = Modifier.font(Font.caption).opacity(0.8))
                             Text(state.spent, modifier = Modifier.font(Font.headline).monospacedDigit())
                         }
                     }
@@ -147,7 +147,7 @@ fun Screen18(vm: Screen18ViewModel) {
                     for (action in state.actions) key(action.id) {
                         VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY), spacing = 6.0) {
                             Image(systemName = 
-                                action.icon,
+                                SFSymbol(action.icon),
                                 modifier = Modifier.font(Font.system(size = 17.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(Color.blue)
                                     .frame(width = 44.0, height = 44.0)
@@ -162,7 +162,7 @@ fun Screen18(vm: Screen18ViewModel) {
                 for (goal in state.goals) key(goal.id) {
                     HStack(spacing = 12.0) {
                         Image(systemName = 
-                            goal.icon,
+                            SFSymbol(goal.icon),
                             modifier = Modifier.foregroundStyle(Color.white)
                                 .frame(width = 32.0, height = 32.0)
                                 .background(goal.tint.color(), RoundedRectangle(cornerRadius = 8.0)),
@@ -191,7 +191,7 @@ fun Screen18(vm: Screen18ViewModel) {
                         for (tx in day.transactions) key(tx.id) {
                             HStack(spacing = 12.0) {
                                 Image(systemName = 
-                                    tx.icon,
+                                    SFSymbol(tx.icon),
                                     modifier = Modifier.font(Font.system(size = 15.0, weight = Font.Weight.semibold))
                                         .foregroundStyle(tx.tint.color())
                                         .frame(width = 36.0, height = 36.0)

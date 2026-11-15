@@ -16,7 +16,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from bridges import Bridge, Classifier, Ctx, Unsupported, kotlin_name, kotlin_param_name  # noqa: E402
+from bridges import Bridge, Classifier, Ctx, Unsupported, kotlin_name, kotlin_param_name, symbolize  # noqa: E402
 import model as model_module  # noqa: E402
 from model import DEPLOYMENT, OSNAME, Model  # noqa: E402
 
@@ -208,7 +208,7 @@ class Generator:
                 if default is not None and drop_unsupported_defaults:
                     continue  # omitted: Swift uses its default
                 raise Unsupported("param %s: %s" % (internal, e))
-            out.append((label, internal, b, default))
+            out.append((label, internal, symbolize(label, b), default))
         return out
 
     def kotlin_default(self, b, default):
@@ -833,7 +833,7 @@ class Generator:
             body = "; ".join(lets + [call])
             branches.append("        %s -> { %s }" % (cond, body))
         branches.append('        else -> error("No SwiftUI %s initializer takes this combination of arguments")' % base_name)
-        doc = "/**\n * SwiftUI `%s` initializers that differ only by argument labels, selected by the labels you pass\n * (e.g. `Image(systemName = \"star\")`).\n */" % base_name
+        doc = "/**\n * SwiftUI `%s` initializers that differ only by argument labels, selected by the labels you pass\n * (e.g. `Image(systemName = SFSymbol.star)`).\n */" % base_name
         return "%s\n@HiddenFromObjC\n@Composable\n@Suppress(\"NAME_SHADOWING\")\npublic fun %s(\n    %s,\n) {\n    when {\n%s\n    }\n}\n" % (
             doc, base_name, plist, "\n".join(branches))
 

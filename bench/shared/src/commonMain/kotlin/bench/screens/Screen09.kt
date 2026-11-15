@@ -136,7 +136,7 @@ fun Screen09(vm: Screen09ViewModel) {
                 Stepper(value = state.age, bounds = 13..99, onValueChange = vm::setAge) {
                     Text(state.ageLabel)
                 }
-                Toggle(title = "Product newsletter", systemImage = "envelope.badge", isOn = state.newsletter, onIsOnChange = vm::setNewsletter)
+                Toggle(title = "Product newsletter", systemImage = SFSymbol.envelopeBadge, isOn = state.newsletter, onIsOnChange = vm::setNewsletter)
             })
             Section(header = { Text("Plan") }, footer = { Text(state.footer) }, content = {
                 LabeledContent(title = "Plan", value = state.plan)

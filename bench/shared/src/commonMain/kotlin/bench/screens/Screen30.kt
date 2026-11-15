@@ -114,7 +114,7 @@ private fun Screen30Diff(file: Screen30File) {
         spacing = 0.0,
     ) {
         HStack(modifier = Modifier.padding(10.0).background(Color.gray.opacity(0.12)), spacing = 6.0) {
-            Image(systemName = file.icon, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
+            Image(systemName = SFSymbol(file.icon), modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
             Text(verbatim = file.path, modifier = Modifier.font(Font.system(style = Font.TextStyle.footnote, design = Font.Design.monospaced)).bold().lineLimit(1).truncationMode(Text.TruncationMode.middle))
             Spacer()
             Text(verbatim = file.stats, modifier = Modifier.font(Font.caption.monospaced()).foregroundStyle(ShapeStyle.secondary))
@@ -146,7 +146,7 @@ fun Screen30(vm: Screen30ViewModel) {
                 HStack(spacing = 8.0) {
                     Label(
                         "Open",
-                        systemImage = "arrow.triangle.pull",
+                        systemImage = SFSymbol.arrowTrianglePull,
                         modifier = Modifier.font(Font.caption.bold())
                             .foregroundStyle(Color.white)
                             .padding(Edge.Set.horizontal, 10.0)
@@ -170,7 +170,7 @@ fun Screen30(vm: Screen30ViewModel) {
                     spacing = 10.0,
                 ) {
                     HStack {
-                        Label(state.approvals, systemImage = "checkmark.seal.fill", modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(Color.green))
+                        Label(state.approvals, systemImage = SFSymbol.checkmarkSealFill, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(Color.green))
                         Spacer()
                         HStack(spacing = -8.0) {
                             for (r in state.reviewers) key(r.id) {
@@ -185,13 +185,13 @@ fun Screen30(vm: Screen30ViewModel) {
                             }
                         }
                     }
-                    Label(state.changesRequested, systemImage = "exclamationmark.bubble.fill", modifier = Modifier.font(Font.subheadline).foregroundStyle(if (state.mergeable) Color.secondary else Color.orange))
-                    Label(state.checks, systemImage = "checkmark.circle.fill", modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
+                    Label(state.changesRequested, systemImage = SFSymbol.exclamationmarkBubbleFill, modifier = Modifier.font(Font.subheadline).foregroundStyle(if (state.mergeable) Color.secondary else Color.orange))
+                    Label(state.checks, systemImage = SFSymbol.checkmarkCircleFill, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                     Button(
                         action = {},
                         modifier = Modifier.buttonStyle(PrimitiveButtonStyle.borderedProminent).tint(Color.green).controlSize(ControlSize.large).disabled(!state.mergeable),
                     ) {
-                        Label("Merge pull request", systemImage = "arrow.triangle.merge", modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY))
+                        Label("Merge pull request", systemImage = SFSymbol.arrowTriangleMerge, modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY))
                     }
                 }
             }

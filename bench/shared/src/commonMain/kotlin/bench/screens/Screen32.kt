@@ -105,11 +105,11 @@ fun Screen32(vm: Screen32ViewModel) {
                         Spacer()
                         ZStack(modifier = Modifier.frame(width = 44.0, height = 44.0)) {
                             ShapeView(Circle(), fill = Color.orange.opacity(0.15))
-                            Image(systemName = "flame.fill", modifier = Modifier.font(Font.title3).foregroundStyle(Color.orange))
+                            Image(systemName = SFSymbol.flameFill, modifier = Modifier.font(Font.title3).foregroundStyle(Color.orange))
                         }
                     }
                     ProgressView(value = state.progress, modifier = Modifier.tint(Color.green))
-                    Label(state.bestStreak, systemImage = "trophy.fill", modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
+                    Label(state.bestStreak, systemImage = SFSymbol.trophyFill, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                 }
             }
             Section(header = {
@@ -126,7 +126,7 @@ fun Screen32(vm: Screen32ViewModel) {
                 for (habit in state.habits) key(habit.id) {
                     HStack(spacing = 12.0) {
                         Image(systemName = 
-                            habit.icon,
+                            SFSymbol(habit.icon),
                             modifier = Modifier.font(Font.system(size = 16.0, weight = Font.Weight.semibold))
                                 .foregroundStyle(habit.tint.color())
                                 .frame(width = 36.0, height = 36.0)
@@ -135,7 +135,7 @@ fun Screen32(vm: Screen32ViewModel) {
                         VStack(alignment = HorizontalAlignment.leading, spacing = 3.0) {
                             Text(verbatim = habit.name, modifier = Modifier.font(Font.body).lineLimit(1))
                             HStack(modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary).lineLimit(1), spacing = 4.0) {
-                                Image(systemName = "flame", modifier = Modifier.imageScale(Image.Scale.small))
+                                Image(systemName = SFSymbol.flame, modifier = Modifier.imageScale(Image.Scale.small))
                                 Text(verbatim = habit.streak, modifier = Modifier.monospacedDigit())
                                 Text(verbatim = "· ${habit.goal}")
                             }
@@ -151,7 +151,7 @@ fun Screen32(vm: Screen32ViewModel) {
                             }
                         }
                         Image(systemName = 
-                            if (habit.doneToday) "checkmark.circle.fill" else "circle",
+                            if (habit.doneToday) SFSymbol.checkmarkCircleFill else SFSymbol.circle,
                             modifier = Modifier.font(Font.title2)
                                 .foregroundStyle(if (habit.doneToday) Color.green else Color.gray.opacity(0.5))
                                 .frame(width = 32.0),

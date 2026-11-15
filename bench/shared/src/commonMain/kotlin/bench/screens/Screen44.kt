@@ -92,7 +92,7 @@ fun Screen44(vm: Screen44ViewModel) {
                         for (chip in state.chips) key(chip.id) {
                             Label(
                                 title = chip.title,
-                                systemImage = chip.icon,
+                                systemImage = SFSymbol(chip.icon),
                                 modifier = Modifier.font(Font.subheadline).fontWeight(Font.Weight.medium)
                                     .foregroundStyle(if (chip.selected) Color.white else Color.primary)
                                     .padding(Edge.Set.horizontal, 12.0)
@@ -105,7 +105,7 @@ fun Screen44(vm: Screen44ViewModel) {
                 HStack {
                     Text(state.resultCount, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                     Spacer()
-                    Label(title = state.saved, systemImage = "bookmark.fill", modifier = Modifier.font(Font.footnote).foregroundStyle(Color.blue))
+                    Label(title = state.saved, systemImage = SFSymbol.bookmarkFill, modifier = Modifier.font(Font.footnote).foregroundStyle(Color.blue))
                 }
             }
             for (job in state.jobs) key(job.id) {
@@ -113,7 +113,7 @@ fun Screen44(vm: Screen44ViewModel) {
                     HStack(alignment = VerticalAlignment.top, spacing = 12.0) {
                         ZStack(modifier = Modifier.frame(width = 48.0, height = 48.0)) {
                             ShapeView(RoundedRectangle(cornerRadius = 12.0), fill = job.logo.color().opacity(0.18))
-                            Image(systemName = job.logoIcon, modifier = Modifier.font(Font.title3).foregroundStyle(job.logo.color()))
+                            Image(systemName = SFSymbol(job.logoIcon), modifier = Modifier.font(Font.title3).foregroundStyle(job.logo.color()))
                         }
                         VStack(alignment = HorizontalAlignment.leading, spacing = 3.0) {
                             HStack(spacing = 6.0) {
@@ -130,11 +130,11 @@ fun Screen44(vm: Screen44ViewModel) {
                                 }
                             }
                             Text(job.title, modifier = Modifier.font(Font.headline))
-                            Label(title = job.location, systemImage = "mappin", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                            Label(title = job.location, systemImage = SFSymbol.mappin, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                         }
                         Spacer()
                         Image(systemName = 
-                            if (job.bookmarked) "bookmark.fill" else "bookmark",
+                            if (job.bookmarked) SFSymbol.bookmarkFill else SFSymbol.bookmark,
                             modifier = Modifier.font(Font.title3).foregroundStyle(if (job.bookmarked) Color.blue else Color.gray),
                         )
                     }

@@ -142,6 +142,10 @@ import SwiftUI
             let a = m.args
             return ModChain.apply(ContentUnavailableView(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
+        r[31] = { m in
+            let a = m.args
+            return ModChain.apply(ContentUnavailableView(LocalizedStringKey(a.string(0)), image: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
+        }
         r[32] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(a.string(0), image: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
@@ -444,6 +448,10 @@ import SwiftUI
         r[90] = { m in
             let a = m.args
             return ModChain.apply(Label(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: a.string(1)), m, m.consumedPrefix)
+        }
+        r[91] = { m in
+            let a = m.args
+            return ModChain.apply(Label(LocalizedStringKey(a.string(0)), image: a.string(1)), m, m.consumedPrefix)
         }
         r[92] = { m in
             let a = m.args

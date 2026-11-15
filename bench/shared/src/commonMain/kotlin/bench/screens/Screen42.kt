@@ -111,7 +111,7 @@ fun Screen42(vm: Screen42ViewModel) {
             Section {
                 VStack(modifier = Modifier.padding(Edge.Set.vertical, 4.0), alignment = HorizontalAlignment.leading, spacing = 10.0) {
                     HStack {
-                        Label(title = "Progress", systemImage = "chart.bar.fill", modifier = Modifier.font(Font.headline).foregroundStyle(Color.indigo))
+                        Label(title = "Progress", systemImage = SFSymbol.chartBarFill, modifier = Modifier.font(Font.headline).foregroundStyle(Color.indigo))
                         Spacer()
                         Text(state.progressText, modifier = Modifier.font(Font.title2).bold().monospacedDigit())
                     }
@@ -122,7 +122,7 @@ fun Screen42(vm: Screen42ViewModel) {
             for (section in state.sections) key(section.id) {
                 Section(header = {
                     HStack {
-                        Label(title = section.title, systemImage = section.icon)
+                        Label(title = section.title, systemImage = SFSymbol(section.icon))
                         Spacer()
                         Text(section.count, modifier = Modifier.font(Font.caption).monospacedDigit())
                     }
@@ -130,7 +130,7 @@ fun Screen42(vm: Screen42ViewModel) {
                     for (task in section.tasks) key(task.id) {
                         HStack(alignment = VerticalAlignment.top, spacing = 12.0) {
                             Image(systemName = 
-                                if (task.done) "checkmark.circle.fill" else "circle",
+                                if (task.done) SFSymbol.checkmarkCircleFill else SFSymbol.circle,
                                 modifier = Modifier.font(Font.title2).foregroundStyle(if (task.done) Color.green else Color.gray),
                             )
                             VStack(alignment = HorizontalAlignment.leading, spacing = 4.0) {
@@ -143,7 +143,7 @@ fun Screen42(vm: Screen42ViewModel) {
                                 HStack(spacing = 8.0) {
                                     Label(
                                         title = task.due,
-                                        systemImage = "clock",
+                                        systemImage = SFSymbol.clock,
                                         modifier = Modifier.font(Font.caption2).foregroundStyle(if (task.overdue) Color.red else Color.secondary),
                                     )
                                     Text(
@@ -158,7 +158,7 @@ fun Screen42(vm: Screen42ViewModel) {
                             }
                             Spacer()
                             if (task.priority > 0) {
-                                Image(systemName = "flag.fill", modifier = Modifier.font(Font.caption).foregroundStyle(screen42FlagColor(task.priority)))
+                                Image(systemName = SFSymbol.flagFill, modifier = Modifier.font(Font.caption).foregroundStyle(screen42FlagColor(task.priority)))
                             }
                         }
                     }
@@ -166,7 +166,7 @@ fun Screen42(vm: Screen42ViewModel) {
             }
             Section {
                 HStack {
-                    Image(systemName = "exclamationmark.triangle.fill", modifier = Modifier.foregroundStyle(Color.orange))
+                    Image(systemName = SFSymbol.exclamationmarkTriangleFill, modifier = Modifier.foregroundStyle(Color.orange))
                     Text(state.footer, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                 }
             }

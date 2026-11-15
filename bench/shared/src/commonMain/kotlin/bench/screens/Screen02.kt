@@ -84,13 +84,13 @@ fun Screen02(vm: Screen02ViewModel) {
             modifier = Modifier.listStyle(ListStyle.plain)
                 .navigationTitle("Mail")
                 .toolbarItem(placement = ToolbarItemPlacement.primaryAction) {
-                    Button(title = "Compose", systemImage = "square.and.pencil", action = {})
+                    Button(title = "Compose", systemImage = SFSymbol.squareAndPencil, action = {})
                 },
         ) {
             Section(title = "Mailboxes") {
                 for (box in state.mailboxes) key(box.id) {
                     HStack(spacing = 12.0, modifier = Modifier.badge(box.count)) {
-                        Image(systemName = box.icon, modifier = Modifier.foregroundStyle(box.tint.color()).frame(width = 26.0))
+                        Image(systemName = SFSymbol(box.icon), modifier = Modifier.foregroundStyle(box.tint.color()).frame(width = 26.0))
                         Text(box.title)
                     }
                 }
@@ -118,14 +118,14 @@ fun Screen02(vm: Screen02ViewModel) {
                                 HStack(spacing = 6.0) {
                                     Text(msg.sender, modifier = Modifier.font(Font.headline).lineLimit(1))
                                     if (msg.flagged) {
-                                        Image(systemName = "flag.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
+                                        Image(systemName = SFSymbol.flagFill, modifier = Modifier.font(Font.caption).foregroundStyle(Color.orange))
                                     }
                                     Spacer()
                                     if (msg.attachment) {
-                                        Image(systemName = "paperclip", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+                                        Image(systemName = SFSymbol.paperclip, modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
                                     }
                                     Text(msg.time, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
-                                    Image(systemName = "chevron.right", modifier = Modifier.font(Font.caption.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.tertiary))
+                                    Image(systemName = SFSymbol.chevronRight, modifier = Modifier.font(Font.caption.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.tertiary))
                                 }
                                 Text(msg.subject, modifier = Modifier.font(Font.subheadline).fontWeight(if (msg.unread) Font.Weight.semibold else Font.Weight.regular).lineLimit(1))
                                 Text(msg.preview, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary).lineLimit(2))

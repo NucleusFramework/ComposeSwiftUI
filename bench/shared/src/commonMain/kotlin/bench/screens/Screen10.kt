@@ -111,7 +111,7 @@ fun Screen10(vm: Screen10ViewModel) {
             Section(title = "Appearance") {
                 Picker(title = "Theme", selection = state.theme, onSelectionChange = { vm.setTheme(it as Int) }, modifier = Modifier.pickerStyle(PickerStyle.segmented)) {
                     for (option in state.themes) key(option.id) {
-                        Label(title = option.label, systemImage = option.icon, modifier = Modifier.tag(option.id))
+                        Label(title = option.label, systemImage = SFSymbol(option.icon), modifier = Modifier.tag(option.id))
                     }
                 }
                 Picker(title = "Accent color", selection = state.accent, onSelectionChange = { vm.setAccent(it as Int) }, modifier = Modifier.pickerStyle(PickerStyle.menu)) {
@@ -130,8 +130,8 @@ fun Screen10(vm: Screen10ViewModel) {
                         bounds = 0.0..1.0,
                         onValueChange = vm::setTextSize,
                         label = { Text("Text size") },
-                        minimumValueLabel = { Image(systemName = "textformat.size.smaller") },
-                        maximumValueLabel = { Image(systemName = "textformat.size.larger") },
+                        minimumValueLabel = { Image(systemName = SFSymbol.textformatSizeSmaller) },
+                        maximumValueLabel = { Image(systemName = SFSymbol.textformatSizeLarger) },
                     )
                 }
                 LabeledContent(title = "Preview") {
@@ -141,19 +141,19 @@ fun Screen10(vm: Screen10ViewModel) {
             Section(header = { Text("Playback") }, footer = { Text("Lossless streaming uses significantly more data.") }, content = {
                 Picker(title = "Streaming quality", selection = state.quality, onSelectionChange = { vm.setQuality(it as Int) }, modifier = Modifier.pickerStyle(PickerStyle.menu)) {
                     for (option in state.qualities) key(option.id) {
-                        Label(title = option.label, systemImage = option.icon, modifier = Modifier.tag(option.id))
+                        Label(title = option.label, systemImage = SFSymbol(option.icon), modifier = Modifier.tag(option.id))
                     }
                 }
                 HStack(spacing = 10.0) {
-                    Image(systemName = "speaker.fill", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
+                    Image(systemName = SFSymbol.speakerFill, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
                     Slider(value = state.volume, bounds = 0.0..1.0, onValueChange = vm::setVolume)
                     Text(state.volumeLabel, modifier = Modifier.monospacedDigit().frame(width = 32.0, alignment = Alignment.trailing))
                 }
-                Toggle(title = "Autoplay", systemImage = "play.circle", isOn = state.autoplay, onIsOnChange = vm::setAutoplay)
+                Toggle(title = "Autoplay", systemImage = SFSymbol.playCircle, isOn = state.autoplay, onIsOnChange = vm::setAutoplay)
                 LabeledContent(title = "Downloaded cache", value = state.cache)
             })
             Section(title = "Notifications") {
-                Picker(title = "Alert sound", systemImage = "bell.badge", selection = state.sound, onSelectionChange = { vm.setSound(it as Int) }) {
+                Picker(title = "Alert sound", systemImage = SFSymbol.bellBadge, selection = state.sound, onSelectionChange = { vm.setSound(it as Int) }) {
                     for (option in state.sounds) key(option.id) {
                         Text(option.label, modifier = Modifier.tag(option.id))
                     }
@@ -163,7 +163,7 @@ fun Screen10(vm: Screen10ViewModel) {
             Section(title = "About") {
                 LabeledContent(title = "Version", value = state.version)
                 LabeledContent(title = "License") {
-                    Label(title = "Pro", systemImage = "checkmark.seal.fill", modifier = Modifier.foregroundStyle(Color.green))
+                    Label(title = "Pro", systemImage = SFSymbol.checkmarkSealFill, modifier = Modifier.foregroundStyle(Color.green))
                 }
             }
         }

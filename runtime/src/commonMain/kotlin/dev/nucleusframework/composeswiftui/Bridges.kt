@@ -52,6 +52,16 @@ data class LocalizedKey(val key: String)
 /** `"settings.title".localized` == `LocalizedKey("settings.title")`. */
 val String.localized: LocalizedKey get() = LocalizedKey(this)
 
+/**
+ * An SF Symbol name, as taken by `Image(systemName:)` and the `systemImage:` parameters.
+ * Use the generated constants (`SFSymbol.starFill`); the constructor covers custom or newer symbols.
+ */
+@OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+@kotlin.native.HiddenFromObjC
+value class SFSymbol(val name: String) {
+    companion object
+}
+
 /** View kinds of the platform view embeddings (UIKit / AppKit), rendered by the Swift renderer. */
 /** How an embedded UIKit or AppKit view is sized by SwiftUI. */
 public enum class NativeViewSizing {

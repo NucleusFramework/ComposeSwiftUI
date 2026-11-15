@@ -86,7 +86,7 @@ private fun Screen24Card(plan: Screen24Plan) {
     ) {
         HStack(spacing = 10.0) {
             Image(systemName = 
-                plan.icon,
+                SFSymbol(plan.icon),
                 modifier = Modifier.font(Font.system(size = 16.0, weight = Font.Weight.bold))
                     .foregroundStyle(Color.white)
                     .frame(width = 34.0, height = 34.0)
@@ -115,7 +115,7 @@ private fun Screen24Card(plan: Screen24Plan) {
             for (feature in plan.features) key(feature.id) {
                 HStack(spacing = 8.0) {
                     Image(systemName = 
-                        if (feature.included) "checkmark.circle.fill" else "xmark.circle",
+                        if (feature.included) SFSymbol.checkmarkCircleFill else SFSymbol.xmarkCircle,
                         modifier = Modifier.foregroundStyle(if (feature.included) plan.tint.color() else Color.gray.opacity(0.5)),
                     )
                     Text(
@@ -147,7 +147,7 @@ fun Screen24(vm: Screen24ViewModel) {
             VStack(modifier = Modifier.padding(), spacing = 16.0) {
                 VStack(spacing = 6.0) {
                     Image(systemName = 
-                        "crown.fill",
+                        SFSymbol.crownFill,
                         modifier = Modifier.font(Font.system(size = 34.0)).symbolRenderingMode(SymbolRenderingMode.multicolor),
                     )
                     Text("Choose your plan", modifier = Modifier.font(Font.title2.bold()))
@@ -165,7 +165,7 @@ fun Screen24(vm: Screen24ViewModel) {
                     Text("Monthly", modifier = Modifier.tag(0))
                     Text("Yearly", modifier = Modifier.tag(1))
                 }
-                Label(state.savings, systemImage = "gift.fill", modifier = Modifier.font(Font.caption.bold()).foregroundStyle(Color.orange))
+                Label(state.savings, systemImage = SFSymbol.giftFill, modifier = Modifier.font(Font.caption.bold()).foregroundStyle(Color.orange))
                 for (plan in state.plans) key(plan.id) {
                     Screen24Card(plan)
                 }

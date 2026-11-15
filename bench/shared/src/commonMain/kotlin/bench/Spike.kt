@@ -55,7 +55,7 @@ fun spikeScreen() = composeSwiftUI {
     }) {
         ScrollView {
             VStack(alignment = HorizontalAlignment.leading, spacing = 16.0, modifier = Modifier.padding().navigationTitle("Extras")) {
-                EnvironmentReader { env -> Text("Scheme: ${env.colorScheme} · type: ${env.dynamicTypeSize}") }
+                EnvironmentReader { env -> Text("Dark: ${env.isDark} · RTL: ${env.layoutDirection == LayoutDirection.rightToLeft}") }
                 HStack {
                     Button("Push page 1") { path = path + 1 }
                     Button("Open sheet") { sheet = Detail(count, "Item $count") }

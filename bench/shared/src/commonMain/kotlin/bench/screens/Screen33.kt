@@ -114,7 +114,7 @@ fun Screen33(vm: Screen33ViewModel) {
                     alignment = HorizontalAlignment.leading,
                     spacing = 6.0,
                 ) {
-                    Label(state.trip, systemImage = "airplane", modifier = Modifier.font(Font.headline).foregroundStyle(Color.white))
+                    Label(state.trip, systemImage = SFSymbol.airplane, modifier = Modifier.font(Font.headline).foregroundStyle(Color.white))
                     Text(verbatim = state.total, modifier = Modifier.font(Font.system(size = 38.0, weight = Font.Weight.bold)).monospacedDigit().foregroundStyle(Color.white))
                     Text(verbatim = state.dates, modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.white.opacity(0.8)))
                 }
@@ -151,7 +151,7 @@ fun Screen33(vm: Screen33ViewModel) {
                     for (expense in state.expenses) key(expense.id) {
                         HStack(spacing = 12.0) {
                             Image(systemName = 
-                                expense.icon,
+                                SFSymbol(expense.icon),
                                 modifier = Modifier.font(Font.system(size = 15.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(Color.white)
                                     .frame(width = 34.0, height = 34.0)
@@ -180,7 +180,7 @@ fun Screen33(vm: Screen33ViewModel) {
                         }
                     }
                     Divider()
-                    Button(title = "Settle up", systemImage = "arrow.left.arrow.right", modifier = Modifier.buttonStyle(PrimitiveButtonStyle.borderedProminent).frame(maxWidth = Double.POSITIVE_INFINITY, alignment = Alignment.trailing), action = {})
+                    Button(title = "Settle up", systemImage = SFSymbol.arrowLeftArrowRight, modifier = Modifier.buttonStyle(PrimitiveButtonStyle.borderedProminent).frame(maxWidth = Double.POSITIVE_INFINITY, alignment = Alignment.trailing), action = {})
                 }
             }
         }

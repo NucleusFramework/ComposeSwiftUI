@@ -22,6 +22,20 @@ class Unsupported(Exception):
     pass
 
 
+SYMBOL_LABELS = ("systemImage", "systemName")
+
+
+def symbolize(label, b):
+    """`systemImage:` / `systemName:` strings are SF Symbol names: typed as `SFSymbol` in Kotlin."""
+    if label not in SYMBOL_LABELS:
+        return b
+    if b.kind == "str":
+        return Bridge("str", "SFSymbol")
+    if b.kind == "optional" and b.inner.kind == "str":
+        return Bridge("optional", "SFSymbol?", inner=Bridge("str", "SFSymbol"))
+    return b
+
+
 class Bridge:
     """
     kind: str | bool | int | double | cgfloat | float | lsk | url | value | proto | hash | action |
@@ -74,6 +88,10 @@ class Bridge:
             return ["%s.toList()" % name]
         if k in ("lsk", "lsr"):
             return ["%s.key" % name]
+        if self.kt == "SFSymbol":
+            return ["%s.name" % name]
+        if k == "optional" and self.inner.kt == "SFSymbol":
+            return ["%s?.name" % name]
         if k == "optional" and self.inner.kind in ("lsk", "lsr"):
             return ["%s?.key" % name]
         return [name]

@@ -111,11 +111,11 @@ fun Screen36(vm: Screen36ViewModel) {
                         fill = LinearGradient(colors = listOf(state.heroFrom.color(), state.heroTo.color()), startPoint = UnitPoint.top, endPoint = UnitPoint.bottom),
                     )
                     VStack(modifier = Modifier.frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY), spacing = 8.0) {
-                        Image(systemName = "building.2.fill", modifier = Modifier.font(Font.system(size = 56.0)).foregroundStyle(Color.white.opacity(0.9)))
-                        Image(systemName = "water.waves", modifier = Modifier.font(Font.title).foregroundStyle(Color.white.opacity(0.6)))
+                        Image(systemName = SFSymbol.building2Fill, modifier = Modifier.font(Font.system(size = 56.0)).foregroundStyle(Color.white.opacity(0.9)))
+                        Image(systemName = SFSymbol.waterWaves, modifier = Modifier.font(Font.title).foregroundStyle(Color.white.opacity(0.6)))
                     }
                     Image(systemName = 
-                        if (state.favorite) "heart.fill" else "heart",
+                        if (state.favorite) SFSymbol.heartFill else SFSymbol.heart,
                         modifier = Modifier.font(Font.title3).foregroundStyle(if (state.favorite) Color.red else Color.white)
                             .padding(10.0)
                             .background(Color.black.opacity(0.25), Circle())
@@ -124,10 +124,10 @@ fun Screen36(vm: Screen36ViewModel) {
                 }
                 VStack(modifier = Modifier.padding(Edge.Set.horizontal), alignment = HorizontalAlignment.leading, spacing = 6.0) {
                     Text(verbatim = state.name, modifier = Modifier.font(Font.title).bold())
-                    Label(state.location, systemImage = "mappin.and.ellipse", modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
+                    Label(state.location, systemImage = SFSymbol.mappinAndEllipse, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                     HStack(spacing = 2.0) {
                         for (star in state.stars) key(star.id) {
-                            Image(systemName = star.symbol, modifier = Modifier.foregroundStyle(Color.yellow))
+                            Image(systemName = SFSymbol(star.symbol), modifier = Modifier.foregroundStyle(Color.yellow))
                         }
                         Text(verbatim = state.rating, modifier = Modifier.fontWeight(Font.Weight.semibold).padding(Edge.Set.leading, 6.0))
                         Text(verbatim = "(${state.reviewsCount})", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
@@ -139,7 +139,7 @@ fun Screen36(vm: Screen36ViewModel) {
                         for (amenity in state.amenities) key(amenity.id) {
                             Label(
                                 amenity.title,
-                                systemImage = amenity.icon,
+                                systemImage = SFSymbol(amenity.icon),
                                 modifier = Modifier.font(Font.subheadline)
                                     .frame(maxWidth = Double.POSITIVE_INFINITY, alignment = Alignment.leading)
                                     .padding(10.0)

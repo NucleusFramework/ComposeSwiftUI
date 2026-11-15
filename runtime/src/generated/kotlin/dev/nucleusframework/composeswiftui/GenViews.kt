@@ -178,12 +178,12 @@ public fun Button(
 @Composable
 public fun Button(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     role: ButtonRole?,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(16, listOf(title, systemImage, role, SAction(action)), modifier)
+    SwiftView(16, listOf(title, systemImage.name, role, SAction(action)), modifier)
 }
 
 /**
@@ -198,11 +198,11 @@ public fun Button(
 @Composable
 public fun Button(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(19, listOf(title, systemImage, SAction(action)), modifier)
+    SwiftView(19, listOf(title, systemImage.name, SAction(action)), modifier)
 }
 
 /**
@@ -361,11 +361,11 @@ public fun ControlGroup(
 @Composable
 public fun ControlGroup(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(37, listOf(title, systemImage), modifier, content = content)
+    SwiftView(37, listOf(title, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -951,15 +951,14 @@ public fun Image(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use Image(systemName = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
-public fun ImageSystemName(
-    systemName: String,
+public fun Image(
+    systemName: SFSymbol,
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(80, listOf(systemName, variableValue), modifier)
+    SwiftView(80, listOf(systemName.name, variableValue), modifier)
 }
 
 /**
@@ -970,14 +969,13 @@ public fun ImageSystemName(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use Image(systemName = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
-public fun ImageSystemName(
-    systemName: String,
+public fun Image(
+    systemName: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(81, listOf(systemName), modifier)
+    SwiftView(81, listOf(systemName.name), modifier)
 }
 
 /**
@@ -1029,10 +1027,10 @@ public fun Label(
 @Composable
 public fun Label(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(89, listOf(title, systemImage), modifier)
+    SwiftView(89, listOf(title, systemImage.name), modifier)
 }
 
 /**
@@ -1307,11 +1305,11 @@ public fun Menu(
 @Composable
 public fun Menu(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(117, listOf(title, systemImage), modifier, content = content)
+    SwiftView(117, listOf(title, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -1753,14 +1751,14 @@ public fun Picker(
 @Composable
 public fun Picker(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(179, listOf(title, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(179, listOf(title, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -1775,13 +1773,13 @@ public fun Picker(
 @Composable
 public fun Picker(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(182, listOf(title, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(182, listOf(title, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -2839,12 +2837,12 @@ public fun Toggle(
 @Composable
 public fun Toggle(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     isOn: Boolean,
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(295, listOf(title, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(295, listOf(title, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -2959,10 +2957,9 @@ public fun ZStack(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use Label(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
-public fun LabelImage(
+public fun Label(
     title: String,
     image: String,
     modifier: Modifier = Modifier,
@@ -3058,12 +3055,12 @@ public fun ButtonAction(
 @Composable
 public fun Button(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     role: ButtonRole?,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(14, listOf(titleResource.key, systemImage, role, SAction(action)), modifier)
+    SwiftView(14, listOf(titleResource.key, systemImage.name, role, SAction(action)), modifier)
 }
 
 /**
@@ -3079,12 +3076,12 @@ public fun Button(
 @Composable
 public fun ButtonSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     role: ButtonRole?,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(15, listOf(titleKey.key, systemImage, role, SAction(action)), modifier)
+    SwiftView(15, listOf(titleKey.key, systemImage.name, role, SAction(action)), modifier)
 }
 
 /**
@@ -3099,11 +3096,11 @@ public fun ButtonSystemImage(
 @Composable
 public fun Button(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(17, listOf(titleResource.key, systemImage, SAction(action)), modifier)
+    SwiftView(17, listOf(titleResource.key, systemImage.name, SAction(action)), modifier)
 }
 
 /**
@@ -3119,11 +3116,11 @@ public fun Button(
 @Composable
 public fun ButtonSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     action: () -> Unit,
 ) {
-    SwiftView(18, listOf(titleKey.key, systemImage, SAction(action)), modifier)
+    SwiftView(18, listOf(titleKey.key, systemImage.name, SAction(action)), modifier)
 }
 
 /**
@@ -3138,11 +3135,11 @@ public fun ButtonSystemImage(
 @Composable
 public fun ContentUnavailableView(
     title: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(27, listOf(title.key, systemImage, description), modifier)
+    SwiftView(27, listOf(title.key, systemImage.name, description), modifier)
 }
 
 /**
@@ -3158,11 +3155,11 @@ public fun ContentUnavailableView(
 @Composable
 public fun ContentUnavailableViewSystemImage(
     title: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(28, listOf(title.key, systemImage, description), modifier)
+    SwiftView(28, listOf(title.key, systemImage.name, description), modifier)
 }
 
 /**
@@ -3177,11 +3174,11 @@ public fun ContentUnavailableViewSystemImage(
 @Composable
 public fun ContentUnavailableView(
     title: String,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(29, listOf(title, systemImage, description), modifier)
+    SwiftView(29, listOf(title, systemImage.name, description), modifier)
 }
 
 /**
@@ -3196,11 +3193,11 @@ public fun ContentUnavailableView(
 @Composable
 public fun ControlGroup(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(35, listOf(titleResource.key, systemImage), modifier, content = content)
+    SwiftView(35, listOf(titleResource.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3216,11 +3213,11 @@ public fun ControlGroup(
 @Composable
 public fun ControlGroupSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(36, listOf(titleKey.key, systemImage), modifier, content = content)
+    SwiftView(36, listOf(titleKey.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3408,10 +3405,10 @@ public fun Image(
 @Composable
 public fun Label(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(87, listOf(titleResource.key, systemImage), modifier)
+    SwiftView(87, listOf(titleResource.key, systemImage.name), modifier)
 }
 
 /**
@@ -3427,10 +3424,10 @@ public fun Label(
 @Composable
 public fun LabelSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(88, listOf(titleKey.key, systemImage), modifier)
+    SwiftView(88, listOf(titleKey.key, systemImage.name), modifier)
 }
 
 /**
@@ -3537,12 +3534,12 @@ public fun LinkDestination(
 @Composable
 public fun Menu(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(113, listOf(titleResource.key, systemImage, SAction(primaryAction)), modifier, content = content)
+    SwiftView(113, listOf(titleResource.key, systemImage.name, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3558,12 +3555,12 @@ public fun Menu(
 @Composable
 public fun MenuSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(114, listOf(titleKey.key, systemImage, SAction(primaryAction)), modifier, content = content)
+    SwiftView(114, listOf(titleKey.key, systemImage.name, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3578,11 +3575,11 @@ public fun MenuSystemImage(
 @Composable
 public fun Menu(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(115, listOf(titleResource.key, systemImage), modifier, content = content)
+    SwiftView(115, listOf(titleResource.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3598,11 +3595,11 @@ public fun Menu(
 @Composable
 public fun MenuSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(116, listOf(titleKey.key, systemImage), modifier, content = content)
+    SwiftView(116, listOf(titleKey.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3920,14 +3917,14 @@ public fun PickerSelection(
 @Composable
 public fun Picker(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(177, listOf(titleResource.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(177, listOf(titleResource.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3943,14 +3940,14 @@ public fun Picker(
 @Composable
 public fun PickerSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(178, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(178, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3965,13 +3962,13 @@ public fun PickerSystemImage(
 @Composable
 public fun Picker(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(180, listOf(titleResource.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(180, listOf(titleResource.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3987,13 +3984,13 @@ public fun Picker(
 @Composable
 public fun PickerSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     selection: Any,
     modifier: Modifier = Modifier,
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(181, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(181, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -4971,12 +4968,12 @@ public fun ToggleIsOn(
 @Composable
 public fun Toggle(
     titleResource: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     isOn: Boolean,
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(293, listOf(titleResource.key, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(293, listOf(titleResource.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -4992,12 +4989,12 @@ public fun Toggle(
 @Composable
 public fun ToggleSystemImage(
     titleKey: LocalizedKey,
-    systemImage: String,
+    systemImage: SFSymbol,
     isOn: Boolean,
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(294, listOf(titleKey.key, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(294, listOf(titleKey.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -5008,10 +5005,9 @@ public fun ToggleSystemImage(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use ContentUnavailableView(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
-public fun ContentUnavailableViewImage(
+public fun ContentUnavailableView(
     title: LocalizedKey,
     image: String,
     modifier: Modifier = Modifier,
@@ -5024,7 +5020,7 @@ public fun ContentUnavailableViewImage(
  * SwiftUI `ContentUnavailableView.init(_:image:description:)`
  *
  * ```swift
- * nonisolated init<S>(_ title: S, image name: String, description: Text? = nil) where S : StringProtocol
+ * nonisolated init(_ title: LocalizedStringKey, image name: String, description: Text? = nil)
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
@@ -5032,6 +5028,25 @@ public fun ContentUnavailableViewImage(
 @HiddenFromObjC
 @Composable
 public fun ContentUnavailableViewImage(
+    title: LocalizedKey,
+    image: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+) {
+    SwiftView(31, listOf(title.key, image, description), modifier)
+}
+
+/**
+ * SwiftUI `ContentUnavailableView.init(_:image:description:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, image name: String, description: Text? = nil) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun ContentUnavailableView(
     title: String,
     image: String,
     modifier: Modifier = Modifier,
@@ -5048,15 +5063,33 @@ public fun ContentUnavailableViewImage(
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use Label(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
 @Composable
-public fun LabelImage(
+public fun Label(
     titleResource: LocalizedKey,
     image: String,
     modifier: Modifier = Modifier,
 ) {
     SwiftView(90, listOf(titleResource.key, image), modifier)
+}
+
+/**
+ * SwiftUI `Label.init(_:image:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, image name: String)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use Label(titleKey = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+@Composable
+public fun LabelImage(
+    titleKey: LocalizedKey,
+    image: String,
+    modifier: Modifier = Modifier,
+) {
+    SwiftView(91, listOf(titleKey.key, image), modifier)
 }
 
 /**
@@ -5190,7 +5223,7 @@ public fun NavigationLink(
 
 /**
  * SwiftUI `Button` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5198,13 +5231,13 @@ public fun NavigationLink(
 public fun Button(
     titleKey: LocalizedKey? = null,
     role: ButtonRole? = null,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     modifier: Modifier = Modifier,
     action: (() -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && action != null && role == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val action = action!!; SwiftView(18, listOf(titleKey.key, systemImage, SAction(action)), modifier) }
-        titleKey != null && systemImage != null && action != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val action = action!!; SwiftView(15, listOf(titleKey.key, systemImage, role, SAction(action)), modifier) }
+        titleKey != null && systemImage != null && action != null && role == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val action = action!!; SwiftView(18, listOf(titleKey.key, systemImage.name, SAction(action)), modifier) }
+        titleKey != null && systemImage != null && action != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val action = action!!; SwiftView(15, listOf(titleKey.key, systemImage.name, role, SAction(action)), modifier) }
         titleKey != null && action != null && role == null && systemImage == null -> { val titleKey = titleKey!!; val action = action!!; SwiftView(12, listOf(titleKey.key, SAction(action)), modifier) }
         titleKey != null && action != null && systemImage == null -> { val titleKey = titleKey!!; val action = action!!; SwiftView(9, listOf(titleKey.key, role, SAction(action)), modifier) }
         else -> error("No SwiftUI Button initializer takes this combination of arguments")
@@ -5213,47 +5246,47 @@ public fun Button(
 
 /**
  * SwiftUI `ContentUnavailableView` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
 @Suppress("NAME_SHADOWING")
 public fun ContentUnavailableView(
     title: LocalizedKey? = null,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     description: String? = null,
     image: String? = null,
     modifier: Modifier = Modifier,
 ) {
     when {
-        title != null && systemImage != null && image == null -> { val title = title!!; val systemImage = systemImage!!; SwiftView(28, listOf(title.key, systemImage, description), modifier) }
-        title != null && image != null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(30, listOf(title.key, image, description), modifier) }
+        title != null && systemImage != null && image == null -> { val title = title!!; val systemImage = systemImage!!; SwiftView(28, listOf(title.key, systemImage.name, description), modifier) }
+        title != null && image != null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(31, listOf(title.key, image, description), modifier) }
         else -> error("No SwiftUI ContentUnavailableView initializer takes this combination of arguments")
     }
 }
 
 /**
  * SwiftUI `ControlGroup` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
 @Suppress("NAME_SHADOWING")
 public fun ControlGroup(
     titleKey: LocalizedKey? = null,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     modifier: Modifier = Modifier,
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && content != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(36, listOf(titleKey.key, systemImage), modifier, content = content) }
+        titleKey != null && systemImage != null && content != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(36, listOf(titleKey.key, systemImage.name), modifier, content = content) }
         else -> error("No SwiftUI ControlGroup initializer takes this combination of arguments")
     }
 }
 
 /**
  * SwiftUI `DatePicker` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5273,7 +5306,7 @@ public fun DatePicker(
 
 /**
  * SwiftUI `DisclosureGroup` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5293,51 +5326,45 @@ public fun DisclosureGroup(
 
 /**
  * SwiftUI `Image` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
 @Suppress("NAME_SHADOWING")
 public fun Image(
-    systemName: String? = null,
-    variableValue: Double? = null,
     name: String? = null,
+    variableValue: Double? = null,
     modifier: Modifier = Modifier,
 ) {
     when {
-        systemName != null && variableValue == null && name == null -> { val systemName = systemName!!; SwiftView(81, listOf(systemName), modifier) }
-        systemName != null && name == null -> { val systemName = systemName!!; SwiftView(80, listOf(systemName, variableValue), modifier) }
-        name != null && systemName == null -> { val name = name!!; SwiftView(83, listOf(name, variableValue), modifier) }
+        name != null -> { val name = name!!; SwiftView(83, listOf(name, variableValue), modifier) }
         else -> error("No SwiftUI Image initializer takes this combination of arguments")
     }
 }
 
 /**
  * SwiftUI `Label` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
 @Suppress("NAME_SHADOWING")
 public fun Label(
-    title: String? = null,
-    image: String? = null,
     titleKey: LocalizedKey? = null,
-    systemImage: String? = null,
-    titleResource: LocalizedKey? = null,
+    systemImage: SFSymbol? = null,
+    image: String? = null,
     modifier: Modifier = Modifier,
 ) {
     when {
-        title != null && image != null && titleKey == null && systemImage == null && titleResource == null -> { val title = title!!; val image = image!!; SwiftView(92, listOf(title, image), modifier) }
-        titleKey != null && systemImage != null && title == null && image == null && titleResource == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; SwiftView(88, listOf(titleKey.key, systemImage), modifier) }
-        titleResource != null && image != null && title == null && titleKey == null && systemImage == null -> { val titleResource = titleResource!!; val image = image!!; SwiftView(90, listOf(titleResource.key, image), modifier) }
+        titleKey != null && systemImage != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; SwiftView(88, listOf(titleKey.key, systemImage.name), modifier) }
+        titleKey != null && image != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; SwiftView(91, listOf(titleKey.key, image), modifier) }
         else -> error("No SwiftUI Label initializer takes this combination of arguments")
     }
 }
 
 /**
  * SwiftUI `LabeledContent` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5355,7 +5382,7 @@ public fun LabeledContent(
 
 /**
  * SwiftUI `Link` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5373,21 +5400,21 @@ public fun Link(
 
 /**
  * SwiftUI `Menu` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
 @Suppress("NAME_SHADOWING")
 public fun Menu(
     titleKey: LocalizedKey? = null,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     modifier: Modifier = Modifier,
     primaryAction: (() -> Unit)? = null,
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && primaryAction != null && content != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(114, listOf(titleKey.key, systemImage, SAction(primaryAction)), modifier, content = content) }
-        titleKey != null && systemImage != null && content != null && primaryAction == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(116, listOf(titleKey.key, systemImage), modifier, content = content) }
+        titleKey != null && systemImage != null && primaryAction != null && content != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(114, listOf(titleKey.key, systemImage.name, SAction(primaryAction)), modifier, content = content) }
+        titleKey != null && systemImage != null && content != null && primaryAction == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(116, listOf(titleKey.key, systemImage.name), modifier, content = content) }
         titleKey != null && primaryAction != null && content != null && systemImage == null -> { val titleKey = titleKey!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(119, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content) }
         else -> error("No SwiftUI Menu initializer takes this combination of arguments")
     }
@@ -5395,7 +5422,7 @@ public fun Menu(
 
 /**
  * SwiftUI `NavigationLink` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5424,7 +5451,7 @@ public fun NavigationLink(
 
 /**
  * SwiftUI `NewDocumentButton` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5442,7 +5469,7 @@ public fun NewDocumentButton(
 
 /**
  * SwiftUI `Picker` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5450,16 +5477,16 @@ public fun NewDocumentButton(
 public fun Picker(
     titleKey: LocalizedKey? = null,
     selection: Any? = null,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     modifier: Modifier = Modifier,
     onSelectionChange: ((Any) -> Unit)? = null,
     currentValueLabel: (@Composable () -> Unit)? = null,
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(178, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
+        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(178, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
         titleKey != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && systemImage == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(172, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
-        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(181, listOf(titleKey.key, systemImage, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
+        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(181, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
         titleKey != null && selection != null && onSelectionChange != null && content != null && systemImage == null && currentValueLabel == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(175, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
         else -> error("No SwiftUI Picker initializer takes this combination of arguments")
     }
@@ -5467,7 +5494,7 @@ public fun Picker(
 
 /**
  * SwiftUI `ProgressView` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5486,7 +5513,7 @@ public fun ProgressView(
 
 /**
  * SwiftUI `Section` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5506,7 +5533,7 @@ public fun Section(
 
 /**
  * SwiftUI `SecureField` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5527,7 +5554,7 @@ public fun SecureField(
 
 /**
  * SwiftUI `ShareLink` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5552,7 +5579,7 @@ public fun ShareLink(
 
 /**
  * SwiftUI `Slider` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5575,7 +5602,7 @@ public fun Slider(
 
 /**
  * SwiftUI `Stepper` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5601,7 +5628,7 @@ public fun Stepper(
 
 /**
  * SwiftUI `TextField` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5625,7 +5652,7 @@ public fun TextField(
 
 /**
  * SwiftUI `TextFieldLink` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5644,7 +5671,7 @@ public fun TextFieldLink(
 
 /**
  * SwiftUI `Toggle` initializers that differ only by argument labels, selected by the labels you pass
- * (e.g. `Image(systemName = "star")`).
+ * (e.g. `Image(systemName = SFSymbol.star)`).
  */
 @HiddenFromObjC
 @Composable
@@ -5652,12 +5679,12 @@ public fun TextFieldLink(
 public fun Toggle(
     titleKey: LocalizedKey? = null,
     isOn: Boolean? = null,
-    systemImage: String? = null,
+    systemImage: SFSymbol? = null,
     modifier: Modifier = Modifier,
     onIsOnChange: ((Boolean) -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && isOn != null && onIsOnChange != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(294, listOf(titleKey.key, systemImage, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
+        titleKey != null && systemImage != null && isOn != null && onIsOnChange != null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(294, listOf(titleKey.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
         titleKey != null && isOn != null && onIsOnChange != null && systemImage == null -> { val titleKey = titleKey!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(291, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
         else -> error("No SwiftUI Toggle initializer takes this combination of arguments")
     }

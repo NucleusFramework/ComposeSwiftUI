@@ -107,11 +107,11 @@ fun Screen48(vm: Screen48ViewModel) {
             Section {
                 VStack(modifier = Modifier.padding(Edge.Set.vertical, 6.0), alignment = HorizontalAlignment.leading, spacing = 12.0) {
                     HStack {
-                        Image(systemName = "car.side.fill", modifier = Modifier.font(Font.system(size = 40.0)).foregroundStyle(Color.teal))
+                        Image(systemName = SFSymbol.carSideFill, modifier = Modifier.font(Font.system(size = 40.0)).foregroundStyle(Color.teal))
                         Spacer()
                         Label(
                             title = state.status,
-                            systemImage = "bolt.fill",
+                            systemImage = SFSymbol.boltFill,
                             modifier = Modifier.font(Font.caption).fontWeight(Font.Weight.semibold).foregroundStyle(Color.green)
                                 .padding(Edge.Set.horizontal, 8.0).padding(Edge.Set.vertical, 4.0)
                                 .background(Color.green.opacity(0.15), Capsule()),
@@ -125,7 +125,7 @@ fun Screen48(vm: Screen48ViewModel) {
                         value = state.battery,
                         bounds = 0.0..1.0,
                         modifier = Modifier.gaugeStyle(GaugeStyle.linearCapacity).tint(Color.green),
-                        label = { Label(title = "Battery", systemImage = "battery.75percent") },
+                        label = { Label(title = "Battery", systemImage = SFSymbol.battery75percent) },
                         currentValueLabel = { Text(state.batteryText, modifier = Modifier.monospacedDigit()) },
                         minimumValueLabel = { Text("0") },
                         maximumValueLabel = { Text("100") },
@@ -144,7 +144,7 @@ fun Screen48(vm: Screen48ViewModel) {
                                         .background(stat.tint.color().opacity(0.1), RoundedRectangle(cornerRadius = 12.0)),
                                     spacing = 10.0,
                                 ) {
-                                    Image(systemName = stat.icon, modifier = Modifier.font(Font.title3).foregroundStyle(stat.tint.color()).frame(width = 28.0))
+                                    Image(systemName = SFSymbol(stat.icon), modifier = Modifier.font(Font.title3).foregroundStyle(stat.tint.color()).frame(width = 28.0))
                                     VStack(alignment = HorizontalAlignment.leading, spacing = 1.0) {
                                         Text(stat.value, modifier = Modifier.font(Font.subheadline).bold().monospacedDigit())
                                         Text(stat.label, modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary))
@@ -156,7 +156,7 @@ fun Screen48(vm: Screen48ViewModel) {
                 }
             }
             Section(header = { Text("Climate") }, footer = { Text(state.outsideText) }, content = {
-                Toggle(title = "Climate control", systemImage = "thermometer.medium", isOn = state.climateOn, onIsOnChange = vm::setClimate)
+                Toggle(title = "Climate control", systemImage = SFSymbol.thermometerMedium, isOn = state.climateOn, onIsOnChange = vm::setClimate)
                 Stepper(value = state.cabinTemp, bounds = 16..28, onValueChange = vm::setCabin) {
                     HStack {
                         Text("Cabin")
@@ -170,7 +170,7 @@ fun Screen48(vm: Screen48ViewModel) {
                             for (control in state.controls.drop(rowIndex * 2).take(2)) key(control.id) {
                                 Toggle(
                                     title = control.title,
-                                    systemImage = control.icon,
+                                    systemImage = SFSymbol(control.icon),
                                     isOn = control.on,
                                     modifier = Modifier.toggleStyle(ToggleStyle.button).font(Font.footnote).frame(maxWidth = Double.POSITIVE_INFINITY),
                                     onIsOnChange = { vm.setControl(control.id, it) },

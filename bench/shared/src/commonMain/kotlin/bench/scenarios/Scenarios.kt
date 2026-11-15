@@ -61,7 +61,7 @@ class LongListScenario(val count: Int, val lazy: Boolean) {
 private fun MailRowView(row: MailRow) {
     HStack(spacing = 12.0) {
         ShapeView(Circle(), fill = if (row.unread) Color.blue else Color.clear, modifier = Modifier.frame(width = 10.0, height = 10.0))
-        Image(systemName = row.icon, modifier = Modifier.foregroundStyle(Color.orange).frame(width = 24.0))
+        Image(systemName = SFSymbol(row.icon), modifier = Modifier.foregroundStyle(Color.orange).frame(width = 24.0))
         VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
             Text(row.title, modifier = Modifier.font(Font.headline))
             Text(row.subtitle, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary).lineLimit(1))

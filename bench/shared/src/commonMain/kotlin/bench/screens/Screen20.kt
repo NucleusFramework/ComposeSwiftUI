@@ -130,13 +130,13 @@ fun Screen20(vm: Screen20ViewModel) {
                                 VStack(alignment = HorizontalAlignment.leading, spacing = 2.0) {
                                     Text(contact.name, modifier = Modifier.font(Font.body.weight(Font.Weight.medium)))
                                     HStack(modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary).lineLimit(1), spacing = 6.0) {
-                                        Label(contact.phone, systemImage = "phone.fill")
-                                        Label(contact.email, systemImage = "envelope.fill")
+                                        Label(contact.phone, systemImage = SFSymbol.phoneFill)
+                                        Label(contact.email, systemImage = SFSymbol.envelopeFill)
                                     }
                                 }
                                 Spacer(minLength = 0.0)
                                 if (contact.favorite) {
-                                    Image(systemName = "star.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.yellow))
+                                    Image(systemName = SFSymbol.starFill, modifier = Modifier.font(Font.caption).foregroundStyle(Color.yellow))
                                 }
                             }
                         }

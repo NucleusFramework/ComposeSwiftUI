@@ -135,7 +135,7 @@ private fun Screen23Chart(state: Screen23State) {
                 Text("2025", modifier = Modifier.font(Font.caption))
             }
             Spacer()
-            Label("Selected", systemImage = "hand.tap.fill", modifier = Modifier.font(Font.caption).foregroundStyle(Color.blue))
+            Label("Selected", systemImage = SFSymbol.handTapFill, modifier = Modifier.font(Font.caption).foregroundStyle(Color.blue))
         }
     }
 }
@@ -151,7 +151,7 @@ fun Screen23(vm: Screen23ViewModel) {
                     Text(state.total, modifier = Modifier.font(Font.system(size = 40.0, weight = Font.Weight.bold, design = Font.Design.rounded)).monospacedDigit())
                     Label(
                         state.change,
-                        systemImage = "arrow.up.forward.circle.fill",
+                        systemImage = SFSymbol.arrowUpForwardCircleFill,
                         modifier = Modifier.font(Font.footnote.weight(Font.Weight.semibold))
                             .foregroundStyle(Color.green)
                             .padding(Edge.Set.horizontal, 10.0)
@@ -165,7 +165,7 @@ fun Screen23(vm: Screen23ViewModel) {
                     for (row in state.summary) key(row.id) {
                         HStack(modifier = Modifier.padding(Edge.Set.vertical, 10.0), spacing = 12.0) {
                             Image(systemName = 
-                                row.icon,
+                                SFSymbol(row.icon),
                                 modifier = Modifier.font(Font.system(size = 14.0, weight = Font.Weight.semibold))
                                     .foregroundStyle(row.tint.color())
                                     .frame(width = 32.0, height = 32.0)

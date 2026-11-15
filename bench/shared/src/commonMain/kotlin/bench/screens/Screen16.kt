@@ -95,9 +95,9 @@ fun Screen16(vm: Screen16ViewModel) {
     NavigationStack {
         VStack(modifier = Modifier.navigationTitle("Board"), alignment = HorizontalAlignment.leading, spacing = 0.0) {
             HStack(modifier = Modifier.padding(Edge.Set.horizontal).padding(Edge.Set.bottom, 8.0)) {
-                Label(state.boardName, systemImage = "square.grid.3x2.fill", modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.secondary))
+                Label(state.boardName, systemImage = SFSymbol.squareGrid3x2Fill, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.secondary))
                 Spacer()
-                Image(systemName = "line.3.horizontal.decrease.circle", modifier = Modifier.font(Font.title3).foregroundStyle(Color.blue))
+                Image(systemName = SFSymbol.line3HorizontalDecreaseCircle, modifier = Modifier.font(Font.title3).foregroundStyle(Color.blue))
             }
             ScrollView(axes = Axis.Set.horizontal, showsIndicators = false) {
                 HStack(modifier = Modifier.padding(), alignment = VerticalAlignment.top, spacing = 12.0) {
@@ -121,7 +121,7 @@ fun Screen16(vm: Screen16ViewModel) {
                                         .background(ShapeStyle.background, Capsule()),
                                 )
                                 Spacer()
-                                Image(systemName = "ellipsis", modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
+                                Image(systemName = SFSymbol.ellipsis, modifier = Modifier.foregroundStyle(ShapeStyle.secondary))
                             }
                             for (card in column.cards) key(card.id) {
                                 VStack(
@@ -146,11 +146,11 @@ fun Screen16(vm: Screen16ViewModel) {
                                     Text(card.title, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).lineLimit(2).frame(maxWidth = Double.POSITIVE_INFINITY, alignment = Alignment.leading))
                                     HStack(spacing = 8.0) {
                                         ProgressView(value = card.progress, modifier = Modifier.tint(column.tint.color()))
-                                        Label(card.checklist, systemImage = "checklist", modifier = Modifier.font(Font.caption2).monospacedDigit().foregroundStyle(ShapeStyle.secondary).fixedSize())
+                                        Label(card.checklist, systemImage = SFSymbol.checklist, modifier = Modifier.font(Font.caption2).monospacedDigit().foregroundStyle(ShapeStyle.secondary).fixedSize())
                                     }
                                     HStack(modifier = Modifier.font(Font.caption2).foregroundStyle(ShapeStyle.secondary).labelStyle(LabelStyle.titleAndIcon).lineLimit(1), spacing = 10.0) {
-                                        Label(card.due, systemImage = "calendar")
-                                        Label(card.comments, systemImage = "bubble.left")
+                                        Label(card.due, systemImage = SFSymbol.calendar)
+                                        Label(card.comments, systemImage = SFSymbol.bubbleLeft)
                                         Spacer()
                                         HStack(spacing = -8.0) {
                                             for (avatar in card.avatars) key(avatar.initials) {
@@ -167,7 +167,7 @@ fun Screen16(vm: Screen16ViewModel) {
                                     }
                                 }
                             }
-                            Label("Add card", systemImage = "plus", modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
+                            Label("Add card", systemImage = SFSymbol.plus, modifier = Modifier.font(Font.subheadline).foregroundStyle(ShapeStyle.secondary))
                         }
                     }
                 }

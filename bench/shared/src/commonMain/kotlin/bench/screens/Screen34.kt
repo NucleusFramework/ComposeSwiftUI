@@ -102,7 +102,7 @@ private fun Screen34Thumb(video: Screen34Video, wide: Boolean) {
         ) {
             ShapeView(Rectangle(), fill = LinearGradient(colors = listOf(video.from.color(), video.to.color()), startPoint = UnitPoint.topLeading, endPoint = UnitPoint.bottomTrailing))
             Image(systemName = 
-                video.icon,
+                SFSymbol(video.icon),
                 modifier = Modifier.font(Font.system(size = if (wide) 40.0 else 34.0)).foregroundStyle(Color.white.opacity(0.85))
                     .frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY),
             )
@@ -128,7 +128,7 @@ fun Screen34(vm: Screen34ViewModel) {
     NavigationStack {
         ScrollView(
             modifier = Modifier.navigationTitle("Library")
-                .toolbarItem(placement = ToolbarItemPlacement.primaryAction) { Button(title = "Search", systemImage = "magnifyingglass", action = {}) },
+                .toolbarItem(placement = ToolbarItemPlacement.primaryAction) { Button(title = "Search", systemImage = SFSymbol.magnifyingglass, action = {}) },
         ) {
             VStack(alignment = HorizontalAlignment.leading, spacing = 24.0) {
                 ZStack(
@@ -143,13 +143,13 @@ fun Screen34(vm: Screen34ViewModel) {
                             endPoint = UnitPoint.bottomTrailing,
                         ),
                     )
-                    Image(systemName = "sparkles", modifier = Modifier.font(Font.system(size = 90.0)).foregroundStyle(Color.white.opacity(0.25)).frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY, alignment = Alignment.topTrailing).padding(16.0))
+                    Image(systemName = SFSymbol.sparkles, modifier = Modifier.font(Font.system(size = 90.0)).foregroundStyle(Color.white.opacity(0.25)).frame(maxWidth = Double.POSITIVE_INFINITY, maxHeight = Double.POSITIVE_INFINITY, alignment = Alignment.topTrailing).padding(16.0))
                     VStack(modifier = Modifier.padding(18.0), alignment = HorizontalAlignment.leading, spacing = 4.0) {
                         Text("FEATURED", modifier = Modifier.font(Font.caption).bold().kerning(1.5).foregroundStyle(Color.white.opacity(0.8)))
                         Text(verbatim = state.featuredTitle, modifier = Modifier.font(Font.title).bold().foregroundStyle(Color.white))
                         HStack(spacing = 10.0) {
                             Text(verbatim = state.featuredMeta, modifier = Modifier.font(Font.subheadline).foregroundStyle(Color.white.opacity(0.9)))
-                            Label("Play", systemImage = "play.fill", modifier = Modifier.font(Font.caption).bold(isActive = true).foregroundStyle(Color.black).padding(Edge.Set.horizontal, 10.0).padding(Edge.Set.vertical, 5.0).background(Color.white, Capsule()))
+                            Label("Play", systemImage = SFSymbol.playFill, modifier = Modifier.font(Font.caption).bold(isActive = true).foregroundStyle(Color.black).padding(Edge.Set.horizontal, 10.0).padding(Edge.Set.vertical, 5.0).background(Color.white, Capsule()))
                         }
                     }
                 }
@@ -161,7 +161,7 @@ fun Screen34(vm: Screen34ViewModel) {
                                 Text(verbatim = shelf.subtitle, modifier = Modifier.font(Font.footnote).foregroundStyle(ShapeStyle.secondary))
                             }
                             Spacer()
-                            Image(systemName = "chevron.right", modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.tertiary))
+                            Image(systemName = SFSymbol.chevronRight, modifier = Modifier.font(Font.subheadline.weight(Font.Weight.semibold)).foregroundStyle(ShapeStyle.tertiary))
                         }
                         ScrollView(axes = Axis.Set.horizontal, showsIndicators = false) {
                             HStack(modifier = Modifier.padding(Edge.Set.horizontal), alignment = VerticalAlignment.top, spacing = 12.0) {

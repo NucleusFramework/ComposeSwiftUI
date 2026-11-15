@@ -1,6 +1,19 @@
 # Changelog
 
-## Unreleased
+## 0.4.0
+
+### Changed (breaking)
+
+- `systemImage` and `systemName` parameters take an `SFSymbol` instead of a `String`. Constants are generated for
+  every SF Symbol (`SFSymbol.starFill`, with availability in their KDoc); `SFSymbol("name")` covers custom or newer
+  symbols. Migrate with `systemImage = "star.fill"` → `systemImage = SFSymbol.starFill`.
+- `SwiftUIEnvironment` exposes `ColorScheme`, `DynamicTypeSize`, `UserInterfaceSizeClass` and `LayoutDirection`
+  instead of strings. An absent size class is now `null` (it used to be an empty string).
+
+### Added
+
+- `Label` and `ContentUnavailableView` overloads that take an asset-catalog `image` with a `LocalizedKey` title. They
+  used to clash with the `systemImage` overloads.
 
 ### Fixed
 
