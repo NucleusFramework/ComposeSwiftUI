@@ -2,6 +2,10 @@ import SwiftUI
 
 @main
 struct BenchApp: App {
+    #if os(macOS)
+    @NSApplicationDelegateAdaptor private var delegate: BenchAppDelegate
+    #endif
+
     init() {
         ComposeGenerated.setUp()
     }
@@ -38,11 +42,33 @@ struct RootView: View {
                 if !status.isEmpty { Text(status).font(.caption).padding(4) }
             }
         }
-        .task { await autoRun() }
+        .task { await AutoRun.start { status = $0 } }
+    }
+}
+
+#if os(macOS)
+/// On macOS the command-line runs start when the app has launched, not with the main window: a window SwiftUI
+/// doesn't open (no state to restore, app not activated) would otherwise keep them from starting.
+final class BenchAppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        Task { @MainActor in await AutoRun.start { _ in } }
+    }
+}
+#endif
+
+/// Command-line runs (`-runBench`, `-runScenarios`, `-profile`); started once, from whichever entry point comes first.
+@MainActor
+enum AutoRun {
+    private static var started = false
+
+    static func start(status: @escaping (String) -> Void) async {
+        guard !started else { return }
+        started = true
+        await run(status: status)
     }
 
     /// `-runBench [-only N] [-out PATH]`: run the identity check + benchmarks, then exit.
-    private func autoRun() async {
+    private static func run(status: @escaping (String) -> Void) async {
         let args = ProcessInfo.processInfo.arguments
         if let i = args.firstIndex(of: "-profile"), i + 2 < args.count, let screen = Int(args[i + 1]) {
             // -profile <screen> <mount|update> [compose|swift]: loops forever, for sampling profilers
@@ -72,7 +98,7 @@ struct RootView: View {
             let size = CGSize(width: 700, height: 900)
             #endif
             let runner = ScenarioRunner(outDir: out, size: size)
-            runner.log = { line in print(line); status = line }
+            runner.log = { line in print(line); status(line) }
             _ = await runner.run(listSizes: sizes, lazy: args.contains("-lazy"))
             exit(0)
         }
@@ -89,7 +115,7 @@ struct RootView: View {
         let size = CGSize(width: 700, height: 900)
         #endif
         let runner = BenchRunner(outDir: out, size: size)
-        runner.log = { line in print(line); status = line }
+        runner.log = { line in print(line); status(line) }
         _ = await runner.run(only: only)
         exit(0)
     }

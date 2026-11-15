@@ -267,11 +267,11 @@ usual way to bridge a `StateFlow` in a KMP app:
 | | Pixel-identical | Mount: SwiftUI → Compose SwiftUI | Update: SwiftUI → Compose SwiftUI |
 |---|---|---|---|
 | iOS simulator | 48 / 50 | 24.1 → 26.1 ms | 1.92 → 1.48 ms |
-| macOS | 50 / 50 | 15.0 → 17.2 ms | 2.15 → 2.13 ms |
+| macOS | 50 / 50 | 14.4 → 17.1 ms | 2.11 → 2.07 ms |
 
 **Scenarios** that the 50 screens don't cover, against plain SwiftUI with native `@Observable` models (one object per
 row, so a change re-evaluates only the views that read it). iOS simulator, list rows with an icon, two lines of text and
-an unread dot, all pixel-identical:
+an unread dot, all pixel-identical (macOS results are in the full results):
 
 | | Plain SwiftUI | Compose SwiftUI, `LazyForEach` | Compose SwiftUI, Kotlin loop |
 |---|---|---|---|
@@ -282,7 +282,7 @@ an unread dot, all pixel-identical:
 | 60 bars, animated change: apply | 5.1 ms | 7.5 ms (same frame count, no hitches) | — |
 
 Updates of a regular screen are as fast as plain SwiftUI or faster, because only the views whose data changed
-re-render. Mounting costs 8% to 14% more, and a new row costs about 40% more while scrolling: SwiftUI builds one
+re-render. Mounting costs 8% to 18% more, and a new row costs 40% (iOS) to 70% (macOS) more while scrolling: SwiftUI builds one
 type-erased view per node because the tree is built at runtime. For long lists, use `LazyForEach`: with a Kotlin loop,
 every row is composed and kept up to date even off screen.
 
