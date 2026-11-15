@@ -24,7 +24,17 @@ fun counterScreen() = composeSwiftUI {
 ComposeView { CounterScreenKt.counterScreen() }
 ```
 
-Supported platforms: iOS 17+, macOS 14+, tvOS 17+ and watchOS 10+. Requires Kotlin 2.4.20 or later.
+## Requirements
+
+| Tool | Minimum |
+|---|---|
+| Xcode | 27.2 (Swift 6.4) |
+| Kotlin | 2.4.20 |
+| JDK | 17 |
+| Deployment target | iOS 17, macOS 14, tvOS 17, watchOS 10 |
+
+Xcode 27.2 is needed to build, because the Swift renderer calls the newest SwiftUI APIs behind `#available` checks.
+Apps still run on the older OS versions above.
 
 ## Quick start
 

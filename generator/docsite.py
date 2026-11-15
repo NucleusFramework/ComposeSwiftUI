@@ -942,6 +942,7 @@ def api_text(key, p):
 summary = "Write SwiftUI screens in Kotlin with the Compose runtime: composables build a tree of real SwiftUI views."
 rules = """Latest release: %s (Gradle plugin `id("dev.nucleusframework.compose-swiftui") version "%s"`).
 Platforms: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ unless an API says otherwise.
+Build requirements: Xcode 27.2+ (Swift 6.4), Kotlin 2.4.20+, JDK 17+.
 
 Key rules for writing Compose SwiftUI code:
 - Views are Kotlin functions named like SwiftUI (`Text`, `VStack`, `Button`...); Swift labels become named arguments (`spacing = 8.0`).
