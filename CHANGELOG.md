@@ -30,7 +30,7 @@
   `Modifier.onKeyPress`, `scrollTransition`, `visualEffect`, `alignmentGuide`, `navigationDestination(item:)`, and
   custom button, toggle and label styles written in Kotlin (`StyleLabel`, `StyleIcon`).
 - `Modifier.environment(name = value)` for the 60 settable `EnvironmentValues` (`colorScheme`, `locale`, `font`,
-  `lineLimit`, `controlSize`…), SwiftUI's `.environment(\\.name, value)`.
+  `lineLimit`, `controlSize`…), SwiftUI's `.environment(\.name, value)`.
 - Optional closures (`Stepper(onIncrement, onDecrement)`, `onDeleteCommand`, `onExitCommand`, `onMoveCommand`, the
   `onDismiss` of `sheet`/`fullScreenCover`, `onPressingChanged` of `onLongPressGesture`) and callbacks with several
   parameters (`onScrollPhaseChange { old, new -> }`, `onChange(value) { old, new -> }`).
