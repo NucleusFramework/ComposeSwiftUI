@@ -32,7 +32,6 @@ internal object HandwrittenIds {
     const val SHAPE_VIEW = 100_000
     const val GEOMETRY_READER = 100_001
     const val TOOLBAR_ITEM = 100_000
-    const val LIST_ROW_BACKGROUND = 100_001
 }
 
 /**
@@ -84,11 +83,3 @@ public fun Modifier.toolbarItem(
     placement: ToolbarItemPlacement = ToolbarItemPlacement.automatic,
     content: @Composable () -> Unit,
 ): Modifier = element(HandwrittenIds.TOOLBAR_ITEM, placement, slotContent(content))
-
-/**
- * SwiftUI `.listRowBackground(content)`: replaces the background of the list row (the whole cell, insets
- * included). Apply it conditionally to keep the system background on other rows.
- */
-@HiddenFromObjC
-public fun Modifier.listRowBackground(content: @Composable () -> Unit): Modifier =
-    element(HandwrittenIds.LIST_ROW_BACKGROUND, slotContent(content))

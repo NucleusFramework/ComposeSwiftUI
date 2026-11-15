@@ -72,9 +72,6 @@ import AppKit
             let content = a.slot(1)
             return AnyView(v.toolbar { ToolbarItem(placement: placement) { content } })
         }
-        ComposeRegistry.modifiers[100_001] = { v, a, _ in
-            AnyView(v.listRowBackground(a.slot(0)))
-        }
     }
 }
 

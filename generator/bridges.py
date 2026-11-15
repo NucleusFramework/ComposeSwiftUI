@@ -49,6 +49,8 @@ class Bridge:
         self.inner = inner
         self.refs = set(refs or ())
         self.cb_kind = cb_kind
+        # slot passed to Swift as a view value (`V`) instead of a `() -> V` builder closure
+        self.bare = False
 
     @property
     def nargs(self):
@@ -117,7 +119,7 @@ class Bridge:
         if k == "binding":
             return [], "%s.%sBinding(%d)" % (src, self.inner.binding_kind(), i)
         if k == "slot":
-            return [], "{ %s.slot(%d) }" % (src, i)
+            return [], ("%s.slot(%d)" if self.bare else "{ %s.slot(%d) }") % (src, i)
         if k == "url":
             return ["guard let %s = URL(string: %s.string(%d)) else { %s }" % (var, src, i, fallback)], var
         if k == "value":
@@ -212,6 +214,9 @@ class Classifier:
         k = t.kind
         if k == "optional":
             inner = self.classify(t.args[0], ctx, top=False)
+            if inner.kind == "slot" and inner.bare:
+                # ponytail: `V?` view values are always passed, Kotlin has no way to omit them
+                return inner
             if inner.kind in ("proto", "slot", "binding", "callback", "optional", "list", "set"):
                 raise Unsupported("optional %s" % inner.kind)
             kt = inner.kt if inner.kt.startswith("(") is False else "(%s)" % inner.kt
@@ -301,7 +306,9 @@ class Classifier:
                 b.proto_swift = ".".join(ps.path)
                 return b
         if "View" in constraints:
-            raise Unsupported("bare View value")
+            b = Bridge("slot", "@Composable () -> Unit")
+            b.bare = True
+            return b
         raise Unsupported("generic constrained to %s" % (constraints or "nothing"))
 
     def _func(self, t, ctx):

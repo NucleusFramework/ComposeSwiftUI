@@ -610,7 +610,10 @@ class Generator:
         def asset(params):
             # asset-catalog image overloads lose the base name to `systemImage` ones
             return any(lbl == "image" for lbl, internal, _, _ in (params or []))
-        for item, kind, s, params in sorted(self.views, key=lambda v: (v[0].sym.deprecated, lsk(v[3]), asset(v[3]) and v[2].name != "Image")):
+        def bare(params):
+            # `V` view-value inits are mostly soft-deprecated twins of the builder ones: builders keep the base name
+            return any(b.kind == "slot" and b.bare for _, _, b, _ in (params or []))
+        for item, kind, s, params in sorted(self.views, key=lambda v: (v[0].sym.deprecated, bare(v[3]), lsk(v[3]), asset(v[3]) and v[2].name != "Image")):
             if kind == "valueview":
                 vt = s
                 pname = vt.sym.name[0].lower() + vt.sym.name[1:]
@@ -930,7 +933,7 @@ class Generator:
         i = start
         for n, (label, internal, b, default) in enumerate(params):
             if b.kind == "slot" and view_children is not None and internal == view_children:
-                expr = "{ ChildrenView(m) }"
+                expr = "ChildrenView(m)" if b.bare else "{ ChildrenView(m) }"
             elif self.null_default(b, default):
                 swift_t = self.NULL_DEFAULT_KINDS[b.kind] or b.swift_type[2:].replace("_", ".")
                 m = re.match(r"^([A-Z][A-Za-z0-9_]*)(.*)$", default)

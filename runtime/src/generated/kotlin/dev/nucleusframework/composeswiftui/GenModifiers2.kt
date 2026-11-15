@@ -186,1392 +186,1412 @@ public fun Modifier.alternatingRowBackgrounds(behavior: AlternatingRowBackground
 public fun Modifier.aspectRatio(aspectRatio: Double? = null, contentMode: ContentMode): Modifier = element(119, aspectRatio, contentMode)
 
 /**
- * SwiftUI `View.background(_:ignoresSafeAreaEdges:)`
+ * SwiftUI `View.background(_:alignment:)`
  *
  * ```swift
- * nonisolated func background<S>(_ style: S, ignoresSafeAreaEdges edges: Edge.Set = .all) -> some View where S : ShapeStyle
+ * nonisolated func background<Background>(_ background: Background, alignment: Alignment = .center) -> some View where Background : View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.background(style: ShapeStyle, ignoresSafeAreaEdges: Edge.Set = Edge.Set.all): Modifier = element(123, style, ignoresSafeAreaEdges)
+public fun Modifier.background(background: @Composable () -> Unit, alignment: Alignment = Alignment.center): Modifier = element(123, slotContent(background), alignment)
 
 /**
- * SwiftUI `View.background(ignoresSafeAreaEdges:)`
+ * SwiftUI `View.background(alignment:content:)`
  *
  * ```swift
- * nonisolated func background(ignoresSafeAreaEdges edges: Edge.Set = .all) -> some View
+ * nonisolated func background<V>(alignment: Alignment = .center, @ContentBuilder content: () -> V) -> some View where V : View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.background(ignoresSafeAreaEdges: Edge.Set = Edge.Set.all): Modifier = element(127, ignoresSafeAreaEdges)
+public fun Modifier.background(alignment: Alignment = Alignment.center, content: @Composable () -> Unit): Modifier = element(127, alignment, slotContent(content))
 
 /**
- * SwiftUI `View.backgroundExtensionEffect(isEnabled:)`
+ * SwiftUI `View.backgroundExtensionEffect()`
  *
  * ```swift
- * @MainActor @preconcurrency func backgroundExtensionEffect(isEnabled: Bool) -> some View
+ * @MainActor @preconcurrency func backgroundExtensionEffect() -> some View
  * ```
  * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
 @HiddenFromObjC
-public fun Modifier.backgroundExtensionEffect(isEnabled: Boolean): Modifier = element(131, isEnabled)
+public fun Modifier.backgroundExtensionEffect(): Modifier = element(131)
 
 /**
- * SwiftUI `View.badgeProminence(_:)`
+ * SwiftUI `View.badge(_:)`
  *
  * ```swift
- * nonisolated func badgeProminence(_ prominence: BadgeProminence) -> some View
+ * nonisolated func badge<S>(_ label: S?) -> some View where S : StringProtocol
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
-public fun Modifier.badgeProminence(prominence: BadgeProminence): Modifier = element(138, prominence)
+public fun Modifier.badge(label: String?): Modifier = element(138, label)
 
 /**
- * SwiftUI `View.bold(_:)`
+ * SwiftUI `View.blur(radius:opaque:)`
  *
  * ```swift
- * nonisolated func bold(_ isActive: Bool = true) -> some View
+ * nonisolated func blur(radius: CGFloat, opaque: Bool = false) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.bold(isActive: Boolean = true): Modifier = element(142, isActive)
+public fun Modifier.blur(radius: Double, opaque: Boolean = false): Modifier = element(142, radius, opaque)
 
 /**
- * SwiftUI `View.buttonRepeatBehavior(_:)`
+ * SwiftUI `View.buttonBorderShape(_:)`
  *
  * ```swift
- * nonisolated func buttonRepeatBehavior(_ behavior: ButtonRepeatBehavior) -> some View
+ * nonisolated func buttonBorderShape(_ shape: ButtonBorderShape) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.buttonRepeatBehavior(behavior: ButtonRepeatBehavior): Modifier = element(146, behavior)
+public fun Modifier.buttonBorderShape(shape: ButtonBorderShape): Modifier = element(146, shape)
 
 /**
- * SwiftUI `View.clipped(antialiased:)`
+ * SwiftUI `View.clipShape(_:style:)`
  *
  * ```swift
- * nonisolated func clipped(antialiased: Bool = false) -> some View
+ * nonisolated func clipShape<S>(_ shape: S, style: FillStyle = FillStyle()) -> some View where S : Shape
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.clipped(antialiased: Boolean = false): Modifier = element(150, antialiased)
+public fun Modifier.clipShape(shape: Shape, style: FillStyle = FillStyle()): Modifier = element(150, shape, style)
 
 /**
- * SwiftUI `View.colorScheme(_:)`
+ * SwiftUI `View.colorMultiply(_:)`
  *
  * ```swift
- * nonisolated func colorScheme(_ colorScheme: ColorScheme) -> some View
+ * nonisolated func colorMultiply(_ color: Color) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.colorScheme(colorScheme: ColorScheme): Modifier = element(154, colorScheme)
-
-/**
- * SwiftUI `View.containerBackground(_:for:)`
- *
- * ```swift
- * nonisolated func containerBackground<S>(_ style: S, for container: ContainerBackgroundPlacement) -> some View where S : ShapeStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.containerBackground(style: ShapeStyle, container: ContainerBackgroundPlacement): Modifier = element(164, style, container)
-
-/**
- * SwiftUI `View.containerRelativeFrame(_:count:span:spacing:alignment:)`
- *
- * ```swift
- * nonisolated func containerRelativeFrame(_ axes: Axis.Set, count: Int, span: Int = 1, spacing: CGFloat, alignment: Alignment = .center) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.containerRelativeFrame(axes: Axis.Set, count: Int, span: Int = 1, spacing: Double, alignment: Alignment = Alignment.center): Modifier = element(168, axes, count, span, spacing, alignment)
-
-/**
- * SwiftUI `View.contentMargins(_:_:for:)`
- *
- * ```swift
- * nonisolated func contentMargins(_ edges: Edge.Set = .all, _ length: CGFloat?, for placement: ContentMarginPlacement = .automatic) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.contentMargins(edges: Edge.Set = Edge.Set.all, length: Double?, placement: ContentMarginPlacement = ContentMarginPlacement.automatic): Modifier = element(172, edges, length, placement)
-
-/**
- * SwiftUI `View.contentShape(_:eoFill:)`
- *
- * ```swift
- * nonisolated func contentShape<S>(_ shape: S, eoFill: Bool = false) -> some View where S : Shape
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.contentShape(shape: Shape, eoFill: Boolean = false): Modifier = element(176, shape, eoFill)
-
-/**
- * SwiftUI `View.contrast(_:)`
- *
- * ```swift
- * nonisolated func contrast(_ amount: Double) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.contrast(amount: Double): Modifier = element(181, amount)
-
-/**
- * SwiftUI `View.coordinateSpace(name:)`
- *
- * ```swift
- * nonisolated func coordinateSpace<T>(name: T) -> some View where T : Hashable
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.coordinateSpace(name: Any): Modifier = element(185, name)
-
-/**
- * SwiftUI `View.defaultHoverEffect(_:)`
- *
- * ```swift
- * nonisolated func defaultHoverEffect(_ effect: HoverEffect?) -> some View
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.defaultHoverEffect(effect: HoverEffect?): Modifier = element(189, effect)
-
-/**
- * SwiftUI `View.defaultTabBarPlacement(_:)`
- *
- * ```swift
- * nonisolated func defaultTabBarPlacement(_ defaultPlacement: AdaptableTabBarPlacement) -> some View
- * ```
- * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
- */
-@HiddenFromObjC
-public fun Modifier.defaultTabBarPlacement(defaultPlacement: AdaptableTabBarPlacement): Modifier = element(193, defaultPlacement)
-
-/**
- * SwiftUI `View.dialogPreventsAppTermination(_:)`
- *
- * ```swift
- * nonisolated func dialogPreventsAppTermination(_ prevents: Bool?) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS 15.4+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.dialogPreventsAppTermination(prevents: Boolean?): Modifier = element(197, prevents)
-
-/**
- * SwiftUI `View.digitalCrownAccessory(_:)`
- *
- * ```swift
- * nonisolated func digitalCrownAccessory(_ visibility: Visibility) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.digitalCrownAccessory(visibility: Visibility): Modifier = element(204, visibility)
-
-/**
- * SwiftUI `View.digitalCrownRotation(_:from:through:sensitivity:isContinuous:isHapticFeedbackEnabled:onChange:onIdle:)`
- *
- * ```swift
- * nonisolated func digitalCrownRotation<V>(_ binding: Binding<V>, from minValue: V, through maxValue: V, sensitivity: DigitalCrownRotationalSensitivity = .high, isContinuous: Bool = false, isHapticFeedbackEnabled: Bool = true, onChange: @escaping (DigitalCrownEvent) -> Void = { _ in }, onIdle: @escaping () -> Void = { }) -> some View where V : BinaryFloatingPoint
- * ```
- * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.digitalCrownRotation(binding: Double, onBindingChange: (Double) -> Unit, minValue: Double, through: Double, sensitivity: DigitalCrownRotationalSensitivity = DigitalCrownRotationalSensitivity.high, isContinuous: Boolean = false, isHapticFeedbackEnabled: Boolean = true, onIdle: () -> Unit = {}): Modifier = element(208, binding, SValueCallback { onBindingChange(it as Double) }, minValue, through, sensitivity, isContinuous, isHapticFeedbackEnabled, SAction(onIdle))
-
-/**
- * SwiftUI `View.disableAutocorrection(_:)`
- *
- * ```swift
- * nonisolated func disableAutocorrection(_ disable: Bool?) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.disableAutocorrection(disable: Boolean?): Modifier = element(212, disable)
-
-/**
- * SwiftUI `View.dismissalConfirmationDialog(_:shouldPresent:actions:message:)`
- *
- * ```swift
- * nonisolated func dismissalConfirmationDialog<S, A, M>(_ title: S, shouldPresent: Bool, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where S : StringProtocol, A : View, M : View
- * ```
- * Availability: iOS 27.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.dismissalConfirmationDialog(title: String, shouldPresent: Boolean, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(221, title, shouldPresent, slotContent(actions), slotContent(message))
-
-/**
- * SwiftUI `View.dragConfiguration(_:)`
- *
- * ```swift
- * nonisolated func dragConfiguration(_ configuration: DragConfiguration) -> some View
- * ```
- * Availability: iOS 27.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.dragConfiguration(configuration: DragConfiguration): Modifier = element(232, configuration)
-
-/**
- * SwiftUI `View.dropPreviewsFormation(_:)`
- *
- * ```swift
- * nonisolated func dropPreviewsFormation(_ formation: DragDropPreviewsFormation) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.dropPreviewsFormation(formation: DragDropPreviewsFormation): Modifier = element(236, formation)
-
-/**
- * SwiftUI `View.fileDialogConfirmationLabel(_:)`
- *
- * ```swift
- * nonisolated func fileDialogConfirmationLabel<S>(_ label: S) -> some View where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.fileDialogConfirmationLabel(label: String): Modifier = element(240, label)
-
-/**
- * SwiftUI `View.fileDialogMessage(_:)`
- *
- * ```swift
- * nonisolated func fileDialogMessage<S>(_ message: S) -> some View where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.fileDialogMessage(message: String): Modifier = element(250, message)
-
-/**
- * SwiftUI `View.fixedSize()`
- *
- * ```swift
- * @export(implementation) nonisolated func fixedSize() -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.fixedSize(): Modifier = element(257)
-
-/**
- * SwiftUI `View.focusSection()`
- *
- * ```swift
- * nonisolated func focusSection() -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.focusSection(): Modifier = element(261)
-
-/**
- * SwiftUI `View.fontDesign(_:)`
- *
- * ```swift
- * nonisolated func fontDesign(_ design: Font.Design?) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.fontDesign(design: Font.Design?): Modifier = element(266, design)
-
-/**
- * SwiftUI `View.foregroundStyle(_:)`
- *
- * ```swift
- * nonisolated func foregroundStyle<S>(_ style: S) -> some View where S : ShapeStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.foregroundStyle(style: ShapeStyle): Modifier = element(270, style)
-
-/**
- * SwiftUI `View.frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
- *
- * ```swift
- * nonisolated func frame(minWidth: CGFloat? = nil, idealWidth: CGFloat? = nil, maxWidth: CGFloat? = nil, minHeight: CGFloat? = nil, idealHeight: CGFloat? = nil, maxHeight: CGFloat? = nil, alignment: Alignment = .center) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.frame(minWidth: Double? = null, idealWidth: Double? = null, maxWidth: Double? = null, minHeight: Double? = null, idealHeight: Double? = null, maxHeight: Double? = null, alignment: Alignment = Alignment.center): Modifier = element(275, minWidth, idealWidth, maxWidth, minHeight, idealHeight, maxHeight, alignment)
-
-/**
- * SwiftUI `View.geometryGroup()`
- *
- * ```swift
- * @export(implementation) nonisolated func geometryGroup() -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.geometryGroup(): Modifier = element(279)
-
-/**
- * SwiftUI `View.gridCellAnchor(_:)`
- *
- * ```swift
- * nonisolated func gridCellAnchor(_ anchor: UnitPoint) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.gridCellAnchor(anchor: UnitPoint): Modifier = element(283, anchor)
-
-/**
- * SwiftUI `View.groupBoxStyle(_:)`
- *
- * ```swift
- * nonisolated func groupBoxStyle<S>(_ style: S) -> some View where S : GroupBoxStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.groupBoxStyle(style: GroupBoxStyle): Modifier = element(287, style)
-
-/**
- * SwiftUI `View.help(_:)`
- *
- * ```swift
- * nonisolated func help<S>(_ text: S) -> some View where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.help(text: String): Modifier = element(294, text)
-
-/**
- * SwiftUI `View.hoverEffect(_:isEnabled:)`
- *
- * ```swift
- * nonisolated func hoverEffect(_ effect: some CustomHoverEffect = .automatic, isEnabled: Bool = true) -> some View
- * ```
- * Availability: iOS 18.0+, macOS: unavailable (no-op), tvOS 18.0+, watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.hoverEffect(effect: CustomHoverEffect = CustomHoverEffect.automatic, isEnabled: Boolean = true): Modifier = element(298, effect, isEnabled)
-
-/**
- * SwiftUI `View.id(_:)`
- *
- * ```swift
- * nonisolated func id<ID>(_ id: ID) -> some View where ID : Hashable
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.id(id: Any): Modifier = element(302, id)
-
-/**
- * SwiftUI `View.indexViewStyle(_:)`
- *
- * ```swift
- * nonisolated func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.indexViewStyle(style: IndexViewStyle): Modifier = element(306, style)
-
-/**
- * SwiftUI `View.interactionActivityTrackingTag(_:)`
- *
- * ```swift
- * nonisolated func interactionActivityTrackingTag(_ tag: String) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.interactionActivityTrackingTag(tag: String): Modifier = element(310, tag)
-
-/**
- * SwiftUI `View.kerning(_:)`
- *
- * ```swift
- * nonisolated func kerning(_ kerning: CGFloat) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.kerning(kerning: Double): Modifier = element(314, kerning)
-
-/**
- * SwiftUI `View.keyboardShortcut(_:modifiers:localization:)`
- *
- * ```swift
- * nonisolated func keyboardShortcut(_ key: KeyEquivalent, modifiers: EventModifiers = .command, localization: KeyboardShortcut.Localization) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.keyboardShortcut(key: KeyEquivalent, modifiers: EventModifiers = EventModifiers.command, localization: KeyboardShortcut.Localization): Modifier = element(318, key, modifiers, localization)
-
-/**
- * SwiftUI `View.labeledContentStyle(_:)`
- *
- * ```swift
- * nonisolated func labeledContentStyle<S>(_ style: S) -> some View where S : LabeledContentStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.labeledContentStyle(style: LabeledContentStyle): Modifier = element(322, style)
-
-/**
- * SwiftUI `View.layoutDirectionBehavior(_:)`
- *
- * ```swift
- * nonisolated func layoutDirectionBehavior(_ behavior: LayoutDirectionBehavior) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.layoutDirectionBehavior(behavior: LayoutDirectionBehavior): Modifier = element(326, behavior)
-
-/**
- * SwiftUI `View.lineLimit(_:reservesSpace:)`
- *
- * ```swift
- * nonisolated func lineLimit(_ limit: Int, reservesSpace: Bool) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.lineLimit(limit: Int, reservesSpace: Boolean): Modifier = element(330, limit, reservesSpace)
-
-/**
- * SwiftUI `View.listRowInsets(_:)`
- *
- * ```swift
- * nonisolated func listRowInsets(_ insets: EdgeInsets?) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.listRowInsets(insets: EdgeInsets?): Modifier = element(334, insets)
-
-/**
- * SwiftUI `View.listRowSeparatorTint(_:edges:)`
- *
- * ```swift
- * nonisolated func listRowSeparatorTint(_ color: Color?, edges: VerticalEdge.Set = .all) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.listRowSeparatorTint(color: Color?, edges: VerticalEdge.Set = VerticalEdge.Set.all): Modifier = element(338, color, edges)
-
-/**
- * SwiftUI `View.listSectionSeparator(_:edges:)`
- *
- * ```swift
- * nonisolated func listSectionSeparator(_ visibility: Visibility, edges: VerticalEdge.Set = .all) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.listSectionSeparator(visibility: Visibility, edges: VerticalEdge.Set = VerticalEdge.Set.all): Modifier = element(342, visibility, edges)
-
-/**
- * SwiftUI `View.listStyle(_:)`
- *
- * ```swift
- * nonisolated func listStyle<S>(_ style: S) -> some View where S : ListStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.listStyle(style: ListStyle): Modifier = element(346, style)
-
-/**
- * SwiftUI `View.menuActionDismissBehavior(_:)`
- *
- * ```swift
- * nonisolated func menuActionDismissBehavior(_ behavior: MenuActionDismissBehavior) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.menuActionDismissBehavior(behavior: MenuActionDismissBehavior): Modifier = element(350, behavior)
-
-/**
- * SwiftUI `View.menuStyle(_:)`
- *
- * ```swift
- * nonisolated func menuStyle<S>(_ style: S) -> some View where S : MenuStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.menuStyle(style: MenuStyle): Modifier = element(354, style)
-
-/**
- * SwiftUI `View.monospacedDigit()`
- *
- * ```swift
- * nonisolated func monospacedDigit() -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.monospacedDigit(): Modifier = element(358)
-
-/**
- * SwiftUI `View.navigationBarBackButtonHidden(_:)`
- *
- * ```swift
- * nonisolated func navigationBarBackButtonHidden(_ hidesBackButton: Bool = true) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.navigationBarBackButtonHidden(hidesBackButton: Boolean = true): Modifier = element(362, hidesBackButton)
-
-/**
- * SwiftUI `View.navigationBarTitleDisplayMode(_:)`
- *
- * ```swift
- * nonisolated func navigationBarTitleDisplayMode(_ displayMode: NavigationBarItem.TitleDisplayMode) -> some View
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.navigationBarTitleDisplayMode(displayMode: NavigationBarItem.TitleDisplayMode): Modifier = element(370, displayMode)
-
-/**
- * SwiftUI `View.navigationSplitViewColumnWidth(_:)`
- *
- * ```swift
- * nonisolated func navigationSplitViewColumnWidth(_ width: CGFloat) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.navigationSplitViewColumnWidth(width: Double): Modifier = element(374, width)
-
-/**
- * SwiftUI `View.navigationTitle(_:)`
- *
- * ```swift
- * nonisolated func navigationTitle<S>(_ title: S) -> some View where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.navigationTitle(title: String): Modifier = element(384, title)
-
-/**
- * SwiftUI `View.navigationViewStyle(_:)`
- *
- * ```swift
- * nonisolated func navigationViewStyle<S>(_ style: S) -> some View where S : NavigationViewStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.navigationViewStyle(style: NavigationViewStyle): Modifier = element(388, style)
-
-/**
- * SwiftUI `View.onChange(of:initial:_:)`
- *
- * ```swift
- * nonisolated func onChange<V>(of value: V, initial: Bool = false, _ action: @escaping () -> Void) -> some View where V : Equatable
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.onChange(value: Any, initial: Boolean = false, action: () -> Unit): Modifier = element(392, value, initial, SAction(action))
-
-/**
- * SwiftUI `View.onLongPressGesture(minimumDuration:maximumDistance:inputKinds:perform:onPressingChanged:)`
- *
- * ```swift
- * nonisolated func onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10, inputKinds: GestureInputKinds = .all, perform action: @escaping () -> Void, onPressingChanged: ((Bool) -> Void)? = nil) -> some View
- * ```
- * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS 27.0+
- */
-@HiddenFromObjC
-public fun Modifier.onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: Double = 10.0, inputKinds: GestureInputKinds = GestureInputKinds.all, perform: () -> Unit): Modifier = element(397, minimumDuration, maximumDistance, inputKinds, SAction(perform))
-
-/**
- * SwiftUI `View.onLongPressGesture(minimumDuration:pressing:perform:)`
- *
- * ```swift
- * nonisolated func onLongPressGesture(minimumDuration: Double = 0.5, pressing: ((Bool) -> Void)? = nil, perform action: @escaping () -> Void) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
- */
-@Deprecated("Use onLongPressGesture(minimumDuration = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.onLongPressGestureMinimumDuration(minimumDuration: Double = 0.5, perform: () -> Unit): Modifier = element(401, minimumDuration, SAction(perform))
-
-/**
- * SwiftUI `View.onSubmit(of:_:)`
- *
- * ```swift
- * nonisolated func onSubmit(of triggers: SubmitTriggers = .text, _ action: @escaping () -> Void) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.onSubmit(triggers: SubmitTriggers = SubmitTriggers.text, action: () -> Unit): Modifier = element(405, triggers, SAction(action))
-
-/**
- * SwiftUI `View.overlay(_:in:fillStyle:)`
- *
- * ```swift
- * nonisolated func overlay<S, T>(_ style: S, in shape: T, fillStyle: FillStyle = FillStyle()) -> some View where S : ShapeStyle, T : Shape
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.overlay(style: ShapeStyle, shape: Shape, fillStyle: FillStyle = FillStyle()): Modifier = element(409, style, shape, fillStyle)
-
-/**
- * SwiftUI `View.padding(_:)`
- *
- * ```swift
- * nonisolated func padding(_ insets: EdgeInsets) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.padding(insets: EdgeInsets): Modifier = element(413, insets)
-
-/**
- * SwiftUI `View.paletteSelectionEffect(_:)`
- *
- * ```swift
- * nonisolated func paletteSelectionEffect(_ effect: PaletteSelectionEffect) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.paletteSelectionEffect(effect: PaletteSelectionEffect): Modifier = element(417, effect)
-
-/**
- * SwiftUI `View.pointerVisibility(_:)`
- *
- * ```swift
- * nonisolated func pointerVisibility(_ visibility: Visibility) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.pointerVisibility(visibility: Visibility): Modifier = element(421, visibility)
-
-/**
- * SwiftUI `View.preferredColorScheme(_:)`
- *
- * ```swift
- * nonisolated func preferredColorScheme(_ colorScheme: ColorScheme?) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.preferredColorScheme(colorScheme: ColorScheme?): Modifier = element(425, colorScheme)
-
-/**
- * SwiftUI `View.presentationCompactAdaptation(_:)`
- *
- * ```swift
- * nonisolated func presentationCompactAdaptation(_ adaptation: PresentationAdaptation) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.presentationCompactAdaptation(adaptation: PresentationAdaptation): Modifier = element(429, adaptation)
-
-/**
- * SwiftUI `View.presentationDetents(_:)`
- *
- * ```swift
- * nonisolated func presentationDetents(_ detents: Set<PresentationDetent>) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.presentationDetents(detents: Set<PresentationDetent>): Modifier = element(433, detents.toList())
-
-/**
- * SwiftUI `View.presentationSizing(_:)`
- *
- * ```swift
- * nonisolated func presentationSizing(_ sizing: some PresentationSizing) -> some View
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC
-public fun Modifier.presentationSizing(sizing: PresentationSizing): Modifier = element(437, sizing)
-
-/**
- * SwiftUI `View.progressViewStyle(_:)`
- *
- * ```swift
- * nonisolated func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.progressViewStyle(style: ProgressViewStyle): Modifier = element(444, style)
-
-/**
- * SwiftUI `View.renameAction(_:)`
- *
- * ```swift
- * nonisolated func renameAction(_ action: @escaping () -> Void) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.renameAction(action: () -> Unit): Modifier = element(448, SAction(action))
-
-/**
- * SwiftUI `View.safeAreaBar(edge:alignment:spacing:content:)`
- *
- * ```swift
- * nonisolated func safeAreaBar(edge: HorizontalEdge, alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ContentBuilder content: () -> some View) -> some View
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.safeAreaBar(edge: HorizontalEdge, alignment: VerticalAlignment = VerticalAlignment.center, spacing: Double? = null, content: @Composable () -> Unit): Modifier = element(452, edge, alignment, spacing, slotContent(content))
-
-/**
- * SwiftUI `View.safeAreaPadding(_:)`
- *
- * ```swift
- * @export(implementation) nonisolated func safeAreaPadding(_ length: CGFloat) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.safeAreaPadding(length: Double): Modifier = element(456, length)
-
-/**
- * SwiftUI `View.scaleEffect(_:anchor:)`
- *
- * ```swift
- * nonisolated func scaleEffect(_ s: CGFloat, anchor: UnitPoint = .center) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.scaleEffect(s: Double, anchor: UnitPoint = UnitPoint.center): Modifier = element(460, s, anchor)
-
-/**
- * SwiftUI `View.scenePadding(_:)`
- *
- * ```swift
- * nonisolated func scenePadding(_ edges: Edge.Set = .all) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.scenePadding(edges: Edge.Set = Edge.Set.all): Modifier = element(464, edges)
-
-/**
- * SwiftUI `View.scrollContentBackground(_:)`
- *
- * ```swift
- * nonisolated func scrollContentBackground(_ visibility: Visibility) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.scrollContentBackground(visibility: Visibility): Modifier = element(468, visibility)
-
-/**
- * SwiftUI `View.scrollEdgeEffectStyle(_:for:)`
- *
- * ```swift
- * nonisolated func scrollEdgeEffectStyle(_ style: ScrollEdgeEffectStyle?, for edges: Edge.Set) -> some View
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.scrollEdgeEffectStyle(style: ScrollEdgeEffectStyle?, edges: Edge.Set): Modifier = element(472, style, edges)
-
-/**
- * SwiftUI `View.scrollInputBehavior(_:for:)`
- *
- * ```swift
- * @MainActor @preconcurrency func scrollInputBehavior(_ behavior: ScrollInputBehavior, for input: ScrollInputKind) -> some View
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC
-public fun Modifier.scrollInputBehavior(behavior: ScrollInputBehavior, input: ScrollInputKind): Modifier = element(476, behavior, input)
-
-/**
- * SwiftUI `View.searchCompletion(_:)`
- *
- * ```swift
- * nonisolated func searchCompletion(_ completion: String) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.searchCompletion(completion: String): Modifier = element(480, completion)
-
-/**
- * SwiftUI `View.searchScopes(_:scopes:)`
- *
- * ```swift
- * nonisolated func searchScopes<V, S>(_ scope: Binding<V>, @ContentBuilder scopes: () -> S) -> some View where V : Hashable, S : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.searchScopes(scope: Any, onScopeChange: (Any) -> Unit, scopes: @Composable () -> Unit): Modifier = element(484, scope, SValueCallback { onScopeChange(it as Any) }, slotContent(scopes))
-
-/**
- * SwiftUI `View.searchable(text:isPresented:placement:prompt:)`
- *
- * ```swift
- * nonisolated func searchable<S>(text: Binding<String>, isPresented: Binding<Bool>, placement: SearchFieldPlacement = .automatic, prompt: S) -> some View where S : StringProtocol
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.searchable(text: String, onTextChange: (String) -> Unit, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: String): Modifier = element(491, text, SValueCallback { onTextChange(it as String) }, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, placement, prompt)
-
-/**
- * SwiftUI `View.sectionIndexLabel(_:)`
- *
- * ```swift
- * @export(implementation) nonisolated func sectionIndexLabel<S>(_ label: S?) -> some View where S : StringProtocol
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.sectionIndexLabel(label: String?): Modifier = element(501, label)
-
-/**
- * SwiftUI `View.sheet(isPresented:onDismiss:content:)`
- *
- * ```swift
- * nonisolated func sheet<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ContentBuilder content: @escaping () -> Content) -> some View where Content : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.sheet(isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, content: @Composable () -> Unit): Modifier = element(505, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(content))
-
-/**
- * SwiftUI `View.speechAnnouncementsQueued(_:)`
- *
- * ```swift
- * nonisolated func speechAnnouncementsQueued(_ value: Bool = true) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.speechAnnouncementsQueued(value: Boolean = true): Modifier = element(509, value)
-
-/**
- * SwiftUI `View.splitArrangementLayoutRatio(minHorizontal:idealHorizontal:maxHorizontal:minVertical:idealVertical:maxVertical:)`
- *
- * ```swift
- * nonisolated func splitArrangementLayoutRatio(minHorizontal: CGFloat? = nil, idealHorizontal: CGFloat? = nil, maxHorizontal: CGFloat? = nil, minVertical: CGFloat? = nil, idealVertical: CGFloat? = nil, maxVertical: CGFloat? = nil) -> some View
- * ```
- * Availability: iOS 27.1+, macOS 27.1+, tvOS 27.1+, watchOS 27.1+
- */
-@HiddenFromObjC
-public fun Modifier.splitArrangementLayoutRatio(minHorizontal: Double? = null, idealHorizontal: Double? = null, maxHorizontal: Double? = null, minVertical: Double? = null, idealVertical: Double? = null, maxVertical: Double? = null): Modifier = element(513, minHorizontal, idealHorizontal, maxHorizontal, minVertical, idealVertical, maxVertical)
-
-/**
- * SwiftUI `View.statusBarHidden(_:)`
- *
- * ```swift
- * @export(implementation) nonisolated func statusBarHidden(_ hidden: Bool = true) -> some View
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.statusBarHidden(hidden: Boolean = true): Modifier = element(517, hidden)
-
-/**
- * SwiftUI `View.swipeActions(edge:allowsFullSwipe:content:)`
- *
- * ```swift
- * nonisolated func swipeActions<T>(edge: HorizontalEdge = .trailing, allowsFullSwipe: Bool = true, @ContentBuilder content: () -> T) -> some View where T : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.swipeActions(edge: HorizontalEdge = HorizontalEdge.trailing, allowsFullSwipe: Boolean = true, content: @Composable () -> Unit): Modifier = element(521, edge, allowsFullSwipe, slotContent(content))
-
-/**
- * SwiftUI `View.symbolEffectsRemoved(_:)`
- *
- * ```swift
- * @export(implementation) nonisolated func symbolEffectsRemoved(_ isEnabled: Bool = true) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.symbolEffectsRemoved(isEnabled: Boolean = true): Modifier = element(525, isEnabled)
-
-/**
- * SwiftUI `View.tabBarMinimizeBehavior(_:)`
- *
- * ```swift
- * nonisolated func tabBarMinimizeBehavior(_ behavior: TabBarMinimizeBehavior) -> some View
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.tabBarMinimizeBehavior(behavior: TabBarMinimizeBehavior): Modifier = element(529, behavior)
-
-/**
- * SwiftUI `View.tabViewSearchActivation(_:)`
- *
- * ```swift
- * nonisolated func tabViewSearchActivation(_ activation: TabSearchActivation) -> some View
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.tabViewSearchActivation(activation: TabSearchActivation): Modifier = element(533, activation)
-
-/**
- * SwiftUI `View.tabViewStyle(_:)`
- *
- * ```swift
- * nonisolated func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.tabViewStyle(style: TabViewStyle): Modifier = element(537, style)
-
-/**
- * SwiftUI `View.task(id:name:priority:file:line:_:)`
- *
- * ```swift
- * @export(implementation) nonisolated func task<T>(id: T, name: String? = nil, priority: TaskPriority = .userInitiated, file: String = #fileID, line: Int = #line, _ action: sending @escaping @isolated(any) () async -> Void) -> some View where T : Equatable
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.task(id: Any, name: String? = null, file: String? = null, line: Int? = null, action: () -> Unit): Modifier = element(541, id, name, file, line, SAction(action))
-
-/**
- * SwiftUI `View.textFieldStyle(_:)`
- *
- * ```swift
- * nonisolated func textFieldStyle<S>(_ style: S) -> some View where S : TextFieldStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.textFieldStyle(style: TextFieldStyle): Modifier = element(545, style)
-
-/**
- * SwiftUI `View.textInputFormattingControlVisibility(_:for:)`
- *
- * ```swift
- * nonisolated func textInputFormattingControlVisibility(_ visibility: Visibility, for placement: TextInputFormattingControlPlacement.Set) -> some View
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.textInputFormattingControlVisibility(visibility: Visibility, placement: TextInputFormattingControlPlacement.Set): Modifier = element(549, visibility, placement)
-
-/**
- * SwiftUI `View.textSelectionAffinity(_:)`
- *
- * ```swift
- * nonisolated func textSelectionAffinity(_ affinity: TextSelectionAffinity) -> some View
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC
-public fun Modifier.textSelectionAffinity(affinity: TextSelectionAffinity): Modifier = element(553, affinity)
-
-/**
- * SwiftUI `View.toolbar(content:)`
- *
- * ```swift
- * nonisolated func toolbar<Content>(@ContentBuilder content: () -> Content) -> some View where Content : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.toolbar(content: @Composable () -> Unit): Modifier = element(557, slotContent(content))
-
-/**
- * SwiftUI `View.toolbarBackgroundVisibility(_:for:)`
- *
- * ```swift
- * nonisolated func toolbarBackgroundVisibility(_ visibility: Visibility, for bars: ToolbarPlacement...) -> some View
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC
-public fun Modifier.toolbarBackgroundVisibility(visibility: Visibility, bars: ToolbarPlacement): Modifier = element(561, visibility, bars)
-
-/**
- * SwiftUI `View.toolbarMinimizationBehavior(_:for:)`
- *
- * ```swift
- * nonisolated func toolbarMinimizationBehavior(_ behavior: ToolbarMinimizationBehavior, for bars: ToolbarPlacement...) -> some View
- * ```
- * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
- */
-@HiddenFromObjC
-public fun Modifier.toolbarMinimizationBehavior(behavior: ToolbarMinimizationBehavior, bars: ToolbarPlacement): Modifier = element(565, behavior, bars)
-
-/**
- * SwiftUI `View.toolbarRole(_:)`
- *
- * ```swift
- * nonisolated func toolbarRole(_ role: ToolbarRole) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.toolbarRole(role: ToolbarRole): Modifier = element(569, role)
-
-/**
- * SwiftUI `View.toolbarVerticalBehavior(_:)`
- *
- * ```swift
- * nonisolated func toolbarVerticalBehavior(_ behavior: ToolbarVerticalBehavior) -> some View
- * ```
- * Availability: iOS 27.1+, macOS 27.1+, tvOS 27.1+, watchOS 27.1+
- */
-@HiddenFromObjC
-public fun Modifier.toolbarVerticalBehavior(behavior: ToolbarVerticalBehavior): Modifier = element(573, behavior)
-
-/**
- * SwiftUI `View.touchBarItemPresence(_:)`
- *
- * ```swift
- * nonisolated func touchBarItemPresence(_ presence: TouchBarItemPresence) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.touchBarItemPresence(presence: TouchBarItemPresence): Modifier = element(578, presence)
-
-/**
- * SwiftUI `View.truncationMode(_:)`
- *
- * ```swift
- * nonisolated func truncationMode(_ mode: Text.TruncationMode) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.truncationMode(mode: Text.TruncationMode): Modifier = element(582, mode)
-
-/**
- * SwiftUI `View.unredacted()`
- *
- * ```swift
- * nonisolated func unredacted() -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.unredacted(): Modifier = element(589)
-
-/**
- * SwiftUI `View.windowResizeAnchor(_:)`
- *
- * ```swift
- * nonisolated func windowResizeAnchor(_ anchor: UnitPoint?) -> some View
- * ```
- * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.windowResizeAnchor(anchor: UnitPoint?): Modifier = element(593, anchor)
-
-/**
- * SwiftUI `View.writingToolsAffordanceVisibility(_:)`
- *
- * ```swift
- * nonisolated func writingToolsAffordanceVisibility(_ visibility: Visibility) -> some View
- * ```
- * Availability: iOS 18.4+, macOS 15.4+, tvOS 18.4+, watchOS 11.4+
- */
-@HiddenFromObjC
-public fun Modifier.writingToolsAffordanceVisibility(visibility: Visibility): Modifier = element(597, visibility)
-
-/**
- * SwiftUI `Image.interpolation(_:)`
- *
- * ```swift
- * func interpolation(_ interpolation: Image.Interpolation) -> Image
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- * Applies to `Image` views only.
- */
-@HiddenFromObjC
-public fun Modifier.interpolation(interpolation: Image.Interpolation): Modifier = element(601, interpolation)
-
-/**
- * SwiftUI `Text.bold()`
- *
- * ```swift
- * nonisolated func bold() -> Text
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- * Applies to `Text` views only.
- */
-@HiddenFromObjC
-public fun Modifier.bold(): Modifier = element(605)
-
-/**
- * SwiftUI `View.accessibilityAction(named:_:)`
- *
- * ```swift
- * @export(implementation) nonisolated func accessibilityAction(named nameResource: LocalizedStringResource, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use accessibilityAction(named = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.accessibilityActionNamed(named: LocalizedKey, handler: () -> Unit): Modifier = element(16, named.key, SAction(handler))
-
-/**
- * SwiftUI `View.accessibilityCustomContent(_:_:importance:)`
- *
- * ```swift
- * nonisolated func accessibilityCustomContent(_ label: Text, _ value: Text, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.accessibilityCustomContent(label: String, value: String): Modifier = element(30, label, value)
-
-/**
- * SwiftUI `View.accessibilityDragPoint(_:description:)`
- *
- * ```swift
- * nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC
-public fun Modifier.accessibilityDragPoint(point: UnitPoint, description: LocalizedKey): Modifier = element(39, point, description.key)
-
-/**
- * SwiftUI `View.accessibilityDragPoint(_:description:isEnabled:)`
- *
- * ```swift
- * @export(implementation) nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: LocalizedStringResource, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@Deprecated("Use accessibilityDragPoint(point = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.accessibilityDragPointDescription(point: UnitPoint, description: LocalizedKey, isEnabled: Boolean): Modifier = element(44, point, description.key, isEnabled)
-
-/**
- * SwiftUI `View.accessibilityDropPoint(_:description:isEnabled:)`
- *
- * ```swift
- * nonisolated func accessibilityDropPoint(_ point: UnitPoint, description: Text, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@Deprecated("Use accessibilityDropPoint(point = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.accessibilityDropPointDescription(point: UnitPoint, description: String, isEnabled: Boolean): Modifier = element(50, point, description, isEnabled)
-
-/**
- * SwiftUI `View.accessibilityHint(_:)`
- *
- * ```swift
- * nonisolated func accessibilityHint(_ hintKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.accessibilityHint(hintKey: LocalizedKey): Modifier = element(59, hintKey.key)
-
-/**
- * SwiftUI `View.accessibilityHint(_:isEnabled:)`
- *
- * ```swift
- * @export(implementation) nonisolated func accessibilityHint(_ hint: LocalizedStringResource, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@Deprecated("Use accessibilityHint(hint = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.accessibilityHintIsEnabled(hint: LocalizedKey, isEnabled: Boolean): Modifier = element(64, hint.key, isEnabled)
-
-/**
- * SwiftUI `View.accessibilityLabel(_:isEnabled:)`
- *
- * ```swift
- * nonisolated func accessibilityLabel(_ label: Text, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@Deprecated("Use accessibilityLabel(label = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.accessibilityLabelIsEnabled(label: String, isEnabled: Boolean): Modifier = element(75, label, isEnabled)
-
-/**
- * SwiftUI `View.accessibilityScrollStatus(_:isEnabled:)`
- *
- * ```swift
- * nonisolated func accessibilityScrollStatus(_ statusKey: LocalizedStringKey, isEnabled: Bool = true) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC
-public fun Modifier.accessibilityScrollStatus(statusKey: LocalizedKey, isEnabled: Boolean = true): Modifier = element(86, statusKey.key, isEnabled)
-
-/**
- * SwiftUI `View.alert(_:isPresented:actions:)`
- *
- * ```swift
- * nonisolated func alert<A>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A) -> some View where A : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC
-public fun Modifier.alert(titleKey: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit): Modifier = element(101, titleKey.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions))
-
-/**
- * SwiftUI `View.alert(_:isPresented:actions:message:)`
- *
- * ```swift
- * @export(implementation) nonisolated func alert<A, M>(_ titleResource: LocalizedStringResource, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Use alert(titleResource = …)", level = DeprecationLevel.WARNING)
-@HiddenFromObjC
-public fun Modifier.alertIsPresented(titleResource: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(106, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions), slotContent(message))
+public fun Modifier.colorMultiply(color: Color): Modifier = element(154, color)
 
 /**
  * SwiftUI `View.confirmationDialog(_:isPresented:titleVisibility:actions:message:)`
  *
  * ```swift
- * nonisolated func confirmationDialog<A, M>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * nonisolated func confirmationDialog<S, A, M>(_ title: S, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where S : StringProtocol, A : View, M : View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.confirmationDialog(titleKey: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(160, titleKey.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message))
+public fun Modifier.confirmationDialog(title: String, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(163, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message))
 
 /**
- * SwiftUI `View.dialogSuppressionToggle(_:isSuppressed:)`
+ * SwiftUI `View.containerRelativeFrame(_:alignment:)`
  *
  * ```swift
- * @export(implementation) nonisolated func dialogSuppressionToggle(_ titleResource: LocalizedStringResource, isSuppressed: Binding<Bool>) -> some View
+ * nonisolated func containerRelativeFrame(_ axes: Axis.Set, alignment: Alignment = .center) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use dialogSuppressionToggle(titleResource = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.dialogSuppressionToggleIsSuppressed(titleResource: LocalizedKey, isSuppressed: Boolean, onIsSuppressedChange: (Boolean) -> Unit): Modifier = element(200, titleResource.key, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) })
+public fun Modifier.containerRelativeFrame(axes: Axis.Set, alignment: Alignment = Alignment.center): Modifier = element(168, axes, alignment)
+
+/**
+ * SwiftUI `View.contentMargins(_:_:for:)`
+ *
+ * ```swift
+ * nonisolated func contentMargins(_ edges: Edge.Set = .all, _ insets: EdgeInsets, for placement: ContentMarginPlacement = .automatic) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.contentMargins(edges: Edge.Set = Edge.Set.all, insets: EdgeInsets, placement: ContentMarginPlacement = ContentMarginPlacement.automatic): Modifier = element(172, edges, insets, placement)
+
+/**
+ * SwiftUI `View.contentShape(_:_:eoFill:)`
+ *
+ * ```swift
+ * nonisolated func contentShape<S>(_ kind: ContentShapeKinds, _ shape: S, eoFill: Bool = false) -> some View where S : Shape
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.contentShape(kind: ContentShapeKinds, shape: Shape, eoFill: Boolean = false): Modifier = element(176, kind, shape, eoFill)
+
+/**
+ * SwiftUI `View.contextMenu(menuItems:preview:)`
+ *
+ * ```swift
+ * nonisolated func contextMenu<M, P>(@ContentBuilder menuItems: () -> M, @ContentBuilder preview: () -> P) -> some View where M : View, P : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.contextMenu(menuItems: @Composable () -> Unit, preview: @Composable () -> Unit): Modifier = element(181, slotContent(menuItems), slotContent(preview))
+
+/**
+ * SwiftUI `View.coordinateSpace(_:)`
+ *
+ * ```swift
+ * nonisolated func coordinateSpace(_ name: NamedCoordinateSpace) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.coordinateSpace(name: NamedCoordinateSpace): Modifier = element(185, name)
+
+/**
+ * SwiftUI `View.defaultAdaptableTabBarPlacement(_:)`
+ *
+ * ```swift
+ * nonisolated func defaultAdaptableTabBarPlacement(_ defaultPlacement: AdaptableTabBarPlacement = .automatic) -> some View
+ * ```
+ * Availability: iOS 18.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.defaultAdaptableTabBarPlacement(defaultPlacement: AdaptableTabBarPlacement = AdaptableTabBarPlacement.automatic): Modifier = element(189, defaultPlacement)
+
+/**
+ * SwiftUI `View.defaultScrollAnchor(_:for:)`
+ *
+ * ```swift
+ * nonisolated func defaultScrollAnchor(_ anchor: UnitPoint?, for role: ScrollAnchorRole) -> some View
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC
+public fun Modifier.defaultScrollAnchor(anchor: UnitPoint?, role: ScrollAnchorRole): Modifier = element(193, anchor, role)
+
+/**
+ * SwiftUI `View.deleteDisabled(_:)`
+ *
+ * ```swift
+ * nonisolated func deleteDisabled(_ isDisabled: Bool) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.deleteDisabled(isDisabled: Boolean): Modifier = element(197, isDisabled)
+
+/**
+ * SwiftUI `View.dialogSuppressionToggle(isSuppressed:)`
+ *
+ * ```swift
+ * nonisolated func dialogSuppressionToggle(isSuppressed: Binding<Bool>) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.dialogSuppressionToggle(isSuppressed: Boolean, onIsSuppressedChange: (Boolean) -> Unit): Modifier = element(204, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) })
+
+/**
+ * SwiftUI `View.digitalCrownRotation(_:from:through:by:sensitivity:isContinuous:isHapticFeedbackEnabled:)`
+ *
+ * ```swift
+ * nonisolated func digitalCrownRotation<V>(_ binding: Binding<V>, from minValue: V, through maxValue: V, by stride: V.Stride? = nil, sensitivity: DigitalCrownRotationalSensitivity = .high, isContinuous: Bool = false, isHapticFeedbackEnabled: Bool = true) -> some View where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.digitalCrownRotation(binding: Double, onBindingChange: (Double) -> Unit, minValue: Double, through: Double, stride: Double? = null, sensitivity: DigitalCrownRotationalSensitivity = DigitalCrownRotationalSensitivity.high, isContinuous: Boolean = false, isHapticFeedbackEnabled: Boolean = true): Modifier = element(208, binding, SValueCallback { onBindingChange(it as Double) }, minValue, through, stride, sensitivity, isContinuous, isHapticFeedbackEnabled)
+
+/**
+ * SwiftUI `View.digitalCrownRotation(detent:from:through:by:sensitivity:isContinuous:isHapticFeedbackEnabled:onChange:onIdle:)`
+ *
+ * ```swift
+ * nonisolated func digitalCrownRotation<V>(detent: Binding<V>, from minValue: V, through maxValue: V, by stride: V.Stride, sensitivity: DigitalCrownRotationalSensitivity = .high, isContinuous: Bool = false, isHapticFeedbackEnabled: Bool = true, onChange: @escaping (DigitalCrownEvent) -> Void = { _ in }, onIdle: @escaping () -> Void = { }) -> some View where V : BinaryInteger, V.Stride : BinaryInteger
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.digitalCrownRotation(detent: Int, onDetentChange: (Int) -> Unit, minValue: Int, through: Int, stride: Int, sensitivity: DigitalCrownRotationalSensitivity = DigitalCrownRotationalSensitivity.high, isContinuous: Boolean = false, isHapticFeedbackEnabled: Boolean = true, onIdle: () -> Unit = {}): Modifier = element(212, detent, SValueCallback { onDetentChange(it as Int) }, minValue, through, stride, sensitivity, isContinuous, isHapticFeedbackEnabled, SAction(onIdle))
 
 /**
  * SwiftUI `View.dismissalConfirmationDialog(_:shouldPresent:actions:)`
  *
  * ```swift
- * nonisolated func dismissalConfirmationDialog<A>(_ title: Text, shouldPresent: Bool, @ContentBuilder actions: () -> A) -> some View where A : View
+ * nonisolated func dismissalConfirmationDialog<S, A>(_ title: S, shouldPresent: Bool, @ContentBuilder actions: () -> A) -> some View where S : StringProtocol, A : View
  * ```
  * Availability: iOS 27.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@Deprecated("Use dismissalConfirmationDialog(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.dismissalConfirmationDialogShouldPresent(title: String, shouldPresent: Boolean, actions: @Composable () -> Unit): Modifier = element(218, title, shouldPresent, slotContent(actions))
+public fun Modifier.dismissalConfirmationDialog(title: String, shouldPresent: Boolean, actions: @Composable () -> Unit): Modifier = element(218, title, shouldPresent, slotContent(actions))
 
 /**
  * SwiftUI `View.documentLaunchTitle(_:)`
  *
  * ```swift
- * nonisolated func documentLaunchTitle(_ titleKey: LocalizedStringKey) -> some View
+ * nonisolated func documentLaunchTitle<S>(_ title: S) -> some View where S : StringProtocol
  * ```
  * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
-public fun Modifier.documentLaunchTitle(titleKey: LocalizedKey): Modifier = element(229, titleKey.key)
+public fun Modifier.documentLaunchTitle(title: String): Modifier = element(232, title)
 
 /**
- * SwiftUI `View.navigationBarTitle(_:displayMode:)`
+ * SwiftUI `View.drawingGroup(opaque:colorMode:)`
  *
  * ```swift
- * nonisolated func navigationBarTitle(_ title: Text, displayMode: NavigationBarItem.TitleDisplayMode) -> some View
+ * nonisolated func drawingGroup(opaque: Bool = false, colorMode: ColorRenderingMode = .nonLinear) -> some View
  * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@Deprecated("Use navigationBarTitle(title = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.navigationBarTitleDisplayMode(title: String, displayMode: NavigationBarItem.TitleDisplayMode): Modifier = element(367, title, displayMode)
+public fun Modifier.drawingGroup(opaque: Boolean = false, colorMode: ColorRenderingMode = ColorRenderingMode.nonLinear): Modifier = element(236, opaque, colorMode)
 
 /**
- * SwiftUI `View.searchable(text:isPresented:placement:prompt:)`
+ * SwiftUI `View.fileDialogBrowserOptions(_:)`
  *
  * ```swift
- * nonisolated func searchable(text: Binding<String>, isPresented: Binding<Bool>, placement: SearchFieldPlacement = .automatic, prompt: Text? = nil) -> some View
+ * nonisolated func fileDialogBrowserOptions(_ options: FileDialogBrowserOptions) -> some View
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@Deprecated("Use searchable(text = …)", level = DeprecationLevel.WARNING)
 @HiddenFromObjC
-public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: String? = null): Modifier = element(488, text, SValueCallback { onTextChange(it as String) }, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, placement, prompt)
+public fun Modifier.fileDialogBrowserOptions(options: FileDialogBrowserOptions): Modifier = element(240, options)
+
+/**
+ * SwiftUI `View.fileDialogImportsUnresolvedAliases(_:)`
+ *
+ * ```swift
+ * nonisolated func fileDialogImportsUnresolvedAliases(_ imports: Bool) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.fileDialogImportsUnresolvedAliases(imports: Boolean): Modifier = element(247, imports)
+
+/**
+ * SwiftUI `View.findNavigator(isPresented:)`
+ *
+ * ```swift
+ * nonisolated func findNavigator(isPresented: Binding<Bool>) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.findNavigator(isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit): Modifier = element(257, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) })
+
+/**
+ * SwiftUI `View.focusEffectDisabled(_:)`
+ *
+ * ```swift
+ * nonisolated func focusEffectDisabled(_ disabled: Bool = true) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.focusEffectDisabled(disabled: Boolean = true): Modifier = element(261, disabled)
+
+/**
+ * SwiftUI `View.font(_:)`
+ *
+ * ```swift
+ * nonisolated func font(_ font: Font?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.font(font: Font?): Modifier = element(266, font)
+
+/**
+ * SwiftUI `View.foregroundColor(_:)`
+ *
+ * ```swift
+ * nonisolated func foregroundColor(_ color: Color?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.foregroundColor(color: Color?): Modifier = element(270, color)
+
+/**
+ * SwiftUI `View.formStyle(_:)`
+ *
+ * ```swift
+ * nonisolated func formStyle<S>(_ style: S) -> some View where S : FormStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.formStyle(style: FormStyle): Modifier = element(274, style)
+
+/**
+ * SwiftUI `View.gaugeStyle(_:)`
+ *
+ * ```swift
+ * nonisolated func gaugeStyle<S>(_ style: S) -> some View where S : GaugeStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.gaugeStyle(style: GaugeStyle): Modifier = element(279, style)
+
+/**
+ * SwiftUI `View.grayscale(_:)`
+ *
+ * ```swift
+ * nonisolated func grayscale(_ amount: Double) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.grayscale(amount: Double): Modifier = element(283, amount)
+
+/**
+ * SwiftUI `View.gridColumnAlignment(_:)`
+ *
+ * ```swift
+ * nonisolated func gridColumnAlignment(_ guide: HorizontalAlignment) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.gridColumnAlignment(guide: HorizontalAlignment): Modifier = element(287, guide)
+
+/**
+ * SwiftUI `View.headerProminence(_:)`
+ *
+ * ```swift
+ * nonisolated func headerProminence(_ prominence: Prominence) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.headerProminence(prominence: Prominence): Modifier = element(291, prominence)
+
+/**
+ * SwiftUI `View.hoverEffect(_:)`
+ *
+ * ```swift
+ * nonisolated func hoverEffect(_ effect: HoverEffect = .automatic) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.hoverEffect(effect: HoverEffect = HoverEffect.automatic): Modifier = element(298, effect)
+
+/**
+ * SwiftUI `View.hueRotation(_:)`
+ *
+ * ```swift
+ * nonisolated func hueRotation(_ angle: Angle) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.hueRotation(angle: Angle): Modifier = element(302, angle)
+
+/**
+ * SwiftUI `View.imageScale(_:)`
+ *
+ * ```swift
+ * nonisolated func imageScale(_ scale: Image.Scale) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.imageScale(scale: Image.Scale): Modifier = element(306, scale)
+
+/**
+ * SwiftUI `View.inspectorColumnWidth(min:ideal:max:)`
+ *
+ * ```swift
+ * nonisolated func inspectorColumnWidth(min: CGFloat? = nil, ideal: CGFloat, max: CGFloat? = nil) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.inspectorColumnWidth(min: Double? = null, ideal: Double, max: Double? = null): Modifier = element(310, min, ideal, max)
+
+/**
+ * SwiftUI `View.italic(_:)`
+ *
+ * ```swift
+ * nonisolated func italic(_ isActive: Bool = true) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.italic(isActive: Boolean = true): Modifier = element(314, isActive)
+
+/**
+ * SwiftUI `View.keyboardShortcut(_:modifiers:)`
+ *
+ * ```swift
+ * nonisolated func keyboardShortcut(_ key: KeyEquivalent, modifiers: EventModifiers = .command) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.keyboardShortcut(key: KeyEquivalent, modifiers: EventModifiers = EventModifiers.command): Modifier = element(318, key, modifiers)
+
+/**
+ * SwiftUI `View.labelStyle(_:)`
+ *
+ * ```swift
+ * nonisolated func labelStyle<S>(_ style: S) -> some View where S : LabelStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.labelStyle(style: LabelStyle): Modifier = element(322, style)
+
+/**
+ * SwiftUI `View.layerEffect(_:maxSampleOffset:isEnabled:)`
+ *
+ * ```swift
+ * nonisolated func layerEffect(_ shader: Shader, maxSampleOffset: CGSize, isEnabled: Bool = true) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.layerEffect(shader: Shader, maxSampleOffset: CGSize, isEnabled: Boolean = true): Modifier = element(326, shader, maxSampleOffset, isEnabled)
+
+/**
+ * SwiftUI `View.lineLimit(_:)`
+ *
+ * ```swift
+ * nonisolated func lineLimit(_ limit: ClosedRange<Int>) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.lineLimit(limit: IntRange): Modifier = element(330, listOf(limit.start, limit.endInclusive))
+
+/**
+ * SwiftUI `View.listItemTint(_:)`
+ *
+ * ```swift
+ * nonisolated func listItemTint(_ tint: Color?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.listItemTint(tint: Color?): Modifier = element(334, tint)
+
+/**
+ * SwiftUI `View.listRowPlatterColor(_:)`
+ *
+ * ```swift
+ * nonisolated func listRowPlatterColor(_ color: Color?) -> some View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.listRowPlatterColor(color: Color?): Modifier = element(338, color)
+
+/**
+ * SwiftUI `View.listSectionIndexVisibility(_:)`
+ *
+ * ```swift
+ * nonisolated func listSectionIndexVisibility(_ visibility: Visibility) -> some View
+ * ```
+ * Availability: iOS 26.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 26.0+
+ */
+@HiddenFromObjC
+public fun Modifier.listSectionIndexVisibility(visibility: Visibility): Modifier = element(342, visibility)
+
+/**
+ * SwiftUI `View.listSectionSpacing(_:)`
+ *
+ * ```swift
+ * nonisolated func listSectionSpacing(_ spacing: ListSectionSpacing) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.listSectionSpacing(spacing: ListSectionSpacing): Modifier = element(346, spacing)
+
+/**
+ * SwiftUI `View.mask(_:)`
+ *
+ * ```swift
+ * nonisolated func mask<Mask>(_ mask: Mask) -> some View where Mask : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.mask(mask: @Composable () -> Unit): Modifier = element(350, slotContent(mask))
+
+/**
+ * SwiftUI `View.menuButtonStyle(_:)`
+ *
+ * ```swift
+ * nonisolated func menuButtonStyle<S>(_ style: S) -> some View where S : MenuButtonStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.menuButtonStyle(style: MenuButtonStyle): Modifier = element(354, style)
+
+/**
+ * SwiftUI `View.minimumScaleFactor(_:)`
+ *
+ * ```swift
+ * nonisolated func minimumScaleFactor(_ factor: CGFloat) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.minimumScaleFactor(factor: Double): Modifier = element(358, factor)
+
+/**
+ * SwiftUI `View.moveDisabled(_:)`
+ *
+ * ```swift
+ * nonisolated func moveDisabled(_ isDisabled: Bool) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.moveDisabled(isDisabled: Boolean): Modifier = element(362, isDisabled)
+
+/**
+ * SwiftUI `View.navigationBarHidden(_:)`
+ *
+ * ```swift
+ * nonisolated func navigationBarHidden(_ hidden: Bool) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.navigationBarHidden(hidden: Boolean): Modifier = element(366, hidden)
+
+/**
+ * SwiftUI `View.navigationBarTitle(_:)`
+ *
+ * ```swift
+ * nonisolated func navigationBarTitle<S>(_ title: S) -> some View where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.navigationBarTitle(title: String): Modifier = element(372, title)
+
+/**
+ * SwiftUI `View.navigationDocument(_:)`
+ *
+ * ```swift
+ * nonisolated func navigationDocument(_ url: URL) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.navigationDocument(url: String): Modifier = element(378, url)
+
+/**
+ * SwiftUI `View.navigationSplitViewStyle(_:)`
+ *
+ * ```swift
+ * nonisolated func navigationSplitViewStyle<S>(_ style: S) -> some View where S : NavigationSplitViewStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.navigationSplitViewStyle(style: NavigationSplitViewStyle): Modifier = element(382, style)
+
+/**
+ * SwiftUI `View.navigationTitle(_:)`
+ *
+ * ```swift
+ * nonisolated func navigationTitle<V>(@ContentBuilder _ title: () -> V) -> some View where V : View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.navigationTitle(title: @Composable () -> Unit): Modifier = element(392, slotContent(title))
+
+/**
+ * SwiftUI `View.offset(x:y:)`
+ *
+ * ```swift
+ * nonisolated func offset(x: CGFloat = 0, y: CGFloat = 0) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.offset(x: Double = 0.0, y: Double = 0.0): Modifier = element(396, x, y)
+
+/**
+ * SwiftUI `View.onHover(perform:)`
+ *
+ * ```swift
+ * nonisolated func onHover(perform action: @escaping (Bool) -> Void) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.onHover(perform: (Boolean) -> Unit): Modifier = element(401, SValueCallback { perform(it as Boolean) })
+
+/**
+ * SwiftUI `View.onLongPressGesture(minimumDuration:maximumDistance:pressing:perform:)`
+ *
+ * ```swift
+ * nonisolated func onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10, pressing: ((Bool) -> Void)? = nil, perform action: @escaping () -> Void) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@Deprecated("Use onLongPressGesture(minimumDuration = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.onLongPressGestureMinimumDuration(minimumDuration: Double = 0.5, maximumDistance: Double = 10.0, perform: () -> Unit): Modifier = element(405, minimumDuration, maximumDistance, SAction(perform))
+
+/**
+ * SwiftUI `View.onOpenURL(prefersInApp:)`
+ *
+ * ```swift
+ * @MainActor @preconcurrency func onOpenURL(prefersInApp: Bool) -> some View
+ * ```
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+ */
+@HiddenFromObjC
+public fun Modifier.onOpenURL(prefersInApp: Boolean): Modifier = element(409, prefersInApp)
+
+/**
+ * SwiftUI `View.opacity(_:)`
+ *
+ * ```swift
+ * nonisolated func opacity(_ opacity: Double) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.opacity(opacity: Double): Modifier = element(413, opacity)
+
+/**
+ * SwiftUI `View.overlay(alignment:content:)`
+ *
+ * ```swift
+ * nonisolated func overlay<V>(alignment: Alignment = .center, @ContentBuilder content: () -> V) -> some View where V : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.overlay(alignment: Alignment = Alignment.center, content: @Composable () -> Unit): Modifier = element(417, alignment, slotContent(content))
+
+/**
+ * SwiftUI `View.padding(_:)`
+ *
+ * ```swift
+ * nonisolated func padding(_ length: CGFloat) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.padding(length: Double): Modifier = element(421, length)
+
+/**
+ * SwiftUI `View.persistentSystemOverlays(_:)`
+ *
+ * ```swift
+ * nonisolated func persistentSystemOverlays(_ visibility: Visibility) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.persistentSystemOverlays(visibility: Visibility): Modifier = element(425, visibility)
+
+/**
+ * SwiftUI `View.popover(isPresented:attachmentAnchor:arrowEdge:content:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func popover<Content>(isPresented: Binding<Bool>, attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: Edge? = nil, @ContentBuilder content: @escaping () -> Content) -> some View where Content : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.popover(isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, attachmentAnchor: PopoverAttachmentAnchor? = null, arrowEdge: Edge? = null, content: @Composable () -> Unit): Modifier = element(429, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, attachmentAnchor, arrowEdge, slotContent(content))
+
+/**
+ * SwiftUI `View.presentationBackground(_:)`
+ *
+ * ```swift
+ * nonisolated func presentationBackground<S>(_ style: S) -> some View where S : ShapeStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.presentationBackground(style: ShapeStyle): Modifier = element(433, style)
+
+/**
+ * SwiftUI `View.presentationCompactAdaptation(horizontal:vertical:)`
+ *
+ * ```swift
+ * nonisolated func presentationCompactAdaptation(horizontal horizontalAdaptation: PresentationAdaptation, vertical verticalAdaptation: PresentationAdaptation) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.presentationCompactAdaptation(horizontal: PresentationAdaptation, vertical: PresentationAdaptation): Modifier = element(437, horizontal, vertical)
+
+/**
+ * SwiftUI `View.presentationDragIndicator(_:)`
+ *
+ * ```swift
+ * nonisolated func presentationDragIndicator(_ visibility: Visibility) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.presentationDragIndicator(visibility: Visibility): Modifier = element(441, visibility)
+
+/**
+ * SwiftUI `View.presentedWindowStyle(_:)`
+ *
+ * ```swift
+ * nonisolated func presentedWindowStyle<S>(_ style: S) -> some View where S : WindowStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.presentedWindowStyle(style: WindowStyle): Modifier = element(445, style)
+
+/**
+ * SwiftUI `View.projectionEffect(_:)`
+ *
+ * ```swift
+ * nonisolated func projectionEffect(_ transform: ProjectionTransform) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.projectionEffect(transform: ProjectionTransform): Modifier = element(452, transform)
+
+/**
+ * SwiftUI `View.replaceDisabled(_:)`
+ *
+ * ```swift
+ * nonisolated func replaceDisabled(_ isDisabled: Bool = true) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.replaceDisabled(isDisabled: Boolean = true): Modifier = element(456, isDisabled)
+
+/**
+ * SwiftUI `View.safeAreaInset(edge:alignment:spacing:content:)`
+ *
+ * ```swift
+ * nonisolated func safeAreaInset<V>(edge: VerticalEdge, alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ContentBuilder content: () -> V) -> some View where V : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.safeAreaInset(edge: VerticalEdge, alignment: HorizontalAlignment = HorizontalAlignment.center, spacing: Double? = null, content: @Composable () -> Unit): Modifier = element(460, edge, alignment, spacing, slotContent(content))
+
+/**
+ * SwiftUI `View.safeAreaPadding(_:_:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func safeAreaPadding(_ edges: Edge.Set = .all, _ length: CGFloat? = nil) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.safeAreaPadding(edges: Edge.Set = Edge.Set.all, length: Double? = null): Modifier = element(464, edges, length)
+
+/**
+ * SwiftUI `View.scaleEffect(x:y:anchor:)`
+ *
+ * ```swift
+ * nonisolated func scaleEffect(x: CGFloat = 1.0, y: CGFloat = 1.0, anchor: UnitPoint = .center) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.scaleEffect(x: Double = 1.0, y: Double = 1.0, anchor: UnitPoint = UnitPoint.center): Modifier = element(468, x, y, anchor)
+
+/**
+ * SwiftUI `View.scenePadding(_:edges:)`
+ *
+ * ```swift
+ * nonisolated func scenePadding(_ padding: ScenePadding, edges: Edge.Set = .all) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.scenePadding(padding: ScenePadding, edges: Edge.Set = Edge.Set.all): Modifier = element(472, padding, edges)
+
+/**
+ * SwiftUI `View.scrollDisabled(_:)`
+ *
+ * ```swift
+ * nonisolated func scrollDisabled(_ disabled: Bool) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.scrollDisabled(disabled: Boolean): Modifier = element(476, disabled)
+
+/**
+ * SwiftUI `View.scrollIndicators(_:axes:)`
+ *
+ * ```swift
+ * nonisolated func scrollIndicators(_ visibility: ScrollIndicatorVisibility, axes: Axis.Set = [.vertical, .horizontal]) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.scrollIndicators(visibility: ScrollIndicatorVisibility, axes: Axis.Set? = null): Modifier = element(480, visibility, axes)
+
+/**
+ * SwiftUI `View.scrollPosition(id:anchor:)`
+ *
+ * ```swift
+ * nonisolated func scrollPosition(id: Binding<(some Hashable)?>, anchor: UnitPoint? = nil) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.scrollPosition(id: Any?, onIdChange: (Any?) -> Unit, anchor: UnitPoint? = null): Modifier = element(484, id, SValueCallback { onIdChange(it as Any?) }, anchor)
+
+/**
+ * SwiftUI `View.searchDictationBehavior(_:)`
+ *
+ * ```swift
+ * nonisolated func searchDictationBehavior(_ dictationBehavior: TextInputDictationBehavior) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.searchDictationBehavior(dictationBehavior: TextInputDictationBehavior): Modifier = element(488, dictationBehavior)
+
+/**
+ * SwiftUI `View.searchSuggestions(_:)`
+ *
+ * ```swift
+ * nonisolated func searchSuggestions<S>(@ContentBuilder _ suggestions: () -> S) -> some View where S : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.searchSuggestions(suggestions: @Composable () -> Unit): Modifier = element(492, slotContent(suggestions))
 
 /**
  * SwiftUI `View.searchable(text:placement:prompt:)`
  *
  * ```swift
- * nonisolated func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey) -> some View
+ * nonisolated func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: S) -> some View where S : StringProtocol
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.searchable(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: LocalizedKey): Modifier = element(493, text, SValueCallback { onTextChange(it as String) }, placement, prompt.key)
+public fun Modifier.searchable(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: String): Modifier = element(502, text, SValueCallback { onTextChange(it as String) }, placement, prompt)
 
 /**
- * SwiftUI `View.frame()`
+ * SwiftUI `View.selectionDisabled(_:)`
  *
  * ```swift
- * nonisolated func frame() -> some View
+ * @export(implementation) nonisolated func selectionDisabled(_ isDisabled: Bool = true) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.selectionDisabled(isDisabled: Boolean = true): Modifier = element(509, isDisabled)
+
+/**
+ * SwiftUI `View.sliderThumbVisibility(_:)`
+ *
+ * ```swift
+ * nonisolated func sliderThumbVisibility(_ visibility: Visibility) -> some View
+ * ```
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS 26.0+
+ */
+@HiddenFromObjC
+public fun Modifier.sliderThumbVisibility(visibility: Visibility): Modifier = element(513, visibility)
+
+/**
+ * SwiftUI `View.speechSpellsOutCharacters(_:)`
+ *
+ * ```swift
+ * nonisolated func speechSpellsOutCharacters(_ value: Bool = true) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.speechSpellsOutCharacters(value: Boolean = true): Modifier = element(517, value)
+
+/**
+ * SwiftUI `View.splitArrangementLayoutSize(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:)`
+ *
+ * ```swift
+ * nonisolated func splitArrangementLayoutSize(minWidth: CGFloat? = nil, idealWidth: CGFloat? = nil, maxWidth: CGFloat? = nil, minHeight: CGFloat? = nil, idealHeight: CGFloat? = nil, maxHeight: CGFloat? = nil) -> some View
+ * ```
+ * Availability: iOS 27.1+, macOS 27.1+, tvOS 27.1+, watchOS 27.1+
+ */
+@HiddenFromObjC
+public fun Modifier.splitArrangementLayoutSize(minWidth: Double? = null, idealWidth: Double? = null, maxWidth: Double? = null, minHeight: Double? = null, idealHeight: Double? = null, maxHeight: Double? = null): Modifier = element(521, minWidth, idealWidth, maxWidth, minHeight, idealHeight, maxHeight)
+
+/**
+ * SwiftUI `View.strikethrough(_:pattern:color:)`
+ *
+ * ```swift
+ * nonisolated func strikethrough(_ isActive: Bool = true, pattern: Text.LineStyle.Pattern = .solid, color: Color? = nil) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.strikethrough(isActive: Boolean = true, pattern: Text.LineStyle.Pattern = Text.LineStyle.Pattern.solid, color: Color? = null): Modifier = element(525, isActive, pattern, color)
+
+/**
+ * SwiftUI `View.swipeActions(edge:allowsFullSwipe:content:onPresentationChanged:)`
+ *
+ * ```swift
+ * nonisolated func swipeActions(edge: HorizontalEdge = .trailing, allowsFullSwipe: Bool = true, @ContentBuilder content: () -> some View, onPresentationChanged: @escaping (Bool) -> Void) -> some View
+ * ```
+ * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS 27.0+
+ */
+@HiddenFromObjC
+public fun Modifier.swipeActions(edge: HorizontalEdge = HorizontalEdge.trailing, allowsFullSwipe: Boolean = true, content: @Composable () -> Unit, onPresentationChanged: (Boolean) -> Unit): Modifier = element(529, edge, allowsFullSwipe, slotContent(content), SValueCallback { onPresentationChanged(it as Boolean) })
+
+/**
+ * SwiftUI `View.symbolRenderingMode(_:)`
+ *
+ * ```swift
+ * nonisolated func symbolRenderingMode(_ mode: SymbolRenderingMode?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.symbolRenderingMode(mode: SymbolRenderingMode?): Modifier = element(533, mode)
+
+/**
+ * SwiftUI `View.tabItem(_:)`
+ *
+ * ```swift
+ * nonisolated func tabItem<V>(@ContentBuilder _ label: () -> V) -> some View where V : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.tabItem(label: @Composable () -> Unit): Modifier = element(537, slotContent(label))
+
+/**
+ * SwiftUI `View.tabViewSidebarBottomBar(content:)`
+ *
+ * ```swift
+ * nonisolated func tabViewSidebarBottomBar<Content>(@ContentBuilder content: () -> Content) -> some View where Content : View
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.tabViewSidebarBottomBar(content: @Composable () -> Unit): Modifier = element(541, slotContent(content))
+
+/**
+ * SwiftUI `View.tableColumnHeaders(_:)`
+ *
+ * ```swift
+ * nonisolated func tableColumnHeaders(_ visibility: Visibility) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.tableColumnHeaders(visibility: Visibility): Modifier = element(545, visibility)
+
+/**
+ * SwiftUI `View.task(name:priority:file:line:_:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func task(name: String? = nil, priority: TaskPriority = .userInitiated, file: String = #fileID, line: Int = #line, _ action: sending @escaping @isolated(any) () async -> Void) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.task(name: String? = null, file: String? = null, line: Int? = null, action: () -> Unit): Modifier = element(549, name, file, line, SAction(action))
+
+/**
+ * SwiftUI `View.textInputAutocapitalization(_:)`
+ *
+ * ```swift
+ * nonisolated func textInputAutocapitalization(_ autocapitalization: TextInputAutocapitalization?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.textInputAutocapitalization(autocapitalization: TextInputAutocapitalization?): Modifier = element(553, autocapitalization)
+
+/**
+ * SwiftUI `View.textInputSuggestions(_:)`
+ *
+ * ```swift
+ * nonisolated func textInputSuggestions<S>(@ContentBuilder _ suggestions: () -> S) -> some View where S : View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.textInputSuggestions(suggestions: @Composable () -> Unit): Modifier = element(557, slotContent(suggestions))
+
+/**
+ * SwiftUI `View.tint(_:)`
+ *
+ * ```swift
+ * nonisolated func tint(_ tint: Color?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.tint(tint: Color?): Modifier = element(561, tint)
+
+/**
+ * SwiftUI `View.toolbar(removing:)`
+ *
+ * ```swift
+ * nonisolated func toolbar(removing defaultItemKind: ToolbarDefaultItemKind?) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.toolbar(removing: ToolbarDefaultItemKind?): Modifier = element(565, removing)
+
+/**
+ * SwiftUI `View.toolbarColorScheme(_:for:)`
+ *
+ * ```swift
+ * nonisolated func toolbarColorScheme(_ colorScheme: ColorScheme?, for bars: ToolbarPlacement...) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.toolbarColorScheme(colorScheme: ColorScheme?, bars: ToolbarPlacement): Modifier = element(569, colorScheme, bars)
+
+/**
+ * SwiftUI `View.toolbarMinimizationRestoration(_:for:)`
+ *
+ * ```swift
+ * nonisolated func toolbarMinimizationRestoration(_ restoration: ToolbarMinimizationRestoration, for bars: ToolbarPlacement...) -> some View
+ * ```
+ * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
+ */
+@HiddenFromObjC
+public fun Modifier.toolbarMinimizationRestoration(restoration: ToolbarMinimizationRestoration, bars: ToolbarPlacement): Modifier = element(573, restoration, bars)
+
+/**
+ * SwiftUI `View.toolbarTitleAlignment(_:)`
+ *
+ * ```swift
+ * nonisolated func toolbarTitleAlignment(_ alignment: ToolbarTitleAlignment) -> some View
+ * ```
+ * Availability: iOS 27.2+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.toolbarTitleAlignment(alignment: ToolbarTitleAlignment): Modifier = element(577, alignment)
+
+/**
+ * SwiftUI `View.toolbarVerticalCompressionBehavior(_:)`
+ *
+ * ```swift
+ * nonisolated func toolbarVerticalCompressionBehavior(_ behavior: ToolbarVerticalCompressionBehavior) -> some View
+ * ```
+ * Availability: iOS 27.1+, macOS 27.1+, tvOS 27.1+, watchOS 27.1+
+ */
+@HiddenFromObjC
+public fun Modifier.toolbarVerticalCompressionBehavior(behavior: ToolbarVerticalCompressionBehavior): Modifier = element(581, behavior)
+
+/**
+ * SwiftUI `View.touchBarItemPrincipal(_:)`
+ *
+ * ```swift
+ * nonisolated func touchBarItemPrincipal(_ principal: Bool = true) -> some View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.touchBarItemPrincipal(principal: Boolean = true): Modifier = element(586, principal)
+
+/**
+ * SwiftUI `View.typeSelectEquivalent(_:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func typeSelectEquivalent<S>(_ string: S) -> some View where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.typeSelectEquivalent(string: String): Modifier = element(593, string)
+
+/**
+ * SwiftUI `View.windowDismissBehavior(_:)`
+ *
+ * ```swift
+ * nonisolated func windowDismissBehavior(_ behavior: WindowInteractionBehavior) -> some View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.windowDismissBehavior(behavior: WindowInteractionBehavior): Modifier = element(597, behavior)
+
+/**
+ * SwiftUI `View.windowResizeBehavior(_:)`
+ *
+ * ```swift
+ * nonisolated func windowResizeBehavior(_ behavior: WindowInteractionBehavior) -> some View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.windowResizeBehavior(behavior: WindowInteractionBehavior): Modifier = element(601, behavior)
+
+/**
+ * SwiftUI `View.writingToolsBehavior(_:)`
+ *
+ * ```swift
+ * nonisolated func writingToolsBehavior(_ behavior: WritingToolsBehavior) -> some View
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.writingToolsBehavior(behavior: WritingToolsBehavior): Modifier = element(605, behavior)
+
+/**
+ * SwiftUI `Image.renderingMode(_:)`
+ *
+ * ```swift
+ * func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> Image
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ * Applies to `Image` views only.
+ */
+@HiddenFromObjC
+public fun Modifier.renderingMode(renderingMode: Image.TemplateRenderingMode?): Modifier = element(609, renderingMode)
+
+/**
+ * SwiftUI `Text.italic()`
+ *
+ * ```swift
+ * nonisolated func italic() -> Text
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ * Applies to `Text` views only.
+ */
+@HiddenFromObjC
+public fun Modifier.italic(): Modifier = element(613)
+
+/**
+ * SwiftUI `View.accessibilityCustomContent(_:_:importance:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityCustomContent(_ labelKey: LocalizedStringKey, _ value: Text, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.accessibilityCustomContent(labelKey: LocalizedKey, value: String): Modifier = element(31, labelKey.key, value)
+
+/**
+ * SwiftUI `View.accessibilityDragPoint(_:description:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func accessibilityDragPoint(_ point: UnitPoint, description: LocalizedStringResource) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@Deprecated("Use accessibilityDragPoint(point = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.accessibilityDragPointDescription(point: UnitPoint, description: LocalizedKey): Modifier = element(40, point, description.key)
+
+/**
+ * SwiftUI `View.accessibilityDropPoint(_:description:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityDropPoint(_ point: UnitPoint, description: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@Deprecated("Use accessibilityDropPoint(point = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.accessibilityDropPointDescription(point: UnitPoint, description: String): Modifier = element(46, point, description)
+
+/**
+ * SwiftUI `View.accessibilityDropPoint(_:description:isEnabled:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityDropPoint(_ point: UnitPoint, description: LocalizedStringKey, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.accessibilityDropPoint(point: UnitPoint, description: LocalizedKey, isEnabled: Boolean): Modifier = element(51, point, description.key, isEnabled)
+
+/**
+ * SwiftUI `View.accessibilityLabel(_:isEnabled:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityLabel(_ labelKey: LocalizedStringKey, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC
+public fun Modifier.accessibilityLabel(labelKey: LocalizedKey, isEnabled: Boolean): Modifier = element(76, labelKey.key, isEnabled)
+
+/**
+ * SwiftUI `View.accessibilityScrollStatus(_:isEnabled:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func accessibilityScrollStatus(_ status: LocalizedStringResource, isEnabled: Bool = true) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+ */
+@Deprecated("Use accessibilityScrollStatus(status = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.accessibilityScrollStatusIsEnabled(status: LocalizedKey, isEnabled: Boolean = true): Modifier = element(88, status.key, isEnabled)
+
+/**
+ * SwiftUI `View.accessibilityValue(_:isEnabled:)`
+ *
+ * ```swift
+ * nonisolated func accessibilityValue(_ valueDescription: Text, isEnabled: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier>
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@Deprecated("Use accessibilityValue(valueDescription = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.accessibilityValueIsEnabled(valueDescription: String, isEnabled: Boolean): Modifier = element(97, valueDescription, isEnabled)
+
+/**
+ * SwiftUI `View.alert(_:isPresented:actions:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func alert<A>(_ titleResource: LocalizedStringResource, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A) -> some View where A : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use alert(titleResource = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.alertIsPresented(titleResource: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit): Modifier = element(102, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions))
+
+/**
+ * SwiftUI `View.alert(_:isPresented:actions:message:)`
+ *
+ * ```swift
+ * nonisolated func alert<A, M>(_ title: Text, isPresented: Binding<Bool>, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use alert(title = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.alertIsPresented(title: String, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(108, title, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, slotContent(actions), slotContent(message))
+
+/**
+ * SwiftUI `View.confirmationDialog(_:isPresented:titleVisibility:actions:)`
+ *
+ * ```swift
+ * nonisolated func confirmationDialog<A>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ContentBuilder actions: () -> A) -> some View where A : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+public fun Modifier.confirmationDialog(titleKey: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit): Modifier = element(157, titleKey.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions))
+
+/**
+ * SwiftUI `View.confirmationDialog(_:isPresented:titleVisibility:actions:message:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func confirmationDialog<A, M>(_ titleResource: LocalizedStringResource, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use confirmationDialog(titleResource = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.confirmationDialogIsPresented(titleResource: LocalizedKey, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, titleVisibility: Visibility = Visibility.automatic, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(162, titleResource.key, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, titleVisibility, slotContent(actions), slotContent(message))
+
+/**
+ * SwiftUI `View.dialogSuppressionToggle(_:isSuppressed:)`
+ *
+ * ```swift
+ * nonisolated func dialogSuppressionToggle(_ label: Text, isSuppressed: Binding<Bool>) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use dialogSuppressionToggle(label = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.dialogSuppressionToggleIsSuppressed(label: String, isSuppressed: Boolean, onIsSuppressedChange: (Boolean) -> Unit): Modifier = element(203, label, isSuppressed, SValueCallback { onIsSuppressedChange(it as Boolean) })
+
+/**
+ * SwiftUI `View.dismissalConfirmationDialog(_:shouldPresent:actions:message:)`
+ *
+ * ```swift
+ * nonisolated func dismissalConfirmationDialog<A, M>(_ titleKey: LocalizedStringKey, shouldPresent: Bool, @ContentBuilder actions: () -> A, @ContentBuilder message: () -> M) -> some View where A : View, M : View
+ * ```
+ * Availability: iOS 27.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.dismissalConfirmationDialog(titleKey: LocalizedKey, shouldPresent: Boolean, actions: @Composable () -> Unit, message: @Composable () -> Unit): Modifier = element(220, titleKey.key, shouldPresent, slotContent(actions), slotContent(message))
+
+/**
+ * SwiftUI `View.documentLaunchSubtitle(_:)`
+ *
+ * ```swift
+ * nonisolated func documentLaunchSubtitle(_ subtitleKey: LocalizedStringKey) -> some View
+ * ```
+ * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.documentLaunchSubtitle(subtitleKey: LocalizedKey): Modifier = element(226, subtitleKey.key)
+
+/**
+ * SwiftUI `View.fileExporterFilenameLabel(_:)`
+ *
+ * ```swift
+ * nonisolated func fileExporterFilenameLabel(_ labelKey: LocalizedStringKey) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.fileExporterFilenameLabel(labelKey: LocalizedKey): Modifier = element(253, labelKey.key)
+
+/**
+ * SwiftUI `View.navigationBarTitle(_:displayMode:)`
+ *
+ * ```swift
+ * nonisolated func navigationBarTitle(_ titleKey: LocalizedStringKey, displayMode: NavigationBarItem.TitleDisplayMode) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.navigationBarTitle(titleKey: LocalizedKey, displayMode: NavigationBarItem.TitleDisplayMode): Modifier = element(374, titleKey.key, displayMode)
+
+/**
+ * SwiftUI `View.searchable(text:isPresented:placement:prompt:)`
+ *
+ * ```swift
+ * nonisolated func searchable(text: Binding<String>, isPresented: Binding<Bool>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.searchable(text: String, onTextChange: (String) -> Unit, isPresented: Boolean, onIsPresentedChange: (Boolean) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: LocalizedKey): Modifier = element(496, text, SValueCallback { onTextChange(it as String) }, isPresented, SValueCallback { onIsPresentedChange(it as Boolean) }, placement, prompt.key)
+
+/**
+ * SwiftUI `View.searchable(text:placement:prompt:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringResource) -> some View
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@Deprecated("Use searchable(text = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+public fun Modifier.searchableText(text: String, onTextChange: (String) -> Unit, placement: SearchFieldPlacement = SearchFieldPlacement.automatic, prompt: LocalizedKey): Modifier = element(501, text, SValueCallback { onTextChange(it as String) }, placement, prompt.key)
+
+/**
+ * SwiftUI `View.touchBarCustomizationLabel(_:)`
+ *
+ * ```swift
+ * nonisolated func touchBarCustomizationLabel(_ label: Text) -> some View
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+public fun Modifier.touchBarCustomizationLabel(label: String): Modifier = element(584, label)
+
+/**
+ * SwiftUI `View.onChange(of:perform:)`
+ *
+ * ```swift
+ * nonisolated func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some View where V : Equatable
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @Deprecated("Deprecated in SwiftUI")
 @HiddenFromObjC
-public fun Modifier.frame(): Modifier = element(274)
-
-/**
- * SwiftUI `View.previewInterfaceOrientation(_:)`
- *
- * ```swift
- * nonisolated func previewInterfaceOrientation(_ value: InterfaceOrientation) -> some View
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@Deprecated("Deprecated in SwiftUI")
-@HiddenFromObjC
-public fun Modifier.previewInterfaceOrientation(value: InterfaceOrientation): Modifier = element(442, value)
+public fun Modifier.onChange(value: Any, perform: (Any) -> Unit): Modifier = element(399, value, SValueCallback { perform(it as Any) })
 

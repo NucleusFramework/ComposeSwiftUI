@@ -6409,8 +6409,8 @@
   "usr": "s:7SwiftUI7AnyViewVyACxcAA0D0Rzlufc",
   "path": "AnyView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param view: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -6422,8 +6422,8 @@
   "usr": "s:7SwiftUI7AnyViewV7erasingACx_tcAA0D0Rzlufc",
   "path": "AnyView.init(erasing:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param view: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -31212,8 +31212,8 @@
   "usr": "s:7SwiftUI13FillShapeViewV5shape5style9fillStyle10backgroundACyxq_q0_Gx_q_AA0cI0Vq0_tcfc",
   "path": "FillShapeView.init(shape:style:fillStyle:background:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param background: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -33818,7 +33818,7 @@
   "path": "ForEach.init(sections:content:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param view: bare View value",
+  "detail": "param content: builder with parameters",
   "platforms": [
    "ios",
    "macos",
@@ -33831,7 +33831,7 @@
   "path": "ForEach.init(subviews:content:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param view: bare View value",
+  "detail": "param content: builder with parameters",
   "platforms": [
    "ios",
    "macos",
@@ -39445,7 +39445,7 @@
   "path": "Group.init(sections:transform:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param view: bare View value",
+  "detail": "param transform: builder with parameters",
   "platforms": [
    "ios",
    "macos",
@@ -39458,7 +39458,7 @@
   "path": "Group.init(subviews:transform:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param view: bare View value",
+  "detail": "param transform: builder with parameters",
   "platforms": [
    "ios",
    "macos",
@@ -39569,8 +39569,8 @@
   "usr": "s:7SwiftUI8GroupBoxV5label7contentACyxq_Gx_q_yXEtcfc",
   "path": "GroupBox.init(label:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param label: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -49557,8 +49557,8 @@
   "usr": "s:7SwiftUI10MenuButtonV5label7contentACyxq_Gx_q_yXEtcfc",
   "path": "MenuButton.init(label:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param label: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "macos"
   ]
@@ -54582,8 +54582,8 @@
   "usr": "s:7SwiftUI14NavigationLinkVA2A4TextVRszrlE_11destinationACyAEq_GAA18LocalizedStringKeyV_q_tcfc",
   "path": "NavigationLink.init(_:destination:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54608,8 +54608,8 @@
   "usr": "s:7SwiftUI14NavigationLinkVA2A4TextVRszrlE_11destinationACyAEq_Gqd___q_tcSyRd__lufc",
   "path": "NavigationLink.init(_:destination:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54634,8 +54634,8 @@
   "usr": "s:7SwiftUI14NavigationLinkVA2A4TextVRszrlE_11destination8isActiveACyAEq_GAA18LocalizedStringKeyV_q_AA7BindingVySbGtcfc",
   "path": "NavigationLink.init(_:destination:isActive:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54647,8 +54647,8 @@
   "usr": "s:7SwiftUI14NavigationLinkVA2A4TextVRszrlE_11destination8isActiveACyAEq_Gqd___q_AA7BindingVySbGtcSyRd__lufc",
   "path": "NavigationLink.init(_:destination:isActive:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54660,8 +54660,8 @@
   "usr": "s:7SwiftUI14NavigationLinkVA2A4TextVRszrlE_11destination3tag9selectionACyAEq_GAA18LocalizedStringKeyV_q_qd__AA7BindingVyqd__SgGtcSHRd__lufc",
   "path": "NavigationLink.init(_:destination:tag:selection:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54673,8 +54673,8 @@
   "usr": "s:7SwiftUI14NavigationLinkVA2A4TextVRszrlE_11destination3tag9selectionACyAEq_Gqd___q_qd_0_AA7BindingVyqd_0_SgGtcSyRd__SHRd_0_r0_lufc",
   "path": "NavigationLink.init(_:destination:tag:selection:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54816,8 +54816,8 @@
   "usr": "s:7SwiftUI14NavigationLinkV11destination8isActive5labelACyxq_Gq__AA7BindingVySbGxyXEtcfc",
   "path": "NavigationLink.init(destination:isActive:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54829,8 +54829,8 @@
   "usr": "s:7SwiftUI14NavigationLinkV11destination5labelACyxq_Gq__xyXEtcfc",
   "path": "NavigationLink.init(destination:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -54855,8 +54855,8 @@
   "usr": "s:7SwiftUI14NavigationLinkV11destination3tag9selection5labelACyxq_Gq__qd__AA7BindingVyqd__SgGxyXEtcSHRd__lufc",
   "path": "NavigationLink.init(destination:tag:selection:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param destination: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59921,8 +59921,8 @@
   "usr": "s:7SwiftUI6PickerV9selection5label7contentACyxq_q0_GAA7BindingVyq_G_xq0_yXEtcfc",
   "path": "Picker.init(selection:label:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param label: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -70803,8 +70803,8 @@
   "usr": "s:7SwiftUI7SectionVA2A9EmptyViewVRszAA0E0R_AaFR0_rlE6footer7contentACyAEq_q0_Gq0__q_yXEtcfc",
   "path": "Section.init(footer:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param footer: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -70816,8 +70816,8 @@
   "usr": "s:7SwiftUI7SectionVA2A4ViewRzAaDR_AA05EmptyD0VRs0_rlE6header7contentACyxq_AFGx_q_yXEtcfc",
   "path": "Section.init(header:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param header: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -70829,8 +70829,8 @@
   "usr": "s:7SwiftUI7SectionVA2A4ViewRzAaDR_AaDR0_rlE6header6footer7contentACyxq_q0_Gx_q0_q_yXEtcfc",
   "path": "Section.init(header:footer:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param header: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -76423,8 +76423,8 @@
   "usr": "s:7SwiftUI6SliderV5value2in16onEditingChanged17minimumValueLabel07maximumjK05labelACyxq_GAA7BindingVyqd__G_SNyqd__GySbcq_q_xyXEtcSBRd__SB6StrideRpd__lufc",
   "path": "Slider.init(value:in:onEditingChanged:minimumValueLabel:maximumValueLabel:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param minimumValueLabel: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -76495,8 +76495,8 @@
   "usr": "s:7SwiftUI6SliderV5value2in4step16onEditingChanged17minimumValueLabel07maximumkL05labelACyxq_GAA7BindingVyqd__G_SNyqd__G6StrideQyd__ySbcq_q_xyXEtcSBRd__SBAQRQlufc",
   "path": "Slider.init(value:in:step:onEditingChanged:minimumValueLabel:maximumValueLabel:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param minimumValueLabel: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -79290,8 +79290,8 @@
   "usr": "s:7SwiftUI21StrokeBorderShapeViewV5shape5style11strokeStyle13isAntialiased10backgroundACyxq_q0_Gx_q_AA0cJ0VSbq0_tcfc",
   "path": "StrokeBorderShapeView.init(shape:style:strokeStyle:isAntialiased:background:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param background: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -79394,8 +79394,8 @@
   "usr": "s:7SwiftUI15StrokeShapeViewV5shape5style11strokeStyle13isAntialiased10backgroundACyxq_q0_Gx_q_AA0cI0VSbq0_tcfc",
   "path": "StrokeShapeView.init(shape:style:strokeStyle:isAntialiased:background:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param background: bare View value",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -79889,7 +79889,7 @@
   "path": "SubscriptionView.init(content:publisher:action:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param content: bare View value",
+  "detail": "param publisher: generic constrained to ['Publisher', 'Publisher']",
   "platforms": [
    "ios",
    "macos",
@@ -103294,8 +103294,8 @@
   "usr": "s:7SwiftUI4ViewPAAE10background_9alignmentQrqd___AA9AlignmentVtAaBRd__lF",
   "path": "View.background(_:alignment:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param background: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -107178,8 +107178,8 @@
   "usr": "s:7SwiftUI4ViewPAAE17listRowBackgroundyQrqd__SgAaBRd__lF",
   "path": "View.listRowBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param view: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -107351,8 +107351,8 @@
   "usr": "s:7SwiftUI4ViewPAAE4maskyQrqd__AaBRd__lF",
   "path": "View.mask(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param mask: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -107615,8 +107615,8 @@
   "usr": "s:7SwiftUI4ViewPAAE18navigationBarItems7leadingQrqd___tAaBRd__lF",
   "path": "View.navigationBarItems(leading:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param leading: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "tvos"
@@ -107626,8 +107626,8 @@
   "usr": "s:7SwiftUI4ViewPAAE18navigationBarItems7leading8trailingQrqd___qd_0_tAaBRd__AaBRd_0_r0_lF",
   "path": "View.navigationBarItems(leading:trailing:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param leading: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "tvos"
@@ -107637,8 +107637,8 @@
   "usr": "s:7SwiftUI4ViewPAAE18navigationBarItems8trailingQrqd___tAaBRd__lF",
   "path": "View.navigationBarItems(trailing:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param trailing: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "tvos"
@@ -108799,8 +108799,8 @@
   "usr": "s:7SwiftUI4ViewPAAE7overlay_9alignmentQrqd___AA9AlignmentVtAaBRd__lF",
   "path": "View.overlay(_:alignment:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param overlay: bare View value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",

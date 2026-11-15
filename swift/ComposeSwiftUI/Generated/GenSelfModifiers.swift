@@ -8,26 +8,26 @@ import SwiftUI
     chain: for (index, mod) in m.modifiers.enumerated() {
         let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 600:
+        case 607:
             r = r.antialiased(a.bool(0))
-        case 601:
+        case 608:
             guard let p0 = d_Image_Interpolation(a.expr(0)) else { break chain }
             r = r.interpolation(p0)
-        case 602:
+        case 609:
             r = r.renderingMode(d_Image_TemplateRenderingMode(a.expr(0)))
         #if os(iOS) || os(macOS) || os(tvOS)
         case 109:
             r = r.allowedDynamicRange(d_Image_DynamicRange(a.expr(0)))
         #endif
-        case 526:
+        case 533:
             r = r.symbolRenderingMode(d_SymbolRenderingMode(a.expr(0)))
-        case 527:
+        case 534:
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
             r = r.symbolVariableValueMode(d_SymbolVariableValueMode(a.expr(0)))
-        case 524:
+        case 531:
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
             r = r.symbolColorRenderingMode(d_SymbolColorRenderingMode(a.expr(0)))
-        case 603:
+        case 610:
             guard let p0 = d_EdgeInsets(a.expr(0)) else { break chain }
             guard let p1 = d_Image_ResizingMode(a.expr(1)) else { break chain }
             r = r.resizable(capInsets: p0, resizingMode: p1)
@@ -46,60 +46,60 @@ import SwiftUI
     chain: for (index, mod) in m.modifiers.enumerated() {
         let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 266:
-            r = r.fontDesign(d_Font_Design(a.expr(0)))
         case 267:
+            r = r.fontDesign(d_Font_Design(a.expr(0)))
+        case 268:
             r = r.fontWeight(d_Font_Weight(a.expr(0)))
-        case 357:
+        case 360:
             r = r.monospaced(a.bool(0))
-        case 604:
+        case 611:
             r = r.strikethrough(a.bool(0), color: d_Color(a.expr(1)))
-        case 518:
+        case 525:
             guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
             r = r.strikethrough(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
-        case 139:
+        case 140:
             r = r.baselineOffset(a.cgFloat(0))
-        case 269:
-            r = r.foregroundColor(d_Color(a.expr(0)))
         case 270:
+            r = r.foregroundColor(d_Color(a.expr(0)))
+        case 271:
             guard let p0 = dp_ShapeStyle(a.expr(0)) else { break chain }
             @MainActor func open<Q0: ShapeStyle>(_ q0: Q0) -> Text { r.foregroundStyle(q0) }
             r = open(p0)
-        case 358:
+        case 361:
             r = r.monospacedDigit()
-        case 507:
+        case 514:
             r = r.speechAdjustedPitch(a.double(0))
-        case 587:
+        case 594:
             guard let p0 = d_TypesettingLanguage(a.expr(0)) else { break chain }
             r = r.typesettingLanguage(p0, isEnabled: a.bool(1))
-        case 509:
+        case 516:
             r = r.speechAnnouncementsQueued(a.bool(0))
-        case 510:
+        case 517:
             r = r.speechSpellsOutCharacters(a.bool(0))
-        case 508:
+        case 515:
             r = r.speechAlwaysIncludesPunctuation(a.bool(0))
-        case 605:
+        case 612:
             r = r.bold()
-        case 142:
+        case 143:
             r = r.bold(a.bool(0))
-        case 265:
+        case 266:
             r = r.font(d_Font(a.expr(0)))
-        case 606:
+        case 613:
             r = r.italic()
-        case 313:
-            r = r.italic(a.bool(0))
         case 314:
+            r = r.italic(a.bool(0))
+        case 315:
             r = r.kerning(a.cgFloat(0))
-        case 580:
+        case 587:
             r = r.tracking(a.cgFloat(0))
-        case 268:
+        case 269:
             r = r.fontWidth(d_Font_Width(a.expr(0)))
-        case 551:
+        case 558:
             guard let p0 = d_Text_Scale(a.expr(0)) else { break chain }
             r = r.textScale(p0, isEnabled: a.bool(1))
-        case 607:
+        case 614:
             r = r.underline(a.bool(0), color: d_Color(a.expr(1)))
-        case 588:
+        case 595:
             guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
             r = r.underline(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
         case 92:
@@ -120,4 +120,4 @@ import SwiftUI
     return r
 }
 
-let generatedSelfModifierIds: Set<Int32> = [55, 73, 74, 92, 109, 139, 142, 265, 266, 267, 268, 269, 270, 313, 314, 357, 358, 507, 508, 509, 510, 518, 524, 526, 527, 551, 580, 587, 588, 600, 601, 602, 603, 604, 605, 606, 607]
+let generatedSelfModifierIds: Set<Int32> = [55, 73, 74, 92, 109, 140, 143, 266, 267, 268, 269, 270, 271, 314, 315, 360, 361, 514, 515, 516, 517, 525, 531, 533, 534, 558, 587, 594, 595, 607, 608, 609, 610, 611, 612, 613, 614]
