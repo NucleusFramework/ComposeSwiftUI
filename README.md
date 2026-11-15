@@ -33,7 +33,7 @@ Supported platforms: iOS 17+, macOS 14+, tvOS 17+ and watchOS 10+. Requires Kotl
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.1.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.1.2"
    }
 
    kotlin {
@@ -104,6 +104,8 @@ API:
 
 | SwiftUI | Compose SwiftUI |
 |---|---|
+| `TabView(selection:)` + `Tab(_:systemImage:value:)` | `TabView(selection, onSelectionChange) { Tab("Home", systemImage = "house", value = AppTab.Home) { … } }` |
+| `Text` concatenation, `AttributedString` | `Text(buildStyledString { withStyle(SpanStyle(color = Color.gray, fontSize = 13.0)) { append("…") } })` |
 | `NavigationStack(path:)` + `navigationDestination(for:)` | `NavigationStack(path, onPathChange, destination = { value -> }) { … }` |
 | `sheet(item:)`, `fullScreenCover(item:)`, `popover(item:)` | `Modifier.sheet(item, onDismiss) { item -> }`, same for the others |
 | `alert(_:isPresented:presenting:)`, `confirmationDialog(…presenting:)` | `Modifier.alert(title, item, onDismiss, actions, message)` |
@@ -214,8 +216,8 @@ one type-erased view per node, because the tree is built at runtime. Full result
 ## Limitations
 
 - visionOS isn't supported: Kotlin/Native has no visionOS target.
-- APIs that take Swift-only types (`UTType`, `Transferable`, `KeyPath`, `AttributedString`…) aren't available.
-  [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
+- APIs that take Swift-only types (`UTType`, `Transferable`, `KeyPath`…) aren't available. For mixed-style
+  text, use `Text(StyledString)` instead of `AttributedString`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
 - Data-driven containers such as `List(data)` and `Table` take Kotlin loops instead of a collection.
 - On iOS, two benchmark screens differ from plain SwiftUI by less than a pixel (one SF Symbol, and the search field
   placeholder after updates).

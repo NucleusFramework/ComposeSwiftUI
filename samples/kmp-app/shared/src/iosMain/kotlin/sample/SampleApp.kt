@@ -3,7 +3,9 @@ package sample
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -23,6 +25,8 @@ sealed interface Route : NavKey {
     data object Chart : Route
 }
 
+enum class AppTab { Examples, Text }
+
 class CounterViewModel : ViewModel() {
     val count = MutableStateFlow(0)
     fun increment() = count.update { it + 1 }
@@ -30,7 +34,7 @@ class CounterViewModel : ViewModel() {
 
 /** Entry point shown from Swift with `ComposeView { SampleAppKt.sampleApp() }`. */
 fun sampleApp() = composeSwiftUI {
-    WithComposeResources { SampleNavigation() }
+    WithComposeResources { AppTabs() }
 }
 
 /**
@@ -47,11 +51,25 @@ private fun WithComposeResources(content: @androidx.compose.runtime.Composable (
 }
 
 @androidx.compose.runtime.Composable
-private fun SampleNavigation() {
+private fun AppTabs() {
+    // The selected tab is Kotlin state: the Examples tab can switch to the Styled text tab.
+    var tab by remember { mutableStateOf(AppTab.Examples) }
+    TabView(selection = tab, onSelectionChange = { tab = it }) {
+        Tab("Examples", systemImage = "list.bullet", value = AppTab.Examples) {
+            SampleNavigation(onShowText = { tab = AppTab.Text })
+        }
+        Tab("Styled text", systemImage = "textformat", value = AppTab.Text) {
+            StyledTextScreen()
+        }
+    }
+}
+
+@androidx.compose.runtime.Composable
+private fun SampleNavigation(onShowText: () -> Unit) {
     // Navigation 3 runtime: back stack + entry provider, displayed with SwiftUI navigation.
     val backStack = remember { mutableStateListOf<Route>(Route.Home) }
     val entries = entryProvider<Route> {
-        entry<Route.Home> { HomeScreen(onOpen = { backStack.add(it) }) }
+        entry<Route.Home> { HomeScreen(onOpen = { backStack.add(it) }, onShowText = onShowText) }
         entry<Route.Counter> { CounterScreen() }
         entry<Route.Chart> { ChartScreen() }
     }
@@ -64,13 +82,16 @@ private fun HomeScreenRows() = listOf(
 )
 
 @androidx.compose.runtime.Composable
-private fun HomeScreen(onOpen: (Route) -> Unit) {
+private fun HomeScreen(onOpen: (Route) -> Unit, onShowText: () -> Unit) {
     List(modifier = Modifier.navigationTitle("Compose SwiftUI")) {
         Section(title = stringResource(Res.string.examples_title)) {
             for ((route, title, icon) in HomeScreenRows()) {
                 Button(action = { onOpen(route) }) {
                     Label(title, systemImage = icon)
                 }
+            }
+            Button(action = onShowText) {
+                Label("Open the Styled text tab", systemImage = "arrow.right.circle.fill")
             }
         }
     }
@@ -95,5 +116,23 @@ private fun ChartScreen() {
         // Compose Multiplatform content, embedded as a UIKit view controller.
         UIViewControllerView(modifier = Modifier.frame(height = 260.0)) { salesChartController() }
         Spacer()
+    }
+}
+
+@androidx.compose.runtime.Composable
+private fun StyledTextScreen() {
+    val paragraph = buildStyledString {
+        withStyle(SpanStyle(fontWeight = Font.Weight.bold)) { append("Bold opening. ") }
+        withStyle(SpanStyle(fontSize = 13.0, color = Color.gray, italic = true)) { append("(a small grey instruction) ") }
+        append("regular text, ")
+        withStyle(SpanStyle(color = Color.orange, fontWeight = Font.Weight.semibold)) { append("a coloured word") }
+        append(", and ")
+        withStyle(SpanStyle(font = Font.title3, underline = true)) { append("a larger underlined one") }
+        append(".")
+    }
+    NavigationStack {
+        ScrollView {
+            Text(paragraph, modifier = Modifier.font(Font.body).padding().navigationTitle("Styled text"))
+        }
     }
 }

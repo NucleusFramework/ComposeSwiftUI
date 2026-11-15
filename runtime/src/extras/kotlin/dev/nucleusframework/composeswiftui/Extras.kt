@@ -20,6 +20,9 @@ internal object ExtraIds {
     const val NAMESPACE_SCOPE = 100_004
     const val CUSTOM_LAYOUT = 100_005
     const val NATIVE_VIEW = 100_006
+    const val STYLED_TEXT = 100_007
+    const val TAB_VIEW = 100_008
+    const val TAB = 100_009
 
     const val FOCUSED = 100_001
     const val DRAG = 100_002
@@ -337,3 +340,142 @@ public fun <T : Any> NavDisplay(
         backStack.firstOrNull()?.let { entryProvider(it) }
     }
 }
+
+// ---- tabs with selection -------------------------------------------------------------------------
+
+/**
+ * SwiftUI `TabView(selection:)`: the selected tab is Kotlin state. Each child is a [Tab] whose `value` matches
+ * a possible [selection]; tapping a tab calls [onSelectionChange] with that value.
+ */
+@HiddenFromObjC
+@Composable
+public fun <T : Any> TabView(
+    selection: T,
+    onSelectionChange: (T) -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    @Suppress("UNCHECKED_CAST")
+    SwiftView(ExtraIds.TAB_VIEW, listOf(selection, SValueCallback { onSelectionChange(it as T) }), modifier, content = content)
+}
+
+/**
+ * SwiftUI `Tab(_:systemImage:value:)`, for use in a [TabView]. [value] is the tag compared with the
+ * `TabView` selection; leave it null when the `TabView` has no selection.
+ */
+@HiddenFromObjC
+@Composable
+public fun Tab(
+    title: String,
+    systemImage: String? = null,
+    value: Any? = null,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(ExtraIds.TAB, listOf(title, systemImage, value), modifier, content = content)
+}
+
+// ---- mixed-style text ----------------------------------------------------------------------------
+
+/** Style of a run of a [StyledString]. Null or default properties inherit from the enclosing style and the `Text`. */
+public data class SpanStyle(
+    val color: Color? = null,
+    val font: Font? = null,
+    /** System font size in points, used when [font] is null. */
+    val fontSize: Double? = null,
+    val fontWeight: Font.Weight? = null,
+    val fontDesign: Font.Design? = null,
+    val italic: Boolean = false,
+    val underline: Boolean = false,
+    val strikethrough: Boolean = false,
+    val monospaced: Boolean = false,
+    val baselineOffset: Double = 0.0,
+    val kerning: Double = 0.0,
+) {
+    /** Returns this style with the properties set in [other] taking precedence. */
+    public fun merge(other: SpanStyle): SpanStyle = SpanStyle(
+        color = other.color ?: color,
+        font = other.font ?: font,
+        fontSize = other.fontSize ?: fontSize,
+        fontWeight = other.fontWeight ?: fontWeight,
+        fontDesign = other.fontDesign ?: fontDesign,
+        italic = italic || other.italic,
+        underline = underline || other.underline,
+        strikethrough = strikethrough || other.strikethrough,
+        monospaced = monospaced || other.monospaced,
+        baselineOffset = if (other.baselineOffset != 0.0) other.baselineOffset else baselineOffset,
+        kerning = if (other.kerning != 0.0) other.kerning else kerning,
+    )
+}
+
+/** A string made of differently styled runs, shown by `Text(StyledString)`. Build it with [buildStyledString]. */
+public class StyledString internal constructor(public val runs: List<Pair<String, SpanStyle>>) {
+    public val text: String get() = runs.joinToString("") { it.first }
+
+    public operator fun plus(other: StyledString): StyledString = StyledString(runs + other.runs)
+
+    override fun equals(other: Any?): Boolean = other is StyledString && other.runs == runs
+    override fun hashCode(): Int = runs.hashCode()
+    override fun toString(): String = text
+}
+
+public class StyledStringBuilder internal constructor() {
+    private val runs = ArrayList<Pair<String, SpanStyle>>()
+    private var current = SpanStyle()
+
+    public fun append(text: String) {
+        if (text.isNotEmpty()) runs += text to current
+    }
+
+    public fun append(text: String, style: SpanStyle): Unit = withStyle(style) { append(text) }
+
+    public fun append(text: StyledString) {
+        text.runs.forEach { (s, style) -> runs += s to current.merge(style) }
+    }
+
+    public fun <R> withStyle(style: SpanStyle, block: StyledStringBuilder.() -> R): R {
+        val previous = current
+        current = previous.merge(style)
+        try {
+            return block()
+        } finally {
+            current = previous
+        }
+    }
+
+    internal fun build() = StyledString(runs.toList())
+}
+
+/** Builds a [StyledString], like Compose's `buildAnnotatedString`. */
+public fun buildStyledString(block: StyledStringBuilder.() -> Unit): StyledString =
+    StyledStringBuilder().apply(block).build()
+
+/**
+ * SwiftUI `Text` made of styled runs (the equivalent of concatenating `Text` values). Modifiers such as
+ * `font` or `foregroundStyle` apply to the runs that don't set that property themselves.
+ */
+@HiddenFromObjC
+@Composable
+public fun Text(text: StyledString, modifier: Modifier = Modifier) {
+    val args = ArrayList<Any?>(1 + text.runs.size * STYLED_RUN_STRIDE)
+    args += text.runs.size
+    for ((s, style) in text.runs) {
+        var flags = 0
+        if (style.italic) flags = flags or 1
+        if (style.underline) flags = flags or 2
+        if (style.strikethrough) flags = flags or 4
+        if (style.monospaced) flags = flags or 8
+        args += s
+        args += style.color
+        args += style.font
+        args += style.fontSize
+        args += style.fontWeight
+        args += style.fontDesign
+        args += flags
+        args += style.baselineOffset
+        args += style.kerning
+    }
+    SwiftView(ExtraIds.STYLED_TEXT, args, modifier)
+}
+
+private const val STYLED_RUN_STRIDE = 9

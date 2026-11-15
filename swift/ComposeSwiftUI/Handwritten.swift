@@ -316,6 +316,20 @@ struct KotlinLayout: Layout {
             return ModChain.apply(factory(a), m, 0)
         }
 
+        ComposeRegistry.views[100_007] = { m in ModChain.apply(StyledTextRenderer.text(m.args), m, 0) }
+        // TabView(selection:) driven by Kotlin; children are tagged Tab nodes.
+        ComposeRegistry.views[100_008] = { m in
+            ModChain.apply(KotlinTabView(m: m, kotlinSelection: m.args.hashable(0)), m, 0)
+        }
+        ComposeRegistry.views[100_009] = { m in
+            let a = m.args
+            let title = a.string(0)
+            let tab = ZStack { ChildrenView(m) }.tabItem {
+                if a.isNil(1) { Text(verbatim: title) } else { Label(title, systemImage: a.string(1)) }
+            }
+            return a.isNil(2) ? ModChain.apply(tab, m, 0) : ModChain.apply(tab.tag(a.hashable(2)), m, 0)
+        }
+
         ComposeRegistry.modifiers[100_001] = { v, a, _ in
             AnyView(v.modifier(FocusBridge(isFocused: a.bool(0), onChange: a.callback(1, box: KBox.bool))))
         }
@@ -406,5 +420,57 @@ private struct EmbeddedNSView: NSViewRepresentable {
         ComposeRegistry.views[100_012] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? NSViewControllerFactory), m, 0) }
         ComposeRegistry.views[100_013] = { m in ModChain.apply(EmbeddedNSView(factory: m.args.raw(0) as? NSViewFactory), m, 0) }
         #endif
+    }
+}
+
+/// Builds one `Text` from the styled runs encoded by Kotlin `Text(StyledString)` (9 args per run).
+@MainActor enum StyledTextRenderer {
+    static func text(_ a: Args) -> Text {
+        var result = Text(verbatim: "")
+        for r in 0..<a.int(0) {
+            let b = 1 + r * 9
+            var t = Text(verbatim: a.string(b))
+            if let font = d_Font(a.expr(b + 2)) {
+                t = t.font(font)
+            } else if !a.isNil(b + 3) {
+                t = t.font(.system(size: a.cgFloat(b + 3)))
+            }
+            if let weight = d_Font_Weight(a.expr(b + 4)) { t = t.fontWeight(weight) }
+            if let design = d_Font_Design(a.expr(b + 5)) { t = t.fontDesign(design) }
+            if let color = d_Color(a.expr(b + 1)) { t = t.foregroundStyle(color) }
+            let flags = a.int(b + 6)
+            if flags & 1 != 0 { t = t.italic() }
+            if flags & 2 != 0 { t = t.underline() }
+            if flags & 4 != 0 { t = t.strikethrough() }
+            if flags & 8 != 0 { t = t.monospaced() }
+            let offset = a.cgFloat(b + 7)
+            if offset != 0 { t = t.baselineOffset(offset) }
+            let kerning = a.cgFloat(b + 8)
+            if kerning != 0 { t = t.kerning(kerning) }
+            result = r == 0 ? t : Text("\(result)\(t)")
+        }
+        return result
+    }
+}
+
+/// `TabView(selection:)` whose selection lives in `@State`: a function-backed `Binding` doesn't make
+/// `TabView` follow changes made from Kotlin, so Kotlin changes are copied in and user changes sent back.
+struct KotlinTabView: View {
+    let m: NodeModel
+    let kotlinSelection: AnyHashable
+    @State private var selection: AnyHashable
+
+    init(m: NodeModel, kotlinSelection: AnyHashable) {
+        self.m = m
+        self.kotlinSelection = kotlinSelection
+        _selection = State(initialValue: kotlinSelection)
+    }
+
+    var body: some View {
+        TabView(selection: $selection) { ChildrenView(m) }
+            .onChange(of: kotlinSelection) { _, new in selection = new }
+            .onChange(of: selection) { _, new in
+                if new != m.args.hashable(0) { m.args.hashableBinding(0).wrappedValue = new }
+            }
     }
 }
