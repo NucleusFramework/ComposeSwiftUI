@@ -1,12 +1,17 @@
 # Changelog
 
-## Unreleased
+## 0.3.1
 
 ### Added
 
 - IntelliJ IDEA / Android Studio plugin (`intellij-plugin`): Kotlin files with `@Preview` open in a code | preview split
   editor, with a gutter icon per preview. Previews are rendered with real SwiftUI on the iOS simulator by the new
   `renderComposeSwiftUIPreviews` Gradle task, and again on every save.
+
+### Fixed
+
+- `TextEditorView(TextEditor(text:))` was read-only: bindings inside nested values were sent to SwiftUI as constants.
+  They now update the text and call the Kotlin `onTextChange` callback.
 
 ## 0.3.0
 
