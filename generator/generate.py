@@ -467,6 +467,7 @@ class Generator:
         for s in sorted(self.model.syms.values(), key=lambda x: x.dotted):
             if s.kind == "swift.method" and len(s.path) == 2 and s.path[0] == "View":
                 mod_id = self._add_modifier(s, mod_id, None)
+        mod_id = self._add_environment_setters(mod_id)
         for item, kind, vt, params in self.views:
             if kind != "init":
                 continue
@@ -503,6 +504,38 @@ class Generator:
                     if len(self.modifiers) > before:
                         self.self_modifiers.setdefault(usr, []).append(self.modifiers[-1])
         return
+
+    def _add_environment_setters(self, mod_id):
+        """`Modifier.environment(name = value)` for each settable `EnvironmentValues` property (`.environment(\\.name, value)`)."""
+        env = self.model.lookup_type("EnvironmentValues")
+        for prop in sorted(env.children if env else [], key=lambda x: x.usr):
+            m = re.match(r"^(?:nonisolated )?var (\w+): (.+?) \{ get set \}$", prop.decl.strip())
+            if prop.kind != "swift.property" or not m:
+                continue
+            key = "env:" + prop.usr
+            if key in self.rejected:
+                self.status(prop, "rejected", self.rejected[key])
+                continue
+            try:
+                b = symbolize(m.group(1), self.classifier.classify(parse_type(m.group(2)), self.ctx_for(prop, ())))
+            except Exception as e:
+                self.status(prop, "skipped", "environment value: %s" % e)
+                continue
+            if b.kind in ("binding", "slot", "action", "callback", "callbackn", "proto") or b.is_function:
+                self.status(prop, "skipped", "environment value of kind %s" % b.kind)
+                continue
+            item = Item(key, prop)
+            item.self_type = None
+            item.kname = "environment"
+            item.env_prop = m.group(1)
+            if not item.compute_platforms(self, set(b.refs)):
+                self.status(prop, "skipped", "unavailable on the supported platforms")
+                continue
+            item.id = mod_id
+            mod_id += 1
+            self.modifiers.append((item, [(m.group(1), m.group(1), b, None)]))
+            self.status(prop, "generated", "environment value (Modifier.environment)")
+        return mod_id
 
     def _add_modifier(self, s, mod_id, self_type):
         key = "mod:" + s.usr
@@ -560,7 +593,20 @@ class Generator:
             for kn, kt in b.kotlin_params(name):
                 decls.append((kn, kt, kd if kn == name else None, b))
             encs.extend(b.kotlin_encode(name))
-        return decls, encs
+        return self.trailing_lambda_last(decls, lambda d: d[2] is None, lambda d: d[1].startswith(("(", "@Composable"))), encs
+
+    @staticmethod
+    def trailing_lambda_last(entries, required, is_fn):
+        """A trailing lambda binds the first required closure in Swift, the last parameter in Kotlin: optional
+        closures that follow the last required one move before it (arguments are encoded by name, not position)."""
+        last = max((n for n, e in enumerate(entries) if is_fn(e) and required(e)), default=None)
+        if last is None:
+            return entries
+        tail = [e for e in entries[last + 1:] if is_fn(e)]
+        if not tail:
+            return entries
+        rest = [e for e in entries[last + 1:] if not is_fn(e)]
+        return entries[:last] + tail + [entries[last]] + rest
 
     def kdoc(self, sym, plats, extra=""):
         decl = sym.decl.replace("*/", "* /")
@@ -663,6 +709,8 @@ class Generator:
                     else:
                         opt.append(entry)
                 args_exprs.extend(b.kotlin_encode(name))
+            if not slots:
+                acts = self.trailing_lambda_last(acts, lambda e: e[2] is None, lambda e: True)
             ordered = req + [("modifier", "Modifier", "Modifier")] + opt + acts + slots
             name = s.name
             types = tuple(t.rstrip("?") for _, t, _ in ordered)
@@ -716,6 +764,7 @@ class Generator:
                 action_params.setdefault(item.sym.name, set()).update(self.kt_name_for(l, i) for l, i, _, _ in params)
         for n, (item, params) in enumerate(sorted(self.modifiers, key=lambda x: (x[0].sym.deprecated, stand_in(x[1]), lsk_m(x[1])))):
             decls, encs = self.kt_params(params)
+            base_name = getattr(item, "kname", item.sym.name)
             if params and params[-1][2].kind == "callback" and params[-1][2].inner.kind == "value" and item.sym.name in action_params:
                 # `Modifier.x { … }` would match both `() -> Unit` and `(T) -> Unit`: require a parameter the
                 # no-argument variant doesn't have, so a bare trailing lambda keeps calling that one
@@ -725,7 +774,7 @@ class Generator:
                     continue
                 decls = [(kn, kt, None if (kn, kt, kd, x) == own[0] else kd, x) for kn, kt, kd, x in decls]
             types = tuple(t.rstrip("?") for _, t, _, _ in decls)
-            mname = item.sym.name
+            mname = base_name
             suffixed = False
             if (mname, types) in seen:
                 labels = [lbl for lbl, _, b, _ in params if lbl != "_"]
@@ -737,7 +786,7 @@ class Generator:
                 continue
             seen.add((mname, types))
             if suffixed:
-                merged_mods.setdefault(item.sym.name, []).append(
+                merged_mods.setdefault(base_name, []).append(
                     {"ordered": [(kn, kt, kd) for kn, kt, kd, _ in decls], "encs": encs, "id": item.id})
             plist = ", ".join("%s: %s%s" % (kn, kt, " = %s" % kd if kd is not None else "") for kn, kt, kd, _ in decls)
             extra = ""
@@ -745,7 +794,7 @@ class Generator:
                 extra = "Applies to `%s` views only." % item.self_type.name
             deprecation = ""
             if suffixed and not item.sym.deprecated and decls:
-                deprecation = '@Deprecated("Use %s(%s = …)", level = DeprecationLevel.WARNING)\n' % (item.sym.name, decls[0][0])
+                deprecation = '@Deprecated("Use %s(%s = …)", level = DeprecationLevel.WARNING)\n' % (base_name, decls[0][0])
             code = "%s\n%s@HiddenFromObjC\npublic fun Modifier.%s(%s): Modifier = element(%d%s)\n" % (
                 self.kdoc(item.sym, item.platforms, extra), deprecation, kotlin_name(mname), plist, item.id,
                 "".join(", " + e for e in encs))
@@ -1264,7 +1313,11 @@ class Generator:
             except Unsupported as e:
                 self.rejected[item.key] = str(e)
                 continue
-            body = stmts + self.open_call("AnyView", "ModChain.apply(v.%s(%s), m, i + 1)" % (self._swift_member(item.sym.name), ", ".join(args)))
+            if getattr(item, "env_prop", None):
+                call = "environment(\\.%s, %s)" % (item.env_prop, args[0].split(": ", 1)[-1])
+            else:
+                call = "%s(%s)" % (self._swift_member(item.sym.name), ", ".join(args))
+            body = stmts + self.open_call("AnyView", "ModChain.apply(v.%s, m, i + 1)" % call)
             ifline, lines = self.swift_wrap(item.platforms, body, next_step, "            ")
             code = []
             if ifline:

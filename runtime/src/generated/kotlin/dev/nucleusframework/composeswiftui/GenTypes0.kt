@@ -276,7 +276,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun destructive(label: String): Alert.Button = Alert.Button(1097, listOf(label))
+            public fun destructive(label: String, action: (() -> Unit)?): Alert.Button = Alert.Button(1097, listOf(label, action?.let { SAction(it) }))
 /**
              * SwiftUI `Alert.Button.cancel(_:action:)`
              *
@@ -285,7 +285,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun cancel(label: String): Alert.Button = Alert.Button(1098, listOf(label))
+            public fun cancel(label: String, action: (() -> Unit)?): Alert.Button = Alert.Button(1098, listOf(label, action?.let { SAction(it) }))
 /**
              * SwiftUI `Alert.Button.cancel(_:)`
              *
@@ -294,7 +294,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun cancel(): Alert.Button = Alert.Button(1099, emptyList())
+            public fun cancel(action: (() -> Unit)?): Alert.Button = Alert.Button(1099, listOf(action?.let { SAction(it) }))
 /**
              * SwiftUI `Alert.Button.default(_:action:)`
              *
@@ -303,7 +303,7 @@ import kotlin.native.HiddenFromObjC
              * ```
              * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
              */
-            public fun default(label: String): Alert.Button = Alert.Button(1100, listOf(label))
+            public fun default(label: String, action: (() -> Unit)?): Alert.Button = Alert.Button(1100, listOf(label, action?.let { SAction(it) }))
         }
     }
 

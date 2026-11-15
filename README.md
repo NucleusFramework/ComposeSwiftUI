@@ -105,6 +105,7 @@ translation:
 | `ForEach(items, id: \.id) { … }` | `for (item in items) key(item.id) { … }`, or `LazyForEach(items, key = { it.id }) { … }` for long lists |
 | `Color.red.opacity(0.5)`, `.secondary` | `Color.red.opacity(0.5)`, `ShapeStyle.secondary` |
 | `CGFloat` | `Double` |
+| `.environment(\\.colorScheme, .dark)` | `Modifier.environment(colorScheme = ColorScheme.dark)` |
 | `Int8` … `UInt64` | `Int` (truncated on the Swift side) |
 | `URL`, `UTType`, `Locale`, `Locale.Language`, `Character` | `String`: the URL, the type identifier (`"public.png"`), the locale or language identifier, one character |
 | `ColorPicker("Tint", selection: $color)`, `NavigationSplitView(columnVisibility: $v)` | `ColorPicker("Tint", selection = color, onSelectionChange = { color = it })`, same pattern for every binding |

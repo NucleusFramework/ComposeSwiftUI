@@ -8,11 +8,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Status | Entries |
 |---|---|
-| ✅ generated | 3649 (44.4%) |
+| ✅ generated | 3771 (45.9%) |
 | ☑️ covered | 28 (0.3%) |
 | ⛔ rejected | 15 (0.2%) |
-| ➖ skipped | 2312 (28.1%) |
-| · n/a | 1100 (13.4%) |
+| ➖ skipped | 2308 (28.1%) |
+| · n/a | 982 (11.9%) |
 | ? unmatched | 1116 (13.6%) |
 | **total** | **8220** |
 
@@ -20,9 +20,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Kind | ✅ | ☑️ | ⛔ | ➖ | · | ? |
 |---|---|---|---|---|---|---|
-| method | 1157 | 28 | 14 | 1266 | 0 | 666 |
-| property | 1032 | 0 | 0 | 108 | 879 | 264 |
-| init | 583 | 0 | 1 | 403 | 0 | 63 |
+| method | 1167 | 28 | 14 | 1256 | 0 | 666 |
+| property | 1141 | 0 | 0 | 117 | 761 | 264 |
+| init | 586 | 0 | 1 | 400 | 0 | 63 |
 | struct | 470 | 0 | 0 | 412 | 0 | 63 |
 | case | 284 | 0 | 0 | 23 | 0 | 28 |
 | protocol | 44 | 0 | 0 | 75 | 0 | 3 |
@@ -47,7 +47,6 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | generic constrained to ['RandomAccessCollection'] | 30 |
 | generic constrained to nothing | 28 |
 | generic constrained to ['Gesture'] | 18 |
-| nested function type | 17 |
 | type Namespace.ID not bridged | 16 |
 | unknown type Result | 12 |
 | generic constrained to ['Identifiable'] | 10 |
@@ -56,14 +55,15 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | unknown type WritableKeyPath | 10 |
 | type FocusState.Binding not bridged | 10 |
 | generic constrained to ['MutableCollection', 'RandomAccessCollection'] | 10 |
-| closure with 2 params | 9 |
 | unknown type Range | 8 |
 | unknown type UITextContentType | 8 |
 | closure returning [T] | 8 |
+| closure returning [NSItemProvider] | 8 |
 | unknown type F.FormatInput | 8 |
 | Binding<value> | 7 |
 | type Image not bridged | 7 |
 | generic constrained to ['RandomAccessCollection', 'RandomAccessCollection', 'RandomAccessC | 7 |
+| generic constrained to ['ObservableObject'] | 6 |
 
 ## All entries
 
@@ -155,7 +155,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [static func buildExpression<Content>(Content) -> Content](https://developer.apple.com/documentation/swiftui/scenebuilder/buildexpression(_:)) | not a view, modifier or value-producing member |
 | ➖ | method | [static func buildLimitedAvailability(some Scene) -> any Scene & _LimitedAvailabilitySceneMarker](https://developer.apple.com/documentation/swiftui/scenebuilder/buildlimitedavailability(_:)) | not a view, modifier or value-producing member |
 | ➖ | method | [static func buildOptional((any Scene & _LimitedAvailabilitySceneMarker)?) -> some Scene](https://developer.apple.com/documentation/swiftui/scenebuilder/buildoptional(_:)) | not a view, modifier or value-producing member |
-| · | property | [var scenePhase: ScenePhase](https://developer.apple.com/documentation/swiftui/environmentvalues/scenephase) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var scenePhase: ScenePhase](https://developer.apple.com/documentation/swiftui/environmentvalues/scenephase) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [ScenePhase](https://developer.apple.com/documentation/swiftui/scenephase) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case active](https://developer.apple.com/documentation/swiftui/scenephase/active) | value member of ScenePhase (1/1 overloads bridged) |
 | ✅ | case | [case inactive](https://developer.apple.com/documentation/swiftui/scenephase/inactive) | value member of ScenePhase (1/1 overloads bridged) |
@@ -408,7 +408,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | struct | [WorldScalingCompensation](https://developer.apple.com/documentation/swiftui/worldscalingcompensation) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [static let scaled: WorldScalingCompensation](https://developer.apple.com/documentation/swiftui/worldscalingcompensation/scaled) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [static let unscaled: WorldScalingCompensation](https://developer.apple.com/documentation/swiftui/worldscalingcompensation/unscaled) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var worldTrackingLimitations: Set<WorldTrackingLimitation>](https://developer.apple.com/documentation/swiftui/environmentvalues/worldtrackinglimitations) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var worldTrackingLimitations: Set<WorldTrackingLimitation>](https://developer.apple.com/documentation/swiftui/environmentvalues/worldtrackinglimitations) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [WorldTrackingLimitation](https://developer.apple.com/documentation/swiftui/worldtrackinglimitation) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let orientation: WorldTrackingLimitation](https://developer.apple.com/documentation/swiftui/worldtrackinglimitation/orientation) | value member of WorldTrackingLimitation (1/1 overloads bridged) |
 | ✅ | property | [static let translation: WorldTrackingLimitation](https://developer.apple.com/documentation/swiftui/worldtrackinglimitation/translation) | value member of WorldTrackingLimitation (1/1 overloads bridged) |
@@ -738,7 +738,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | case | [case automatic](https://developer.apple.com/documentation/swiftui/navigationbaritem/titledisplaymode/automatic) | value member of NavigationBarItem.TitleDisplayMode (1/1 overloads bridged) |
 | ✅ | case | [case inline](https://developer.apple.com/documentation/swiftui/navigationbaritem/titledisplaymode/inline) | value member of NavigationBarItem.TitleDisplayMode (1/1 overloads bridged) |
 | ✅ | case | [case large](https://developer.apple.com/documentation/swiftui/navigationbaritem/titledisplaymode/large) | value member of NavigationBarItem.TitleDisplayMode (1/1 overloads bridged) |
-| · | property | [var sidebarRowSize: SidebarRowSize](https://developer.apple.com/documentation/swiftui/environmentvalues/sidebarrowsize) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var sidebarRowSize: SidebarRowSize](https://developer.apple.com/documentation/swiftui/environmentvalues/sidebarrowsize) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [SidebarRowSize](https://developer.apple.com/documentation/swiftui/sidebarrowsize) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case small](https://developer.apple.com/documentation/swiftui/sidebarrowsize/small) | value member of SidebarRowSize (1/1 overloads bridged) |
 | ✅ | case | [case medium](https://developer.apple.com/documentation/swiftui/sidebarrowsize/medium) | value member of SidebarRowSize (1/1 overloads bridged) |
@@ -1427,7 +1427,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var projectedValue: ObservedObject<ObjectType>.Wrapper](https://developer.apple.com/documentation/swiftui/observedobject/projectedvalue) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [ObservedObject.Wrapper](https://developer.apple.com/documentation/swiftui/observedobject/wrapper) | type not constructible from Kotlin (generic or no bridgeable members) |
 | · | subscript | [subscript<Subject>(dynamicMember _: ReferenceWritableKeyPath<ObjectType, Subject>) -> Binding<Subject>](https://developer.apple.com/documentation/swiftui/observedobject/wrapper/subscript(dynamicmember:)) | instance property / subscript (read side, not a view-building API) |
-| ✅ | method | [func onChange(of:initial:_:)](https://developer.apple.com/documentation/swiftui/view/onchange(of:initial:_:)) | modifier (1/2 overloads bridged) |
+| ✅ | method | [func onChange(of:initial:_:)](https://developer.apple.com/documentation/swiftui/view/onchange(of:initial:_:)) | modifier (2/2 overloads bridged) |
 | ➖ | method | [func onReceive<P>(P, perform: (P.Output) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onreceive(_:perform:)) | param publisher: generic constrained to ['Publisher'] |
 | ➖ | method | [func environmentObject<T>(T) -> some View](https://developer.apple.com/documentation/swiftui/view/environmentobject(_:)) | param object: generic constrained to ['ObservableObject'] |
 | ➖ | method | [func environmentObject<T>(T) -> some Scene](https://developer.apple.com/documentation/swiftui/scene/environmentobject(_:)) | not a view, modifier or value-producing member |
@@ -1450,18 +1450,18 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var accessibilityAssistiveAccessEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityassistiveaccessenabled) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityDimFlashingLights: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitydimflashinglights) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityDifferentiateWithoutColor: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitydifferentiatewithoutcolor) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var accessibilityEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityenabled) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var accessibilityEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var accessibilityInvertColors: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityinvertcolors) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityLargeContentViewerEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitylargecontentviewerenabled) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityPlayAnimatedImages: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityplayanimatedimages) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var accessibilityPrefersHeadAnchorAlternative: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityprefersheadanchoralternative) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var accessibilityPrefersCrossFadeTransitions: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitypreferscrossfadetransitions) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var accessibilityPrefersCrossFadeTransitions: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitypreferscrossfadetransitions) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var accessibilityQuickActionsEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityquickactionsenabled) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityReduceMotion: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityreducemotion) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityReduceTransparency: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityreducetransparency) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilitySwitchControlEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityswitchcontrolenabled) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityVoiceOverEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityvoiceoverenabled) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var legibilityWeight: LegibilityWeight?](https://developer.apple.com/documentation/swiftui/environmentvalues/legibilityweight) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var legibilityWeight: LegibilityWeight?](https://developer.apple.com/documentation/swiftui/environmentvalues/legibilityweight) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var dismiss: DismissAction](https://developer.apple.com/documentation/swiftui/environmentvalues/dismiss) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var dismissSearch: DismissSearchAction](https://developer.apple.com/documentation/swiftui/environmentvalues/dismisssearch) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var dismissWindow: DismissWindowAction](https://developer.apple.com/documentation/swiftui/environmentvalues/dismisswindow) | instance property / subscript (read side, not a view-building API) |
@@ -1477,31 +1477,31 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var rename: RenameAction?](https://developer.apple.com/documentation/swiftui/environmentvalues/rename) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var resetFocus: ResetFocusAction](https://developer.apple.com/documentation/swiftui/environmentvalues/resetfocus) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var openSettings: OpenSettingsAction](https://developer.apple.com/documentation/swiftui/environmentvalues/opensettings) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var overlayArrangementZIndex: Int](https://developer.apple.com/documentation/swiftui/environmentvalues/overlayarrangementzindex) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var splitArrangementAxis: Axis?](https://developer.apple.com/documentation/swiftui/environmentvalues/splitarrangementaxis) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var overlayArrangementZIndex: Int](https://developer.apple.com/documentation/swiftui/environmentvalues/overlayarrangementzindex) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var splitArrangementAxis: Axis?](https://developer.apple.com/documentation/swiftui/environmentvalues/splitarrangementaxis) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ? | property | [var authorizationController: AuthorizationController](https://developer.apple.com/documentation/swiftui/environmentvalues/authorizationcontroller) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [var webAuthenticationSession: WebAuthenticationSession](https://developer.apple.com/documentation/swiftui/environmentvalues/webauthenticationsession) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | · | property | [var buttonRepeatBehavior: ButtonRepeatBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/buttonrepeatbehavior) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var controlSize: ControlSize](https://developer.apple.com/documentation/swiftui/environmentvalues/controlsize) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var defaultWheelPickerItemHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultwheelpickeritemheight) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var controlSize: ControlSize](https://developer.apple.com/documentation/swiftui/environmentvalues/controlsize) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var defaultWheelPickerItemHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultwheelpickeritemheight) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var keyboardShortcut: KeyboardShortcut?](https://developer.apple.com/documentation/swiftui/environmentvalues/keyboardshortcut) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var menuIndicatorVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/menuindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var menuOrder: MenuOrder](https://developer.apple.com/documentation/swiftui/environmentvalues/menuorder) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var menuIndicatorVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/menuindicatorvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var menuOrder: MenuOrder](https://developer.apple.com/documentation/swiftui/environmentvalues/menuorder) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var searchSuggestionsPlacement: SearchSuggestionsPlacement](https://developer.apple.com/documentation/swiftui/environmentvalues/searchsuggestionsplacement) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var preferredPencilDoubleTapAction: PencilPreferredAction](https://developer.apple.com/documentation/swiftui/environmentvalues/preferredpencildoubletapaction) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var preferredPencilSqueezeAction: PencilPreferredAction](https://developer.apple.com/documentation/swiftui/environmentvalues/preferredpencilsqueezeaction) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var appearsActive: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/appearsactive) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var colorScheme: ColorScheme](https://developer.apple.com/documentation/swiftui/environmentvalues/colorscheme) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var colorScheme: ColorScheme](https://developer.apple.com/documentation/swiftui/environmentvalues/colorscheme) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var colorSchemeContrast: ColorSchemeContrast](https://developer.apple.com/documentation/swiftui/environmentvalues/colorschemecontrast) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var displayScale: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/displayscale) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var displayScale: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/displayscale) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var horizontalSizeClass: UserInterfaceSizeClass?](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalsizeclass) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var imageScale: Image.Scale](https://developer.apple.com/documentation/swiftui/environmentvalues/imagescale) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var imageScale: Image.Scale](https://developer.apple.com/documentation/swiftui/environmentvalues/imagescale) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var pixelLength: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/pixellength) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var sidebarRowSize: SidebarRowSize](https://developer.apple.com/documentation/swiftui/environmentvalues/sidebarrowsize) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var sidebarRowSize: SidebarRowSize](https://developer.apple.com/documentation/swiftui/environmentvalues/sidebarrowsize) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var verticalSizeClass: UserInterfaceSizeClass?](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalsizeclass) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var immersiveSpaceDisplacement: Pose3D](https://developer.apple.com/documentation/swiftui/environmentvalues/immersivespacedisplacement) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var labelsVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/labelsvisibility) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var materialActiveAppearance: MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/environmentvalues/materialactiveappearance) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var labelsVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/labelsvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var materialActiveAppearance: MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/environmentvalues/materialactiveappearance) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [TabBarPlacement](https://developer.apple.com/documentation/swiftui/tabbarplacement) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let bottomBar: TabBarPlacement](https://developer.apple.com/documentation/swiftui/tabbarplacement/bottombar) | value member of TabBarPlacement (1/1 overloads bridged) |
 | ✅ | property | [static let ornament: TabBarPlacement](https://developer.apple.com/documentation/swiftui/tabbarplacement/ornament) | value member of TabBarPlacement (1/1 overloads bridged) |
@@ -1510,64 +1510,64 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let topBar: TabBarPlacement](https://developer.apple.com/documentation/swiftui/tabbarplacement/topbar) | value member of TabBarPlacement (1/1 overloads bridged) |
 | · | property | [var toolbarLabelStyle: ToolbarLabelStyle?](https://developer.apple.com/documentation/swiftui/environmentvalues/toolbarlabelstyle) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var toolbarVerticalEdge: HorizontalEdge?](https://developer.apple.com/documentation/swiftui/environmentvalues/toolbarverticaledge) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var calendar: Calendar](https://developer.apple.com/documentation/swiftui/environmentvalues/calendar) | instance property / subscript (read side, not a view-building API) |
+| ➖ | property | [var calendar: Calendar](https://developer.apple.com/documentation/swiftui/environmentvalues/calendar) | environment value: unknown type Calendar |
 | · | property | [var documentConfiguration: DocumentConfiguration?](https://developer.apple.com/documentation/swiftui/environmentvalues/documentconfiguration) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var locale: Locale](https://developer.apple.com/documentation/swiftui/environmentvalues/locale) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var managedObjectContext: NSManagedObjectContext](https://developer.apple.com/documentation/swiftui/environmentvalues/managedobjectcontext) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var locale: Locale](https://developer.apple.com/documentation/swiftui/environmentvalues/locale) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ➖ | property | [var managedObjectContext: NSManagedObjectContext](https://developer.apple.com/documentation/swiftui/environmentvalues/managedobjectcontext) | environment value: unknown type NSManagedObjectContext |
 | ? | property | [var modelContext: ModelContext](https://developer.apple.com/documentation/swiftui/environmentvalues/modelcontext) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var timeZone: TimeZone](https://developer.apple.com/documentation/swiftui/environmentvalues/timezone) | instance property / subscript (read side, not a view-building API) |
+| ➖ | property | [var timeZone: TimeZone](https://developer.apple.com/documentation/swiftui/environmentvalues/timezone) | environment value: unknown type TimeZone |
 | · | property | [var undoManager: UndoManager?](https://developer.apple.com/documentation/swiftui/environmentvalues/undomanager) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var isScrollEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscrollenabled) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var verticalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var scrollDismissesKeyboardMode: ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/environmentvalues/scrolldismisseskeyboardmode) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var horizontalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollbouncebehavior) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var verticalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollbouncebehavior) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var editMode: Binding<EditMode>?](https://developer.apple.com/documentation/swiftui/environmentvalues/editmode) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isScrollEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscrollenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollindicatorvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var verticalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollindicatorvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var scrollDismissesKeyboardMode: ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/environmentvalues/scrolldismisseskeyboardmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var horizontalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollbouncebehavior) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var verticalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollbouncebehavior) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ➖ | property | [var editMode: Binding<EditMode>?](https://developer.apple.com/documentation/swiftui/environmentvalues/editmode) | environment value: optional binding |
 | ? | property | [var isActivityFullscreen: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isactivityfullscreen) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var isEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isenabled) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var isFocused: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isfocused) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var isFocusEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isfocuseffectenabled) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var isHoverEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/ishovereffectenabled) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var isLuminanceReduced: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isluminancereduced) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isFocusEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isfocuseffectenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var isHoverEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/ishovereffectenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var isLuminanceReduced: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isluminancereduced) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var isPresented: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/ispresented) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var isSceneCaptured: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscenecaptured) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isSceneCaptured: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscenecaptured) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var isSearching: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/issearching) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var isTabBarShowingSections: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/istabbarshowingsections) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var scenePhase: ScenePhase](https://developer.apple.com/documentation/swiftui/environmentvalues/scenephase) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var scenePhase: ScenePhase](https://developer.apple.com/documentation/swiftui/environmentvalues/scenephase) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var supportsMultipleWindows: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/supportsmultiplewindows) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var displayStoreKitMessage: DisplayMessageAction](https://developer.apple.com/documentation/swiftui/environmentvalues/displaystorekitmessage) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [var requestReview: RequestReviewAction](https://developer.apple.com/documentation/swiftui/environmentvalues/requestreview) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var allowsTightening: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/allowstightening) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var allowsTightening: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/allowstightening) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var autocorrectionDisabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/autocorrectiondisabled) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var dynamicTypeSize: DynamicTypeSize](https://developer.apple.com/documentation/swiftui/environmentvalues/dynamictypesize) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var font: Font?](https://developer.apple.com/documentation/swiftui/environmentvalues/font) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var layoutDirection: LayoutDirection](https://developer.apple.com/documentation/swiftui/environmentvalues/layoutdirection) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var lineLimit: Int?](https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var lineSpacing: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/linespacing) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var minimumScaleFactor: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/minimumscalefactor) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var multilineTextAlignment: TextAlignment](https://developer.apple.com/documentation/swiftui/environmentvalues/multilinetextalignment) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var textCase: Text.Case?](https://developer.apple.com/documentation/swiftui/environmentvalues/textcase) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var textSelectionAffinity: TextSelectionAffinity](https://developer.apple.com/documentation/swiftui/environmentvalues/textselectionaffinity) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var truncationMode: Text.TruncationMode](https://developer.apple.com/documentation/swiftui/environmentvalues/truncationmode) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var allowedDynamicRange: Image.DynamicRange?](https://developer.apple.com/documentation/swiftui/environmentvalues/alloweddynamicrange) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var backgroundMaterial: Material?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundmaterial) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var backgroundProminence: BackgroundProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundprominence) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var backgroundStyle: AnyShapeStyle?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundstyle) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var badgeProminence: BadgeProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/badgeprominence) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var contentTransition: ContentTransition](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransition) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var contentTransitionAddsDrawingGroup: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransitionaddsdrawinggroup) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var defaultMinListHeaderHeight: CGFloat?](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistheaderheight) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var defaultMinListRowHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistrowheight) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var headerProminence: Prominence](https://developer.apple.com/documentation/swiftui/environmentvalues/headerprominence) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var dynamicTypeSize: DynamicTypeSize](https://developer.apple.com/documentation/swiftui/environmentvalues/dynamictypesize) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var font: Font?](https://developer.apple.com/documentation/swiftui/environmentvalues/font) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var layoutDirection: LayoutDirection](https://developer.apple.com/documentation/swiftui/environmentvalues/layoutdirection) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var lineLimit: Int?](https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var lineSpacing: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/linespacing) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var minimumScaleFactor: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/minimumscalefactor) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var multilineTextAlignment: TextAlignment](https://developer.apple.com/documentation/swiftui/environmentvalues/multilinetextalignment) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var textCase: Text.Case?](https://developer.apple.com/documentation/swiftui/environmentvalues/textcase) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var textSelectionAffinity: TextSelectionAffinity](https://developer.apple.com/documentation/swiftui/environmentvalues/textselectionaffinity) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var truncationMode: Text.TruncationMode](https://developer.apple.com/documentation/swiftui/environmentvalues/truncationmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var allowedDynamicRange: Image.DynamicRange?](https://developer.apple.com/documentation/swiftui/environmentvalues/alloweddynamicrange) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var backgroundMaterial: Material?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundmaterial) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var backgroundProminence: BackgroundProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundprominence) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var backgroundStyle: AnyShapeStyle?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundstyle) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var badgeProminence: BadgeProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/badgeprominence) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var contentTransition: ContentTransition](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransition) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var contentTransitionAddsDrawingGroup: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransitionaddsdrawinggroup) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var defaultMinListHeaderHeight: CGFloat?](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistheaderheight) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var defaultMinListRowHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistrowheight) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var headerProminence: Prominence](https://developer.apple.com/documentation/swiftui/environmentvalues/headerprominence) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ? | property | [var physicalMetrics: PhysicalMetricsConverter](https://developer.apple.com/documentation/swiftui/environmentvalues/physicalmetrics) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [var realityKitScene: Scene?](https://developer.apple.com/documentation/swiftui/environmentvalues/realitykitscene) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [var realityViewCameraControls: CameraControls](https://developer.apple.com/documentation/swiftui/environmentvalues/realityviewcameracontrols) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var redactionReasons: RedactionReasons](https://developer.apple.com/documentation/swiftui/environmentvalues/redactionreasons) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var redactionReasons: RedactionReasons](https://developer.apple.com/documentation/swiftui/environmentvalues/redactionreasons) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var springLoadingBehavior: SpringLoadingBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/springloadingbehavior) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var symbolRenderingMode: SymbolRenderingMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolrenderingmode) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var symbolVariants: SymbolVariants](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolvariants) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var worldTrackingLimitations: Set<WorldTrackingLimitation>](https://developer.apple.com/documentation/swiftui/environmentvalues/worldtrackinglimitations) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var symbolRenderingMode: SymbolRenderingMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolrenderingmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var symbolVariants: SymbolVariants](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolvariants) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var worldTrackingLimitations: Set<WorldTrackingLimitation>](https://developer.apple.com/documentation/swiftui/environmentvalues/worldtrackinglimitations) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ? | property | [var showsWidgetContainerBackground: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/showswidgetcontainerbackground) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [var showsWidgetLabel: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/showswidgetlabel) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [var widgetFamily: WidgetFamily](https://developer.apple.com/documentation/swiftui/environmentvalues/widgetfamily) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
@@ -1575,13 +1575,13 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | property | [var widgetContentMargins: EdgeInsets](https://developer.apple.com/documentation/swiftui/environmentvalues/widgetcontentmargins) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | · | property | [var accessibilityShowButtonShapes: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityshowbuttonshapes) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var complicationRenderingMode: ComplicationRenderingMode](https://developer.apple.com/documentation/swiftui/environmentvalues/complicationrenderingmode) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var controlActiveState: ControlActiveState](https://developer.apple.com/documentation/swiftui/environmentvalues/controlactivestate) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var disableAutocorrection: Bool?](https://developer.apple.com/documentation/swiftui/environmentvalues/disableautocorrection) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var controlActiveState: ControlActiveState](https://developer.apple.com/documentation/swiftui/environmentvalues/controlactivestate) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var disableAutocorrection: Bool?](https://developer.apple.com/documentation/swiftui/environmentvalues/disableautocorrection) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var presentationMode: Binding<PresentationMode>](https://developer.apple.com/documentation/swiftui/environmentvalues/presentationmode) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [PresentationMode](https://developer.apple.com/documentation/swiftui/presentationmode) | type not constructible from Kotlin (generic or no bridgeable members) |
 | · | property | [var isPresented: Bool](https://developer.apple.com/documentation/swiftui/presentationmode/ispresented) | instance property / subscript (read side, not a view-building API) |
 | ➖ | method | [func dismiss()](https://developer.apple.com/documentation/swiftui/presentationmode/dismiss()) | not a view, modifier or value-producing member |
-| · | property | [var sizeCategory: ContentSizeCategory](https://developer.apple.com/documentation/swiftui/environmentvalues/sizecategory) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var sizeCategory: ContentSizeCategory](https://developer.apple.com/documentation/swiftui/environmentvalues/sizecategory) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ? | property | [var imagePlaygroundPersonalizationPolicy: ImagePlaygroundPersonalizationPolicy](https://developer.apple.com/documentation/swiftui/environmentvalues/imageplaygroundpersonalizationpolicy) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | · | property | [var accessibilityReduceHighlightingEffects: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityreducehighlightingeffects) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityShowBorders: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityshowborders) | instance property / subscript (read side, not a view-building API) |
@@ -1606,7 +1606,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var labelIconToTitleSpacing: CGFloat?](https://developer.apple.com/documentation/swiftui/environmentvalues/labelicontotitlespacing) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var labelReservedIconWidth: CGFloat?](https://developer.apple.com/documentation/swiftui/environmentvalues/labelreservediconwidth) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var levelOfDetail: LevelOfDetail](https://developer.apple.com/documentation/swiftui/environmentvalues/levelofdetail) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var lineHeight: AttributedString.LineHeight?](https://developer.apple.com/documentation/swiftui/environmentvalues/lineheight) | instance property / subscript (read side, not a view-building API) |
+| ➖ | property | [var lineHeight: AttributedString.LineHeight?](https://developer.apple.com/documentation/swiftui/environmentvalues/lineheight) | environment value: unknown type AttributedString.LineHeight |
 | · | property | [var navigationLinkIndicatorVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/navigationlinkindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var remoteDeviceIdentifier: RemoteDeviceIdentifier?](https://developer.apple.com/documentation/swiftui/environmentvalues/remotedeviceidentifier) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var requestAgeRange: DeclaredAgeRangeAction](https://developer.apple.com/documentation/swiftui/environmentvalues/requestagerange) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
@@ -1616,12 +1616,12 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | property | [var supportsImagePlayground: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/supportsimageplayground) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | · | property | [var supportsRemoteScenes: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/supportsremotescenes) | instance property / subscript (read side, not a view-building API) |
 | ? | property | [var surfaceSnappingInfo: SurfaceSnappingInfo](https://developer.apple.com/documentation/swiftui/environmentvalues/surfacesnappinginfo) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var symbolColorRenderingMode: SymbolColorRenderingMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolcolorrenderingmode) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var symbolVariableValueMode: SymbolVariableValueMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolvariablevaluemode) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var systemPrefersReducedResourceUsage: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/systemprefersreducedresourceusage) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var symbolColorRenderingMode: SymbolColorRenderingMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolcolorrenderingmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var symbolVariableValueMode: SymbolVariableValueMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolvariablevaluemode) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var systemPrefersReducedResourceUsage: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/systemprefersreducedresourceusage) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var tabBarPlacement: TabBarPlacement?](https://developer.apple.com/documentation/swiftui/environmentvalues/tabbarplacement) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var tabViewBottomAccessoryPlacement: TabViewBottomAccessoryPlacement?](https://developer.apple.com/documentation/swiftui/environmentvalues/tabviewbottomaccessoryplacement) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var toolbarTitleAlignment: ToolbarTitleAlignment](https://developer.apple.com/documentation/swiftui/environmentvalues/toolbartitlealignment) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var toolbarTitleAlignment: ToolbarTitleAlignment](https://developer.apple.com/documentation/swiftui/environmentvalues/toolbartitlealignment) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ? | property | [var windowClippingMargins: EdgeInsets3D](https://developer.apple.com/documentation/swiftui/environmentvalues/windowclippingmargins) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | · | property | [var writingToolsBehavior: WritingToolsBehavior?](https://developer.apple.com/documentation/swiftui/environmentvalues/writingtoolsbehavior) | instance property / subscript (read side, not a view-building API) |
 | · | macro | [macro Entry()](https://developer.apple.com/documentation/swiftui/entry()) | Swift macro (compile-time) |
@@ -1660,7 +1660,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var wrappedValue: Value](https://developer.apple.com/documentation/swiftui/scenestorage/wrappedvalue) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var projectedValue: Binding<Value>](https://developer.apple.com/documentation/swiftui/scenestorage/projectedvalue) | instance property / subscript (read side, not a view-building API) |
 | ➖ | init | [init(wrappedValue: Value, String, store: UserDefaults?)](https://developer.apple.com/documentation/swiftui/scenestorage/init(wrappedvalue:_:store:)) | not a view, modifier or value-producing member |
-| · | property | [var managedObjectContext: NSManagedObjectContext](https://developer.apple.com/documentation/swiftui/environmentvalues/managedobjectcontext) | instance property / subscript (read side, not a view-building API) |
+| ➖ | property | [var managedObjectContext: NSManagedObjectContext](https://developer.apple.com/documentation/swiftui/environmentvalues/managedobjectcontext) | environment value: unknown type NSManagedObjectContext |
 | ➖ | struct | [FetchRequest](https://developer.apple.com/documentation/swiftui/fetchrequest) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | init | [init(sortDescriptors:predicate:animation:)](https://developer.apple.com/documentation/swiftui/fetchrequest/init(sortdescriptors:predicate:animation:)) | not a view, modifier or value-producing member |
 | ➖ | init | [init(entity: NSEntityDescription, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate?, animation: Animation?)](https://developer.apple.com/documentation/swiftui/fetchrequest/init(entity:sortdescriptors:predicate:animation:)) | not a view, modifier or value-producing member |
@@ -2278,7 +2278,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func onScrollGeometryChange<T>(for: T.Type, of: (ScrollGeometry) -> T, action: (T, T) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)) | param type: type unknown |
 | ➖ | method | [func onScrollTargetVisibilityChange<ID>(idType: ID.Type, threshold: Double, ([ID]) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onscrolltargetvisibilitychange(idtype:threshold:_:)) | param idType: type unknown |
 | ✅ | method | [func onScrollVisibilityChange(threshold: Double, (Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onscrollvisibilitychange(threshold:_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onScrollPhaseChange(_:)](https://developer.apple.com/documentation/swiftui/view/onscrollphasechange(_:)) | param action: closure with 2 params |
+| ✅ | method | [func onScrollPhaseChange(_:)](https://developer.apple.com/documentation/swiftui/view/onscrollphasechange(_:)) | modifier (1/2 overloads bridged) |
 | ➖ | method | [func onGeometryChange(for:of:action:)](https://developer.apple.com/documentation/swiftui/view/ongeometrychange(for:of:action:)) | param type: type unknown |
 | ? | method | [func onGeometryChange3D(for:of:action:)](https://developer.apple.com/documentation/swiftui/view/ongeometrychange3d(for:of:action:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ✅ | method | [func onInteractiveResizeChange((Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/oninteractiveresizechange(_:)) | modifier (1/1 overloads bridged) |
@@ -2355,8 +2355,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func copyable<T>(@autoclosure () -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/copyable(_:)) | param payload: closure returning [T] |
 | ➖ | method | [func cuttable<T>(for: T.Type, action: () -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/cuttable(for:action:)) | param action: closure returning [T] |
 | ➖ | method | [func pasteDestination<T>(for: T.Type, action: ([T]) -> Void, validator: ([T]) -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/pastedestination(for:action:validator:)) | param action: callback of list |
-| ➖ | method | [func onCopyCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)) | param payloadAction: nested function type |
-| ➖ | method | [func onCutCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)) | param payloadAction: nested function type |
+| ➖ | method | [func onCopyCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)) | param payloadAction: closure returning [NSItemProvider] |
+| ➖ | method | [func onCutCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)) | param payloadAction: closure returning [NSItemProvider] |
 | ➖ | method | [func onPasteCommand(of:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)) | param payloadAction: unknown type NSItemProvider |
 | ➖ | method | [func onPasteCommand(of:validator:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)) | param validator: builder with parameters |
 | ✅ | method | [func dragConfiguration(DragConfiguration) -> some View](https://developer.apple.com/documentation/swiftui/view/dragconfiguration(_:)) | modifier (1/1 overloads bridged) |
@@ -2372,9 +2372,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func draggable<Item>(Item.Type, item: @autoclosure () -> Item?, containerNamespace: Namespace.ID?) -> some View](https://developer.apple.com/documentation/swiftui/view/draggable(_:item:containernamespace:)) | param item: closure returning Item? |
 | ✅ | method | [func draggable<ItemID>(containerItemID: ItemID, containerNamespace: Namespace.ID?) -> some View](https://developer.apple.com/documentation/swiftui/view/draggable(containeritemid:containernamespace:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func dropConfiguration((DropSession) -> DropConfiguration) -> some View](https://developer.apple.com/documentation/swiftui/view/dropconfiguration(_:)) | param configuration: builder with parameters |
-| ➖ | method | [func dropDestination<T>(for: T.Type, isEnabled: Bool, action: ([T], DropSession) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/dropdestination(for:isenabled:action:)) | param action: closure with 2 params |
+| ➖ | method | [func dropDestination<T>(for: T.Type, isEnabled: Bool, action: ([T], DropSession) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/dropdestination(for:isenabled:action:)) | param action: type DropSession not bridged |
 | ✅ | method | [func dropPreviewsFormation(DragDropPreviewsFormation) -> some View](https://developer.apple.com/documentation/swiftui/view/droppreviewsformation(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func itemProvider(Optional<() -> NSItemProvider?>) -> some View](https://developer.apple.com/documentation/swiftui/view/itemprovider(_:)) | param action: nested function type |
+| ➖ | method | [func itemProvider(Optional<() -> NSItemProvider?>) -> some View](https://developer.apple.com/documentation/swiftui/view/itemprovider(_:)) | param action: closure returning NSItemProvider? |
 | ➖ | method | [func onDrag<V>(() -> NSItemProvider, preview: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:preview:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDrag(() -> NSItemProvider) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDragSessionUpdated((DragSession) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ondragsessionupdated(_:)) | param onUpdate: type DragSession not bridged |
@@ -2393,15 +2393,15 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func onSubmit(of: SubmitTriggers, () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onsubmit(of:_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func submitScope(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/submitscope(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func submitLabel(SubmitLabel) -> some View](https://developer.apple.com/documentation/swiftui/view/submitlabel(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onMoveCommand(perform: ((MoveCommandDirection) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onmovecommand(perform:)) | param action: nested function type |
+| ✅ | method | [func onMoveCommand(perform: ((MoveCommandDirection) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onmovecommand(perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func moveDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/movedisabled(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onDeleteCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/ondeletecommand(perform:)) | param action: nested function type |
+| ✅ | method | [func onDeleteCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/ondeletecommand(perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func deleteDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/deletedisabled(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func pageCommand<V>(value: Binding<V>, in: ClosedRange<V>, step: V) -> some View](https://developer.apple.com/documentation/swiftui/view/pagecommand(value:in:step:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onExitCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onexitcommand(perform:)) | param action: nested function type |
-| ➖ | method | [func onPlayPauseCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onplaypausecommand(perform:)) | param action: nested function type |
+| ✅ | method | [func onExitCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onexitcommand(perform:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func onPlayPauseCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onplaypausecommand(perform:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func onCommand(Selector, perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncommand(_:perform:)) | param selector: unknown type Selector |
-| ➖ | method | [func onHingeChange(isEnabled: Bool, (DeviceHingeContext, DeviceHingeContext) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onhingechange(isenabled:_:)) | param action: closure with 2 params |
+| ➖ | method | [func onHingeChange(isEnabled: Bool, (DeviceHingeContext, DeviceHingeContext) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onhingechange(isenabled:_:)) | param action: type DeviceHingeContext not bridged |
 | ✅ | method | [func digitalCrownAccessory(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/digitalcrownaccessory(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func digitalCrownAccessory<Content>(content: () -> Content) -> some View](https://developer.apple.com/documentation/swiftui/view/digitalcrownaccessory(content:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func digitalCrownRotation<V>(Binding<V>, from: V, through: V, sensitivity: DigitalCrownRotationalSensitivity, isContinuous: Bool, isHapticFeedbackEnabled: Bool, onChange: (DigitalCrownEvent) -> Void, onIdle: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(_:from:through:sensitivity:iscontinuous:ishapticfeedbackenabled:onchange:onidle:)) | modifier (1/1 overloads bridged) |
@@ -2422,7 +2422,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func handlesExternalEvents(preferring: Set<String>, allowing: Set<String>) -> some View](https://developer.apple.com/documentation/swiftui/view/handlesexternalevents(preferring:allowing:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onAppear(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onappear(perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onDisappear(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/ondisappear(perform:)) | modifier (1/1 overloads bridged) |
-| ✅ | method | [func onChange(of:initial:_:)](https://developer.apple.com/documentation/swiftui/view/onchange(of:initial:_:)) | modifier (1/2 overloads bridged) |
+| ✅ | method | [func onChange(of:initial:_:)](https://developer.apple.com/documentation/swiftui/view/onchange(of:initial:_:)) | modifier (2/2 overloads bridged) |
 | ➖ | method | [func task<T>(id: T, name: String?, executorPreference: any TaskExecutor, priority: TaskPriority, file: String, line: Int, sending () async -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/task(id:name:executorpreference:priority:file:line:_:)) | param taskExecutor: generic constrained to ['TaskExecutor'] |
 | ✅ | method | [func task<T>(id: T, name: String?, priority: TaskPriority, file: String, line: Int, sending () async -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/task(id:name:priority:file:line:_:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func task(name: String?, executorPreference: any TaskExecutor, priority: TaskPriority, file: String, line: Int, action: sending () async -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/task(name:executorpreference:priority:file:line:action:)) | param taskExecutor: generic constrained to ['TaskExecutor'] |
@@ -2989,7 +2989,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func hidden() -> some View](https://developer.apple.com/documentation/swiftui/view/hidden()) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func labelsHidden() -> some View](https://developer.apple.com/documentation/swiftui/view/labelshidden()) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func labelsVisibility(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/labelsvisibility(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var labelsVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/labelsvisibility) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var labelsVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/labelsvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func menuIndicator(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/menuindicator(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func persistentSystemOverlays(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/persistentsystemoverlays(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | enum | [Visibility](https://developer.apple.com/documentation/swiftui/visibility) | Kotlin value class (1/1 overloads bridged) |
@@ -2998,12 +2998,12 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | case | [case hidden](https://developer.apple.com/documentation/swiftui/visibility/hidden) | value member of Visibility (1/1 overloads bridged) |
 | ✅ | method | [func statusBarHidden(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/statusbarhidden(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func disabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/disabled(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var isEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isenabled) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func interactionActivityTrackingTag(String) -> some View](https://developer.apple.com/documentation/swiftui/view/interactionactivitytrackingtag(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func invalidatableContent(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/invalidatablecontent(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func help(_:)](https://developer.apple.com/documentation/swiftui/view/help(_:)) | modifier (4/4 overloads bridged) |
 | ✅ | method | [func preferredColorScheme(ColorScheme?) -> some View](https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var colorScheme: ColorScheme](https://developer.apple.com/documentation/swiftui/environmentvalues/colorscheme) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var colorScheme: ColorScheme](https://developer.apple.com/documentation/swiftui/environmentvalues/colorscheme) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [ColorScheme](https://developer.apple.com/documentation/swiftui/colorscheme) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case light](https://developer.apple.com/documentation/swiftui/colorscheme/light) | value member of ColorScheme (1/1 overloads bridged) |
 | ✅ | case | [case dark](https://developer.apple.com/documentation/swiftui/colorscheme/dark) | value member of ColorScheme (1/1 overloads bridged) |
@@ -3031,8 +3031,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func privacySensitive(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/privacysensitive(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func redacted(reason: RedactionReasons) -> some View](https://developer.apple.com/documentation/swiftui/view/redacted(reason:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func unredacted() -> some View](https://developer.apple.com/documentation/swiftui/view/unredacted()) | modifier (1/1 overloads bridged) |
-| · | property | [var redactionReasons: RedactionReasons](https://developer.apple.com/documentation/swiftui/environmentvalues/redactionreasons) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var isSceneCaptured: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscenecaptured) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var redactionReasons: RedactionReasons](https://developer.apple.com/documentation/swiftui/environmentvalues/redactionreasons) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var isSceneCaptured: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscenecaptured) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [RedactionReasons](https://developer.apple.com/documentation/swiftui/redactionreasons) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let invalidated: RedactionReasons](https://developer.apple.com/documentation/swiftui/redactionreasons/invalidated) | value member of RedactionReasons (1/1 overloads bridged) |
 | ✅ | property | [static let placeholder: RedactionReasons](https://developer.apple.com/documentation/swiftui/redactionreasons/placeholder) | value member of RedactionReasons (1/1 overloads bridged) |
@@ -3898,8 +3898,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | init | [init<T>(T)](https://developer.apple.com/documentation/swiftui/anytransition/init(_:)) | param transition: generic constrained to ['Transition'] |
 | ➖ | method | [static func modifier<E>(active: E, identity: E) -> AnyTransition](https://developer.apple.com/documentation/swiftui/anytransition/modifier(active:identity:)) | param active: generic constrained to ['ViewModifier'] |
 | ✅ | method | [func contentTransition(ContentTransition) -> some View](https://developer.apple.com/documentation/swiftui/view/contenttransition(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var contentTransition: ContentTransition](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransition) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var contentTransitionAddsDrawingGroup: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransitionaddsdrawinggroup) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var contentTransition: ContentTransition](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransition) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var contentTransitionAddsDrawingGroup: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/contenttransitionaddsdrawinggroup) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [ContentTransition](https://developer.apple.com/documentation/swiftui/contenttransition) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let identity: ContentTransition](https://developer.apple.com/documentation/swiftui/contenttransition/identity) | value member of ContentTransition (1/1 overloads bridged) |
 | ✅ | property | [static let interpolate: ContentTransition](https://developer.apple.com/documentation/swiftui/contenttransition/interpolate) | value member of ContentTransition (1/1 overloads bridged) |
@@ -4109,7 +4109,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | case | [case multiSelection(RangeSet<String.Index>)](https://developer.apple.com/documentation/swiftui/textselection/indices-swift.enum/multiselection(_:)) | not a view, modifier or value-producing member |
 | ➖ | case | [case selection(Range<String.Index>)](https://developer.apple.com/documentation/swiftui/textselection/indices-swift.enum/selection(_:)) | not a view, modifier or value-producing member |
 | ✅ | method | [func textSelectionAffinity(TextSelectionAffinity) -> some View](https://developer.apple.com/documentation/swiftui/view/textselectionaffinity(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var textSelectionAffinity: TextSelectionAffinity](https://developer.apple.com/documentation/swiftui/environmentvalues/textselectionaffinity) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var textSelectionAffinity: TextSelectionAffinity](https://developer.apple.com/documentation/swiftui/environmentvalues/textselectionaffinity) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [TextSelectionAffinity](https://developer.apple.com/documentation/swiftui/textselectionaffinity) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case automatic](https://developer.apple.com/documentation/swiftui/textselectionaffinity/automatic) | value member of TextSelectionAffinity (1/1 overloads bridged) |
 | ✅ | case | [case downstream](https://developer.apple.com/documentation/swiftui/textselectionaffinity/downstream) | value member of TextSelectionAffinity (1/1 overloads bridged) |
@@ -4132,7 +4132,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func fontDesign(Font.Design?) -> some View](https://developer.apple.com/documentation/swiftui/view/fontdesign(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func fontWeight(Font.Weight?) -> some View](https://developer.apple.com/documentation/swiftui/view/fontweight(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func fontWidth(Font.Width?) -> some View](https://developer.apple.com/documentation/swiftui/view/fontwidth(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var font: Font?](https://developer.apple.com/documentation/swiftui/environmentvalues/font) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var font: Font?](https://developer.apple.com/documentation/swiftui/environmentvalues/font) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [Font](https://developer.apple.com/documentation/swiftui/font) | Kotlin value class (1/1 overloads bridged) |
 | ? | property | [static let extraLargeTitle2: Font](https://developer.apple.com/documentation/swiftui/font/extralargetitle2) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | property | [static let extraLargeTitle: Font](https://developer.apple.com/documentation/swiftui/font/extralargetitle) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
@@ -4231,7 +4231,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [static system(size:weight:design:)](https://developer.apple.com/documentation/swiftui/font/system(size:weight:design:)) | value member of Font (2/2 overloads bridged) |
 | ✅ | method | [func textScale(Text.Scale, isEnabled: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/textscale(_:isenabled:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func dynamicTypeSize(_:)](https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)) | modifier (1/2 overloads bridged) |
-| · | property | [var dynamicTypeSize: DynamicTypeSize](https://developer.apple.com/documentation/swiftui/environmentvalues/dynamictypesize) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var dynamicTypeSize: DynamicTypeSize](https://developer.apple.com/documentation/swiftui/environmentvalues/dynamictypesize) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [DynamicTypeSize](https://developer.apple.com/documentation/swiftui/dynamictypesize) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case xSmall](https://developer.apple.com/documentation/swiftui/dynamictypesize/xsmall) | value member of DynamicTypeSize (1/1 overloads bridged) |
 | ✅ | case | [case small](https://developer.apple.com/documentation/swiftui/dynamictypesize/small) | value member of DynamicTypeSize (1/1 overloads bridged) |
@@ -4280,7 +4280,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func underline(Bool, pattern: Text.LineStyle.Pattern, color: Color?) -> some View](https://developer.apple.com/documentation/swiftui/view/underline(_:pattern:color:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func strikethrough(Bool, pattern: Text.LineStyle.Pattern, color: Color?) -> some View](https://developer.apple.com/documentation/swiftui/view/strikethrough(_:pattern:color:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func textCase(Text.Case?) -> some View](https://developer.apple.com/documentation/swiftui/view/textcase(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var textCase: Text.Case?](https://developer.apple.com/documentation/swiftui/environmentvalues/textcase) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var textCase: Text.Case?](https://developer.apple.com/documentation/swiftui/environmentvalues/textcase) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func monospaced(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/monospaced(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func monospacedDigit() -> some View](https://developer.apple.com/documentation/swiftui/view/monospaceddigit()) | modifier (1/1 overloads bridged) |
 | ➖ | protocol | [AttributedTextFormattingDefinition](https://developer.apple.com/documentation/swiftui/attributedtextformattingdefinition) | protocol without bridgeable conformers |
@@ -4320,11 +4320,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | struct | [AttributedTextFormatting.ValueConstraint](https://developer.apple.com/documentation/swiftui/attributedtextformatting/valueconstraint) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | init | [init(for:values:default:)](https://developer.apple.com/documentation/swiftui/attributedtextformatting/valueconstraint/init(for:values:default:)) | not a view, modifier or value-producing member |
 | ✅ | method | [func truncationMode(Text.TruncationMode) -> some View](https://developer.apple.com/documentation/swiftui/view/truncationmode(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var truncationMode: Text.TruncationMode](https://developer.apple.com/documentation/swiftui/environmentvalues/truncationmode) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var truncationMode: Text.TruncationMode](https://developer.apple.com/documentation/swiftui/environmentvalues/truncationmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func allowsTightening(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/allowstightening(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var allowsTightening: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/allowstightening) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var allowsTightening: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/allowstightening) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func minimumScaleFactor(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/minimumscalefactor(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var minimumScaleFactor: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/minimumscalefactor) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var minimumScaleFactor: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/minimumscalefactor) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func baselineOffset(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/baselineoffset(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func kerning(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/kerning(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func tracking(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/tracking(_:)) | modifier (1/1 overloads bridged) |
@@ -4345,11 +4345,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func sizeThatFits(ProposedViewSize) -> CGSize](https://developer.apple.com/documentation/swiftui/textproxy/sizethatfits(_:)) | not a view, modifier or value-producing member |
 | ✅ | method | [func lineLimit(_:)](https://developer.apple.com/documentation/swiftui/view/linelimit(_:)) | modifier (2/4 overloads bridged) |
 | ✅ | method | [func lineLimit(Int, reservesSpace: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/linelimit(_:reservesspace:)) | modifier (1/1 overloads bridged) |
-| · | property | [var lineLimit: Int?](https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var lineLimit: Int?](https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func lineSpacing(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/linespacing(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var lineSpacing: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/linespacing) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var lineSpacing: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/linespacing) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func multilineTextAlignment(TextAlignment) -> some View](https://developer.apple.com/documentation/swiftui/view/multilinetextalignment(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var multilineTextAlignment: TextAlignment](https://developer.apple.com/documentation/swiftui/environmentvalues/multilinetextalignment) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var multilineTextAlignment: TextAlignment](https://developer.apple.com/documentation/swiftui/environmentvalues/multilinetextalignment) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ➖ | enum | [SystemFormatStyle](https://developer.apple.com/documentation/swiftui/systemformatstyle) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | struct | [SystemFormatStyle.DateOffset](https://developer.apple.com/documentation/swiftui/systemformatstyle/dateoffset) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(to: Date, allowedFields: Set<Date.ComponentsFormatStyle.Field>, maxFieldCount: Int, sign: NumberFormatStyleConfiguration.SignDisplayStrategy)](https://developer.apple.com/documentation/swiftui/systemformatstyle/dateoffset/init(to:allowedfields:maxfieldcount:sign:)) | value member of SystemFormatStyle.DateOffset (1/1 overloads bridged) |
@@ -4429,7 +4429,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func appendInterpolation(timerInterval: ClosedRange<Date>, pauseTime: Date?, countsDown: Bool, showsHours: Bool)](https://developer.apple.com/documentation/swiftui/localizedstringkey/stringinterpolation/appendinterpolation(timerinterval:pausetime:countsdown:showshours:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func appendLiteral(String)](https://developer.apple.com/documentation/swiftui/localizedstringkey/stringinterpolation/appendliteral(_:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func appendInterpolation(accessibilityName: Color)](https://developer.apple.com/documentation/swiftui/localizedstringkey/stringinterpolation/appendinterpolation(accessibilityname:)) | not a view, modifier or value-producing member |
-| · | property | [var locale: Locale](https://developer.apple.com/documentation/swiftui/environmentvalues/locale) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var locale: Locale](https://developer.apple.com/documentation/swiftui/environmentvalues/locale) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func typesettingLanguage(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/typesettinglanguage(_:isenabled:)) | modifier (2/2 overloads bridged) |
 | ✅ | struct | [TypesettingLanguage](https://developer.apple.com/documentation/swiftui/typesettinglanguage) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: TypesettingLanguage](https://developer.apple.com/documentation/swiftui/typesettinglanguage/automatic) | value member of TypesettingLanguage (1/1 overloads bridged) |
@@ -4463,7 +4463,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | case | [case medium](https://developer.apple.com/documentation/swiftui/image/interpolation/medium) | value member of Image.Interpolation (1/1 overloads bridged) |
 | ✅ | case | [case none](https://developer.apple.com/documentation/swiftui/image/interpolation/none) | value member of Image.Interpolation (1/1 overloads bridged) |
 | ☑️ | method | [func allowedDynamicRange(Image.DynamicRange?) -> Image](https://developer.apple.com/documentation/swiftui/image/alloweddynamicrange(_:)) | same as View.allowedDynamicRange (applied on Image at the head of the chain) |
-| · | property | [var allowedDynamicRange: Image.DynamicRange?](https://developer.apple.com/documentation/swiftui/environmentvalues/alloweddynamicrange) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var allowedDynamicRange: Image.DynamicRange?](https://developer.apple.com/documentation/swiftui/environmentvalues/alloweddynamicrange) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [Image.DynamicRange](https://developer.apple.com/documentation/swiftui/image/dynamicrange) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let standard: Image.DynamicRange](https://developer.apple.com/documentation/swiftui/image/dynamicrange/standard) | value member of Image.DynamicRange (1/1 overloads bridged) |
 | ✅ | property | [static let high: Image.DynamicRange](https://developer.apple.com/documentation/swiftui/image/dynamicrange/high) | value member of Image.DynamicRange (1/1 overloads bridged) |
@@ -4488,7 +4488,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | case | [case medium](https://developer.apple.com/documentation/swiftui/image/scale/medium) | value member of Image.Scale (1/1 overloads bridged) |
 | ✅ | case | [case large](https://developer.apple.com/documentation/swiftui/image/scale/large) | value member of Image.Scale (1/1 overloads bridged) |
 | ✅ | method | [func imageScale(Image.Scale) -> some View](https://developer.apple.com/documentation/swiftui/view/imagescale(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var imageScale: Image.Scale](https://developer.apple.com/documentation/swiftui/environmentvalues/imagescale) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var imageScale: Image.Scale](https://developer.apple.com/documentation/swiftui/environmentvalues/imagescale) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [Image.Scale](https://developer.apple.com/documentation/swiftui/image/scale) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case small](https://developer.apple.com/documentation/swiftui/image/scale/small) | value member of Image.Scale (1/1 overloads bridged) |
 | ✅ | case | [case medium](https://developer.apple.com/documentation/swiftui/image/scale/medium) | value member of Image.Scale (1/1 overloads bridged) |
@@ -4519,7 +4519,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var image: Image?](https://developer.apple.com/documentation/swiftui/asyncimagephase/image) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var error: (any Error)?](https://developer.apple.com/documentation/swiftui/asyncimagephase/error) | instance property / subscript (read side, not a view-building API) |
 | ✅ | method | [func symbolVariant(SymbolVariants) -> some View](https://developer.apple.com/documentation/swiftui/view/symbolvariant(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var symbolVariants: SymbolVariants](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolvariants) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var symbolVariants: SymbolVariants](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolvariants) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [SymbolVariants](https://developer.apple.com/documentation/swiftui/symbolvariants) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let none: SymbolVariants](https://developer.apple.com/documentation/swiftui/symbolvariants/none) | value member of SymbolVariants (1/1 overloads bridged) |
 | ✅ | property | [static let circle: SymbolVariants](https://developer.apple.com/documentation/swiftui/symbolvariants/circle-swift.type.property) | value member of SymbolVariants (1/2 overloads bridged) |
@@ -4539,7 +4539,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | struct | [SymbolEffectTransition](https://developer.apple.com/documentation/swiftui/symboleffecttransition) | Kotlin value class (1/1 overloads bridged) |
 | ➖ | init | [init<T>(effect: T, options: SymbolEffectOptions)](https://developer.apple.com/documentation/swiftui/symboleffecttransition/init(effect:options:)) | param effect: generic constrained to ['SymbolEffect', 'TransitionSymbolEffect'] |
 | ✅ | method | [func symbolRenderingMode(SymbolRenderingMode?) -> some View](https://developer.apple.com/documentation/swiftui/view/symbolrenderingmode(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var symbolRenderingMode: SymbolRenderingMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolrenderingmode) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var symbolRenderingMode: SymbolRenderingMode?](https://developer.apple.com/documentation/swiftui/environmentvalues/symbolrenderingmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [SymbolRenderingMode](https://developer.apple.com/documentation/swiftui/symbolrenderingmode) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let hierarchical: SymbolRenderingMode](https://developer.apple.com/documentation/swiftui/symbolrenderingmode/hierarchical) | value member of SymbolRenderingMode (1/1 overloads bridged) |
 | ✅ | property | [static let monochrome: SymbolRenderingMode](https://developer.apple.com/documentation/swiftui/symbolrenderingmode/monochrome) | value member of SymbolRenderingMode (1/1 overloads bridged) |
@@ -4714,11 +4714,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | init | [init<F>(value: Binding<F.FormatInput>, in: ClosedRange<F.FormatInput>, step: F.FormatInput.Stride, format: F, label: () -> Label, onEditingChanged: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/stepper/init(value:in:step:format:label:oneditingchanged:)) | param value: unknown type F.FormatInput |
 | ✅ | init | [init(_:value:in:step:onEditingChanged:)](https://developer.apple.com/documentation/swiftui/stepper/init(_:value:in:step:oneditingchanged:)) | view (3/3 overloads bridged) |
 | ➖ | init | [init(_:value:in:step:format:onEditingChanged:)](https://developer.apple.com/documentation/swiftui/stepper/init(_:value:in:step:format:oneditingchanged:)) | param value: unknown type F.FormatInput |
-| ➖ | init | [init(label: () -> Label, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/stepper/init(label:onincrement:ondecrement:oneditingchanged:)) | param onIncrement: nested function type |
-| ➖ | init | [init(_:onIncrement:onDecrement:onEditingChanged:)](https://developer.apple.com/documentation/swiftui/stepper/init(_:onincrement:ondecrement:oneditingchanged:)) | param onIncrement: nested function type |
+| ✅ | init | [init(label: () -> Label, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/stepper/init(label:onincrement:ondecrement:oneditingchanged:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(_:onIncrement:onDecrement:onEditingChanged:)](https://developer.apple.com/documentation/swiftui/stepper/init(_:onincrement:ondecrement:oneditingchanged:)) | view (3/3 overloads bridged) |
 | ✅ | init | [init<V>(value: Binding<V>, step: V.Stride, onEditingChanged: (Bool) -> Void, label: () -> Label)](https://developer.apple.com/documentation/swiftui/stepper/init(value:step:oneditingchanged:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, step: V.Stride, onEditingChanged: (Bool) -> Void, label: () -> Label)](https://developer.apple.com/documentation/swiftui/stepper/init(value:in:step:oneditingchanged:label:)) | view (1/1 overloads bridged) |
-| ➖ | init | [init(onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: (Bool) -> Void, label: () -> Label)](https://developer.apple.com/documentation/swiftui/stepper/init(onincrement:ondecrement:oneditingchanged:label:)) | param onIncrement: nested function type |
+| ✅ | init | [init(onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: (Bool) -> Void, label: () -> Label)](https://developer.apple.com/documentation/swiftui/stepper/init(onincrement:ondecrement:oneditingchanged:label:)) | view (1/1 overloads bridged) |
 | ➖ | struct | [Toggle](https://developer.apple.com/documentation/swiftui/toggle) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(_:isOn:)](https://developer.apple.com/documentation/swiftui/toggle/init(_:ison:)) | view (3/3 overloads bridged) |
 | ✅ | init | [init(isOn: Binding<Bool>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/toggle/init(ison:label:)) | view (1/1 overloads bridged) |
@@ -4753,7 +4753,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func pickerStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/pickerstyle(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func horizontalRadioGroupLayout() -> some View](https://developer.apple.com/documentation/swiftui/view/horizontalradiogrouplayout()) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func defaultWheelPickerItemHeight(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/defaultwheelpickeritemheight(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var defaultWheelPickerItemHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultwheelpickeritemheight) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var defaultWheelPickerItemHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultwheelpickeritemheight) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func paletteSelectionEffect(PaletteSelectionEffect) -> some View](https://developer.apple.com/documentation/swiftui/view/paletteselectioneffect(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [PaletteSelectionEffect](https://developer.apple.com/documentation/swiftui/paletteselectioneffect) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: PaletteSelectionEffect](https://developer.apple.com/documentation/swiftui/paletteselectioneffect/automatic) | value member of PaletteSelectionEffect (1/1 overloads bridged) |
@@ -4775,8 +4775,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | init | [init(selection: Binding<Set<DateComponents>>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/multidatepicker/init(selection:label:)) | param selection: unknown type DateComponents |
 | ➖ | init | [init(_:selection:in:)](https://developer.apple.com/documentation/swiftui/multidatepicker/init(_:selection:in:)) | param selection: unknown type DateComponents |
 | ➖ | init | [init(selection:in:label:)](https://developer.apple.com/documentation/swiftui/multidatepicker/init(selection:in:label:)) | param selection: unknown type DateComponents |
-| · | property | [var calendar: Calendar](https://developer.apple.com/documentation/swiftui/environmentvalues/calendar) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var timeZone: TimeZone](https://developer.apple.com/documentation/swiftui/environmentvalues/timezone) | instance property / subscript (read side, not a view-building API) |
+| ➖ | property | [var calendar: Calendar](https://developer.apple.com/documentation/swiftui/environmentvalues/calendar) | environment value: unknown type Calendar |
+| ➖ | property | [var timeZone: TimeZone](https://developer.apple.com/documentation/swiftui/environmentvalues/timezone) | environment value: unknown type TimeZone |
 | ➖ | struct | [ColorPicker](https://developer.apple.com/documentation/swiftui/colorpicker) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(_:selection:supportsOpacity:)](https://developer.apple.com/documentation/swiftui/colorpicker/init(_:selection:supportsopacity:)) | view (3/6 overloads bridged) |
 | ✅ | init | [init(selection:supportsOpacity:label:)](https://developer.apple.com/documentation/swiftui/colorpicker/init(selection:supportsopacity:label:)) | view (1/2 overloads bridged) |
@@ -4857,7 +4857,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [static func release(SensoryFeedback.ReleaseFeedback) -> SensoryFeedback](https://developer.apple.com/documentation/swiftui/sensoryfeedback/release(_:)) | value member of SensoryFeedback (1/1 overloads bridged) |
 | ✅ | method | [static func selection(SensoryFeedback.SelectionFeedback) -> SensoryFeedback](https://developer.apple.com/documentation/swiftui/sensoryfeedback/selection(_:)) | value member of SensoryFeedback (1/1 overloads bridged) |
 | ✅ | method | [func controlSize(_:)](https://developer.apple.com/documentation/swiftui/view/controlsize(_:)) | modifier (1/2 overloads bridged) |
-| · | property | [var controlSize: ControlSize](https://developer.apple.com/documentation/swiftui/environmentvalues/controlsize) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var controlSize: ControlSize](https://developer.apple.com/documentation/swiftui/environmentvalues/controlsize) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [ControlSize](https://developer.apple.com/documentation/swiftui/controlsize) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case mini](https://developer.apple.com/documentation/swiftui/controlsize/mini) | value member of ControlSize (1/1 overloads bridged) |
 | ✅ | case | [case small](https://developer.apple.com/documentation/swiftui/controlsize/small) | value member of ControlSize (1/1 overloads bridged) |
@@ -4944,14 +4944,14 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | struct | [EmptyCommands](https://developer.apple.com/documentation/swiftui/emptycommands) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/emptycommands/init()) | value member of EmptyCommands (1/1 overloads bridged) |
 | ✅ | method | [func menuIndicator(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/menuindicator(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var menuIndicatorVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/menuindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var menuIndicatorVisibility: Visibility](https://developer.apple.com/documentation/swiftui/environmentvalues/menuindicatorvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func menuActionDismissBehavior(MenuActionDismissBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/menuactiondismissbehavior(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [MenuActionDismissBehavior](https://developer.apple.com/documentation/swiftui/menuactiondismissbehavior) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: MenuActionDismissBehavior](https://developer.apple.com/documentation/swiftui/menuactiondismissbehavior/automatic) | value member of MenuActionDismissBehavior (1/1 overloads bridged) |
 | ✅ | property | [static let disabled: MenuActionDismissBehavior](https://developer.apple.com/documentation/swiftui/menuactiondismissbehavior/disabled) | value member of MenuActionDismissBehavior (1/1 overloads bridged) |
 | ✅ | property | [static let enabled: MenuActionDismissBehavior](https://developer.apple.com/documentation/swiftui/menuactiondismissbehavior/enabled) | value member of MenuActionDismissBehavior (1/1 overloads bridged) |
 | ✅ | method | [func menuOrder(MenuOrder) -> some View](https://developer.apple.com/documentation/swiftui/view/menuorder(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var menuOrder: MenuOrder](https://developer.apple.com/documentation/swiftui/environmentvalues/menuorder) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var menuOrder: MenuOrder](https://developer.apple.com/documentation/swiftui/environmentvalues/menuorder) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [MenuOrder](https://developer.apple.com/documentation/swiftui/menuorder) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: MenuOrder](https://developer.apple.com/documentation/swiftui/menuorder/automatic) | value member of MenuOrder (1/1 overloads bridged) |
 | ✅ | property | [static let fixed: MenuOrder](https://developer.apple.com/documentation/swiftui/menuorder/fixed) | value member of MenuOrder (1/1 overloads bridged) |
@@ -5220,8 +5220,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | struct | [ContainerRelativeShape](https://developer.apple.com/documentation/swiftui/containerrelativeshape) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/containerrelativeshape/init()) | value member of ContainerRelativeShape (1/1 overloads bridged) |
 | ➖ | struct | [Canvas](https://developer.apple.com/documentation/swiftui/canvas) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(opaque: Bool, colorMode: ColorRenderingMode, rendersAsynchronously: Bool, renderer: (inout GraphicsContext, CGSize) -> Void)](https://developer.apple.com/documentation/swiftui/canvas/init(opaque:colormode:rendersasynchronously:renderer:)) | param renderer: closure with 2 params |
-| ➖ | init | [init(opaque: Bool, colorMode: ColorRenderingMode, rendersAsynchronously: Bool, renderer: (inout GraphicsContext, CGSize) -> Void, symbols: () -> Symbols)](https://developer.apple.com/documentation/swiftui/canvas/init(opaque:colormode:rendersasynchronously:renderer:symbols:)) | param renderer: closure with 2 params |
+| ➖ | init | [init(opaque: Bool, colorMode: ColorRenderingMode, rendersAsynchronously: Bool, renderer: (inout GraphicsContext, CGSize) -> Void)](https://developer.apple.com/documentation/swiftui/canvas/init(opaque:colormode:rendersasynchronously:renderer:)) | param renderer: type GraphicsContext not bridged |
+| ➖ | init | [init(opaque: Bool, colorMode: ColorRenderingMode, rendersAsynchronously: Bool, renderer: (inout GraphicsContext, CGSize) -> Void, symbols: () -> Symbols)](https://developer.apple.com/documentation/swiftui/canvas/init(opaque:colormode:rendersasynchronously:renderer:symbols:)) | param renderer: type GraphicsContext not bridged |
 | · | property | [var isOpaque: Bool](https://developer.apple.com/documentation/swiftui/canvas/isopaque) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var colorMode: ColorRenderingMode](https://developer.apple.com/documentation/swiftui/canvas/colormode) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var symbols: Symbols](https://developer.apple.com/documentation/swiftui/canvas/symbols) | instance property / subscript (read side, not a view-building API) |
@@ -5411,7 +5411,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func foregroundStyle<S1, S2>(S1, S2) -> some View](https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func foregroundStyle<S1, S2, S3>(S1, S2, S3) -> some View](https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func backgroundStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/backgroundstyle(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var backgroundStyle: AnyShapeStyle?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundstyle) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var backgroundStyle: AnyShapeStyle?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundstyle) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | protocol | [ShapeStyle](https://developer.apple.com/documentation/swiftui/shapestyle) | Kotlin interface (1/1 overloads bridged) |
 | ✅ | property | [static var black: Color](https://developer.apple.com/documentation/swiftui/shapestyle/black) | value member of Color (1/1 overloads bridged) |
 | ✅ | property | [static var blue: Color](https://developer.apple.com/documentation/swiftui/shapestyle/blue) | value member of Color (1/1 overloads bridged) |
@@ -5599,7 +5599,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func hueRotation(Angle) -> some View](https://developer.apple.com/documentation/swiftui/view/huerotation(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func luminanceToAlpha() -> some View](https://developer.apple.com/documentation/swiftui/view/luminancetoalpha()) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func materialActiveAppearance(MaterialActiveAppearance) -> some View](https://developer.apple.com/documentation/swiftui/view/materialactiveappearance(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var materialActiveAppearance: MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/environmentvalues/materialactiveappearance) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var materialActiveAppearance: MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/environmentvalues/materialactiveappearance) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/materialactiveappearance) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let active: MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/materialactiveappearance/active) | value member of MaterialActiveAppearance (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: MaterialActiveAppearance](https://developer.apple.com/documentation/swiftui/materialactiveappearance/automatic) | value member of MaterialActiveAppearance (1/1 overloads bridged) |
@@ -6077,7 +6077,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func overlay<V>(alignment: Alignment, content: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/overlay(alignment:content:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func overlay<S>(S, ignoresSafeAreaEdges: Edge.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/overlay(_:ignoressafeareaedges:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func overlay<S, T>(S, in: T, fillStyle: FillStyle) -> some View](https://developer.apple.com/documentation/swiftui/view/overlay(_:in:fillstyle:)) | modifier (1/1 overloads bridged) |
-| · | property | [var backgroundMaterial: Material?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundmaterial) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var backgroundMaterial: Material?](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundmaterial) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func containerBackground<S>(S, for: ContainerBackgroundPlacement) -> some View](https://developer.apple.com/documentation/swiftui/view/containerbackground(_:for:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func containerBackground<V>(for: ContainerBackgroundPlacement, alignment: Alignment, content: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/containerbackground(for:alignment:content:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [ContainerBackgroundPlacement](https://developer.apple.com/documentation/swiftui/containerbackgroundplacement) | Kotlin value class (1/1 overloads bridged) |
@@ -6200,14 +6200,14 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | case | [case fixed](https://developer.apple.com/documentation/swiftui/layoutdirectionbehavior/fixed) | value member of LayoutDirectionBehavior (1/1 overloads bridged) |
 | ✅ | property | [static var mirrors: LayoutDirectionBehavior](https://developer.apple.com/documentation/swiftui/layoutdirectionbehavior/mirrors) | value member of LayoutDirectionBehavior (1/1 overloads bridged) |
 | ✅ | case | [case mirrors(in: LayoutDirection)](https://developer.apple.com/documentation/swiftui/layoutdirectionbehavior/mirrors(in:)) | value member of LayoutDirectionBehavior (1/1 overloads bridged) |
-| · | property | [var layoutDirection: LayoutDirection](https://developer.apple.com/documentation/swiftui/environmentvalues/layoutdirection) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var layoutDirection: LayoutDirection](https://developer.apple.com/documentation/swiftui/environmentvalues/layoutdirection) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [LayoutDirection](https://developer.apple.com/documentation/swiftui/layoutdirection) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case leftToRight](https://developer.apple.com/documentation/swiftui/layoutdirection/lefttoright) | value member of LayoutDirection (1/1 overloads bridged) |
 | ✅ | case | [case rightToLeft](https://developer.apple.com/documentation/swiftui/layoutdirection/righttoleft) | value member of LayoutDirection (1/1 overloads bridged) |
 | ➖ | init | [init?(UITraitEnvironmentLayoutDirection)](https://developer.apple.com/documentation/swiftui/layoutdirection/init(_:)) | not a view, modifier or value-producing member |
 | ? | struct | [LayoutRotationUnaryLayout](https://developer.apple.com/documentation/swiftui/layoutrotationunarylayout) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| · | property | [var isLuminanceReduced: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isluminancereduced) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var displayScale: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/displayscale) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isLuminanceReduced: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isluminancereduced) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var displayScale: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/displayscale) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | · | property | [var pixelLength: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/pixellength) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var horizontalSizeClass: UserInterfaceSizeClass?](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalsizeclass) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var verticalSizeClass: UserInterfaceSizeClass?](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalsizeclass) | instance property / subscript (read side, not a view-building API) |
@@ -6416,8 +6416,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func disclosureGroupStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/disclosuregroupstyle(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func listRowInsets(EdgeInsets?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowinsets(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func listRowInsets(Edge.Set, CGFloat?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowinsets(_:_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var defaultMinListRowHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistrowheight) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var defaultMinListHeaderHeight: CGFloat?](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistheaderheight) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var defaultMinListRowHeight: CGFloat](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistrowheight) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var defaultMinListHeaderHeight: CGFloat?](https://developer.apple.com/documentation/swiftui/environmentvalues/defaultminlistheaderheight) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func listRowSpacing(CGFloat?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowspacing(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func listSectionSpacing(_:)](https://developer.apple.com/documentation/swiftui/view/listsectionspacing(_:)) | modifier (2/2 overloads bridged) |
 | ✅ | struct | [ListSectionSpacing](https://developer.apple.com/documentation/swiftui/listsectionspacing) | Kotlin value class (1/1 overloads bridged) |
@@ -6431,7 +6431,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [static func fixed(Color) -> ListItemTint](https://developer.apple.com/documentation/swiftui/listitemtint/fixed(_:)) | value member of ListItemTint (1/1 overloads bridged) |
 | ✅ | method | [static func preferred(Color) -> ListItemTint](https://developer.apple.com/documentation/swiftui/listitemtint/preferred(_:)) | value member of ListItemTint (1/1 overloads bridged) |
 | ✅ | method | [func headerProminence(Prominence) -> some View](https://developer.apple.com/documentation/swiftui/view/headerprominence(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var headerProminence: Prominence](https://developer.apple.com/documentation/swiftui/environmentvalues/headerprominence) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var headerProminence: Prominence](https://developer.apple.com/documentation/swiftui/environmentvalues/headerprominence) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [Prominence](https://developer.apple.com/documentation/swiftui/prominence) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case standard](https://developer.apple.com/documentation/swiftui/prominence/standard) | value member of Prominence (1/1 overloads bridged) |
 | ✅ | case | [case increased](https://developer.apple.com/documentation/swiftui/prominence/increased) | value member of Prominence (1/1 overloads bridged) |
@@ -6445,13 +6445,13 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let automatic: AlternatingRowBackgroundBehavior](https://developer.apple.com/documentation/swiftui/alternatingrowbackgroundbehavior/automatic) | value member of AlternatingRowBackgroundBehavior (1/1 overloads bridged) |
 | ✅ | property | [static let enabled: AlternatingRowBackgroundBehavior](https://developer.apple.com/documentation/swiftui/alternatingrowbackgroundbehavior/enabled) | value member of AlternatingRowBackgroundBehavior (1/1 overloads bridged) |
 | ✅ | property | [static let disabled: AlternatingRowBackgroundBehavior](https://developer.apple.com/documentation/swiftui/alternatingrowbackgroundbehavior/disabled) | value member of AlternatingRowBackgroundBehavior (1/1 overloads bridged) |
-| · | property | [var backgroundProminence: BackgroundProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundprominence) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var backgroundProminence: BackgroundProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/backgroundprominence) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [BackgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let standard: BackgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence/standard) | value member of BackgroundProminence (1/1 overloads bridged) |
 | ✅ | property | [static let increased: BackgroundProminence](https://developer.apple.com/documentation/swiftui/backgroundprominence/increased) | value member of BackgroundProminence (1/1 overloads bridged) |
 | ✅ | method | [func badge(_:)](https://developer.apple.com/documentation/swiftui/view/badge(_:)) | modifier (5/5 overloads bridged) |
 | ✅ | method | [func badgeProminence(BadgeProminence) -> some View](https://developer.apple.com/documentation/swiftui/view/badgeprominence(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var badgeProminence: BadgeProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/badgeprominence) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var badgeProminence: BadgeProminence](https://developer.apple.com/documentation/swiftui/environmentvalues/badgeprominence) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [BadgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let standard: BadgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence/standard) | value member of BadgeProminence (1/1 overloads bridged) |
 | ✅ | property | [static let increased: BadgeProminence](https://developer.apple.com/documentation/swiftui/badgeprominence/increased) | value member of BadgeProminence (1/1 overloads bridged) |
@@ -6466,7 +6466,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func callAsFunction() async](https://developer.apple.com/documentation/swiftui/refreshaction/callasfunction()) | not a view, modifier or value-producing member |
 | ✅ | method | [func moveDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/movedisabled(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func deleteDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/deletedisabled(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var editMode: Binding<EditMode>?](https://developer.apple.com/documentation/swiftui/environmentvalues/editmode) | instance property / subscript (read side, not a view-building API) |
+| ➖ | property | [var editMode: Binding<EditMode>?](https://developer.apple.com/documentation/swiftui/environmentvalues/editmode) | environment value: optional binding |
 | ✅ | enum | [EditMode](https://developer.apple.com/documentation/swiftui/editmode) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case active](https://developer.apple.com/documentation/swiftui/editmode/active) | value member of EditMode (1/1 overloads bridged) |
 | ✅ | case | [case inactive](https://developer.apple.com/documentation/swiftui/editmode/inactive) | value member of EditMode (1/1 overloads bridged) |
@@ -6832,7 +6832,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func onScrollGeometryChange<T>(for: T.Type, of: (ScrollGeometry) -> T, action: (T, T) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)) | param type: type unknown |
 | ➖ | method | [func onScrollTargetVisibilityChange<ID>(idType: ID.Type, threshold: Double, ([ID]) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onscrolltargetvisibilitychange(idtype:threshold:_:)) | param idType: type unknown |
 | ✅ | method | [func onScrollVisibilityChange(threshold: Double, (Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onscrollvisibilitychange(threshold:_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onScrollPhaseChange(_:)](https://developer.apple.com/documentation/swiftui/view/onscrollphasechange(_:)) | param action: closure with 2 params |
+| ✅ | method | [func onScrollPhaseChange(_:)](https://developer.apple.com/documentation/swiftui/view/onscrollphasechange(_:)) | modifier (1/2 overloads bridged) |
 | ✅ | struct | [ScrollGeometry](https://developer.apple.com/documentation/swiftui/scrollgeometry) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(contentOffset: CGPoint, contentSize: CGSize, contentInsets: EdgeInsets, containerSize: CGSize)](https://developer.apple.com/documentation/swiftui/scrollgeometry/init(contentoffset:contentsize:contentinsets:containersize:)) | value member of ScrollGeometry (1/1 overloads bridged) |
 | · | property | [var bounds: CGRect](https://developer.apple.com/documentation/swiftui/scrollgeometry/bounds) | instance property / subscript (read side, not a view-building API) |
@@ -6854,8 +6854,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func scrollIndicatorsFlash(onAppear: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/scrollindicatorsflash(onappear:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func scrollIndicatorsFlash(trigger: some Equatable) -> some View](https://developer.apple.com/documentation/swiftui/view/scrollindicatorsflash(trigger:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func scrollIndicators(ScrollIndicatorVisibility, axes: Axis.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/scrollindicators(_:axes:)) | modifier (1/1 overloads bridged) |
-| · | property | [var horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var verticalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollindicatorvisibility) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var horizontalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollindicatorvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var verticalScrollIndicatorVisibility: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollindicatorvisibility) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/scrollindicatorvisibility) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static var automatic: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/scrollindicatorvisibility/automatic) | value member of ScrollIndicatorVisibility (1/1 overloads bridged) |
 | ✅ | property | [static var hidden: ScrollIndicatorVisibility](https://developer.apple.com/documentation/swiftui/scrollindicatorvisibility/hidden) | value member of ScrollIndicatorVisibility (1/1 overloads bridged) |
@@ -6867,10 +6867,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static var automatic: ScrollContentOffsetAdjustmentBehavior](https://developer.apple.com/documentation/swiftui/scrollcontentoffsetadjustmentbehavior/automatic) | value member of ScrollContentOffsetAdjustmentBehavior (1/1 overloads bridged) |
 | ✅ | property | [static var disabled: ScrollContentOffsetAdjustmentBehavior](https://developer.apple.com/documentation/swiftui/scrollcontentoffsetadjustmentbehavior/disabled) | value member of ScrollContentOffsetAdjustmentBehavior (1/1 overloads bridged) |
 | ✅ | method | [func scrollDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var isScrollEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscrollenabled) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isScrollEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isscrollenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | method | [func scrollBounceBehavior(ScrollBounceBehavior, axes: Axis.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/scrollbouncebehavior(_:axes:)) | modifier (1/1 overloads bridged) |
-| · | property | [var horizontalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollbouncebehavior) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var verticalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollbouncebehavior) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var horizontalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalscrollbouncebehavior) | environment value (Modifier.environment) (1/1 overloads bridged) |
+| ✅ | property | [var verticalScrollBounceBehavior: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/environmentvalues/verticalscrollbouncebehavior) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/scrollbouncebehavior) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static var automatic: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/scrollbouncebehavior/automatic) | value member of ScrollBounceBehavior (1/1 overloads bridged) |
 | ✅ | property | [static var always: ScrollBounceBehavior](https://developer.apple.com/documentation/swiftui/scrollbouncebehavior/always) | value member of ScrollBounceBehavior (1/1 overloads bridged) |
@@ -6883,7 +6883,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static var soft: ScrollEdgeEffectStyle](https://developer.apple.com/documentation/swiftui/scrolledgeeffectstyle/soft) | value member of ScrollEdgeEffectStyle (1/1 overloads bridged) |
 | ✅ | method | [func safeAreaBar(edge:alignment:spacing:content:)](https://developer.apple.com/documentation/swiftui/view/safeareabar(edge:alignment:spacing:content:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func scrollDismissesKeyboard(ScrollDismissesKeyboardMode) -> some View](https://developer.apple.com/documentation/swiftui/view/scrolldismisseskeyboard(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var scrollDismissesKeyboardMode: ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/environmentvalues/scrolldismisseskeyboardmode) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var scrollDismissesKeyboardMode: ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/environmentvalues/scrolldismisseskeyboardmode) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | struct | [ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static var automatic: ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/automatic) | value member of ScrollDismissesKeyboardMode (1/1 overloads bridged) |
 | ✅ | property | [static var immediately: ScrollDismissesKeyboardMode](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/immediately) | value member of ScrollDismissesKeyboardMode (1/1 overloads bridged) |
@@ -7200,7 +7200,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func hoverEffect(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/hovereffect(_:isenabled:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func hoverEffectDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/hovereffectdisabled(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func defaultHoverEffect(_:)](https://developer.apple.com/documentation/swiftui/view/defaulthovereffect(_:)) | modifier (2/2 overloads bridged) |
-| · | property | [var isHoverEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/ishovereffectenabled) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isHoverEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/ishovereffectenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [HoverPhase](https://developer.apple.com/documentation/swiftui/hoverphase) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case active(CGPoint)](https://developer.apple.com/documentation/swiftui/hoverphase/active(_:)) | value member of HoverPhase (1/1 overloads bridged) |
 | ✅ | case | [case ended](https://developer.apple.com/documentation/swiftui/hoverphase/ended) | value member of HoverPhase (1/1 overloads bridged) |
@@ -7348,11 +7348,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static var route: SubmitLabel](https://developer.apple.com/documentation/swiftui/submitlabel/route) | value member of SubmitLabel (1/1 overloads bridged) |
 | ✅ | property | [static var search: SubmitLabel](https://developer.apple.com/documentation/swiftui/submitlabel/search) | value member of SubmitLabel (1/1 overloads bridged) |
 | ✅ | property | [static var send: SubmitLabel](https://developer.apple.com/documentation/swiftui/submitlabel/send) | value member of SubmitLabel (1/1 overloads bridged) |
-| ➖ | method | [func onMoveCommand(perform: ((MoveCommandDirection) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onmovecommand(perform:)) | param action: nested function type |
-| ➖ | method | [func onDeleteCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/ondeletecommand(perform:)) | param action: nested function type |
+| ✅ | method | [func onMoveCommand(perform: ((MoveCommandDirection) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onmovecommand(perform:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func onDeleteCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/ondeletecommand(perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func pageCommand<V>(value: Binding<V>, in: ClosedRange<V>, step: V) -> some View](https://developer.apple.com/documentation/swiftui/view/pagecommand(value:in:step:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onExitCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onexitcommand(perform:)) | param action: nested function type |
-| ➖ | method | [func onPlayPauseCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onplaypausecommand(perform:)) | param action: nested function type |
+| ✅ | method | [func onExitCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onexitcommand(perform:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func onPlayPauseCommand(perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onplaypausecommand(perform:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func onCommand(Selector, perform: (() -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncommand(_:perform:)) | param selector: unknown type Selector |
 | ✅ | enum | [MoveCommandDirection](https://developer.apple.com/documentation/swiftui/movecommanddirection) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case up](https://developer.apple.com/documentation/swiftui/movecommanddirection/up) | value member of MoveCommandDirection (1/1 overloads bridged) |
@@ -7370,7 +7370,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let hoverEffect: ContentShapeKinds](https://developer.apple.com/documentation/swiftui/contentshapekinds/hovereffect) | value member of ContentShapeKinds (1/1 overloads bridged) |
 | ✅ | property | [static let accessibility: ContentShapeKinds](https://developer.apple.com/documentation/swiftui/contentshapekinds/accessibility) | value member of ContentShapeKinds (1/1 overloads bridged) |
 | ✅ | init | [init(rawValue: Int)](https://developer.apple.com/documentation/swiftui/contentshapekinds/init(rawvalue:)) | value member of ContentShapeKinds (1/1 overloads bridged) |
-| ➖ | method | [func onHingeChange(isEnabled: Bool, (DeviceHingeContext, DeviceHingeContext) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onhingechange(isenabled:_:)) | param action: closure with 2 params |
+| ➖ | method | [func onHingeChange(isEnabled: Bool, (DeviceHingeContext, DeviceHingeContext) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onhingechange(isenabled:_:)) | param action: type DeviceHingeContext not bridged |
 | ➖ | struct | [DeviceHingeContext](https://developer.apple.com/documentation/swiftui/devicehingecontext) | type not constructible from Kotlin (generic or no bridgeable members) |
 | · | property | [var hinge: DeviceHinge?](https://developer.apple.com/documentation/swiftui/devicehingecontext/hinge) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [DeviceHinge](https://developer.apple.com/documentation/swiftui/devicehinge) | type not constructible from Kotlin (generic or no bridgeable members) |
@@ -7411,8 +7411,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func copyable<T>(@autoclosure () -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/copyable(_:)) | param payload: closure returning [T] |
 | ➖ | method | [func cuttable<T>(for: T.Type, action: () -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/cuttable(for:action:)) | param action: closure returning [T] |
 | ➖ | method | [func pasteDestination<T>(for: T.Type, action: ([T]) -> Void, validator: ([T]) -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/pastedestination(for:action:validator:)) | param action: callback of list |
-| ➖ | method | [func onCopyCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)) | param payloadAction: nested function type |
-| ➖ | method | [func onCutCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)) | param payloadAction: nested function type |
+| ➖ | method | [func onCopyCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)) | param payloadAction: closure returning [NSItemProvider] |
+| ➖ | method | [func onCutCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)) | param payloadAction: closure returning [NSItemProvider] |
 | ➖ | method | [func onPasteCommand(of:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)) | param payloadAction: unknown type NSItemProvider |
 | ➖ | method | [func onPasteCommand(of:validator:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)) | param validator: builder with parameters |
 | ✅ | method | [func dragConfiguration(DragConfiguration) -> some View](https://developer.apple.com/documentation/swiftui/view/dragconfiguration(_:)) | modifier (1/1 overloads bridged) |
@@ -7480,7 +7480,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func draggable<Item, ItemID>(Item.Type, id: KeyPath<Item, ItemID>, item: @autoclosure () -> Item?, containerNamespace: Namespace.ID?) -> some View](https://developer.apple.com/documentation/swiftui/view/draggable(_:id:item:containernamespace:)) | param id: unknown type KeyPath |
 | ➖ | method | [func draggable<Item>(Item.Type, item: @autoclosure () -> Item?, containerNamespace: Namespace.ID?) -> some View](https://developer.apple.com/documentation/swiftui/view/draggable(_:item:containernamespace:)) | param item: closure returning Item? |
 | ✅ | method | [func draggable<ItemID>(containerItemID: ItemID, containerNamespace: Namespace.ID?) -> some View](https://developer.apple.com/documentation/swiftui/view/draggable(containeritemid:containernamespace:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func itemProvider(Optional<() -> NSItemProvider?>) -> some View](https://developer.apple.com/documentation/swiftui/view/itemprovider(_:)) | param action: nested function type |
+| ➖ | method | [func itemProvider(Optional<() -> NSItemProvider?>) -> some View](https://developer.apple.com/documentation/swiftui/view/itemprovider(_:)) | param action: closure returning NSItemProvider? |
 | ➖ | method | [func onDrag<V>(() -> NSItemProvider, preview: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:preview:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDrag(() -> NSItemProvider) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param isTargeted: optional binding |
@@ -7612,7 +7612,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | struct | [ResetFocusAction](https://developer.apple.com/documentation/swiftui/resetfocusaction) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | method | [func callAsFunction(in: Namespace.ID)](https://developer.apple.com/documentation/swiftui/resetfocusaction/callasfunction(in:)) | not a view, modifier or value-producing member |
 | ✅ | method | [func focusEffectDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/focuseffectdisabled(_:)) | modifier (1/1 overloads bridged) |
-| · | property | [var isFocusEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isfocuseffectenabled) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var isFocusEffectEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/isfocuseffectenabled) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ➖ | method | [func userActivity<P>(String, element: P?, (P, NSUserActivity) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/useractivity(_:element:_:)) | param element: generic constrained to nothing |
 | ➖ | method | [func userActivity(String, isActive: Bool, (NSUserActivity) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/useractivity(_:isactive:_:)) | param update: unknown type NSUserActivity |
 | ➖ | method | [func onContinueUserActivity(String, perform: (NSUserActivity) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/oncontinueuseractivity(_:perform:)) | param action: unknown type NSUserActivity |
@@ -7689,7 +7689,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func accessibilityShowsLargeContentViewer<V>(() -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/accessibilityshowslargecontentviewer(_:)) | modifier (1/1 overloads bridged) |
 | · | property | [var accessibilityLargeContentViewerEnabled: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitylargecontentviewerenabled) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var accessibilityReduceTransparency: Bool](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilityreducetransparency) | instance property / subscript (read side, not a view-building API) |
-| · | property | [var legibilityWeight: LegibilityWeight?](https://developer.apple.com/documentation/swiftui/environmentvalues/legibilityweight) | instance property / subscript (read side, not a view-building API) |
+| ✅ | property | [var legibilityWeight: LegibilityWeight?](https://developer.apple.com/documentation/swiftui/environmentvalues/legibilityweight) | environment value (Modifier.environment) (1/1 overloads bridged) |
 | ✅ | enum | [LegibilityWeight](https://developer.apple.com/documentation/swiftui/legibilityweight) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | case | [case regular](https://developer.apple.com/documentation/swiftui/legibilityweight/regular) | value member of LegibilityWeight (1/1 overloads bridged) |
 | ✅ | case | [case bold](https://developer.apple.com/documentation/swiftui/legibilityweight/bold) | value member of LegibilityWeight (1/1 overloads bridged) |

@@ -2,11 +2,69 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+@MainActor func e_NavigationSplitViewVisibility(_ v: NavigationSplitViewVisibility) -> SExpr? {
+    if v == .detailOnly { return SExpr(id: 1962, args: []) }
+    if v == .doubleColumn { return SExpr(id: 1963, args: []) }
+    if v == .all { return SExpr(id: 1964, args: []) }
+    if v == .automatic { return SExpr(id: 1965, args: []) }
+    return nil
+}
+#if os(iOS) || os(macOS) || os(tvOS)
+@MainActor func e_HoverPhase(_ v: HoverPhase) -> SExpr? {
+    if case .ended = v { return SExpr(id: 1805, args: []) }
+    if case .active(let x0) = v { return SExpr(id: 1806, args: [(e_CGPoint(x0) ?? NSNull())]) }
+    return nil
+}
+#endif
+@MainActor func e_NavigationSplitViewColumn(_ v: NavigationSplitViewColumn) -> SExpr? {
+    if v == .detail { return SExpr(id: 1959, args: []) }
+    if v == .content { return SExpr(id: 1960, args: []) }
+    if v == .sidebar { return SExpr(id: 1961, args: []) }
+    return nil
+}
+#if os(iOS) || os(tvOS)
+@MainActor func e_EditMode(_ v: EditMode) -> SExpr? {
+    if case .active = v { return SExpr(id: 1531, args: []) }
+    if case .inactive = v { return SExpr(id: 1532, args: []) }
+    if case .transient = v { return SExpr(id: 1533, args: []) }
+    return nil
+}
+#endif
+#if os(iOS) || os(macOS)
+@available(iOS 17.5, macOS 14.5, tvOS 17.0, watchOS 10.0, *)
+@MainActor func e_PencilSqueezeGesturePhase(_ v: PencilSqueezeGesturePhase) -> SExpr? {
+    if case .failed = v { return SExpr(id: 2024, args: []) }
+    return nil
+}
+#endif
 @MainActor func e_Edge(_ v: Edge) -> SExpr? {
     if case .top = v { return SExpr(id: 1492, args: []) }
     if case .bottom = v { return SExpr(id: 1493, args: []) }
     if case .leading = v { return SExpr(id: 1494, args: []) }
     if case .trailing = v { return SExpr(id: 1495, args: []) }
+    return nil
+}
+@MainActor func e_AccessibilityAdjustmentDirection(_ v: AccessibilityAdjustmentDirection) -> SExpr? {
+    if case .decrement = v { return SExpr(id: 1012, args: []) }
+    if case .increment = v { return SExpr(id: 1013, args: []) }
+    return nil
+}
+#if os(macOS) || os(tvOS)
+@MainActor func e_MoveCommandDirection(_ v: MoveCommandDirection) -> SExpr? {
+    if case .up = v { return SExpr(id: 1936, args: []) }
+    if case .down = v { return SExpr(id: 1937, args: []) }
+    if case .left = v { return SExpr(id: 1938, args: []) }
+    if case .right = v { return SExpr(id: 1939, args: []) }
+    return nil
+}
+#endif
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func e_ScrollPhase(_ v: ScrollPhase) -> SExpr? {
+    if case .interacting = v { return SExpr(id: 2167, args: []) }
+    if case .decelerating = v { return SExpr(id: 2168, args: []) }
+    if case .idle = v { return SExpr(id: 2169, args: []) }
+    if case .tracking = v { return SExpr(id: 2170, args: []) }
+    if case .animating = v { return SExpr(id: 2171, args: []) }
     return nil
 }
 @MainActor func e_Color(_ v: Color) -> SExpr? {
@@ -52,37 +110,5 @@ import UniformTypeIdentifiers
     if case .sRGBLinear = v { return SExpr(id: 1308, args: []) }
     if case .sRGB = v { return SExpr(id: 1309, args: []) }
     if case .displayP3 = v { return SExpr(id: 1310, args: []) }
-    return nil
-}
-#if os(iOS) || os(macOS)
-@available(iOS 17.5, macOS 14.5, tvOS 17.0, watchOS 10.0, *)
-@MainActor func e_PencilSqueezeGesturePhase(_ v: PencilSqueezeGesturePhase) -> SExpr? {
-    if case .failed = v { return SExpr(id: 2024, args: []) }
-    return nil
-}
-#endif
-@MainActor func e_NavigationSplitViewVisibility(_ v: NavigationSplitViewVisibility) -> SExpr? {
-    if v == .detailOnly { return SExpr(id: 1962, args: []) }
-    if v == .doubleColumn { return SExpr(id: 1963, args: []) }
-    if v == .all { return SExpr(id: 1964, args: []) }
-    if v == .automatic { return SExpr(id: 1965, args: []) }
-    return nil
-}
-@MainActor func e_AccessibilityAdjustmentDirection(_ v: AccessibilityAdjustmentDirection) -> SExpr? {
-    if case .decrement = v { return SExpr(id: 1012, args: []) }
-    if case .increment = v { return SExpr(id: 1013, args: []) }
-    return nil
-}
-#if os(iOS) || os(macOS) || os(tvOS)
-@MainActor func e_HoverPhase(_ v: HoverPhase) -> SExpr? {
-    if case .ended = v { return SExpr(id: 1805, args: []) }
-    if case .active(let x0) = v { return SExpr(id: 1806, args: [(e_CGPoint(x0) ?? NSNull())]) }
-    return nil
-}
-#endif
-@MainActor func e_NavigationSplitViewColumn(_ v: NavigationSplitViewColumn) -> SExpr? {
-    if v == .detail { return SExpr(id: 1959, args: []) }
-    if v == .content { return SExpr(id: 1960, args: []) }
-    if v == .sidebar { return SExpr(id: 1961, args: []) }
     return nil
 }

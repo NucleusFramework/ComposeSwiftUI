@@ -12885,7 +12885,7 @@
   "path": "Canvas.init(opaque:colorMode:rendersAsynchronously:renderer:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param renderer: closure with 2 params",
+  "detail": "param renderer: type GraphicsContext not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -12898,7 +12898,7 @@
   "path": "Canvas.init(opaque:colorMode:rendersAsynchronously:renderer:symbols:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param renderer: closure with 2 params",
+  "detail": "param renderer: type GraphicsContext not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -28118,8 +28118,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV20accessibilityEnabledSbvp",
   "path": "EnvironmentValues.accessibilityEnabled",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28170,8 +28170,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV40accessibilityPrefersCrossFadeTransitionsSbvp",
   "path": "EnvironmentValues.accessibilityPrefersCrossFadeTransitions",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28287,8 +28287,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV19allowedDynamicRangeAA5ImageV0fG0VSgvp",
   "path": "EnvironmentValues.allowedDynamicRange",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28299,8 +28299,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV16allowsTighteningSbvp",
   "path": "EnvironmentValues.allowsTightening",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28338,8 +28338,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV18backgroundMaterialAA0F0VSgvp",
   "path": "EnvironmentValues.backgroundMaterial",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28351,8 +28351,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV20backgroundProminenceAA010BackgroundF0Vvp",
   "path": "EnvironmentValues.backgroundProminence",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28364,8 +28364,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV15backgroundStyleAA08AnyShapeF0VSgvp",
   "path": "EnvironmentValues.backgroundStyle",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28377,8 +28377,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE15badgeProminenceAA05BadgeF0Vvp",
   "path": "EnvironmentValues.badgeProminence",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos"
@@ -28414,8 +28414,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV8calendar10Foundation8CalendarVvp",
   "path": "EnvironmentValues.calendar",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "skipped",
+  "detail": "environment value: unknown type Calendar",
   "platforms": [
    "ios",
    "macos",
@@ -28427,8 +28427,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV11colorSchemeAA05ColorF0Ovp",
   "path": "EnvironmentValues.colorScheme",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28453,8 +28453,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV17contentTransitionAA07ContentF0Vvp",
   "path": "EnvironmentValues.contentTransition",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28466,8 +28466,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV33contentTransitionAddsDrawingGroupSbvp",
   "path": "EnvironmentValues.contentTransitionAddsDrawingGroup",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28479,8 +28479,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV18controlActiveStateAA07ControlfG0Ovp",
   "path": "EnvironmentValues.controlActiveState",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "macos"
   ]
@@ -28489,8 +28489,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV11controlSizeAA07ControlF0Ovp",
   "path": "EnvironmentValues.controlSize",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28502,8 +28502,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE26defaultMinListHeaderHeight14CoreFoundation7CGFloatVSgvp",
   "path": "EnvironmentValues.defaultMinListHeaderHeight",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28515,8 +28515,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE23defaultMinListRowHeight14CoreFoundation7CGFloatVvp",
   "path": "EnvironmentValues.defaultMinListRowHeight",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28528,8 +28528,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE28defaultWheelPickerItemHeight14CoreFoundation7CGFloatVvp",
   "path": "EnvironmentValues.defaultWheelPickerItemHeight",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "watchos"
   ]
@@ -28551,8 +28551,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE21disableAutocorrectionSbSgvp",
   "path": "EnvironmentValues.disableAutocorrection",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28611,8 +28611,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV12displayScale14CoreFoundation7CGFloatVvp",
   "path": "EnvironmentValues.displayScale",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28635,8 +28635,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV15dynamicTypeSizeAA07DynamicfG0Ovp",
   "path": "EnvironmentValues.dynamicTypeSize",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28648,8 +28648,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE8editModeAA7BindingVyAA04EditF0OGSgvp",
   "path": "EnvironmentValues.editMode",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "skipped",
+  "detail": "environment value: optional binding",
   "platforms": [
    "ios",
    "tvos"
@@ -28670,8 +28670,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV4fontAA4FontVSgvp",
   "path": "EnvironmentValues.font",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28696,8 +28696,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV16headerProminenceAA0F0Ovp",
   "path": "EnvironmentValues.headerProminence",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28709,8 +28709,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE30horizontalScrollBounceBehaviorAA0fgH0Vvp",
   "path": "EnvironmentValues.horizontalScrollBounceBehavior",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28722,8 +28722,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE35horizontalScrollIndicatorVisibilityAA0fgH0Vvp",
   "path": "EnvironmentValues.horizontalScrollIndicatorVisibility",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28748,8 +28748,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV10imageScaleAA5ImageV0F0Ovp",
   "path": "EnvironmentValues.imageScale",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28774,8 +28774,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV9isEnabledSbvp",
   "path": "EnvironmentValues.isEnabled",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28787,8 +28787,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE20isFocusEffectEnabledSbvp",
   "path": "EnvironmentValues.isFocusEffectEnabled",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28813,8 +28813,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV20isHoverEffectEnabledSbvp",
   "path": "EnvironmentValues.isHoverEffectEnabled",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "tvos"
@@ -28824,8 +28824,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV18isLuminanceReducedSbvp",
   "path": "EnvironmentValues.isLuminanceReduced",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28850,8 +28850,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE15isSceneCapturedSbvp",
   "path": "EnvironmentValues.isSceneCaptured",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios"
   ]
@@ -28860,8 +28860,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE15isScrollEnabledSbvp",
   "path": "EnvironmentValues.isScrollEnabled",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28962,8 +28962,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE16labelsVisibilityAA0F0Ovp",
   "path": "EnvironmentValues.labelsVisibility",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28975,8 +28975,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV15layoutDirectionAA06LayoutF0Ovp",
   "path": "EnvironmentValues.layoutDirection",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -28988,8 +28988,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV16legibilityWeightAA010LegibilityF0OSgvp",
   "path": "EnvironmentValues.legibilityWeight",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29001,8 +29001,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV10lineHeight10Foundation16AttributedStringV8CoreTextE04LineF0VSgvp",
   "path": "EnvironmentValues.lineHeight",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "skipped",
+  "detail": "environment value: unknown type AttributedString.LineHeight",
   "platforms": [
    "ios",
    "macos",
@@ -29014,8 +29014,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV9lineLimitSiSgvp",
   "path": "EnvironmentValues.lineLimit",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29027,8 +29027,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV11lineSpacing14CoreFoundation7CGFloatVvp",
   "path": "EnvironmentValues.lineSpacing",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29040,8 +29040,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV6locale10Foundation6LocaleVvp",
   "path": "EnvironmentValues.locale",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29053,8 +29053,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE20managedObjectContextSo09NSManagedfG0Cvp",
   "path": "EnvironmentValues.managedObjectContext",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "skipped",
+  "detail": "environment value: unknown type NSManagedObjectContext",
   "platforms": [
    "ios",
    "macos",
@@ -29066,8 +29066,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV24materialActiveAppearanceAA08MaterialfG0Vvp",
   "path": "EnvironmentValues.materialActiveAppearance",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29079,8 +29079,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE23menuIndicatorVisibilityAA0G0Ovp",
   "path": "EnvironmentValues.menuIndicatorVisibility",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29091,8 +29091,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE9menuOrderAA04MenuF0Vvp",
   "path": "EnvironmentValues.menuOrder",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29104,8 +29104,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV18minimumScaleFactor14CoreFoundation7CGFloatVvp",
   "path": "EnvironmentValues.minimumScaleFactor",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29117,8 +29117,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV22multilineTextAlignmentAA0fG0Ovp",
   "path": "EnvironmentValues.multilineTextAlignment",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29207,8 +29207,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV24overlayArrangementZIndexSivp",
   "path": "EnvironmentValues.overlayArrangementZIndex",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29268,8 +29268,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV16redactionReasonsAA09RedactionF0Vvp",
   "path": "EnvironmentValues.redactionReasons",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29329,8 +29329,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE10scenePhaseAA05SceneF0Ovp",
   "path": "EnvironmentValues.scenePhase",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29342,8 +29342,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE27scrollDismissesKeyboardModeAA06ScrollfgH0Vvp",
   "path": "EnvironmentValues.scrollDismissesKeyboardMode",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29368,8 +29368,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE14sidebarRowSizeAA07SidebarfG0Ovp",
   "path": "EnvironmentValues.sidebarRowSize",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29381,8 +29381,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV12sizeCategoryAA011ContentSizeF0Ovp",
   "path": "EnvironmentValues.sizeCategory",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29394,8 +29394,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV20splitArrangementAxisAA0G0OSgvp",
   "path": "EnvironmentValues.splitArrangementAxis",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29483,8 +29483,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV24symbolColorRenderingModeAA06SymbolfgH0VSgvp",
   "path": "EnvironmentValues.symbolColorRenderingMode",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29496,8 +29496,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV19symbolRenderingModeAA06SymbolfG0VSgvp",
   "path": "EnvironmentValues.symbolRenderingMode",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29509,8 +29509,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV23symbolVariableValueModeAA06SymbolfgH0VSgvp",
   "path": "EnvironmentValues.symbolVariableValueMode",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29522,8 +29522,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV14symbolVariantsAA06SymbolF0Vvp",
   "path": "EnvironmentValues.symbolVariants",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29535,8 +29535,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE33systemPrefersReducedResourceUsageSbvp",
   "path": "EnvironmentValues.systemPrefersReducedResourceUsage",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29574,8 +29574,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV8textCaseAA4TextV0F0OSgvp",
   "path": "EnvironmentValues.textCase",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29587,8 +29587,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE21textSelectionAffinityAA04TextfG0Ovp",
   "path": "EnvironmentValues.textSelectionAffinity",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29600,8 +29600,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV8timeZone10Foundation04TimeF0Vvp",
   "path": "EnvironmentValues.timeZone",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "skipped",
+  "detail": "environment value: unknown type TimeZone",
   "platforms": [
    "ios",
    "macos",
@@ -29626,8 +29626,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE21toolbarTitleAlignmentAA07ToolbarfG0Vvp",
   "path": "EnvironmentValues.toolbarTitleAlignment",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29652,8 +29652,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV14truncationModeAA4TextV010TruncationF0Ovp",
   "path": "EnvironmentValues.truncationMode",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29678,8 +29678,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE28verticalScrollBounceBehaviorAA0fgH0Vvp",
   "path": "EnvironmentValues.verticalScrollBounceBehavior",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29691,8 +29691,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE33verticalScrollIndicatorVisibilityAA0fgH0Vvp",
   "path": "EnvironmentValues.verticalScrollIndicatorVisibility",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "ios",
    "macos",
@@ -29717,8 +29717,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE24worldTrackingLimitationsShyAA05WorldF10LimitationVGvp",
   "path": "EnvironmentValues.worldTrackingLimitations",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "generated",
+  "detail": "environment value (Modifier.environment)",
   "platforms": [
    "macos"
   ]
@@ -78935,8 +78935,8 @@
   "usr": "s:7SwiftUI7StepperVA2A4TextVRszrlE_11onIncrement0E9Decrement0E14EditingChangedACyAEG10Foundation23LocalizedStringResourceV_yycSgAMySbctcfc",
   "path": "Stepper.init(_:onIncrement:onDecrement:onEditingChanged:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param onIncrement: nested function type",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -78947,8 +78947,8 @@
   "usr": "s:7SwiftUI7StepperVA2A4TextVRszrlE_11onIncrement0E9Decrement0E14EditingChangedACyAEGAA18LocalizedStringKeyV_yycSgALySbctcfc",
   "path": "Stepper.init(_:onIncrement:onDecrement:onEditingChanged:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param onIncrement: nested function type",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -78959,8 +78959,8 @@
   "usr": "s:7SwiftUI7StepperVA2A4TextVRszrlE_11onIncrement0E9Decrement0E14EditingChangedACyAEGqd___yycSgAJySbctcSyRd__lufc",
   "path": "Stepper.init(_:onIncrement:onDecrement:onEditingChanged:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param onIncrement: nested function type",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -79115,8 +79115,8 @@
   "usr": "s:7SwiftUI7StepperV5label11onIncrement0E9Decrement0E14EditingChangedACyxGxyXE_yycSgAIySbctcfc",
   "path": "Stepper.init(label:onIncrement:onDecrement:onEditingChanged:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param onIncrement: nested function type",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -79127,8 +79127,8 @@
   "usr": "s:7SwiftUI7StepperV11onIncrement0D9Decrement0D14EditingChanged5labelACyxGyycSg_AIySbcxyXEtcfc",
   "path": "Stepper.init(onIncrement:onDecrement:onEditingChanged:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param onIncrement: nested function type",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -105218,7 +105218,7 @@
   "path": "View.dropDestination(for:isEnabled:action:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param action: closure with 2 params",
+  "detail": "param action: type DropSession not bridged",
   "platforms": [
    "ios",
    "macos"
@@ -106826,7 +106826,7 @@
   "path": "View.itemProvider(_:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param action: nested function type",
+  "detail": "param action: closure returning NSItemProvider?",
   "platforms": [
    "ios",
    "macos",
@@ -108074,8 +108074,8 @@
   "usr": "s:7SwiftUI4ViewPAAE8onChange2of7initial_Qrqd___Sbyqd___qd__tctSQRd__lF",
   "path": "View.onChange(of:initial:_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: closure with 2 params",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108161,7 +108161,7 @@
   "path": "View.onCopyCommand(perform:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param payloadAction: nested function type",
+  "detail": "param payloadAction: closure returning [NSItemProvider]",
   "platforms": [
    "macos"
   ]
@@ -108171,7 +108171,7 @@
   "path": "View.onCutCommand(perform:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param payloadAction: nested function type",
+  "detail": "param payloadAction: closure returning [NSItemProvider]",
   "platforms": [
    "macos"
   ]
@@ -108180,8 +108180,8 @@
   "usr": "s:7SwiftUI4ViewPAAE15onDeleteCommand7performQryycSg_tF",
   "path": "View.onDeleteCommand(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: nested function type",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "macos"
   ]
@@ -108313,8 +108313,8 @@
   "usr": "s:7SwiftUI4ViewPAAE13onExitCommand7performQryycSg_tF",
   "path": "View.onExitCommand(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: nested function type",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "macos",
    "tvos"
@@ -108351,7 +108351,7 @@
   "path": "View.onHingeChange(isEnabled:_:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param action: closure with 2 params",
+  "detail": "param action: type DeviceHingeContext not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -108523,8 +108523,8 @@
   "usr": "s:7SwiftUI4ViewPAAE13onMoveCommand7performQryAA0eF9DirectionOcSg_tF",
   "path": "View.onMoveCommand(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: nested function type",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "macos",
    "tvos"
@@ -108622,8 +108622,8 @@
   "usr": "s:7SwiftUI4ViewPAAE18onPlayPauseCommand7performQryycSg_tF",
   "path": "View.onPlayPauseCommand(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: nested function type",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "tvos"
   ]
@@ -108671,8 +108671,8 @@
   "usr": "s:7SwiftUI4ViewPAAE19onScrollPhaseChangeyQryAA0eF0O_AFtcF",
   "path": "View.onScrollPhaseChange(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: closure with 2 params",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108685,7 +108685,7 @@
   "path": "View.onScrollPhaseChange(_:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param action: closure with 3 params",
+  "detail": "param action: type ScrollPhaseChangeContext not bridged",
   "platforms": [
    "ios",
    "macos",

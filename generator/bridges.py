@@ -72,8 +72,8 @@ class Bridge:
 
     @property
     def is_function(self):
-        return self.kind in ("action", "async_action", "callback") or (
-            self.kind == "optional" and self.inner.kind in ("action", "async_action"))
+        return self.kind in ("action", "async_action", "callback", "callbackn") or (
+            self.kind == "optional" and self.inner.kind in ("action", "async_action", "callback", "callbackn"))
 
     # Kotlin --------------------------------------------------------------------------------
 
@@ -91,6 +91,12 @@ class Bridge:
             return ["%s?.let { SAction(it) }" % name]
         if k == "callback":
             return [self.inner.kotlin_receive(name)]
+        if k == "callbackn":
+            return [self.kotlin_receive_n(name)]
+        if k == "optional" and self.inner.kind == "callback":
+            return ["%s?.let { f -> %s }" % (name, self.inner.inner.kotlin_receive("f"))]
+        if k == "optional" and self.inner.kind == "callbackn":
+            return ["%s?.let { f -> %s }" % (name, self.inner.kotlin_receive_n("f"))]
         if k == "binding":
             cb = "on" + name[0].upper() + name[1:] + "Change"
             return [name, self.inner.kotlin_receive(cb)]
@@ -120,6 +126,29 @@ class Bridge:
             return "SValueCallback { (it as? SExpr)?.let { e -> %s(%s) } }" % (fn, ctor)
         return "SValueCallback { %s(it as %s) }" % (fn, self.kt)
 
+    def kotlin_value(self, x):
+        """Kotlin expression of the value `x` (an Any? sent by Swift), or null when it can't be rebuilt."""
+        if self.kind == "value":
+            ctor = "cgValue(e) as %s" % self.kt if self.kt in CG_VALUES else "%s(e.id, e.args)" % self.kt
+            return "((%s as? SExpr)?.let { e -> %s })" % (x, ctor)
+        return "(%s as? %s)" % (x, self.kt)
+
+    def kotlin_receive_n(self, fn):
+        """SValueCallback unpacking the argument list Swift sends to a multi-parameter callback."""
+        vals = ["val a%d = %s ?: return@SValueCallback" % (n, p.kotlin_value("l[%d]" % n)) for n, p in enumerate(self.params)]
+        return "SValueCallback { val l = it as List<*>; %s; %s(%s) }" % (
+            "; ".join(vals), fn, ", ".join("a%d" % n for n in range(len(self.params))))
+
+    def swift_box(self, x):
+        """Swift expression sending the Swift value `x` of this bridge to Kotlin."""
+        if self.kind == "value":
+            return "(%s(%s) ?? NSNull())" % (self.encoder, x)
+        if self.kind == "url":
+            return "KBox.string(%s.absoluteString)" % x
+        if self.conv:
+            return "%s(%s)" % (Bridge(self.kind, self.kt).box(), self.conv[3] % x)
+        return "%s(%s)" % (self.box(), x)
+
     @property
     def encoder(self):
         return "e_" + self.swift_type[2:]
@@ -147,6 +176,13 @@ class Bridge:
             return [], simple[k] % (src, i)
         if k == "async_action":
             return ["let %s = %s.action(%d)" % (var, src, i)], "{ %s() }" % var
+        if k == "callbackn":
+            xs = ["x%d" % n for n in range(len(self.params))]
+            return ["let %s = %s.callback(%d, box: { (v: NSArray) -> Any? in v })" % (var, src, i)], \
+                "{ %s in %s([%s] as NSArray) }" % (", ".join(xs), var, ", ".join(p.swift_box(x) for p, x in zip(self.params, xs)))
+        if k == "optional" and self.inner.kind in ("callback", "callbackn"):
+            stmts, expr = self.inner.swift_decode(i, var, fallback, src)
+            return stmts, "(%s.isNil(%d) ? nil : %s)" % (src, i, expr)
         if k == "callback":
             inner = self.inner
             if inner.kind == "value":
@@ -317,6 +353,11 @@ class Classifier:
     def classify(self, t, ctx, top=True):
         k = t.kind
         if k == "optional":
+            if t.args[0].kind == "func" and top:
+                inner = self._func(t.args[0], ctx)
+                if inner.kind in ("action", "callback", "callbackn"):
+                    return Bridge("optional", "(%s)?" % inner.kt, inner=inner)
+                raise Unsupported("optional %s" % inner.kind)
             inner = self.classify(t.args[0], ctx, top=False)
             if inner.kind == "slot" and inner.bare:
                 # ponytail: `V?` view values are always passed, Kotlin has no way to omit them
@@ -437,6 +478,14 @@ class Classifier:
                         "str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url"):
                     return Bridge("callback", "(%s) -> Unit" % inner.kt, inner=inner)
                 raise Unsupported("callback of %s" % inner.kind)
+            if not t.is_async:
+                params = [self.classify(p, ctx, top=False) for p in t.params]
+                for p in params:
+                    if not (self.encodable(p) or not p.conv and p.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url")):
+                        raise Unsupported("closure with %d params" % len(t.params))
+                b = Bridge("callbackn", "(%s) -> Unit" % ", ".join(p.kt for p in params))
+                b.params = params
+                return b
             raise Unsupported("closure with %d params" % len(t.params))
         # builder closures: () -> Content where Content: View
         if t.params:

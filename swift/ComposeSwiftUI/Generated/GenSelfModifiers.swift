@@ -9,26 +9,26 @@ import UniformTypeIdentifiers
     chain: for (index, mod) in m.modifiers.enumerated() {
         let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 619:
+        case 685:
             r = r.antialiased(a.bool(0))
-        case 620:
+        case 686:
             guard let p0 = d_Image_Interpolation(a.expr(0)) else { break chain }
             r = r.interpolation(p0)
-        case 621:
+        case 687:
             r = r.renderingMode(d_Image_TemplateRenderingMode(a.expr(0)))
         #if os(iOS) || os(macOS) || os(tvOS)
-        case 111:
+        case 645:
             r = r.allowedDynamicRange(d_Image_DynamicRange(a.expr(0)))
         #endif
-        case 543:
+        case 646:
             r = r.symbolRenderingMode(d_SymbolRenderingMode(a.expr(0)))
-        case 544:
+        case 652:
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
             r = r.symbolVariableValueMode(d_SymbolVariableValueMode(a.expr(0)))
-        case 541:
+        case 655:
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
             r = r.symbolColorRenderingMode(d_SymbolColorRenderingMode(a.expr(0)))
-        case 622:
+        case 688:
             guard let p0 = d_EdgeInsets(a.expr(0)) else { break chain }
             guard let p1 = d_Image_ResizingMode(a.expr(1)) else { break chain }
             r = r.resizable(capInsets: p0, resizingMode: p1)
@@ -53,9 +53,9 @@ import UniformTypeIdentifiers
             r = r.fontWeight(d_Font_Weight(a.expr(0)))
         case 362:
             r = r.monospaced(a.bool(0))
-        case 623:
+        case 689:
             r = r.strikethrough(a.bool(0), color: d_Color(a.expr(1)))
-        case 535:
+        case 541:
             guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
             r = r.strikethrough(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
         case 142:
@@ -68,41 +68,41 @@ import UniformTypeIdentifiers
             r = open(p0)
         case 363:
             r = r.monospacedDigit()
-        case 524:
+        case 530:
             r = r.speechAdjustedPitch(a.double(0))
-        case 605:
+        case 611:
             r = r.typesettingLanguage(Locale.Language(identifier: a.string(0)), isEnabled: a.bool(1))
-        case 606:
+        case 612:
             guard let p0 = d_TypesettingLanguage(a.expr(0)) else { break chain }
             r = r.typesettingLanguage(p0, isEnabled: a.bool(1))
-        case 526:
+        case 532:
             r = r.speechAnnouncementsQueued(a.bool(0))
-        case 527:
+        case 533:
             r = r.speechSpellsOutCharacters(a.bool(0))
-        case 525:
+        case 531:
             r = r.speechAlwaysIncludesPunctuation(a.bool(0))
-        case 624:
+        case 690:
             r = r.bold()
         case 145:
             r = r.bold(a.bool(0))
-        case 268:
+        case 658:
             r = r.font(d_Font(a.expr(0)))
-        case 625:
+        case 691:
             r = r.italic()
         case 316:
             r = r.italic(a.bool(0))
         case 317:
             r = r.kerning(a.cgFloat(0))
-        case 597:
+        case 603:
             r = r.tracking(a.cgFloat(0))
         case 271:
             r = r.fontWidth(d_Font_Width(a.expr(0)))
-        case 568:
+        case 574:
             guard let p0 = d_Text_Scale(a.expr(0)) else { break chain }
             r = r.textScale(p0, isEnabled: a.bool(1))
-        case 626:
+        case 692:
             r = r.underline(a.bool(0), color: d_Color(a.expr(1)))
-        case 607:
+        case 613:
             guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
             r = r.underline(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
         case 94:
@@ -123,4 +123,4 @@ import UniformTypeIdentifiers
     return r
 }
 
-let generatedSelfModifierIds: Set<Int32> = [56, 74, 75, 94, 111, 142, 145, 268, 269, 270, 271, 272, 273, 316, 317, 362, 363, 524, 525, 526, 527, 535, 541, 543, 544, 568, 597, 605, 606, 607, 619, 620, 621, 622, 623, 624, 625, 626]
+let generatedSelfModifierIds: Set<Int32> = [56, 74, 75, 94, 142, 145, 269, 270, 271, 272, 273, 316, 317, 362, 363, 530, 531, 532, 533, 541, 574, 603, 611, 612, 613, 645, 646, 652, 655, 658, 685, 686, 687, 688, 689, 690, 691, 692]

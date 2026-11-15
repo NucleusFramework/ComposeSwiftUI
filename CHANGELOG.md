@@ -29,9 +29,17 @@
   (a Kotlin `DrawScope`), `Table` with columns and selection (iOS 17.4+, macOS 14.4+), `OutlineGroup`,
   `Modifier.onKeyPress`, `scrollTransition`, `visualEffect`, `alignmentGuide`, `navigationDestination(item:)`, and
   custom button, toggle and label styles written in Kotlin (`StyleLabel`, `StyleIcon`).
+- `Modifier.environment(name = value)` for the 60 settable `EnvironmentValues` (`colorScheme`, `locale`, `font`,
+  `lineLimit`, `controlSize`…), SwiftUI's `.environment(\\.name, value)`.
+- Optional closures (`Stepper(onIncrement, onDecrement)`, `onDeleteCommand`, `onExitCommand`, `onMoveCommand`, the
+  `onDismiss` of `sheet`/`fullScreenCover`, `onPressingChanged` of `onLongPressGesture`) and callbacks with several
+  parameters (`onScrollPhaseChange { old, new -> }`, `onChange(value) { old, new -> }`).
 
 ### Changed
 
+- A trailing lambda now binds the main closure, as in Swift: `Slider(value, bounds) { value = it }` and
+  `Stepper(…) { }` pass it to `onValueChange` (it used to go to `onEditingChanged`), and optional closures such as
+  `onPressingChanged` come before `perform`.
 - `NewDocumentButtonSource` (deprecated alias) is now `NewDocumentButtonContentType`.
 - The Swift renderer has two new files, `Interactive.swift` and `Generated/GenEncoders.swift`. If you added the
   `ComposeSwiftUI` folder to Xcode as a group, add them to the app target once.

@@ -84,13 +84,13 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     case 1097:
-        return .destructive(Text(a.string(0)))
+        return .destructive(Text(a.string(0)), action: a.actionOpt(1))
     case 1098:
-        return .cancel(Text(a.string(0)))
+        return .cancel(Text(a.string(0)), action: a.actionOpt(1))
     case 1099:
-        return .cancel()
+        return .cancel(a.actionOpt(0))
     case 1100:
-        return .`default`(Text(a.string(0)))
+        return .`default`(Text(a.string(0)), action: a.actionOpt(1))
     default: return nil
     }
 }
