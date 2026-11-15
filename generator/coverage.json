@@ -11789,8 +11789,8 @@
   "usr": "s:7SwiftUI6ButtonVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image6actionACyAJG10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fL0Vyyctcfc",
   "path": "Button.init(_:image:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -11802,8 +11802,8 @@
   "usr": "s:7SwiftUI6ButtonVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image6actionACyAJGAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVyyctcfc",
   "path": "Button.init(_:image:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -11815,8 +11815,8 @@
   "usr": "s:7SwiftUI6ButtonVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image6actionACyAJGqd___21DeveloperToolsSupport0F8ResourceVyyctcSyRd__lufc",
   "path": "Button.init(_:image:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -11828,8 +11828,8 @@
   "usr": "s:7SwiftUI6ButtonVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image4role6actionACyAJG10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fM0VAA0C4RoleVSgyyctcfc",
   "path": "Button.init(_:image:role:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -11841,8 +11841,8 @@
   "usr": "s:7SwiftUI6ButtonVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image4role6actionACyAJGAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVAA0C4RoleVSgyyctcfc",
   "path": "Button.init(_:image:role:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -11854,8 +11854,8 @@
   "usr": "s:7SwiftUI6ButtonVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image4role6actionACyAJGqd___21DeveloperToolsSupport0F8ResourceVAA0C4RoleVSgyyctcSyRd__lufc",
   "path": "Button.init(_:image:role:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -14420,8 +14420,8 @@
   "usr": "s:7SwiftUI5ColorVyAC21DeveloperToolsSupport0C8ResourceVcfc",
   "path": "Color.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param resource: unknown type ColorResource",
+  "status": "generated",
+  "detail": "value member of Color",
   "platforms": [
    "ios",
    "macos",
@@ -18200,8 +18200,8 @@
   "usr": "s:7SwiftUI12ControlGroupV_5image7contentACyAA07LabeledcD7ContentVyqd__AA5LabelVyAA4TextVAA5ImageVGGG10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0kO0Vqd__yXEtcAORszAA4ViewRd__lufc",
   "path": "ControlGroup.init(_:image:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -18212,8 +18212,8 @@
   "usr": "s:7SwiftUI12ControlGroupV_5image7contentACyAA07LabeledcD7ContentVyqd__AA5LabelVyAA4TextVAA5ImageVGGGAA18LocalizedStringKeyV_21DeveloperToolsSupport0K8ResourceVqd__yXEtcAORszAA4ViewRd__lufc",
   "path": "ControlGroup.init(_:image:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -18224,8 +18224,8 @@
   "usr": "s:7SwiftUI12ControlGroupV_5image7contentACyAA07LabeledcD7ContentVyqd__AA5LabelVyAA4TextVAA5ImageVGGGqd_0__21DeveloperToolsSupport0K8ResourceVqd__yXEtcAORszAA4ViewRd__SyRd_0_r0_lufc",
   "path": "ControlGroup.init(_:image:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -19527,8 +19527,8 @@
   "usr": "s:7SwiftUI10DatePickerVA2A4TextVRszrlE_9selection2in19displayedComponentsACyAEG10Foundation23LocalizedStringResourceV_AA7BindingVyAJ0C0VGSNyAPGAA0cdI0Vtcfc",
   "path": "DatePicker.init(_:selection:in:displayedComponents:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param range: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -19563,8 +19563,8 @@
   "usr": "s:7SwiftUI10DatePickerVA2A4TextVRszrlE_9selection2in19displayedComponentsACyAEGAA18LocalizedStringKeyV_AA7BindingVy10Foundation0C0VGSNyAPGAA0cdI0Vtcfc",
   "path": "DatePicker.init(_:selection:in:displayedComponents:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param range: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -19599,8 +19599,8 @@
   "usr": "s:7SwiftUI10DatePickerVA2A4TextVRszrlE_9selection2in19displayedComponentsACyAEGqd___AA7BindingVy10Foundation0C0VGSNyANGAA0cdI0VtcSyRd__lufc",
   "path": "DatePicker.init(_:selection:in:displayedComponents:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param range: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -19647,8 +19647,8 @@
   "usr": "s:7SwiftUI10DatePickerV9selection2in19displayedComponents5labelACyxGAA7BindingVy10Foundation0C0VG_SNyAMGAA0cdH0VxyXEtcfc",
   "path": "DatePicker.init(selection:in:displayedComponents:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param range: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -41827,8 +41827,8 @@
   "usr": "s:7SwiftUI5ImageVyAC21DeveloperToolsSupport0C8ResourceVcfc",
   "path": "Image.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param resource: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -44624,8 +44624,8 @@
   "usr": "s:7SwiftUI5LabelVA2A4TextVRszAA5ImageVRs_rlE_5imageACyAeGG10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0eJ0Vtcfc",
   "path": "Label.init(_:image:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param resource: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -44650,8 +44650,8 @@
   "usr": "s:7SwiftUI5LabelVA2A4TextVRszAA5ImageVRs_rlE_5imageACyAeGGAA18LocalizedStringKeyV_21DeveloperToolsSupport0E8ResourceVtcfc",
   "path": "Label.init(_:image:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param resource: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -44676,8 +44676,8 @@
   "usr": "s:7SwiftUI5LabelVA2A4TextVRszAA5ImageVRs_rlE_5imageACyAeGGqd___21DeveloperToolsSupport0E8ResourceVtcSyRd__lufc",
   "path": "Label.init(_:image:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param resource: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -48970,8 +48970,8 @@
   "usr": "s:7SwiftUI4MenuVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image7contentACyAJq_G10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fL0Vq_yXEtcfc",
   "path": "Menu.init(_:image:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -48982,8 +48982,8 @@
   "usr": "s:7SwiftUI4MenuVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image7contentACyAJq_GAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVq_yXEtcfc",
   "path": "Menu.init(_:image:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -48994,8 +48994,8 @@
   "usr": "s:7SwiftUI4MenuVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image7contentACyAJq_Gqd___21DeveloperToolsSupport0F8ResourceVq_yXEtcSyRd__lufc",
   "path": "Menu.init(_:image:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -49006,8 +49006,8 @@
   "usr": "s:7SwiftUI4MenuVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image7content13primaryActionACyAJq_G10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fN0Vq_yXEyyctcfc",
   "path": "Menu.init(_:image:content:primaryAction:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -49018,8 +49018,8 @@
   "usr": "s:7SwiftUI4MenuVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image7content13primaryActionACyAJq_GAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVq_yXEyyctcfc",
   "path": "Menu.init(_:image:content:primaryAction:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -58433,8 +58433,8 @@
   "usr": "s:7SwiftUI4PathV8applyingyACSo17CGAffineTransformVF",
   "path": "Path.applying(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param transform: unknown type CGAffineTransform",
+  "status": "generated",
+  "detail": "value member of Path",
   "platforms": [
    "ios",
    "macos",
@@ -59427,8 +59427,8 @@
   "usr": "s:7SwiftUI6PickerVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image9selection7contentACyAJq_q0_G10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fM0VAA7BindingVyq_Gq0_yXEtcfc",
   "path": "Picker.init(_:image:selection:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59440,8 +59440,8 @@
   "usr": "s:7SwiftUI6PickerVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image9selection7contentACyAJq_q0_GAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVAA7BindingVyq_Gq0_yXEtcfc",
   "path": "Picker.init(_:image:selection:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59453,8 +59453,8 @@
   "usr": "s:7SwiftUI6PickerVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image9selection7contentACyAJq_q0_Gqd___21DeveloperToolsSupport0F8ResourceVAA7BindingVyq_Gq0_yXEtcSyRd__lufc",
   "path": "Picker.init(_:image:selection:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59466,8 +59466,8 @@
   "usr": "s:7SwiftUI6PickerVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image9selection7content012currentValueD0ACyAJq_q0_G10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fO0VAA7BindingVyq_Gq0_yXEqd__yXEtcAA4ViewRd__lufc",
   "path": "Picker.init(_:image:selection:content:currentValueLabel:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59479,8 +59479,8 @@
   "usr": "s:7SwiftUI6PickerVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image9selection7content012currentValueD0ACyAJq_q0_GAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVAA7BindingVyq_Gq0_yXEqd__yXEtcAA4ViewRd__lufc",
   "path": "Picker.init(_:image:selection:content:currentValueLabel:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59492,8 +59492,8 @@
   "usr": "s:7SwiftUI6PickerVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image9selection7content012currentValueD0ACyAJq_q0_Gqd___21DeveloperToolsSupport0F8ResourceVAA7BindingVyq_Gq0_yXEqd_0_yXEtcSyRd__AA4ViewRd_0_r0_lufc",
   "path": "Picker.init(_:image:selection:content:currentValueLabel:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -59506,7 +59506,7 @@
   "path": "Picker.init(_:image:sources:selection:content:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -59519,7 +59519,7 @@
   "path": "Picker.init(_:image:sources:selection:content:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -59532,7 +59532,7 @@
   "path": "Picker.init(_:image:sources:selection:content:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -59545,7 +59545,7 @@
   "path": "Picker.init(_:image:sources:selection:content:currentValueLabel:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -59558,7 +59558,7 @@
   "path": "Picker.init(_:image:sources:selection:content:currentValueLabel:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -59571,7 +59571,7 @@
   "path": "Picker.init(_:image:sources:selection:content:currentValueLabel:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -60496,8 +60496,8 @@
   "usr": "s:7SwiftUI12PointerStyleV5image_7hotSpotAC21DeveloperToolsSupport13ImageResourceV_AA9UnitPointVtFZ",
   "path": "PointerStyle.image(_:hotSpot:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "param resource: unknown type ImageResource",
+  "status": "generated",
+  "detail": "value member of PointerStyle",
   "platforms": [
    "macos"
   ]
@@ -62401,8 +62401,8 @@
   "usr": "s:7SwiftUI12ProgressViewVA2A05EmptyD0VRszAA011DefaultDateC5LabelVRs_rlE13timerInterval10countsDownACyAeGGSNy10Foundation0G0VG_Sbtcfc",
   "path": "ProgressView.init(timerInterval:countsDown:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param timerInterval: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -62414,8 +62414,8 @@
   "usr": "s:7SwiftUI12ProgressViewVA2A011DefaultDateC5LabelVRs_rlE13timerInterval10countsDown5labelACyxAEGSNy10Foundation0F0VG_SbxyXEtcfc",
   "path": "ProgressView.init(timerInterval:countsDown:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param timerInterval: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -62427,8 +62427,8 @@
   "usr": "s:7SwiftUI12ProgressViewV13timerInterval10countsDown5label17currentValueLabelACyxq_GSNy10Foundation4DateVG_SbxyXEq_yXEtcfc",
   "path": "ProgressView.init(timerInterval:countsDown:label:currentValueLabel:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param timerInterval: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -62866,8 +62866,8 @@
   "usr": "s:7SwiftUI19ProjectionTransformVyACSo08CGAffineD0Vcfc",
   "path": "ProjectionTransform.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param m: unknown type CGAffineTransform",
+  "status": "generated",
+  "detail": "value member of ProjectionTransform",
   "platforms": [
    "ios",
    "macos",
@@ -75387,7 +75387,7 @@
   "path": "ShareLink.init(_:item:subject:message:preview:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -75399,7 +75399,7 @@
   "path": "ShareLink.init(_:item:subject:message:preview:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -75411,7 +75411,7 @@
   "path": "ShareLink.init(_:item:subject:message:preview:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -75423,7 +75423,7 @@
   "path": "ShareLink.init(_:item:subject:message:preview:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -75627,7 +75627,7 @@
   "path": "ShareLink.init(item:subject:message:preview:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -75639,7 +75639,7 @@
   "path": "ShareLink.init(item:subject:message:preview:label:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -90401,8 +90401,8 @@
   "usr": "s:7SwiftUI4TextVyACSNy10Foundation4DateVGcfc",
   "path": "Text.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param dates: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -90544,8 +90544,8 @@
   "usr": "s:7SwiftUI4TextV13timerInterval9pauseTime10countsDown10showsHoursACSNy10Foundation4DateVG_AJSgS2btcfc",
   "path": "Text.init(timerInterval:pauseTime:countsDown:showsHours:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param timerInterval: ClosedRange<Date>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -93543,8 +93543,8 @@
   "usr": "s:7SwiftUI6ToggleVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image4isOnACyAJG10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0fM0VAA7BindingVySbGtcfc",
   "path": "Toggle.init(_:image:isOn:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -93556,8 +93556,8 @@
   "usr": "s:7SwiftUI6ToggleVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image4isOnACyAJGAA18LocalizedStringKeyV_21DeveloperToolsSupport0F8ResourceVAA7BindingVySbGtcfc",
   "path": "Toggle.init(_:image:isOn:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -93569,8 +93569,8 @@
   "usr": "s:7SwiftUI6ToggleVA2A5LabelVyAA4TextVAA5ImageVGRszrlE_5image4isOnACyAJGqd___21DeveloperToolsSupport0F8ResourceVAA7BindingVySbGtcSyRd__lufc",
   "path": "Toggle.init(_:image:isOn:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -93583,7 +93583,7 @@
   "path": "Toggle.init(_:image:sources:isOn:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -93596,7 +93596,7 @@
   "path": "Toggle.init(_:image:sources:isOn:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -93609,7 +93609,7 @@
   "path": "Toggle.init(_:image:sources:isOn:)",
   "kind": "swift.init",
   "status": "skipped",
-  "detail": "param image: unknown type ImageResource",
+  "detail": "param sources: generic constrained to ['RandomAccessCollection']",
   "platforms": [
    "ios",
    "macos",
@@ -96586,8 +96586,8 @@
   "usr": "s:7SwiftUI16TransformedShapeV5shape9transformACyxGx_So17CGAffineTransformVtcfc",
   "path": "TransformedShape.init(shape:transform:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param transform: unknown type CGAffineTransform",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -105623,7 +105623,7 @@
   "path": "View.fileExporter(isPresented:item:contentTypes:defaultFilename:onCompletion:onCancellation:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param item: generic constrained to ['Transferable']",
+  "detail": "param onCompletion: unknown type Result",
   "platforms": [
    "ios",
    "macos"
@@ -107764,8 +107764,8 @@
   "usr": "s:7SwiftUI4ViewPAAE18navigationDocumentyQrqd__16CoreTransferable0G0Rd__lF",
   "path": "View.navigationDocument(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param document: generic constrained to ['Transferable']",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -107791,7 +107791,7 @@
   "path": "View.navigationDocument(_:preview:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param document: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -107803,7 +107803,7 @@
   "path": "View.navigationDocument(_:preview:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param document: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -107815,7 +107815,7 @@
   "path": "View.navigationDocument(_:preview:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param document: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -107827,7 +107827,7 @@
   "path": "View.navigationDocument(_:preview:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param document: generic constrained to ['Transferable']",
+  "detail": "param preview: type SharePreview not bridged",
   "platforms": [
    "ios",
    "macos",
@@ -108964,7 +108964,7 @@
   "path": "View.pasteDestination(for:action:validator:)",
   "kind": "swift.method",
   "status": "skipped",
-  "detail": "param action: generic constrained to ['Transferable']",
+  "detail": "param action: callback of list",
   "platforms": [
    "ios",
    "macos"
@@ -111848,8 +111848,8 @@
   "usr": "s:7SwiftUI4ViewPAAE15transformEffectyQrSo17CGAffineTransformVF",
   "path": "View.transformEffect(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param transform: unknown type CGAffineTransform",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",

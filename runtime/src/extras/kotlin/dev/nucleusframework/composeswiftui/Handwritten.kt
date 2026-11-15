@@ -28,6 +28,17 @@ public class CGRect(public val x: Double, public val y: Double, public val width
 @HiddenFromObjC
 public class CGVector(public val dx: Double, public val dy: Double) : SExpr(4, listOf(dx, dy))
 
+/** CoreGraphics `CGAffineTransform`: `x' = a*x + c*y + tx`, `y' = b*x + d*y + ty`. */
+@HiddenFromObjC
+public class CGAffineTransform(
+    public val a: Double = 1.0,
+    public val b: Double = 0.0,
+    public val c: Double = 0.0,
+    public val d: Double = 1.0,
+    public val tx: Double = 0.0,
+    public val ty: Double = 0.0,
+) : SExpr(6, listOf(a, b, c, d, tx, ty))
+
 internal object HandwrittenIds {
     const val SHAPE_VIEW = 100_000
     const val GEOMETRY_READER = 100_001

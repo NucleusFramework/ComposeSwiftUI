@@ -36,6 +36,16 @@ def symbolize(label, b):
     return b
 
 
+def stand_in(params):
+    """True when a variant carries a Swift type through a stand-in (view value, converted or lossy type):
+    on a Kotlin signature clash, the variant with native types keeps the name."""
+    def one(b):
+        if b.kind in ("optional", "list", "set", "binding", "callback") and b.inner is not None:
+            return one(b.inner)
+        return bool(b.conv) or b.lossy or (b.kind == "slot" and b.bare)
+    return any(one(b) for _, _, b, _ in (params or []))
+
+
 class Bridge:
     """
     kind: str | bool | int | double | cgfloat | float | lsk | url | value | proto | hash | action |
@@ -53,6 +63,8 @@ class Bridge:
         self.bare = False
         # Swift type built from the base kind (see CONVS): (type name, to template, failable, back template, fallback)
         self.conv = None
+        # lossy stand-in for a Swift type (Transferable as String...): loses Kotlin signature clashes
+        self.lossy = False
 
     @property
     def nargs(self):
@@ -220,6 +232,9 @@ CONVS = {
     "Locale": ("str", "Locale(identifier: %s)", "%s.identifier", None),
     "Locale.Language": ("str", "Locale.Language(identifier: %s)", "%s.maximalIdentifier", None),
     "UTType": ("str", "UTType(%s)", "%s.identifier", ".item"),
+    # asset-catalog resources of the main bundle, by name
+    "ImageResource": ("str", "ImageResource(name: %s, bundle: .main)", None, None),
+    "ColorResource": ("str", "ColorResource(name: %s, bundle: .main)", None, None),
 }
 
 GENERIC_PRIMS = {
@@ -228,6 +243,8 @@ GENERIC_PRIMS = {
     "BinaryInteger": ("int", "Int"),
     "FixedWidthInteger": ("int", "Int"),
     "Hashable": ("hash", "Any"),
+    # ponytail: Transferable payloads travel as text (String is Transferable); files/images need their own API
+    "Transferable": ("str", "String"),
     "Strideable": ("int", "Int"),
     "Equatable": ("hash", "Any"),
 }
@@ -291,7 +308,7 @@ class Classifier:
             return self._constrained(ctx.conf.get(name, []), ctx, t)
         if name == "Binding" and t.args:
             inner = self.classify(t.args[0], ctx, top=False)
-            ok = inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
+            ok = not (inner.conv and inner.conv[3] is None) and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
                 inner.kind == "optional" and inner.inner.kind == "hash")
             if not ok:
                 raise Unsupported("Binding<%s>" % inner.kind)
@@ -301,14 +318,17 @@ class Classifier:
             if inner.kind in ("double", "cgfloat"):
                 return Bridge("drange", "ClosedFloatingPointRange<Double>")
             if inner.kind == "date":
-                raise Unsupported("ClosedRange<Date>")
+                b = Bridge("drange", "ClosedFloatingPointRange<Double>")
+                b.conv = ("ClosedRange<Date>", "({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(%s)",
+                          False, None, None)
+                return b
             if inner.kind == "int" and not inner.conv:
                 return Bridge("irange", "IntRange")
             raise Unsupported("ClosedRange<%s>" % inner.kind)
         # `V.Stride` / `V.Value` of a generic numeric parameter: same bridge as V
         if "." in name and name.split(".")[0] in ctx.generic_names and name.split(".")[1] in ("Stride",):
             return self.classify(T("name", name=name.split(".")[0]), ctx, top)
-        if name in ("CGPoint", "CGSize", "CGRect", "CGVector"):
+        if name in ("CGPoint", "CGSize", "CGRect", "CGVector", "CGAffineTransform"):
             return Bridge("value", name, swift_type="d_" + name)
         if name in PRIMS:
             kind, kt = PRIMS[name]
@@ -343,7 +363,9 @@ class Classifier:
         for c in constraints:
             if c in GENERIC_PRIMS:
                 kind, kt = GENERIC_PRIMS[c]
-                return Bridge(kind, kt)
+                b = Bridge(kind, kt)
+                b.lossy = c == "Transferable"
+                return b
         for c in constraints:
             ps = self.model.lookup_type(c)
             if ps is not None and ps.usr in self.protos:
@@ -365,7 +387,8 @@ class Classifier:
                 return Bridge("async_action" if t.is_async else "action", "() -> Unit")
             if len(t.params) == 1 and not t.is_async:
                 inner = self.classify(t.params[0], ctx, top=False)
-                if inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url"):
+                if not (inner.conv and inner.conv[3] is None) and inner.kind in (
+                        "str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url"):
                     return Bridge("callback", "(%s) -> Unit" % inner.kt, inner=inner)
                 raise Unsupported("callback of %s" % inner.kind)
             raise Unsupported("closure with %d params" % len(t.params))

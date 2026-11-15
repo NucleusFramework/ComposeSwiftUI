@@ -31,6 +31,12 @@ import AppKit
     return CGVector(dx: a.double(0), dy: a.double(1))
 }
 
+@MainActor func d_CGAffineTransform(_ e: SExpr?) -> CGAffineTransform? {
+    guard let e, e.id == 6 else { return nil }
+    let a = Args(expr: e)
+    return CGAffineTransform(a: a.double(0), b: a.double(1), c: a.double(2), d: a.double(3), tx: a.double(4), ty: a.double(5))
+}
+
 @MainActor enum HandwrittenRenderers {
     static func register() {
         ComposeRegistry.views[100_000] = { m in
@@ -103,6 +109,7 @@ extension ComposeGenerated {
         case 2: return d_CGSize(e)
         case 3: return d_CGRect(e)
         case 4: return d_CGVector(e)
+        case 6: return d_CGAffineTransform(e)
         case 5: return KotlinPathShape(commands: Args(expr: e).list(0).compactMap { ($0 as? NSNumber)?.doubleValue })
         default: return nil
         }

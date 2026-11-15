@@ -14,19 +14,19 @@ Button(title: String, role: ButtonRole?, modifier: Modifier = Modifier, action: 
 Button(title: String, modifier: Modifier = Modifier, action: () -> Unit,)
 Button(title: String, systemImage: SFSymbol, role: ButtonRole?, modifier: Modifier = Modifier, action: () -> Unit,)
 Button(title: String, systemImage: SFSymbol, modifier: Modifier = Modifier, action: () -> Unit,)
-ButtonBorderShapeView(buttonBorderShape: ButtonBorderShape, modifier: Modifier = Modifier) { SwiftView(22, listOf(buttonBorderShape), modifier) } /** * SwiftUI `Capsule` * * ```swift * @frozen struct Capsule * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun CapsuleView(capsule: Capsule, modifier: Modifier = Modifier) { SwiftView(23, listOf(capsule), modifier) } /** * SwiftUI `Circle` * * ```swift * @frozen struct Circle * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun CircleView(circle: Circle, modifier: Modifier = Modifier) { SwiftView(24, listOf(circle), modifier) } /** * SwiftUI `Color` * * ```swift * @frozen struct Color * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun ColorView(color: Color, modifier: Modifier = Modifier) { SwiftView(25, listOf(color), modifier) } /** * SwiftUI `ConcentricRectangle` * * ```swift * struct ConcentricRectangle * ``` * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun ConcentricRectangleView(concentricRectangle: ConcentricRectangle, modifier: Modifier = Modifier) { SwiftView(26, listOf(concentricRectangle), modifier) } /** * SwiftUI `ContainerRelativeShape` * * ```swift * @frozen struct ContainerRelativeShape * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun ContainerRelativeShapeView(containerRelativeShape: ContainerRelativeShape, modifier: Modifier = Modifier) { SwiftView(27, listOf(containerRelativeShape), modifier) } /** * SwiftUI `ContentUnavailableView.init(label:description:actions:)` * * ```swift * nonisolated init(@ContentBuilder label: () -> Label, @ContentBuilder description: () -> Description = { EmptyView() }, @ContentBuilder actions: () -> Actions = { EmptyView() }) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun ContentUnavailableView(modifier: Modifier = Modifier, label: @Composable () -> Unit, description: @Composable () -> Unit, actions: @Composable () -> Unit,)
+ButtonBorderShapeView(buttonBorderShape: ButtonBorderShape, modifier: Modifier = Modifier) { SwiftView(28, listOf(buttonBorderShape), modifier) } /** * SwiftUI `Capsule` * * ```swift * @frozen struct Capsule * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun CapsuleView(capsule: Capsule, modifier: Modifier = Modifier) { SwiftView(29, listOf(capsule), modifier) } /** * SwiftUI `Circle` * * ```swift * @frozen struct Circle * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun CircleView(circle: Circle, modifier: Modifier = Modifier) { SwiftView(30, listOf(circle), modifier) } /** * SwiftUI `Color` * * ```swift * @frozen struct Color * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun ColorView(color: Color, modifier: Modifier = Modifier) { SwiftView(31, listOf(color), modifier) } /** * SwiftUI `ConcentricRectangle` * * ```swift * struct ConcentricRectangle * ``` * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun ConcentricRectangleView(concentricRectangle: ConcentricRectangle, modifier: Modifier = Modifier) { SwiftView(32, listOf(concentricRectangle), modifier) } /** * SwiftUI `ContainerRelativeShape` * * ```swift * @frozen struct ContainerRelativeShape * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun ContainerRelativeShapeView(containerRelativeShape: ContainerRelativeShape, modifier: Modifier = Modifier) { SwiftView(33, listOf(containerRelativeShape), modifier) } /** * SwiftUI `ContentUnavailableView.init(label:description:actions:)` * * ```swift * nonisolated init(@ContentBuilder label: () -> Label, @ContentBuilder description: () -> Description = { EmptyView() }, @ContentBuilder actions: () -> Actions = { EmptyView() }) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun ContentUnavailableView(modifier: Modifier = Modifier, label: @Composable () -> Unit, description: @Composable () -> Unit, actions: @Composable () -> Unit,)
 ControlGroup(modifier: Modifier = Modifier, content: @Composable () -> Unit, label: @Composable () -> Unit,)
 ControlGroup(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 ControlGroup(title: String, systemImage: SFSymbol, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 ControlGroup(title: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 DatePicker(selection: Double, modifier: Modifier = Modifier, displayedComponents: DatePickerComponents? = null, onSelectionChange: (Double) -> Unit, content: @Composable () -> Unit,)
 DatePicker(title: String, selection: Double, modifier: Modifier = Modifier, displayedComponents: DatePickerComponents? = null, onSelectionChange: (Double) -> Unit,)
-DefaultDocumentGroupLaunchActionsView(defaultDocumentGroupLaunchActions: DefaultDocumentGroupLaunchActions, modifier: Modifier = Modifier) { SwiftView(47, listOf(defaultDocumentGroupLaunchActions), modifier) } /** * SwiftUI `DefaultGlassEffectShape` * * ```swift * struct DefaultGlassEffectShape * ``` * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun DefaultGlassEffectShapeView(defaultGlassEffectShape: DefaultGlassEffectShape, modifier: Modifier = Modifier) { SwiftView(48, listOf(defaultGlassEffectShape), modifier) } /** * SwiftUI `DisclosureGroup.init(isExpanded:content:label:)` * * ```swift * nonisolated init(isExpanded: Binding<Bool>, @ContentBuilder content: @escaping () -> Content, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op) */ @HiddenFromObjC @Composable public fun DisclosureGroup(isExpanded: Boolean, modifier: Modifier = Modifier, onIsExpandedChange: (Boolean) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit,)
+DefaultDocumentGroupLaunchActionsView(defaultDocumentGroupLaunchActions: DefaultDocumentGroupLaunchActions, modifier: Modifier = Modifier) { SwiftView(60, listOf(defaultDocumentGroupLaunchActions), modifier) } /** * SwiftUI `DefaultGlassEffectShape` * * ```swift * struct DefaultGlassEffectShape * ``` * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun DefaultGlassEffectShapeView(defaultGlassEffectShape: DefaultGlassEffectShape, modifier: Modifier = Modifier) { SwiftView(61, listOf(defaultGlassEffectShape), modifier) } /** * SwiftUI `DisclosureGroup.init(isExpanded:content:label:)` * * ```swift * nonisolated init(isExpanded: Binding<Bool>, @ContentBuilder content: @escaping () -> Content, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op) */ @HiddenFromObjC @Composable public fun DisclosureGroup(isExpanded: Boolean, modifier: Modifier = Modifier, onIsExpandedChange: (Boolean) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit,)
 DisclosureGroup(modifier: Modifier = Modifier, content: @Composable () -> Unit, label: @Composable () -> Unit,)
 DisclosureGroup(label: String, isExpanded: Boolean, modifier: Modifier = Modifier, onIsExpandedChange: (Boolean) -> Unit, content: @Composable () -> Unit,)
 DisclosureGroup(label: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 Divider(modifier: Modifier = Modifier,)
-EditButtonView(editButton: EditButton, modifier: Modifier = Modifier) { SwiftView(58, listOf(editButton), modifier) } /** * SwiftUI `Ellipse` * * ```swift * @frozen struct Ellipse * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun EllipseView(ellipse: Ellipse, modifier: Modifier = Modifier) { SwiftView(59, listOf(ellipse), modifier) } /** * SwiftUI `EllipticalGradient` * * ```swift * @frozen nonisolated struct EllipticalGradient * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun EllipticalGradientView(ellipticalGradient: EllipticalGradient, modifier: Modifier = Modifier) { SwiftView(60, listOf(ellipticalGradient), modifier) } /** * SwiftUI `EmptyView.init()` * * ```swift * nonisolated init() * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun EmptyView(modifier: Modifier = Modifier,)
+EditButtonView(editButton: EditButton, modifier: Modifier = Modifier) { SwiftView(71, listOf(editButton), modifier) } /** * SwiftUI `Ellipse` * * ```swift * @frozen struct Ellipse * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun EllipseView(ellipse: Ellipse, modifier: Modifier = Modifier) { SwiftView(72, listOf(ellipse), modifier) } /** * SwiftUI `EllipticalGradient` * * ```swift * @frozen nonisolated struct EllipticalGradient * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun EllipticalGradientView(ellipticalGradient: EllipticalGradient, modifier: Modifier = Modifier) { SwiftView(73, listOf(ellipticalGradient), modifier) } /** * SwiftUI `EmptyView.init()` * * ```swift * nonisolated init() * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun EmptyView(modifier: Modifier = Modifier,)
 Form(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 Gauge(value: Double, bounds: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit, markedValueLabels: @Composable () -> Unit,)
 Gauge(value: Double, bounds: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit, minimumValueLabel: @Composable () -> Unit, maximumValueLabel: @Composable () -> Unit, markedValueLabels: @Composable () -> Unit,)
@@ -42,7 +42,7 @@ GroupBox(title: String, modifier: Modifier = Modifier, content: @Composable () -
 GroupBox(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 HSplitView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 HStack(modifier: Modifier = Modifier, alignment: VerticalAlignment = VerticalAlignment.center, spacing: Double? = null, content: @Composable () -> Unit,)
-HelpLinkView(helpLink: HelpLink, modifier: Modifier = Modifier) { SwiftView(81, listOf(helpLink), modifier) } /** * SwiftUI `Image.init(decorative:variableValue:bundle:)` * * ```swift * init(decorative name: String, variableValue: Double?, bundle: Bundle? = nil) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Image(decorative: String, variableValue: Double?, modifier: Modifier = Modifier,)
+HelpLinkView(helpLink: HelpLink, modifier: Modifier = Modifier) { SwiftView(94, listOf(helpLink), modifier) } /** * SwiftUI `Image.init(decorative:variableValue:bundle:)` * * ```swift * init(decorative name: String, variableValue: Double?, bundle: Bundle? = nil) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Image(decorative: String, variableValue: Double?, modifier: Modifier = Modifier,)
 Image(decorative: String, modifier: Modifier = Modifier,)
 Image(systemName: SFSymbol, variableValue: Double?, modifier: Modifier = Modifier,)
 Image(systemName: SFSymbol, modifier: Modifier = Modifier,)
@@ -56,7 +56,7 @@ LazyHGrid(rows: List<GridItem>, modifier: Modifier = Modifier, alignment: Vertic
 LazyHStack(modifier: Modifier = Modifier, alignment: VerticalAlignment = VerticalAlignment.center, spacing: Double? = null, pinnedViews: PinnedScrollableViews? = null, content: @Composable () -> Unit,)
 LazyVGrid(columns: List<GridItem>, modifier: Modifier = Modifier, alignment: HorizontalAlignment = HorizontalAlignment.center, spacing: Double? = null, pinnedViews: PinnedScrollableViews? = null, content: @Composable () -> Unit,)
 LazyVStack(modifier: Modifier = Modifier, alignment: HorizontalAlignment = HorizontalAlignment.center, spacing: Double? = null, pinnedViews: PinnedScrollableViews? = null, content: @Composable () -> Unit,)
-LinearGradientView(linearGradient: LinearGradient, modifier: Modifier = Modifier) { SwiftView(108, listOf(linearGradient), modifier) } /** * SwiftUI `Link.init(destination:label:)` * * ```swift * @MainActor @preconcurrency init(destination: URL, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Link(destination: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+LinearGradientView(linearGradient: LinearGradient, modifier: Modifier = Modifier) { SwiftView(125, listOf(linearGradient), modifier) } /** * SwiftUI `Link.init(destination:label:)` * * ```swift * @MainActor @preconcurrency init(destination: URL, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Link(destination: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 Link(title: String, destination: String, modifier: Modifier = Modifier,)
 List(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
 List(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
@@ -78,13 +78,8 @@ NavigationSplitView(modifier: Modifier = Modifier, sidebar: @Composable () -> Un
 NavigationSplitView(modifier: Modifier = Modifier, sidebar: @Composable () -> Unit, content: @Composable () -> Unit, detail: @Composable () -> Unit,)
 NavigationStack(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 NavigationView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
-NewDocumentButton(title: String, contentType: String, modifier: Modifier = Modifier,)
-NewDocumentButton(title: String, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
-NewDocumentButton(title: String, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
-NewDocumentButton(title: String, modifier: Modifier = Modifier, contentType: String? = null,)
-NewDocumentButtonContentType(title: String, modifier: Modifier = Modifier, contentType: String? = null,)
 OffsetShape(shape: Shape, offset: CGSize, modifier: Modifier = Modifier,)
-PathView(path: Path, modifier: Modifier = Modifier) { SwiftView(190, listOf(path), modifier) } /** * SwiftUI `Picker.init(selection:content:label:currentValueLabel:)` * * ```swift * nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View) * ``` * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+ */ @HiddenFromObjC @Composable public fun Picker(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
+PathView(path: Path, modifier: Modifier = Modifier) { SwiftView(212, listOf(path), modifier) } /** * SwiftUI `Picker.init(selection:content:label:currentValueLabel:)` * * ```swift * nonisolated init(selection: Binding<SelectionValue>, @ContentBuilder content: () -> Content, @ContentBuilder label: () -> Label, @ContentBuilder currentValueLabel: () -> some View) * ``` * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+ */ @HiddenFromObjC @Composable public fun Picker(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 Picker(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, label: @Composable () -> Unit,)
 Picker(title: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 Picker(title: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
@@ -97,9 +92,9 @@ ProgressView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 ProgressView(modifier: Modifier = Modifier,)
 ProgressView(title: String, modifier: Modifier = Modifier,)
 ProgressView(title: String, value: Double?, modifier: Modifier = Modifier, total: Double = 1.0,)
-RadialGradientView(radialGradient: RadialGradient, modifier: Modifier = Modifier) { SwiftView(217, listOf(radialGradient), modifier) } /** * SwiftUI `Rectangle` * * ```swift * @frozen struct Rectangle * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) { SwiftView(218, listOf(rectangle), modifier) } /** * SwiftUI `RenameButton.init()` * * ```swift * nonisolated init() where Label == Label<Text, Image> * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun RenameButton(modifier: Modifier = Modifier,)
+RadialGradientView(radialGradient: RadialGradient, modifier: Modifier = Modifier) { SwiftView(248, listOf(radialGradient), modifier) } /** * SwiftUI `Rectangle` * * ```swift * @frozen struct Rectangle * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ * Renders the value as a view. */ @HiddenFromObjC @Composable public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) { SwiftView(249, listOf(rectangle), modifier) } /** * SwiftUI `RenameButton.init()` * * ```swift * nonisolated init() where Label == Label<Text, Image> * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun RenameButton(modifier: Modifier = Modifier,)
 RotatedShape(shape: Shape, angle: Angle, modifier: Modifier = Modifier, anchor: UnitPoint = UnitPoint.center,)
-RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Modifier = Modifier) { SwiftView(221, listOf(roundedRectangle), modifier) } /** * SwiftUI `ScaledShape.init(shape:scale:anchor:)` * * ```swift * init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun ScaledShape(shape: Shape, scale: CGSize, modifier: Modifier = Modifier, anchor: UnitPoint = UnitPoint.center,)
+RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Modifier = Modifier) { SwiftView(252, listOf(roundedRectangle), modifier) } /** * SwiftUI `ScaledShape.init(shape:scale:anchor:)` * * ```swift * init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun ScaledShape(shape: Shape, scale: CGSize, modifier: Modifier = Modifier, anchor: UnitPoint = UnitPoint.center,)
 ScrollView(modifier: Modifier = Modifier, axes: Axis.Set = Axis.Set.vertical, showsIndicators: Boolean = true, content: @Composable () -> Unit,)
 ScrollView(modifier: Modifier = Modifier, axes: Axis.Set = Axis.Set.vertical, content: @Composable () -> Unit,)
 Section(modifier: Modifier = Modifier, content: @Composable () -> Unit, header: @Composable () -> Unit, footer: @Composable () -> Unit,)
@@ -132,15 +127,16 @@ Stepper(title: String, value: Int, modifier: Modifier = Modifier, step: Int = 1,
 TabView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 Text(verbatim: String, modifier: Modifier = Modifier,)
 Text(date: Double, style: Text.DateStyle, modifier: Modifier = Modifier,)
-TextEditorView(textEditor: TextEditor, modifier: Modifier = Modifier) { SwiftView(294, listOf(textEditor), modifier) } /** * SwiftUI `TextField.init(_:text:onEditingChanged:onCommit:)` * * ```swift * nonisolated init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) where S : StringProtocol * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onEditingChanged: (Boolean) -> Unit, onCommit: () -> Unit,)
+TextEditorView(textEditor: TextEditor, modifier: Modifier = Modifier) { SwiftView(327, listOf(textEditor), modifier) } /** * SwiftUI `TextField.init(_:text:onEditingChanged:onCommit:)` * * ```swift * nonisolated init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) where S : StringProtocol * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onEditingChanged: (Boolean) -> Unit, onCommit: () -> Unit,)
 TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onEditingChanged: (Boolean) -> Unit,)
 TextField(title: String, text: String, axis: Axis, modifier: Modifier = Modifier, onTextChange: (String) -> Unit,)
 TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit, onCommit: () -> Unit,)
 TextField(title: String, text: String, modifier: Modifier = Modifier, onTextChange: (String) -> Unit,)
-TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, modifier: Modifier = Modifier) { SwiftView(319, listOf(textInputBorderShape), modifier) } /** * SwiftUI `Toggle.init(isOn:label:)` * * ```swift * nonisolated init(isOn: Binding<Bool>, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Toggle(isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit, content: @Composable () -> Unit,)
+TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, modifier: Modifier = Modifier) { SwiftView(352, listOf(textInputBorderShape), modifier) } /** * SwiftUI `Toggle.init(isOn:label:)` * * ```swift * nonisolated init(isOn: Binding<Bool>, @ContentBuilder label: () -> Label) * ``` * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ */ @HiddenFromObjC @Composable public fun Toggle(isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit, content: @Composable () -> Unit,)
 Toggle(title: String, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
 Toggle(title: String, systemImage: SFSymbol, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
-UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRectangle, modifier: Modifier = Modifier) { SwiftView(327, listOf(unevenRoundedRectangle), modifier) } /** * SwiftUI `VSplitView.init(content:)` * * ```swift * nonisolated init(@ContentBuilder content: () -> Content) * ``` * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op) */ @HiddenFromObjC @Composable public fun VSplitView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+TransformedShape(shape: Shape, transform: CGAffineTransform, modifier: Modifier = Modifier,)
+UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRectangle, modifier: Modifier = Modifier) { SwiftView(364, listOf(unevenRoundedRectangle), modifier) } /** * SwiftUI `VSplitView.init(content:)` * * ```swift * nonisolated init(@ContentBuilder content: () -> Content) * ``` * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op) */ @HiddenFromObjC @Composable public fun VSplitView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 VStack(modifier: Modifier = Modifier, alignment: HorizontalAlignment = HorizontalAlignment.center, spacing: Double? = null, content: @Composable () -> Unit,)
 ViewThatFits(modifier: Modifier = Modifier, axes: Axis.Set? = null, content: @Composable () -> Unit,)
 WindowVisibilityToggle(windowID: String, modifier: Modifier = Modifier,)
@@ -186,18 +182,6 @@ MenuButton(titleKey: LocalizedKey, modifier: Modifier = Modifier, content: @Comp
 NavigationLink(titleResource: LocalizedKey, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 NavigationLink(titleResource: LocalizedKey, value: Any?, modifier: Modifier = Modifier,)
 NavigationLinkValue(titleResource: LocalizedKey, value: Any?, modifier: Modifier = Modifier,)
-NewDocumentButton(title: LocalizedKey, contentType: String, modifier: Modifier = Modifier,)
-NewDocumentButtonContentType(title: LocalizedKey, contentType: String, modifier: Modifier = Modifier,)
-NewDocumentButton(title: LocalizedKey, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
-NewDocumentButtonContentType(title: LocalizedKey, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
-NewDocumentButton(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
-NewDocumentButtonContentType(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
-NewDocumentButton(source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
-NewDocumentButtonContentType(contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null,)
-NewDocumentButton(title: LocalizedKey, modifier: Modifier = Modifier, contentType: String? = null,)
-NewDocumentButtonContentType(title: LocalizedKey, modifier: Modifier = Modifier, contentType: String? = null,)
-NewDocumentButton(modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
-NewDocumentButtonContentType(modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
 Picker(titleResource: LocalizedKey, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 PickerSelection(titleKey: LocalizedKey, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
 Picker(titleResource: LocalizedKey, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
@@ -262,13 +246,63 @@ ContentUnavailableView(title: String, image: String, modifier: Modifier = Modifi
 Label(titleResource: LocalizedKey, image: String, modifier: Modifier = Modifier,)
 LabelImage(titleKey: LocalizedKey, image: String, modifier: Modifier = Modifier,)
 AnyView(modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+DatePicker(selection: Double, range: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, displayedComponents: DatePickerComponents? = null, onSelectionChange: (Double) -> Unit, content: @Composable () -> Unit,)
+DatePicker(title: String, selection: Double, range: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, displayedComponents: DatePickerComponents? = null, onSelectionChange: (Double) -> Unit,)
 FillShapeView(shape: Shape, style: ShapeStyle, fillStyle: FillStyle, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 MenuButton(modifier: Modifier = Modifier, label: @Composable () -> Unit, content: @Composable () -> Unit,)
+NewDocumentButton(title: String, contentType: String, modifier: Modifier = Modifier,)
+NewDocumentButton(title: String, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
+NewDocumentButton(title: String, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButton(title: String, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButtonContentType(title: String, modifier: Modifier = Modifier, contentType: String? = null,)
 PickerSelection(selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, label: @Composable () -> Unit, content: @Composable () -> Unit,)
+ProgressView(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, countsDown: Boolean = true, label: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
+ProgressView(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, countsDown: Boolean = true, content: @Composable () -> Unit,)
+ProgressView(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, countsDown: Boolean = true,)
 SliderValue(value: Double, bounds: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, onValueChange: (Double) -> Unit, onEditingChanged: (Boolean) -> Unit = {}, minimumValueLabel: @Composable () -> Unit, maximumValueLabel: @Composable () -> Unit, label: @Composable () -> Unit,)
 SliderValue(value: Double, bounds: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, step: Double = 1.0, onValueChange: (Double) -> Unit, onEditingChanged: (Boolean) -> Unit = {}, minimumValueLabel: @Composable () -> Unit, maximumValueLabel: @Composable () -> Unit, label: @Composable () -> Unit,)
 StrokeBorderShapeView(shape: InsettableShape, style: ShapeStyle, strokeStyle: StrokeStyle, isAntialiased: Boolean, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
 StrokeShapeView(shape: Shape, style: ShapeStyle, strokeStyle: StrokeStyle, isAntialiased: Boolean, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+Text(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, pauseTime: Double? = null, countsDown: Boolean = true, showsHours: Boolean = true,)
+Text(dates: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier,)
+Button(title: String, image: String, role: ButtonRole?, modifier: Modifier = Modifier, action: () -> Unit,)
+Button(title: String, image: String, modifier: Modifier = Modifier, action: () -> Unit,)
+ControlGroup(title: String, image: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+LabelImage(title: String, image: String, modifier: Modifier = Modifier,)
+Menu(title: String, image: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+Picker(title: String, image: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
+Picker(title: String, image: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
+Toggle(title: String, image: String, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
+DatePicker(titleResource: LocalizedKey, selection: Double, range: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, displayedComponents: DatePickerComponents? = null, onSelectionChange: (Double) -> Unit,)
+DatePickerSelection(titleKey: LocalizedKey, selection: Double, range: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, displayedComponents: DatePickerComponents? = null, onSelectionChange: (Double) -> Unit,)
+NewDocumentButton(title: LocalizedKey, contentType: String, modifier: Modifier = Modifier,)
+NewDocumentButtonContentType(title: LocalizedKey, contentType: String, modifier: Modifier = Modifier,)
+NewDocumentButton(title: LocalizedKey, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
+NewDocumentButtonContentType(title: LocalizedKey, contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier,)
+NewDocumentButton(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButtonContentType(title: LocalizedKey, source: DocumentCreationSource, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButton(source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
+NewDocumentButtonContentType(contentType: String, source: DocumentCreationSource, modifier: Modifier = Modifier, label: String? = null,)
+NewDocumentButton(title: LocalizedKey, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButtonContentType(title: LocalizedKey, modifier: Modifier = Modifier, contentType: String? = null,)
+NewDocumentButton(modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
+NewDocumentButtonContentType(modifier: Modifier = Modifier, label: String? = null, contentType: String? = null,)
+Button(titleResource: LocalizedKey, image: String, role: ButtonRole?, modifier: Modifier = Modifier, action: () -> Unit,)
+ButtonImage(titleKey: LocalizedKey, image: String, role: ButtonRole?, modifier: Modifier = Modifier, action: () -> Unit,)
+Button(titleResource: LocalizedKey, image: String, modifier: Modifier = Modifier, action: () -> Unit,)
+ButtonImage(titleKey: LocalizedKey, image: String, modifier: Modifier = Modifier, action: () -> Unit,)
+ControlGroup(titleResource: LocalizedKey, image: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+ControlGroupImage(titleKey: LocalizedKey, image: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+Menu(titleResource: LocalizedKey, image: String, modifier: Modifier = Modifier, primaryAction: () -> Unit, content: @Composable () -> Unit,)
+MenuImage(titleKey: LocalizedKey, image: String, modifier: Modifier = Modifier, primaryAction: () -> Unit, content: @Composable () -> Unit,)
+Menu(titleResource: LocalizedKey, image: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+MenuImage(titleKey: LocalizedKey, image: String, modifier: Modifier = Modifier, content: @Composable () -> Unit,)
+Picker(titleResource: LocalizedKey, image: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
+PickerImage(titleKey: LocalizedKey, image: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit, currentValueLabel: @Composable () -> Unit,)
+Picker(titleResource: LocalizedKey, image: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
+PickerImage(titleKey: LocalizedKey, image: String, selection: Any, modifier: Modifier = Modifier, onSelectionChange: (Any) -> Unit, content: @Composable () -> Unit,)
+Toggle(titleResource: LocalizedKey, image: String, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
+ToggleImage(titleKey: LocalizedKey, image: String, isOn: Boolean, modifier: Modifier = Modifier, onIsOnChange: (Boolean) -> Unit,)
 NavigationLink(tag: Any, selection: Any?, modifier: Modifier = Modifier, onSelectionChange: (Any?) -> Unit, destination: @Composable () -> Unit, label: @Composable () -> Unit,)
 NavigationLink(isActive: Boolean, modifier: Modifier = Modifier, onIsActiveChange: (Boolean) -> Unit, destination: @Composable () -> Unit, label: @Composable () -> Unit,)
 NavigationLinkTag(title: String, tag: Any, selection: Any?, modifier: Modifier = Modifier, onSelectionChange: (Any?) -> Unit, content: @Composable () -> Unit,)
@@ -279,19 +313,19 @@ NavigationLinkTag(tag: Any, selection: Any?, modifier: Modifier = Modifier, onSe
 NavigationLinkIsActive(isActive: Boolean, modifier: Modifier = Modifier, onIsActiveChange: (Boolean) -> Unit, destination: @Composable () -> Unit, label: @Composable () -> Unit,)
 NavigationLinkTag(titleKey: LocalizedKey, tag: Any, selection: Any?, modifier: Modifier = Modifier, onSelectionChange: (Any?) -> Unit, content: @Composable () -> Unit,)
 NavigationLinkIsActive(titleKey: LocalizedKey, isActive: Boolean, modifier: Modifier = Modifier, onIsActiveChange: (Boolean) -> Unit, content: @Composable () -> Unit,)
-Button(titleKey: LocalizedKey? = null, role: ButtonRole? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, action: (() -> Unit)? = null,)
+Button(titleKey: LocalizedKey? = null, role: ButtonRole? = null, systemImage: SFSymbol? = null, image: String? = null, modifier: Modifier = Modifier, action: (() -> Unit)? = null,)
 ContentUnavailableView(title: LocalizedKey? = null, systemImage: SFSymbol? = null, description: String? = null, image: String? = null, modifier: Modifier = Modifier,)
-ControlGroup(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, content: (@Composable () -> Unit)? = null,)
-DatePicker(titleKey: LocalizedKey? = null, selection: Double? = null, displayedComponents: DatePickerComponents? = null, modifier: Modifier = Modifier, onSelectionChange: ((Double) -> Unit)? = null,)
+ControlGroup(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, image: String? = null, modifier: Modifier = Modifier, content: (@Composable () -> Unit)? = null,)
+DatePicker(titleKey: LocalizedKey? = null, selection: Double? = null, displayedComponents: DatePickerComponents? = null, range: ClosedFloatingPointRange<Double>? = null, modifier: Modifier = Modifier, onSelectionChange: ((Double) -> Unit)? = null,)
 DisclosureGroup(titleKey: LocalizedKey? = null, isExpanded: Boolean? = null, modifier: Modifier = Modifier, onIsExpandedChange: ((Boolean) -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 Image(name: String? = null, variableValue: Double? = null, modifier: Modifier = Modifier,)
-Label(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, image: String? = null, modifier: Modifier = Modifier,)
+Label(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, image: String? = null, title: String? = null, modifier: Modifier = Modifier,)
 LabeledContent(titleKey: LocalizedKey? = null, value: String? = null, modifier: Modifier = Modifier,)
 Link(titleKey: LocalizedKey? = null, destination: String? = null, modifier: Modifier = Modifier,)
-Menu(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, primaryAction: (() -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
+Menu(titleKey: LocalizedKey? = null, systemImage: SFSymbol? = null, image: String? = null, modifier: Modifier = Modifier, primaryAction: (() -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 NavigationLink(value: Any? = null, title: String? = null, titleResource: LocalizedKey? = null, tag: Any? = null, selection: Any? = null, isActive: Boolean? = null, titleKey: LocalizedKey? = null, modifier: Modifier = Modifier, onSelectionChange: ((Any?) -> Unit)? = null, onIsActiveChange: ((Boolean) -> Unit)? = null, destination: (@Composable () -> Unit)? = null, label: (@Composable () -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 NewDocumentButton(title: String? = null, contentType: String? = null, source: DocumentCreationSource? = null, label: String? = null, modifier: Modifier = Modifier,)
-Picker(titleKey: LocalizedKey? = null, selection: Any? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, onSelectionChange: ((Any) -> Unit)? = null, currentValueLabel: (@Composable () -> Unit)? = null, label: (@Composable () -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
+Picker(titleKey: LocalizedKey? = null, selection: Any? = null, systemImage: SFSymbol? = null, image: String? = null, modifier: Modifier = Modifier, onSelectionChange: ((Any) -> Unit)? = null, currentValueLabel: (@Composable () -> Unit)? = null, label: (@Composable () -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 ProgressView(titleKey: LocalizedKey? = null, value: Double? = null, total: Double? = null, modifier: Modifier = Modifier,)
 Section(titleKey: LocalizedKey? = null, isExpanded: Boolean? = null, modifier: Modifier = Modifier, onIsExpandedChange: ((Boolean) -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 SecureField(titleKey: LocalizedKey? = null, text: String? = null, prompt: String? = null, modifier: Modifier = Modifier, onTextChange: ((String) -> Unit)? = null,)
@@ -300,7 +334,7 @@ Slider(value: Double? = null, bounds: ClosedFloatingPointRange<Double>? = null, 
 Stepper(value: Int? = null, bounds: IntRange? = null, step: Int? = null, titleKey: LocalizedKey? = null, modifier: Modifier = Modifier, onValueChange: ((Int) -> Unit)? = null, onEditingChanged: ((Boolean) -> Unit)? = null, content: (@Composable () -> Unit)? = null,)
 TextField(titleKey: LocalizedKey? = null, text: String? = null, axis: Axis? = null, prompt: String? = null, modifier: Modifier = Modifier, onTextChange: ((String) -> Unit)? = null,)
 TextFieldLink(titleKey: LocalizedKey? = null, prompt: String? = null, modifier: Modifier = Modifier, onSubmit: ((String) -> Unit)? = null,)
-Toggle(titleKey: LocalizedKey? = null, isOn: Boolean? = null, systemImage: SFSymbol? = null, modifier: Modifier = Modifier, onIsOnChange: ((Boolean) -> Unit)? = null,)
+Toggle(titleKey: LocalizedKey? = null, isOn: Boolean? = null, systemImage: SFSymbol? = null, image: String? = null, modifier: Modifier = Modifier, onIsOnChange: ((Boolean) -> Unit)? = null,)
 AngularGradientView(angularGradient: AngularGradient, modifier: Modifier = Modifier)
 AnyShapeView(anyShape: AnyShape, modifier: Modifier = Modifier)
 ArrangementView(modifier: Modifier = Modifier, primary: @Composable ()
@@ -349,6 +383,9 @@ ContentUnavailableView(title: LocalizedKey, image: String, modifier: Modifier = 
 ContentUnavailableView(title: String, image: String, modifier: Modifier = Modifier, description: String? = null)
 AnyView(modifier: Modifier = Modifier, content: @Composable ()
 FillShapeView(shape: Shape, style: ShapeStyle, fillStyle: FillStyle, modifier: Modifier = Modifier, content: @Composable ()
+ProgressView(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, countsDown: Boolean = true, label: @Composable ()
+ProgressView(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, countsDown: Boolean = true, content: @Composable ()
+ProgressView(timerInterval: ClosedFloatingPointRange<Double>, modifier: Modifier = Modifier, countsDown: Boolean = true)
 StrokeBorderShapeView(shape: InsettableShape, style: ShapeStyle, strokeStyle: StrokeStyle, isAntialiased: Boolean, modifier: Modifier = Modifier, content: @Composable ()
 StrokeShapeView(shape: Shape, style: ShapeStyle, strokeStyle: StrokeStyle, isAntialiased: Boolean, modifier: Modifier = Modifier, content: @Composable ()
 ContentUnavailableView(title: LocalizedKey? = null, systemImage: SFSymbol? = null, description: String? = null, image: String? = null, modifier: Modifier = Modifier)
@@ -933,6 +970,7 @@ Modifier.touchBarCustomizationLabel(label: String)
 Modifier.touchBarItemPresence(presence: TouchBarItemPresence)
 Modifier.touchBarItemPrincipal(principal: Boolean = true)
 Modifier.tracking(tracking: Double)
+Modifier.transformEffect(transform: CGAffineTransform)
 Modifier.transition(t: AnyTransition)
 Modifier.truncationMode(mode: Text.TruncationMode)
 Modifier.typeSelectEquivalent(string: String)
@@ -1693,6 +1731,7 @@ Modifier.zIndex(value: Double)
   - `ProjectionTransform.concatenating(rhs: ProjectionTransform): ProjectionTransform`
   - `ProjectionTransform.inverted(): ProjectionTransform`
   - `ProjectionTransform()`
+  - `ProjectionTransform(m: CGAffineTransform)`
 - `PushTransition` (class)
   - `PushTransition(edge: Edge)`
 - `RedactionReasons` (class)
@@ -1943,8 +1982,8 @@ Modifier.zIndex(value: Double)
   - `HorizontalDirection.leading`
   - `HorizontalDirection.trailing`
 - `HorizontalDirection.Set` (class)
-  - `HorizontalDirection.Set(rawValue: Int)`
   - `HorizontalDirection.Set(direction: HorizontalDirection)`
+  - `HorizontalDirection.Set(rawValue: Int)`
   - `HorizontalDirection.Set.all`
   - `HorizontalDirection.Set.leading`
   - `HorizontalDirection.Set.trailing`
@@ -2369,8 +2408,8 @@ Modifier.zIndex(value: Double)
   - `HorizontalEdge.leading`
   - `HorizontalEdge.trailing`
 - `HorizontalEdge.Set` (class)
-  - `HorizontalEdge.Set(rawValue: Int)`
   - `HorizontalEdge.Set(edge: HorizontalEdge)`
+  - `HorizontalEdge.Set(rawValue: Int)`
   - `HorizontalEdge.Set.all`
   - `HorizontalEdge.Set.leading`
   - `HorizontalEdge.Set.trailing`
@@ -2595,8 +2634,8 @@ Modifier.zIndex(value: Double)
   - `VerticalDirection.up`
   - `VerticalDirection.down`
 - `VerticalDirection.Set` (class)
-  - `VerticalDirection.Set(rawValue: Int)`
   - `VerticalDirection.Set(direction: VerticalDirection)`
+  - `VerticalDirection.Set(rawValue: Int)`
   - `VerticalDirection.Set.up`
   - `VerticalDirection.Set.all`
   - `VerticalDirection.Set.down`
@@ -2801,6 +2840,7 @@ Modifier.zIndex(value: Double)
   - `Path.lineIntersection(other: Path, eoFill: Boolean`
   - `Path.symmetricDifference(other: Path, eoFill: Boolean`
   - `Path.union(other: Path, eoFill: Boolean`
+  - `Path.applying(transform: CGAffineTransform): Path`
   - `Path.offsetBy(dx: Double, dy: Double): Path`
   - `Path(ellipseIn: CGRect)`
   - `Path()`
@@ -2827,6 +2867,7 @@ Modifier.zIndex(value: Double)
   - `PointerStyle.grabIdle`
   - `PointerStyle.rowResize(directions: VerticalDirection.Set): PointerStyle`
   - `PointerStyle.rowResize`
+  - `PointerStyle.image(resource: String, hotSpot: UnitPoint): PointerStyle`
 - `PresentationDetent` (class)
   - `PresentationDetent.large`
   - `PresentationDetent.height(height: Double): PresentationDetent`
@@ -3015,8 +3056,8 @@ Modifier.zIndex(value: Double)
   - `VerticalEdge.top`
   - `VerticalEdge.bottom`
 - `VerticalEdge.Set` (class)
-  - `VerticalEdge.Set(rawValue: Int)`
   - `VerticalEdge.Set(e: VerticalEdge)`
+  - `VerticalEdge.Set(rawValue: Int)`
   - `VerticalEdge.Set.all`
   - `VerticalEdge.Set.top`
   - `VerticalEdge.Set.bottom`
@@ -3154,8 +3195,8 @@ Modifier.zIndex(value: Double)
   - `Edge.Corner.bottomLeading`
   - `Edge.Corner.bottomTrailing`
 - `Edge.Corner.Set` (class)
-  - `Edge.Corner.Set(rawValue: Int)`
   - `Edge.Corner.Set(corner: Edge.Corner)`
+  - `Edge.Corner.Set(rawValue: Int)`
   - `Edge.Corner.Set.topLeading`
   - `Edge.Corner.Set.topTrailing`
   - `Edge.Corner.Set.bottomLeading`
@@ -3175,8 +3216,8 @@ Modifier.zIndex(value: Double)
 - `Edge.Corner.Style.AnimatableData` (class)
   - `Edge.Corner.Style.AnimatableData.zero`
 - `Edge.Set` (class)
-  - `Edge.Set(rawValue: Int)`
   - `Edge.Set(e: Edge)`
+  - `Edge.Set(rawValue: Int)`
   - `Edge.Set.horizontal`
   - `Edge.Set.all`
   - `Edge.Set.top`
@@ -3195,8 +3236,8 @@ Modifier.zIndex(value: Double)
   - `FrameResizeDirection.inward`
   - `FrameResizeDirection.outward`
 - `FrameResizeDirection.Set` (class)
-  - `FrameResizeDirection.Set(rawValue: Int)`
   - `FrameResizeDirection.Set(direction: FrameResizeDirection)`
+  - `FrameResizeDirection.Set(rawValue: Int)`
   - `FrameResizeDirection.Set.all`
   - `FrameResizeDirection.Set.inward`
   - `FrameResizeDirection.Set.outward`
@@ -3373,8 +3414,8 @@ Modifier.zIndex(value: Double)
   - `ToolbarVerticalBehavior.disabled`
   - `ToolbarVerticalBehavior.automatic`
 - `TypesettingLanguage` (class)
-  - `TypesettingLanguage.explicit(language: String): TypesettingLanguage`
   - `TypesettingLanguage.automatic`
+  - `TypesettingLanguage.explicit(language: String): TypesettingLanguage`
 - `UnitPoint` (class)
   - `UnitPoint(x: Double, y: Double)`
   - `UnitPoint()`

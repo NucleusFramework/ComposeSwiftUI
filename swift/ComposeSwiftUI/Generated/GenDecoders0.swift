@@ -73,7 +73,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1087:
         return AccessoryCircularGaugeStyle()
-    case 2659:
+    case 2663:
         return .accessoryCircular
     default: return nil
     }
@@ -123,7 +123,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2793:
+    case 2797:
         return .automatic
     default: return nil
     }
@@ -136,7 +136,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1195:
         return AutomaticMenuBarExtraStyle()
-    case 2799:
+    case 2803:
         return .automatic
     default: return nil
     }
@@ -208,7 +208,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1239:
         return BorderedProminentButtonStyle()
-    case 2828:
+    case 2832:
         return .borderedProminent
     default: return nil
     }
@@ -231,7 +231,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1264:
         return ButtonToggleStyle()
-    case 2746:
+    case 2750:
         return .button
     default: return nil
     }
@@ -255,7 +255,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1310:
+    case 1311:
         guard let p0 = d_Color_RGBColorSpace(a.expr(0)) else { return nil }
         return Color.Resolved(colorSpace: p0, red: a.float(1), green: a.float(2), blue: a.float(3), opacity: a.float(4))
     default: return nil
@@ -266,7 +266,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2817:
+    case 2821:
         return .columns
     default: return nil
     }
@@ -277,7 +277,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1352:
+    case 1353:
         return .zero
     default: return nil
     }
@@ -287,29 +287,29 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS) || os(macOS)
-    case 1364:
+    case 1365:
         return .dragPreview
     #endif
     #if os(macOS) || os(watchOS)
-    case 1365:
+    case 1366:
         return .focusEffect
     #endif
     #if os(iOS) || os(tvOS)
-    case 1366:
+    case 1367:
         if #available(iOS 17.0, macOS 14.0, tvOS 18.0, watchOS 10.0, *) {
             return .hoverEffect
         }
         return nil
     #endif
-    case 1367:
-        return .interaction
     case 1368:
+        return .interaction
+    case 1369:
         return .accessibility
     #if os(iOS) || os(tvOS)
-    case 1369:
+    case 1370:
         return .contextMenuPreview
     #endif
-    case 1370:
+    case 1371:
         return ContentShapeKinds(rawValue: a.int(0))
     default: return nil
     }
@@ -318,9 +318,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1398:
-        return .local
     case 1399:
+        return .local
+    case 1400:
         return .global
     default: return nil
     }
@@ -329,9 +329,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1407:
-        return .userInitiated
     case 1408:
+        return .userInitiated
+    case 1409:
         return .automatic
     default: return nil
     }
@@ -341,7 +341,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1414:
+    case 1415:
         return DefaultMenuButtonStyle()
     default: return nil
     }
@@ -351,9 +351,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1420:
+    case 1421:
         return DefaultTextFieldStyle()
-    case 2775:
+    case 2779:
         return .automatic
     default: return nil
     }
@@ -362,11 +362,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1428:
-        return .critical
     case 1429:
-        return .standard
+        return .critical
     case 1430:
+        return .standard
+    case 1431:
         return .automatic
     default: return nil
     }
@@ -377,15 +377,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1438:
+    case 1439:
         guard let p0 = d_DragConfiguration_OperationsWithinApp(a.expr(0)) else { return nil }
         guard let p1 = d_DragConfiguration_OperationsOutsideApp(a.expr(1)) else { return nil }
         return DragConfiguration(operationsWithinApp: p0, operationsOutsideApp: p1)
     #if os(macOS)
-    case 1439:
+    case 1440:
         return DragConfiguration(allowMove: a.bool(0), allowDelete: a.bool(1))
     #endif
-    case 1440:
+    case 1441:
         return DragConfiguration(allowMove: a.bool(0))
     default: return nil
     }
@@ -397,7 +397,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1458:
+    case 1459:
         guard let p0 = d_DropOperation(a.expr(0)) else { return nil }
         return DropConfiguration(operation: p0)
     default: return nil
@@ -408,13 +408,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1491:
-        return .top
     case 1492:
-        return .bottom
+        return .top
     case 1493:
-        return .leading
+        return .bottom
     case 1494:
+        return .leading
+    case 1495:
         return .trailing
     default: return nil
     }
@@ -423,9 +423,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1526:
-        return EdgeInsets(top: a.cgFloat(0), leading: a.cgFloat(1), bottom: a.cgFloat(2), trailing: a.cgFloat(3))
     case 1527:
+        return EdgeInsets(top: a.cgFloat(0), leading: a.cgFloat(1), bottom: a.cgFloat(2), trailing: a.cgFloat(3))
+    case 1528:
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
             guard let base = d_EdgeInsets(a.expr(0)) else { return nil }
             guard let p0 = d_RectangleCornerInsets(a.expr(1)) else { return nil }
@@ -433,7 +433,7 @@ import UniformTypeIdentifiers
             return base.inset(by: p0, edges: p1)
         }
         return nil
-    case 1528:
+    case 1529:
         return EdgeInsets()
     default: return nil
     }
@@ -442,9 +442,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1538:
-        return .zero
     case 1539:
+        return .zero
+    case 1540:
         return EmptyAnimatableData()
     default: return nil
     }
@@ -454,7 +454,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1546:
+    case 1547:
         return EmptyWidgetConfiguration()
     default: return nil
     }
@@ -465,9 +465,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1559:
+    case 1560:
         return FieldDatePickerStyle()
-    case 2778:
+    case 2782:
         return .field
     default: return nil
     }
@@ -477,13 +477,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1566:
-        return .edit
     case 1567:
-        return .activate
+        return .edit
     case 1568:
-        return FocusInteractions(rawValue: a.int(0))
+        return .activate
     case 1569:
+        return FocusInteractions(rawValue: a.int(0))
+    case 1570:
         return .automatic
     default: return nil
     }
@@ -492,15 +492,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1634:
-        return .compressed
     case 1635:
-        return .expanded
+        return .compressed
     case 1636:
-        return .standard
+        return .expanded
     case 1637:
-        return .condensed
+        return .standard
     case 1638:
+        return .condensed
+    case 1639:
         return Font.Width(a.cgFloat(0))
     default: return nil
     }
@@ -511,9 +511,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1655:
+    case 1656:
         return FullImmersionStyle()
-    case 2768:
+    case 2772:
         return .full
     default: return nil
     }
@@ -524,9 +524,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1677:
+    case 1678:
         return GlassProminentButtonStyle()
-    case 2827:
+    case 2831:
         return .glassProminent
     default: return nil
     }
@@ -535,63 +535,63 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1685:
-        return .colorDodge
     case 1686:
-        return .difference
+        return .colorDodge
     case 1687:
-        return .luminosity
+        return .difference
     case 1688:
-        return .plusDarker
+        return .luminosity
     case 1689:
-        return .saturation
+        return .plusDarker
     case 1690:
-        return .sourceAtop
+        return .saturation
     case 1691:
-        return .plusLighter
+        return .sourceAtop
     case 1692:
-        return .destinationIn
+        return .plusLighter
     case 1693:
-        return .destinationOut
+        return .destinationIn
     case 1694:
-        return .destinationAtop
+        return .destinationOut
     case 1695:
-        return .destinationOver
+        return .destinationAtop
     case 1696:
-        return .hue
+        return .destinationOver
     case 1697:
-        return .xor
+        return .hue
     case 1698:
-        return .copy
+        return .xor
     case 1699:
-        return .clear
+        return .copy
     case 1700:
-        return .color
+        return .clear
     case 1701:
-        return .darken
+        return .color
     case 1702:
-        return .normal
+        return .darken
     case 1703:
-        return .screen
+        return .normal
     case 1704:
-        return .lighten
+        return .screen
     case 1705:
-        return .overlay
+        return .lighten
     case 1706:
-        return .multiply
+        return .overlay
     case 1707:
-        return GraphicsContext.BlendMode(rawValue: Int32(truncatingIfNeeded: a.int(0)))
+        return .multiply
     case 1708:
-        return .sourceIn
+        return GraphicsContext.BlendMode(rawValue: Int32(truncatingIfNeeded: a.int(0)))
     case 1709:
-        return .colorBurn
+        return .sourceIn
     case 1710:
-        return .exclusion
+        return .colorBurn
     case 1711:
-        return .hardLight
+        return .exclusion
     case 1712:
-        return .softLight
+        return .hardLight
     case 1713:
+        return .softLight
+    case 1714:
         return .sourceOut
     default: return nil
     }
@@ -600,9 +600,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1743:
-        return .foreground
     case 1744:
+        return .foreground
+    case 1745:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
             guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
@@ -611,13 +611,13 @@ import UniformTypeIdentifiers
             return .conicGradient(p0, center: p1, angle: p2, options: p3)
         }
         return nil
-    case 1745:
+    case 1746:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
         guard let p2 = d_Angle(a.expr(2)) else { return nil }
         let p3: GraphicsContext.GradientOptions = a.isNil(3) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(3)) ?? GraphicsContext.GradientOptions())
         return .conicGradient(p0, center: p1, angle: p2, options: p3)
-    case 1746:
+    case 1747:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
             guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
@@ -626,13 +626,13 @@ import UniformTypeIdentifiers
             return .linearGradient(p0, startPoint: p1, endPoint: p2, options: p3)
         }
         return nil
-    case 1747:
+    case 1748:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
         guard let p2 = d_CGPoint(a.expr(2)) else { return nil }
         let p3: GraphicsContext.GradientOptions = a.isNil(3) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(3)) ?? GraphicsContext.GradientOptions())
         return .linearGradient(p0, startPoint: p1, endPoint: p2, options: p3)
-    case 1748:
+    case 1749:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
             guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
@@ -641,7 +641,7 @@ import UniformTypeIdentifiers
             return .radialGradient(p0, startCenter: p1, startRadius: a.cgFloat(2), endCenter: p3, endRadius: a.cgFloat(4), options: p5)
         }
         return nil
-    case 1749:
+    case 1750:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_Gradient(a.expr(0)) else { return nil }
             guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
@@ -650,7 +650,7 @@ import UniformTypeIdentifiers
             return .radialGradient(p0, startCenter: p1, startRadius: a.cgFloat(2), endCenter: p3, endRadius: a.cgFloat(4), options: p5)
         }
         return nil
-    case 1750:
+    case 1751:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
             guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
@@ -658,35 +658,35 @@ import UniformTypeIdentifiers
             return .radialGradient(p0, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3), options: p4)
         }
         return nil
-    case 1751:
+    case 1752:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
         let p4: GraphicsContext.GradientOptions = a.isNil(4) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(4)) ?? GraphicsContext.GradientOptions())
         return .radialGradient(p0, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3), options: p4)
-    case 1752:
-        guard let p0 = d_Color_RGBColorSpace(a.expr(0)) else { return nil }
-        return .color(p0, red: a.double(1), green: a.double(2), blue: a.double(3), opacity: a.double(4))
     case 1753:
         guard let p0 = d_Color_RGBColorSpace(a.expr(0)) else { return nil }
-        return .color(p0, white: a.double(1), opacity: a.double(2))
+        return .color(p0, red: a.double(1), green: a.double(2), blue: a.double(3), opacity: a.double(4))
     case 1754:
+        guard let p0 = d_Color_RGBColorSpace(a.expr(0)) else { return nil }
+        return .color(p0, white: a.double(1), opacity: a.double(2))
+    case 1755:
         guard let p0 = d_Color(a.expr(0)) else { return nil }
         return .color(p0)
-    case 1755:
+    case 1756:
         guard let p0 = dp_ShapeStyle(a.expr(0)) else { return nil }
         @MainActor func open<Q0: ShapeStyle>(_ q0: Q0) -> GraphicsContext.Shading? {
             return .style(q0)
         }
         return open(p0)
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 1756:
+    case 1757:
         guard let p0 = d_Shader(a.expr(0)) else { return nil }
         let p1: CGRect = a.isNil(1) ? .zero : (d_CGRect(a.expr(1)) ?? .zero)
         return .shader(p0, bounds: p1)
     #endif
-    case 1757:
-        return .palette(a.exprList(0).compactMap { d_GraphicsContext_Shading($0) })
     case 1758:
+        return .palette(a.exprList(0).compactMap { d_GraphicsContext_Shading($0) })
+    case 1759:
         return .backdrop
     default: return nil
     }
@@ -696,9 +696,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1768:
+    case 1769:
         return GroupedListStyle()
-    case 2877:
+    case 2881:
         return .grouped
     default: return nil
     }
@@ -708,25 +708,25 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1775:
-        return .quaternary
     case 1776:
-        return .primary
-    case 1777:
-        return .quinary
-    case 1778:
-        return .tertiary
-    case 1779:
-        return .secondary
-    case 2671:
         return .quaternary
-    case 2672:
+    case 1777:
         return .primary
-    case 2673:
+    case 1778:
         return .quinary
-    case 2674:
+    case 1779:
         return .tertiary
+    case 1780:
+        return .secondary
     case 2675:
+        return .quaternary
+    case 2676:
+        return .primary
+    case 2677:
+        return .quinary
+    case 2678:
+        return .tertiary
+    case 2679:
         return .secondary
     default: return nil
     }
@@ -735,15 +735,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1795:
-        return .all
     case 1796:
-        return .leading
+        return .all
     case 1797:
-        return HorizontalEdge.Set(rawValue: Int8(truncatingIfNeeded: a.int(0)))
+        return .leading
     case 1798:
-        return .trailing
+        return HorizontalEdge.Set(rawValue: Int8(truncatingIfNeeded: a.int(0)))
     case 1799:
+        return .trailing
+    case 1800:
         guard let p0 = d_HorizontalEdge(a.expr(0)) else { return nil }
         return HorizontalEdge.Set(p0)
     default: return nil
@@ -753,13 +753,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1811:
-        return .low
     case 1812:
-        return .high
+        return .low
     case 1813:
-        return .none
+        return .high
     case 1814:
+        return .none
+    case 1815:
         return .medium
     default: return nil
     }
@@ -768,9 +768,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1831:
+    case 1832:
         return InlinePickerStyle()
-    case 2742:
+    case 2746:
         return .inline
     default: return nil
     }
@@ -780,39 +780,39 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1842:
-        return .rightArrow
     case 1843:
-        return .deleteForward
+        return .rightArrow
     case 1844:
-        return KeyEquivalent(extendedGraphemeClusterLiteral: (a.string(0).first ?? " "))
+        return .deleteForward
     case 1845:
-        return .end
+        return KeyEquivalent(extendedGraphemeClusterLiteral: (a.string(0).first ?? " "))
     case 1846:
-        return .tab
+        return .end
     case 1847:
-        return .home
+        return .tab
     case 1848:
-        return .clear
+        return .home
     case 1849:
-        return .space
+        return .clear
     case 1850:
-        return .delete
+        return .space
     case 1851:
-        return .escape
+        return .delete
     case 1852:
-        return .pageUp
+        return .escape
     case 1853:
-        return .return
+        return .pageUp
     case 1854:
-        return .upArrow
+        return .return
     case 1855:
-        return .pageDown
+        return .upArrow
     case 1856:
-        return .downArrow
+        return .pageDown
     case 1857:
-        return .leftArrow
+        return .downArrow
     case 1858:
+        return .leftArrow
+    case 1859:
         return KeyEquivalent((a.string(0).first ?? " "))
     default: return nil
     }
@@ -822,11 +822,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1875:
-        return .fixed
     case 1876:
-        return .mirrors
+        return .fixed
     case 1877:
+        return .mirrors
+    case 1878:
         guard let p0 = d_LayoutDirection(a.expr(0)) else { return nil }
         return .mirrors(in: p0)
     default: return nil
@@ -836,28 +836,28 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1886:
-        guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
-        guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
-        return LinearGradient(stops: a.exprList(0).compactMap { d_Gradient_Stop($0) }, startPoint: p1, endPoint: p2)
     case 1887:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
-        return LinearGradient(colors: a.exprList(0).compactMap { d_Color($0) }, startPoint: p1, endPoint: p2)
+        return LinearGradient(stops: a.exprList(0).compactMap { d_Gradient_Stop($0) }, startPoint: p1, endPoint: p2)
     case 1888:
+        guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
+        guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
+        return LinearGradient(colors: a.exprList(0).compactMap { d_Color($0) }, startPoint: p1, endPoint: p2)
+    case 1889:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
         return LinearGradient(gradient: p0, startPoint: p1, endPoint: p2)
-    case 2683:
+    case 2687:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
         return .linearGradient(stops: a.exprList(0).compactMap { d_Gradient_Stop($0) }, startPoint: p1, endPoint: p2)
-    case 2684:
+    case 2688:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
         return .linearGradient(colors: a.exprList(0).compactMap { d_Color($0) }, startPoint: p1, endPoint: p2)
-    case 2685:
+    case 2689:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         guard let p2 = d_UnitPoint(a.expr(2)) else { return nil }
@@ -869,9 +869,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1899:
+    case 1900:
         return LocalCoordinateSpace()
-    case 2844:
+    case 2848:
         return .local
     default: return nil
     }
@@ -880,13 +880,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1910:
-        return .size
     case 1911:
-        return .frame
+        return .size
     case 1912:
-        return .position
+        return .frame
     case 1913:
+        return .position
+    case 1914:
         return MatchedGeometryProperties(rawValue: UInt32(truncatingIfNeeded: a.int(0)))
     default: return nil
     }
@@ -896,9 +896,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1932:
+    case 1933:
         return MenuPickerStyle()
-    case 2739:
+    case 2743:
         return .menu
     default: return nil
     }
@@ -908,9 +908,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1950:
-        return .encodingError
     case 1951:
+        return .encodingError
+    case 1952:
         return .invalidContent
     default: return nil
     }
@@ -919,11 +919,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1958:
-        return .detail
     case 1959:
-        return .content
+        return .detail
     case 1960:
+        return .content
+    case 1961:
         return .sidebar
     default: return nil
     }
@@ -934,9 +934,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1975:
-        return .required
     case 1976:
+        return .required
+    case 1977:
         return .requested
     default: return nil
     }
@@ -947,11 +947,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1985:
-        return .never
     case 1986:
-        return .always
+        return .never
     case 1987:
+        return .always
+    case 1988:
         return .automatic
     default: return nil
     }
@@ -961,20 +961,20 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2010:
+    case 2012:
         return .closeSubpath
-    case 2011:
+    case 2013:
         guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
         return .line(to: p0)
-    case 2012:
+    case 2014:
         guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
         return .move(to: p0)
-    case 2013:
+    case 2015:
         guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
         guard let p2 = d_CGPoint(a.expr(2)) else { return nil }
         return .curve(to: p0, control1: p1, control2: p2)
-    case 2014:
+    case 2016:
         guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
         return .quadCurve(to: p0, control: p1)
@@ -985,9 +985,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2028:
+    case 2030:
         return PlainButtonStyle()
-    case 2834:
+    case 2838:
         return .plain
     default: return nil
     }
@@ -997,7 +997,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2047:
+    case 2050:
         return PopUpButtonPickerStyle()
     default: return nil
     }
@@ -1009,18 +1009,18 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS)
-    case 2065:
+    case 2068:
         return .center
     #endif
     #if os(iOS)
-    case 2066:
+    case 2069:
         return .leading
     #endif
     #if os(iOS)
-    case 2067:
+    case 2070:
         return .trailing
     #endif
-    case 2068:
+    case 2071:
         return .automatic
     default: return nil
     }
@@ -1029,9 +1029,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2083:
+    case 2087:
         return .standard
-    case 2084:
+    case 2088:
         return .increased
     default: return nil
     }
@@ -1040,23 +1040,23 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2094:
+    case 2098:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         return RadialGradient(stops: a.exprList(0).compactMap { d_Gradient_Stop($0) }, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3))
-    case 2095:
+    case 2099:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         return RadialGradient(colors: a.exprList(0).compactMap { d_Color($0) }, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3))
-    case 2096:
+    case 2100:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         return RadialGradient(gradient: p0, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3))
-    case 2686:
+    case 2690:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         return .radialGradient(stops: a.exprList(0).compactMap { d_Gradient_Stop($0) }, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3))
-    case 2687:
+    case 2691:
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         return .radialGradient(colors: a.exprList(0).compactMap { d_Color($0) }, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3))
-    case 2688:
+    case 2692:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
         return .radialGradient(p0, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3))
@@ -1068,9 +1068,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2106:
+    case 2110:
         return .division
-    case 2107:
+    case 2111:
         return .occlusion
     default: return nil
     }
@@ -1079,18 +1079,18 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2116:
+    case 2120:
         guard let p0 = d_CGSize(a.expr(0)) else { return nil }
         guard let p1 = d_RoundedCornerStyle(a.expr(1)) else { return nil }
         return RoundedRectangle(cornerSize: p0, style: p1)
-    case 2117:
+    case 2121:
         guard let p1 = d_RoundedCornerStyle(a.expr(1)) else { return nil }
         return RoundedRectangle(cornerRadius: a.cgFloat(0), style: p1)
-    case 2857:
+    case 2861:
         guard let p0 = d_CGSize(a.expr(0)) else { return nil }
         guard let p1 = d_RoundedCornerStyle(a.expr(1)) else { return nil }
         return .rect(cornerSize: p0, style: p1)
-    case 2858:
+    case 2862:
         guard let p1 = d_RoundedCornerStyle(a.expr(1)) else { return nil }
         return .rect(cornerRadius: a.cgFloat(0), style: p1)
     default: return nil
@@ -1101,10 +1101,10 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(watchOS)
-    case 2132:
+    case 2136:
         return .navigationBar
     #endif
-    case 2133:
+    case 2137:
         return .minimum
     default: return nil
     }
@@ -1113,13 +1113,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2147:
+    case 2151:
         return .immediately
-    case 2148:
+    case 2152:
         return .interactively
-    case 2149:
+    case 2153:
         return .never
-    case 2150:
+    case 2154:
         return .automatic
     default: return nil
     }
@@ -1129,15 +1129,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2163:
-        return .interacting
-    case 2164:
-        return .decelerating
-    case 2165:
-        return .idle
-    case 2166:
-        return .tracking
     case 2167:
+        return .interacting
+    case 2168:
+        return .decelerating
+    case 2169:
+        return .idle
+    case 2170:
+        return .tracking
+    case 2171:
         return .animating
     default: return nil
     }
@@ -1147,27 +1147,27 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS) || os(macOS)
-    case 2191:
+    case 2195:
         return .toolbarPrincipal
     #endif
     #if os(iOS)
-    case 2192:
+    case 2196:
         guard let p0 = d_SearchFieldPlacement_NavigationBarDrawerDisplayMode(a.expr(0)) else { return nil }
         return .navigationBarDrawer(displayMode: p0)
     #endif
     #if os(iOS) || os(watchOS)
-    case 2193:
+    case 2197:
         return .navigationBarDrawer
     #endif
     #if os(iOS) || os(macOS)
-    case 2194:
+    case 2198:
         return .sidebar
     #endif
     #if os(iOS) || os(macOS) || os(watchOS)
-    case 2195:
+    case 2199:
         return .toolbar
     #endif
-    case 2196:
+    case 2200:
         return .automatic
     default: return nil
     }
@@ -1178,10 +1178,10 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS)
-    case 2210:
+    case 2214:
         return .minimize
     #endif
-    case 2211:
+    case 2215:
         return .automatic
     default: return nil
     }
@@ -1191,7 +1191,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2239:
+    case 2243:
         return .slider
     default: return nil
     }
@@ -1202,13 +1202,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2259:
+    case 2263:
         return .shapeStyle
-    case 2260:
+    case 2264:
         return .colorEffect
-    case 2261:
+    case 2265:
         return .layerEffect
-    case 2262:
+    case 2266:
         return .distortionEffect
     default: return nil
     }
@@ -1219,7 +1219,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2272:
+    case 2276:
         return SidebarCommands()
     default: return nil
     }
@@ -1230,7 +1230,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2283:
+    case 2287:
         return SnapshotResponse(restoredDefaultState: a.bool(0), estimatedSnapshotExpiration: a.dateOpt(1), identifier: a.stringOpt(2))
     default: return nil
     }
@@ -1241,13 +1241,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2297:
+    case 2301:
         guard let base = d_SplitArrangementViewStyle(a.expr(0)) else { return nil }
         guard let p0 = d_Axis_Set(a.expr(1)) else { return nil }
         return base.axes(p0)
-    case 2298:
+    case 2302:
         return SplitArrangementViewStyle()
-    case 2819:
+    case 2823:
         return .split
     default: return nil
     }
@@ -1256,7 +1256,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2315:
+    case 2319:
         return StrokeStyle(lineWidth: a.cgFloat(0), miterLimit: a.cgFloat(1), dash: a.list(2).compactMap { ($0 as? NSNumber).map { CGFloat($0.doubleValue) } }, dashPhase: a.cgFloat(3))
     default: return nil
     }
@@ -1266,9 +1266,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2337:
+    case 2341:
         return .flat
-    case 2338:
+    case 2342:
         return .gradient
     default: return nil
     }
@@ -1278,9 +1278,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2353:
+    case 2357:
         return SystemFormatStyle.DateReference(to: a.date(0), maxFieldCount: a.int(1))
-    case 2354:
+    case 2358:
         guard let base = d_SystemFormatStyle_DateReference(a.expr(0)) else { return nil }
         return base.locale(Locale(identifier: a.string(1)))
     default: return nil
@@ -1292,14 +1292,14 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS)
-    case 2368:
+    case 2372:
         return .reorderable
     #endif
     #if os(iOS)
-    case 2369:
+    case 2373:
         return .disabled
     #endif
-    case 2370:
+    case 2374:
         return .automatic
     default: return nil
     }
@@ -1310,7 +1310,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2383:
+    case 2387:
         return TabViewCustomization()
     default: return nil
     }
@@ -1320,9 +1320,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2403:
+    case 2407:
         return .lowercase
-    case 2404:
+    case 2408:
         return .uppercase
     default: return nil
     }
@@ -1331,15 +1331,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2416:
-        return .dashDotDot
-    case 2417:
-        return .dot
-    case 2418:
-        return .dash
-    case 2419:
-        return .solid
     case 2420:
+        return .dashDotDot
+    case 2421:
+        return .dot
+    case 2422:
+        return .dash
+    case 2423:
+        return .solid
+    case 2424:
         return .dashDot
     default: return nil
     }
@@ -1349,13 +1349,13 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2433:
+    case 2437:
         if #available(iOS 26.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
             let p0 = a.stringBinding(0)
             return TextEditor(text: Binding<AttributedString>(get: { AttributedString(p0.wrappedValue) }, set: { p0.wrappedValue = String($0.characters) }))
         }
         return nil
-    case 2434:
+    case 2438:
         return TextEditor(text: a.stringBinding(0))
     default: return nil
     }
@@ -1367,25 +1367,25 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS) || os(macOS)
-    case 2447:
+    case 2451:
         return .contextMenu
     #endif
     #if os(macOS)
-    case 2448:
+    case 2452:
         return .accessoryBar
     #endif
     #if os(iOS)
-    case 2449:
+    case 2453:
         return .inputAssistant
     #endif
-    case 2450:
+    case 2454:
         return .all
-    case 2451:
+    case 2455:
         return .`default`
-    case 2452:
+    case 2456:
         return TextInputFormattingControlPlacement.Set(rawValue: UInt(truncatingIfNeeded: a.int(0)))
     #if os(macOS)
-    case 2453:
+    case 2457:
         return .fontPanel
     #endif
     default: return nil
@@ -1395,9 +1395,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2462:
+    case 2466:
         return TitleOnlyLabelStyle()
-    case 2668:
+    case 2672:
         return .titleOnly
     default: return nil
     }
@@ -1407,91 +1407,91 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS)
-    case 2475:
+    case 2479:
         if #available(iOS 26.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .largeTitle
         }
         return nil
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2476:
+    case 2480:
         return .navigation
     #endif
     #if os(macOS)
-    case 2477:
+    case 2481:
         return .accessoryBar(id: a.hashable(0))
     #endif
     #if os(iOS)
-    case 2478:
+    case 2482:
         if #available(iOS 26.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .largeSubtitle
         }
         return nil
     #endif
-    case 2479:
+    case 2483:
         return .primaryAction
     #if os(iOS) || os(macOS)
-    case 2480:
+    case 2484:
         return .secondaryAction
     #endif
-    case 2481:
+    case 2485:
         return .destructiveAction
-    case 2482:
+    case 2486:
         return .cancellationAction
-    case 2483:
+    case 2487:
         return .confirmationAction
     #if os(iOS) || os(tvOS)
-    case 2484:
+    case 2488:
         return .navigationBarLeading
     #endif
     #if os(iOS)
-    case 2485:
+    case 2489:
         if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .topBarPinnedTrailing
         }
         return nil
     #endif
     #if os(iOS) || os(tvOS)
-    case 2486:
+    case 2490:
         return .navigationBarTrailing
     #endif
     #if os(macOS)
-    case 2487:
+    case 2491:
         return ToolbarItemPlacement(id: a.hashable(0))
     #endif
     #if os(iOS)
-    case 2488:
+    case 2492:
         return .title
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2489:
+    case 2493:
         if #available(iOS 17.0, macOS 14.0, tvOS 18.0, watchOS 10.0, *) {
             return .status
         }
         return nil
     #endif
     #if os(iOS) || os(macOS)
-    case 2490:
+    case 2494:
         return .keyboard
     #endif
     #if os(iOS)
-    case 2491:
+    case 2495:
         if #available(iOS 26.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .subtitle
         }
         return nil
     #endif
-    case 2492:
+    case 2496:
         return .automatic
     #if os(iOS) || os(tvOS) || os(watchOS)
-    case 2493:
+    case 2497:
         if #available(iOS 17.0, macOS 14.0, tvOS 18.0, watchOS 10.0, *) {
             return .bottomBar
         }
         return nil
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2494:
+    case 2498:
         return .principal
     #endif
     default: return nil
@@ -1502,33 +1502,33 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 2513:
+    case 2517:
         return .windowToolbar
     #endif
     #if os(macOS)
-    case 2514:
+    case 2518:
         return .accessoryBar(id: a.hashable(0))
     #endif
     #if os(iOS) || os(tvOS) || os(watchOS)
-    case 2515:
+    case 2519:
         return .navigationBar
     #endif
     #if os(macOS)
-    case 2516:
+    case 2520:
         return ToolbarPlacement(id: a.hashable(0))
     #endif
     #if os(iOS) || os(tvOS)
-    case 2517:
+    case 2521:
         return .tabBar
     #endif
-    case 2518:
+    case 2522:
         return .automatic
     #if os(iOS) || os(watchOS)
-    case 2519:
+    case 2523:
         return .bottomBar
     #endif
     #if os(iOS)
-    case 2520:
+    case 2524:
         if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .statusBar
         }
@@ -1543,14 +1543,14 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS)
-    case 2535:
+    case 2539:
         return .prefersToolbarItems
     #endif
     #if os(iOS)
-    case 2536:
+    case 2540:
         return .prefersTabBar
     #endif
-    case 2537:
+    case 2541:
         return .automatic
     default: return nil
     }
@@ -1560,11 +1560,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2549:
+    case 2553:
         return .intrinsicContentSize
-    case 2550:
+    case 2554:
         return .preferredContentSize
-    case 2551:
+    case 2555:
         return UIHostingControllerSizingOptions(rawValue: a.int(0))
     default: return nil
     }
@@ -1574,9 +1574,9 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2579:
+    case 2583:
         return .compact
-    case 2580:
+    case 2584:
         return .regular
     default: return nil
     }
@@ -1585,15 +1585,15 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2596:
-        return .all
-    case 2597:
-        return .top
-    case 2598:
-        return .bottom
-    case 2599:
-        return VerticalEdge.Set(rawValue: Int8(truncatingIfNeeded: a.int(0)))
     case 2600:
+        return .all
+    case 2601:
+        return .top
+    case 2602:
+        return .bottom
+    case 2603:
+        return VerticalEdge.Set(rawValue: Int8(truncatingIfNeeded: a.int(0)))
+    case 2604:
         guard let p0 = d_VerticalEdge(a.expr(0)) else { return nil }
         return VerticalEdge.Set(p0)
     default: return nil
@@ -1603,11 +1603,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2617:
+    case 2621:
         return .hidden
-    case 2618:
+    case 2622:
         return .visible
-    case 2619:
+    case 2623:
         return .automatic
     default: return nil
     }
@@ -1618,11 +1618,11 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2627:
+    case 2631:
         return .enabled
-    case 2628:
+    case 2632:
         return .disabled
-    case 2629:
+    case 2633:
         return .automatic
     default: return nil
     }
@@ -1634,14 +1634,14 @@ import UniformTypeIdentifiers
     let a = Args(expr: e)
     switch e.id {
     #if os(macOS)
-    case 2645:
+    case 2649:
         return .onHover
     #endif
     #if os(macOS)
-    case 2646:
+    case 2650:
         return .visible
     #endif
-    case 2647:
+    case 2651:
         return .automatic
     default: return nil
     }

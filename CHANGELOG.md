@@ -13,6 +13,11 @@
   the `OptionSet` `rawValue` initializers, `Modifier.typesettingLanguage`, `TextEditor(text:)` over an
   `AttributedString`, and the `contentType` variants of `NewDocumentButton`.
 - `Modifier.onOpenURL { url -> }`: callbacks receive a `URL` as its absolute string.
+- Asset-catalog `ImageResource`/`ColorResource` parameters, by name: `Button(title, image = "logo") { }`, and the
+  `image:` variants of `Menu`, `Toggle`, `Picker`, `ControlGroup`.
+- `ClosedRange<Date>` parameters as `ClosedFloatingPointRange<Double>` of epoch seconds: `DatePicker(…, range = …)`,
+  `ProgressView(timerInterval = …)`, `Text(timerInterval = …)`.
+- `Transferable` payloads as `String` (`ShareLink(item = "…")`), and `CGAffineTransform` (`Modifier.transformEffect`).
 
 ### Changed
 

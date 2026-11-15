@@ -16,7 +16,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from bridges import Bridge, Classifier, Ctx, Unsupported, kotlin_name, kotlin_param_name, symbolize  # noqa: E402
+from bridges import Bridge, Classifier, stand_in, Ctx, Unsupported, kotlin_name, kotlin_param_name, symbolize  # noqa: E402
 import model as model_module  # noqa: E402
 from model import DEPLOYMENT, OSNAME, Model  # noqa: E402
 
@@ -610,10 +610,7 @@ class Generator:
         def asset(params):
             # asset-catalog image overloads lose the base name to `systemImage` ones
             return any(lbl == "image" for lbl, internal, _, _ in (params or []))
-        def bare(params):
-            # `V` view-value inits are mostly soft-deprecated twins of the builder ones: builders keep the base name
-            return any(b.kind == "slot" and b.bare for _, _, b, _ in (params or []))
-        for item, kind, s, params in sorted(self.views, key=lambda v: (v[0].sym.deprecated, bare(v[3]), lsk(v[3]), asset(v[3]) and v[2].name != "Image")):
+        for item, kind, s, params in sorted(self.views, key=lambda v: (v[0].sym.deprecated, stand_in(v[3]), lsk(v[3]), asset(v[3]) and v[2].name != "Image")):
             if kind == "valueview":
                 vt = s
                 pname = vt.sym.name[0].lower() + vt.sym.name[1:]
@@ -712,7 +709,7 @@ class Generator:
 
         def lsk_m(params):
             return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in params)
-        for n, (item, params) in enumerate(sorted(self.modifiers, key=lambda x: (x[0].sym.deprecated, lsk_m(x[1])))):
+        for n, (item, params) in enumerate(sorted(self.modifiers, key=lambda x: (x[0].sym.deprecated, stand_in(x[1]), lsk_m(x[1])))):
             decls, encs = self.kt_params(params)
             types = tuple(t.rstrip("?") for _, t, _, _ in decls)
             mname = item.sym.name
@@ -863,7 +860,7 @@ class Generator:
                 ind, self._indent(self.kdoc(vt.sym, self.type_platforms(vt.usr)), ind), ind, "@HiddenFromObjC " if depth == 0 else "", name, ", ".join(supers)), "type:" + vt.usr)
             statics, members = [], []
             seen_sigs = set()
-            for item, kind, params, _ in sorted(vt.members, key=lambda x: x[0].sym.deprecated):
+            for item, kind, params, _ in sorted(vt.members, key=lambda x: (x[0].sym.deprecated, stand_in(x[2]))):
                 if item.sym.parent != vt.usr and kind in ("pstatic", "pfunc"):
                     continue  # declared on the protocol companion
                 if item.key in self.rejected:

@@ -199,142 +199,132 @@ import UniformTypeIdentifiers
             return ModChain.apply(v.navigationBarTitle(LocalizedStringKey(a.string(0))), m, i + 1)
 #endif
         case 379:
-            guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.navigationLinkIndicatorVisibility(p0), m, i + 1)
+            guard let p0 = URL(string: a.string(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.navigationDocument(p0), m, i + 1)
+#if os(iOS) || os(macOS)
         case 387:
-            return ModChain.apply(v.navigationTitle(Text(a.string(0))), m, i + 1)
-        case 395:
-            guard let p0 = d_CGSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.offset(p0), m, i + 1)
-#if os(iOS) || os(macOS) || os(watchOS)
-        case 403:
-            if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
-                guard let p2 = d_GestureInputKinds(a.expr(2)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.onLongPressGesture(minimumDuration: a.double(0), maximumDistance: a.cgFloat(1), inputKinds: p2, perform: a.action(3)), m, i + 1)
+            if #available(iOS 26.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                return ModChain.apply(v.navigationSubtitle(a.string(0)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
+        case 395:
+            guard let p0 = dp_NavigationViewStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            @MainActor func open<Q0: NavigationViewStyle>(_ q0: Q0) -> AnyView {
+                return ModChain.apply(v.navigationViewStyle(q0), m, i + 1)
+            }
+            return open(p0)
+        case 403:
+            if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+                return ModChain.apply(v.onInteractiveResizeChange(a.callback(0, box: KBox.bool)), m, i + 1)
+            }
+            return ModChain.apply(v, m, i + 1)
         case 411:
-            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
-                return ModChain.apply(v.onScrollVisibilityChange(threshold: a.double(0), a.callback(1, box: KBox.bool)), m, i + 1)
+            if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+                return ModChain.apply(v.onOpenURL(prefersInApp: a.bool(0)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
         case 419:
-            if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
-                return ModChain.apply(v.overlayArrangementEdge(d_VerticalEdge(a.expr(0))), m, i + 1)
-            }
-            return ModChain.apply(v, m, i + 1)
+            guard let p0 = d_Alignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.overlay(alignment: p0, content: { a.slot(1) }), m, i + 1)
         case 427:
-            guard let p0 = dp_PickerStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            @MainActor func open<Q0: PickerStyle>(_ q0: Q0) -> AnyView {
-                return ModChain.apply(v.pickerStyle(q0), m, i + 1)
+            guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.persistentSystemOverlays(p0), m, i + 1)
+        case 435:
+            guard let p0 = dp_ShapeStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            @MainActor func open<Q0: ShapeStyle>(_ q0: Q0) -> AnyView {
+                return ModChain.apply(v.presentationBackground(q0), m, i + 1)
             }
             return open(p0)
-        case 435:
-            guard let p0 = d_Alignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.presentationBackground(alignment: p0, content: { a.slot(1) }), m, i + 1)
         case 443:
-            if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
-                guard let p0 = d_PresentationPlacement(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.presentationPlacement(p0), m, i + 1)
-            }
-            return ModChain.apply(v, m, i + 1)
+            guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.presentationDragIndicator(p0), m, i + 1)
         case 451:
-            return ModChain.apply(v.privacySensitive(a.bool(0)), m, i + 1)
+            guard let p0 = d_InterfaceOrientation(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.previewInterfaceOrientation(p0), m, i + 1)
         case 459:
-            if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
-                guard let p0 = d_VerticalEdge(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                guard let p1 = d_HorizontalAlignment(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.safeAreaBar(edge: p0, alignment: p1, spacing: a.cgFloatOpt(2), content: { a.slot(3) }), m, i + 1)
+            guard let p0 = d_Angle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            guard let p1 = d_UnitPoint(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.rotationEffect(p0, anchor: p1), m, i + 1)
+        case 467:
+            return ModChain.apply(v.saturation(a.double(0)), m, i + 1)
+        case 475:
+            guard let p0 = d_ScrollBounceBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            let p1: Axis.Set = a.isNil(1) ? [.vertical] : (d_Axis_Set(a.expr(1)) ?? [.vertical])
+            return ModChain.apply(v.scrollBounceBehavior(p0, axes: p1), m, i + 1)
+        case 483:
+            return ModChain.apply(v.scrollIndicatorsFlash(onAppear: a.bool(0)), m, i + 1)
+        case 491:
+            if #available(iOS 17.1, macOS 14.1, tvOS 17.1, watchOS 10.1, *) {
+                guard let p0 = d_SearchPresentationToolbarBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.searchPresentationToolbarBehavior(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-        case 467:
-            guard let p0 = d_CGSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            guard let p1 = d_UnitPoint(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.scaleEffect(p0, anchor: p1), m, i + 1)
-        case 475:
-            return ModChain.apply(v.scrollClipDisabled(a.bool(0)), m, i + 1)
-        case 483:
-            return ModChain.apply(v.scrollIndicatorsFlash(trigger: a.hashable(0)), m, i + 1)
-#if os(iOS) || os(macOS) || os(tvOS)
-        case 491:
-            guard let p1 = d_SearchScopeActivation(a.expr(2)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.searchScopes(a.hashableBinding(0), activation: p1, { a.slot(3) }), m, i + 1)
-#endif
 #if os(iOS) || os(macOS)
         case 499:
             guard let p2 = d_SearchFieldPlacement(a.expr(4)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.searchable(text: a.stringBinding(0), isPresented: a.boolBinding(2), placement: p2, prompt: a.string(5)), m, i + 1)
+            return ModChain.apply(v.searchable(text: a.stringBinding(0), isPresented: a.boolBinding(2), placement: p2, prompt: LocalizedStringResource(String.LocalizationValue(a.string(5)))), m, i + 1)
 #endif
-#if os(iOS) || os(macOS)
         case 507:
-            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
-                return ModChain.apply(v.sectionActions(content: { a.slot(0) }), m, i + 1)
+            guard let p1 = d_SearchFieldPlacement(a.expr(2)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.searchable(text: a.stringBinding(0), placement: p1, prompt: a.string(3), suggestions: { a.slot(4) }), m, i + 1)
+#if os(iOS) || os(macOS) || os(watchOS)
+        case 515:
+            if #available(iOS 26.0, macOS 26.0, tvOS 17.0, watchOS 26.0, *) {
+                guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.sliderThumbVisibility(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-        case 515:
-            return ModChain.apply(v.speechAdjustedPitch(a.double(0)), m, i + 1)
         case 523:
-            guard let p0 = d_SpringLoadingBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.springLoadingBehavior(p0), m, i + 1)
+            if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
+                return ModChain.apply(v.splitArrangementLayoutSize(minWidth: a.cgFloatOpt(0), idealWidth: a.cgFloatOpt(1), maxWidth: a.cgFloatOpt(2), minHeight: a.cgFloatOpt(3), idealHeight: a.cgFloatOpt(4), maxHeight: a.cgFloatOpt(5)), m, i + 1)
+            }
+            return ModChain.apply(v, m, i + 1)
 #if os(iOS) || os(macOS) || os(watchOS)
         case 531:
             if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
-                return ModChain.apply(v.swipeActionsContainer(), m, i + 1)
+                guard let p0 = d_HorizontalEdge(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.swipeActions(edge: p0, allowsFullSwipe: a.bool(1), content: { a.slot(2) }, onPresentationChanged: a.callback(3, box: KBox.bool)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if os(iOS)
         case 539:
-            if #available(iOS 26.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                return ModChain.apply(v.tabViewBottomAccessory(content: { a.slot(0) }), m, i + 1)
-            }
-            return ModChain.apply(v, m, i + 1)
-#endif
+            return ModChain.apply(v.tabItem({ a.slot(0) }), m, i + 1)
 #if os(iOS) || os(macOS)
         case 547:
-            guard let p0 = dp_TableStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            @MainActor func open<Q0: TableStyle>(_ q0: Q0) -> AnyView {
-                return ModChain.apply(v.tableStyle(q0), m, i + 1)
-            }
-            return open(p0)
+            guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.tableColumnHeaders(p0), m, i + 1)
 #endif
+#if os(iOS) || os(tvOS) || os(watchOS)
         case 555:
-            if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
-                guard let p0 = d_TextInputBorderShape(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.textInputBorderShape(p0), m, i + 1)
+            return ModChain.apply(v.textInputAutocapitalization(d_TextInputAutocapitalization(a.expr(0))), m, i + 1)
+#endif
+        case 563:
+            return ModChain.apply(v.tint(d_Color(a.expr(0))), m, i + 1)
+        case 571:
+            guard let p1 = d_ToolbarPlacement(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.toolbarColorScheme(d_ColorScheme(a.expr(0)), for: p1), m, i + 1)
+#if os(iOS)
+        case 579:
+            if #available(iOS 27.2, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                guard let p0 = d_ToolbarTitleAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+                return ModChain.apply(v.toolbarTitleAlignment(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-        case 563:
-            guard let p0 = dp_ToggleStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            @MainActor func open<Q0: ToggleStyle>(_ q0: Q0) -> AnyView {
-                return ModChain.apply(v.toggleStyle(q0), m, i + 1)
-            }
-            return open(p0)
-#if os(watchOS)
-        case 571:
-            guard let p0 = dp_ShapeStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            guard let p1 = d_ToolbarPlacement(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
-            @MainActor func open<Q0: ShapeStyle>(_ q0: Q0) -> AnyView {
-                return ModChain.apply(v.toolbarForegroundStyle(q0, for: p1), m, i + 1)
-            }
-            return open(p0)
 #endif
-        case 579:
-            guard let p0 = d_ToolbarTitleDisplayMode(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-            return ModChain.apply(v.toolbarTitleDisplayMode(p0), m, i + 1)
 #if os(macOS)
         case 587:
-            return ModChain.apply(v.touchBarItemPrincipal(a.bool(0)), m, i + 1)
+            guard let p0 = d_TouchBarItemPresence(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
+            return ModChain.apply(v.touchBarItemPresence(p0), m, i + 1)
 #endif
         case 595:
-            return ModChain.apply(v.typesettingLanguage(Locale.Language(identifier: a.string(0)), isEnabled: a.bool(1)), m, i + 1)
+            return ModChain.apply(v.typeSelectEquivalent(LocalizedStringResource(String.LocalizationValue(a.string(0)))), m, i + 1)
 #if os(macOS)
         case 603:
             if #available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 guard let p0 = d_WindowInteractionBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
-                return ModChain.apply(v.windowResizeBehavior(p0), m, i + 1)
+                return ModChain.apply(v.windowMinimizeBehavior(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
