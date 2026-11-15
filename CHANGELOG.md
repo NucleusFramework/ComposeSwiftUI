@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- `renderComposeSwiftUIPreviews` links static frameworks that use C libraries, such as SQLDelight's SQLite driver.
+  It passes the framework's `linkerOpts` to the preview host and strips dead code like Xcode does. If symbols are
+  still missing, the error says to declare those libraries with `linkerOpts`.
+
 ## 0.3.2
 
 ### Fixed

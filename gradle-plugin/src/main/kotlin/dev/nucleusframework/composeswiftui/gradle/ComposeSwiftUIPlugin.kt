@@ -140,6 +140,7 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             task.frameworkDirectory.set(project.layout.dir(framework.map { it.outputFile }))
             task.frameworkName.set(framework.map { it.baseName })
             task.staticFramework.set(framework.map { it.isStatic })
+            task.linkerOpts.set(framework.map { if (it.isStatic) it.linkerOpts else emptyList() })
             task.previewsSwiftFile.set(previews.flatMap { it.swiftOutputFile })
             task.hostSwiftFile.set(previews.flatMap { it.hostSwiftOutputFile })
             task.device.set(extension.previewDevice)

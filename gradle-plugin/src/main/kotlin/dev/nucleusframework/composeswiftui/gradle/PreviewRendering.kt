@@ -5,6 +5,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
@@ -57,6 +58,10 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
 
     @get:Input
     abstract val staticFramework: Property<Boolean>
+
+    /** The framework's `linkerOpts`, e.g. SQLDelight's `-lsqlite3`: a static framework leaves them to the app link. */
+    @get:Input
+    abstract val linkerOpts: ListProperty<String>
 
     @get:InputFile
     @get:PathSensitive(PathSensitivity.NONE)
@@ -134,10 +139,22 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
                 timeoutMinutes = 15,
             )
         }
-        exec(
-            "xcrun", "swiftc", *common, objectFile.path, "-framework", frameworkName.get(), "-lc++",
-            "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks", "-o", app.resolve(HOST_NAME).path,
-        )
+        try {
+            exec(
+                "xcrun", "swiftc", *common, objectFile.path, "-framework", frameworkName.get(), "-lc++",
+                "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks", "-o", app.resolve(HOST_NAME).path,
+                // Like Xcode's default DEAD_CODE_STRIPPING: unused C interop wrappers must not need their symbols.
+                "-Xlinker", "-dead_strip",
+                *linkerOpts.get().flatMap { listOf("-Xlinker", it) }.toTypedArray(),
+            )
+        } catch (e: GradleException) {
+            if ("Undefined symbols" !in e.message.orEmpty()) throw e
+            throw GradleException(
+                "Compose SwiftUI: the preview host doesn't get the app's Xcode linker flags (OTHER_LDFLAGS). Declare " +
+                    "the libraries the framework needs on it, e.g. `binaries.framework { linkerOpts(\"-lsqlite3\") }` " +
+                    "for SQLDelight.\n${e.message}",
+            )
+        }
         composeResources.files.filter { it.isDirectory }.forEach { it.copyRecursively(app.resolve("compose-resources"), overwrite = true) }
         if (!staticFramework.get()) framework.copyRecursively(app.resolve("Frameworks/${framework.name}"))
         app.resolve("Info.plist").writeText(INFO_PLIST)
