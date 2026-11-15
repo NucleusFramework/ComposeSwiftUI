@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.1
+
+### Added
+
+- IntelliJ plugin: *Code › Render Compose SwiftUI Previews* renders the previews of the current file again, with
+  ⌥⇧⌘P on macOS (Ctrl+Alt+Shift+P elsewhere).
+
+### Fixed
+
+- IntelliJ plugin: the preview editor reads the file and the preview images in the background. It used to do it on
+  the UI thread when the file was opened, which the IDE reports as an error and which could freeze it briefly.
+
 ## 0.4.0
 
 ### Changed (breaking)

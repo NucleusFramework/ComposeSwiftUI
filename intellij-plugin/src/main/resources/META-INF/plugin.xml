@@ -22,4 +22,14 @@
         <codeInsight.lineMarkerProvider language="kotlin"
                                         implementationClass="dev.nucleusframework.composeswiftui.idea.PreviewLineMarkerProvider"/>
     </extensions>
+
+    <actions>
+        <action id="ComposeSwiftUI.RenderPreviews" class="dev.nucleusframework.composeswiftui.idea.RenderPreviewsAction"
+                text="Render Compose SwiftUI Previews" description="Render the previews of this file on the iOS simulator"
+                icon="AllIcons.Actions.Refresh">
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift P"/>
+            <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="meta alt shift P" replace-all="true"/>
+        </action>
+    </actions>
 </idea-plugin>

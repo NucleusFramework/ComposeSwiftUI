@@ -8,6 +8,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.ModalityState
 import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Document
@@ -23,6 +24,7 @@ import com.intellij.psi.PsiManager
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.panels.VerticalLayout
+import com.intellij.util.concurrency.AppExecutorUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.UIUtil
 import org.jetbrains.kotlin.psi.KtFile
@@ -55,7 +57,7 @@ private fun KtNamedFunction.previewTitle(): String {
 /** Right side of the split editor: the rendered previews of the file, re-rendered when the file is saved. */
 class PreviewEditor(private val project: Project, private val file: VirtualFile) : UserDataHolderBase(), FileEditor {
     // Resolved on use: the module is unknown until the Gradle sync has finished.
-    private val module: PreviewModule? get() = PreviewModule.of(project, file)
+    val module: PreviewModule? get() = PreviewModule.of(project, file)
     private val status = JBLabel().apply { foreground = UIUtil.getContextHelpForeground() }
     private val cards = JPanel(VerticalLayout(JBUI.scale(20))).apply { border = JBUI.Borders.empty(12) }
     private val cardsByName = mutableMapOf<String, JComponent>()
@@ -69,7 +71,7 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
                 e.presentation.isEnabled = module != null && !project.service<PreviewRenderer>().isRendering(module)
             }
             override fun getActionUpdateThread() = ActionUpdateThread.EDT
-        }
+        }.apply { copyShortcutFrom(ActionManager.getInstance().getAction(RenderPreviewsAction.ID)) }
         val toolbar = ActionManager.getInstance()
             .createActionToolbar("ComposeSwiftUIPreview", DefaultActionGroup(refresh), true)
             .apply { targetComponent = component }
@@ -112,10 +114,11 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
 
     /** Shows the rendered previews, or renders them when there are none yet. */
     private fun reloadOrRender() {
-        reload()
-        val module = module
-        status.text = if (module == null) "Waiting for the Gradle sync…" else ""
-        if (module != null && cardsByName.isNotEmpty() && cardsByName.keys.none { module.image(it).exists() }) render()
+        reload { previews ->
+            val module = module
+            status.text = if (module == null) "Waiting for the Gradle sync…" else ""
+            if (module != null && previews.isNotEmpty() && previews.none { it.image != null }) render()
+        }
     }
 
     fun render() {
@@ -127,23 +130,41 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
         cardsByName[qualifiedName]?.let { it.scrollRectToVisible(it.bounds.apply { setLocation(0, 0) }) }
     }
 
-    private fun reload() {
-        val previews = ReadAction.compute<List<Pair<String, String>>, Throwable> {
-            val ktFile = PsiManager.getInstance(project).findFile(file) as? KtFile ?: return@compute emptyList()
+    private class Preview(val qualifiedName: String, val title: String, val image: BufferedImage?)
+
+    /** Reads the file's previews and their images off the EDT (PSI and disk access), then shows them. */
+    private fun reload(then: (List<Preview>) -> Unit = {}) {
+        ReadAction.nonBlocking<List<Preview>> {
+            val ktFile = PsiManager.getInstance(project).findFile(file) as? KtFile ?: return@nonBlocking emptyList()
+            val module = module
             ktFile.declarations.filterIsInstance<KtNamedFunction>()
                 .filter { it.isComposeSwiftUIPreview() }
-                .mapNotNull { function -> function.fqName?.asString()?.let { it to function.previewTitle() } }
+                .mapNotNull { function ->
+                    val qualifiedName = function.fqName?.asString() ?: return@mapNotNull null
+                    val image = module?.image(qualifiedName)?.takeIf { it.exists() }?.let { ImageIO.read(it) }
+                    Preview(qualifiedName, function.previewTitle(), image)
+                }
         }
-        val module = module
+            .expireWith(this)
+            .finishOnUiThread(ModalityState.any()) { previews ->
+                showPreviews(previews)
+                then(previews)
+            }
+            .submit(AppExecutorUtil.getAppExecutorService())
+    }
+
+    private fun showPreviews(previews: List<Preview>) {
         cards.removeAll()
         cardsByName.clear()
-        for ((qualifiedName, title) in previews) {
+        for (preview in previews) {
             val card = JPanel(VerticalLayout(JBUI.scale(6))).apply { isOpaque = false }
-            card.add(JBLabel(title).apply { font = JBUI.Fonts.label().asBold() })
-            val image = module?.image(qualifiedName)?.takeIf { it.exists() }?.let { ImageIO.read(it) }
-            card.add(if (image != null) ScaledImage(image) else JBLabel("Not rendered yet").apply { foreground = UIUtil.getContextHelpForeground() })
+            card.add(JBLabel(preview.title).apply { font = JBUI.Fonts.label().asBold() })
+            card.add(
+                preview.image?.let { ScaledImage(it) }
+                    ?: JBLabel("Not rendered yet").apply { foreground = UIUtil.getContextHelpForeground() },
+            )
             cards.add(card)
-            cardsByName[qualifiedName] = card
+            cardsByName[preview.qualifiedName] = card
         }
         if (previews.isEmpty()) cards.add(JBLabel("No @Preview composable in this file"))
         cards.revalidate()
