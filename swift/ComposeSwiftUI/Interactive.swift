@@ -381,6 +381,7 @@ private func effectValues(_ list: [NSNumber]) -> [Double] { list.map(\.doubleVal
         }
         registerSelectionAndInput()
         registerEffectsAndFiles()
+        registerLayoutAndAccessibility()
     }
 }
 
@@ -440,10 +441,12 @@ private struct GlassID: Hashable, @unchecked Sendable {
 }
 
 private struct NamespacedModifier: ViewModifier {
-    enum Kind { case glassID, glassUnion, focusScope }
+    enum Kind { case glassID, glassUnion, focusScope, linkedGroup, labeledPair, defaultFocus }
     let kind: Kind
     let id: KHashable
     let namespace: Int64
+    var role: AccessibilityLabeledPairRole = .label
+    var flag = true
     @Environment(\.composeNamespaces) private var namespaces
 
     func body(content: Content) -> some View {
@@ -464,6 +467,16 @@ private struct NamespacedModifier: ViewModifier {
                 content
                 #else
                 content.focusScope(ns)
+                #endif
+            case .linkedGroup:
+                content.accessibilityLinkedGroup(id: id, in: ns)
+            case .labeledPair:
+                content.accessibilityLabeledPair(role: role, id: id, in: ns)
+            case .defaultFocus:
+                #if os(iOS)
+                content
+                #else
+                content.prefersDefaultFocus(flag, in: ns)
                 #endif
             }
         } else {
@@ -733,6 +746,56 @@ extension InteractiveRenderers {
         }
         ComposeRegistry.modifiers[100_042] = { v, a, _ in
             a.bool(3) ? discreteSymbolEffect(v, a.int(0), a.hashable(2)) : indefiniteSymbolEffect(v, a.int(0), a.bool(1))
+        }
+    }
+}
+
+// MARK: - 3D rotation, type size ranges, container-relative frames, detents, accessibility groups
+
+@MainActor private func typeSizeRange(_ v: AnyView, _ min: DynamicTypeSize?, _ max: DynamicTypeSize?) -> AnyView {
+    switch (min, max) {
+    case let (lo?, hi?) where lo <= hi: return AnyView(v.dynamicTypeSize(lo...hi))
+    case let (lo?, nil): return AnyView(v.dynamicTypeSize(lo...))
+    case let (nil, hi?): return AnyView(v.dynamicTypeSize(...hi))
+    default: return v
+    }
+}
+
+extension InteractiveRenderers {
+    static func registerLayoutAndAccessibility() {
+        ComposeRegistry.modifiers[100_045] = { v, a, _ in
+            AnyView(v.rotation3DEffect(d_Angle(a.expr(0)) ?? .zero, axis: (x: a.cgFloat(1), y: a.cgFloat(2), z: a.cgFloat(3)),
+                                       anchor: d_UnitPoint(a.expr(4)) ?? .center, anchorZ: a.cgFloat(5), perspective: a.cgFloat(6)))
+        }
+        ComposeRegistry.modifiers[100_046] = { v, a, _ in
+            typeSizeRange(v, d_DynamicTypeSize(a.expr(0)), d_DynamicTypeSize(a.expr(1)))
+        }
+        ComposeRegistry.modifiers[100_047] = { v, a, _ in
+            guard let axes = d_Axis_Set(a.expr(0)), let provider = a.raw(2) as? LengthProvider else { return v }
+            return AnyView(v.containerRelativeFrame(axes, alignment: d_Alignment(a.expr(1)) ?? .center) { length, axis in
+                CGFloat(provider.length(length: Double(length), axis: axis == .horizontal ? 0 : 1))
+            })
+        }
+        ComposeRegistry.modifiers[100_048] = { v, a, _ in
+            let detents = a.exprList(0).compactMap { d_PresentationDetent($0) }
+            guard !detents.isEmpty else { return v }
+            let index = a.int(1)
+            let report = a.callback(2, box: KBox.int)
+            let selection = Binding<PresentationDetent>(
+                get: { detents[index >= 0 && index < detents.count ? index : 0] },
+                set: { new in if let i = detents.firstIndex(of: new) { report(i) } }
+            )
+            return AnyView(v.presentationDetents(Set(detents), selection: selection))
+        }
+        ComposeRegistry.modifiers[100_049] = { v, a, _ in
+            AnyView(v.modifier(NamespacedModifier(kind: .linkedGroup, id: KHashable(a.raw(0) as? NSObject ?? NSNull()), namespace: Int64(a.int(1)))))
+        }
+        ComposeRegistry.modifiers[100_050] = { v, a, _ in
+            AnyView(v.modifier(NamespacedModifier(kind: .labeledPair, id: KHashable(a.raw(1) as? NSObject ?? NSNull()),
+                                                  namespace: Int64(a.int(2)), role: d_AccessibilityLabeledPairRole(a.expr(0)) ?? .label)))
+        }
+        ComposeRegistry.modifiers[100_051] = { v, a, _ in
+            AnyView(v.modifier(NamespacedModifier(kind: .defaultFocus, id: KHashable(NSNull()), namespace: Int64(a.int(1)), flag: a.bool(0))))
         }
     }
 }

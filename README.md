@@ -154,6 +154,10 @@ API:
 | `phaseAnimator`, `symbolEffect`, `MeshGradient` | `Modifier.phaseAnimator(listOf(VisualEffects(), VisualEffects(scale = 1.2)))`, `Modifier.symbolEffect(SymbolEffectKind.Bounce, value = count)`, `MeshGradient(2, 2, points, colors)` |
 | `keyboardType`, `textContentType` | `Modifier.keyboardType(KeyboardType.EmailAddress)`, `Modifier.textContentType(TextContentType.OneTimeCode)` |
 | `Image(uiImage:)`, `Image(nsImage:)`, `MultiDatePicker` | `Image(uiImage)` in `iosMain`, `Image(nsImage)` in `macosMain`, `MultiDatePicker("Days", selection, onSelectionChange)` |
+| `rotation3DEffect(_:axis:)`, `dynamicTypeSize(...xLarge)` | `Modifier.rotation3DEffect(Angle.degrees(45.0), x = 0.0, y = 1.0, z = 0.0)`, `Modifier.dynamicTypeSize(max = DynamicTypeSize.xLarge)` |
+| `containerRelativeFrame(.horizontal) { length, axis in … }` | `Modifier.containerRelativeFrame(Axis.Set.horizontal) { length, axis -> length / 2 }` |
+| `presentationDetents(_:selection:)` | `Modifier.presentationDetents(detents, detent) { detent = it }` |
+| `Text("Rated \(Image(systemName: "star.fill"))")` | `Text(buildStyledString { append("Rated "); appendSymbol(SFSymbol.starFill) })` |
 | A Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map")` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
 | Values passed from Swift | `ComposeView(input: value) { … }` + `hostInput<T>()` in Kotlin |
 

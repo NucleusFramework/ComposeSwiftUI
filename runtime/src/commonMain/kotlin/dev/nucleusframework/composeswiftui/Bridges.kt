@@ -118,3 +118,8 @@ interface AlignmentGuideProvider {
 interface DropHandler {
     fun onDrop(items: List<String>, x: Double, y: Double): Boolean
 }
+
+/** `containerRelativeFrame` length computed in Kotlin from the container length along [axis] (0 horizontal, 1 vertical). */
+interface LengthProvider {
+    fun length(length: Double, axis: Int): Double
+}

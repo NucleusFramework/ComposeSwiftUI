@@ -35,6 +35,9 @@
   `onScrollTargetVisibilityChange`, `fileImporter`, `fileExporter` (text), `PasteButton`, `draggable`/`dropDestination`
   (text), `phaseAnimator`, `symbolEffect`, `MeshGradient`, `keyboardType`, `textContentType`, `MultiDatePicker`, and
   `Image(uiImage)` / `Image(nsImage)` in the platform source sets.
+- `rotation3DEffect`, `dynamicTypeSize(min, max)`, `containerRelativeFrame` with a Kotlin length function,
+  `presentationDetents(detents, selection)`, `accessibilityLinkedGroup`, `accessibilityLabeledPair`,
+  `prefersDefaultFocus`, and inline SF Symbols in styled text (`StyledStringBuilder.appendSymbol`).
 - `Modifier.environment(name = value)` for the 60 settable `EnvironmentValues` (`colorScheme`, `locale`, `font`,
   `lineLimit`, `controlSize`…), SwiftUI's `.environment(\.name, value)`.
 - Optional closures (`Stepper(onIncrement, onDecrement)`, `onDeleteCommand`, `onExitCommand`, `onMoveCommand`, the

@@ -441,6 +441,8 @@ public class StyledString internal constructor(public val runs: List<Pair<String
     override fun toString(): String = text
 }
 
+private const val SYMBOL_RUN = "\u0000sf:"
+
 public class StyledStringBuilder internal constructor() {
     private val runs = ArrayList<Pair<String, SpanStyle>>()
     private var current = SpanStyle()
@@ -450,6 +452,11 @@ public class StyledStringBuilder internal constructor() {
     }
 
     public fun append(text: String, style: SpanStyle): Unit = withStyle(style) { append(text) }
+
+    /** An SF Symbol inline with the text (SwiftUI `Text(Image(systemName:))`), styled like the text around it. */
+    public fun appendSymbol(symbol: SFSymbol) {
+        runs += (SYMBOL_RUN + symbol.name) to current
+    }
 
     public fun append(text: StyledString) {
         text.runs.forEach { (s, style) -> runs += s to current.merge(style) }
@@ -487,7 +494,10 @@ public fun Text(text: StyledString, modifier: Modifier = Modifier) {
         if (style.underline) flags = flags or 2
         if (style.strikethrough) flags = flags or 4
         if (style.monospaced) flags = flags or 8
-        args += s
+        // ponytail: symbol runs are marked by a prefix no user text contains; a run type if more kinds appear
+        val symbol = s.startsWith(SYMBOL_RUN)
+        if (symbol) flags = flags or 16
+        args += if (symbol) s.removePrefix(SYMBOL_RUN) else s
         args += style.color
         args += style.font
         args += style.fontSize

@@ -536,7 +536,7 @@ private struct EmbeddedNSView: NSViewRepresentable {
         var result = Text(verbatim: "")
         for r in 0..<a.int(0) {
             let b = 1 + r * 9
-            var t = Text(verbatim: a.string(b))
+            var t = a.int(b + 6) & 16 != 0 ? Text(Image(systemName: a.string(b))) : Text(verbatim: a.string(b))
             if let font = d_Font(a.expr(b + 2)) {
                 t = t.font(font)
             } else if !a.isNil(b + 3) {

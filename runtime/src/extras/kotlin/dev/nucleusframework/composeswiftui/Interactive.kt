@@ -60,6 +60,13 @@ internal object InteractiveIds {
     const val SYMBOL_EFFECT = 100_042
     const val KEYBOARD_TYPE = 100_043
     const val TEXT_CONTENT_TYPE = 100_044
+    const val ROTATION_3D = 100_045
+    const val DYNAMIC_TYPE_RANGE = 100_046
+    const val CONTAINER_RELATIVE_FRAME = 100_047
+    const val PRESENTATION_DETENTS = 100_048
+    const val ACCESSIBILITY_LINKED_GROUP = 100_049
+    const val ACCESSIBILITY_LABELED_PAIR = 100_050
+    const val PREFERS_DEFAULT_FOCUS = 100_051
 }
 
 // ---- AsyncImage --------------------------------------------------------------------------------
@@ -733,3 +740,70 @@ public fun MultiDatePicker(
         modifier,
     )
 }
+
+// ---- 3D rotation, type size ranges, container-relative frames, sheet detents --------------------
+
+/** SwiftUI `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` around the axis ([x], [y], [z]). */
+@HiddenFromObjC
+public fun Modifier.rotation3DEffect(
+    angle: Angle,
+    x: Double,
+    y: Double,
+    z: Double,
+    anchor: UnitPoint = UnitPoint.center,
+    anchorZ: Double = 0.0,
+    perspective: Double = 1.0,
+): Modifier = element(InteractiveIds.ROTATION_3D, angle, x, y, z, anchor, anchorZ, perspective)
+
+/** SwiftUI `dynamicTypeSize(_:)` with a range: limits Dynamic Type between [min] and [max] (null = unbounded). */
+@HiddenFromObjC
+public fun Modifier.dynamicTypeSize(min: DynamicTypeSize? = null, max: DynamicTypeSize? = null): Modifier =
+    element(InteractiveIds.DYNAMIC_TYPE_RANGE, min, max)
+
+/**
+ * SwiftUI `containerRelativeFrame(_:alignment:_:)`: [length] maps the container length along an axis
+ * (0 horizontal, 1 vertical) to this view's length.
+ */
+@HiddenFromObjC
+public fun Modifier.containerRelativeFrame(
+    axes: Axis.Set,
+    alignment: Alignment = Alignment.center,
+    length: (containerLength: Double, axis: Int) -> Double,
+): Modifier = element(
+    InteractiveIds.CONTAINER_RELATIVE_FRAME,
+    axes,
+    alignment,
+    object : LengthProvider {
+        override fun length(length: Double, axis: Int): Double = length(length, axis)
+    },
+)
+
+/** SwiftUI `presentationDetents(_:selection:)`: the sheet detent, among [detents], driven by Kotlin state. */
+@HiddenFromObjC
+public fun Modifier.presentationDetents(
+    detents: List<PresentationDetent>,
+    selection: PresentationDetent,
+    onSelectionChange: (PresentationDetent) -> Unit,
+): Modifier = element(
+    InteractiveIds.PRESENTATION_DETENTS,
+    detents,
+    detents.indexOf(selection),
+    SValueCallback { i -> detents.getOrNull((i as Number).toInt())?.let(onSelectionChange) },
+)
+
+// ---- accessibility groups and default focus -----------------------------------------------------
+
+/** SwiftUI `accessibilityLinkedGroup(id:in:)`: VoiceOver links the views sharing [id]. */
+@HiddenFromObjC
+public fun Modifier.accessibilityLinkedGroup(id: Any, namespace: NamespaceId): Modifier =
+    element(InteractiveIds.ACCESSIBILITY_LINKED_GROUP, id, namespace.id)
+
+/** SwiftUI `accessibilityLabeledPair(role:id:in:)`: pairs a label view and its content for VoiceOver. */
+@HiddenFromObjC
+public fun Modifier.accessibilityLabeledPair(role: AccessibilityLabeledPairRole, id: Any, namespace: NamespaceId): Modifier =
+    element(InteractiveIds.ACCESSIBILITY_LABELED_PAIR, role, id, namespace.id)
+
+/** SwiftUI `prefersDefaultFocus(_:in:)` (macOS, tvOS, watchOS), inside a [focusScope]. */
+@HiddenFromObjC
+public fun Modifier.prefersDefaultFocus(prefersDefaultFocus: Boolean = true, namespace: NamespaceId): Modifier =
+    element(InteractiveIds.PREFERS_DEFAULT_FOCUS, prefersDefaultFocus, namespace.id)
