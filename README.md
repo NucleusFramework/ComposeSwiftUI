@@ -149,7 +149,8 @@ A row recomposes when its item changes, so prefer immutable items such as data c
 
 ## Previews
 
-Compose SwiftUI draws with real SwiftUI, so previews render in Xcode's canvas, not in Android Studio. Annotate a
+Compose SwiftUI draws with real SwiftUI, so previews render with SwiftUI: in IntelliJ IDEA / Android Studio with the
+Compose SwiftUI IDE plugin, or in Xcode's canvas. Annotate a
 top-level, parameterless composable with `@Preview`:
 
 ```kotlin
@@ -159,6 +160,22 @@ fun CounterPreview() {
     NavigationStack { CounterScreen() }
 }
 ```
+
+### In IntelliJ IDEA and Android Studio
+
+Install the IDE plugin: download `compose-swiftui-intellij-plugin-<version>.zip` from the
+[GitHub releases](https://github.com/NucleusFramework/ComposeSwiftUI/releases), then *Settings › Plugins › ⚙ ›
+Install Plugin from Disk*. To build it yourself: `./gradlew -p intellij-plugin buildPlugin`. A Kotlin file with previews opens in a split editor, code on the
+left and the rendered previews on the right, like Compose's own preview. Each preview has a gutter icon that renders
+it and scrolls to it, and the previews are rendered again every time the file is saved.
+
+Rendering runs the `renderComposeSwiftUIPreviews` Gradle task: it links the debug framework of the simulator target
+(`iosSimulatorArm64`, or `iosX64` on Intel Macs), builds a small host app with the renderer, and snapshots every
+preview on the booted simulator (or boots the last available iPhone) into `build/composeSwiftUI/previews/`. It needs
+macOS with Xcode. The first run compiles the renderer (about a minute); after that, a Kotlin change only costs the
+framework link. Choose the simulator with `composeSwiftUI { previewDevice.set("iPhone 17 Pro") }`.
+
+### In Xcode
 
 On every build, the plugin writes `ComposeSwiftUIPreviews.swift` next to the renderer (`iosApp/ComposeSwiftUI`), with
 one Swift `#Preview` per annotated function. Open that file in Xcode to see the previews in the canvas. The same file

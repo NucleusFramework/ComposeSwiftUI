@@ -20,11 +20,13 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.TaskProvider
 import org.gradle.work.DisableCachingByDefault
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.Family
 import java.io.File
 
@@ -41,6 +43,12 @@ abstract class ComposeSwiftUIExtension {
 
     /** Library version added to `commonMain`. Default: the plugin version. */
     abstract val libraryVersion: Property<String>
+
+    /**
+     * Simulator (name or UDID) used by `renderComposeSwiftUIPreviews`. Default: the booted simulator, else the
+     * first available iPhone.
+     */
+    abstract val previewDevice: Property<String>
 }
 
 /**
@@ -71,6 +79,7 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             }
 
             val previews = registerPreviews(project, kotlin)
+            registerPreviewRendering(project, kotlin, extension, previews)
             val sync = project.tasks.register("syncComposeSwiftUIRenderer", SyncComposeSwiftUIRendererTask::class.java) { task ->
                 task.group = "compose swiftui"
                 task.description = "Writes the Compose SwiftUI renderer (Swift sources) into the Xcode project."
@@ -103,6 +112,9 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             task.swiftOutputFile.set(
                 project.layout.buildDirectory.file("generated/composeSwiftUI/previews/${PreviewCodegen.SWIFT_FILE_NAME}"),
             )
+            task.hostSwiftOutputFile.set(
+                project.layout.buildDirectory.file("generated/composeSwiftUI/previews/ComposeSwiftUIRenderedPreviews.swift"),
+            )
         }.also { previews ->
             kotlin.targets.withType(KotlinNativeTarget::class.java).configureEach { target ->
                 if (target.konanTarget.family.isAppleFamily) {
@@ -112,6 +124,44 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 }
             }
         }
+
+    /** `renderComposeSwiftUIPreviews`, run by the IntelliJ plugin. Uses the debug framework of the simulator target. */
+    private fun registerPreviewRendering(
+        project: Project,
+        kotlin: KotlinMultiplatformExtension,
+        extension: ComposeSwiftUIExtension,
+        previews: TaskProvider<GenerateComposeSwiftUIPreviewsTask>,
+    ) {
+        val framework = project.provider { previewFramework(kotlin) }
+        project.tasks.register("renderComposeSwiftUIPreviews", RenderComposeSwiftUIPreviewsTask::class.java) { task ->
+            task.group = "compose swiftui"
+            task.description = "Renders the @Preview composables to PNG on the iOS simulator."
+            task.dependsOn(framework.map { it.linkTaskProvider })
+            task.frameworkDirectory.set(project.layout.dir(framework.map { it.outputFile }))
+            task.frameworkName.set(framework.map { it.baseName })
+            task.staticFramework.set(framework.map { it.isStatic })
+            task.previewsSwiftFile.set(previews.flatMap { it.swiftOutputFile })
+            task.hostSwiftFile.set(previews.flatMap { it.hostSwiftOutputFile })
+            task.device.set(extension.previewDevice)
+            // Compose Multiplatform resources, when the module uses them (the app bundle must carry them).
+            task.composeResources.from(
+                project.provider {
+                    val name = "assemble${framework.get().target.name.replaceFirstChar { it.uppercase() }}MainResources"
+                    if (name in project.tasks.names) listOf(project.tasks.named(name)) else emptyList()
+                },
+            )
+            task.workDirectory.set(project.layout.buildDirectory.dir("composeSwiftUI/previewHost"))
+            task.outputDirectory.set(project.layout.buildDirectory.dir(PREVIEW_IMAGES_DIR))
+        }
+    }
+
+    private fun previewFramework(kotlin: KotlinMultiplatformExtension): Framework {
+        val targetName = if (System.getProperty("os.arch") == "aarch64") "iosSimulatorArm64" else "iosX64"
+        val target = kotlin.targets.findByName(targetName) as? KotlinNativeTarget
+            ?: throw GradleException("Compose SwiftUI previews need the `$targetName()` target with a framework binary.")
+        return target.binaries.withType(Framework::class.java).firstOrNull { it.buildType == NativeBuildType.DEBUG }
+            ?: throw GradleException("Compose SwiftUI previews need a debug framework on `$targetName`: `binaries.framework { }`.")
+    }
 
     /**
      * Hand-written source directories compiled into every Apple framework (e.g. `commonMain`, `appleMain`,
@@ -161,6 +211,11 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                     "`iosArm64 { binaries.framework { baseName = \"Shared\" } }`, or set composeSwiftUI.frameworkName.",
             )
 
+    internal companion object {
+        /** Read by the IntelliJ plugin: keep in sync with `PreviewImages` there. */
+        const val PREVIEW_IMAGES_DIR = "composeSwiftUI/previews"
+    }
+
     private val Family.isAppleFamily: Boolean
         get() = this == Family.IOS || this == Family.OSX || this == Family.TVOS || this == Family.WATCHOS
 }
@@ -186,11 +241,7 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
     @TaskAction
     fun sync() {
         val out = outputDirectory.get().asFile
-        val base = BuildConfig.RENDERER_RESOURCES
-        val loader = SyncComposeSwiftUIRendererTask::class.java.classLoader
-        val index = loader.getResourceAsStream("$base/index.txt")?.bufferedReader()?.readText()
-            ?: throw GradleException("Compose SwiftUI: renderer resources missing from the plugin jar")
-        val files = index.lines().filter { it.isNotBlank() }
+        val files = RendererResources.files()
 
         out.mkdirs()
         val wanted = files.toSet() + setOf("KotlinModule.swift", README, PreviewCodegen.SWIFT_FILE_NAME)
@@ -199,7 +250,7 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
             if (file.relativeTo(out).invariantSeparatorsPath !in wanted) file.delete()
         }
         for (rel in files) {
-            val bytes = loader.getResourceAsStream("$base/$rel")!!.use { it.readBytes() }
+            val bytes = RendererResources.read(rel)
             val target = out.resolve(rel)
             if (!target.exists() || !target.readBytes().contentEquals(bytes)) {
                 target.parentFile.mkdirs()
@@ -245,6 +296,10 @@ abstract class GenerateComposeSwiftUIPreviewsTask : DefaultTask() {
     @get:OutputFile
     abstract val swiftOutputFile: RegularFileProperty
 
+    /** Preview list of the host app that renders the previews to PNG (see [RenderComposeSwiftUIPreviewsTask]). */
+    @get:OutputFile
+    abstract val hostSwiftOutputFile: RegularFileProperty
+
     @TaskAction
     fun generate() {
         val previews = sources.asFileTree.matching { it.include("**/*.kt") }.files
@@ -259,6 +314,7 @@ abstract class GenerateComposeSwiftUIPreviewsTask : DefaultTask() {
             kotlinRoot.resolve("$target/${PreviewCodegen.OBJECT_NAME}.kt").apply { parentFile.mkdirs() }.writeText(kotlinCode)
         }
         swiftOutputFile.get().asFile.apply { parentFile.mkdirs() }.writeText(PreviewCodegen.swift(entries))
+        hostSwiftOutputFile.get().asFile.apply { parentFile.mkdirs() }.writeText(PreviewCodegen.hostSwift(entries))
         logger.info("Compose SwiftUI: ${entries.size} preview(s): ${entries.joinToString { it.function.qualifiedName }}")
     }
 }

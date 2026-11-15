@@ -14,3 +14,4 @@ samples/kmp-app/build/
 samples/kmp-app/shared/build/
 samples/kmp-app/.gradle/
 samples/kmp-app/.kotlin/
+.intellijPlatform/
