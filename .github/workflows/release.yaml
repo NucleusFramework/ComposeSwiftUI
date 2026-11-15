@@ -12,12 +12,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Write release notes
         env:
           TAG: ${{ github.ref_name }}
         run: |
           VERSION="${TAG#v}"
           {
+            # This version's section of CHANGELOG.md, without its heading
+            awk -v v="## $VERSION" '$0 == v { on = 1; next } /^## / { on = 0 } on' CHANGELOG.md
+            echo ""
             echo "Install with the Gradle plugin in your shared KMP module:"
             echo ""
             echo '```kotlin'
