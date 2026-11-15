@@ -26,6 +26,9 @@ internal object MapKitIds {
     const val PITCH_TOGGLE = 200_010
     const val LOOK_AROUND = 200_011
     const val MAP_READER = 200_012
+    const val PITCH_SLIDER = 200_013
+    const val ZOOM_STEPPER = 200_014
+    const val LOCATION_COMPASS = 200_015
 
     const val MAP_STYLE = 200_000
     const val MAP_CONTROLS = 200_001
@@ -449,6 +452,27 @@ public fun MapUserLocationButton(modifier: Modifier = Modifier, scope: Namespace
 @Composable
 public fun MapPitchToggle(modifier: Modifier = Modifier, scope: NamespaceId? = null) {
     SwiftView(MapKitIds.PITCH_TOGGLE, listOf(scope?.id), modifier)
+}
+
+/** SwiftUI `MapPitchSlider(scope:)` (macOS). */
+@HiddenFromObjC
+@Composable
+public fun MapPitchSlider(modifier: Modifier = Modifier, scope: NamespaceId? = null) {
+    SwiftView(MapKitIds.PITCH_SLIDER, listOf(scope?.id), modifier)
+}
+
+/** SwiftUI `MapZoomStepper(scope:)` (macOS). */
+@HiddenFromObjC
+@Composable
+public fun MapZoomStepper(modifier: Modifier = Modifier, scope: NamespaceId? = null) {
+    SwiftView(MapKitIds.ZOOM_STEPPER, listOf(scope?.id), modifier)
+}
+
+/** SwiftUI `MapLocationCompass(scope:)` (watchOS). */
+@HiddenFromObjC
+@Composable
+public fun MapLocationCompass(modifier: Modifier = Modifier, scope: NamespaceId? = null) {
+    SwiftView(MapKitIds.LOCATION_COMPASS, listOf(scope?.id), modifier)
 }
 
 /** MapKit `MKLookAroundBadgePosition`. */

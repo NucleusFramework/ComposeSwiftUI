@@ -26,8 +26,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO7appleIDyACSo0E17AppleIDCredentialCcACmF",
   "path": "ASAuthorizationResult.appleID(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos",
@@ -39,8 +39,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO12customMethodyACSo0e6CustomH0acACmF",
   "path": "ASAuthorizationResult.customMethod(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "tvos"
   ]
@@ -49,8 +49,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO22passkeyAccountCreationyAC0aB00ehI27PlatformPublicKeyCredentialCcACmF",
   "path": "ASAuthorizationResult.passkeyAccountCreation(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos"
@@ -60,8 +60,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO16passkeyAssertionyACSo0e27PlatformPublicKeyCredentialH0CcACmF",
   "path": "ASAuthorizationResult.passkeyAssertion(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos",
@@ -72,8 +72,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO19passkeyRegistrationyACSo0e27PlatformPublicKeyCredentialH0CcACmF",
   "path": "ASAuthorizationResult.passkeyRegistration(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos",
@@ -84,8 +84,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO8passwordyACSo20ASPasswordCredentialCcACmF",
   "path": "ASAuthorizationResult.password(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos",
@@ -97,8 +97,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO20securityKeyAssertionyACSo0e8Securityh6Publich10CredentialI0CcACmF",
   "path": "ASAuthorizationResult.securityKeyAssertion(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos"
@@ -108,8 +108,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21ASAuthorizationResultO23securityKeyRegistrationyACSo0e8Securityh6Publich10CredentialI0CcACmF",
   "path": "ASAuthorizationResult.securityKeyRegistration(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): AuthorizationResult",
   "platforms": [
    "ios",
    "macos"
@@ -149,8 +149,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE_14cardholderName9passStyle20primaryAccountSuffix11cardDetails11description7filters9onRequest0V10CompletionACyAFGSo18PKEncryptionSchemea_SSSo012PKAddPaymentaN0VSSSgSaySo14PKLabeledValueCGSgATSayAA0eafgH6FilterVGSo012PKAddPaymentaW0CAA0eafgH8ResponseVYacys6ResultOySo015PKSecureElementA0Cs5Error_pGctcfc",
   "path": "AddPassToWalletButton.init(_:cardholderName:passStyle:primaryAccountSuffix:cardDetails:description:filters:onRequest:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -159,8 +159,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonV_14cardholderName9passStyle20primaryAccountSuffix11cardDetails11description7filters9onRequest0T10Completion8fallbackACyxGSo18PKEncryptionSchemea_SSSo012PKAddPaymentaL0VSSSgSaySo14PKLabeledValueCGSgARSayAA0eafgH6FilterVGSo0z7PaymentaU0CAA0eafgH8ResponseVYacys6ResultOySo015PKSecureElementA0Cs5Error_pGcxyXEtcfc",
   "path": "AddPassToWalletButton.init(_:cardholderName:passStyle:primaryAccountSuffix:cardDetails:description:filters:onRequest:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -169,8 +169,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE_12onCompletionACyAFGSo018PKAddSecureElementA13ConfigurationC_ys6ResultOySaySo08PKSecureoA0CGs5Error_pGctcfc",
   "path": "AddPassToWalletButton.init(_:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): AddPassToWalletButton(passes, onCompletion)",
   "platforms": [
    "ios"
   ]
@@ -179,8 +179,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE_12onCompletionACyAFGSaySo6PKPassCG_ySbctcfc",
   "path": "AddPassToWalletButton.init(_:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): AddPassToWalletButton(passes, onCompletion)",
   "platforms": [
    "ios"
   ]
@@ -189,8 +189,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonV_12onCompletion8fallbackACyxGSo018PKAddSecureElementA13ConfigurationC_ys6ResultOySaySo08PKSecurenA0CGs5Error_pGcxyXEtcfc",
   "path": "AddPassToWalletButton.init(_:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): AddPassToWalletButton(passes, onCompletion)",
   "platforms": [
    "ios"
   ]
@@ -199,8 +199,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonV_12onCompletion8fallbackACyxGSaySo6PKPassCG_ySbcxyXEtcfc",
   "path": "AddPassToWalletButton.init(_:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): AddPassToWalletButton(passes, onCompletion)",
   "platforms": [
    "ios"
   ]
@@ -209,8 +209,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE_9onRequest0K10CompletionACyAFGSo012PKAddPaymentaL13ConfigurationC_So0noaL0CAA0eafgH8ResponseVYacys6ResultOySo015PKSecureElementA0Cs5Error_pGctcfc",
   "path": "AddPassToWalletButton.init(_:onRequest:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -219,8 +219,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonV_9onRequest0I10Completion8fallbackACyxGSo012PKAddPaymentaJ13ConfigurationC_So0mnaJ0CAA0eafgH8ResponseVYacys6ResultOySo015PKSecureElementA0Cs5Error_pGcxyXEtcfc",
   "path": "AddPassToWalletButton.init(_:onRequest:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -229,8 +229,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE_20primaryAccountSuffix9passStyle11cardDetails11description7filters9onRequest0T10CompletionACyAFGSo18PKEncryptionSchemea_SSSo012PKAddPaymentaO0VSaySo14PKLabeledValueCGSgSSSgSayAA0eafgH6FilterVGSo0yzaU0CAA0eafgH8ResponseVYacys6ResultOySo015PKSecureElementA0Cs5Error_pGctcfc",
   "path": "AddPassToWalletButton.init(_:primaryAccountSuffix:passStyle:cardDetails:description:filters:onRequest:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -239,8 +239,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonV_20primaryAccountSuffix9passStyle11cardDetails11description7filters9onRequest0R10Completion8fallbackACyxGSo18PKEncryptionSchemea_SSSo012PKAddPaymentaM0VSaySo14PKLabeledValueCGSgSSSgSayAA0eafgH6FilterVGSo0xyaS0CAA0eafgH8ResponseVYacys6ResultOySo015PKSecureElementA0Cs5Error_pGcxyXEtcfc",
   "path": "AddPassToWalletButton.init(_:primaryAccountSuffix:passStyle:cardDetails:description:filters:onRequest:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -249,8 +249,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE6actionACyAFGyyc_tcfc",
   "path": "AddPassToWalletButton.init(action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): AddPassToWalletButton(action)",
   "platforms": [
    "ios"
   ]
@@ -259,8 +259,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonVAA0cD09EmptyViewVRszrlE14carKeyPassword26supportedRadioTechnologies16issuerIdentifier12onCompletionACyAFGSS_So17PKRadioTechnologyVSSys6ResultOySo015PKSecureElementA0Cs5Error_pGctcfc",
   "path": "AddPassToWalletButton.init(carKeyPassword:supportedRadioTechnologies:issuerIdentifier:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "car keys: issuer provisioning requires the car key entitlement",
   "platforms": [
    "ios"
   ]
@@ -269,8 +269,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA14ToWalletButtonV14carKeyPassword26supportedRadioTechnologies16issuerIdentifier12onCompletion8fallbackACyxGSS_So17PKRadioTechnologyVSSys6ResultOySo015PKSecureElementA0Cs5Error_pGcxyXEtcfc",
   "path": "AddPassToWalletButton.init(carKeyPassword:supportedRadioTechnologies:issuerIdentifier:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "car keys: issuer provisioning requires the car key entitlement",
   "platforms": [
    "ios"
   ]
@@ -289,8 +289,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA20ToWalletButtonFilterV14paymentNetworkyACSo09PKPaymentK0aFZ",
   "path": "AddPassToWalletButtonFilter.paymentNetwork(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -299,8 +299,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA20ToWalletButtonFilterV24primaryAccountIdentifieryACSSFZ",
   "path": "AddPassToWalletButtonFilter.primaryAccountIdentifier(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -309,8 +309,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA20ToWalletButtonFilterV17productIdentifieryACSSFZ",
   "path": "AddPassToWalletButtonFilter.productIdentifier(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "payment pass provisioning: requires the issuer entitlement and server-side encryption",
   "platforms": [
    "ios"
   ]
@@ -369,8 +369,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA19ToWalletButtonStyleV5blackACvpZ",
   "path": "AddPassToWalletButtonStyle.black",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.addPassToWalletButtonStyle(blackOutline)",
   "platforms": [
    "ios"
   ]
@@ -379,8 +379,8 @@
   "usr": "s:16_PassKit_SwiftUI03AddA19ToWalletButtonStyleV12blackOutlineACvpZ",
   "path": "AddPassToWalletButtonStyle.blackOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.addPassToWalletButtonStyle(blackOutline)",
   "platforms": [
    "ios"
   ]
@@ -1218,8 +1218,8 @@
   "usr": "s:16_PassKit_SwiftUI27ApplePayMerchandisingActionV8RawValuea",
   "path": "ApplePayMerchandisingAction.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(action)",
   "platforms": [
    "ios"
   ]
@@ -1228,8 +1228,8 @@
   "usr": "s:16_PassKit_SwiftUI27ApplePayMerchandisingActionV8rawValueACSS_tcfc",
   "path": "ApplePayMerchandisingAction.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(action)",
   "platforms": [
    "ios"
   ]
@@ -1238,8 +1238,8 @@
   "usr": "s:16_PassKit_SwiftUI27ApplePayMerchandisingActionV9learnMoreACvpZ",
   "path": "ApplePayMerchandisingAction.learnMore",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(action)",
   "platforms": [
    "ios"
   ]
@@ -1248,8 +1248,8 @@
   "usr": "s:16_PassKit_SwiftUI27ApplePayMerchandisingActionV8rawValueSSvp",
   "path": "ApplePayMerchandisingAction.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(action)",
   "platforms": [
    "ios"
   ]
@@ -1268,8 +1268,8 @@
   "usr": "s:16_PassKit_SwiftUI41ApplePayMerchandisingPartnerConfigurationV2eeoiySbAC_ACtFZ",
   "path": "ApplePayMerchandisingPartnerConfiguration.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingPartners",
   "platforms": [
    "ios"
   ]
@@ -1278,8 +1278,8 @@
   "usr": "s:16_PassKit_SwiftUI41ApplePayMerchandisingPartnerConfigurationV3allACvpZ",
   "path": "ApplePayMerchandisingPartnerConfiguration.all",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingPartners",
   "platforms": [
    "ios"
   ]
@@ -1288,8 +1288,8 @@
   "usr": "s:16_PassKit_SwiftUI41ApplePayMerchandisingPartnerConfigurationV7limited18partnerIdentifiersACSaySSG_tFZ",
   "path": "ApplePayMerchandisingPartnerConfiguration.limited(partnerIdentifiers:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingPartners",
   "platforms": [
    "ios"
   ]
@@ -1298,8 +1298,8 @@
   "usr": "s:16_PassKit_SwiftUI41ApplePayMerchandisingPartnerConfigurationV4noneACvpZ",
   "path": "ApplePayMerchandisingPartnerConfiguration.none",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingPartners",
   "platforms": [
    "ios"
   ]
@@ -1318,8 +1318,8 @@
   "usr": "s:16_PassKit_SwiftUI26ApplePayMerchandisingStyleV8RawValuea",
   "path": "ApplePayMerchandisingStyle.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(style)",
   "platforms": [
    "ios"
   ]
@@ -1328,8 +1328,8 @@
   "usr": "s:16_PassKit_SwiftUI26ApplePayMerchandisingStyleV8rawValueACSS_tcfc",
   "path": "ApplePayMerchandisingStyle.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(style)",
   "platforms": [
    "ios"
   ]
@@ -1338,8 +1338,8 @@
   "usr": "s:16_PassKit_SwiftUI26ApplePayMerchandisingStyleV8rawValueSSvp",
   "path": "ApplePayMerchandisingStyle.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(style)",
   "platforms": [
    "ios"
   ]
@@ -1348,8 +1348,8 @@
   "usr": "s:16_PassKit_SwiftUI26ApplePayMerchandisingStyleV8standardACvpZ",
   "path": "ApplePayMerchandisingStyle.standard",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(style)",
   "platforms": [
    "ios"
   ]
@@ -1388,8 +1388,8 @@
   "usr": "s:16_PassKit_SwiftUI25ApplePayMerchandisingViewV6amount8currency6region6action5style8partners8fallbackACyxGSo9NSDecimala_10Foundation6LocaleV8CurrencyVAP6RegionVAA0efG6ActionVAA0efG5StyleVAA0efG20PartnerConfigurationVxyXEtcfc",
   "path": "ApplePayMerchandisingView.init(amount:currency:region:action:style:partners:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayMerchandisingView(amount, currency, region, action, style, partners)",
   "platforms": [
    "ios"
   ]
@@ -1801,8 +1801,8 @@
   "usr": "s:17_MusicKit_SwiftUI12ArtworkImageV_6heightAC0aB00E0V_14CoreFoundation7CGFloatVtcfc",
   "path": "ArtworkImage.init(_:height:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "n/a",
+  "detail": "MusicKit Artwork values come from catalog requests made in Swift",
   "platforms": [
    "ios",
    "macos",
@@ -1814,8 +1814,8 @@
   "usr": "s:17_MusicKit_SwiftUI12ArtworkImageV_5widthAC0aB00E0V_14CoreFoundation7CGFloatVtcfc",
   "path": "ArtworkImage.init(_:width:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "n/a",
+  "detail": "MusicKit Artwork values come from catalog requests made in Swift",
   "platforms": [
    "ios",
    "macos",
@@ -1827,8 +1827,8 @@
   "usr": "s:17_MusicKit_SwiftUI12ArtworkImageV_5width6heightAC0aB00E0V_14CoreFoundation7CGFloatVAKtcfc",
   "path": "ArtworkImage.init(_:width:height:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "n/a",
+  "detail": "MusicKit Artwork values come from catalog requests made in Swift",
   "platforms": [
    "ios",
    "macos",
@@ -1873,7 +1873,7 @@
   "path": "AsyncShareablePassConfiguration.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1883,7 +1883,7 @@
   "path": "AsyncShareablePassConfiguration.Result",
   "kind": "swift.enum",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the PassKit integration exposes what views need",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1892,8 +1892,8 @@
   "usr": "s:16_PassKit_SwiftUI014AsyncShareableA13ConfigurationV6ResultO7failureyAEyx_Gs5Error_pcAGm0cD04ViewRzlF",
   "path": "AsyncShareablePassConfiguration.Result.failure(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1902,8 +1902,8 @@
   "usr": "s:16_PassKit_SwiftUI014AsyncShareableA13ConfigurationV6ResultO7loadingyAEyx_GAGm0cD04ViewRzlF",
   "path": "AsyncShareablePassConfiguration.Result.loading",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1912,8 +1912,8 @@
   "usr": "s:16_PassKit_SwiftUI014AsyncShareableA13ConfigurationV6ResultO7successyAEyx_GSo05PKAddfaG0CcAGm0cD04ViewRzlF",
   "path": "AsyncShareablePassConfiguration.Result.success(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1923,7 +1923,7 @@
   "path": "AsyncShareablePassConfiguration.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1932,8 +1932,8 @@
   "usr": "s:16_PassKit_SwiftUI014AsyncShareableA13ConfigurationV8metadata6action7contentACyxGSaySo011PKShareableA8MetadataCG_So05PKAddfaG13PrimaryActionVxAC6ResultOyx_Gctcfc",
   "path": "AsyncShareablePassConfiguration.init(metadata:action:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "n/a",
+  "detail": "shareable pass metadata (PKShareablePassMetadata) comes from an issuer server",
   "platforms": [
    "ios"
   ]
@@ -1955,8 +1955,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV30performAutoFillAssistedRequestyAA21ASAuthorizationResultOSo0lK0CYaKF",
   "path": "AuthorizationController.performAutoFillAssistedRequest(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(autoFillAssisted = true)",
   "platforms": [
    "ios"
   ]
@@ -1965,8 +1965,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV31performAutoFillAssistedRequestsyAA21ASAuthorizationResultOSaySo0L7RequestCGYaKF",
   "path": "AuthorizationController.performAutoFillAssistedRequests(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(autoFillAssisted = true)",
   "platforms": [
    "ios"
   ]
@@ -1975,8 +1975,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV14performRequestyAA21ASAuthorizationResultOSo0iH0CYaKF",
   "path": "AuthorizationController.performRequest(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, autoFillAssisted, preferImmediatelyAvailableCredentials)",
   "platforms": [
    "ios",
    "macos",
@@ -1988,8 +1988,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV14performRequest_13customMethodsAA21ASAuthorizationResultOSo0kH0C_SaySo0K12CustomMethodaGtYaKF",
   "path": "AuthorizationController.performRequest(_:customMethods:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, autoFillAssisted, preferImmediatelyAvailableCredentials)",
   "platforms": [
    "tvos"
   ]
@@ -1998,8 +1998,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV14performRequest_7optionsAA21ASAuthorizationResultOSo0jH0C_So0jfH7OptionsVtYaKF",
   "path": "AuthorizationController.performRequest(_:options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, autoFillAssisted, preferImmediatelyAvailableCredentials)",
   "platforms": [
    "ios",
    "macos"
@@ -2009,8 +2009,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV15performRequestsyAA21ASAuthorizationResultOSaySo0I7RequestCGYaKF",
   "path": "AuthorizationController.performRequests(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, autoFillAssisted, preferImmediatelyAvailableCredentials)",
   "platforms": [
    "ios",
    "macos",
@@ -2022,8 +2022,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV15performRequests_13customMethodsAA21ASAuthorizationResultOSaySo0K7RequestCG_SaySo0K12CustomMethodaGtYaKF",
   "path": "AuthorizationController.performRequests(_:customMethods:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, autoFillAssisted, preferImmediatelyAvailableCredentials)",
   "platforms": [
    "tvos"
   ]
@@ -2032,8 +2032,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI23AuthorizationControllerV15performRequests_7optionsAA21ASAuthorizationResultOSaySo0J7RequestCG_So0jfL7OptionsVtYaKF",
   "path": "AuthorizationController.performRequests(_:options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, autoFillAssisted, preferImmediatelyAvailableCredentials)",
   "platforms": [
    "ios",
    "macos"
@@ -5470,8 +5470,8 @@
   "usr": "s:16_HomeKit_SwiftUI10CameraViewV6sourceACSo14HMCameraSourceC_tcfc",
   "path": "CameraView.init(source:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "HomeKit integration: not bridged",
+  "status": "n/a",
+  "detail": "HomeKit camera sources (HMCameraSource) come from a HomeKit home in Swift",
   "platforms": [
    "ios",
    "tvos",
@@ -8245,8 +8245,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21CredentialDataManagerV37reportAllAcceptedPublicKeyCredentials22relyingPartyIdentifier10userHandle08acceptedE3IDsySS_10Foundation0F0VSayAJGtYaKF",
   "path": "CredentialDataManager.reportAllAcceptedPublicKeyCredentials(relyingPartyIdentifier:userHandle:acceptedCredentialIDs:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "credential management API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -8256,8 +8256,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21CredentialDataManagerV015reportPublicKeyE6Update22relyingPartyIdentifier10userHandle7newNameySS_10Foundation0F0VSStYaKF",
   "path": "CredentialDataManager.reportPublicKeyCredentialUpdate(relyingPartyIdentifier:userHandle:newName:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "credential management API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -8267,8 +8267,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21CredentialDataManagerV022reportUnknownPublicKeyE022relyingPartyIdentifier12credentialIDySS_10Foundation0F0VtYaKF",
   "path": "CredentialDataManager.reportUnknownPublicKeyCredential(relyingPartyIdentifier:credentialID:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "credential management API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -8278,8 +8278,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21CredentialDataManagerV020reportUnusedPasswordE06domain8userNameySS_SStYaKF",
   "path": "CredentialDataManager.reportUnusedPasswordCredential(domain:userName:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "credential management API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -8289,8 +8289,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21CredentialDataManagerV4save8password3for5titleySo010ASPasswordE0C_0aB018ASAutoFillURLScopeVSSSgtYaKF",
   "path": "CredentialDataManager.save(password:for:title:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "credential management API (not view building)",
   "platforms": [
    "ios"
   ]
@@ -8639,8 +8639,8 @@
   "usr": "s:So9NSDecimala6ChartsE18primitivePlottableABSgSd_tcfc",
   "path": "Decimal.init(primitivePlottable:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Plottable conformance plumbing",
   "platforms": [
    "ios",
    "macos",
@@ -8736,7 +8736,7 @@
   "path": "DeliveredVerificationCodesManager.VerificationError",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "one-time code API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -8746,8 +8746,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI33DeliveredVerificationCodesManagerV18consumeOneTimeCodeyy0aB0014ASVerificationL0VYaKF",
   "path": "DeliveredVerificationCodesManager.consumeOneTimeCode(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "one-time code API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -8757,8 +8757,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI33DeliveredVerificationCodesManagerV07oneTimeG017preferredDurationQrSd_tYaKF",
   "path": "DeliveredVerificationCodesManager.oneTimeCodes(preferredDuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "n/a",
+  "detail": "one-time code API (not view building)",
   "platforms": [
    "ios",
    "macos"
@@ -10235,8 +10235,8 @@
   "usr": "s:23_GameController_SwiftUI0aB20EventHandlingOptionsVACycfc",
   "path": "GameControllerEventHandlingOptions.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "GameController integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (GameController integration): Modifier.handlesGameControllerEvents(receivesEventsInView)",
   "platforms": [
    "ios"
   ]
@@ -10245,8 +10245,8 @@
   "usr": "s:23_GameController_SwiftUI0aB20EventHandlingOptionsV20receivesEventsInViewyACSbFZ",
   "path": "GameControllerEventHandlingOptions.receivesEventsInView(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "GameController integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (GameController integration): Modifier.handlesGameControllerEvents(receivesEventsInView)",
   "platforms": [
    "ios"
   ]
@@ -10313,8 +10313,8 @@
   "usr": "s:7SwiftUI5GroupV08_MapKit_aB0AD0D7ContentRzlE7contentACyxGxyXE_tcfc",
   "path": "Group.init(content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MapKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MapKit integration): Kotlin grouping of chart / map content",
   "platforms": [
    "ios",
    "macos",
@@ -10352,8 +10352,8 @@
   "usr": "s:Si6ChartsE18primitivePlottableSiSgSi_tcfc",
   "path": "Int.init(primitivePlottable:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Plottable conformance plumbing",
   "platforms": [
    "ios",
    "macos",
@@ -10391,8 +10391,8 @@
   "usr": "s:s5Int16V6ChartsE18primitivePlottableABSgAB_tcfc",
   "path": "Int16.init(primitivePlottable:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Plottable conformance plumbing",
   "platforms": [
    "ios",
    "macos",
@@ -10443,8 +10443,8 @@
   "usr": "s:s5Int64V6ChartsE18primitivePlottableABSgAB_tcfc",
   "path": "Int64.init(primitivePlottable:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Plottable conformance plumbing",
   "platforms": [
    "ios",
    "macos",
@@ -11333,8 +11333,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_7contextACy0cD04TextVGAE18LocalizedStringKeyV_So9LAContextCtcAGRszrlufc",
   "path": "LocalAuthenticationView.init(_:context:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11343,8 +11343,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_7contextACy0cD04TextVG10Foundation23LocalizedStringResourceV_So9LAContextCtcAGRszrlufc",
   "path": "LocalAuthenticationView.init(_:context:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11353,8 +11353,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_7contextACy0cD04TextVGqd___So9LAContextCtcAGRszSyRd__lufc",
   "path": "LocalAuthenticationView.init(_:context:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11363,8 +11363,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_6reason7context6resultACy0cD04TextVGAI_AISo9LAContextCSgys6ResultOyyts5Error_pGctcAIRszrlufc",
   "path": "LocalAuthenticationView.init(_:reason:context:result:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11373,8 +11373,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_6reason7context6resultACy0cD04TextVGAG18LocalizedStringKeyV_AISo9LAContextCSgys6ResultOyyts5Error_pGctcAIRszrlufc",
   "path": "LocalAuthenticationView.init(_:reason:context:result:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11383,8 +11383,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_6reason7context6resultACy0cD04TextVG10Foundation23LocalizedStringResourceV_AISo9LAContextCSgys6ResultOyyts5Error_pGctcAIRszrlufc",
   "path": "LocalAuthenticationView.init(_:reason:context:result:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11393,8 +11393,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV_6reason7context6resultACy0cD04TextVGqd___AISo9LAContextCSgys6ResultOyyts5Error_pGctcAIRszSyRd__lufc",
   "path": "LocalAuthenticationView.init(_:reason:context:result:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11403,8 +11403,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV7context5labelACyxGSo9LAContextC_xyXEtcfc",
   "path": "LocalAuthenticationView.init(context:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11413,8 +11413,8 @@
   "usr": "s:28_LocalAuthentication_SwiftUI0aB4ViewV6reason7context6result5labelACyxG0cD04TextV_So9LAContextCSgys6ResultOyyts5Error_pGcxyXEtcfc",
   "path": "LocalAuthenticationView.init(reason:context:result:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "LocalAuthentication integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (LocalAuthentication integration): LocalAuthenticationView(reason, onResult, title) { label } (an LAContext is created for each view)",
   "platforms": [
    "macos"
   ]
@@ -11456,8 +11456,8 @@
   "usr": "s:021_CoreLocationUI_SwiftC00B6ButtonV5TitleV07currentB0AEvpZ",
   "path": "LocationButton.Title.currentLocation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "CoreLocationUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (CoreLocationUI integration): LocationButtonTitle",
   "platforms": [
    "ios",
    "watchos"
@@ -11467,8 +11467,8 @@
   "usr": "s:021_CoreLocationUI_SwiftC00B6ButtonV5TitleV011sendCurrentB0AEvpZ",
   "path": "LocationButton.Title.sendCurrentLocation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "CoreLocationUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (CoreLocationUI integration): LocationButtonTitle",
   "platforms": [
    "ios",
    "watchos"
@@ -11478,8 +11478,8 @@
   "usr": "s:021_CoreLocationUI_SwiftC00B6ButtonV5TitleV013sendMyCurrentB0AEvpZ",
   "path": "LocationButton.Title.sendMyCurrentLocation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "CoreLocationUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (CoreLocationUI integration): LocationButtonTitle",
   "platforms": [
    "ios",
    "watchos"
@@ -11489,8 +11489,8 @@
   "usr": "s:021_CoreLocationUI_SwiftC00B6ButtonV5TitleV012shareCurrentB0AEvpZ",
   "path": "LocationButton.Title.shareCurrentLocation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "CoreLocationUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (CoreLocationUI integration): LocationButtonTitle",
   "platforms": [
    "ios",
    "watchos"
@@ -11500,8 +11500,8 @@
   "usr": "s:021_CoreLocationUI_SwiftC00B6ButtonV5TitleV014shareMyCurrentB0AEvpZ",
   "path": "LocationButton.Title.shareMyCurrentLocation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "CoreLocationUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (CoreLocationUI integration): LocationButtonTitle",
   "platforms": [
    "ios",
    "watchos"
@@ -11522,8 +11522,8 @@
   "usr": "s:021_CoreLocationUI_SwiftC00B6ButtonV_6actionA2C5TitleVSg_yyctcfc",
   "path": "LocationButton.init(_:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "CoreLocationUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (CoreLocationUI integration): LocationButton(action, title)",
   "platforms": [
    "ios",
    "watchos"
@@ -13690,8 +13690,8 @@
   "usr": "s:15_MapKit_SwiftUI0A15LocationCompassV5scopeAC0cD09NamespaceV2IDVSg_tcfc",
   "path": "MapLocationCompass.init(scope:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MapKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MapKit integration): MapLocationCompass(scope)",
   "platforms": [
    "watchos"
   ]
@@ -13782,8 +13782,8 @@
   "usr": "s:15_MapKit_SwiftUI0A11PitchSliderV5scopeAC0cD09NamespaceV2IDVSg_tcfc",
   "path": "MapPitchSlider.init(scope:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MapKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MapKit integration): MapPitchSlider(scope)",
   "platforms": [
    "macos"
   ]
@@ -14739,8 +14739,8 @@
   "usr": "s:15_MapKit_SwiftUI0A11ZoomStepperV5scopeAC0cD09NamespaceV2IDVSg_tcfc",
   "path": "MapZoomStepper.init(scope:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MapKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MapKit integration): MapZoomStepper(scope)",
   "platforms": [
    "macos"
   ]
@@ -15507,8 +15507,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionV",
   "path": "MusicSubscriptionOffer.Action",
   "kind": "swift.struct",
-  "status": "n/a",
-  "detail": "type not built directly from Kotlin: the MusicKit integration exposes what views need",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15518,8 +15518,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionV8RawValuea",
   "path": "MusicSubscriptionOffer.Action.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15529,8 +15529,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionV11descriptionSSvp",
   "path": "MusicSubscriptionOffer.Action.description",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15540,8 +15540,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionVyAESScfc",
   "path": "MusicSubscriptionOffer.Action.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15551,8 +15551,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionV8rawValueAESS_tcfc",
   "path": "MusicSubscriptionOffer.Action.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15562,8 +15562,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionV8rawValueSSvp",
   "path": "MusicSubscriptionOffer.Action.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15573,8 +15573,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV6ActionV9subscribeAEvpZ",
   "path": "MusicSubscriptionOffer.Action.subscribe",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15584,8 +15584,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV",
   "path": "MusicSubscriptionOffer.MessageIdentifier",
   "kind": "swift.struct",
-  "status": "n/a",
-  "detail": "type not built directly from Kotlin: the MusicKit integration exposes what views need",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15595,8 +15595,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV8RawValuea",
   "path": "MusicSubscriptionOffer.MessageIdentifier.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15606,8 +15606,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV03addA0AEvpZ",
   "path": "MusicSubscriptionOffer.MessageIdentifier.addMusic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15617,8 +15617,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV11descriptionSSvp",
   "path": "MusicSubscriptionOffer.MessageIdentifier.description",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15628,8 +15628,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierVyAESScfc",
   "path": "MusicSubscriptionOffer.MessageIdentifier.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15639,8 +15639,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV8rawValueAESS_tcfc",
   "path": "MusicSubscriptionOffer.MessageIdentifier.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15650,8 +15650,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV4joinAEvpZ",
   "path": "MusicSubscriptionOffer.MessageIdentifier.join",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15661,8 +15661,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV04playA0AEvpZ",
   "path": "MusicSubscriptionOffer.MessageIdentifier.playMusic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15672,8 +15672,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV8rawValueSSvp",
   "path": "MusicSubscriptionOffer.MessageIdentifier.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15683,8 +15683,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV",
   "path": "MusicSubscriptionOffer.Options",
   "kind": "swift.struct",
-  "status": "n/a",
-  "detail": "type not built directly from Kotlin: the MusicKit integration exposes what views need",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15694,8 +15694,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV2eeoiySbAE_AEtFZ",
   "path": "MusicSubscriptionOffer.Options.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15705,8 +15705,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV6actionAC6ActionVvp",
   "path": "MusicSubscriptionOffer.Options.action",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15716,8 +15716,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV14affiliateTokenSSSgvp",
   "path": "MusicSubscriptionOffer.Options.affiliateToken",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15727,8 +15727,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV13campaignTokenSSSgvp",
   "path": "MusicSubscriptionOffer.Options.campaignToken",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15738,8 +15738,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV7defaultAEvpZ",
   "path": "MusicSubscriptionOffer.Options.default",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15749,8 +15749,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV11descriptionSSvp",
   "path": "MusicSubscriptionOffer.Options.description",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15760,8 +15760,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV4hash4intoys6HasherVz_tF",
   "path": "MusicSubscriptionOffer.Options.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15771,8 +15771,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV9hashValueSivp",
   "path": "MusicSubscriptionOffer.Options.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15782,8 +15782,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV6action17messageIdentifier6itemID14affiliateToken08campaignN0AeC6ActionV_AC07MessageJ0V0aB00a4ItemL0VSgSSSgAStcfc",
   "path": "MusicSubscriptionOffer.Options.init(action:messageIdentifier:itemID:affiliateToken:campaignToken:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15793,8 +15793,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV6itemID0aB00a4ItemI0VSgvp",
   "path": "MusicSubscriptionOffer.Options.itemID",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15804,8 +15804,8 @@
   "usr": "s:17_MusicKit_SwiftUI0A17SubscriptionOfferV7OptionsV17messageIdentifierAC07MessageI0Vvp",
   "path": "MusicSubscriptionOffer.Options.messageIdentifier",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer",
   "platforms": [
    "ios",
    "macos"
@@ -15880,8 +15880,8 @@
   "usr": "s:s5NeverO6ChartsE18primitivePlottableABSgAB_tcfc",
   "path": "Never.init(primitivePlottable:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Plottable conformance plumbing",
   "platforms": [
    "ios",
    "macos",
@@ -17290,8 +17290,8 @@
   "usr": "s:So11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ",
   "path": "PHLivePhoto.transferRepresentation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "n/a",
+  "detail": "Transferable conformance",
   "platforms": [
    "ios",
    "macos"
@@ -17498,8 +17498,8 @@
   "usr": "s:7SwiftUI26PagingScrollTargetBehaviorV6ChartsE06updateE0_7contextyAA0dE0Vz_AD05ChartdeF7ContextVtF",
   "path": "PagingScrollTargetBehavior.updateTarget(_:context:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "protocol requirement",
   "platforms": [
    "ios",
    "macos",
@@ -17541,8 +17541,8 @@
   "usr": "s:16_PassKit_SwiftUI12PayLaterViewVAA0cD005EmptyG0VRszrlE6amount8currencyACyAFGSo9NSDecimala_10Foundation6LocaleV8CurrencyVtcfc",
   "path": "PayLaterView.init(amount:currency:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterView(amount, currency)",
   "platforms": [
    "ios"
   ]
@@ -17561,8 +17561,8 @@
   "usr": "s:16_PassKit_SwiftUI18PayLaterViewActionV2eeoiySbAC_ACtFZ",
   "path": "PayLaterViewAction.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterAction",
   "platforms": [
    "ios"
   ]
@@ -17571,8 +17571,8 @@
   "usr": "s:16_PassKit_SwiftUI18PayLaterViewActionV10calculatorACvpZ",
   "path": "PayLaterViewAction.calculator",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterAction",
   "platforms": [
    "ios"
   ]
@@ -17581,8 +17581,8 @@
   "usr": "s:16_PassKit_SwiftUI18PayLaterViewActionV9learnMoreACvpZ",
   "path": "PayLaterViewAction.learnMore",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterAction",
   "platforms": [
    "ios"
   ]
@@ -17601,8 +17601,8 @@
   "usr": "s:16_PassKit_SwiftUI24PayLaterViewDisplayStyleV2eeoiySbAC_ACtFZ",
   "path": "PayLaterViewDisplayStyle.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterDisplayStyle",
   "platforms": [
    "ios"
   ]
@@ -17611,8 +17611,8 @@
   "usr": "s:16_PassKit_SwiftUI24PayLaterViewDisplayStyleV5badgeACvpZ",
   "path": "PayLaterViewDisplayStyle.badge",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterDisplayStyle",
   "platforms": [
    "ios"
   ]
@@ -17621,8 +17621,8 @@
   "usr": "s:16_PassKit_SwiftUI24PayLaterViewDisplayStyleV8checkoutACvpZ",
   "path": "PayLaterViewDisplayStyle.checkout",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterDisplayStyle",
   "platforms": [
    "ios"
   ]
@@ -17631,8 +17631,8 @@
   "usr": "s:16_PassKit_SwiftUI24PayLaterViewDisplayStyleV5priceACvpZ",
   "path": "PayLaterViewDisplayStyle.price",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterDisplayStyle",
   "platforms": [
    "ios"
   ]
@@ -17641,8 +17641,8 @@
   "usr": "s:16_PassKit_SwiftUI24PayLaterViewDisplayStyleV8standardACvpZ",
   "path": "PayLaterViewDisplayStyle.standard",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayLaterDisplayStyle",
   "platforms": [
    "ios"
   ]
@@ -17687,8 +17687,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE6ButtonVAA0cD09EmptyViewVRszrlE_6actionACyAFGAA0efgeH5LabelV_yyctcfc",
   "path": "PayWithApplePayButton.init(_:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(label, request, onAuthorize, onFinish, merchantSession, action, fallback)",
   "platforms": [
    "ios",
    "macos",
@@ -17699,8 +17699,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE6ButtonV_6action8fallbackACyxGAA0efgeH5LabelV_yycxyXEtcfc",
   "path": "PayWithApplePayButton.init(_:action:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(label, request, onAuthorize, onFinish, merchantSession, action, fallback)",
   "platforms": [
    "ios",
    "macos",
@@ -17711,8 +17711,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE6ButtonVAA0cD09EmptyViewVRszrlE_7request28onPaymentAuthorizationChangeACyAFGAA0efgeH5LabelV_So16PKPaymentRequestCyAA0efgehmN5PhaseOctcfc",
   "path": "PayWithApplePayButton.init(_:request:onPaymentAuthorizationChange:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(label, request, onAuthorize, onFinish, merchantSession, action, fallback)",
   "platforms": [
    "ios",
    "watchos"
@@ -17722,8 +17722,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE6ButtonV_7request28onPaymentAuthorizationChange8fallbackACyxGAA0efgeH5LabelV_So16PKPaymentRequestCyAA0efgehkL5PhaseOcxyXEtcfc",
   "path": "PayWithApplePayButton.init(_:request:onPaymentAuthorizationChange:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(label, request, onAuthorize, onFinish, merchantSession, action, fallback)",
   "platforms": [
    "ios",
    "watchos"
@@ -17733,8 +17733,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE6ButtonVAA0cD09EmptyViewVRszrlE_7request28onPaymentAuthorizationChange0L24MerchantSessionRequestedACyAFGAA0efgeH5LabelV_So16PKPaymentRequestCyAA0efgehmN5PhaseOcSo0tupQ6UpdateCyYactcfc",
   "path": "PayWithApplePayButton.init(_:request:onPaymentAuthorizationChange:onMerchantSessionRequested:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(label, request, onAuthorize, onFinish, merchantSession, action, fallback)",
   "platforms": [
    "ios",
    "macos",
@@ -17745,8 +17745,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE6ButtonV_7request28onPaymentAuthorizationChange0J24MerchantSessionRequested8fallbackACyxGAA0efgeH5LabelV_So16PKPaymentRequestCyAA0efgehkL5PhaseOcSo0stnO6UpdateCyYacxyXEtcfc",
   "path": "PayWithApplePayButton.init(_:request:onPaymentAuthorizationChange:onMerchantSessionRequested:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(label, request, onAuthorize, onFinish, merchantSession, action, fallback)",
   "platforms": [
    "ios",
    "macos",
@@ -17769,8 +17769,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV2eeoiySbAC_ACtFZ",
   "path": "PayWithApplePayButtonLabel.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17781,8 +17781,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV8addMoneyACvpZ",
   "path": "PayWithApplePayButtonLabel.addMoney",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17793,8 +17793,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV4bookACvpZ",
   "path": "PayWithApplePayButtonLabel.book",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17805,8 +17805,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV3buyACvpZ",
   "path": "PayWithApplePayButtonLabel.buy",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17817,8 +17817,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV8checkoutACvpZ",
   "path": "PayWithApplePayButtonLabel.checkout",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17829,8 +17829,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV8continueACvpZ",
   "path": "PayWithApplePayButtonLabel.continue",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17841,8 +17841,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV10contributeACvpZ",
   "path": "PayWithApplePayButtonLabel.contribute",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17853,8 +17853,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV6donateACvpZ",
   "path": "PayWithApplePayButtonLabel.donate",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17865,8 +17865,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV7inStoreACvpZ",
   "path": "PayWithApplePayButtonLabel.inStore",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17877,8 +17877,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV5orderACvpZ",
   "path": "PayWithApplePayButtonLabel.order",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17889,8 +17889,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV5plainACvpZ",
   "path": "PayWithApplePayButtonLabel.plain",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17901,8 +17901,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV6reloadACvpZ",
   "path": "PayWithApplePayButtonLabel.reload",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17913,8 +17913,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV4rentACvpZ",
   "path": "PayWithApplePayButtonLabel.rent",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17925,8 +17925,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV5setUpACvpZ",
   "path": "PayWithApplePayButtonLabel.setUp",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17937,8 +17937,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV9subscribeACvpZ",
   "path": "PayWithApplePayButtonLabel.subscribe",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17949,8 +17949,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV7supportACvpZ",
   "path": "PayWithApplePayButtonLabel.support",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17961,8 +17961,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV3tipACvpZ",
   "path": "PayWithApplePayButtonLabel.tip",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17973,8 +17973,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV5topUpACvpZ",
   "path": "PayWithApplePayButtonLabel.topUp",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -17997,8 +17997,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO12didAuthorizeyACSo9PKPaymentC_ySo0nJ6ResultCctcACmF",
   "path": "PayWithApplePayButtonPaymentAuthorizationPhase.didAuthorize(payment:resultHandler:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(onAuthorize, onFinish)",
   "platforms": [
    "ios",
    "macos",
@@ -18009,8 +18009,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO9didFinishyA2CmF",
   "path": "PayWithApplePayButtonPaymentAuthorizationPhase.didFinish",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(onAuthorize, onFinish)",
   "platforms": [
    "ios",
    "macos",
@@ -18021,8 +18021,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO13willAuthorizeyA2CmF",
   "path": "PayWithApplePayButtonPaymentAuthorizationPhase.willAuthorize",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): PayWithApplePayButton(onAuthorize, onFinish)",
   "platforms": [
    "ios",
    "macos",
@@ -18045,8 +18045,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV2eeoiySbAC_ACtFZ",
   "path": "PayWithApplePayButtonStyle.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonStyle",
   "platforms": [
    "ios",
    "macos",
@@ -18057,8 +18057,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV9automaticACvpZ",
   "path": "PayWithApplePayButtonStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonStyle",
   "platforms": [
    "ios",
    "macos",
@@ -18069,8 +18069,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV5blackACvpZ",
   "path": "PayWithApplePayButtonStyle.black",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonStyle",
   "platforms": [
    "ios",
    "macos",
@@ -18081,8 +18081,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV5whiteACvpZ",
   "path": "PayWithApplePayButtonStyle.white",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonStyle",
   "platforms": [
    "ios",
    "macos",
@@ -18093,8 +18093,8 @@
   "usr": "s:16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV12whiteOutlineACvpZ",
   "path": "PayWithApplePayButtonStyle.whiteOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): ApplePayButtonStyle",
   "platforms": [
    "ios",
    "macos",
@@ -18218,8 +18218,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection8matching21preferredItemEncodingACyAFGAD18LocalizedStringKeyV_AD7BindingVyAA0adI0VSgG0aB014PHPickerFilterVSgAP0J20DisambiguationPolicyVtcfc",
   "path": "PhotosPicker.init(_:selection:matching:preferredItemEncoding:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos",
@@ -18230,8 +18230,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection8matching21preferredItemEncodingACyAFGqd___AD7BindingVyAA0adI0VSgG0aB014PHPickerFilterVSgAN0J20DisambiguationPolicyVtcSyRd__lufc",
   "path": "PhotosPicker.init(_:selection:matching:preferredItemEncoding:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos",
@@ -18242,8 +18242,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection8matching21preferredItemEncoding12photoLibraryACyAFGAD18LocalizedStringKeyV_AD7BindingVyAA0adI0VSgG0aB014PHPickerFilterVSgAQ0J20DisambiguationPolicyVSo07PHPhotoL0Ctcfc",
   "path": "PhotosPicker.init(_:selection:matching:preferredItemEncoding:photoLibrary:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -18253,8 +18253,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection8matching21preferredItemEncoding12photoLibraryACyAFGqd___AD7BindingVyAA0adI0VSgG0aB014PHPickerFilterVSgAO0J20DisambiguationPolicyVSo07PHPhotoL0CtcSyRd__lufc",
   "path": "PhotosPicker.init(_:selection:matching:preferredItemEncoding:photoLibrary:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -18264,8 +18264,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection17maxSelectionCount0F8Behavior8matching21preferredItemEncodingACyAFGAD18LocalizedStringKeyV_AD7BindingVySayAA0adM0VGGSiSgAA0adhJ0V0aB014PHPickerFilterVSgAR0N20DisambiguationPolicyVtcfc",
   "path": "PhotosPicker.init(_:selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos",
@@ -18276,8 +18276,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection17maxSelectionCount0F8Behavior8matching21preferredItemEncodingACyAFGqd___AD7BindingVySayAA0adM0VGGSiSgAA0adhJ0V0aB014PHPickerFilterVSgAP0N20DisambiguationPolicyVtcSyRd__lufc",
   "path": "PhotosPicker.init(_:selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos",
@@ -18288,8 +18288,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection17maxSelectionCount0F8Behavior8matching21preferredItemEncoding12photoLibraryACyAFGAD18LocalizedStringKeyV_AD7BindingVySayAA0adM0VGGSiSgAA0adhJ0V0aB014PHPickerFilterVSgAS0N20DisambiguationPolicyVSo07PHPhotoP0Ctcfc",
   "path": "PhotosPicker.init(_:selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:photoLibrary:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -18299,8 +18299,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerVAA0cB04TextVRszrlE_9selection17maxSelectionCount0F8Behavior8matching21preferredItemEncoding12photoLibraryACyAFGqd___AD7BindingVySayAA0adM0VGGSiSgAA0adhJ0V0aB014PHPickerFilterVSgAQ0N20DisambiguationPolicyVSo07PHPhotoP0CtcSyRd__lufc",
   "path": "PhotosPicker.init(_:selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:photoLibrary:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -18310,8 +18310,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerV9selection8matching21preferredItemEncoding5labelACyxG0cB07BindingVyAA0adH0VSgG_0aB014PHPickerFilterVSgAM0I20DisambiguationPolicyVxyXEtcfc",
   "path": "PhotosPicker.init(selection:matching:preferredItemEncoding:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos",
@@ -18322,8 +18322,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerV9selection8matching21preferredItemEncoding12photoLibrary5labelACyxG0cB07BindingVyAA0adH0VSgG_0aB014PHPickerFilterVSgAN0I20DisambiguationPolicyVSo07PHPhotoK0CxyXEtcfc",
   "path": "PhotosPicker.init(selection:matching:preferredItemEncoding:photoLibrary:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -18333,8 +18333,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerV9selection17maxSelectionCount0E8Behavior8matching21preferredItemEncoding5labelACyxG0cB07BindingVySayAA0adL0VGG_SiSgAA0adgI0V0aB014PHPickerFilterVSgAO0M20DisambiguationPolicyVxyXEtcfc",
   "path": "PhotosPicker.init(selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos",
@@ -18345,8 +18345,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A6PickerV9selection17maxSelectionCount0E8Behavior8matching21preferredItemEncoding12photoLibrary5labelACyxG0cB07BindingVySayAA0adL0VGG_SiSgAA0adgI0V0aB014PHPickerFilterVSgAP0M20DisambiguationPolicyVSo07PHPhotoO0CxyXEtcfc",
   "path": "PhotosPicker.init(selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:photoLibrary:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection, onPick, title, maxSelectionCount, selectionBehavior, filter, preferredItemEncoding) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -18392,8 +18392,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV28EncodingDisambiguationPolicyV2eeoiySbAE_AEtFZ",
   "path": "PhotosPickerItem.EncodingDisambiguationPolicy.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerEncoding",
   "platforms": [
    "ios",
    "macos",
@@ -18404,8 +18404,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV28EncodingDisambiguationPolicyV9automaticAEvpZ",
   "path": "PhotosPickerItem.EncodingDisambiguationPolicy.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerEncoding",
   "platforms": [
    "ios",
    "macos",
@@ -18416,8 +18416,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV28EncodingDisambiguationPolicyV10compatibleAEvpZ",
   "path": "PhotosPickerItem.EncodingDisambiguationPolicy.compatible",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerEncoding",
   "platforms": [
    "ios",
    "macos",
@@ -18428,8 +18428,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV28EncodingDisambiguationPolicyV7currentAEvpZ",
   "path": "PhotosPickerItem.EncodingDisambiguationPolicy.current",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerEncoding",
   "platforms": [
    "ios",
    "macos",
@@ -18440,8 +18440,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV28EncodingDisambiguationPolicyV4hash4intoys6HasherVz_tF",
   "path": "PhotosPickerItem.EncodingDisambiguationPolicy.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerEncoding",
   "platforms": [
    "ios",
    "macos",
@@ -18452,8 +18452,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV28EncodingDisambiguationPolicyV9hashValueSivp",
   "path": "PhotosPickerItem.EncodingDisambiguationPolicy.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerEncoding",
   "platforms": [
    "ios",
    "macos",
@@ -18488,8 +18488,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV14itemIdentifierACSS_tcfc",
   "path": "PhotosPickerItem.init(itemIdentifier:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPicker(selection = identifiers)",
   "platforms": [
    "ios",
    "macos"
@@ -18510,8 +18510,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV16loadTransferable4typexSgxm_tYaK04CoreG00G0RzlF",
   "path": "PhotosPickerItem.loadTransferable(type:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PickedMedia.fileUrl (each picked item is copied to a file)",
   "platforms": [
    "ios",
    "macos",
@@ -18522,8 +18522,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A10PickerItemV16loadTransferable4type17completionHandlerSo10NSProgressCxm_ys6ResultOyxSgs5Error_pGct04CoreG00G0RzlF",
   "path": "PhotosPickerItem.loadTransferable(type:completionHandler:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PickedMedia.fileUrl (each picked item is copied to a file)",
   "platforms": [
    "ios",
    "macos",
@@ -18558,8 +18558,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV2eeoiySbAC_ACtFZ",
   "path": "PhotosPickerSelectionBehavior.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos",
@@ -18570,8 +18570,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV10continuousACvpZ",
   "path": "PhotosPickerSelectionBehavior.continuous",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -18581,8 +18581,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV20continuousAndOrderedACvpZ",
   "path": "PhotosPickerSelectionBehavior.continuousAndOrdered",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -18592,8 +18592,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV7defaultACvpZ",
   "path": "PhotosPickerSelectionBehavior.default",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos",
@@ -18604,8 +18604,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV4hash4intoys6HasherVz_tF",
   "path": "PhotosPickerSelectionBehavior.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos",
@@ -18616,8 +18616,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV9hashValueSivp",
   "path": "PhotosPickerSelectionBehavior.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos",
@@ -18628,8 +18628,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A23PickerSelectionBehaviorV7orderedACvpZ",
   "path": "PhotosPickerSelectionBehavior.ordered",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerSelectionBehavior",
   "platforms": [
    "ios",
    "macos",
@@ -18651,8 +18651,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A11PickerStyleV2eeoiySbAC_ACtFZ",
   "path": "PhotosPickerStyle.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerStyle",
   "platforms": [
    "ios",
    "macos"
@@ -18662,8 +18662,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A11PickerStyleV7compactACvpZ",
   "path": "PhotosPickerStyle.compact",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerStyle",
   "platforms": [
    "ios",
    "macos"
@@ -18673,8 +18673,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A11PickerStyleV4hash4intoys6HasherVz_tF",
   "path": "PhotosPickerStyle.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerStyle",
   "platforms": [
    "ios",
    "macos"
@@ -18684,8 +18684,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A11PickerStyleV9hashValueSivp",
   "path": "PhotosPickerStyle.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerStyle",
   "platforms": [
    "ios",
    "macos"
@@ -18695,8 +18695,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A11PickerStyleV6inlineACvpZ",
   "path": "PhotosPickerStyle.inline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerStyle",
   "platforms": [
    "ios",
    "macos"
@@ -18706,8 +18706,8 @@
   "usr": "s:015_PhotosUI_SwiftB00A11PickerStyleV12presentationACvpZ",
   "path": "PhotosPickerStyle.presentation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): PhotosPickerStyle",
   "platforms": [
    "ios",
    "macos"
@@ -23728,8 +23728,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV19ArrayLiteralElementa",
   "path": "SceneView.Options.ArrayLiteralElement",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23741,8 +23741,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV7Elementa",
   "path": "SceneView.Options.Element",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23754,8 +23754,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV8RawValuea",
   "path": "SceneView.Options.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23767,8 +23767,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV19allowsCameraControlAEvpZ",
   "path": "SceneView.Options.allowsCameraControl",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23780,8 +23780,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV26autoenablesDefaultLightingAEvpZ",
   "path": "SceneView.Options.autoenablesDefaultLighting",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23793,8 +23793,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV8rawValueAESi_tcfc",
   "path": "SceneView.Options.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23806,8 +23806,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV16jitteringEnabledAEvpZ",
   "path": "SceneView.Options.jitteringEnabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23819,8 +23819,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV8rawValueSivp",
   "path": "SceneView.Options.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23832,8 +23832,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV19rendersContinuouslyAEvpZ",
   "path": "SceneView.Options.rendersContinuously",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23845,8 +23845,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV7OptionsV27temporalAntialiasingEnabledAEvpZ",
   "path": "SceneView.Options.temporalAntialiasingEnabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -23871,8 +23871,8 @@
   "usr": "s:17_SceneKit_SwiftUI0A4ViewV5scene07pointOfE07options24preferredFramesPerSecond16antialiasingMode8delegate9techniqueACSo8SCNSceneCSg_So7SCNNodeCSgAC7OptionsVSiSo015SCNAntialiasingO0VSo0R16RendererDelegate_pSgSo12SCNTechniqueCSgtcfc",
   "path": "SceneView.init(scene:pointOfView:options:preferredFramesPerSecond:antialiasingMode:delegate:technique:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SceneKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SceneKit integration): SceneView(sceneFileName, pointOfView, options, preferredFramesPerSecond, antialiasingMode)",
   "platforms": [
    "ios",
    "macos",
@@ -24150,8 +24150,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV8continueAEvpZ",
   "path": "SignInWithAppleButton.Label.continue",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleLabel",
   "platforms": [
    "ios",
    "macos",
@@ -24163,8 +24163,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV04signF0AEvpZ",
   "path": "SignInWithAppleButton.Label.signIn",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleLabel",
   "platforms": [
    "ios",
    "macos",
@@ -24176,8 +24176,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5LabelV6signUpAEvpZ",
   "path": "SignInWithAppleButton.Label.signUp",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleLabel",
   "platforms": [
    "ios",
    "macos",
@@ -24202,8 +24202,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV5blackAEvpZ",
   "path": "SignInWithAppleButton.Style.black",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleStyle",
   "platforms": [
    "ios",
    "macos",
@@ -24215,8 +24215,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV5whiteAEvpZ",
   "path": "SignInWithAppleButton.Style.white",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleStyle",
   "platforms": [
    "ios",
    "macos",
@@ -24228,8 +24228,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV5StyleV12whiteOutlineAEvpZ",
   "path": "SignInWithAppleButton.Style.whiteOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleStyle",
   "platforms": [
    "ios",
    "macos",
@@ -24254,8 +24254,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV_9onRequest0J10CompletionA2C5LabelV_ySo015ASAuthorizationH9IDRequestCcys6ResultOySo0N0Cs5Error_pGctcfc",
   "path": "SignInWithAppleButton.init(_:onRequest:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): SignInWithAppleButton(onCompletion, label, requestedScopes, nonce, state)",
   "platforms": [
    "ios",
    "macos",
@@ -24452,8 +24452,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV19ArrayLiteralElementa",
   "path": "SpriteView.DebugOptions.ArrayLiteralElement",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24465,8 +24465,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV7Elementa",
   "path": "SpriteView.DebugOptions.Element",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24478,8 +24478,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8RawValuea",
   "path": "SpriteView.DebugOptions.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24491,8 +24491,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8rawValueAESi_tcfc",
   "path": "SpriteView.DebugOptions.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24504,8 +24504,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8rawValueSivp",
   "path": "SpriteView.DebugOptions.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24517,8 +24517,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsDrawCountAEvpZ",
   "path": "SpriteView.DebugOptions.showsDrawCount",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24530,8 +24530,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8showsFPSAEvpZ",
   "path": "SpriteView.DebugOptions.showsFPS",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24543,8 +24543,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV11showsFieldsAEvpZ",
   "path": "SpriteView.DebugOptions.showsFields",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24556,8 +24556,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsNodeCountAEvpZ",
   "path": "SpriteView.DebugOptions.showsNodeCount",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24569,8 +24569,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV12showsPhysicsAEvpZ",
   "path": "SpriteView.DebugOptions.showsPhysics",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24582,8 +24582,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsQuadCountAEvpZ",
   "path": "SpriteView.DebugOptions.showsQuadCount",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewDebugOption",
   "platforms": [
    "ios",
    "macos",
@@ -24607,8 +24607,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV19ArrayLiteralElementa",
   "path": "SpriteView.Options.ArrayLiteralElement",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24619,8 +24619,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV7Elementa",
   "path": "SpriteView.Options.Element",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24631,8 +24631,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV8RawValuea",
   "path": "SpriteView.Options.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24643,8 +24643,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV18allowsTransparencyAEvpZ",
   "path": "SpriteView.Options.allowsTransparency",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24655,8 +24655,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV19ignoresSiblingOrderAEvpZ",
   "path": "SpriteView.Options.ignoresSiblingOrder",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24667,8 +24667,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV8rawValueAESi_tcfc",
   "path": "SpriteView.Options.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24679,8 +24679,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV8rawValueSivp",
   "path": "SpriteView.Options.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24691,8 +24691,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV7OptionsV25shouldCullNonVisibleNodesAEvpZ",
   "path": "SpriteView.Options.shouldCullNonVisibleNodes",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteViewOption",
   "platforms": [
    "ios",
    "macos",
@@ -24716,8 +24716,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV5scene10transition8isPaused24preferredFramesPerSecondACSo7SKSceneC_So12SKTransitionCSgSbSitcfc",
   "path": "SpriteView.init(scene:transition:isPaused:preferredFramesPerSecond:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteView(sceneFileName / sceneClassName, isPaused, preferredFramesPerSecond, options, debugOptions)",
   "platforms": [
    "ios",
    "macos",
@@ -24729,8 +24729,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV5scene10transition8isPaused24preferredFramesPerSecond7options12debugOptions12shouldRenderACSo7SKSceneC_So12SKTransitionCSgSbSiAC0P0VAC05DebugP0VSbSdctcfc",
   "path": "SpriteView.init(scene:transition:isPaused:preferredFramesPerSecond:options:debugOptions:shouldRender:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteView(sceneFileName / sceneClassName, isPaused, preferredFramesPerSecond, options, debugOptions)",
   "platforms": [
    "ios",
    "macos",
@@ -24741,8 +24741,8 @@
   "usr": "s:18_SpriteKit_SwiftUI0A4ViewV5scene10transition8isPaused24preferredFramesPerSecond7options12shouldRenderACSo7SKSceneC_So12SKTransitionCSgSbSiAC7OptionsVSbSdctcfc",
   "path": "SpriteView.init(scene:transition:isPaused:preferredFramesPerSecond:options:shouldRender:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SpriteKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (SpriteKit integration): SpriteView(sceneFileName / sceneClassName, isPaused, preferredFramesPerSecond, options, debugOptions)",
   "platforms": [
    "ios",
    "macos",
@@ -28104,8 +28104,8 @@
   "usr": "s:s5UInt8V6ChartsE18primitivePlottableABSgAB_tcfc",
   "path": "UInt8.init(primitivePlottable:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Plottable conformance plumbing",
   "platforms": [
    "ios",
    "macos",
@@ -29017,8 +29017,8 @@
   "usr": "s:16_PassKit_SwiftUI30VerifyIdentityWithWalletButtonVAA0cD09EmptyViewVRszrlE_6actionACyAFGAA0efghI5LabelV_yyctcfc",
   "path": "VerifyIdentityWithWalletButton.init(_:action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityWithWalletButton(label, merchantIdentifier, nonce, elements, onCompletion, action)",
   "platforms": [
    "ios"
   ]
@@ -29027,8 +29027,8 @@
   "usr": "s:16_PassKit_SwiftUI30VerifyIdentityWithWalletButtonVAA0cD09EmptyViewVRszrlE_7request12onCompletionACyAFGAA0efghI5LabelV_So17PKIdentityRequestCys6ResultOySo0P8DocumentCs5Error_pGctcfc",
   "path": "VerifyIdentityWithWalletButton.init(_:request:onCompletion:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityWithWalletButton(label, merchantIdentifier, nonce, elements, onCompletion, action)",
   "platforms": [
    "ios"
   ]
@@ -29037,8 +29037,8 @@
   "usr": "s:16_PassKit_SwiftUI30VerifyIdentityWithWalletButtonV_7request12onCompletion8fallbackACyxGAA0efghI5LabelV_So17PKIdentityRequestCys6ResultOySo0O8DocumentCs5Error_pGcxyXEtcfc",
   "path": "VerifyIdentityWithWalletButton.init(_:request:onCompletion:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityWithWalletButton(label, merchantIdentifier, nonce, elements, onCompletion, action)",
   "platforms": [
    "ios"
   ]
@@ -29057,8 +29057,8 @@
   "usr": "s:16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonLabelV8continueACvpZ",
   "path": "VerifyIdentityWithWalletButtonLabel.continue",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityLabel",
   "platforms": [
    "ios"
   ]
@@ -29067,8 +29067,8 @@
   "usr": "s:16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonLabelV6verifyACvpZ",
   "path": "VerifyIdentityWithWalletButtonLabel.verify",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityLabel",
   "platforms": [
    "ios"
   ]
@@ -29077,8 +29077,8 @@
   "usr": "s:16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonLabelV9verifyAgeACvpZ",
   "path": "VerifyIdentityWithWalletButtonLabel.verifyAge",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityLabel",
   "platforms": [
    "ios"
   ]
@@ -29087,8 +29087,8 @@
   "usr": "s:16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonLabelV06verifyF0ACvpZ",
   "path": "VerifyIdentityWithWalletButtonLabel.verifyIdentity",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): VerifyIdentityLabel",
   "platforms": [
    "ios"
   ]
@@ -29107,8 +29107,8 @@
   "usr": "s:16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonStyleV5blackACvpZ",
   "path": "VerifyIdentityWithWalletButtonStyle.black",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.verifyIdentityWithWalletButtonStyle(blackOutline)",
   "platforms": [
    "ios"
   ]
@@ -29117,8 +29117,8 @@
   "usr": "s:16_PassKit_SwiftUI35VerifyIdentityWithWalletButtonStyleV12blackOutlineACvpZ",
   "path": "VerifyIdentityWithWalletButtonStyle.blackOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.verifyIdentityWithWalletButtonStyle(blackOutline)",
   "platforms": [
    "ios"
   ]
@@ -29166,8 +29166,8 @@
   "usr": "s:14_AVKit_SwiftUI11VideoPlayerVAA0bC09EmptyViewVRszrlE6playerACyAFGSo8AVPlayerCSg_tcfc",
   "path": "VideoPlayer.init(player:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): VideoPlayer(url, isPlaying, onPlayingChange, isMuted, loops) { videoOverlay }",
   "platforms": [
    "ios",
    "macos",
@@ -29179,8 +29179,8 @@
   "usr": "s:14_AVKit_SwiftUI11VideoPlayerV6player12videoOverlayACyxGSo8AVPlayerCSg_xyXEtcfc",
   "path": "VideoPlayer.init(player:videoOverlay:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): VideoPlayer(url, isPlaying, onPlayingChange, isMuted, loops) { videoOverlay }",
   "platforms": [
    "ios",
    "macos",
@@ -29270,8 +29270,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E03addD19ToWalletButtonStyleyQrAD03AdddghiJ0VF",
   "path": "View.addPassToWalletButtonStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.addPassToWalletButtonStyle",
   "platforms": [
    "ios"
   ]
@@ -30417,8 +30417,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E22continuityDevicePicker11isPresented12onDidConnectQrAA7BindingVySbG_ySo012AVContinuityF0CSgcSgtF",
   "path": "View.continuityDevicePicker(isPresented:onDidConnect:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.continuityDevicePicker(isPresented, onDismiss, onDidConnect)",
   "platforms": [
    "tvos"
   ]
@@ -30440,8 +30440,8 @@
   "usr": "s:7SwiftUI4ViewP015_DataDetection_aB0E04dataE0_7optionsQr0dE00D8DetectorO9MatchTypeV_AI7OptionsVtF",
   "path": "View.dataDetection(_:options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "DataDetection integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (DataDetection integration): Modifier.dataDetection(types)",
   "platforms": [
    "ios",
    "watchos"
@@ -30451,8 +30451,8 @@
   "usr": "s:7SwiftUI4ViewP016_GameController_aB0E07handlesdE6Events8matchingQrSo14GCUIEventTypesV_tF",
   "path": "View.handlesGameControllerEvents(matching:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "GameController integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (GameController integration): Modifier.handlesGameControllerEvents(types, receivesEventsInView)",
   "platforms": [
    "ios"
   ]
@@ -30461,8 +30461,8 @@
   "usr": "s:7SwiftUI4ViewP016_GameController_aB0E07handlesdE6Events8matching11withOptionsQrSo14GCUIEventTypesV_AD0de13EventHandlingJ0VSgtF",
   "path": "View.handlesGameControllerEvents(matching:withOptions:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "GameController integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (GameController integration): Modifier.handlesGameControllerEvents(types, receivesEventsInView)",
   "platforms": [
    "ios"
   ]
@@ -30747,8 +30747,8 @@
   "usr": "s:7SwiftUI4ViewP010_MusicKit_aB0E11musicPicker11isPresented5title9selectionQrAA7BindingVySbG_AA4TextVSgAJyqd__SgGtAD08PickableD4ItemRd__lF",
   "path": "View.musicPicker(isPresented:title:selection:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicPicker(isPresented, onDismiss, multiple, title, onPick)",
   "platforms": [
    "ios"
   ]
@@ -30757,8 +30757,8 @@
   "usr": "s:7SwiftUI4ViewP010_MusicKit_aB0E11musicPicker11isPresented5title9selectionQrAA7BindingVySbG_AA4TextVSgAJySayqd__GGtAD08PickableD4ItemRd__lF",
   "path": "View.musicPicker(isPresented:title:selection:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicPicker(isPresented, onDismiss, multiple, title, onPick)",
   "platforms": [
    "ios"
   ]
@@ -30767,8 +30767,8 @@
   "usr": "s:7SwiftUI4ViewP010_MusicKit_aB0E11musicPicker11isPresented5title9selectionQrAA7BindingVySbG_AA4TextVSgAJy0dE00D14ItemCollectionVyqd__GGtAD08PickabledN0Rd__lF",
   "path": "View.musicPicker(isPresented:title:selection:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicPicker(isPresented, onDismiss, multiple, title, onPick)",
   "platforms": [
    "ios"
   ]
@@ -30777,8 +30777,8 @@
   "usr": "s:7SwiftUI4ViewP010_MusicKit_aB0E22musicSubscriptionOffer11isPresented7options16onLoadCompletionQrAA7BindingVySbG_AD0dgH0V7OptionsVys5Error_pSgctF",
   "path": "View.musicSubscriptionOffer(isPresented:options:onLoadCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "MusicKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (MusicKit integration): Modifier.musicSubscriptionOffer(isPresented, onDismiss, messageIdentifier, itemId, \u2026)",
   "platforms": [
    "ios",
    "macos"
@@ -30821,8 +30821,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E26onApplePayCouponCodeChange7performQrSo016PKPaymentRequestiJ6UpdateCSSYac_tF",
   "path": "View.onApplePayCouponCodeChange(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.onApplePayChange(couponCode)",
   "platforms": [
    "ios",
    "macos"
@@ -30832,8 +30832,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E29onApplePayPaymentMethodChange7performQrSo016PKPaymentRequestiJ6UpdateCSo0mJ0CYac_tF",
   "path": "View.onApplePayPaymentMethodChange(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.onApplePayChange(paymentMethod)",
   "platforms": [
    "ios",
    "macos",
@@ -30844,8 +30844,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E31onApplePayShippingContactChange7performQrSo016PKPaymentRequestiJ6UpdateCSo9PKContactCYac_tF",
   "path": "View.onApplePayShippingContactChange(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.onApplePayChange(shippingContact)",
   "platforms": [
    "ios",
    "macos",
@@ -30856,8 +30856,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E30onApplePayShippingMethodChange7performQrSo016PKPaymentRequestiJ6UpdateCSo010PKShippingJ0CYac_tF",
   "path": "View.onApplePayShippingMethodChange(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.onApplePayChange(shippingMethod)",
   "platforms": [
    "ios",
    "macos",
@@ -30868,8 +30868,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E20onCameraCaptureEvent9isEnabled6actionQrSb_ySo09AVCaptureH0CctF",
   "path": "View.onCameraCaptureEvent(isEnabled:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.onCameraCaptureEvent(isEnabled, defaultSoundDisabled, secondaryAction) { phase -> }",
   "platforms": [
    "ios"
   ]
@@ -30878,8 +30878,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E20onCameraCaptureEvent9isEnabled20defaultSoundDisabled6actionQrSb_SbySo09AVCaptureH0CYactF",
   "path": "View.onCameraCaptureEvent(isEnabled:defaultSoundDisabled:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.onCameraCaptureEvent(isEnabled, defaultSoundDisabled, secondaryAction) { phase -> }",
   "platforms": [
    "ios"
   ]
@@ -30888,8 +30888,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E20onCameraCaptureEvent9isEnabled20defaultSoundDisabled6actionQrSb_SbySo09AVCaptureH0CctF",
   "path": "View.onCameraCaptureEvent(isEnabled:defaultSoundDisabled:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.onCameraCaptureEvent(isEnabled, defaultSoundDisabled, secondaryAction) { phase -> }",
   "platforms": [
    "ios"
   ]
@@ -30898,8 +30898,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E20onCameraCaptureEvent9isEnabled20defaultSoundDisabled13primaryAction09secondaryO0QrSb_SbySo09AVCaptureH0CYacyAKYactF",
   "path": "View.onCameraCaptureEvent(isEnabled:defaultSoundDisabled:primaryAction:secondaryAction:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.onCameraCaptureEvent(isEnabled, defaultSoundDisabled, secondaryAction) { phase -> }",
   "platforms": [
    "ios"
   ]
@@ -30908,8 +30908,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E20onCameraCaptureEvent9isEnabled20defaultSoundDisabled13primaryAction09secondaryO0QrSb_SbySo09AVCaptureH0CcyAKctF",
   "path": "View.onCameraCaptureEvent(isEnabled:defaultSoundDisabled:primaryAction:secondaryAction:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.onCameraCaptureEvent(isEnabled, defaultSoundDisabled, secondaryAction) { phase -> }",
   "platforms": [
    "ios"
   ]
@@ -30918,8 +30918,8 @@
   "usr": "s:7SwiftUI4ViewP07_AVKit_aB0E20onCameraCaptureEvent9isEnabled13primaryAction09secondaryL0QrSb_ySo09AVCaptureH0CcyAJctF",
   "path": "View.onCameraCaptureEvent(isEnabled:primaryAction:secondaryAction:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AVKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AVKit integration): Modifier.onCameraCaptureEvent(isEnabled, defaultSoundDisabled, secondaryAction) { phase -> }",
   "platforms": [
    "ios"
   ]
@@ -30980,8 +30980,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E08payLaterC6ActionyQrAD03PaygcH0VF",
   "path": "View.payLaterViewAction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.payLaterViewStyle(action)",
   "platforms": [
    "ios"
   ]
@@ -30990,8 +30990,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E08payLaterC12DisplayStyleyQrAD03PaygchI0VF",
   "path": "View.payLaterViewDisplayStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.payLaterViewStyle(displayStyle)",
   "platforms": [
    "ios"
   ]
@@ -31000,8 +31000,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E35payWithApplePayButtonDisableCardArtQryF",
   "path": "View.payWithApplePayButtonDisableCardArt()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.payWithApplePayButtonStyle(disableCardArt = true)",
   "platforms": [
    "ios"
   ]
@@ -31010,8 +31010,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E26payWithApplePayButtonStyleyQrAD0ighijK0VF",
   "path": "View.payWithApplePayButtonStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.payWithApplePayButtonStyle(style)",
   "platforms": [
    "ios",
    "macos",
@@ -31022,8 +31022,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E12photosPicker11isPresented9selection8matching21preferredItemEncodingQrAA7BindingVySbG_AKyAD0dfL0VSgG0dB014PHPickerFilterVSgAN0M20DisambiguationPolicyVtF",
   "path": "View.photosPicker(isPresented:selection:matching:preferredItemEncoding:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPicker(isPresented, onDismiss, selection, onPick, \u2026)",
   "platforms": [
    "ios",
    "macos",
@@ -31034,8 +31034,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E12photosPicker11isPresented9selection8matching21preferredItemEncoding12photoLibraryQrAA7BindingVySbG_ALyAD0dfL0VSgG0dB014PHPickerFilterVSgAO0M20DisambiguationPolicyVSo07PHPhotoO0CtF",
   "path": "View.photosPicker(isPresented:selection:matching:preferredItemEncoding:photoLibrary:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPicker(isPresented, onDismiss, selection, onPick, \u2026)",
   "platforms": [
    "ios",
    "macos"
@@ -31045,8 +31045,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E12photosPicker11isPresented9selection17maxSelectionCount0I8Behavior8matching21preferredItemEncodingQrAA7BindingVySbG_AMySayAD0dfP0VGGSiSgAD0dfkM0V0dB014PHPickerFilterVSgAP0Q20DisambiguationPolicyVtF",
   "path": "View.photosPicker(isPresented:selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPicker(isPresented, onDismiss, selection, onPick, \u2026)",
   "platforms": [
    "ios",
    "macos",
@@ -31057,8 +31057,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E12photosPicker11isPresented9selection17maxSelectionCount0I8Behavior8matching21preferredItemEncoding12photoLibraryQrAA7BindingVySbG_ANySayAD0dfP0VGGSiSgAD0dfkM0V0dB014PHPickerFilterVSgAQ0Q20DisambiguationPolicyVSo07PHPhotoS0CtF",
   "path": "View.photosPicker(isPresented:selection:maxSelectionCount:selectionBehavior:matching:preferredItemEncoding:photoLibrary:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPicker(isPresented, onDismiss, selection, onPick, \u2026)",
   "platforms": [
    "ios",
    "macos"
@@ -31068,8 +31068,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E31photosPickerAccessoryVisibility_5edgesQrAA0H0O_AA4EdgeO3SetVtF",
   "path": "View.photosPickerAccessoryVisibility(_:edges:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPickerStyle(accessoryVisibility, accessoryEdges)",
   "platforms": [
    "ios",
    "macos"
@@ -31079,8 +31079,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E32photosPickerDisabledCapabilitiesyQrSo08PHPickerH0VF",
   "path": "View.photosPickerDisabledCapabilities(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPickerStyle(disabledCapabilities)",
   "platforms": [
    "ios",
    "macos"
@@ -31090,8 +31090,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E27photosPickerMetadataOptionsyQrSo08PHPickergH0VF",
   "path": "View.photosPickerMetadataOptions(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPickerStyle(metadata)",
   "platforms": [
    "ios",
    "macos"
@@ -31101,8 +31101,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E22photosPickerSearchTextyQr0dB008PHPickergH0VSgF",
   "path": "View.photosPickerSearchText(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPickerStyle(searchText)",
   "platforms": [
    "ios",
    "macos"
@@ -31112,8 +31112,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E22photosPickerSearchTextyQrSSSgF",
   "path": "View.photosPickerSearchText(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPickerStyle(searchText)",
   "platforms": [
    "ios",
    "macos"
@@ -31123,8 +31123,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E17photosPickerStyleyQrAD0dfG0VF",
   "path": "View.photosPickerStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosPickerStyle(style)",
   "platforms": [
    "ios",
    "macos"
@@ -31134,8 +31134,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E26photosReferenceImageViewer5asset22onProcessingCompletionQrAA7BindingVySo7PHAssetCSgG_ys6ResultOyAKs5Error_pGcSgtF",
   "path": "View.photosReferenceImageViewer(asset:onProcessingCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosReferenceImageViewer(fileUrl)",
   "platforms": [
    "ios",
    "macos"
@@ -31145,8 +31145,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E26photosReferenceImageViewer7fileURL22onProcessingCompletionQrAA7BindingVy10Foundation0J0VSgG_ys6ResultOyALs5Error_pGcSgtF",
   "path": "View.photosReferenceImageViewer(fileURL:onProcessingCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosReferenceImageViewer(fileUrl)",
   "platforms": [
    "ios",
    "macos"
@@ -31156,8 +31156,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E26photosReferenceImageViewer10pickerItem22onProcessingCompletionQrAA7BindingVyAD0d6PickerJ0VSgG_ys6ResultOySo7PHAssetCs5Error_pGcSgtF",
   "path": "View.photosReferenceImageViewer(pickerItem:onProcessingCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosReferenceImageViewer(fileUrl)",
   "platforms": [
    "ios",
    "macos"
@@ -31167,8 +31167,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E26photosReferenceImageViewer12pickerResult22onProcessingCompletionQrAA7BindingVy0dB008PHPickerJ0VSgG_ys0J0OySo7PHAssetCs5Error_pGcSgtF",
   "path": "View.photosReferenceImageViewer(pickerResult:onProcessingCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosReferenceImageViewer(fileUrl)",
   "platforms": [
    "ios",
    "macos"
@@ -31178,8 +31178,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E30photosSharedAlbumCreationSheet11isPresented12defaultTitle0L13SharingPolicy12photoLibrary12onCompletionQrAA7BindingVySbG_SSSgSo08PHSharedghnO0VSgSo07PHPhotoQ0Cy0dB00ugH6ResultVSgcSgtF",
   "path": "View.photosSharedAlbumCreationSheet(isPresented:defaultTitle:defaultSharingPolicy:photoLibrary:onCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosSharedAlbumSheet",
   "platforms": [
    "ios",
    "macos"
@@ -31189,8 +31189,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E35photosSharedAlbumCustomizationSheet11isPresented15albumIdentifier12photoLibrary12onCompletionQrAA7BindingVySbG_SSSgSo07PHPhotoO0Cys5Error_pSgcSgtF",
   "path": "View.photosSharedAlbumCustomizationSheet(isPresented:albumIdentifier:photoLibrary:onCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosSharedAlbumSheet(albumIdentifier)",
   "platforms": [
    "ios",
    "macos"
@@ -31200,8 +31200,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E29photosSharedAlbumPostingSheet11isPresented5items07defaultG10Identifier12photoLibrary10completionQrAA7BindingVySbG_SayAD0D10PickerItemVGSSSgSo07PHPhotoP0Cys6ResultOySSs5Error_pGcSgtF",
   "path": "View.photosSharedAlbumPostingSheet(isPresented:items:defaultAlbumIdentifier:photoLibrary:completion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosSharedAlbumSheet(itemIdentifiers)",
   "platforms": [
    "ios",
    "macos"
@@ -31211,8 +31211,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E29photosSharedAlbumPostingSheet11isPresented5items07defaultG10Identifier12photoLibrary10completionQrAA7BindingVySbG_Say0dB014PHPickerResultVGSSSgSo07PHPhotoP0Cys0T0OySSs5Error_pGcSgtF",
   "path": "View.photosSharedAlbumPostingSheet(isPresented:items:defaultAlbumIdentifier:photoLibrary:completion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosSharedAlbumSheet(itemIdentifiers)",
   "platforms": [
    "ios",
    "macos"
@@ -31222,8 +31222,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E06postToD16SharedAlbumSheet11isPresented5items12photoLibrary07defaultH10Identifier10completionQrAA7BindingVySbG_SayAD0D10PickerItemVGSo07PHPhotoN0CSSSgys6ResultOyyts5Error_pGcSgtF",
   "path": "View.postToPhotosSharedAlbumSheet(isPresented:items:photoLibrary:defaultAlbumIdentifier:completion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosSharedAlbumSheet(itemIdentifiers)",
   "platforms": [
    "ios"
   ]
@@ -31232,8 +31232,8 @@
   "usr": "s:7SwiftUI4ViewP07_Photosb1_aB0E06postToD16SharedAlbumSheet11isPresented5items12photoLibrary07defaultH10Identifier10completionQrAA7BindingVySbG_Say0dB014PHPickerResultVGSo07PHPhotoN0CSSSgys0T0Oyyts5Error_pGcSgtF",
   "path": "View.postToPhotosSharedAlbumSheet(isPresented:items:photoLibrary:defaultAlbumIdentifier:completion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PhotosUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PhotosUI integration): Modifier.photosSharedAlbumSheet(itemIdentifiers)",
   "platforms": [
    "ios"
   ]
@@ -31305,8 +31305,8 @@
   "usr": "s:7SwiftUI4ViewP011_QuickLook_aB0E05quickE7PreviewyQrAA7BindingVy10Foundation3URLVSgGF",
   "path": "View.quickLookPreview(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "QuickLook integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (QuickLook integration): Modifier.quickLookPreview(selection, onSelectionChange, items)",
   "platforms": [
    "ios",
    "macos"
@@ -31316,8 +31316,8 @@
   "usr": "s:7SwiftUI4ViewP011_QuickLook_aB0E05quickE7Preview_2inQrAA7BindingVy10Foundation3URLVSgG_qd__tSkRd__AK7ElementRtd__lF",
   "path": "View.quickLookPreview(_:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "QuickLook integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (QuickLook integration): Modifier.quickLookPreview(selection, onSelectionChange, items)",
   "platforms": [
    "ios",
    "macos"
@@ -31381,8 +31381,8 @@
   "usr": "s:7SwiftUI4ViewP024_AuthenticationServices_aB0E26signInWithAppleButtonStyleyQrAD04SignghiJ0V0K0VF",
   "path": "View.signInWithAppleButtonStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.signInWithAppleButtonStyle",
   "platforms": [
    "ios",
    "macos",
@@ -31711,8 +31711,8 @@
   "usr": "s:7SwiftUI4ViewP013_Translation_aB0E23translationPresentation11isPresented4text16attachmentAnchor9arrowEdge17replacementActionQrAA7BindingVySbG_SSAA017PopoverAttachmentK0OAA0M0OySScSgtF",
   "path": "View.translationPresentation(isPresented:text:attachmentAnchor:arrowEdge:replacementAction:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "Translation integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (Translation integration): Modifier.translationPresentation(isPresented, onDismiss, text, arrowEdge, replacementAction)",
   "platforms": [
    "ios",
    "macos"
@@ -31722,8 +31722,8 @@
   "usr": "s:7SwiftUI4ViewP013_Translation_aB0E15translationTask_6actionQr0D00D7SessionC13ConfigurationVSg_yAIYactF",
   "path": "View.translationTask(_:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "Translation integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (Translation integration): Modifier.translationTask(texts, source, target, preferredStrategy) { translations, error -> }",
   "platforms": [
    "ios",
    "macos"
@@ -31733,8 +31733,8 @@
   "usr": "s:7SwiftUI4ViewP013_Translation_aB0E15translationTask6source6target6actionQr10Foundation6LocaleV8LanguageVSg_ANy0D00D7SessionCYactF",
   "path": "View.translationTask(source:target:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "Translation integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (Translation integration): Modifier.translationTask(texts, source, target, preferredStrategy) { translations, error -> }",
   "platforms": [
    "ios",
    "macos"
@@ -31744,8 +31744,8 @@
   "usr": "s:7SwiftUI4ViewP013_Translation_aB0E15translationTask6source6target17preferredStrategy6actionQr10Foundation6LocaleV8LanguageVSg_AO0D00D7SessionC0J0VyARYactF",
   "path": "View.translationTask(source:target:preferredStrategy:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "Translation integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (Translation integration): Modifier.translationTask(texts, source, target, preferredStrategy) { translations, error -> }",
   "platforms": [
    "ios",
    "macos"
@@ -31755,8 +31755,8 @@
   "usr": "s:7SwiftUI4ViewP09_PassKit_aB0E35verifyIdentityWithWalletButtonStyleyQrAD06VerifyghijK0VF",
   "path": "View.verifyIdentityWithWalletButtonStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PassKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PassKit integration): Modifier.verifyIdentityWithWalletButtonStyle",
   "platforms": [
    "ios"
   ]
@@ -31765,8 +31765,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC29BackForwardNavigationGesturesyQrAD0dC0V0ghiJ8BehaviorVF",
   "path": "View.webViewBackForwardNavigationGestures(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(backForwardNavigationGestures)",
   "platforms": [
    "ios",
    "macos"
@@ -31776,8 +31776,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC17ContentBackgroundyQrAA10VisibilityOF",
   "path": "View.webViewContentBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(contentBackground)",
   "platforms": [
    "ios",
    "macos"
@@ -31787,8 +31787,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC11ContextMenu4menuQrqd__AD0dC0V20ActivatedElementInfoVYbScMYcc_tAaBRd__lF",
   "path": "View.webViewContextMenu(menu:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebView(contextMenu = { linkUrl -> })",
   "platforms": [
    "macos"
   ]
@@ -31797,8 +31797,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC25ElementFullscreenBehavioryQrAD0dC0V0ghI0VF",
   "path": "View.webViewElementFullscreenBehavior(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(elementFullscreen)",
   "platforms": [
    "ios",
    "macos"
@@ -31808,8 +31808,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC12LinkPreviewsyQrAD0dC0V0G15PreviewBehaviorVF",
   "path": "View.webViewLinkPreviews(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(linkPreviews)",
   "platforms": [
    "ios",
    "macos"
@@ -31819,8 +31819,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC21MagnificationGesturesyQrAD0dC0V0gH8BehaviorVF",
   "path": "View.webViewMagnificationGestures(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(magnificationGestures)",
   "platforms": [
    "ios",
    "macos"
@@ -31830,8 +31830,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC22OnScrollGeometryChange3for2of6actionQrqd__m_qd__AA0hI0Vcyqd___qd__tctSHRd__lF",
   "path": "View.webViewOnScrollGeometryChange(for:of:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewScroll(onScrollGeometryChange)",
   "platforms": [
    "ios",
    "macos"
@@ -31841,8 +31841,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC19ScrollInputBehavior_3forQrAA0ghI0V_AA0gH4KindVtF",
   "path": "View.webViewScrollInputBehavior(_:for:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(scrollInputBehavior, scrollInputKind)",
   "platforms": [
    "ios",
    "macos"
@@ -31852,8 +31852,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC14ScrollPositionyQrAA7BindingVyAA0gH0VGF",
   "path": "View.webViewScrollPosition(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewScroll(position)",
   "platforms": [
    "ios",
    "macos"
@@ -31863,8 +31863,8 @@
   "usr": "s:7SwiftUI4ViewP08_WebKit_aB0E03webC13TextSelectionyQrqd__AA0G13SelectabilityRd__lF",
   "path": "View.webViewTextSelection(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): Modifier.webViewStyle(textSelectionEnabled)",
   "platforms": [
    "ios",
    "macos"
@@ -31886,8 +31886,8 @@
   "usr": "s:7SwiftUI11ViewBuilderV6ChartsE10buildBlockQryFZ",
   "path": "ViewBuilder.buildBlock()",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -31899,8 +31899,8 @@
   "usr": "s:7SwiftUI11ViewBuilderV6ChartsE10buildBlockyAD15AnyChartContentVxxQpRvzAD0iJ0RzlFZ",
   "path": "ViewBuilder.buildBlock(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -31912,8 +31912,8 @@
   "usr": "s:7SwiftUI11ViewBuilderV6ChartsE24buildLimitedAvailabilityyAD15AnyChartContentVxAD0jK0RzlFZ",
   "path": "ViewBuilder.buildLimitedAvailability(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "Charts integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -31951,8 +31951,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V9ephemeralAEvpZ",
   "path": "WebAuthenticationSession.BrowserSession.ephemeral",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.webAuthenticationSession(ephemeral)",
   "platforms": [
    "ios",
    "macos",
@@ -31964,8 +31964,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V6sharedAEvpZ",
   "path": "WebAuthenticationSession.BrowserSession.shared",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.webAuthenticationSession(ephemeral)",
   "platforms": [
    "ios",
    "macos",
@@ -31977,8 +31977,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI03WebA7SessionV12authenticate5using8callback016preferredBrowserF022additionalHeaderFields10Foundation3URLVAK_So05ASWebaF8CallbackCAC0kF0VSgSDyS2SGtYaKF",
   "path": "WebAuthenticationSession.authenticate(using:callback:preferredBrowserSession:additionalHeaderFields:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.webAuthenticationSession(trigger, url, callbackUrlScheme, ephemeral)",
   "platforms": [
    "ios",
    "macos",
@@ -31990,8 +31990,8 @@
   "usr": "s:31_AuthenticationServices_SwiftUI03WebA7SessionV12authenticate5using17callbackURLScheme016preferredBrowserF010Foundation3URLVAJ_SSAC0lF0VSgtYaKF",
   "path": "WebAuthenticationSession.authenticate(using:callbackURLScheme:preferredBrowserSession:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AuthenticationServices integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.webAuthenticationSession(trigger, url, callbackUrlScheme, ephemeral)",
   "platforms": [
    "ios",
    "macos",
@@ -32102,8 +32102,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV37BackForwardNavigationGesturesBehaviorV9automaticAEvpZ",
   "path": "WebView.BackForwardNavigationGesturesBehavior.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32113,8 +32113,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV37BackForwardNavigationGesturesBehaviorV8disabledAEvpZ",
   "path": "WebView.BackForwardNavigationGesturesBehavior.disabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32124,8 +32124,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV37BackForwardNavigationGesturesBehaviorV7enabledAEvpZ",
   "path": "WebView.BackForwardNavigationGesturesBehavior.enabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32157,8 +32157,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV25ElementFullscreenBehaviorV9automaticAEvpZ",
   "path": "WebView.ElementFullscreenBehavior.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32168,8 +32168,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV25ElementFullscreenBehaviorV8disabledAEvpZ",
   "path": "WebView.ElementFullscreenBehavior.disabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32179,8 +32179,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV25ElementFullscreenBehaviorV7enabledAEvpZ",
   "path": "WebView.ElementFullscreenBehavior.enabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32201,8 +32201,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV19LinkPreviewBehaviorV9automaticAEvpZ",
   "path": "WebView.LinkPreviewBehavior.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32212,8 +32212,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV19LinkPreviewBehaviorV8disabledAEvpZ",
   "path": "WebView.LinkPreviewBehavior.disabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32223,8 +32223,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV19LinkPreviewBehaviorV7enabledAEvpZ",
   "path": "WebView.LinkPreviewBehavior.enabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32245,8 +32245,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV29MagnificationGesturesBehaviorV9automaticAEvpZ",
   "path": "WebView.MagnificationGesturesBehavior.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32256,8 +32256,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV29MagnificationGesturesBehaviorV8disabledAEvpZ",
   "path": "WebView.MagnificationGesturesBehavior.disabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32267,8 +32267,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV29MagnificationGesturesBehaviorV7enabledAEvpZ",
   "path": "WebView.MagnificationGesturesBehavior.enabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebViewBehavior",
   "platforms": [
    "ios",
    "macos"
@@ -32289,8 +32289,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewVyAC0aB00A4PageCcfc",
   "path": "WebView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebView(url, controller, contextMenu)",
   "platforms": [
    "ios",
    "macos"
@@ -32300,8 +32300,8 @@
   "usr": "s:15_WebKit_SwiftUI0A4ViewV3urlAC10Foundation3URLVSg_tcfc",
   "path": "WebView.init(url:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "WebKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WebKit integration): WebView(url, controller, contextMenu)",
   "platforms": [
    "ios",
    "macos"

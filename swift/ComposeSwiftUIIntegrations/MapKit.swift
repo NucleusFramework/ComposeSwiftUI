@@ -11,6 +11,9 @@ public extension ComposeIntegrations {
         ComposeRegistry.views[200_008] = { m in ModChain.apply(MapControl(m: m, kind: .scale), m, 0) }
         ComposeRegistry.views[200_009] = { m in ModChain.apply(MapControl(m: m, kind: .userLocation), m, 0) }
         ComposeRegistry.views[200_010] = { m in ModChain.apply(MapControl(m: m, kind: .pitch), m, 0) }
+        ComposeRegistry.views[200_013] = { m in ModChain.apply(MapControl(m: m, kind: .pitchSlider), m, 0) }
+        ComposeRegistry.views[200_014] = { m in ModChain.apply(MapControl(m: m, kind: .zoomStepper), m, 0) }
+        ComposeRegistry.views[200_015] = { m in ModChain.apply(MapControl(m: m, kind: .locationCompass), m, 0) }
         #if os(iOS) || os(macOS)
         ComposeRegistry.views[200_011] = { m in ModChain.apply(KotlinLookAroundPreview(m: m), m, 0) }
         #endif
@@ -416,7 +419,7 @@ private struct FeatureContent: ViewModifier {
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 private struct MapControl: View {
-    enum Kind { case compass, scale, userLocation, pitch }
+    enum Kind { case compass, scale, userLocation, pitch, pitchSlider, zoomStepper, locationCompass }
     let m: NodeModel
     let kind: Kind
     @Environment(\.composeNamespaces) private var namespaces
@@ -447,6 +450,24 @@ private struct MapControl: View {
         case .pitch:
             #if os(iOS) || os(macOS)
             MapPitchToggle(scope: scope)
+            #else
+            EmptyView()
+            #endif
+        case .pitchSlider:
+            #if os(macOS)
+            MapPitchSlider(scope: scope)
+            #else
+            EmptyView()
+            #endif
+        case .zoomStepper:
+            #if os(macOS)
+            MapZoomStepper(scope: scope)
+            #else
+            EmptyView()
+            #endif
+        case .locationCompass:
+            #if os(watchOS)
+            MapLocationCompass(scope: scope)
             #else
             EmptyView()
             #endif

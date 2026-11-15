@@ -178,6 +178,9 @@ public struct ComposeView: View {
 /// framework's file from `ComposeSwiftUIIntegrations` to the app and call its `register…()` once at launch.
 public enum ComposeIntegrations {}
 
+/// Calls a synchronous Kotlin function (`KotlinFunction`) passed as an argument; nil when absent.
+func kotlinInvoke(_ f: Any?, _ args: [Any]) -> Any? { (f as? KotlinFunction)?.invoke(args: args) }
+
 /// Registry of view / modifier renderers. The generated code registers itself here; hand-written
 /// renderers can override or extend any id.
 @MainActor

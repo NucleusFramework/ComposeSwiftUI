@@ -88,7 +88,7 @@ enum StoreEncoding {
 
     /// Calls a synchronous Kotlin function.
     static func call(_ f: Any?, _ args: [Any]) -> Any? {
-        (f as? KotlinFunction)?.invoke(args: args)
+        kotlinInvoke(f, args)
     }
 }
 
