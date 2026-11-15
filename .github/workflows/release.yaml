@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write  # to start the docs workflow
 
 jobs:
   release:
@@ -56,3 +57,10 @@ jobs:
         run: |
           gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes-file notes.md --generate-notes --verify-tag \
             intellij-plugin/build/distributions/*.zip
+
+      # A release created with GITHUB_TOKEN fires no `release` event, so the docs site (which shows the latest
+      # release) is rebuilt explicitly: workflow_dispatch is the one trigger GITHUB_TOKEN may fire.
+      - name: Rebuild the docs site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run docs.yaml --repo "$GITHUB_REPOSITORY" --ref main
