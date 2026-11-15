@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- IntelliJ IDEA / Android Studio plugin (`intellij-plugin`): Kotlin files with `@Preview` open in a code | preview split
+  editor, with a gutter icon per preview. Previews are rendered with real SwiftUI on the iOS simulator by the new
+  `renderComposeSwiftUIPreviews` Gradle task, and again on every save.
+
 ## 0.3.0
 
 ### Added

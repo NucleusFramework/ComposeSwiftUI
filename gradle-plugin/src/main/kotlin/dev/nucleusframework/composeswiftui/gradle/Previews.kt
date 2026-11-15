@@ -145,6 +145,25 @@ internal object PreviewCodegen {
         append(galleryBody)
     }
 
+    /** Previews rendered by the host app of `renderComposeSwiftUIPreviews`, keyed by qualified name (the PNG name). */
+    fun hostSwift(entries: List<PreviewEntry>): String = buildString {
+        appendLine("// $HEADER")
+        appendLine()
+        appendLine("struct ComposeSwiftUIRenderedPreview {")
+        appendLine("    let id: String")
+        appendLine("    let makeHost: () -> ComposeSwiftUIHost")
+        appendLine("}")
+        appendLine()
+        appendLine("let composeSwiftUIRenderedPreviews: [ComposeSwiftUIRenderedPreview] = [")
+        for ((function, accessor) in entries) {
+            appendLine(
+                "    ComposeSwiftUIRenderedPreview(id: ${function.qualifiedName.swiftLiteral()}, " +
+                    "makeHost: { $OBJECT_NAME.shared.$accessor() }),",
+            )
+        }
+        appendLine("]")
+    }
+
     private val galleryBody = """
         |
         |    @State private var selection: Entry?
