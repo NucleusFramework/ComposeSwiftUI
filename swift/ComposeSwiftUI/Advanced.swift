@@ -250,7 +250,7 @@ private struct KotlinTextRenderer: TextRenderer {
         .map { KotlinDouble(value: Double($0)) } as NSArray
 }
 
-@MainActor private func buildGesture(_ raw: Any?) -> AnyGesture<Void>? {
+@MainActor func buildGesture(_ raw: Any?) -> AnyGesture<Void>? {
     guard let s = raw as? [Any], let kind = (s.first as? NSNumber)?.intValue else { return nil }
     func arg(_ i: Int) -> Any? { i < s.count ? s[i] : nil }
     func num(_ i: Int) -> Double { (arg(i) as? NSNumber)?.doubleValue ?? 0 }

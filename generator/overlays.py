@@ -43,6 +43,9 @@ def classify(s):
     for key, why in table["not_applicable"].items():
         if match(path, key):
             return "n/a", why
+    name = path.split(".")[-1]
+    if name.startswith(("hash(into:)", "==(", "encode(to:)", "init(from:)", "index(", "contains(", "relative(")) or name in ("hashValue", "description"):
+        return "n/a", "protocol conformance plumbing (Equatable, Hashable, Codable, Collection…)"
     if kind in ("swift.typealias", "swift.associatedtype"):
         return "n/a", "type alias / associated type (no runtime surface)"
     if kind == "swift.func.op":

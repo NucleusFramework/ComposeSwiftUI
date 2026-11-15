@@ -97,6 +97,42 @@ interface ScrollProxyHandle {
     fun scrollTo(id: Any, anchor: Any?)
 }
 
+/** A Kotlin function sampled by Swift Charts (function plots, surfaces): inputs → outputs. */
+interface ChartFunction {
+    fun evaluate(input: List<Double>): List<Double>
+}
+
+/** Custom axis value label: the value as `[kind, raw]` (0 String, 1 Double, 2 date) and its index. */
+interface AxisLabelProvider {
+    fun label(value: Any?, index: Int): String?
+}
+
+/** Swift Charts `ChartProxy`, implemented in Swift (swift/ComposeSwiftUIIntegrations/Charts.swift). Values are `[kind, raw]`. */
+interface ChartProxyHandle {
+    /** [type]: 0 String, 1 number, 2 date (a number axis also reads as dates). */
+    fun valueAt(axis: Int, position: Double, type: Int): Any?
+    fun positionFor(axis: Int, value: Any): Double?
+    fun positionForPoint(x: Any, y: Any): List<Double>?
+    fun positionRange(axis: Int, value: Any): List<Double>?
+    fun angleAt(x: Double, y: Double): Double?
+    fun valueAtAngle(degrees: Double, type: Int): Any?
+    fun plotFrame(): List<Double>?
+    fun domain(axis: Int, type: Int): List<Any?>?
+    fun select(axis: Int, values: List<Double>)
+}
+
+/** MapKit `MapProxy`, implemented in Swift (swift/ComposeSwiftUIIntegrations/MapKit.swift). */
+interface MapProxyHandle {
+    /** Coordinate (latitude, longitude) at a point of the reader's local space, or null off the map. */
+    fun coordinate(x: Double, y: Double): List<Double>?
+
+    /** Point (x, y) of a coordinate in the reader's local space, or null. */
+    fun point(latitude: Double, longitude: Double): List<Double>?
+
+    /** Camera (latitude, longitude, distance, heading, pitch) framing a region (lat, lon, latDelta, lonDelta). */
+    fun camera(framing: List<Double>): List<Double>?
+}
+
 /** `onKeyPress` handler: returns true when the key press is handled. */
 interface KeyPressHandler {
     fun onKeyPress(characters: String, key: String, modifiers: Int, phase: Int): Boolean

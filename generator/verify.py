@@ -41,7 +41,8 @@ def lookup(linemap, path, line):
 
 def swift_errors(project, target, sdk_name, fw):
     files = sorted(glob.glob(os.path.join(project, "swift", "ComposeSwiftUI", "*.swift")) +
-                   glob.glob(os.path.join(project, "swift", "ComposeSwiftUI", "Generated", "*.swift")))
+                   glob.glob(os.path.join(project, "swift", "ComposeSwiftUI", "Generated", "*.swift")) +
+                   glob.glob(os.path.join(project, "swift", "ComposeSwiftUIIntegrations", "*.swift")))
     cmd = ["xcrun", "swiftc", "-typecheck", "-swift-version", "5", "-target", target, "-sdk", sdk(sdk_name),
            "-F", fw, "-module-name", "ComposeSwiftUI"] + files
     p = subprocess.run(cmd, capture_output=True, text=True)

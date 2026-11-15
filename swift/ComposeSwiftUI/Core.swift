@@ -174,6 +174,10 @@ public struct ComposeView: View {
     }
 }
 
+/// Opt-in renderers for the SwiftUI APIs of other Apple frameworks (MapKit, Charts, StoreKit…): add the
+/// framework's file from `ComposeSwiftUIIntegrations` to the app and call its `register…()` once at launch.
+public enum ComposeIntegrations {}
+
 /// Registry of view / modifier renderers. The generated code registers itself here; hand-written
 /// renderers can override or extend any id.
 @MainActor
