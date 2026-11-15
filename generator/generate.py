@@ -1045,9 +1045,10 @@ class Generator:
         Matches enum cases (with payloads) and, for Equatable types, static members; `nil` when none match."""
         out = Out(path)
         out.add(header)
-        todo, done = list(self.classifier.encoders), set()
+        # sorted, and drained in order: generated output must not depend on set iteration order
+        todo, done = sorted(self.classifier.encoders), set()
         while todo:
-            usr = todo.pop()
+            usr = todo.pop(0)
             if usr in done or usr not in self.values:
                 continue
             done.add(usr)
