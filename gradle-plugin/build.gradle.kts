@@ -15,7 +15,7 @@ version =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.4.1"
+        ?: "0.5.0"
 
 dependencies {
     compileOnly(libs.kotlin.gradle.plugin)
@@ -35,15 +35,19 @@ kotlin {
 // ---- Embed the Swift renderer sources (swift/ComposeSwiftUI) as plugin resources ----------------
 
 val rendererDir = layout.projectDirectory.dir("../swift/ComposeSwiftUI")
+// opt-in framework renderers (MapKit, Charts, StoreKit…), embedded under integrations/
+val integrationsDir = layout.projectDirectory.dir("../swift/ComposeSwiftUIIntegrations")
 val rendererResources = layout.buildDirectory.dir("generated/renderer-resources")
 val rendererResourcePath = "dev/nucleusframework/composeswiftui/renderer"
 
 val embedSwiftRenderer = tasks.register("embedSwiftRenderer") {
     description = "Copies the Swift renderer sources into the plugin resources, with an index."
     inputs.dir(rendererDir)
+    inputs.dir(integrationsDir)
     outputs.dir(rendererResources)
     // local values only: the configuration cache can't serialize script references
     val root = rendererDir.asFile
+    val integrationsRoot = integrationsDir.asFile
     val outRoot = rendererResources
     val resourcePath = rendererResourcePath
     doLast {
@@ -56,7 +60,9 @@ val embedSwiftRenderer = tasks.register("embedSwiftRenderer") {
             .sorted()
             .toList()
         files.forEach { rel -> root.resolve(rel).copyTo(out.resolve(rel), overwrite = true) }
-        out.resolve("index.txt").writeText(files.joinToString("\n"))
+        val integrations = integrationsRoot.listFiles { f -> f.extension == "swift" }.orEmpty().map { "integrations/${it.name}" }.sorted()
+        integrations.forEach { rel -> integrationsRoot.resolve(rel.removePrefix("integrations/")).copyTo(out.resolve(rel), overwrite = true) }
+        out.resolve("index.txt").writeText((files + integrations).joinToString("\n"))
     }
 }
 

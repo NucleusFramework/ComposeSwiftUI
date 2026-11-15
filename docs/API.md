@@ -1101,6 +1101,8 @@ Modifier.zIndex(value: Double)
   - `AccessibilityActionCategory(name: String)`
   - `AccessibilityActionCategory.edit`
   - `AccessibilityActionCategory.default`
+  - `AccessibilityActionCategory.nameKey(nameKey: LocalizedKey): AccessibilityActionCategory`
+  - `AccessibilityActionCategory.name(name: String): AccessibilityActionCategory`
 - `AccessibilityHeadingLevel` (class)
   - `AccessibilityHeadingLevel.unspecified`
   - `AccessibilityHeadingLevel.h1`
@@ -1424,6 +1426,7 @@ Modifier.zIndex(value: Double)
   - `Spring.smooth`
   - `Spring.snappy(duration: Double`
   - `Spring.snappy`
+  - `Spring.response(response: Double, dampingRatio: Double): Spring`
 - `SubmitLabel` (class)
   - `SubmitLabel.go`
   - `SubmitLabel.done`
@@ -1449,6 +1452,7 @@ Modifier.zIndex(value: Double)
   - `TableStyle.automatic`
 - `TextEditor` (class)
   - `TextEditor(text: String, onTextChange: (String) -> Unit)`
+  - `TextEditor.text(text: String, onTextChange: (String) -> Unit): TextEditor`
 - `TextInputDictationActivation` (class)
   - `TextInputDictationActivation.onLook`
   - `TextInputDictationActivation.onSelect`
@@ -1609,6 +1613,10 @@ Modifier.zIndex(value: Double)
   - `ConcentricRectangle(uniformTopCorners: Edge.Corner.Style = Edge.Corner.Style.concentric, bottomLeadingCorner: Edge.Corner.Style = Edge.Corner.Style.concentric, bottomTrailingCorner: Edge.Corner.Style = Edge.Corner.Style.concentric)`
   - `ConcentricRectangle(corners: Edge.Corner.Style, isUniform: Boolean = false)`
   - `ConcentricRectangle()`
+  - `ConcentricRectangle.uniformBottomCorners(uniformBottomCorners: Edge.Corner.Style`
+  - `ConcentricRectangle.uniformLeadingCorners(uniformLeadingCorners: Edge.Corner.Style`
+  - `ConcentricRectangle.uniformLeadingCorners(uniformLeadingCorners: Edge.Corner.Style`
+  - `ConcentricRectangle.uniformTrailingCorners(uniformTrailingCorners: Edge.Corner.Style`
 - `ConcentricRectangle.AnimatableData` (class)
   - `ConcentricRectangle.AnimatableData.zero`
 - `ContentShapeKinds` (class)
@@ -1692,7 +1700,9 @@ Modifier.zIndex(value: Double)
   - `Font.title`
   - `Font.custom(name: String, size: Double, relativeTo: Font.TextStyle): Font`
   - `Font.custom(name: String, size: Double): Font`
+  - `Font.customName(name: String, fixedSize: Double): Font`
   - `Font.system(size: Double, weight: Font.Weight`
+  - `Font.systemSize(size: Double, weight: Font.Weight?`
   - `Font.system(style: Font.TextStyle, design: Font.Design?`
   - `Font.system(style: Font.TextStyle, design: Font.Design`
   - `Font.title2`
@@ -1781,6 +1791,7 @@ Modifier.zIndex(value: Double)
   - `KeyEquivalent.pageDown`
   - `KeyEquivalent.downArrow`
   - `KeyEquivalent.leftArrow`
+  - `KeyEquivalent.character(character: String): KeyEquivalent`
 - `LayoutDirectionBehavior` (class)
   - `LayoutDirectionBehavior.fixed`
   - `LayoutDirectionBehavior.mirrors`
@@ -1833,6 +1844,7 @@ Modifier.zIndex(value: Double)
   - `PresentationAdaptation.automatic`
 - `PreviewDevice` (class)
   - `PreviewDevice(stringLiteral: String)`
+  - `PreviewDevice.rawValue(rawValue: String): PreviewDevice`
 - `ProjectionTransform` (class)
   - `ProjectionTransform.concatenating(rhs: ProjectionTransform): ProjectionTransform`
   - `ProjectionTransform.inverted(): ProjectionTransform`
@@ -1922,6 +1934,7 @@ Modifier.zIndex(value: Double)
   - `ToolbarItemVisibilityPriority.low`
   - `ToolbarItemVisibilityPriority.high`
   - `ToolbarItemVisibilityPriority.automatic`
+  - `ToolbarItemVisibilityPriority.lowerThan(lowerThan: ToolbarItemVisibilityPriority): ToolbarItemVisibilityPriority`
 - `ToolbarRole` (class)
   - `ToolbarRole.navigationStack`
   - `ToolbarRole.editor`
@@ -2221,6 +2234,7 @@ Modifier.zIndex(value: Double)
   - `ScrollPosition(edge: Edge)`
   - `ScrollPosition(point: CGPoint)`
   - `ScrollPosition()`
+  - `ScrollPosition.y(y: Double): ScrollPosition`
 - `SearchPresentationToolbarBehavior` (class)
   - `SearchPresentationToolbarBehavior.avoidHidingContent`
   - `SearchPresentationToolbarBehavior.automatic`
@@ -2270,6 +2284,12 @@ Modifier.zIndex(value: Double)
   - `Shape.rect(cornerSize: CGSize, style: RoundedCornerStyle`
   - `Shape.rect(cornerRadius: Double, style: RoundedCornerStyle`
   - `Shape.rect(topLeadingCorner: Edge.Corner.Style, topTrailingCorner: Edge.Corner.Style, bottomLeadingCorner: Edge.Corner.Style, bottomTrailingCorner: Edge.Corner.Style): ConcentricRectangle`
+  - `Shape.rect(uniformTopCorners: Edge.Corner.Style, uniformBottomCorners: Edge.Corner.Style): ConcentricRectangle`
+  - `Shape.rect(uniformTopCorners: Edge.Corner.Style, bottomLeadingCorner: Edge.Corner.Style, bottomTrailingCorner: Edge.Corner.Style): ConcentricRectangle`
+  - `Shape.rectUniformBottomCorners(uniformBottomCorners: Edge.Corner.Style, topLeadingCorner: Edge.Corner.Style, topTrailingCorner: Edge.Corner.Style): ConcentricRectangle`
+  - `Shape.rectUniformLeadingCorners(uniformLeadingCorners: Edge.Corner.Style, uniformTrailingCorners: Edge.Corner.Style): ConcentricRectangle`
+  - `Shape.rectUniformLeadingCorners(uniformLeadingCorners: Edge.Corner.Style, topTrailingCorner: Edge.Corner.Style, bottomTrailingCorner: Edge.Corner.Style): ConcentricRectangle`
+  - `Shape.rectUniformTrailingCorners(uniformTrailingCorners: Edge.Corner.Style, topLeadingCorner: Edge.Corner.Style, bottomLeadingCorner: Edge.Corner.Style): ConcentricRectangle`
   - `Shape.rect(corners: Edge.Corner.Style, isUniform: Boolean`
   - `Shape.rect(cornerRadii: RectangleCornerRadii, style: RoundedCornerStyle`
   - `Shape.rect(topLeadingRadius: Double`
@@ -2385,6 +2405,7 @@ Modifier.zIndex(value: Double)
   - `Angle.zero`
   - `Angle.degrees(degrees: Double): Angle`
   - `Angle.radians(radians: Double): Angle`
+  - `Angle.radiansRadians(radians: Double): Angle`
 - `AnyNavigationTransition` (class)
   - `AnyNavigationTransition(transition: NavigationTransition)`
 - `AsyncImagePhase` (class)
@@ -2437,6 +2458,7 @@ Modifier.zIndex(value: Double)
   - `Color.yellow`
   - `Color.primary`
   - `Color.secondary`
+  - `Color.resource(resource: String): Color`
 - `Color.RGBColorSpace` (class)
   - `Color.RGBColorSpace.sRGBLinear`
   - `Color.RGBColorSpace.sRGB`
@@ -2546,6 +2568,7 @@ Modifier.zIndex(value: Double)
 - `LocalizedStringKey` (class)
   - `LocalizedStringKey(stringLiteral: String)`
   - `LocalizedStringKey(stringInterpolation: LocalizedStringKey.StringInterpolation)`
+  - `LocalizedStringKey.value(value: String): LocalizedStringKey`
 - `LocalizedStringKey.StringInterpolation` (class)
   - `LocalizedStringKey.StringInterpolation(literalCapacity: Int, interpolationCount: Int)`
 - `MaterialActiveAppearance` (class)
@@ -2761,6 +2784,8 @@ Modifier.zIndex(value: Double)
   - `AccessibilityCustomContentKey(label: LocalizedKey, id: String)`
   - `AccessibilityCustomContentKey(label: String, id: String)`
   - `AccessibilityCustomContentKey(label: LocalizedKey)`
+  - `AccessibilityCustomContentKey.labelKey(labelKey: LocalizedKey, id: String): AccessibilityCustomContentKey`
+  - `AccessibilityCustomContentKey.labelKey(labelKey: LocalizedKey): AccessibilityCustomContentKey`
 - `AccessibilityQuickActionStyle` (interface)
   - `AccessibilityQuickActionStyle.prompt`
   - `AccessibilityQuickActionStyle.outline`
@@ -2945,11 +2970,13 @@ Modifier.zIndex(value: Double)
   - `Path.lineSubtraction(other: Path, eoFill: Boolean`
   - `Path.lineIntersection(other: Path, eoFill: Boolean`
   - `Path.symmetricDifference(other: Path, eoFill: Boolean`
+  - `Path.path(inValue: CGRect): Path`
   - `Path.union(other: Path, eoFill: Boolean`
   - `Path.applying(transform: CGAffineTransform): Path`
   - `Path.offsetBy(dx: Double, dy: Double): Path`
   - `Path(ellipseIn: CGRect)`
   - `Path()`
+  - `Path.rect(rect: CGRect): Path`
 - `Path.Element` (class)
   - `Path.Element.closeSubpath`
   - `Path.Element.line(to: CGPoint): Path.Element`
@@ -3213,6 +3240,7 @@ Modifier.zIndex(value: Double)
   - `Animation.timingCurve(curve: UnitCurve, duration: Double): Animation`
   - `Animation.timingCurve(p1x: Double, p1y: Double, p2x: Double, p2y: Double, duration: Double`
   - `Animation.interactiveSpring(duration: Double`
+  - `Animation.interactiveSpringResponse(response: Double`
   - `Animation.interactiveSpring`
   - `Animation.interpolatingSpring(mass: Double`
   - `Animation.interpolatingSpring(duration: Double`
@@ -3229,6 +3257,7 @@ Modifier.zIndex(value: Double)
   - `Animation.snappy(duration: Double`
   - `Animation.snappy`
   - `Animation.spring(duration: Double`
+  - `Animation.springResponse(response: Double`
   - `Animation.spring`
   - `Animation.spring(spring: Spring, blendDuration: Double`
   - `Animation.default`

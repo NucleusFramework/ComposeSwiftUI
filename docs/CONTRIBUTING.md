@@ -34,8 +34,16 @@ python3 -I generator/verify.py /tmp/sg . /tmp/corefw --kotlin
 
 # 4. Reference docs
 python3 -I generator/api_index.py .                                 # docs/API.md
+python3 -I generator/overlays.py /tmp/sg .                          # generator/coverage_overlays.json
 python3 -I generator/coverage_report.py <apple-doc-index.json> .    # docs/COVERAGE.md
 ```
+
+`extract.sh` also extracts the SwiftUI overlays of other frameworks (MapKit, Charts, StoreKit…) into
+`/tmp/sg/overlays`. They aren't generated: their Kotlin APIs are hand-written (`runtime/src/extras/.../MapKit.kt`,
+`Charts.kt`, `StoreKit.kt`) with one opt-in Swift renderer each in `swift/ComposeSwiftUIIntegrations`, and
+`generator/integrations.json` maps each overlay symbol to its Kotlin API or gives the reason it doesn't apply.
+`verify.py` typechecks the integrations with the renderer; the Gradle plugin writes them to
+`iosApp/ComposeSwiftUIIntegrations`.
 
 `<apple-doc-index.json>` is the documentation index from
 `https://developer.apple.com/tutorials/data/index/swiftui`.

@@ -43,7 +43,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.4.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.5.0"
    }
 
    kotlin {
@@ -234,8 +234,49 @@ simulator or device, for example from a debug menu:
 - If you added the `ComposeSwiftUI` folder to Xcode as a group before this version, add the new
   `ComposeSwiftUIPreviews.swift` file to the app target once.
 - If the folder is a group, add `Interactive.swift`, `Advanced.swift`, `Completions.swift` and
-  `Generated/GenEncoders.swift` to the app target once when you
-  upgrade past 0.4.1.
+  `Generated/GenEncoders.swift` to the app target once when you upgrade past 0.4.1.
+
+## Apple frameworks: maps, charts, in-app purchases
+
+The SwiftUI views and modifiers of MapKit, Swift Charts and StoreKit are available from Kotlin. Each framework has its
+own renderer file, which the Gradle plugin writes to `iosApp/ComposeSwiftUIIntegrations` next to the renderer. Add
+only the files you need to the app target, so your app links only those frameworks, and register each once at launch.
+
+```swift
+@main
+struct MyApp: App {
+    init() {
+        ComposeIntegrations.registerMapKit()     // MapKit.swift
+        ComposeIntegrations.registerCharts()     // Charts.swift
+        ComposeIntegrations.registerStoreKit()   // StoreKit.swift
+    }
+    var body: some Scene { WindowGroup { ComposeView { MainKt.app() } } }
+}
+```
+
+```kotlin
+// MapKit
+var position by remember { mutableStateOf(MapCameraPosition.region(MKCoordinateRegion(paris, 0.05, 0.05))) }
+Map(position = position, onPositionChange = { position = it }, modifier = Modifier.mapStyle(MapStyle.hybrid)) {
+    Marker("Eiffel Tower", eiffel, systemImage = "star.fill")
+    MapCircle(paris, radius = 800.0, style = MapContentStyle(foregroundStyle = Color.blue.opacity(0.2)))
+}
+
+// Swift Charts
+Chart(modifier = Modifier.frame(height = 200.0)) {
+    for ((month, sales) in data) {
+        BarMark(x = PlottableValue.value("Month", month), y = PlottableValue.value("Sales", sales))
+    }
+}
+
+// StoreKit
+SubscriptionStoreView(groupId = "21482456", modifier = Modifier.storeStyle(StoreContentStyle(controlStyle = SubscriptionStoreControlStyle.picker)))
+```
+
+Swift-only data stays on the Swift side: map items are coordinates and names, chart values are strings, numbers or
+`ChartDate`s, and products are identified by their App Store Connect ids (purchases, transactions and subscription
+statuses arrive as Kotlin data classes). Vectorized chart plots (`ChartPlot`) are drawn as one mark per item, and 3D
+charts take numeric values.
 
 ## Using it with other Compose libraries
 

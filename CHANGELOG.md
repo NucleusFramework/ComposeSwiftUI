@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0
 
 ### Added
 
@@ -61,6 +61,24 @@
   `dragContainer`, `onDragSessionUpdated`/`onDropSessionUpdated`, `dropConfiguration`, and the macOS commands
   (`copyable`, `cuttable`, `pasteDestination`, `onCopyCommand`, `onCutCommand`, `onPasteCommand`,
   `exportableToServices`, `importableFromServices`, `onModifierKeysChanged`), plus `onPencilDoubleTap`.
+- Shape operations (`offset`, `rotation`, `scale`, `trim`, `transform`, `size`, `union`, `intersection`, `subtracting`,
+  `symmetricDifference`, `lineIntersection`, `lineSubtraction`, `inset`, `strokedShape`), the full `Path` API in
+  `PathBuilder` (arcs, tangent arcs, rounded rectangles, lines, rectangles, nested paths), `Gradient.colorSpace` and
+  `Text(text, variant)`.
+- Overloads that Kotlin can't tell apart (same parameter types, different labels) are no longer dropped: they are named
+  after their first label (`ConcentricRectangle.uniformBottomCorners(…)`, `Shape.rectUniformLeadingCorners(…)`,
+  `Font.customName(_, fixedSize)`, `AccessibilityActionCategory.name(…)`…).
+- MapKit (`ComposeIntegrations.registerMapKit()`): `Map` with Kotlin-controlled position, bounds, interaction modes,
+  marker and point-of-interest selection; `Marker`, `Annotation`, `MapCircle`, `MapPolyline`, `MapPolygon`,
+  `UserAnnotation`; map controls; `MapReader`; `LookAroundPreview` and `lookAroundViewer`; map item detail sheet and
+  popover; `mapStyle`, `onMapCameraChange`, camera keyframes.
+- Swift Charts (`ComposeIntegrations.registerCharts()`): every mark with String, number or date values; vectorized and
+  function plots; 3D charts and surfaces; styles by value, annotations, masks; axes and axis marks with Kotlin labels;
+  scales, legend, selection, scrolling; `ChartProxy` for overlays, backgrounds and gestures.
+- StoreKit (`ComposeIntegrations.registerStoreKit()`): `ProductView`, `StoreView`, `SubscriptionStoreView` with option
+  groups, sections and period sets, `SubscriptionOfferView`; store styles and buttons; subscription, offer code, refund
+  and App Store overlay sheets; purchase callbacks and options; introductory, promotional and preferred offers; product,
+  entitlement and subscription status tasks; `requestReview` and `purchase`.
 - Every entry of Apple's SwiftUI documentation that builds UI is now generated or hand-written;
   [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one that doesn't apply to Kotlin.
 
@@ -73,6 +91,8 @@
 - The Swift renderer has four new files, `Interactive.swift`, `Advanced.swift`, `Completions.swift` and
   `Generated/GenEncoders.swift`. If you added the `ComposeSwiftUI` folder to Xcode as a group, add them to the app
   target once.
+- The integrations are opt-in: add `swift/ComposeSwiftUIIntegrations/MapKit.swift`, `Charts.swift` or `StoreKit.swift`
+  to the app and call its `register…()` once.
 
 ## 0.4.1
 
