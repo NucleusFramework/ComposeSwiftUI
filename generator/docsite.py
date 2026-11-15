@@ -194,7 +194,7 @@ def markdown(md):
             i += 1
             while i < len(lines) and not lines[i].startswith("```"):
                 code.append(lines[i]); i += 1
-            out.append('<pre><code class="%s">%s</code></pre>' % (esc(lang), esc("\n".join(code))))
+            out.append('<pre><code class="language-%s">%s</code></pre>' % (esc(lang or "plaintext"), esc("\n".join(code))))
         elif re.match(r"^#{1,4} ", l):
             n = len(l.split(" ")[0])
             text = l[n + 1:]
@@ -248,8 +248,10 @@ def sections(md):
 # ---- page layout (modelled on the structure of Apple's documentation pages) --------------------------------
 
 CSS = """
-:root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--soft:#f5f5f7;--code:#f5f5f7;--accent:#0066cc;--side:#fafafc}
-@media (prefers-color-scheme:dark){:root{--bg:#1d1d1f;--fg:#f5f5f7;--muted:#a1a1a6;--line:#424245;--soft:#2c2c2e;--code:#2c2c2e;--accent:#2997ff;--side:#161617}}
+:root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--soft:#f5f5f7;--code:#f5f5f7;--accent:#0066cc;--side:#fafafc;--pill:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1d1d1f;--fg:#f5f5f7;--muted:#a1a1a6;--line:#424245;--soft:#2c2c2e;--code:#2c2c2e;--accent:#2997ff;--side:#161617;--pill:#4a4a4e;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#1d1d1f;--fg:#f5f5f7;--muted:#a1a1a6;--line:#424245;--soft:#2c2c2e;--code:#2c2c2e;--accent:#2997ff;--side:#161617;--pill:#4a4a4e;color-scheme:dark}
+.theme{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}.theme button{display:grid;place-items:center;width:28px;height:24px;border:0;border-radius:999px;background:none;color:var(--muted);cursor:pointer;transition:background .2s,color .2s}.theme button:hover{color:var(--fg)}.theme button[aria-pressed=true]{background:var(--pill);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.15)}.theme button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 *{box-sizing:border-box}html,body{margin:0}body{font:17px/1.47 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;background:var(--bg);color:var(--fg)}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .top{height:52px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:22px;padding:0 22px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:saturate(180%) blur(20px);z-index:2}
@@ -268,7 +270,7 @@ main{flex:1;min-width:0}
 h2{font-size:28px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--line)}h2:first-child{border-top:0;margin-top:0}
 h3{font-size:20px;margin:28px 0 10px}
 code{font:.88em "SF Mono",ui-monospace,Menlo,monospace}p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:5px}
-pre{background:var(--code);padding:14px 16px;border-radius:12px;overflow:auto;font-size:15px;line-height:1.5}
+pre code.hljs{background:none;padding:0}pre{background:var(--code);padding:14px 16px;border-radius:12px;overflow:auto;font-size:15px;line-height:1.5}
 .decl{border:1px solid var(--line);background:var(--bg)}
 .topic{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}.topic:last-child{border-bottom:0}
 .topic .sig{font:14px "SF Mono",ui-monospace,Menlo,monospace;flex:1;min-width:0;overflow-wrap:anywhere}
@@ -309,8 +311,20 @@ res.innerHTML=hits.map(e=>`<a href="${UP+e.u}">${e.n}</a>`).join('')||'<a>No res
 def layout(title, body, depth=0, current=None):
     up = "../" * depth
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css"></head><body>
-<div class="top"><a class="brand" href="%sindex.html">Compose SwiftUI</a><span class="sp"></span><a href="%sguide.html">Guide</a><a href="%sreference.html">API</a><a href="%s">GitHub</a></div>
+<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css">
+<link id="hl-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme:light)">
+<link id="hl-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme:dark)">
+<script>
+// Theme: "light", "dark" or "system" (follows the OS). Applied before first paint to avoid a flash.
+function setTheme(t){const r=document.documentElement;if(t==='system')r.removeAttribute('data-theme');else r.dataset.theme=t;
+document.getElementById('hl-light').media=t==='system'?'(prefers-color-scheme:light)':t==='light'?'all':'not all';
+document.getElementById('hl-dark').media=t==='system'?'(prefers-color-scheme:dark)':t==='dark'?'all':'not all';
+document.querySelectorAll('.theme button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t));
+try{t==='system'?localStorage.removeItem('theme'):localStorage.setItem('theme',t)}catch(e){}}
+let THEME='system';try{THEME=localStorage.getItem('theme')||'system'}catch(e){}setTheme(THEME);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer onload="hljs.highlightAll()"></script></head><body>
+<div class="top"><a class="brand" href="%sindex.html">Compose SwiftUI</a><span class="sp"></span><a href="%sguide.html">Guide</a><a href="%sreference.html">API</a><a href="%s">GitHub</a><div class="theme" role="group" aria-label="Appearance"><button type="button" data-t="system" title="System" aria-label="System appearance" onclick="setTheme(this.dataset.t)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></button><button type="button" data-t="light" title="Light" aria-label="Light appearance" onclick="setTheme(this.dataset.t)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-t="dark" title="Dark" aria-label="Dark appearance" onclick="setTheme(this.dataset.t)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div><script>setTheme(THEME)</script></div>
 <div class="wrap">%s<main>%s<footer>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps.</footer></main></div></body></html>
 """ % (esc(title), up, up, up, up, REPO, sidebar(up, current), body)
 
@@ -411,16 +425,16 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
     primary = min(callables, key=lambda e: len(e["kotlin"])) if callables else (types[0] if types else first)
     body = ['<div class="hero"><div class="eyebrow">%s</div><h1>%s</h1><p class="abstract">%s</p><div class="chips">%s</div></div><div class="content">'
             % (kind_label(p), esc(display), inline(abstract), chips(primary["avail"]))]
-    body.append('<h2>Declaration</h2><pre class="decl"><code>%s</code></pre>' % esc(primary["kotlin"]))
+    body.append('<h2>Declaration</h2><pre class="decl"><code class="language-kotlin">%s</code></pre>' % esc(primary["kotlin"]))
     body.append("<h2>Overview</h2>")
     if overview:
         body.append("<p>%s</p>" % inline(overview))
     if example:
-        body.append("<pre><code>%s</code></pre>" % esc(example))
+        body.append('<pre><code class="language-kotlin">%s</code></pre>' % esc(example))
     elif primary["kind"] in ("view", "modifier") and sketch(primary):
-        body.append("<pre><code>%s</code></pre>" % esc(sketch(primary)))
+        body.append('<pre><code class="language-kotlin">%s</code></pre>' % esc(sketch(primary)))
     body.append('<p>This is the Kotlin form of SwiftUI <code>%s</code>: <a href="%s">SwiftUI documentation</a>. '
-                'In Swift it reads:</p><pre><code>%s</code></pre>' % (esc(primary["swift"]), apple_url(primary, p), esc(primary["swiftDecl"])))
+                'In Swift it reads:</p><pre><code class="language-swift">%s</code></pre>' % (esc(primary["swift"]), apple_url(primary, p), esc(primary["swiftDecl"])))
     body.append("<h2>Topics</h2>")
     for g, items in topic_groups(p):
         body.append("<h3>%s</h3>" % esc(g))
