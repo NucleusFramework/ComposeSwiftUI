@@ -202,6 +202,45 @@ def link(target):
                "../bench/BENCH_GUIDE.md": REPO + "/blob/main/bench/BENCH_GUIDE.md"}
     return mapping.get(t, REPO + "/blob/main/" + t)
 
+# ---- syntax highlighting at build time (Xcode-like classes, no client-side highlighter) ---------------------------
+
+KEYWORDS = {
+    "kotlin": "fun val var class interface object enum data sealed open override private public internal protected return if "
+              "else when for while do in is as by get set import package typealias this super null true false try catch "
+              "finally throw suspend inline reified companion init constructor lateinit const abstract annotation "
+              "operator infix vararg out where break continue it",
+    "swift": "func let var struct class enum protocol extension import return if else guard switch case default for in "
+             "while repeat true false nil self Self some any static private public internal fileprivate open init deinit "
+             "throws rethrows try catch inout where associatedtype typealias async await nonisolated mutating override "
+             "final convenience required lazy weak unowned do break continue",
+    "bash": "if then else fi for in do done export cd echo",
+}
+TOKEN = re.compile(r"""(?P<c>//[^\n]*|/\*.*?\*/|\#[^\n]*)|(?P<s>\"\"\".*?\"\"\"|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*')"""
+                   r"|(?P<m>@\w+)|(?P<n>\b\d+(?:\.\d+)?[fFL]?\b)|(?P<w>\b[A-Za-z_]\w*\b)", re.S)
+
+def highlight(code, lang):
+    """Code as HTML with token classes: keywords, strings, numbers, comments, annotations and type names."""
+    lang = {"kt": "kotlin", "kts": "kotlin", "sh": "bash", "shell": "bash", "zsh": "bash"}.get(lang, lang)
+    if lang not in KEYWORDS:
+        return esc(code)
+    keywords = set(KEYWORDS[lang].split())
+    out, pos = [], 0
+    for m in TOKEN.finditer(code):
+        kind, text = m.lastgroup, m.group()
+        if kind == "c" and text.startswith("#") != (lang == "bash"):
+            continue  # "#" comments only in shell scripts, "//" ones elsewhere
+        if kind == "w":
+            kind = "k" if text in keywords else "t" if text[0].isupper() and lang != "bash" else None
+        if kind == "m" and lang == "bash":
+            kind = None
+        out.append(esc(code[pos:m.start()]))
+        out.append('<span class="%s">%s</span>' % (kind, esc(text)) if kind else esc(text))
+        pos = m.end()
+    return "".join(out) + esc(code[pos:])
+
+def code_block(code, lang, cls=""):
+    return '<pre%s><code>%s</code></pre>' % (' class="%s"' % cls if cls else "", highlight(code, lang))
+
 def markdown(md):
     out, lines, i = [], md.split("\n"), 0
     while i < len(lines):
@@ -213,7 +252,7 @@ def markdown(md):
             i += 1
             while i < len(lines) and not lines[i].lstrip().startswith("```"):
                 code.append(lines[i][indent:] if not lines[i][:indent].strip() else lines[i].lstrip()); i += 1
-            out.append('<pre><code class="language-%s">%s</code></pre>' % (esc(lang or "plaintext"), esc("\n".join(code))))
+            out.append(code_block("\n".join(code), lang))
         elif re.match(r"^#{1,4} ", l):
             n = len(l.split(" ")[0])
             text = l[n + 1:]
@@ -224,9 +263,12 @@ def markdown(md):
                 rows.append(lines[i]); i += 1
             i -= 1
             cells = lambda r: [c.strip() for c in r.strip().strip("|").split("|")]
-            t = ["<table><thead><tr>" + "".join("<th>%s</th>" % inline(c) for c in cells(rows[0])) + "</tr></thead><tbody>"]
+            heads = cells(rows[0])
+            langs = ["swift" if h.lower() in ("swiftui", "swift") else "kotlin" for h in heads]
+            colour = lambda c, lang: re.sub(r"<code>(.*?)</code>", lambda m: "<code>%s</code>" % highlight(html.unescape(m.group(1)), lang), inline(c))
+            t = ["<table><thead><tr>" + "".join("<th>%s</th>" % inline(c) for c in heads) + "</tr></thead><tbody>"]
             for r in rows[2:]:
-                t.append("<tr>" + "".join("<td>%s</td>" % inline(c) for c in cells(r)) + "</tr>")
+                t.append("<tr>" + "".join("<td>%s</td>" % colour(c, langs[i] if i < len(langs) else "kotlin") for i, c in enumerate(cells(r))) + "</tr>")
             out.append("".join(t) + "</tbody></table>")
         elif re.match(r"^\s*(- |\d+\. )", l):
             number = re.match(r"^\s*(\d+)\. ", l)  # a list split by a code block keeps its numbering
@@ -310,6 +352,8 @@ dialog.search::backdrop{background:rgba(0,0,0,.18)}
 .skip{position:absolute;left:-9999px;top:8px;z-index:9;padding:8px 12px;border-radius:8px;background:var(--bg);color:var(--accent);border:1px solid var(--line)}.skip:focus{left:12px}
 a:focus-visible,.side input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 @media(max-width:359px){.top .ver{display:none}}
+main{view-transition-name:content}::view-transition-old(content),::view-transition-new(content){animation-duration:.14s}
+::view-transition-old(root),::view-transition-new(root){animation:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after,::backdrop{transition:none!important;animation:none!important}}
 /* sidebar */
 .sidetoggle{display:grid;place-items:center;width:32px;height:32px;margin-left:-6px;border:0;border-radius:8px;background:none;color:var(--fg);cursor:pointer}
@@ -344,8 +388,7 @@ code{font:.88em "SF Mono",ui-monospace,Menlo,monospace}p code,li code,td code{co
 pre{background:var(--code);padding:14px 16px;border-radius:15px;overflow:auto;font-size:15px;line-height:1.66;margin:0 0 24px}
 pre code{font-size:15px}.decl{margin:24px 0 0}
 /* syntax colours (Xcode-like) */
-.hljs-keyword,.hljs-meta,.hljs-literal{color:var(--kw)}.hljs-type,.hljs-title.class_,.hljs-built_in{color:var(--ty)}
-.hljs-string{color:var(--str)}.hljs-number{color:var(--num)}.hljs-comment{color:var(--com);font-style:italic}.hljs-title.function_{color:var(--fn)}
+code .k,code .m{color:var(--kw)}code .t{color:var(--ty)}code .s{color:var(--str)}code .n{color:var(--num)}code .c{color:var(--com);font-style:italic}
 /* topics */
 .topic{padding:0 0 18px}
 .topic .sig{font:15px/1.6 "SF Mono",ui-monospace,Menlo,monospace;color:var(--muted);overflow-wrap:anywhere}.topic .sig b{font-weight:400;color:var(--accent)}
@@ -383,7 +426,6 @@ def sidebar(up, current):
     out.append("""</div></div><div class="filter"><input id="q" placeholder="Filter" autocomplete="off" aria-label="Filter"><div class="narrow">%s</div></div></nav>""" % THEME_SWITCH)
     return "".join(out)
 
-HLJS = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
 SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>'
 THEMES = [("system", '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>'),
           ("light", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
@@ -414,10 +456,10 @@ def layout(title, body, depth=0, current=None, kind="Article", description=SUMMA
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme:dark)">
 <script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('side')==='closed')document.documentElement.classList.add('noside')}catch(e){}</script>
 <link rel="alternate" type="text/plain" title="LLM documentation" href="%sllms.txt">
-<script src="%s" defer></script><script src="%sapp.js?v=%s" defer></script></head><body><a class="skip" href="#main">Skip to content</a>
+<script src="%sapp.js?v=%s" defer></script></head><body><a class="skip" href="#main">Skip to content</a>
 <div class="top">%s<a class="brand" href="%sindex.html">Compose SwiftUI</a><a class="ver" href="%s/releases/tag/%s" title="Latest release">%s</a><span class="sp"></span>%s<a class="wide" href="%sguide.html">Guide</a><a class="wide" href="%sreference.html">API</a><a class="wide" href="%s">GitHub</a><span class="wide">%s</span></div>
 <div class="wrap">%s<main id="main" data-pagefind-body data-pagefind-meta="kind:%s">%s<footer data-pagefind-ignore>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps. <a href="%slegal.html">Legal and privacy</a></footer></main></div></body></html>
-""" % (esc(title), meta, up, ASSETS_V, up, up, up, up, HLJS, up, ASSETS_V, SIDE_TOGGLE, up, REPO, VERSION, esc(VERSION), SEARCH_BOX, up, up, REPO, THEME_SWITCH, sidebar(up, current), kind, body, up)
+""" % (esc(title), meta, up, ASSETS_V, up, up, up, up, up, ASSETS_V, SIDE_TOGGLE, up, REPO, VERSION, esc(VERSION), SEARCH_BOX, up, up, REPO, THEME_SWITCH, sidebar(up, current), kind, body, up)
 
 def write(rel, content):
     path = os.path.join(OUT, rel)
@@ -523,7 +565,7 @@ SwiftUI, Swift, Xcode, iOS, macOS, tvOS and watchOS are trademarks of Apple Inc.
 - No cookies, no analytics, no account.
 - Your appearance and sidebar choices are stored in your browser and never sent anywhere.
 - A service worker keeps a copy of the site in your browser so it works offline. Clearing the site data removes it.
-- Pages are served by GitHub Pages and code highlighting is loaded from cdnjs (Cloudflare). Like any web server, they receive your IP address and browser details: see the [GitHub privacy statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement) and the [Cloudflare privacy policy](https://www.cloudflare.com/privacypolicy/).
+- Pages are served by GitHub Pages. Like any web server, it receives your IP address and browser details: see the [GitHub privacy statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement).
 """ % {"repo": REPO}
 write("legal.html", article_page("Legal and privacy", "Who publishes this site, and what it does with your data.", markdown(LEGAL)))
 
@@ -555,16 +597,16 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
     body = ['<div class="hero">%s<div class="eyebrow" data-pagefind-ignore>%s</div><h1>%s</h1><p class="abstract">%s</p><div class="avail" data-pagefind-ignore>%s</div></div><div class="content">'
             % (crumbs("../", ("Compose SwiftUI", "index.html"), ("APIs", "reference.html"), (display, "")),
                kind_label(p), esc(display), inline(abstract), chips(primary["avail"]))]
-    body.append('<pre class="decl"><code class="language-kotlin">%s</code></pre>' % esc(primary["kotlin"]))
+    body.append(code_block(primary["kotlin"], "kotlin", "decl"))
     body.append("<h2>Overview</h2>")
     if overview:
         body.append("<p>%s</p>" % inline(overview))
     if example:
-        body.append('<pre><code class="language-kotlin">%s</code></pre>' % esc(example))
+        body.append(code_block(example, "kotlin"))
     elif primary["kind"] in ("view", "modifier") and sketch(primary):
-        body.append('<pre><code class="language-kotlin">%s</code></pre>' % esc(sketch(primary)))
+        body.append(code_block(sketch(primary), "kotlin"))
     body.append('<p>This is the Kotlin form of SwiftUI <code>%s</code>: <a href="%s" target="_blank" rel="noopener">SwiftUI documentation</a>. '
-                'In Swift it reads:</p><pre><code class="language-swift">%s</code></pre>' % (esc(primary["swift"]), apple_url(primary, p), esc(primary["swiftDecl"])))
+                'In Swift it reads:</p>%s' % (esc(primary["swift"]), apple_url(primary, p), code_block(primary["swiftDecl"], "swift")))
     body.append("<h2>Topics</h2>")
     for g, items in topic_groups(p):
         body.append("<h3>%s</h3>" % esc(g))
@@ -629,52 +671,72 @@ async function filter(query) {
 }
 
 const isMac = /Mac|iPhone|iPad/.test(navigator.platform);
-function hydrate() {
-  syncTheme();
-  if (!isMac) document.querySelectorAll('.searchbtn kbd').forEach(k => k.textContent = 'Ctrl K');
-  if (window.hljs) {
-    document.querySelectorAll('pre code').forEach(c => hljs.highlightElement(c));
-    // Inline code in tables: Swift under a "SwiftUI"/"Swift" header, Kotlin elsewhere.
-    document.querySelectorAll('td code:not(.hljs)').forEach(c => {
-      const th = c.closest('table').querySelectorAll('th')[c.closest('td').cellIndex];
-      const language = /^swift(ui)?$/i.test(th?.textContent.trim() ?? '') ? 'swift' : 'kotlin';
-      c.innerHTML = hljs.highlight(c.textContent, {language}).value;
-      c.classList.add('hljs');
-    });
-  }
-  document.querySelector('.side a.on')?.scrollIntoView({block: 'nearest'});
-}
 
-// Single-page navigation: every page shares the same shell, so a link swaps the body instead of reloading.
+// Single-page navigation. The shell (top bar, sidebar, search) is rendered once and stays; a link only swaps the
+// content of <main>. Pages come from the service worker's cache (or are prefetched on hover), so a swap is instant.
+const pages = new Map();  // url -> Promise of the page's HTML
+const pageKey = url => url.origin + url.pathname;
+const load = url => {
+  const key = pageKey(url);
+  if (!pages.has(key)) pages.set(key, fetch(key).then(r => r.ok ? r.text() : Promise.reject(r.status)).catch(e => { pages.delete(key); throw e }));
+  return pages.get(key);
+};
+const internal = a => {
+  const url = new URL(a.href);
+  return url.origin === location.origin && url.pathname.startsWith(BASE.pathname) && !a.target && !/\.(txt|json|xml|png)$/.test(url.pathname) ? url : null;
+};
+function markCurrent() {
+  const path = location.pathname.replace(/\/$/, '/index.html');
+  const side = document.querySelector('.side');
+  side.querySelectorAll('a.on').forEach(a => { a.classList.remove('on'); a.removeAttribute('aria-current') });
+  const current = [...side.querySelectorAll('#tree a[href]')].find(a => new URL(a.href).pathname.replace(/\/$/, '/index.html') === path);
+  current?.classList.add('on');
+  current?.setAttribute('aria-current', 'page');
+  current?.scrollIntoView({block: 'nearest'});
+}
 let here = location.pathname;
 async function go(url, push) {
   let doc;
-  try {
-    const r = await fetch(url);
-    if (!r.ok) throw r.status;
-    doc = new DOMParser().parseFromString(await r.text(), 'text/html');
-  } catch (e) { location.href = url; return }
-  const sideScroll = document.querySelector('.side .scroll')?.scrollTop ?? 0;
-  if (push) history.pushState(null, '', url);  // before the swap, so relative links resolve against the new page
-  here = location.pathname;
-  document.title = doc.title;
-  document.body.replaceWith(doc.body);
-  root.classList.remove('mside');
-  document.querySelector('.side .scroll').scrollTop = sideScroll;
-  hydrate();
-  const target = url.hash && document.getElementById(decodeURIComponent(url.hash.slice(1)));
-  target ? target.scrollIntoView() : scrollTo(0, 0);
+  try { doc = new DOMParser().parseFromString(await load(url), 'text/html') } catch (e) { location.href = url; return }
+  const swap = () => {
+    // The URL changes together with the content, so relative links always match the page they are on.
+    if (push) {
+      history.replaceState({y: scrollY}, '');  // where to come back to with the back button
+      history.pushState({y: 0}, '', url);
+    }
+    here = location.pathname;
+    document.title = doc.title;
+    document.querySelector('main').replaceWith(doc.querySelector('main'));
+    root.classList.remove('mside');
+    markCurrent();
+    const target = url.hash && document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    target ? target.scrollIntoView() : scrollTo(0, push ? 0 : history.state?.y ?? 0);
+  };
+  if (document.startViewTransition && !matchMedia('(prefers-reduced-motion:reduce)').matches) document.startViewTransition(swap);
+  else swap();
   checkForUpdate();
 }
+history.scrollRestoration = 'manual';
+addEventListener('popstate', () => { if (location.pathname !== here) go(new URL(location.href), false) });
+
+// Prefetch on intent: hover, touch or keyboard focus.
+const prefetch = e => { const a = e.target.closest?.('a[href]'), url = a && internal(a); if (url && url.pathname !== location.pathname) load(url).catch(() => {}) };
+document.addEventListener('pointerover', prefetch);
+document.addEventListener('touchstart', prefetch, {passive: true});
+document.addEventListener('focusin', prefetch);
+
+// The shell's links are written relative to the first page; make them absolute once so they survive navigation.
+document.querySelectorAll('.top a[href], .side a[href]').forEach(a => a.setAttribute('href', a.href));
+syncTheme();
+if (!isMac) document.querySelectorAll('.searchbtn kbd').forEach(k => k.textContent = 'Ctrl K');
+document.querySelector('.side a.on')?.scrollIntoView({block: 'nearest'});
 
 document.addEventListener('click', e => {
   const button = e.target.closest('button');
   if (button?.dataset.t) return setTheme(button.dataset.t);
   if (button?.classList.contains('sidetoggle')) return toggleSidebar();
-  const a = e.target.closest('a[href]');
-  if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target) return;
-  const url = new URL(a.href);
-  if (url.origin !== location.origin || !url.pathname.startsWith(BASE.pathname)) return;
+  const a = e.target.closest('a[href]'), url = a && internal(a);
+  if (!url || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   if (url.pathname === location.pathname && url.hash) return;  // in-page anchor: the browser scrolls
   e.preventDefault();
   go(url, true);
@@ -737,15 +799,14 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('mousemove', e => { const h = e.target.closest('#sres .hit'); if (h && !h.classList.contains('sel')) select(h) });
 document.addEventListener('click', e => {
-  if (root.classList.contains('mside') && !e.target.closest('.side, .sidetoggle')) root.classList.remove('mside');
+  // The overlay sidebar (narrow screens) closes on a tap outside it or on any link inside it.
+  if (root.classList.contains('mside') && (!e.target.closest('.side, .sidetoggle') || e.target.closest('.side a[href]'))) root.classList.remove('mside');
   if (e.target.closest('.searchbtn')) openSearch();
   else if (e.target.closest('#sres .hit')) document.querySelector('dialog.search').close();  // same-page anchors don't swap the body
   else if (e.target.matches('dialog.search') || e.target.closest('.scancel')) document.querySelector('dialog.search').close();
 });
 document.addEventListener('input', e => { if (e.target.id === 'sq') runSearch(e.target.value) });
 document.addEventListener('input', e => { if (e.target.id === 'q') filter(e.target.value) });
-addEventListener('popstate', () => { if (location.pathname !== here) go(new URL(location.href), false) });
-
 // Offline: the service worker serves the whole release from its cache. When a new release is published, the
 // browser installs the new worker, which replaces the cache and takes over; the page then reloads onto it.
 function checkForUpdate() { navigator.serviceWorker?.getRegistration().then(r => r?.update()).catch(() => {}) }
@@ -755,7 +816,6 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadWorker) location.reload() });
 }
 
-hydrate();
 """
 
 SW_JS = r"""// Generated by docsite.py. VERSION is a hash of the release, so every publish changes this file: the browser
@@ -910,6 +970,5 @@ files = sorted(os.path.relpath(f, OUT) for f in glob.glob(os.path.join(OUT, "**"
                if os.path.isfile(f) and not f.endswith(".nojekyll"))
 hashes = {f: hashlib.sha256(open(os.path.join(OUT, f), "rb").read()).hexdigest()[:12] for f in files}
 hashes["./"] = hashes["index.html"]
-hashes[HLJS] = "1"  # versioned URL: never changes
 release = hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()[:16]
 write("sw.js", SW_JS % (release, json.dumps(hashes, separators=(",", ":"))))
