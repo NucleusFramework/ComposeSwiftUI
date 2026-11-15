@@ -53,6 +53,18 @@ data class LocalizedKey(val key: String)
 val String.localized: LocalizedKey get() = LocalizedKey(this)
 
 /** View kinds of the platform view embeddings (UIKit / AppKit), rendered by the Swift renderer. */
+/** How an embedded UIKit or AppKit view is sized by SwiftUI. */
+public enum class NativeViewSizing {
+    /** Takes the size SwiftUI proposes (set it with `Modifier.frame`). */
+    Fill,
+
+    /** Takes the proposed width and the height its content needs at that width, e.g. a multi-line label. */
+    FitHeight,
+
+    /** Takes the size its content needs (Auto Layout fitting size or intrinsic content size). */
+    FitContent,
+}
+
 internal object NativeViewKinds {
     const val UI_VIEW_CONTROLLER = 100_010
     const val UI_VIEW = 100_011

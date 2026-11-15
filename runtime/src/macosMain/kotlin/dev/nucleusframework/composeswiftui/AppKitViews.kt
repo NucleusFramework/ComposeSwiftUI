@@ -4,24 +4,48 @@ import androidx.compose.runtime.Composable
 import platform.AppKit.NSView
 import platform.AppKit.NSViewController
 
-/** Creates the embedded AppKit controller once (called by the Swift renderer). */
-class NSViewControllerFactory internal constructor(private val factory: () -> NSViewController) {
+/** Creates the embedded AppKit controller once and updates it (called by the Swift renderer). */
+class NSViewControllerFactory internal constructor(
+    private val factory: () -> NSViewController,
+    private val updater: (NSViewController) -> Unit,
+) {
     fun create(): NSViewController = factory()
+    fun update(controller: NSViewController): Unit = updater(controller)
 }
 
-/** Creates the embedded AppKit view once (called by the Swift renderer). */
-class NSViewFactory internal constructor(private val factory: () -> NSView) {
+/** Creates the embedded AppKit view once and updates it (called by the Swift renderer). */
+class NSViewFactory internal constructor(
+    private val factory: () -> NSView,
+    private val updater: (NSView) -> Unit,
+) {
     fun create(): NSView = factory()
+    fun update(view: NSView): Unit = updater(view)
 }
 
-/** Embeds an AppKit view controller (SwiftUI `NSViewControllerRepresentable`). [factory] runs once. */
+/**
+ * Embeds an AppKit view controller (SwiftUI `NSViewControllerRepresentable`). [factory] runs once; [update] runs
+ * after it and on every recomposition.
+ */
 @Composable
-fun NSViewControllerView(modifier: Modifier = Modifier, factory: () -> NSViewController) {
-    SwiftView(NativeViewKinds.NS_VIEW_CONTROLLER, listOf(NSViewControllerFactory(factory)), modifier)
+fun NSViewControllerView(
+    modifier: Modifier = Modifier,
+    sizing: NativeViewSizing = NativeViewSizing.Fill,
+    update: (NSViewController) -> Unit = {},
+    factory: () -> NSViewController,
+) {
+    SwiftView(NativeViewKinds.NS_VIEW_CONTROLLER, listOf(NSViewControllerFactory(factory, update), sizing.ordinal), modifier)
 }
 
-/** Embeds an AppKit view (SwiftUI `NSViewRepresentable`). [factory] runs once. */
+/**
+ * Embeds an AppKit view (SwiftUI `NSViewRepresentable`). [factory] runs once; [update] runs after it and on every
+ * recomposition. Use [NativeViewSizing.FitHeight] for content of variable height, such as a wrapping `NSTextField`.
+ */
 @Composable
-fun AppKitView(modifier: Modifier = Modifier, factory: () -> NSView) {
-    SwiftView(NativeViewKinds.NS_VIEW, listOf(NSViewFactory(factory)), modifier)
+fun AppKitView(
+    modifier: Modifier = Modifier,
+    sizing: NativeViewSizing = NativeViewSizing.Fill,
+    update: (NSView) -> Unit = {},
+    factory: () -> NSView,
+) {
+    SwiftView(NativeViewKinds.NS_VIEW, listOf(NSViewFactory(factory, update), sizing.ordinal), modifier)
 }

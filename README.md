@@ -152,6 +152,17 @@ UIViewControllerView(modifier = Modifier.frame(height = 260.0)) {
 }
 ```
 
+By default the embedded view takes the size SwiftUI proposes, so give it a `frame`. For content of variable height,
+such as a multi-line label, pass `sizing = NativeViewSizing.FitHeight`: the view takes the proposed width and the
+height its content needs. `update` runs on every recomposition, so the view follows Kotlin state:
+
+```kotlin
+UIKitView(
+    sizing = NativeViewSizing.FitHeight,
+    update = { (it as UILabel).text = paragraph },
+) { UILabel().apply { numberOfLines = 0 } }
+```
+
 The embedded content has its own composition. Share state between the two through a `ViewModel` or a `StateFlow`.
 Your app's `Info.plist` needs `CADisableMinimumFrameDurationOnPhone` set to `true`, as for any Compose Multiplatform
 app. `UIKitView`, `NSViewControllerView` and `AppKitView` embed other UIKit and AppKit views the same way.

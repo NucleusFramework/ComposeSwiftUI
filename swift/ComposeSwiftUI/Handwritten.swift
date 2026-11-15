@@ -388,37 +388,121 @@ struct KotlinLayout: Layout {
 #if os(iOS)
 private struct EmbeddedViewController: UIViewControllerRepresentable {
     let factory: UIViewControllerFactory?
+    let sizing: Int
     func makeUIViewController(context: Context) -> UIViewController { factory?.create() ?? UIViewController() }
-    func updateUIViewController(_ controller: UIViewController, context: Context) {}
+    func updateUIViewController(_ controller: UIViewController, context: Context) {
+        factory?.update(controller: controller)
+        if sizing != 0 { controller.view.invalidateIntrinsicContentSize() }
+    }
+    func sizeThatFits(_ proposal: ProposedViewSize, uiViewController controller: UIViewController, context: Context) -> CGSize? {
+        EmbeddedSizing.fit(controller.view, proposal, sizing)
+    }
 }
 
 private struct EmbeddedUIView: UIViewRepresentable {
     let factory: UIViewFactory?
+    let sizing: Int
     func makeUIView(context: Context) -> UIView { factory?.create() ?? UIView() }
-    func updateUIView(_ view: UIView, context: Context) {}
+    func updateUIView(_ view: UIView, context: Context) {
+        factory?.update(view: view)
+        if sizing != 0 { view.invalidateIntrinsicContentSize() }
+    }
+    func sizeThatFits(_ proposal: ProposedViewSize, uiView view: UIView, context: Context) -> CGSize? {
+        EmbeddedSizing.fit(view, proposal, sizing)
+    }
+}
+
+/// Content-based sizing of embedded UIKit views (Kotlin `NativeViewSizing`: 0 Fill, 1 FitHeight, 2 FitContent).
+@MainActor private enum EmbeddedSizing {
+    static func fit(_ view: UIView, _ proposal: ProposedViewSize, _ sizing: Int) -> CGSize? {
+        switch sizing {
+        case 1:
+            guard let width = proposal.width, width.isFinite else { return fitting(view) }
+            let target = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
+            var height = view.systemLayoutSizeFitting(
+                target, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel
+            ).height
+            // Views without Auto Layout content (e.g. a plain UILabel) report through sizeThatFits.
+            if height <= 0 { height = view.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height }
+            return CGSize(width: width, height: ceil(height))
+        case 2:
+            return fitting(view)
+        default:
+            return nil
+        }
+    }
+
+    private static func fitting(_ view: UIView) -> CGSize {
+        let size = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        if size.width > 0 || size.height > 0 { return CGSize(width: ceil(size.width), height: ceil(size.height)) }
+        let fits = view.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: .greatestFiniteMagnitude))
+        return CGSize(width: ceil(fits.width), height: ceil(fits.height))
+    }
 }
 #elseif os(macOS)
 private struct EmbeddedViewController: NSViewControllerRepresentable {
     let factory: NSViewControllerFactory?
+    let sizing: Int
     func makeNSViewController(context: Context) -> NSViewController { factory?.create() ?? NSViewController() }
-    func updateNSViewController(_ controller: NSViewController, context: Context) {}
+    func updateNSViewController(_ controller: NSViewController, context: Context) {
+        factory?.update(controller: controller)
+        if sizing != 0 { controller.view.invalidateIntrinsicContentSize() }
+    }
+    func sizeThatFits(_ proposal: ProposedViewSize, nsViewController controller: NSViewController, context: Context) -> CGSize? {
+        EmbeddedSizing.fit(controller.view, proposal, sizing)
+    }
 }
 
 private struct EmbeddedNSView: NSViewRepresentable {
     let factory: NSViewFactory?
+    let sizing: Int
     func makeNSView(context: Context) -> NSView { factory?.create() ?? NSView() }
-    func updateNSView(_ view: NSView, context: Context) {}
+    func updateNSView(_ view: NSView, context: Context) {
+        factory?.update(view: view)
+        if sizing != 0 { view.invalidateIntrinsicContentSize() }
+    }
+    func sizeThatFits(_ proposal: ProposedViewSize, nsView view: NSView, context: Context) -> CGSize? {
+        EmbeddedSizing.fit(view, proposal, sizing)
+    }
+}
+
+/// Content-based sizing of embedded AppKit views (Kotlin `NativeViewSizing`: 0 Fill, 1 FitHeight, 2 FitContent).
+@MainActor private enum EmbeddedSizing {
+    static func fit(_ view: NSView, _ proposal: ProposedViewSize, _ sizing: Int) -> CGSize? {
+        switch sizing {
+        case 1:
+            guard let width = proposal.width, width.isFinite else { return fitting(view) }
+            if let field = view as? NSTextField { field.preferredMaxLayoutWidth = width }
+            let constraint = view.widthAnchor.constraint(equalToConstant: width)
+            constraint.isActive = true
+            var height = view.fittingSize.height
+            constraint.isActive = false
+            if height <= 0 { height = view.intrinsicContentSize.height }
+            return CGSize(width: width, height: ceil(max(height, 0)))
+        case 2:
+            return fitting(view)
+        default:
+            return nil
+        }
+    }
+
+    private static func fitting(_ view: NSView) -> CGSize {
+        let size = view.fittingSize
+        if size.width > 0 || size.height > 0 { return CGSize(width: ceil(size.width), height: ceil(size.height)) }
+        let intrinsic = view.intrinsicContentSize
+        return CGSize(width: ceil(max(intrinsic.width, 0)), height: ceil(max(intrinsic.height, 0)))
+    }
 }
 #endif
 
 @MainActor enum PlatformViewRenderers {
     static func register() {
         #if os(iOS)
-        ComposeRegistry.views[100_010] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? UIViewControllerFactory), m, 0) }
-        ComposeRegistry.views[100_011] = { m in ModChain.apply(EmbeddedUIView(factory: m.args.raw(0) as? UIViewFactory), m, 0) }
+        ComposeRegistry.views[100_010] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? UIViewControllerFactory, sizing: m.args.int(1)), m, 0) }
+        ComposeRegistry.views[100_011] = { m in ModChain.apply(EmbeddedUIView(factory: m.args.raw(0) as? UIViewFactory, sizing: m.args.int(1)), m, 0) }
         #elseif os(macOS)
-        ComposeRegistry.views[100_012] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? NSViewControllerFactory), m, 0) }
-        ComposeRegistry.views[100_013] = { m in ModChain.apply(EmbeddedNSView(factory: m.args.raw(0) as? NSViewFactory), m, 0) }
+        ComposeRegistry.views[100_012] = { m in ModChain.apply(EmbeddedViewController(factory: m.args.raw(0) as? NSViewControllerFactory, sizing: m.args.int(1)), m, 0) }
+        ComposeRegistry.views[100_013] = { m in ModChain.apply(EmbeddedNSView(factory: m.args.raw(0) as? NSViewFactory, sizing: m.args.int(1)), m, 0) }
         #endif
     }
 }

@@ -23,6 +23,7 @@ sealed interface Route : NavKey {
     data object Home : Route
     data object Counter : Route
     data object Chart : Route
+    data object Paragraph : Route
 }
 
 enum class AppTab { Examples, Text }
@@ -72,6 +73,7 @@ private fun SampleNavigation(onShowText: () -> Unit) {
         entry<Route.Home> { HomeScreen(onOpen = { backStack.add(it) }, onShowText = onShowText) }
         entry<Route.Counter> { CounterScreen() }
         entry<Route.Chart> { ChartScreen() }
+        entry<Route.Paragraph> { ParagraphScreen() }
     }
     NavDisplay(backStack) { route -> entries(route).Content() }
 }
@@ -79,6 +81,7 @@ private fun SampleNavigation(onShowText: () -> Unit) {
 private fun HomeScreenRows() = listOf(
     Triple(Route.Counter, "Counter", "plusminus.circle.fill"),
     Triple(Route.Chart, "Compose Multiplatform chart", "chart.bar.fill"),
+    Triple(Route.Paragraph, "UIKit paragraph", "text.alignleft"),
 )
 
 @androidx.compose.runtime.Composable
@@ -133,6 +136,30 @@ private fun StyledTextScreen() {
     NavigationStack {
         ScrollView {
             Text(paragraph, modifier = Modifier.font(Font.body).padding().navigationTitle("Styled text"))
+        }
+    }
+}
+
+@androidx.compose.runtime.Composable
+private fun ParagraphScreen() {
+    var sentences by remember { mutableStateOf(1) }
+    val text = (1..sentences).joinToString(" ") { "Sentence $it of a paragraph drawn by a UIKit label." }
+    ScrollView(modifier = Modifier.navigationTitle("UIKit paragraph")) {
+        VStack(alignment = HorizontalAlignment.leading, spacing = 12.0, modifier = Modifier.padding()) {
+            Text("Above the UIKit label", modifier = Modifier.font(Font.headline))
+            // A multi-line UILabel sized by its content: the height follows the text.
+            UIKitView(
+                sizing = NativeViewSizing.FitHeight,
+                modifier = Modifier.background(Color.yellow.opacity(0.3)),
+                update = { (it as platform.UIKit.UILabel).text = text },
+            ) {
+                platform.UIKit.UILabel().apply { numberOfLines = 0 }
+            }
+            Text("Below the UIKit label", modifier = Modifier.font(Font.headline))
+            HStack(spacing = 12.0) {
+                Button("Add a sentence", action = { sentences++ })
+                Button("Reset", action = { sentences = 1 })
+            }
         }
     }
 }

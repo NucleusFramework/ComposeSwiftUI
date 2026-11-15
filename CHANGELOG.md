@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `UIKitView`, `UIViewControllerView`, `AppKitView` and `NSViewControllerView` take a `sizing` parameter.
+  `NativeViewSizing.FitHeight` sizes the embedded view to its content at the proposed width, so a paragraph of variable
+  length is neither cut nor followed by a gap. `FitContent` uses the content's size in both directions. `Fill`, the
+  default, keeps the previous behavior.
+- The same four functions take an `update` callback that runs on every recomposition, to push Kotlin state into the
+  embedded view.
+
 ## 0.2.0
 
 ### Added
