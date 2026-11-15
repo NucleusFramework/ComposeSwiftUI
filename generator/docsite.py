@@ -9,6 +9,8 @@ usage: docsite.py <repo-root> <out-dir>
 - Guides: the README sections, CHANGELOG and benchmark results, rendered from Markdown.
 """
 import glob, html, json, os, re, shutil, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from doc_content import CONTENT, TOPICS
 
 ROOT, OUT = sys.argv[1], sys.argv[2]
 GEN = os.path.join(ROOT, "runtime/src/generated/kotlin/dev/nucleusframework/composeswiftui")
@@ -242,41 +244,114 @@ def sections(md):
         parts.append((title, "\n".join(cur)))
     return parts
 
-# ---- page layout ----------------------------------------------------------------------------------------------
+# ---- page layout (modelled on the structure of Apple's documentation pages) --------------------------------
 
 CSS = """
-:root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--line:#e5e5ea;--code:#f5f5f7;--accent:#7f52ff}
-@media (prefers-color-scheme:dark){:root{--bg:#1c1c1e;--fg:#f2f2f7;--muted:#a1a1a6;--line:#3a3a3c;--code:#2c2c2e;--accent:#b49cff}}
-*{box-sizing:border-box}body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--fg)}
+:root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--soft:#f5f5f7;--code:#f5f5f7;--accent:#0066cc;--side:#fafafc}
+@media (prefers-color-scheme:dark){:root{--bg:#1d1d1f;--fg:#f5f5f7;--muted:#a1a1a6;--line:#424245;--soft:#2c2c2e;--code:#2c2c2e;--accent:#2997ff;--side:#161617}}
+*{box-sizing:border-box}html,body{margin:0}body{font:17px/1.47 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;background:var(--bg);color:var(--fg)}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);padding:12px 24px;display:flex;gap:20px;align-items:center;position:sticky;top:0;background:var(--bg);z-index:1}
-header .brand{font-weight:700;color:var(--fg)}header nav a{margin-right:14px}
-main{max-width:980px;margin:0 auto;padding:24px}
-code{font:0.88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:1px 5px;border-radius:5px}
-pre{background:var(--code);padding:12px 14px;border-radius:10px;overflow:auto}pre code{background:none;padding:0}
-table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95em}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-.entry{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:16px 0}
-.entry h3{margin:0 0 6px;font-size:1em}.label{color:var(--muted);font-size:.8em;text-transform:uppercase;letter-spacing:.04em;margin:10px 0 2px}
-.avail{color:var(--muted);font-size:.9em}.cols{columns:3 220px}.cols a{display:block}
-#q{width:100%;padding:10px 12px;font-size:1em;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg)}
-#results a{display:block;padding:3px 0}.kind{color:var(--muted);font-size:.85em;margin-left:6px}
-footer{color:var(--muted);font-size:.85em;max-width:980px;margin:40px auto;padding:0 24px}
+.top{height:52px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:22px;padding:0 22px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:saturate(180%) blur(20px);z-index:2}
+.top .brand{font-weight:600;color:var(--fg);font-size:17px}.top a{font-size:14px;color:var(--fg)}.top .sp{flex:1}
+.wrap{display:flex;min-height:calc(100vh - 52px)}
+.side{width:280px;flex:none;border-right:1px solid var(--line);background:var(--side);padding:16px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow:auto;font-size:14px}
+.side h4{margin:16px 20px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.side a{display:block;padding:3px 20px;color:var(--fg)}.side a.on{background:var(--soft);font-weight:600}
+.side input{margin:0 16px 8px;width:calc(100% - 32px);padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font-size:14px}
+main{flex:1;min-width:0}
+.hero{background:var(--soft);border-bottom:1px solid var(--line);padding:40px 56px 32px}
+.eyebrow{color:var(--muted);font-size:15px;margin-bottom:4px}.hero h1{font-size:40px;line-height:1.1;margin:0 0 12px;font-weight:700;letter-spacing:-.01em}
+.abstract{font-size:21px;line-height:1.38;margin:0 0 16px;max-width:760px}
+.chips span{display:inline-block;border:1px solid var(--line);border-radius:12px;padding:1px 10px;margin:0 6px 6px 0;font-size:13px;color:var(--muted)}
+.content{padding:32px 56px 64px;max-width:980px}
+h2{font-size:28px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--line)}h2:first-child{border-top:0;margin-top:0}
+h3{font-size:20px;margin:28px 0 10px}
+code{font:.88em "SF Mono",ui-monospace,Menlo,monospace}p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:5px}
+pre{background:var(--code);padding:14px 16px;border-radius:12px;overflow:auto;font-size:15px;line-height:1.5}
+.decl{border:1px solid var(--line);background:var(--bg)}
+.topic{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}.topic:last-child{border-bottom:0}
+.topic .sig{font:14px "SF Mono",ui-monospace,Menlo,monospace;flex:1;min-width:0;overflow-wrap:anywhere}
+.topic .meta{color:var(--muted);font-size:13px;margin-top:3px;font-family:-apple-system,sans-serif}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);border-radius:14px;padding:16px}.card b{display:block;margin-bottom:4px;color:var(--fg)}.card span{color:var(--muted);font-size:14px}
+#results a{display:block;padding:4px 20px}
+footer{color:var(--muted);font-size:13px;padding:24px 56px;border-top:1px solid var(--line)}
+@media(max-width:820px){.side{display:none}.hero,.content,footer{padding-left:20px;padding-right:20px}}
 """
 
-def layout(title, body, depth=0):
+def page_url(key):
+    return "reference/%s.html" % slug(key)
+
+def sidebar(up, current):
+    out = ['<nav class="side"><input id="q" placeholder="Filter" autocomplete="off"><div id="results"></div><div id="tree">',
+           '<h4>Essentials</h4><a href="%sindex.html">Overview</a><a href="%sguide.html">Guide</a><a href="%sreference.html">All APIs</a>' % (up, up, up)]
+    for title, keys in TOPICS:
+        links = [k for k in keys if k in pages]
+        if not links:
+            continue
+        out.append("<h4>%s</h4>" % esc(title))
+        for k in links:
+            name = pages[k]["title"]
+            name = name if not k.startswith("modifier-") else name + "(_:)"
+            out.append('<a href="%s%s"%s>%s</a>' % (up, page_url(k), ' class="on"' if k == current else "", esc(name)))
+    out.append('<h4>More</h4><a href="%sbenchmarks.html">Benchmarks</a><a href="%schangelog.html">Changelog</a><a href="%scontributing.html">Contributing</a>' % (up, up, up))
+    out.append("""</div></nav><script>
+const UP='%s';let idx=null;const q=document.getElementById('q'),res=document.getElementById('results'),tree=document.getElementById('tree');
+q.addEventListener('input',async()=>{const s=q.value.trim().toLowerCase();if(!s){res.innerHTML='';tree.style.display='';return}
+if(!idx)idx=await (await fetch(UP+'search.json')).json();tree.style.display='none';
+const hits=idx.filter(e=>e.n.toLowerCase().includes(s)).sort((a,b)=>a.n.toLowerCase().indexOf(s)-b.n.toLowerCase().indexOf(s)||a.n.length-b.n.length).slice(0,50);
+res.innerHTML=hits.map(e=>`<a href="${UP+e.u}">${e.n}</a>`).join('')||'<a>No results</a>'});
+</script>""" % up)
+    return "".join(out)
+
+def layout(title, body, depth=0, current=None):
     up = "../" * depth
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>%s · Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css"></head><body>
-<header><a class="brand" href="%sindex.html">Compose SwiftUI</a><nav><a href="%sguide.html">Guide</a><a href="%sreference.html">Reference</a>
-<a href="%sbenchmarks.html">Benchmarks</a><a href="%schangelog.html">Changelog</a><a href="%s">GitHub</a></nav></header>
-<main>%s</main><footer>Compose SwiftUI documentation. SwiftUI is a trademark of Apple Inc. Explanations of each SwiftUI API are on
-<a href="https://developer.apple.com/documentation/swiftui">Apple's documentation</a>, linked from every reference page.</footer></body></html>
-""" % (esc(title), up, up, up, up, up, up, REPO, body)
+<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css"></head><body>
+<div class="top"><a class="brand" href="%sindex.html">Compose SwiftUI</a><span class="sp"></span><a href="%sguide.html">Guide</a><a href="%sreference.html">API</a><a href="%s">GitHub</a></div>
+<div class="wrap">%s<main>%s<footer>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps.</footer></main></div></body></html>
+""" % (esc(title), up, up, up, up, REPO, sidebar(up, current), body)
 
 def write(rel, content):
     path = os.path.join(OUT, rel)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").write(content)
+
+def chips(avail):
+    return "".join("<span>%s</span>" % esc(a.strip()) for a in avail.split(",") if a.strip())
+
+def topic_groups(p):
+    """Sorts a page's entries into topic groups, like the Topics section of a documentation page."""
+    groups = {}
+    title = p["title"]
+    for e in p["entries"]:
+        k = e["kotlin"]
+        if p["category"] == "Modifiers":
+            g = "Overloads"
+        elif k.startswith("fun %s(" % title) or k.startswith("fun %sView(" % title):
+            g = "Creating a %s" % title
+        elif k.startswith("fun Modifier."):
+            g = "Modifiers for %s" % title
+        elif k.startswith("constructor"):
+            g = "Initializers"
+        elif k.startswith("val "):
+            g = "Type properties"
+        elif k.startswith("fun "):
+            g = "Methods"
+        else:
+            g = "Types"
+        groups.setdefault(g, []).append(e)
+    order = ["Overloads", "Creating a %s" % title, "Initializers", "Modifiers for %s" % title, "Type properties", "Methods", "Types"]
+    return [(g, groups[g]) for g in order if g in groups]
+
+def kind_label(p):
+    if p["category"] == "Modifiers":
+        return "View modifier"
+    if p["category"] == "Views":
+        return "View"
+    first = p["entries"][0]["swiftDecl"]
+    return "Enumeration" if " enum " in " " + first else "Protocol" if "protocol " in first else "Structure"
 
 # ---- build ----------------------------------------------------------------------------------------------------
 
@@ -291,62 +366,81 @@ intro = readme.split("\n## ")[0]
 intro_html = markdown("\n".join(intro.split("\n")[1:]))
 guide_parts = [(t, b) for t, b in sections(readme) if t not in ("Contributing", "Reference", "Performance")]
 
-index_body = """<h1>Compose SwiftUI</h1>%s
-<p><a href="guide.html">Read the guide</a> · <a href="reference.html">Browse the %d supported SwiftUI APIs</a> · <a href="%s">GitHub</a></p>
-<h2>Search the reference</h2><input id="q" placeholder="Text, padding, NavigationStack…" autofocus><div id="results"></div>
-<script>
-let idx=[];fetch('search.json').then(r=>r.json()).then(d=>idx=d);
-const q=document.getElementById('q'),res=document.getElementById('results');
-q.addEventListener('input',()=>{const s=q.value.trim().toLowerCase();if(!s){res.innerHTML='';return}
-const hits=idx.filter(e=>e.n.toLowerCase().includes(s)).sort((a,b)=>(a.n.toLowerCase().indexOf(s))-(b.n.toLowerCase().indexOf(s))||a.n.length-b.n.length).slice(0,60);
-res.innerHTML=hits.map(e=>`<a href="${e.u}">${e.n}<span class="kind">${e.k}</span></a>`).join('')||'<p>No match.</p>'});
-</script>""" % (intro_html, len(entries), REPO)
-write("index.html", layout("Home", index_body))
+cards = "".join('<a class="card" href="%s"><b>%s</b><span>%s</span></a>' % (page_url(keys[0]), esc(t), esc(", ".join(pages[k]["title"] for k in keys[:4] if k in pages)))
+                for t, keys in TOPICS if keys and keys[0] in pages)
+index_body = """<div class="hero"><div class="eyebrow">Framework</div><h1>Compose SwiftUI</h1>
+<p class="abstract">Write SwiftUI screens in Kotlin with the Compose runtime, and keep your view models.</p>
+<div class="chips"><span>iOS 17.0+</span><span>macOS 14.0+</span><span>tvOS 17.0+</span><span>watchOS 10.0+</span></div></div>
+<div class="content"><h2>Overview</h2>%s<h2>Topics</h2><div class="grid">%s</div>
+<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a></p></div>""" % (intro_html, cards, len(entries))
+write("index.html", layout("Compose SwiftUI", index_body))
 
 toc = "".join('<li><a href="#%s">%s</a></li>' % (slug(t.lower()), esc(t)) for t, _ in guide_parts)
-guide_body = "<h1>Guide</h1><ul>%s</ul>" % toc + "".join(
-    '<h2 id="%s">%s</h2>%s' % (slug(t.lower()), esc(t), markdown(b)) for t, b in guide_parts)
+guide_body = '<div class="hero"><div class="eyebrow">Article</div><h1>Guide</h1><p class="abstract">Set up Compose SwiftUI, write screens and use it with other Compose libraries.</p></div><div class="content"><ul>%s</ul>%s</div>' % (
+    toc, "".join('<h2 id="%s">%s</h2>%s' % (slug(t.lower()), esc(t), markdown(b)) for t, b in guide_parts))
 write("guide.html", layout("Guide", guide_body))
+
+def article(title, abstract, md_html):
+    return '<div class="hero"><div class="eyebrow">Article</div><h1>%s</h1><p class="abstract">%s</p></div><div class="content">%s</div>' % (esc(title), esc(abstract), md_html)
 
 perf = dict(sections(readme)).get("Performance", "")
 results = open(os.path.join(ROOT, "docs/bench/RESULTS.md")).read()
-write("benchmarks.html", layout("Benchmarks", "<h1>Performance</h1>" + markdown(perf) + markdown(results)))
-write("changelog.html", layout("Changelog", markdown(open(os.path.join(ROOT, "CHANGELOG.md")).read())))
-write("contributing.html", layout("Contributing", markdown(open(os.path.join(ROOT, "docs/CONTRIBUTING.md")).read())))
+write("benchmarks.html", layout("Benchmarks", article("Performance", "How Compose SwiftUI compares with plain SwiftUI.", markdown(perf) + markdown(results.split("\n", 1)[1]))))
+write("changelog.html", layout("Changelog", article("Changelog", "Changes in each release.", markdown(open(os.path.join(ROOT, "CHANGELOG.md")).read().split("\n", 1)[1]))))
+write("contributing.html", layout("Contributing", article("Contributing", "Regenerate the bindings, run the benchmarks, publish a release.", markdown(open(os.path.join(ROOT, "docs/CONTRIBUTING.md")).read().split("\n", 1)[1]))))
 
 search = []
 cats = {"Views": [], "Modifiers": [], "Types": []}
 for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
-    rel = "reference/%s.html" % slug(key)
+    rel = page_url(key)
     cats[p["category"]].append((p["title"], rel))
-    search.append({"n": p["title"] if p["category"] != "Modifiers" else "." + p["title"], "u": rel, "k": p["category"][:-1].lower()})
-    body = ['<p><a href="../reference.html">Reference</a> › %s</p><h1>%s</h1>' % (p["category"], esc(p["title"]))]
-    body.append('<p>Compose SwiftUI equivalents of SwiftUI <code>%s</code>. For what it does, see '
-                '<a href="%s">Apple\'s documentation</a>.</p>' % (esc(p["title"]), apple_url(p["entries"][0], p)))
-    for e in p["entries"]:
-        ex = sketch(e)
-        body.append('<div class="entry"><h3><code>%s</code> <a class="kind" href="%s">Apple ↗</a></h3>' % (esc(e["swift"]), apple_url(e, p)))
-        if e["swiftDecl"]:
-            body.append('<div class="label">Swift</div><pre><code>%s</code></pre>' % esc(e["swiftDecl"]))
-        body.append('<div class="label">Compose SwiftUI (Kotlin)</div><pre><code>%s</code></pre>' % esc(e["kotlin"]))
-        if ex and e["kind"] in ("view", "modifier"):
-            body.append('<div class="label">Usage</div><pre><code>%s</code></pre>' % esc(ex))
-        if e["notes"]:
-            body.append("<p>%s</p>" % inline(e["notes"]))
-        if e["avail"]:
-            body.append('<div class="avail">%s</div>' % esc(e["avail"]))
-        body.append("</div>")
-    write(rel, layout(p["title"], "".join(body), depth=1))
+    display = p["title"] if p["category"] != "Modifiers" else p["title"] + "(_:)"
+    search.append({"n": display, "u": rel})
+    abstract, overview, example = CONTENT.get(key, ("", "", ""))
+    first = p["entries"][0]
+    if not abstract:
+        abstract = ("A view modifier that maps SwiftUI's %s." % p["title"]) if p["category"] == "Modifiers" else \
+                   ("The Compose SwiftUI form of SwiftUI's %s." % p["title"])
+    # The simplest form leads the page: the shortest view or modifier signature, else the type itself.
+    wanted = "modifier" if p["category"] == "Modifiers" else "view"
+    callables = [e for e in p["entries"] if e["kind"] == wanted and e["kotlin"].startswith("fun ")
+                 and not e["kotlin"].startswith("fun %sView(" % p["title"])]  # "XView" only shows a value as a view
+    types = sorted((e for e in p["entries"] if e["kotlin"].startswith(("class", "interface"))),
+                   key=lambda e: e["swift"] != p["title"])  # the page's own type first
+    primary = min(callables, key=lambda e: len(e["kotlin"])) if callables else (types[0] if types else first)
+    body = ['<div class="hero"><div class="eyebrow">%s</div><h1>%s</h1><p class="abstract">%s</p><div class="chips">%s</div></div><div class="content">'
+            % (kind_label(p), esc(display), inline(abstract), chips(primary["avail"]))]
+    body.append('<h2>Declaration</h2><pre class="decl"><code>%s</code></pre>' % esc(primary["kotlin"]))
+    body.append("<h2>Overview</h2>")
+    if overview:
+        body.append("<p>%s</p>" % inline(overview))
+    if example:
+        body.append("<pre><code>%s</code></pre>" % esc(example))
+    elif primary["kind"] in ("view", "modifier") and sketch(primary):
+        body.append("<pre><code>%s</code></pre>" % esc(sketch(primary)))
+    body.append('<p>This is the Kotlin form of SwiftUI <code>%s</code>: <a href="%s">SwiftUI documentation</a>. '
+                'In Swift it reads:</p><pre><code>%s</code></pre>' % (esc(primary["swift"]), apple_url(primary, p), esc(primary["swiftDecl"])))
+    body.append("<h2>Topics</h2>")
+    for g, items in topic_groups(p):
+        body.append("<h3>%s</h3>" % esc(g))
+        for e in items:
+            meta = "SwiftUI <code>%s</code>" % esc(e["swift"])
+            if e["avail"] and e["avail"] != primary["avail"]:
+                meta += " · " + esc(e["avail"])
+            if e["notes"]:
+                meta += " · " + inline(e["notes"])
+            body.append('<div class="topic"><div class="sig">%s<div class="meta">%s</div></div></div>' % (esc(e["kotlin"]), meta))
+    body.append("</div>")
+    write(rel, layout(display, "".join(body), depth=1, current=key))
 
-handwritten = dict(sections(readme)).get("Writing screens", "")
-ref_body = ["<h1>Reference</h1><p>Every SwiftUI API that Compose SwiftUI supports, generated from Apple's SDK and compiled for "
-            "iOS, macOS, tvOS and watchOS. Each page shows the Swift declaration next to its Kotlin equivalent. "
-            "APIs that need Kotlin-specific shapes (navigation paths, item presentations, gestures, lazy lists…) are "
-            "listed in the <a href=\"guide.html#writing-screens\">guide</a>. "
-            "<a href=\"%s/blob/main/docs/COVERAGE.md\">COVERAGE.md</a> gives the status of every Apple documentation entry.</p>" % REPO]
+ref = ['<div class="hero"><div class="eyebrow">API Collection</div><h1>All APIs</h1><p class="abstract">Every SwiftUI API that '
+       'Compose SwiftUI supports, generated from Apple\'s SDK and compiled for iOS, macOS, tvOS and watchOS.</p></div><div class="content">',
+       '<p>APIs with a Kotlin-specific shape (navigation paths, item presentations, gestures, lazy lists, mixed-style text) are '
+       'described in the <a href="guide.html#writing-screens">guide</a>.</p>']
 for cat in ("Views", "Modifiers", "Types"):
-    ref_body.append("<h2>%s (%d)</h2><div class=\"cols\">%s</div>" % (
-        cat, len(cats[cat]), "".join('<a href="%s">%s</a>' % (rel, esc(("." if cat == "Modifiers" else "") + t)) for t, rel in cats[cat])))
-write("reference.html", layout("Reference", "".join(ref_body)))
+    ref.append("<h2>%s</h2><div class=\"grid\">%s</div>" % (cat, "".join(
+        '<a href="%s">%s</a>' % (rel, esc(t + ("(_:)" if cat == "Modifiers" else ""))) for t, rel in cats[cat])))
+ref.append("</div>")
+write("reference.html", layout("All APIs", "".join(ref)))
 write("search.json", json.dumps(search, separators=(",", ":")))
 print("entries=%d pages=%d views=%d modifiers=%d types=%d" % (len(entries), len(pages), len(cats["Views"]), len(cats["Modifiers"]), len(cats["Types"])))
