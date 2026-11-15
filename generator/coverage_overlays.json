@@ -2108,8 +2108,8 @@
   "usr": "s:17_StoreKit_SwiftUI25AutomaticProductViewStyleVACycfc",
   "path": "AutomaticProductViewStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -2121,8 +2121,8 @@
   "usr": "s:17_StoreKit_SwiftUI25AutomaticProductViewStyleV8makeBody13configurationQrAA0fgH13ConfigurationV_tF",
   "path": "AutomaticProductViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -2167,8 +2167,8 @@
   "usr": "s:17_StoreKit_SwiftUI35AutomaticSubscriptionOfferViewStyleVACycfc",
   "path": "AutomaticSubscriptionOfferViewStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -2177,8 +2177,8 @@
   "usr": "s:17_StoreKit_SwiftUI35AutomaticSubscriptionOfferViewStyleV8makeBody13configurationQrAA0fghI13ConfigurationV_tF",
   "path": "AutomaticSubscriptionOfferViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios"
   ]
@@ -2239,8 +2239,8 @@
   "usr": "s:17_StoreKit_SwiftUI37AutomaticSubscriptionOptionGroupStyleVACycfc",
   "path": "AutomaticSubscriptionOptionGroupStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupStyle",
   "platforms": [
    "ios",
    "macos",
@@ -2266,7 +2266,7 @@
   "path": "AutomaticSubscriptionStoreControlPlacement.RawValue",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "placement values of the automatic control style on visionOS / macOS layouts, applied by StoreKit",
   "platforms": [
    "ios",
    "macos",
@@ -2278,8 +2278,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV9automaticACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement.automatic",
   "platforms": [
    "ios",
    "macos",
@@ -2291,8 +2291,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV6bottomACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.bottom",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "placement values of the automatic control style on visionOS / macOS layouts, applied by StoreKit",
   "platforms": [
    "tvos"
   ]
@@ -2301,8 +2301,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV9bottomBarACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.bottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement.bottomBar",
   "platforms": [
    "ios",
    "macos"
@@ -2312,8 +2312,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV18buttonsInBottomBarACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.buttonsInBottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement.buttonsInBottomBar",
   "platforms": [
    "ios",
    "macos"
@@ -2323,8 +2323,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV8rawValueAcA0fagH3KeyV_tcfc",
   "path": "AutomaticSubscriptionStoreControlPlacement.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "placement values of the automatic control style on visionOS / macOS layouts, applied by StoreKit",
   "platforms": [
    "ios",
    "macos",
@@ -2336,8 +2336,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV7leadingACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.leading",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "placement values of the automatic control style on visionOS / macOS layouts, applied by StoreKit",
   "platforms": [
    "tvos"
   ]
@@ -2347,7 +2347,7 @@
   "path": "AutomaticSubscriptionStoreControlPlacement.rawValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "placement values of the automatic control style on visionOS / macOS layouts, applied by StoreKit",
   "platforms": [
    "ios",
    "macos",
@@ -2359,8 +2359,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV10scrollViewACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.scrollView",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement.scrollView",
   "platforms": [
    "ios",
    "macos",
@@ -2371,8 +2371,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA16ControlPlacementV8trailingACvpZ",
   "path": "AutomaticSubscriptionStoreControlPlacement.trailing",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "placement values of the automatic control style on visionOS / macOS layouts, applied by StoreKit",
   "platforms": [
    "tvos"
   ]
@@ -2420,8 +2420,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA12ControlStyleV9PlacementV8RawValuea",
   "path": "AutomaticSubscriptionStoreControlStyle.Placement.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -2433,8 +2433,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA12ControlStyleV9PlacementV9automaticAEvpZ",
   "path": "AutomaticSubscriptionStoreControlStyle.Placement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -2446,8 +2446,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA12ControlStyleV9PlacementV8rawValueAESgAA0fagI3KeyV_tcfc",
   "path": "AutomaticSubscriptionStoreControlStyle.Placement.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -2459,8 +2459,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA12ControlStyleV9PlacementV8rawValueAA0fagI3KeyVvp",
   "path": "AutomaticSubscriptionStoreControlStyle.Placement.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -2472,8 +2472,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA12ControlStyleVACycfc",
   "path": "AutomaticSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -2485,8 +2485,8 @@
   "usr": "s:17_StoreKit_SwiftUI021AutomaticSubscriptionA12ControlStyleV8makeBody13configurationQrAA0fagH13ConfigurationV_tF",
   "path": "AutomaticSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -4507,8 +4507,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV8RawValuea",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -4520,8 +4520,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV9automaticAEvpZ",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -4533,8 +4533,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV6bottomAEvpZ",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.bottom",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "tvos"
   ]
@@ -4543,8 +4543,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV9bottomBarAEvpZ",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.bottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -4554,8 +4554,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV8rawValueAESgAA0fagI3KeyV_tcfc",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -4567,8 +4567,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV7leadingAEvpZ",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.leading",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "tvos"
   ]
@@ -4577,8 +4577,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV8rawValueAA0fagI3KeyVvp",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -4590,8 +4590,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV10scrollViewAEvpZ",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.scrollView",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -4602,8 +4602,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV9PlacementV8trailingAEvpZ",
   "path": "ButtonsSubscriptionStoreControlStyle.Placement.trailing",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "tvos"
   ]
@@ -4612,8 +4612,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleVACycfc",
   "path": "ButtonsSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -4625,8 +4625,8 @@
   "usr": "s:17_StoreKit_SwiftUI019ButtonsSubscriptionA12ControlStyleV8makeBody13configurationQrAA0fagH13ConfigurationV_tF",
   "path": "ButtonsSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -7871,8 +7871,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV8RawValuea",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7882,8 +7882,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV9automaticAEvpZ",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7893,8 +7893,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV9bottomBarAEvpZ",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.bottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7904,8 +7904,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV18buttonsInBottomBarAEvpZ",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.buttonsInBottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7915,8 +7915,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV8rawValueAESgAA0gahJ3KeyV_tcfc",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7926,8 +7926,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV8rawValueAA0gahJ3KeyVvp",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7937,8 +7937,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV9PlacementV10scrollViewAEvpZ",
   "path": "CompactPickerSubscriptionStoreControlStyle.Placement.scrollView",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -7948,8 +7948,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleVACycfc",
   "path": "CompactPickerSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos"
@@ -7959,8 +7959,8 @@
   "usr": "s:17_StoreKit_SwiftUI025CompactPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0gahI13ConfigurationV_tF",
   "path": "CompactPickerSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos"
@@ -7994,8 +7994,8 @@
   "usr": "s:17_StoreKit_SwiftUI23CompactProductViewStyleVACycfc",
   "path": "CompactProductViewStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -8006,8 +8006,8 @@
   "usr": "s:17_StoreKit_SwiftUI23CompactProductViewStyleV8makeBody13configurationQrAA0fgH13ConfigurationV_tF",
   "path": "CompactProductViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -8038,8 +8038,8 @@
   "usr": "s:17_StoreKit_SwiftUI33CompactSubscriptionOfferViewStyleVACycfc",
   "path": "CompactSubscriptionOfferViewStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -8048,8 +8048,8 @@
   "usr": "s:17_StoreKit_SwiftUI33CompactSubscriptionOfferViewStyleV8makeBody13configurationQrAA0fghI13ConfigurationV_tF",
   "path": "CompactSubscriptionOfferViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios"
   ]
@@ -8188,8 +8188,8 @@
   "usr": "s:7SwiftUI28ContainerBackgroundPlacementV010_StoreKit_aB0E012subscriptionF0ACvpZ",
   "path": "ContainerBackgroundPlacement.subscriptionStore",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ContainerBackgroundPlacement.subscriptionStore / subscriptionStoreHeader / subscriptionStoreFullHeight",
   "platforms": [
    "ios",
    "macos",
@@ -8200,8 +8200,8 @@
   "usr": "s:7SwiftUI28ContainerBackgroundPlacementV010_StoreKit_aB0E012subscriptionF10FullHeightACvpZ",
   "path": "ContainerBackgroundPlacement.subscriptionStoreFullHeight",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ContainerBackgroundPlacement.subscriptionStore / subscriptionStoreHeader / subscriptionStoreFullHeight",
   "platforms": [
    "ios",
    "macos",
@@ -8212,8 +8212,8 @@
   "usr": "s:7SwiftUI28ContainerBackgroundPlacementV010_StoreKit_aB0E012subscriptionF6HeaderACvpZ",
   "path": "ContainerBackgroundPlacement.subscriptionStoreHeader",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ContainerBackgroundPlacement.subscriptionStore / subscriptionStoreHeader / subscriptionStoreFullHeight",
   "platforms": [
    "ios",
    "macos",
@@ -9401,8 +9401,8 @@
   "usr": "s:17_StoreKit_SwiftUI20DisplayMessageActionV14callAsFunctionyy0aB00F0VKF",
   "path": "DisplayMessageAction.callAsFunction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeAction(trigger, displayMessages = true)",
   "platforms": [
    "ios"
   ]
@@ -9594,8 +9594,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO7failureyACyxGs5Error_pcAEmlF",
   "path": "EntitlementTaskState.failure(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9607,8 +9607,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO7flatMapyACyqd__GAExKXEKlF",
   "path": "EntitlementTaskState.flatMap(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9620,8 +9620,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO7flatMapyACyqd__GAExYaKXEYaKlF",
   "path": "EntitlementTaskState.flatMap(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9633,8 +9633,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO7loadingyACyxGAEmlF",
   "path": "EntitlementTaskState.loading",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9646,8 +9646,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO3mapyACyqd__Gqd__xKXEKlF",
   "path": "EntitlementTaskState.map(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9659,8 +9659,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO3mapyACyqd__Gqd__xYaKXEYaKlF",
   "path": "EntitlementTaskState.map(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9672,8 +9672,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO7successyACyxGxcAEmlF",
   "path": "EntitlementTaskState.success(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9685,8 +9685,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateOAA0aB018VerificationResultOyAD11TransactionVGSgRszlE11transactionAJvp",
   "path": "EntitlementTaskState.transaction",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -9698,8 +9698,8 @@
   "usr": "s:17_StoreKit_SwiftUI20EntitlementTaskStateO5valuexSgvp",
   "path": "EntitlementTaskState.value",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -11011,8 +11011,8 @@
   "usr": "s:17_StoreKit_SwiftUI21LargeProductViewStyleVACycfc",
   "path": "LargeProductViewStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos"
@@ -11022,8 +11022,8 @@
   "usr": "s:17_StoreKit_SwiftUI21LargeProductViewStyleV8makeBody13configurationQrAA0fgH13ConfigurationV_tF",
   "path": "LargeProductViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos"
@@ -11290,8 +11290,8 @@
   "usr": "s:17_StoreKit_SwiftUI33LinksSubscriptionOptionGroupStyleVACycfc",
   "path": "LinksSubscriptionOptionGroupStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupStyle",
   "platforms": [
    "ios",
    "macos",
@@ -17337,8 +17337,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV8RawValuea",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -17349,8 +17349,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV9automaticAEvpZ",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -17361,8 +17361,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV9bottomBarAEvpZ",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.bottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -17372,8 +17372,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV18buttonsInBottomBarAEvpZ",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.buttonsInBottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -17383,8 +17383,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV8rawValueAESgAA0gahJ3KeyV_tcfc",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -17395,8 +17395,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV8rawValueAA0gahJ3KeyVvp",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -17407,8 +17407,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV9PlacementV10scrollViewAEvpZ",
   "path": "PagedPickerSubscriptionStoreControlStyle.Placement.scrollView",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -17419,8 +17419,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleVACycfc",
   "path": "PagedPickerSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -17431,8 +17431,8 @@
   "usr": "s:17_StoreKit_SwiftUI023PagedPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0gahI13ConfigurationV_tF",
   "path": "PagedPickerSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -17476,8 +17476,8 @@
   "usr": "s:17_StoreKit_SwiftUI032PagedProminentPickerSubscriptionA12ControlStyleVACycfc",
   "path": "PagedProminentPickerSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos"
@@ -17487,8 +17487,8 @@
   "usr": "s:17_StoreKit_SwiftUI032PagedProminentPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0haiJ13ConfigurationV_tF",
   "path": "PagedProminentPickerSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos"
@@ -18763,8 +18763,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV9PlacementV8RawValuea",
   "path": "PickerSubscriptionStoreControlStyle.Placement.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -18775,8 +18775,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV9PlacementV9automaticAEvpZ",
   "path": "PickerSubscriptionStoreControlStyle.Placement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -18787,8 +18787,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV9PlacementV18buttonsInBottomBarAEvpZ",
   "path": "PickerSubscriptionStoreControlStyle.Placement.buttonsInBottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -18798,8 +18798,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV9PlacementV8rawValueAESgAA0fagI3KeyV_tcfc",
   "path": "PickerSubscriptionStoreControlStyle.Placement.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -18810,8 +18810,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV9PlacementV8rawValueAA0fagI3KeyVvp",
   "path": "PickerSubscriptionStoreControlStyle.Placement.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -18822,8 +18822,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV9PlacementV10scrollViewAEvpZ",
   "path": "PickerSubscriptionStoreControlStyle.Placement.scrollView",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -18834,8 +18834,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleVACycfc",
   "path": "PickerSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -18846,8 +18846,8 @@
   "usr": "s:17_StoreKit_SwiftUI018PickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0fagH13ConfigurationV_tF",
   "path": "PickerSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -19961,8 +19961,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO7failureyAFs5Error_pcAFmF",
   "path": "Product.CollectionTaskState.failure(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -19974,8 +19974,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO7loadingyA2FmF",
   "path": "Product.CollectionTaskState.loading",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -19987,8 +19987,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO8productsSayACGSgvp",
   "path": "Product.CollectionTaskState.products",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20000,8 +20000,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO7successyAFSayACG_SaySSGtcAFmF",
   "path": "Product.CollectionTaskState.success(_:unavailable:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20026,8 +20026,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV19ArrayLiteralElementa",
   "path": "Product.SubscriptionRelationship.ArrayLiteralElement",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20039,8 +20039,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV7Elementa",
   "path": "Product.SubscriptionRelationship.Element",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20052,8 +20052,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV8RawValuea",
   "path": "Product.SubscriptionRelationship.RawValue",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20065,8 +20065,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV3allAFvpZ",
   "path": "Product.SubscriptionRelationship.all",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20078,8 +20078,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV10crossgradeAFvpZ",
   "path": "Product.SubscriptionRelationship.crossgrade",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20091,8 +20091,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV7currentAFvpZ",
   "path": "Product.SubscriptionRelationship.current",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20104,8 +20104,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV9downgradeAFvpZ",
   "path": "Product.SubscriptionRelationship.downgrade",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20117,8 +20117,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV8rawValueAFSi_tcfc",
   "path": "Product.SubscriptionRelationship.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20130,8 +20130,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV8rawValueSivp",
   "path": "Product.SubscriptionRelationship.rawValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20143,8 +20143,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE24SubscriptionRelationshipV7upgradeAFvpZ",
   "path": "Product.SubscriptionRelationship.upgrade",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionRelationship",
   "platforms": [
    "ios",
    "macos",
@@ -20169,8 +20169,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE9TaskStateO7failureyAFs5Error_pcAFmF",
   "path": "Product.TaskState.failure(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20182,8 +20182,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE9TaskStateO7loadingyA2FmF",
   "path": "Product.TaskState.loading",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20195,8 +20195,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE9TaskStateO7productACSgvp",
   "path": "Product.TaskState.product",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20208,8 +20208,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE9TaskStateO7successyAfCcAFmF",
   "path": "Product.TaskState.success(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20221,8 +20221,8 @@
   "usr": "s:8StoreKit7ProductV01_aB8_SwiftUIE9TaskStateO11unavailableyA2FmF",
   "path": "Product.TaskState.unavailable",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreTaskState",
   "platforms": [
    "ios",
    "macos",
@@ -20247,8 +20247,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductIconPhaseO5errors5Error_pSgvp",
   "path": "ProductIconPhase.error",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductIconPhase",
   "platforms": [
    "ios",
    "macos",
@@ -20260,8 +20260,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductIconPhaseO7failureyACs5Error_pcACmF",
   "path": "ProductIconPhase.failure(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductIconPhase",
   "platforms": [
    "ios",
    "macos",
@@ -20273,8 +20273,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductIconPhaseO7loadingyA2CmF",
   "path": "ProductIconPhase.loading",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductIconPhase",
   "platforms": [
    "ios",
    "macos",
@@ -20286,8 +20286,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductIconPhaseO011promotionalF00cD05ImageVSgvp",
   "path": "ProductIconPhase.promotionalIcon",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductIconPhase",
   "platforms": [
    "ios",
    "macos",
@@ -20299,8 +20299,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductIconPhaseO7successyAC0cD05ImageVcACmF",
   "path": "ProductIconPhase.success(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductIconPhase",
   "platforms": [
    "ios",
    "macos",
@@ -20312,8 +20312,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductIconPhaseO11unavailableyA2CmF",
   "path": "ProductIconPhase.unavailable",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductIconPhase",
   "platforms": [
    "ios",
    "macos",
@@ -20364,8 +20364,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewVyACyAA0eF18StyleConfigurationV4IconVAGGAEcAGRszAGRs_rlufc",
   "path": "ProductView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "style configuration of a custom Swift ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20377,8 +20377,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV_4iconACyx0cD005EmptyF0VG0aB00E0V_xAA0E9IconPhaseOctcAGRs_rlufc",
   "path": "ProductView.init(_:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, iconPhase = { phase -> })",
   "platforms": [
    "ios",
    "macos",
@@ -20390,8 +20390,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV_22prefersPromotionalIconACy0cD005EmptyF0VAGG0aB00E0V_SbtcAGRszAGRs_rlufc",
   "path": "ProductView.init(_:prefersPromotionalIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, prefersPromotionalIcon, icon)",
   "platforms": [
    "ios",
    "macos",
@@ -20403,8 +20403,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV_22prefersPromotionalIcon4iconACyx0cD005EmptyF0VG0aB00E0V_SbxyXEtcAHRs_rlufc",
   "path": "ProductView.init(_:prefersPromotionalIcon:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, prefersPromotionalIcon, icon)",
   "platforms": [
    "ios",
    "macos",
@@ -20416,8 +20416,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV2id4icon15placeholderIconACyxq_GSS_xAA0eJ5PhaseOcq_yXEtcfc",
   "path": "ProductView.init(id:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, prefersPromotionalIcon, icon, placeholderIcon, iconPhase)",
   "platforms": [
    "ios",
    "macos",
@@ -20429,8 +20429,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV2id22prefersPromotionalIconACy0cD005EmptyF0VAHGSS_SbtcAHRszAHRs_rlufc",
   "path": "ProductView.init(id:prefersPromotionalIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, prefersPromotionalIcon, icon, placeholderIcon, iconPhase)",
   "platforms": [
    "ios",
    "macos",
@@ -20442,8 +20442,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV2id22prefersPromotionalIcon4iconACyxAA09Automatice11PlaceholderJ0VGSS_SbxyXEtcAHRs_rlufc",
   "path": "ProductView.init(id:prefersPromotionalIcon:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, prefersPromotionalIcon, icon, placeholderIcon, iconPhase)",
   "platforms": [
    "ios",
    "macos",
@@ -20455,8 +20455,8 @@
   "usr": "s:17_StoreKit_SwiftUI11ProductViewV2id22prefersPromotionalIcon4icon011placeholderJ0ACyxq_GSS_SbxyXEq_yXEtcfc",
   "path": "ProductView.init(id:prefersPromotionalIcon:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductView(id, prefersPromotionalIcon, icon, placeholderIcon, iconPhase)",
   "platforms": [
    "ios",
    "macos",
@@ -20481,8 +20481,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStyleP4BodyQa",
   "path": "ProductViewStyle.Body",
   "kind": "swift.associatedtype",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20494,8 +20494,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStyleP13Configurationa",
   "path": "ProductViewStyle.Configuration",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20507,8 +20507,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStylePA2A09AutomaticefG0VRszrlE9automaticAEvpZ",
   "path": "ProductViewStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20520,8 +20520,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStylePA2A07CompactefG0VRszrlE7compactAEvpZ",
   "path": "ProductViewStyle.compact",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20532,8 +20532,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStylePA2A05LargeefG0VRszrlE5largeAEvpZ",
   "path": "ProductViewStyle.large",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos"
@@ -20543,8 +20543,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStyleP8makeBody13configuration0I0QzAA0efG13ConfigurationV_tF",
   "path": "ProductViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20556,8 +20556,8 @@
   "usr": "s:17_StoreKit_SwiftUI16ProductViewStylePA2A07RegularefG0VRszrlE7regularAEvpZ",
   "path": "ProductViewStyle.regular",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -20583,7 +20583,7 @@
   "path": "ProductViewStyleConfiguration.Icon",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20596,7 +20596,7 @@
   "path": "ProductViewStyleConfiguration.Icon.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20609,7 +20609,7 @@
   "path": "ProductViewStyleConfiguration.Icon.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20622,7 +20622,7 @@
   "path": "ProductViewStyleConfiguration.descriptionVisibility",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20635,7 +20635,7 @@
   "path": "ProductViewStyleConfiguration.hasCurrentEntitlement",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20648,7 +20648,7 @@
   "path": "ProductViewStyleConfiguration.icon",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20661,7 +20661,7 @@
   "path": "ProductViewStyleConfiguration.product",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20673,8 +20673,8 @@
   "usr": "s:17_StoreKit_SwiftUI29ProductViewStyleConfigurationV8purchaseyyF",
   "path": "ProductViewStyleConfiguration.purchase()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20687,7 +20687,7 @@
   "path": "ProductViewStyleConfiguration.state",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -20732,8 +20732,8 @@
   "usr": "s:17_StoreKit_SwiftUI027ProminentPickerSubscriptionA12ControlStyleVACycfc",
   "path": "ProminentPickerSubscriptionStoreControlStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos"
@@ -20743,8 +20743,8 @@
   "usr": "s:17_StoreKit_SwiftUI027ProminentPickerSubscriptionA12ControlStyleV8makeBody13configurationQrAA0gahI13ConfigurationV_tF",
   "path": "ProminentPickerSubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos"
@@ -20767,8 +20767,8 @@
   "usr": "s:17_StoreKit_SwiftUI14PurchaseActionV14callAsFunction_10compactJWS7options0aB07ProductV0E6ResultOAG016AdvancedCommerceM0V_SSShyAM0E6OptionVGtYaKF",
   "path": "PurchaseAction.callAsFunction(_:compactJWS:options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Advanced Commerce products: server-side Swift API",
   "platforms": [
    "ios",
    "macos",
@@ -20780,8 +20780,8 @@
   "usr": "s:17_StoreKit_SwiftUI14PurchaseActionV14callAsFunction_7options0aB07ProductV0E6ResultOAH_ShyAH0E6OptionVGtYaKF",
   "path": "PurchaseAction.callAsFunction(_:options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeAction(trigger, purchaseProductId, purchaseOptions, onPurchase)",
   "platforms": [
    "ios",
    "macos",
@@ -23061,8 +23061,8 @@
   "usr": "s:17_StoreKit_SwiftUI23RegularProductViewStyleVACycfc",
   "path": "RegularProductViewStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): ProductViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -23074,8 +23074,8 @@
   "usr": "s:17_StoreKit_SwiftUI23RegularProductViewStyleV8makeBody13configurationQrAA0fgH13ConfigurationV_tF",
   "path": "RegularProductViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "requirement of a Swift style protocol (Kotlin picks the style with an enum)",
   "platforms": [
    "ios",
    "macos",
@@ -23108,8 +23108,8 @@
   "usr": "s:17_StoreKit_SwiftUI19RequestReviewActionV14callAsFunctionyyF",
   "path": "RequestReviewAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeAction(trigger, requestReview = true)",
   "platforms": [
    "ios",
    "macos"
@@ -24766,8 +24766,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A10ButtonKindV12cancellationACvpZ",
   "path": "StoreButtonKind.cancellation",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreButtonKind",
   "platforms": [
    "ios",
    "macos",
@@ -24778,8 +24778,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A10ButtonKindV8policiesACvpZ",
   "path": "StoreButtonKind.policies",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreButtonKind",
   "platforms": [
    "ios",
    "macos",
@@ -24791,8 +24791,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A10ButtonKindV10redeemCodeACvpZ",
   "path": "StoreButtonKind.redeemCode",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreButtonKind",
   "platforms": [
    "ios",
    "macos"
@@ -24802,8 +24802,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A10ButtonKindV16restorePurchasesACvpZ",
   "path": "StoreButtonKind.restorePurchases",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreButtonKind",
   "platforms": [
    "ios",
    "macos",
@@ -24815,8 +24815,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A10ButtonKindV6signInACvpZ",
   "path": "StoreButtonKind.signIn",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreButtonKind",
   "platforms": [
    "ios",
    "macos",
@@ -24841,8 +24841,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentP4BodyQa",
   "path": "StoreContent.Body",
   "kind": "swift.associatedtype",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24854,8 +24854,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentP4body4BodyQzvp",
   "path": "StoreContent.body",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24867,8 +24867,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE18productDescriptionyQr0cD010VisibilityOF",
   "path": "StoreContent.productDescription(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24880,8 +24880,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE11storeButton_3forQr0cD010VisibilityO_AA0aG4KindVdtF",
   "path": "StoreContent.storeButton(_:for:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24893,8 +24893,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA11ButtonLabelyQrAA012SubscriptionagH0VF",
   "path": "StoreContent.subscriptionStoreButtonLabel(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24905,8 +24905,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA17ControlBackgroundyQrqd__0cD010ShapeStyleRd__lF",
   "path": "StoreContent.subscriptionStoreControlBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos"
@@ -24916,8 +24916,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA17ControlBackgroundyQrAA012SubscriptionagH0VF",
   "path": "StoreContent.subscriptionStoreControlBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos"
@@ -24927,8 +24927,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA12ControlStyle_9placementQrqd___9PlacementQyd__tAA012SubscriptionagH0Rd__lF",
   "path": "StoreContent.subscriptionStoreControlStyle(_:placement:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24940,8 +24940,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA16OptionGroupStyleyQrqd__AA012SubscriptionghI0Rd__lF",
   "path": "StoreContent.subscriptionStoreOptionGroupStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24953,8 +24953,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA20PickerItemBackgroundyQrqd__0cD010ShapeStyleRd__lF",
   "path": "StoreContent.subscriptionStorePickerItemBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24965,8 +24965,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A7ContentPAAE012subscriptionA20PickerItemBackground_2inQrqd___qd_0_t0cD010ShapeStyleRd__AF0K0Rd_0_r0_lF",
   "path": "StoreContent.subscriptionStorePickerItemBackground(_:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreContentStyle(productDescription, storeButtons, buttonLabel) on the store content; the other store modifiers on the store view",
   "platforms": [
    "ios",
    "macos",
@@ -24990,8 +24990,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A14ContentBuilderV10buildBlockyAA05TupleaE0VyxxQp_QPGxxQpRvzAA0aE0RzlFZ",
   "path": "StoreContentBuilder.buildBlock(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -25003,8 +25003,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A14ContentBuilderV11buildEither5first0cD0012_ConditionalE0Vyxq_Gx_tAA0aE0RzAaJR_r0_lFZ",
   "path": "StoreContentBuilder.buildEither(first:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -25016,8 +25016,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A14ContentBuilderV11buildEither6second0cD0012_ConditionalE0Vyxq_Gq__tAA0aE0RzAaJR_r0_lFZ",
   "path": "StoreContentBuilder.buildEither(second:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -25029,8 +25029,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A14ContentBuilderV15buildExpressionyQrxAA0aE0RzlFZ",
   "path": "StoreContentBuilder.buildExpression(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -25042,8 +25042,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A14ContentBuilderV7buildIfyxSgAeA0aE0RzlFZ",
   "path": "StoreContentBuilder.buildIf(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -25055,8 +25055,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A14ContentBuilderV24buildLimitedAvailabilityyQrAA0aE0_pFZ",
   "path": "StoreContentBuilder.buildLimitedAvailability(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios",
    "macos",
@@ -25107,8 +25107,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV3ids4icon15placeholderIconACyxq_Gqd___x0aB07ProductV_AA0jI5PhaseOtcq_yXEtcSlRd__SS7ElementRtd__lufc",
   "path": "StoreView.init(ids:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25120,8 +25120,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV3ids22prefersPromotionalIconACy0cD005EmptyE0VAHGqd___SbtcAHRszAHRs_SlRd__SS7ElementRtd__lufc",
   "path": "StoreView.init(ids:prefersPromotionalIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25133,8 +25133,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV3ids22prefersPromotionalIcon4iconACyxAA027AutomaticProductPlaceholderI0VGqd___Sbx0aB00L0VctcAHRs_SlRd__SS7ElementRtd__lufc",
   "path": "StoreView.init(ids:prefersPromotionalIcon:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25146,8 +25146,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV3ids22prefersPromotionalIcon4icon011placeholderI0ACyxq_Gqd___Sbx0aB07ProductVcq_yXEtcSlRd__SS7ElementRtd__lufc",
   "path": "StoreView.init(ids:prefersPromotionalIcon:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25159,8 +25159,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV8products4iconACyx0cD005EmptyE0VGqd___x0aB07ProductV_AA0I9IconPhaseOtctcAHRs_SlRd__AL7ElementRtd__lufc",
   "path": "StoreView.init(products:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25172,8 +25172,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV8products22prefersPromotionalIconACy0cD005EmptyE0VAHGqd___SbtcAHRszAHRs_SlRd__0aB07ProductV7ElementRtd__lufc",
   "path": "StoreView.init(products:prefersPromotionalIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25185,8 +25185,8 @@
   "usr": "s:17_StoreKit_SwiftUI0A4ViewV8products22prefersPromotionalIcon4iconACyx0cD005EmptyE0VGqd___Sbx0aB07ProductVctcAIRs_SlRd__AM7ElementRtd__lufc",
   "path": "StoreView.init(products:prefersPromotionalIcon:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): StoreView(ids, prefersPromotionalIcon, icons, placeholderIcon)",
   "platforms": [
    "ios",
    "macos",
@@ -25241,8 +25241,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewVyACyAA0efG18StyleConfigurationV4IconVAGGAEcAGRszAGRs_rlufc",
   "path": "SubscriptionOfferView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "style configuration of a custom Swift SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -25251,8 +25251,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV_4iconACyx0cD005EmptyG0VG0aB07ProductV_xAA0J9IconPhaseOctcAGRs_rlufc",
   "path": "SubscriptionOfferView.init(_:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, icon)",
   "platforms": [
    "ios"
   ]
@@ -25261,8 +25261,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV_22prefersPromotionalIconACy0cD005EmptyG0VAGG0aB07ProductV_SbtcAGRszAGRs_rlufc",
   "path": "SubscriptionOfferView.init(_:prefersPromotionalIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, prefersPromotionalIcon)",
   "platforms": [
    "ios"
   ]
@@ -25271,8 +25271,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV_22prefersPromotionalIcon4iconACyx0cD005EmptyG0VG0aB07ProductV_SbxyXEtcAHRs_rlufc",
   "path": "SubscriptionOfferView.init(_:prefersPromotionalIcon:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, prefersPromotionalIcon)",
   "platforms": [
    "ios"
   ]
@@ -25281,8 +25281,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV7groupID19visibleRelationshipACy0cD005EmptyG0VAHGSS_0aB07ProductVAAE0eK0VtcAHRszAHRs_rlufc",
   "path": "SubscriptionOfferView.init(groupID:visibleRelationship:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(groupId, visibleRelationship, useAppIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25291,8 +25291,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV7groupID19visibleRelationship4iconACyxAA31AutomaticProductPlaceholderIconVGSS_0aB00N0VAAE0eK0VxyXEtcAHRs_rlufc",
   "path": "SubscriptionOfferView.init(groupID:visibleRelationship:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(groupId, visibleRelationship, useAppIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25301,8 +25301,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV7groupID19visibleRelationship4icon15placeholderIconACyxq_GSS_0aB07ProductVAAE0eK0VxyXEq_yXEtcfc",
   "path": "SubscriptionOfferView.init(groupID:visibleRelationship:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(groupId, visibleRelationship, useAppIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25311,8 +25311,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV7groupID19visibleRelationship10useAppIconACy0cD005EmptyG0VAIGSS_0aB07ProductVAAE0eK0VSbtcAIRszAIRs_rlufc",
   "path": "SubscriptionOfferView.init(groupID:visibleRelationship:useAppIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(groupId, visibleRelationship, useAppIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25321,8 +25321,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV2id4icon15placeholderIconACyxq_GSS_xAA07ProductK5PhaseOcq_yXEtcfc",
   "path": "SubscriptionOfferView.init(id:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, prefersPromotionalIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25331,8 +25331,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV2id22prefersPromotionalIconACy0cD005EmptyG0VAHGSS_SbtcAHRszAHRs_rlufc",
   "path": "SubscriptionOfferView.init(id:prefersPromotionalIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, prefersPromotionalIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25341,8 +25341,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV2id22prefersPromotionalIcon4iconACyxAA027AutomaticProductPlaceholderK0VGSS_SbxyXEtcAHRs_rlufc",
   "path": "SubscriptionOfferView.init(id:prefersPromotionalIcon:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, prefersPromotionalIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25351,8 +25351,8 @@
   "usr": "s:17_StoreKit_SwiftUI21SubscriptionOfferViewV2id22prefersPromotionalIcon4icon011placeholderK0ACyxq_GSS_SbxyXEq_yXEtcfc",
   "path": "SubscriptionOfferView.init(id:prefersPromotionalIcon:icon:placeholderIcon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferView(id, prefersPromotionalIcon, icon, placeholderIcon)",
   "platforms": [
    "ios"
   ]
@@ -25371,8 +25371,8 @@
   "usr": "s:17_StoreKit_SwiftUI31SubscriptionOfferViewButtonKindV10detailLinkACvpZ",
   "path": "SubscriptionOfferViewButtonKind.detailLink",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOfferViewStyle(detailLinkVisibility)",
   "platforms": [
    "ios"
   ]
@@ -25391,8 +25391,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOfferViewStyleP4BodyQa",
   "path": "SubscriptionOfferViewStyle.Body",
   "kind": "swift.associatedtype",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -25401,8 +25401,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOfferViewStyleP13Configurationa",
   "path": "SubscriptionOfferViewStyle.Configuration",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -25411,8 +25411,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOfferViewStylePA2A09AutomaticefgH0VRszrlE9automaticAEvpZ",
   "path": "SubscriptionOfferViewStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -25421,8 +25421,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOfferViewStylePA2A07CompactefgH0VRszrlE7compactAEvpZ",
   "path": "SubscriptionOfferViewStyle.compact",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -25431,8 +25431,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOfferViewStyleP8makeBody13configuration0J0QzAA0efgH13ConfigurationV_tF",
   "path": "SubscriptionOfferViewStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -25452,7 +25452,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.Icon",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25462,7 +25462,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.Icon.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25472,7 +25472,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.Icon.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25482,7 +25482,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.activeOffer",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25491,8 +25491,8 @@
   "usr": "s:17_StoreKit_SwiftUI39SubscriptionOfferViewStyleConfigurationV14displayDetailsyyF",
   "path": "SubscriptionOfferViewStyleConfiguration.displayDetails()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25502,7 +25502,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.icon",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25512,7 +25512,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.state",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25521,8 +25521,8 @@
   "usr": "s:17_StoreKit_SwiftUI39SubscriptionOfferViewStyleConfigurationV9subscribeyyF",
   "path": "SubscriptionOfferViewStyleConfiguration.subscribe()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25532,7 +25532,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.subscriptionGroupDisplayName",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25542,7 +25542,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.subscriptionStatus",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25552,7 +25552,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.subscriptions",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25562,7 +25562,7 @@
   "path": "SubscriptionOfferViewStyleConfiguration.visibleSubscription",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios"
   ]
@@ -25610,8 +25610,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_AA09AutomaticeA16MarketingContentVRs0_rlE_7contentACyxAfHGAD18LocalizedStringKeyV_xyXEtcfc",
   "path": "SubscriptionOptionGroup.init(_:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25623,8 +25623,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_AA09AutomaticeA16MarketingContentVRs0_rlE_7contentACyxAfHGqd___xyXEtcSyRd__lufc",
   "path": "SubscriptionOptionGroup.init(_:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25636,8 +25636,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_rlE_7content16marketingContentACyxAFq0_GAD18LocalizedStringKeyV_xyXEq0_yXEtcfc",
   "path": "SubscriptionOptionGroup.init(_:content:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25649,8 +25649,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_rlE_7content16marketingContentACyxAFq0_Gqd___xyXEq0_yXEtcSyRd__lufc",
   "path": "SubscriptionOptionGroup.init(_:content:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25662,8 +25662,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_AA09AutomaticeA16MarketingContentVRs0_rlE_10isIncludedACys5NeverOAfHGAD18LocalizedStringKeyV_Sb0aB07ProductVctcAKRszrlufc",
   "path": "SubscriptionOptionGroup.init(_:isIncluded:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25675,8 +25675,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_AA09AutomaticeA16MarketingContentVRs0_rlE_10isIncludedACys5NeverOAfHGqd___Sb0aB07ProductVctcAKRszSyRd__lufc",
   "path": "SubscriptionOptionGroup.init(_:isIncluded:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25688,8 +25688,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_rlE_10isIncluded16marketingContentACys5NeverOAFq0_GAD18LocalizedStringKeyV_Sb0aB07ProductVcq0_yXEtcAJRszrlufc",
   "path": "SubscriptionOptionGroup.init(_:isIncluded:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25701,8 +25701,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVAA0cD04TextVRs_rlE_10isIncluded16marketingContentACys5NeverOAFq0_Gqd___Sb0aB07ProductVcq0_yXEtcAJRszSyRd__lufc",
   "path": "SubscriptionOptionGroup.init(_:isIncluded:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25714,8 +25714,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVA2A09AutomaticefG5LabelVRs_AA0heA16MarketingContentVRs0_rlE7contentACyxAeGGxyXE_tcfc",
   "path": "SubscriptionOptionGroup.init(content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25727,8 +25727,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVA2A09AutomaticeA16MarketingContentVRs0_rlE7content5labelACyxq_AEGxyXE_q_yXEtcfc",
   "path": "SubscriptionOptionGroup.init(content:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25740,8 +25740,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupV7content5label16marketingContentACyxq_q0_GxyXE_q_yXEq0_yXEtcfc",
   "path": "SubscriptionOptionGroup.init(content:label:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25753,8 +25753,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVA2A09AutomaticefG5LabelVRs_rlE7content16marketingContentACyxAEq0_GxyXE_q0_yXEtcfc",
   "path": "SubscriptionOptionGroup.init(content:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25766,8 +25766,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVA2A09AutomaticefG5LabelVRs_AA0heA16MarketingContentVRs0_rlE10isIncludedACys5NeverOAeGGSb0aB07ProductVc_tcAJRszrlufc",
   "path": "SubscriptionOptionGroup.init(isIncluded:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25779,8 +25779,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVA2A09AutomaticeA16MarketingContentVRs0_rlE10isIncluded5labelACys5NeverOq_AEGSb0aB07ProductVc_q_yXEtcAIRszrlufc",
   "path": "SubscriptionOptionGroup.init(isIncluded:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25792,8 +25792,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupV10isIncluded5label16marketingContentACys5NeverOq_q0_GSb0aB07ProductVc_q_yXEq0_yXEtcAHRszrlufc",
   "path": "SubscriptionOptionGroup.init(isIncluded:label:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25805,8 +25805,8 @@
   "usr": "s:17_StoreKit_SwiftUI23SubscriptionOptionGroupVA2A09AutomaticefG5LabelVRs_rlE10isIncluded16marketingContentACys5NeverOAEq0_GSb0aB07ProductVc_q0_yXEtcAIRszrlufc",
   "path": "SubscriptionOptionGroup.init(isIncluded:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroup(label, include, labelContent, marketingContent, sections)",
   "platforms": [
    "ios",
    "macos",
@@ -25857,8 +25857,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOptionGroupSetV6idType9groupedBy5labelACyxq_AA09AutomaticeA16MarketingContentVGxm_x0aB07ProductVcq_xctcAHRs0_rlufc",
   "path": "SubscriptionOptionGroupSet.init(idType:groupedBy:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupSet(groupedBy, label, marketingText)",
   "platforms": [
    "ios",
    "macos",
@@ -25870,8 +25870,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionOptionGroupSetV6idType9groupedBy5label16marketingContentACyxq_q0_Gxm_x0aB07ProductVcq_xcq0_xctcfc",
   "path": "SubscriptionOptionGroupSet.init(idType:groupedBy:label:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupSet(groupedBy, label, marketingText)",
   "platforms": [
    "ios",
    "macos",
@@ -25896,8 +25896,8 @@
   "usr": "s:17_StoreKit_SwiftUI28SubscriptionOptionGroupStylePA2A09AutomaticefgH0VRszrlE9automaticAEvpZ",
   "path": "SubscriptionOptionGroupStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupStyle",
   "platforms": [
    "ios",
    "macos",
@@ -25909,8 +25909,8 @@
   "usr": "s:17_StoreKit_SwiftUI28SubscriptionOptionGroupStylePA2A05LinksefgH0VRszrlE5linksAEvpZ",
   "path": "SubscriptionOptionGroupStyle.links",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupStyle",
   "platforms": [
    "ios",
    "macos",
@@ -25922,8 +25922,8 @@
   "usr": "s:17_StoreKit_SwiftUI28SubscriptionOptionGroupStylePA2A04TabsefgH0VRszrlE4tabsAEvpZ",
   "path": "SubscriptionOptionGroupStyle.tabs",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupStyle",
   "platforms": [
    "ios",
    "macos",
@@ -25986,8 +25986,8 @@
   "usr": "s:17_StoreKit_SwiftUI25SubscriptionOptionSectionVAA0cD04TextVRszs5NeverORs_rlE_10isIncluded6footerACyAfHq0_GAD18LocalizedStringKeyV_Sb0aB07ProductVcq0_yXEtcfc",
   "path": "SubscriptionOptionSection.init(_:isIncluded:footer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionSection(title, include, header, footer)",
   "platforms": [
    "ios",
    "macos",
@@ -25999,8 +25999,8 @@
   "usr": "s:17_StoreKit_SwiftUI25SubscriptionOptionSectionVAA0cD04TextVRszs5NeverORs_rlE_10isIncluded6footerACyAfHq0_Gqd___Sb0aB07ProductVcq0_yXEtcSyRd__lufc",
   "path": "SubscriptionOptionSection.init(_:isIncluded:footer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionSection(title, include, header, footer)",
   "platforms": [
    "ios",
    "macos",
@@ -26012,8 +26012,8 @@
   "usr": "s:17_StoreKit_SwiftUI25SubscriptionOptionSectionVAAs5NeverORs_rlE10isIncluded6header6footerACyxAEq0_GSb0aB07ProductVc_xyXEq0_yXEtcfc",
   "path": "SubscriptionOptionSection.init(isIncluded:header:footer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionSection(title, include, header, footer)",
   "platforms": [
    "ios",
    "macos",
@@ -26064,8 +26064,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionPeriodGroupSetVACyAA09Automatice6OptionG5LabelVAA0ieA16MarketingContentVGycAERszAGRs_rlufc",
   "path": "SubscriptionPeriodGroupSet.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionPeriodGroupSet(marketingContent, label) per period",
   "platforms": [
    "ios",
    "macos",
@@ -26077,8 +26077,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionPeriodGroupSetV16marketingContentACyAA09Automatice6OptionG5LabelVq_Gq_0aB07ProductV0eF0VSgc_tcAFRszrlufc",
   "path": "SubscriptionPeriodGroupSet.init(marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionPeriodGroupSet(marketingContent, label) per period",
   "platforms": [
    "ios",
    "macos",
@@ -26090,8 +26090,8 @@
   "usr": "s:17_StoreKit_SwiftUI26SubscriptionPeriodGroupSetV16marketingContent5labelACyxq_Gq_0aB07ProductV0eF0VSgc_xALctcfc",
   "path": "SubscriptionPeriodGroupSet.init(marketingContent:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionPeriodGroupSet(marketingContent, label) per period",
   "platforms": [
    "ios",
    "macos",
@@ -26142,8 +26142,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA6ButtonVyAcA0eA25ControlStyleConfigurationV6OptionVcfc",
   "path": "SubscriptionStoreButton.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26167,8 +26167,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV2eeoiySbAC_ACtFZ",
   "path": "SubscriptionStoreButtonLabel.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26179,8 +26179,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV6actionACvpZ",
   "path": "SubscriptionStoreButtonLabel.action",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26191,8 +26191,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV6actionACvp",
   "path": "SubscriptionStoreButtonLabel.action",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26203,8 +26203,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV9automaticACvpZ",
   "path": "SubscriptionStoreButtonLabel.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26215,8 +26215,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV11displayNameACvpZ",
   "path": "SubscriptionStoreButtonLabel.displayName",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26227,8 +26227,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV11displayNameACvp",
   "path": "SubscriptionStoreButtonLabel.displayName",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26239,8 +26239,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV4hash4intoys6HasherVz_tF",
   "path": "SubscriptionStoreButtonLabel.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26251,8 +26251,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV9hashValueSivp",
   "path": "SubscriptionStoreButtonLabel.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26263,8 +26263,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV9multilineACvpZ",
   "path": "SubscriptionStoreButtonLabel.multiline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos"
@@ -26274,8 +26274,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV9multilineACvp",
   "path": "SubscriptionStoreButtonLabel.multiline",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos"
@@ -26285,8 +26285,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV5priceACvpZ",
   "path": "SubscriptionStoreButtonLabel.price",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26297,8 +26297,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV5priceACvp",
   "path": "SubscriptionStoreButtonLabel.price",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26309,8 +26309,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV10singleLineACvpZ",
   "path": "SubscriptionStoreButtonLabel.singleLine",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26321,8 +26321,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA11ButtonLabelV10singleLineACvp",
   "path": "SubscriptionStoreButtonLabel.singleLine",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreButtonLabel",
   "platforms": [
    "ios",
    "macos",
@@ -26383,8 +26383,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA17ControlBackgroundV9automaticACvpZ",
   "path": "SubscriptionStoreControlBackground.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlBackground",
   "platforms": [
    "ios",
    "macos"
@@ -26394,8 +26394,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA17ControlBackgroundV16gradientMaterialACvpZ",
   "path": "SubscriptionStoreControlBackground.gradientMaterial",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlBackground",
   "platforms": [
    "ios",
    "macos"
@@ -26405,8 +26405,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA17ControlBackgroundV24gradientMaterialOnScrollACvpZ",
   "path": "SubscriptionStoreControlBackground.gradientMaterialOnScroll",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlBackground",
   "platforms": [
    "ios"
   ]
@@ -26428,8 +26428,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA16ControlPlacementP9automaticxvpZ",
   "path": "SubscriptionStoreControlPlacement.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -26454,8 +26454,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV2eeoiySbAC_ACtFZ",
   "path": "SubscriptionStoreControlPlacementKey.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -26467,8 +26467,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV6bottomACvpZ",
   "path": "SubscriptionStoreControlPlacementKey.bottom",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "tvos"
   ]
@@ -26477,8 +26477,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV9bottomBarACvpZ",
   "path": "SubscriptionStoreControlPlacementKey.bottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -26488,8 +26488,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV18buttonsInBottomBarACvpZ",
   "path": "SubscriptionStoreControlPlacementKey.buttonsInBottomBar",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos"
@@ -26499,8 +26499,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV4hash4intoys6HasherVz_tF",
   "path": "SubscriptionStoreControlPlacementKey.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -26512,8 +26512,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV9hashValueSivp",
   "path": "SubscriptionStoreControlPlacementKey.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -26525,8 +26525,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV7leadingACvpZ",
   "path": "SubscriptionStoreControlPlacementKey.leading",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "tvos"
   ]
@@ -26535,8 +26535,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV10scrollViewACvpZ",
   "path": "SubscriptionStoreControlPlacementKey.scrollView",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "ios",
    "macos",
@@ -26547,8 +26547,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA19ControlPlacementKeyV8trailingACvpZ",
   "path": "SubscriptionStoreControlPlacementKey.trailing",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlPlacement",
   "platforms": [
    "tvos"
   ]
@@ -26570,8 +26570,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStyleP4BodyQa",
   "path": "SubscriptionStoreControlStyle.Body",
   "kind": "swift.associatedtype",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26583,8 +26583,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStyleP13Configurationa",
   "path": "SubscriptionStoreControlStyle.Configuration",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26596,8 +26596,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStyleP9PlacementQa",
   "path": "SubscriptionStoreControlStyle.Placement",
   "kind": "swift.associatedtype",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26609,8 +26609,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePAAE15SubscribeButtona",
   "path": "SubscriptionStoreControlStyle.SubscribeButton",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26622,8 +26622,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePAAE0E6Pickera",
   "path": "SubscriptionStoreControlStyle.SubscriptionPicker",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26634,8 +26634,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePAAE0E12PickerOptiona",
   "path": "SubscriptionStoreControlStyle.SubscriptionPickerOption",
   "kind": "swift.typealias",
-  "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26646,8 +26646,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A09AutomaticeafG0VRszrlE9automaticAEvpZ",
   "path": "SubscriptionStoreControlStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26659,8 +26659,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A07ButtonseafG0VRszrlE7buttonsAEvpZ",
   "path": "SubscriptionStoreControlStyle.buttons",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26672,8 +26672,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A013CompactPickereafG0VRszrlE07compactI0AEvpZ",
   "path": "SubscriptionStoreControlStyle.compactPicker",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos"
@@ -26683,8 +26683,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStyleP8makeBody13configuration0I0QzAA0eafG13ConfigurationV_tF",
   "path": "SubscriptionStoreControlStyle.makeBody(configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26696,8 +26696,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A011PagedPickereafG0VRszrlE05pagedI0AEvpZ",
   "path": "SubscriptionStoreControlStyle.pagedPicker",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26708,8 +26708,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A020PagedProminentPickereafG0VRszrlE05pagediJ0AEvpZ",
   "path": "SubscriptionStoreControlStyle.pagedProminentPicker",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos"
@@ -26719,8 +26719,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A06PickereafG0VRszrlE6pickerAEvpZ",
   "path": "SubscriptionStoreControlStyle.picker",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -26731,8 +26731,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12ControlStylePA2A015ProminentPickereafG0VRszrlE09prominentI0AEvpZ",
   "path": "SubscriptionStoreControlStyle.prominentPicker",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos"
@@ -26756,7 +26756,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Icon",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26769,7 +26769,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Icon.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26782,7 +26782,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Icon.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26795,7 +26795,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26808,7 +26808,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26821,7 +26821,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.ID",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26834,7 +26834,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.activeOffer",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26847,7 +26847,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26860,7 +26860,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26873,7 +26873,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.icon",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26886,7 +26886,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.id",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26898,8 +26898,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA25ControlStyleConfigurationV6OptionV9subscribeyyF",
   "path": "SubscriptionStoreControlStyleConfiguration.Option.subscribe()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26912,7 +26912,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26925,7 +26925,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26938,7 +26938,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26951,7 +26951,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Option.subscription",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26964,7 +26964,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26976,7 +26976,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -26988,7 +26988,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.ID",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27000,7 +27000,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.activeOffer",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27012,7 +27012,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27024,7 +27024,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27036,7 +27036,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.icon",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27048,7 +27048,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.id",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27060,7 +27060,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.isSelected",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27072,7 +27072,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27084,7 +27084,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27096,7 +27096,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27108,7 +27108,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.PickerOption.subscription",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27120,7 +27120,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27133,7 +27133,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.Footer",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27146,7 +27146,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.Footer.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27159,7 +27159,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.Footer.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27172,7 +27172,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.Header",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27185,7 +27185,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.Header.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27198,7 +27198,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.Header.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27211,7 +27211,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.ID",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the StoreKit integration exposes what views need",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27224,7 +27224,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.ID.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27237,7 +27237,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.ID.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27250,7 +27250,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.ID.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27263,7 +27263,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.footer",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27276,7 +27276,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.header",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27289,7 +27289,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.id",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27302,7 +27302,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.Section.options",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27315,7 +27315,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.allOptions",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27328,7 +27328,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.autoRenewPreference",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27341,7 +27341,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.descriptionVisibility",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27354,7 +27354,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.groupDisplayName",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27367,7 +27367,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.options",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27380,7 +27380,7 @@
   "path": "SubscriptionStoreControlStyleConfiguration.sections",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "configuration of a custom Swift style",
   "platforms": [
    "ios",
    "macos",
@@ -27428,8 +27428,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA6PickerV_19pickerOptionContent12confirmationACyxq_GAA0eA25ControlStyleConfigurationV_xAH0fH0Vcq_AH0H0Vctcfc",
   "path": "SubscriptionStorePicker.init(_:pickerOptionContent:confirmation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27440,8 +27440,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA6PickerV_9selection19pickerOptionContent12confirmationACyxq_GAA0eA25ControlStyleConfigurationV_0cD07BindingVyAI0I0VSgGxAI0fI0Vcq_ANctcfc",
   "path": "SubscriptionStorePicker.init(_:selection:pickerOptionContent:confirmation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27452,8 +27452,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA6PickerV13pickerContent12confirmationACyxq_GxyXE_q_AA0eA25ControlStyleConfigurationV6OptionVctcfc",
   "path": "SubscriptionStorePicker.init(pickerContent:confirmation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27464,8 +27464,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA6PickerV9selection13pickerContent12confirmationACyxq_G0cD07BindingVyAA0eA25ControlStyleConfigurationV6OptionVSgG_xyXEq_ANctcfc",
   "path": "SubscriptionStorePicker.init(selection:pickerContent:confirmation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27512,8 +27512,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12PickerOptionVyACyAA09AutomaticeafG5LabelVGAA0eA25ControlStyleConfigurationV0G0VcAERszrlufc",
   "path": "SubscriptionStorePickerOption.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27524,8 +27524,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12PickerOptionVyACyAA09AutomaticeafG5LabelVGAA0eA25ControlStyleConfigurationV0fG0VcAERszrlufc",
   "path": "SubscriptionStorePickerOption.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27536,8 +27536,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA12PickerOptionV_5labelACyxGAA0eA25ControlStyleConfigurationV0G0V_xAG0fG0Vctcfc",
   "path": "SubscriptionStorePickerOption.init(_:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "building block of a custom Swift SubscriptionStoreControlStyle",
   "platforms": [
    "ios",
    "macos",
@@ -27561,8 +27561,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV2eeoiySbAC_ACtFZ",
   "path": "SubscriptionStorePolicyKind.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStorePolicyKind",
   "platforms": [
    "ios",
    "macos",
@@ -27574,8 +27574,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV4hash4intoys6HasherVz_tF",
   "path": "SubscriptionStorePolicyKind.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStorePolicyKind",
   "platforms": [
    "ios",
    "macos",
@@ -27587,8 +27587,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV9hashValueSivp",
   "path": "SubscriptionStorePolicyKind.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStorePolicyKind",
   "platforms": [
    "ios",
    "macos",
@@ -27600,8 +27600,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV07privacyF0ACvpZ",
   "path": "SubscriptionStorePolicyKind.privacyPolicy",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStorePolicyKind",
   "platforms": [
    "ios",
    "macos",
@@ -27613,8 +27613,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV14termsOfServiceACvpZ",
   "path": "SubscriptionStorePolicyKind.termsOfService",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStorePolicyKind",
   "platforms": [
    "ios",
    "macos",
@@ -27665,8 +27665,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV7groupID20visibleRelationshipsACyAA09AutomaticeA16MarketingContentVGSS_0aB07ProductVAAE0E12RelationshipVtcAGRszrlufc",
   "path": "SubscriptionStoreView.init(groupID:visibleRelationships:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(groupId, visibleRelationships, marketingContent) { store content }",
   "platforms": [
    "ios",
    "macos",
@@ -27678,8 +27678,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV7groupID20visibleRelationships7contentACyAA0ea7ContentF0Vyqd__GGSS_0aB07ProductVAAE0E12RelationshipVqd__yXEtcAIRszAA0aL0Rd__lufc",
   "path": "SubscriptionStoreView.init(groupID:visibleRelationships:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(groupId, visibleRelationships, marketingContent) { store content }",
   "platforms": [
    "ios",
    "macos",
@@ -27691,8 +27691,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV7groupID20visibleRelationships16marketingContentACyxGSS_0aB07ProductVAAE0E12RelationshipVxyXEtcfc",
   "path": "SubscriptionStoreView.init(groupID:visibleRelationships:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(groupId, visibleRelationships, marketingContent) { store content }",
   "platforms": [
    "ios",
    "macos",
@@ -27704,8 +27704,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV10productIDsACyAA09AutomaticeA16MarketingContentVGqd___tcAFRszSlRd__SS7ElementRtd__lufc",
   "path": "SubscriptionStoreView.init(productIDs:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(productIds, marketingContent) { store content }",
   "platforms": [
    "ios",
    "macos",
@@ -27717,8 +27717,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV10productIDs7contentACyAA0ea7ContentF0Vyqd__GGqd_0__qd__yXEtcAHRszAA0aJ0Rd__SlRd_0_SS7ElementRtd_0_r0_lufc",
   "path": "SubscriptionStoreView.init(productIDs:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(productIds, marketingContent) { store content }",
   "platforms": [
    "ios",
    "macos",
@@ -27730,8 +27730,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV10productIDs16marketingContentACyxGqd___xyXEtcSlRd__SS7ElementRtd__lufc",
   "path": "SubscriptionStoreView.init(productIDs:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(productIds, marketingContent) { store content }",
   "platforms": [
    "ios",
    "macos",
@@ -27743,8 +27743,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV13subscriptionsACyAA09AutomaticeA16MarketingContentVGqd___tcAFRszSlRd__0aB07ProductV7ElementRtd__lufc",
   "path": "SubscriptionStoreView.init(subscriptions:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(productIds) (products by id)",
   "platforms": [
    "ios",
    "macos",
@@ -27756,8 +27756,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV13subscriptions7contentACyAA0ea7ContentF0Vyqd__GGqd_0__qd__yXEtcAHRszAA0aI0Rd__SlRd_0_0aB07ProductV7ElementRtd_0_r0_lufc",
   "path": "SubscriptionStoreView.init(subscriptions:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(productIds) (products by id)",
   "platforms": [
    "ios",
    "macos",
@@ -27769,8 +27769,8 @@
   "usr": "s:17_StoreKit_SwiftUI012SubscriptionA4ViewV13subscriptions16marketingContentACyxGqd___xyXEtcSlRd__0aB07ProductV7ElementRtd__lufc",
   "path": "SubscriptionStoreView.init(subscriptions:marketingContent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionStoreView(productIds) (products by id)",
   "platforms": [
    "ios",
    "macos",
@@ -27871,8 +27871,8 @@
   "usr": "s:17_StoreKit_SwiftUI32TabsSubscriptionOptionGroupStyleVACycfc",
   "path": "TabsSubscriptionOptionGroupStyle.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): SubscriptionOptionGroupStyle",
   "platforms": [
    "ios",
    "macos",
@@ -29319,8 +29319,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E03appD13Merchandising11isPresented4kind9onDismissQrAA7BindingVySbG_0dE003AppdG4KindVys6ResultOyAN012PresentationP0Os5Error_pGYacSgtF",
   "path": "View.appStoreMerchandising(isPresented:kind:onDismiss:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "App Store merchandising kinds are Swift values tied to App Store Connect (iOS 26 merchandising API)",
   "platforms": [
    "ios",
    "macos",
@@ -29331,8 +29331,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E03appD7Overlay11isPresented13configurationQrAA7BindingVySbG_So22SKOverlayConfigurationCyctF",
   "path": "View.appStoreOverlay(isPresented:configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.appStoreOverlay(isPresented, onDismiss, appIdentifier, position)",
   "platforms": [
    "ios"
   ]
@@ -30427,8 +30427,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E22currentEntitlementTask3for8priority6actionQrSS_ScPyAD0gH5StateOy0dE018VerificationResultOyAK11TransactionVGSgGYactF",
   "path": "View.currentEntitlementTask(for:priority:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.currentEntitlementTask",
   "platforms": [
    "ios",
    "macos",
@@ -30471,8 +30471,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E20inAppPurchaseOptionsyQrShy0dE07ProductV0H6OptionVGAHYacSgF",
   "path": "View.inAppPurchaseOptions(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.onInAppPurchase(options)",
   "platforms": [
    "ios",
    "macos",
@@ -30504,8 +30504,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E24manageSubscriptionsSheet11isPresentedQrAA7BindingVySbG_tF",
   "path": "View.manageSubscriptionsSheet(isPresented:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.manageSubscriptionsSheet",
   "platforms": [
    "ios"
   ]
@@ -30514,8 +30514,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E24manageSubscriptionsSheet11isPresented19subscriptionGroupIDQrAA7BindingVySbG_SStF",
   "path": "View.manageSubscriptionsSheet(isPresented:subscriptionGroupID:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.manageSubscriptionsSheet",
   "platforms": [
    "ios"
   ]
@@ -30788,8 +30788,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E19offerCodeRedemption11isPresented12onCompletionQrAA7BindingVySbG_ys6ResultOyyts5Error_pGScMYcctF",
   "path": "View.offerCodeRedemption(isPresented:onCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.offerCodeRedemption",
   "platforms": [
    "ios",
    "macos"
@@ -30799,8 +30799,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E19offerCodeRedemption7options11isPresented12onCompletionQrShy0dE012RedeemOptionVG_AA7BindingVySbGys6ResultOyAI012VerificationQ0OyAI11TransactionVGs5Error_pGScMYcctF",
   "path": "View.offerCodeRedemption(options:isPresented:onCompletion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.offerCodeRedemption",
   "platforms": [
    "ios",
    "macos"
@@ -30928,8 +30928,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E25onInAppPurchaseCompletion7performQry0dE07ProductV_s6ResultOyAI0iM0Os5Error_pGtYacSg_tF",
   "path": "View.onInAppPurchaseCompletion(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.onInAppPurchase(onCompletion)",
   "platforms": [
    "ios",
    "macos",
@@ -30941,8 +30941,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E20onInAppPurchaseStart7performQry0dE07ProductVYacSg_tF",
   "path": "View.onInAppPurchaseStart(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.onInAppPurchase(onStart)",
   "platforms": [
    "ios",
    "macos",
@@ -31242,8 +31242,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E26preferredSubscriptionOfferyQr0dE07ProductV0gH0VSgAH_AH0G4InfoVSayAJGtcF",
   "path": "View.preferredSubscriptionOffer(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOffers(preferredOffer)",
   "platforms": [
    "ios",
    "macos",
@@ -31255,8 +31255,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E33preferredSubscriptionPricingTermsyQr0dE07ProductV0G4InfoV0hI0VSgAH_AJtcF",
   "path": "View.preferredSubscriptionPricingTerms(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "n/a",
+  "detail": "pricing terms are Swift values of Product.SubscriptionInfo (no Kotlin counterpart)",
   "platforms": [
    "ios",
    "macos",
@@ -31268,8 +31268,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E18productDescriptionyQrAA10VisibilityOF",
   "path": "View.productDescription(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(productDescription))",
   "platforms": [
    "ios",
    "macos",
@@ -31281,8 +31281,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E17productIconBorderQryF",
   "path": "View.productIconBorder()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.productIconBorder",
   "platforms": [
    "ios",
    "macos"
@@ -31292,8 +31292,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E07productC5StyleyQrqd__AD07ProductcG0Rd__lF",
   "path": "View.productViewStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.productViewStyle",
   "platforms": [
    "ios",
    "macos",
@@ -31360,8 +31360,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E18refundRequestSheet3for11isPresented9onDismissQrs6UInt64V_AA7BindingVySbGys6ResultOy0dE011TransactionV06RefundG6StatusOAR0rG5ErrorOGcSgtF",
   "path": "View.refundRequestSheet(for:isPresented:onDismiss:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.refundRequestSheet",
   "platforms": [
    "ios",
    "macos"
@@ -31406,8 +31406,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E11storeButton_3forQrAA10VisibilityO_AD0dG4KindVdtF",
   "path": "View.storeButton(_:for:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(storeButtons))",
   "platforms": [
    "ios",
    "macos",
@@ -31419,8 +31419,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E16storeProductTask3for8priority6actionQrSS_ScPy0dE00G0VADE0H5StateOYactF",
   "path": "View.storeProductTask(for:priority:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeProductTask",
   "platforms": [
    "ios",
    "macos",
@@ -31432,8 +31432,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E17storeProductsTask3for8priority6actionQrqd___ScPy0dE07ProductVADE010CollectionH5StateOYactSlRd__SQRd__s8SendableRd__SS7ElementSTRtd__lF",
   "path": "View.storeProductsTask(for:priority:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeProductsTask",
   "platforms": [
    "ios",
    "macos",
@@ -31445,8 +31445,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E29subscriptionIntroductoryOffer05applyH010compactJWSQrSb0dE07ProductV_AJ16SubscriptionInfoVtc_SSAJ_ALtYaKctF",
   "path": "View.subscriptionIntroductoryOffer(applyOffer:compactJWS:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOffers(applyIntroductoryOffer, introductoryOfferJWS)",
   "platforms": [
    "ios",
    "macos",
@@ -31458,8 +31458,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E017subscriptionOfferC16ButtonVisibility_3forQrAA0I0O_AD012SubscriptiongcH4KindVdtF",
   "path": "View.subscriptionOfferViewButtonVisibility(_:for:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOfferViewStyle(detailLinkVisibility)",
   "platforms": [
    "ios"
   ]
@@ -31468,8 +31468,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E017subscriptionOfferC12DetailActionyQryycSgF",
   "path": "View.subscriptionOfferViewDetailAction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOfferViewStyle(detailAction)",
   "platforms": [
    "ios"
   ]
@@ -31478,8 +31478,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E017subscriptionOfferC5StyleyQrqd__AD012SubscriptiongcH0Rd__lF",
   "path": "View.subscriptionOfferViewStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOfferViewStyle",
   "platforms": [
    "ios"
   ]
@@ -31488,8 +31488,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E28subscriptionPromotionalOffer5offer10compactJWSQr0dE07ProductV012SubscriptionH0VSgAJ_AJ0M4InfoVtc_SSAJ_AoLtYaKctF",
   "path": "View.subscriptionPromotionalOffer(offer:compactJWS:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOffers(promotionalOffer, promotionalOfferSignature / promotionalOfferJWS)",
   "platforms": [
    "ios",
    "macos",
@@ -31501,8 +31501,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E28subscriptionPromotionalOffer5offer9signatureQr0dE07ProductV012SubscriptionH0VSgAJ_AJ0L4InfoVtc_AL9SignatureVAJ_AoLtYaKctF",
   "path": "View.subscriptionPromotionalOffer(offer:signature:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionOffers(promotionalOffer, promotionalOfferSignature / promotionalOfferJWS)",
   "platforms": [
    "ios",
    "macos",
@@ -31514,8 +31514,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E22subscriptionStatusTask3for8priority6actionQrSS_ScPyAD011EntitlementH5StateOySay0dE07ProductV16SubscriptionInfoV0G0VGGYactF",
   "path": "View.subscriptionStatusTask(for:priority:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStatusTask",
   "platforms": [
    "ios",
    "macos",
@@ -31527,8 +31527,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD11ButtonLabelyQrAD012SubscriptiondgH0VF",
   "path": "View.subscriptionStoreButtonLabel(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(buttonLabel))",
   "platforms": [
    "ios",
    "macos",
@@ -31539,8 +31539,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD17ControlBackgroundyQrqd__AA10ShapeStyleRd__lF",
   "path": "View.subscriptionStoreControlBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(controlBackground))",
   "platforms": [
    "ios",
    "macos"
@@ -31550,8 +31550,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD17ControlBackgroundyQrAD012SubscriptiondgH0VF",
   "path": "View.subscriptionStoreControlBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(controlBackground))",
   "platforms": [
    "ios",
    "macos"
@@ -31561,8 +31561,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD11ControlIcon4iconQrqd__0dE07ProductV_AI16SubscriptionInfoVtc_tAaBRd__lF",
   "path": "View.subscriptionStoreControlIcon(icon:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStoreControlIcon(icons, default)",
   "platforms": [
    "ios",
    "macos",
@@ -31574,8 +31574,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD12ControlStyleyQrqd__AD012SubscriptiondgH0Rd__lF",
   "path": "View.subscriptionStoreControlStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(controlStyle, controlPlacement))",
   "platforms": [
    "ios",
    "macos",
@@ -31587,8 +31587,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD12ControlStyle_9placementQrqd___9PlacementQyd__tAD012SubscriptiondgH0Rd__lF",
   "path": "View.subscriptionStoreControlStyle(_:placement:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(controlStyle, controlPlacement))",
   "platforms": [
    "ios",
    "macos",
@@ -31600,8 +31600,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD16OptionGroupStyleyQrqd__AD012SubscriptionghI0Rd__lF",
   "path": "View.subscriptionStoreOptionGroupStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(optionGroupStyle))",
   "platforms": [
    "ios",
    "macos",
@@ -31613,8 +31613,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD20PickerItemBackgroundyQrqd__AA10ShapeStyleRd__lF",
   "path": "View.subscriptionStorePickerItemBackground(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(pickerItemBackground, pickerItemShape))",
   "platforms": [
    "ios",
    "macos",
@@ -31625,8 +31625,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD20PickerItemBackground_2inQrqd___qd_0_tAA10ShapeStyleRd__AA0K0Rd_0_r0_lF",
   "path": "View.subscriptionStorePickerItemBackground(_:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeStyle(StoreContentStyle(pickerItemBackground, pickerItemShape))",
   "platforms": [
    "ios",
    "macos",
@@ -31637,8 +31637,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD17PolicyDestination3for11destinationQrAD012SubscriptiondG4KindV_qd__yXEtAaBRd__lF",
   "path": "View.subscriptionStorePolicyDestination(for:destination:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStorePolicy(kind, url / destination)",
   "platforms": [
    "ios",
    "macos",
@@ -31650,8 +31650,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD17PolicyDestination3url3forQr10Foundation3URLV_AD012SubscriptiondG4KindVtF",
   "path": "View.subscriptionStorePolicyDestination(url:for:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStorePolicy(kind, url / destination)",
   "platforms": [
    "ios",
    "macos",
@@ -31662,8 +31662,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD21PolicyForegroundStyleyQrqd__AA05ShapeI0Rd__lF",
   "path": "View.subscriptionStorePolicyForegroundStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStorePolicy(foregroundStyle, secondaryForegroundStyle)",
   "platforms": [
    "ios",
    "macos",
@@ -31675,8 +31675,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD21PolicyForegroundStyleyQrqd___qd_0_tAA05ShapeI0Rd__AaFRd_0_r0_lF",
   "path": "View.subscriptionStorePolicyForegroundStyle(_:_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStorePolicy(foregroundStyle, secondaryForegroundStyle)",
   "platforms": [
    "ios",
    "macos",
@@ -31688,8 +31688,8 @@
   "usr": "s:7SwiftUI4ViewP010_StoreKit_aB0E012subscriptionD12SignInActionyQryycSgF",
   "path": "View.subscriptionStoreSignInAction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "StoreKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.subscriptionStoreSignInAction",
   "platforms": [
    "ios",
    "macos",

@@ -174,6 +174,10 @@ public struct ComposeView: View {
     }
 }
 
+/// Opt-in renderers for the SwiftUI APIs of other Apple frameworks (MapKit, Charts, StoreKit…): add the
+/// framework's file from `ComposeSwiftUIIntegrations` to the app and call its `register…()` once at launch.
+public enum ComposeIntegrations {}
+
 /// Registry of view / modifier renderers. The generated code registers itself here; hand-written
 /// renderers can override or extend any id.
 @MainActor
@@ -186,6 +190,8 @@ public enum ComposeRegistry {
     public static var selfModifierIds: Set<Int32> = []
     /// Swift views rendered by Kotlin `NativeView(key, …)`; the Args hold the extra Kotlin arguments (from index 1).
     public static var nativeViews: [String: (Args) -> AnyView] = [:]
+    /// Hand-written Kotlin values (ids 900…999) of the framework integrations.
+    public static var values: [Int32: (SExpr) -> Any?] = [:]
 
     static func makeView(_ model: NodeModel) -> AnyView {
         model.consumedPrefix = 0

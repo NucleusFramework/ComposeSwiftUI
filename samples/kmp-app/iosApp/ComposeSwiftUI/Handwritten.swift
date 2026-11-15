@@ -127,7 +127,7 @@ extension ComposeGenerated {
         case 7: return AdvancedValues.decode(e)
         case 8, 9, 10, 11, 12, 13, 14: return CompletionValues.decode(e)
         case 5: return KotlinPathShape(commands: Args(expr: e).list(0).compactMap { ($0 as? NSNumber)?.doubleValue })
-        default: return nil
+        default: return ComposeRegistry.values[e.id]?(e)
         }
     }
 }

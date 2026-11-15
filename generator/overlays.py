@@ -46,6 +46,8 @@ def classify(s):
     name = path.split(".")[-1]
     if name.startswith(("hash(into:)", "==(", "encode(to:)", "init(from:)", "index(", "contains(", "relative(")) or name in ("hashValue", "description"):
         return "n/a", "protocol conformance plumbing (Equatable, Hashable, Codable, Collection…)"
+    if name == "makeBody(configuration:)":
+        return "n/a", "requirement of a Swift style protocol (Kotlin picks the style with an enum)"
     if kind in ("swift.typealias", "swift.associatedtype"):
         return "n/a", "type alias / associated type (no runtime surface)"
     if kind == "swift.func.op":

@@ -190,6 +190,8 @@ public enum ComposeRegistry {
     public static var selfModifierIds: Set<Int32> = []
     /// Swift views rendered by Kotlin `NativeView(key, …)`; the Args hold the extra Kotlin arguments (from index 1).
     public static var nativeViews: [String: (Args) -> AnyView] = [:]
+    /// Hand-written Kotlin values (ids 900…999) of the framework integrations.
+    public static var values: [Int32: (SExpr) -> Any?] = [:]
 
     static func makeView(_ model: NodeModel) -> AnyView {
         model.consumedPrefix = 0

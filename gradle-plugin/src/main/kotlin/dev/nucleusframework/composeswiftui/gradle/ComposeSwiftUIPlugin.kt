@@ -243,7 +243,8 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
     @TaskAction
     fun sync() {
         val out = outputDirectory.get().asFile
-        val files = RendererResources.files()
+        val all = RendererResources.files()
+        val files = all.filterNot { it.startsWith(INTEGRATIONS) }
 
         out.mkdirs()
         val wanted = files.toSet() + setOf("KotlinModule.swift", README, PreviewCodegen.SWIFT_FILE_NAME)
@@ -254,6 +255,16 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
         for (rel in files) {
             val bytes = RendererResources.read(rel)
             val target = out.resolve(rel)
+            if (!target.exists() || !target.readBytes().contentEquals(bytes)) {
+                target.parentFile.mkdirs()
+                target.writeBytes(bytes)
+            }
+        }
+        // Opt-in framework renderers, next to the renderer: add only the ones the app uses to its target.
+        val integrationsOut = out.resolveSibling("ComposeSwiftUIIntegrations")
+        for (rel in all.filter { it.startsWith(INTEGRATIONS) }) {
+            val bytes = RendererResources.read(rel)
+            val target = integrationsOut.resolve(rel.removePrefix(INTEGRATIONS))
             if (!target.exists() || !target.readBytes().contentEquals(bytes)) {
                 target.parentFile.mkdirs()
                 target.writeBytes(bytes)
@@ -275,6 +286,7 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
 
     private companion object {
         const val README = "README.txt"
+        const val INTEGRATIONS = "integrations/"
     }
 }
 

@@ -537,7 +537,7 @@ index_body = """<div class="hero"><div class="eyebrow" data-pagefind-ignore>Fram
 <p class="abstract">Write SwiftUI screens in Kotlin with the Compose runtime, and keep your view models.</p>
 <div class="avail" data-pagefind-ignore><span>iOS 17.0+</span><span>macOS 14.0+</span><span>tvOS 17.0+</span><span>watchOS 10.0+</span></div></div>
 <div class="content"><h2>Overview</h2>%s<h2>Topics</h2><div class="grid" data-pagefind-ignore>%s</div>
-<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a></p></div>""" % (intro_html, cards, len(entries))
+<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a> · <a href="mapkit.html">MapKit</a> · <a href="charts.html">Swift Charts</a> · <a href="storekit.html">StoreKit</a></p></div>""" % (intro_html, cards, len(entries))
 write("index.html", layout("Compose SwiftUI", index_body))
 
 toc = "".join('<li><a href="#%s">%s</a></li>' % (slug(t.lower()), esc(t)) for t, _ in guide_parts)
@@ -636,6 +636,82 @@ for cat in ("Views", "Modifiers", "Types"):
     ref.append("<h2>%s</h2><div class=\"grid\" data-pagefind-ignore>%s</div>" % (cat, "".join(
         '<a href="%s">%s</a>' % (rel, esc(t + ("(_:)" if cat == "Modifiers" else ""))) for t, rel in cats[cat])))
 ref.append("</div>")
+# ---- hand-written APIs: Kotlin-specific forms and the framework integrations, from their KDoc ----------------
+
+EXTRAS = os.path.join(ROOT, "runtime/src/extras/kotlin/dev/nucleusframework/composeswiftui")
+HANDWRITTEN = [
+    ("mapkit", "MapKit", "Maps, markers, annotations, overlays, map controls and Look Around.",
+     "Register `swift/ComposeSwiftUIIntegrations/MapKit.swift` with `ComposeIntegrations.registerMapKit()`.", ["MapKit.kt"]),
+    ("charts", "Swift Charts", "Bar, line, point, area, rule, rectangle and sector marks, plots, 3D charts, axes and selection.",
+     "Register `swift/ComposeSwiftUIIntegrations/Charts.swift` with `ComposeIntegrations.registerCharts()`.", ["Charts.kt"]),
+    ("storekit", "StoreKit", "Product and subscription stores, offers, purchase callbacks and store sheets.",
+     "Register `swift/ComposeSwiftUIIntegrations/StoreKit.swift` with `ComposeIntegrations.registerStoreKit()`.", ["StoreKit.kt"]),
+    ("kotlin-apis", "Kotlin-specific APIs", "SwiftUI APIs whose Swift form relies on Swift types, closures or protocols, in their Kotlin form.",
+     "These are part of the renderer: nothing to register.",
+     ["Extras.kt", "Interactive.kt", "Advanced.kt", "Completions.kt", "Handwritten.kt"]),
+]
+
+def handwritten_entries(path):
+    """Public declarations with their KDoc, in file order."""
+    lines = open(path).read().split("\n")
+    out, i = [], 0
+    while i < len(lines):
+        if lines[i].strip().startswith("/**"):
+            doc = []
+            first = lines[i].strip()[3:]
+            if first.endswith("*/"):
+                doc.append(first[:-2].strip())
+                i += 1
+            else:
+                if first.strip():
+                    doc.append(first.strip())
+                i += 1
+                while i < len(lines) and not lines[i].strip().endswith("*/"):
+                    doc.append(re.sub(r"^\s*\* ?", "", lines[i]))
+                    i += 1
+                i += 1
+            while i < len(lines) and lines[i].strip().startswith("@") and "public " not in lines[i]:
+                i += 1
+            if i < len(lines) and "public " in lines[i] and not lines[i].strip().startswith("//"):
+                decl = [lines[i]]
+                if lines[i].rstrip().endswith("("):
+                    while i + 1 < len(lines) and not re.match(r"^\s*\)", lines[i + 1]):
+                        i += 1
+                        decl.append(lines[i])
+                    decl.append(")")
+                d = collapse(" ".join(x.strip() for x in decl))
+                d = re.sub(r"\s*\{\s*$", "", d)
+                if " fun " in " " + d or d.startswith("fun "):
+                    # keep the signature, drop the body (`= …`)
+                    m = re.match(r"^(.*?\)(\s*:\s*[\w.<>?, ()\->]+?)?)\s+=\s.*$", d)
+                    if m:
+                        d = m.group(1)
+                d = re.sub(r" internal constructor\(.*$", "", d)
+                d = re.sub(r"\s*:\s*SExpr\(.*$", "", d)
+                d = re.sub(r" get\(\) = .*$", "", d)
+                d = d.replace("public ", "").replace("@HiddenFromObjC ", "")
+                d = re.sub(r"^@Composable ", "", d)
+                d = d.replace("( ", "(").replace(", )", ")")
+                out.append((d, " ".join(x.strip() for x in doc if x.strip())))
+        i += 1
+    return out
+
+handwritten_links = []
+for key, title, abstract, setup, files in HANDWRITTEN:
+    body = ['<div class="hero">%s<div class="eyebrow" data-pagefind-ignore>API Collection</div><h1>%s</h1><p class="abstract">%s</p></div><div class="content"><p>%s</p>'
+            % (crumbs("", ("Compose SwiftUI", "index.html"), (title, "")), esc(title), esc(abstract), inline(setup))]
+    for f in files:
+        path = os.path.join(EXTRAS, f)
+        if not os.path.exists(path):
+            continue
+        for decl, doc in handwritten_entries(path):
+            body.append('<div class="topic"><div class="sig">%s</div><div class="meta">%s</div></div>' % (sig_html(decl), inline(doc)))
+    body.append("</div>")
+    write(key + ".html", layout(title, "".join(body), description=abstract))
+    search.append({"n": title, "u": key})
+    handwritten_links.append('<a href="%s.html">%s</a>' % (key, esc(title)))
+ref.insert(-1, '<h2>Frameworks and Kotlin-specific APIs</h2><div class="grid" data-pagefind-ignore>%s</div>' % "".join(handwritten_links))
+
 write("reference.html", layout("All APIs", "".join(ref), description="Every SwiftUI API that Compose SwiftUI supports."))
 write("search.json", json.dumps(search, separators=(",", ":")))
 print("entries=%d pages=%d views=%d modifiers=%d types=%d" % (len(entries), len(pages), len(cats["Views"]), len(cats["Modifiers"]), len(cats["Types"])))

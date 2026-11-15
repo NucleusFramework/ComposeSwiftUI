@@ -97,6 +97,11 @@ interface ScrollProxyHandle {
     fun scrollTo(id: Any, anchor: Any?)
 }
 
+/** A synchronous Kotlin function called from Swift (StoreKit predicates, offers, purchase options…). */
+interface KotlinFunction {
+    fun invoke(args: List<Any?>): Any?
+}
+
 /** A Kotlin function sampled by Swift Charts (function plots, surfaces): inputs → outputs. */
 interface ChartFunction {
     fun evaluate(input: List<Double>): List<Double>

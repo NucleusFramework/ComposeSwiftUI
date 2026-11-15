@@ -8,6 +8,10 @@ import collections, json, os, re, sys
 
 index_path, root = sys.argv[1], sys.argv[2]
 cov = json.load(open(os.path.join(root, "generator/coverage.json")))
+# SwiftUI APIs of other frameworks (MapKit, Charts, StoreKit…), classified by generator/overlays.py
+overlays_path = os.path.join(root, "generator/coverage_overlays.json")
+if os.path.exists(overlays_path):
+    cov += json.load(open(overlays_path))
 by_key = collections.defaultdict(list)
 for e in cov:
     by_key[e["path"].lower().replace(".", "/")].append(e)
@@ -60,14 +64,14 @@ for section, title, kind, path in entries:
         detail = best["detail"] if status != "generated" else "%s (%d/%d overloads bridged)" % (best["detail"], n_gen, len(matches))
         plats = ",".join(best["platforms"])
     else:
-        status, detail, plats = "unmatched", "not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only", ""
+        status, detail, plats = "unmatched", "not in the iOS, macOS, tvOS or watchOS SDKs (visionOS-only, or a framework without a SwiftUI overlay on these platforms)", ""
     stats[status] += 1
     per_kind[kind][status] += 1
     rows.append((section, kind, title, status, detail, path))
 
 lines = ["# SwiftUI API coverage", "",
          "Every symbol entry of Apple's SwiftUI documentation index (developer.apple.com/documentation/swiftui), "
-         "matched against the iOS, macOS, tvOS and watchOS 27 SDK symbol graphs and the generator.", "",
+         "matched against the iOS, macOS, tvOS and watchOS 27 SDK symbol graphs of SwiftUI and of the SwiftUI overlays of other frameworks (MapKit, Charts, StoreKit…), and the generator.", "",
          "Legend: ✅ generated and compiler-verified on every platform where Apple ships it (iOS, macOS, tvOS, watchOS) · ☑️ covered by an equivalent overload · "
          "⛔ generated but rejected by the compiler (reason given) · ➖ skipped (reason given) · · not applicable to a "
          "declarative bridge (type aliases, operators, read-only instance properties) · ? not in the iOS/macOS SDK.", "",
