@@ -418,12 +418,21 @@ private struct EmbeddedUIView: UIViewRepresentable {
         switch sizing {
         case 1:
             guard let width = proposal.width, width.isFinite else { return fitting(view) }
+            // Leaf views (UILabel, UITextView…) answer sizeThatFits without side effects; Auto Layout fitting
+            // would leave a UILabel wrapping at the width of SwiftUI's last probe.
+            if view.subviews.isEmpty || view is UILabel || view is UITextView {
+                // A multi-line label wraps at its preferred width: keep it equal to the width it is measured at.
+                if let label = view as? UILabel, label.preferredMaxLayoutWidth != width {
+                    label.preferredMaxLayoutWidth = width
+                    label.setNeedsDisplay()
+                }
+                let height = view.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height
+                return CGSize(width: width, height: ceil(height))
+            }
             let target = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
-            var height = view.systemLayoutSizeFitting(
+            let height = view.systemLayoutSizeFitting(
                 target, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel
             ).height
-            // Views without Auto Layout content (e.g. a plain UILabel) report through sizeThatFits.
-            if height <= 0 { height = view.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude)).height }
             return CGSize(width: width, height: ceil(height))
         case 2:
             return fitting(view)

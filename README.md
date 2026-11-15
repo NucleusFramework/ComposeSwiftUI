@@ -33,7 +33,7 @@ Supported platforms: iOS 17+, macOS 14+, tvOS 17+ and watchOS 10+. Requires Kotl
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.2.0"
+       id("dev.nucleusframework.compose-swiftui") version "0.2.1"
    }
 
    kotlin {
