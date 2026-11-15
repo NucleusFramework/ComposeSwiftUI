@@ -930,7 +930,7 @@ class Generator:
         i = start
         for n, (label, internal, b, default) in enumerate(params):
             if b.kind == "slot" and view_children is not None and internal == view_children:
-                expr = "{ ForEach(m.children) { NodeView(model: $0) } }"
+                expr = "{ ChildrenView(m) }"
             elif self.null_default(b, default):
                 swift_t = self.NULL_DEFAULT_KINDS[b.kind] or b.swift_type[2:].replace("_", ".")
                 m = re.match(r"^([A-Z][A-Za-z0-9_]*)(.*)$", default)

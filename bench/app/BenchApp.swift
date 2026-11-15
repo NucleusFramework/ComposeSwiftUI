@@ -58,6 +58,24 @@ struct RootView: View {
                 try? await Task.sleep(nanoseconds: 1_000_000)
             }
         }
+        if args.contains("-runScenarios") {
+            // -runScenarios [-sizes 1000,10000] [-lazy] [-out PATH]
+            var sizes = [1000, 10000]
+            if let i = args.firstIndex(of: "-sizes"), i + 1 < args.count {
+                sizes = args[i + 1].split(separator: ",").compactMap { Int($0) }
+            }
+            var out = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("scenarios")
+            if let i = args.firstIndex(of: "-out"), i + 1 < args.count { out = URL(fileURLWithPath: args[i + 1]) }
+            #if os(iOS)
+            let size = CGSize(width: 402, height: 874)
+            #else
+            let size = CGSize(width: 700, height: 900)
+            #endif
+            let runner = ScenarioRunner(outDir: out, size: size)
+            runner.log = { line in print(line); status = line }
+            _ = await runner.run(listSizes: sizes, lazy: args.contains("-lazy"))
+            exit(0)
+        }
         guard args.contains("-runBench") else { return }
         var only: [Int]?
         if let i = args.firstIndex(of: "-only"), i + 1 < args.count {

@@ -92,6 +92,13 @@ final class OffscreenRenderer {
         #endif
     }
 
+    /// The hosting view currently in the window.
+    #if os(iOS)
+    var rootView: UIView? { window.rootViewController?.view }
+    #else
+    var rootView: NSView? { window.contentView }
+    #endif
+
     func unmount() {
         #if os(iOS)
         window.rootViewController = nil

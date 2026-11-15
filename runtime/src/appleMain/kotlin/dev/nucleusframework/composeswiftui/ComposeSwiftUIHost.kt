@@ -64,8 +64,12 @@ class ComposeSwiftUIHost(private val content: @Composable () -> Unit) : ViewMode
      * that the state change is reflected in the same SwiftUI transaction when possible.
      */
     fun flush() {
-        Snapshot.sendApplyNotifications()
-        if (clock.hasAwaiters) clock.sendFrame(now())
+        // A few passes: effects of one pass (e.g. LazyForEach updating its rows) may schedule more work.
+        repeat(4) {
+            Snapshot.sendApplyNotifications()
+            if (!clock.hasAwaiters) return
+            clock.sendFrame(now())
+        }
     }
 
     fun dispose() {

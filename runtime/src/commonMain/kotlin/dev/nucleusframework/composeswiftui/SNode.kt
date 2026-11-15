@@ -167,10 +167,12 @@ class SNode internal constructor(val kind: Int) : SArgs {
 object SNodeKinds {
     const val ROOT = -1
     const val SLOT = -2
+    const val LAZY_FOR_EACH = 100_014
 }
 
 /** Structural equality where callbacks only compare by kind (their target is swapped in place). */
 private fun sameShape(a: Any?, b: Any?): Boolean = when {
+    a === b -> true
     a is SAction -> b is SAction
     a is SValueCallback -> b is SValueCallback
     a is List<*> && b is List<*> -> a.size == b.size && a.indices.all { sameShape(a[it], b[it]) }

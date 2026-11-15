@@ -562,3 +562,65 @@ struct KotlinTabView: View {
             }
     }
 }
+
+/// The rows of a Kotlin `LazyForEach` (expanded by `ChildrenView`): one `LazyItemView` per item id.
+struct LazyForEachContent: View {
+    static let kind: Int32 = 100_014
+    let model: NodeModel
+
+    var body: some View {
+        let _ = model.version
+        if let items = model.args.raw(0) as? LazyItems {
+            ForEach(Self.ids(items), id: \.self) { LazyItemView(items: items, id: $0) }
+        }
+    }
+
+    /// Copies the Kotlin ids into a Swift array (one call per element, no boxing).
+    private static func ids(_ items: LazyItems) -> [Int64] {
+        let source = items.ids
+        let count = Int(source.size)
+        return [Int64](unsafeUninitializedCapacity: count) { buffer, initialized in
+            for i in 0..<count { buffer[i] = source.get(index: Int32(i)) }
+            initialized = count
+        }
+    }
+}
+
+/// One row of a `LazyForEach`: composed in Kotlin when it appears, disposed when it disappears.
+struct LazyItemView: View {
+    let items: LazyItems
+    let id: Int64
+    @State private var row = LazyRow()
+    @State private var generation = 0
+
+    var body: some View {
+        let _ = generation
+        // Declared as a single view: a List only builds the rows on screen when it knows statically that each
+        // element is one row; otherwise it evaluates every row to count them.
+        _UnaryViewAdaptor(ChildrenView(row.model(items, id)))
+            .onAppear { if row.ensure(items, id) { generation &+= 1 } }
+            .onDisappear { row.release(items) }
+    }
+}
+
+@MainActor final class LazyRow {
+    private var root: SNode?
+
+    func model(_ items: LazyItems, _ id: Int64) -> NodeModel {
+        _ = ensure(items, id)
+        return NodeModel.of(root!)
+    }
+
+    /// Composes the row if it isn't; returns true when it had to.
+    func ensure(_ items: LazyItems, _ id: Int64) -> Bool {
+        guard root == nil else { return false }
+        root = items.compose(id: id)
+        return true
+    }
+
+    func release(_ items: LazyItems) {
+        guard let root else { return }
+        items.dispose(root: root)
+        self.root = nil
+    }
+}
