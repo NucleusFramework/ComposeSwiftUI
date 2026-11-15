@@ -23,9 +23,11 @@
 		68442AA27F477A45C0F0456C /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6A2FFB790A722FB7483E0 /* Core.swift */; };
 		737296F002F5B67C6F1D2CD5 /* GenProtocolDecoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */; };
 		73FCDE488110E3A62FDE604E /* GenRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8307DB050CF205CFCDF88 /* GenRegister.swift */; };
+		969A04FEB5DAFB89BFB8115E /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925158699FD68A25A62EC10A /* Interactive.swift */; };
 		994A9E71457DEA41A9E0BFCE /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE8394311ADAF4BC0A3255D /* SampleApp.swift */; };
 		AB21215B33B73BFF7D1597C5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 686260C240CD9512D9CB71A8 /* README.txt */; };
 		B3FC7C9DEA0DB1395C5E0E52 /* GenSelfModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BD079EBB00000146783D64 /* GenSelfModifiers.swift */; };
+		D1DF96A2BA57912F1DCA8A3D /* GenEncoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C8B30C82864EDD2DD60CE /* GenEncoders.swift */; };
 		D2260FE9021483D273A1EC5A /* GenDecoders1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1977DA372940747763528 /* GenDecoders1.swift */; };
 		D23E402C854FB3C10A79DDA3 /* GenModifiers2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70F6192110CD19B0C779 /* GenModifiers2.swift */; };
 		DD28BE26585D2A2292EBCA62 /* GenDecoders4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0991D4F451D94E831DEA15 /* GenDecoders4.swift */; };
@@ -48,9 +50,11 @@
 		677996633148E100CF8B6B87 /* GenDecoders2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders2.swift; sourceTree = "<group>"; };
 		686260C240CD9512D9CB71A8 /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers3.swift; sourceTree = "<group>"; };
+		7B2C8B30C82864EDD2DD60CE /* GenEncoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenEncoders.swift; sourceTree = "<group>"; };
 		7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenProtocolDecoders.swift; sourceTree = "<group>"; };
 		86038AE1032E284E79B32AD6 /* iosApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FBF537FE7FCA9FB5840325E /* ComposeSwiftUIPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeSwiftUIPreviews.swift; sourceTree = "<group>"; };
+		925158699FD68A25A62EC10A /* Interactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		A56D65B8660062301F7F5709 /* GenModifiers1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers1.swift; sourceTree = "<group>"; };
 		AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders3.swift; sourceTree = "<group>"; };
 		BFC8CB8E396099504DC1E6A6 /* GenDecoders0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders0.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */,
 				0F0991D4F451D94E831DEA15 /* GenDecoders4.swift */,
 				D6B672764C3827C8295175CB /* GenDecoders5.swift */,
+				7B2C8B30C82864EDD2DD60CE /* GenEncoders.swift */,
 				E62214446A931E287D2C5C3F /* GenModifiers0.swift */,
 				A56D65B8660062301F7F5709 /* GenModifiers1.swift */,
 				385A70F6192110CD19B0C779 /* GenModifiers2.swift */,
@@ -123,6 +128,7 @@
 				8FBF537FE7FCA9FB5840325E /* ComposeSwiftUIPreviews.swift */,
 				56C6A2FFB790A722FB7483E0 /* Core.swift */,
 				36383731CAECE4330150F7E2 /* Handwritten.swift */,
+				925158699FD68A25A62EC10A /* Interactive.swift */,
 				EFC5F5DDDE53545B4B33D2A5 /* KotlinModule.swift */,
 				686260C240CD9512D9CB71A8 /* README.txt */,
 				87F3A55CCF164FEFCC854FF2 /* Generated */,
@@ -229,6 +235,7 @@
 				0BCE0353D92A7E27251A4941 /* GenDecoders3.swift in Sources */,
 				DD28BE26585D2A2292EBCA62 /* GenDecoders4.swift in Sources */,
 				3AD878629C38BE47968DA6DE /* GenDecoders5.swift in Sources */,
+				D1DF96A2BA57912F1DCA8A3D /* GenEncoders.swift in Sources */,
 				21AB3B491D7F1897EEAFEBF8 /* GenModifiers0.swift in Sources */,
 				3ABD26950B1C28076A3C5328 /* GenModifiers1.swift in Sources */,
 				D23E402C854FB3C10A79DDA3 /* GenModifiers2.swift in Sources */,
@@ -242,6 +249,7 @@
 				B3FC7C9DEA0DB1395C5E0E52 /* GenSelfModifiers.swift in Sources */,
 				E6C13D1C556D7406AFCD9ECA /* GenViews.swift in Sources */,
 				10F64A9EB87F4345C0B21CF4 /* Handwritten.swift in Sources */,
+				969A04FEB5DAFB89BFB8115E /* Interactive.swift in Sources */,
 				27E9579F32EF243F0B197A44 /* KotlinModule.swift in Sources */,
 				994A9E71457DEA41A9E0BFCE /* SampleApp.swift in Sources */,
 			);

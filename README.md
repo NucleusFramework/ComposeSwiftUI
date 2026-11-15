@@ -132,6 +132,17 @@ API:
 | Custom `Layout` | `CustomLayout(policy) { … }` with a Kotlin `LayoutPolicy` |
 | Custom `Shape` | `PathShape { moveTo(0.0, 0.0); lineTo(1.0, 0.5); close() }` |
 | `Circle().trim(from:to:).stroke(…)` | `ShapeView(Circle(), stroke = …, trimFrom = 0.0, trimTo = 0.7)` |
+| `AsyncImage(url:) { phase in … }` | `AsyncImage(url) { state -> if (state == AsyncImageState.Success) AsyncImageContent(Modifier.resizable()) }` |
+| `ScrollViewReader { proxy in … }` | `ScrollViewReader { proxy -> Button("Top") { proxy.scrollTo(0) } }`, rows marked `Modifier.id(…)` |
+| `TimelineView(.periodic(from:by:)) { context in … }` | `TimelineView(TimelineSchedule.periodic(0.0, 1.0)) { date -> }` (epoch seconds) |
+| `Canvas { context, size in … }` | `Canvas { fill(Color.orange) { ellipse(0.0, 0.0, width, height) }; drawText("Hi", 10.0, 10.0) }` |
+| `Table(rows) { TableColumn("Name") { … } }` | `Table(rows, key = { it.id }, selection, onSelectionChange) { column("Name") { Text(it.name) } }` |
+| `OutlineGroup(data, children:)`, `List(data, children:)` | `List { OutlineGroup(items, key = { it.id }, children = { it.children }) { Text(it.name) } }` |
+| `onKeyPress(keys:phases:action:)` | `Modifier.onKeyPress(keys = setOf("a")) { press -> true }` |
+| `scrollTransition { content, phase in … }`, `visualEffect { … }` | `Modifier.scrollTransition { phase, _ -> VisualEffects(opacity = 1 - abs(phase)) }` |
+| `alignmentGuide(.leading) { d in … }` | `Modifier.alignmentGuide(HorizontalAlignment.leading) { width, height -> width / 2 }` |
+| `navigationDestination(item:)` | `Modifier.navigationDestination(item, onDismiss) { item -> }` |
+| Custom `ButtonStyle`, `ToggleStyle`, `LabelStyle` | `Modifier.buttonStyle { isPressed -> StyleLabel(…) }`, `toggleStyle { isOn -> }`, `labelStyle { StyleIcon(); StyleLabel() }` |
 | A Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map")` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
 | Values passed from Swift | `ComposeView(input: value) { … }` + `hostInput<T>()` in Kotlin |
 
@@ -207,6 +218,8 @@ simulator or device, for example from a debug menu:
   iOS-only app. A preview in `iosMain` is skipped if the module also has macOS targets.
 - If you added the `ComposeSwiftUI` folder to Xcode as a group before this version, add the new
   `ComposeSwiftUIPreviews.swift` file to the app target once.
+- If the folder is a group, add `Interactive.swift` and `Generated/GenEncoders.swift` to the app target once when you
+  upgrade past 0.4.1.
 
 ## Using it with other Compose libraries
 

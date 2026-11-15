@@ -81,3 +81,33 @@ internal object NativeViewKinds {
     const val NS_VIEW_CONTROLLER = 100_012
     const val NS_VIEW = 100_013
 }
+
+// ---- Kotlin code that Swift calls synchronously (Interactive.kt) -----------------------------------
+
+/** A SwiftUI `ScrollViewProxy`, implemented in Swift: scrolls to the view marked `Modifier.id(id)`. */
+interface ScrollProxyHandle {
+    fun scrollTo(id: Any, anchor: Any?)
+}
+
+/** `onKeyPress` handler: returns true when the key press is handled. */
+interface KeyPressHandler {
+    fun onKeyPress(characters: String, key: String, modifiers: Int, phase: Int): Boolean
+}
+
+/** `Canvas` renderer: the drawing commands for a canvas of the given size. */
+interface CanvasRenderer {
+    fun draw(width: Double, height: Double): List<Any?>
+}
+
+/**
+ * Visual effects computed in Kotlin for `scrollTransition` / `visualEffect`: `[opacity, scale, offsetX, offsetY,
+ * rotationDegrees, blurRadius]`. The arguments are the transition phase value (or 0) and the view geometry.
+ */
+interface EffectsProvider {
+    fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double): List<Double>
+}
+
+/** `alignmentGuide` value computed in Kotlin from the view size. */
+interface AlignmentGuideProvider {
+    fun compute(width: Double, height: Double): Double
+}

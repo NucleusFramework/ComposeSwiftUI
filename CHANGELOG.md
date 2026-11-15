@@ -24,10 +24,17 @@
   `Modifier.onTapGesture(coordinateSpace = …) { point -> }`, `Modifier.onContinuousHover`,
   `Modifier.accessibilityAdjustableAction`, `Modifier.accessibilityScrollAction`, `Modifier.onPencilSqueeze`.
   A color picked by the user arrives as `Color(red, green, blue, opacity)` in sRGB.
+- Hand-written APIs for SwiftUI views whose content depends on SwiftUI-only values: `AsyncImage` with load
+  states (`AsyncImageContent` shows the image), `ScrollViewReader` (`ScrollProxy.scrollTo`), `TimelineView`, `Canvas`
+  (a Kotlin `DrawScope`), `Table` with columns and selection (iOS 17.4+, macOS 14.4+), `OutlineGroup`,
+  `Modifier.onKeyPress`, `scrollTransition`, `visualEffect`, `alignmentGuide`, `navigationDestination(item:)`, and
+  custom button, toggle and label styles written in Kotlin (`StyleLabel`, `StyleIcon`).
 
 ### Changed
 
 - `NewDocumentButtonSource` (deprecated alias) is now `NewDocumentButtonContentType`.
+- The Swift renderer has two new files, `Interactive.swift` and `Generated/GenEncoders.swift`. If you added the
+  `ComposeSwiftUI` folder to Xcode as a group, add them to the app target once.
 
 ## 0.4.1
 

@@ -105,6 +105,7 @@ extension ComposeGenerated {
         registerAll()
         HandwrittenRenderers.register()
         ExtraRenderers.register()
+        InteractiveRenderers.register()
         PlatformViewRenderers.register()
     }
 }

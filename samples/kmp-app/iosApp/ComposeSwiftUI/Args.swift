@@ -157,6 +157,13 @@ public struct Args {
 
     // MARK: Slots
 
+    /// The node of the slot passed at `i` (nil when absent).
+    public func slotModel(_ i: Int) -> NodeModel? {
+        let index = src.argSlot(index: k(i))
+        guard index >= 0, let node else { return nil }
+        return node.slot(index: index).map(NodeModel.of)
+    }
+
     public func slot(_ i: Int) -> SlotView {
         let index = src.argSlot(index: k(i))
         guard index >= 0, let node else { return SlotView(model: nil) }
