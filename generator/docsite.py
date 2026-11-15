@@ -31,6 +31,7 @@ def latest_version():
         return tags[0] if tags else "dev"
 
 VERSION = latest_version()
+ASSETS_V = hashlib.sha256(open(__file__, "rb").read()).hexdigest()[:10]  # changes with the CSS and JS below
 # Full-text search: Pagefind (open source) indexes the built pages; the search then runs in the browser, offline too.
 PAGEFIND = "pagefind@1.5.2"
 
@@ -211,7 +212,7 @@ def markdown(md):
             code = []
             i += 1
             while i < len(lines) and not lines[i].lstrip().startswith("```"):
-                code.append(lines[i][indent:] if lines[i][:indent].isspace() else lines[i].lstrip()); i += 1
+                code.append(lines[i][indent:] if not lines[i][:indent].strip() else lines[i].lstrip()); i += 1
             out.append('<pre><code class="language-%s">%s</code></pre>' % (esc(lang or "plaintext"), esc("\n".join(code))))
         elif re.match(r"^#{1,4} ", l):
             n = len(l.split(" ")[0])
@@ -286,9 +287,23 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .searchbtn{display:flex;align-items:center;gap:8px;height:32px;padding:0 8px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--muted);font:14px -apple-system,sans-serif;cursor:pointer;min-width:200px}
 .searchbtn span{flex:1;text-align:left}.searchbtn kbd{font:12px -apple-system,sans-serif;border:1px solid var(--line);border-radius:4px;padding:0 5px;background:var(--bg)}
 .searchbtn:hover{color:var(--fg)}.searchbtn:focus-visible{outline:2px solid var(--accent)}
-dialog.search{width:min(720px,calc(100vw - 32px));max-height:min(640px,calc(100vh - 120px));margin:80px auto 0;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:auto}
-dialog.search::backdrop{background:rgba(0,0,0,.35);backdrop-filter:blur(2px)}
-#search{--pagefind-ui-scale:.85;--pagefind-ui-primary:var(--accent);--pagefind-ui-text:var(--fg);--pagefind-ui-background:var(--bg);--pagefind-ui-border:var(--line);--pagefind-ui-tag:var(--soft);--pagefind-ui-border-radius:10px;--pagefind-ui-font:-apple-system,BlinkMacSystemFont,sans-serif}
+dialog.search{width:min(680px,calc(100vw - 24px));margin:12vh auto 0;padding:0;border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:18px;
+background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(180%) blur(30px);-webkit-backdrop-filter:saturate(180%) blur(30px);color:var(--fg);
+box-shadow:0 24px 80px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.08);overflow:hidden}
+dialog.search[open]{animation:pop .16s ease-out}@keyframes pop{from{opacity:0;transform:scale(.97) translateY(-6px)}}
+dialog.search::backdrop{background:rgba(0,0,0,.18)}
+.sbar{display:flex;align-items:center;gap:12px;padding:0 18px;height:60px}.sbar svg{width:22px;height:22px;color:var(--muted);flex:none}
+.sbar input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--fg);font:400 22px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:-.01em}
+.sbar input::-webkit-search-cancel-button{display:none}.sbar input::placeholder{color:var(--faint)}
+.sbar kbd{font:500 11px -apple-system,sans-serif;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+#sres{max-height:min(460px,60vh);overflow:auto;padding:0 8px}#sres:not(:empty){border-top:1px solid var(--line);padding:8px}
+#sres .hit{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:10px;color:var(--fg)}
+#sres .hit:hover{text-decoration:none}#sres .hit.sel{background:var(--accent);color:#fff}
+#sres .hit .ic{margin-top:3px}#sres .hit.sel .ic{border-color:rgba(255,255,255,.8);color:#fff}
+#sres .t{display:block;font-weight:600;font-size:15px}#sres .t i{font-style:normal;font-weight:400;color:var(--muted)}
+#sres .x{display:block;font-size:13px;line-height:1.4;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+#sres mark{background:none;color:inherit;font-weight:600}#sres .hit.sel .t i,#sres .hit.sel .x{color:rgba(255,255,255,.85)}
+#sres .msg{padding:22px 12px;text-align:center;color:var(--muted);font-size:14px}
 .top .ver{margin-left:-12px;font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px}.top .ver:hover{text-decoration:none;color:var(--fg)}
 /* sidebar */
 .sidetoggle{display:grid;place-items:center;width:32px;height:32px;margin-left:-6px;border:0;border-radius:8px;background:none;color:var(--fg);cursor:pointer}
@@ -369,22 +384,23 @@ SIDE_TOGGLE = '<button type="button" class="sidetoggle" title="Toggle sidebar" a
     SVG % '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16M5.5 8h1.5M5.5 11h1.5"/>')
 
 SEARCH_BOX = ('<button type="button" class="searchbtn" aria-label="Search the documentation">%s<span>Search</span><kbd>⌘K</kbd></button>'
-              '<dialog class="search" aria-label="Search"><div id="search"></div></dialog>'
-              % (SVG % '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'))
+              '<dialog class="search" aria-label="Search"><div class="sbar">%s<input id="sq" type="search" placeholder="Search Compose SwiftUI"'
+              ' autocomplete="off" spellcheck="false" aria-controls="sres"><kbd>esc</kbd></div><div id="sres" role="listbox"></div></dialog>'
+              % (SVG % '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', SVG % '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'))
 
-def layout(title, body, depth=0, current=None):
+def layout(title, body, depth=0, current=None, kind="Article"):
     up = "../" * depth
     # The theme and the sidebar state are applied in <head>, before first paint, to avoid a flash.
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css"><link rel="manifest" href="%smanifest.webmanifest">
+<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css?v=%s"><link rel="manifest" href="%smanifest.webmanifest">
 <link rel="icon" href="%sicon-192.png"><link rel="apple-touch-icon" href="%sicon-192.png">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme:dark)">
 <script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('side')==='closed')document.documentElement.classList.add('noside')}catch(e){}</script>
 <link rel="alternate" type="text/plain" title="LLM documentation" href="%sllms.txt">
-<script src="%s" defer></script><script src="%sapp.js" defer></script></head><body>
+<script src="%s" defer></script><script src="%sapp.js?v=%s" defer></script></head><body>
 <div class="top">%s<a class="brand" href="%sindex.html">Compose SwiftUI</a><a class="ver" href="%s/releases/tag/%s" title="Latest release">%s</a><span class="sp"></span>%s<a href="%sguide.html">Guide</a><a href="%sreference.html">API</a><a href="%s">GitHub</a>%s</div>
-<div class="wrap">%s<main data-pagefind-body>%s<footer data-pagefind-ignore>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps.</footer></main></div></body></html>
-""" % (esc(title), up, up, up, up, up, HLJS, up, SIDE_TOGGLE, up, REPO, VERSION, esc(VERSION), SEARCH_BOX, up, up, REPO, THEME_SWITCH, sidebar(up, current), body)
+<div class="wrap">%s<main data-pagefind-body data-pagefind-meta="kind:%s">%s<footer data-pagefind-ignore>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps.</footer></main></div></body></html>
+""" % (esc(title), up, ASSETS_V, up, up, up, up, HLJS, up, ASSETS_V, SIDE_TOGGLE, up, REPO, VERSION, esc(VERSION), SEARCH_BOX, up, up, REPO, THEME_SWITCH, sidebar(up, current), kind, body)
 
 def write(rel, content):
     path = os.path.join(OUT, rel)
@@ -515,14 +531,14 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
                 meta += " · " + inline(e["notes"])
             body.append('<div class="topic"><div class="sig">%s</div><div class="meta">%s</div></div>' % (sig_html(e["kotlin"]), meta))
     body.append("</div>")
-    write(rel, layout(display, "".join(body), depth=1, current=key))
+    write(rel, layout(display, "".join(body), depth=1, current=key, kind=kind_label(p)))
 
 ref = ['<div class="hero">' + crumbs("", ("Compose SwiftUI", "index.html"), ("All APIs", "")) + '<div class="eyebrow" data-pagefind-ignore>API Collection</div><h1>All APIs</h1><p class="abstract">Every SwiftUI API that '
        'Compose SwiftUI supports, generated from Apple\'s SDK and compiled for iOS, macOS, tvOS and watchOS.</p></div><div class="content">',
        '<p>APIs with a Kotlin-specific shape (navigation paths, item presentations, gestures, lazy lists, mixed-style text) are '
        'described in the <a href="guide.html#writing-screens">guide</a>.</p>']
 for cat in ("Views", "Modifiers", "Types"):
-    ref.append("<h2>%s</h2><div class=\"grid\">%s</div>" % (cat, "".join(
+    ref.append("<h2>%s</h2><div class=\"grid\" data-pagefind-ignore>%s</div>" % (cat, "".join(
         '<a href="%s">%s</a>' % (rel, esc(t + ("(_:)" if cat == "Modifiers" else ""))) for t, rel in cats[cat])))
 ref.append("</div>")
 write("reference.html", layout("All APIs", "".join(ref)))
@@ -616,33 +632,61 @@ document.addEventListener('click', e => {
   e.preventDefault();
   go(url, true);
 });
-// Search: Pagefind's UI, loaded on first use and mounted in the dialog of the current body.
-let pagefindLoaded = null;
-function loadPagefind() {
-  return pagefindLoaded ??= new Promise((resolve, reject) => {
-    const css = document.createElement('link');
-    css.rel = 'stylesheet'; css.href = new URL('pagefind/pagefind-ui.css', BASE);
-    const js = document.createElement('script');
-    js.src = new URL('pagefind/pagefind-ui.js', BASE); js.onload = resolve; js.onerror = reject;
-    document.head.append(css, js);
-  });
-}
-async function openSearch() {
+// Search: a Spotlight-like dialog over Pagefind's JS API (the index is built with the site, so it also works offline).
+let pagefind = null, searchSeq = 0;
+const getPagefind = async () => pagefind ??= await import(new URL('pagefind/pagefind.js', BASE).href).then(async pf => {
+  await pf.options({baseUrl: BASE.pathname});
+  return pf;
+});
+const badge = kind => kind === 'Article' ? '¶' : kind === 'View modifier' ? 'M' : (kind || '¶')[0];
+
+function openSearch() {
   const dialog = document.querySelector('dialog.search');
-  dialog.showModal();
-  await loadPagefind();
-  const box = document.getElementById('search');
-  if (!box.childElementCount) new PagefindUI({element: box, bundlePath: new URL('pagefind/', BASE).href, showSubResults: true, showImages: false, resetStyles: false});
-  box.querySelector('input')?.focus();
+  if (!dialog.open) dialog.showModal();
+  dialog.querySelector('#sq').select();
+  getPagefind();  // warm up while the user types
 }
+async function runSearch(query) {
+  const seq = ++searchSeq, list = document.getElementById('sres');
+  if (!query.trim()) { list.innerHTML = ''; return }
+  const pf = await getPagefind();
+  const found = await pf.search(query);
+  const hits = await Promise.all(found.results.slice(0, 12).map(r => r.data()));
+  if (seq !== searchSeq) return;  // a newer query is on its way
+  list.innerHTML = hits.map(d => {
+    const sub = d.sub_results?.find(s => s.url !== d.url);  // a heading inside an article
+    const title = sub ? `${escHtml(d.meta.title)} <i>› ${escHtml(sub.title)}</i>` : escHtml(d.meta.title);
+    return `<a class="hit" role="option" href="${(sub || d).url}"><span class="ic">${badge(d.meta.kind)}</span>` +
+      `<span><span class="t">${title}</span><span class="x">${(sub || d).excerpt}</span></span></a>`;
+  }).join('') || `<div class="msg">No results for “${escHtml(query)}”</div>`;
+  select(list.querySelector('.hit'));
+}
+function select(hit) {
+  document.querySelectorAll('#sres .hit.sel').forEach(h => h.classList.remove('sel'));
+  hit?.classList.add('sel');
+  hit?.scrollIntoView({block: 'nearest'});
+}
+
 document.addEventListener('keydown', e => {
   const typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement?.tagName);
-  if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) { e.preventDefault(); openSearch() }
+  if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) { e.preventDefault(); openSearch(); return }
+  if (e.target.id !== 'sq') return;
+  const sel = document.querySelector('#sres .hit.sel');
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    select((e.key === 'ArrowDown' ? sel?.nextElementSibling : sel?.previousElementSibling) || sel);
+  } else if (e.key === 'Enter' && sel) {
+    e.preventDefault();
+    sel.click();
+  }
 });
+document.addEventListener('mousemove', e => { const h = e.target.closest('#sres .hit'); if (h && !h.classList.contains('sel')) select(h) });
 document.addEventListener('click', e => {
   if (e.target.closest('.searchbtn')) openSearch();
+  else if (e.target.closest('#sres .hit')) document.querySelector('dialog.search').close();  // same-page anchors don't swap the body
   else if (e.target.matches('dialog.search')) e.target.close();  // click on the backdrop
 });
+document.addEventListener('input', e => { if (e.target.id === 'sq') runSearch(e.target.value) });
 document.addEventListener('input', e => { if (e.target.id === 'q') filter(e.target.value) });
 addEventListener('popstate', () => { if (location.pathname !== here) go(new URL(location.href), false) });
 
