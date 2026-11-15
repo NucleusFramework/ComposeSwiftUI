@@ -9,26 +9,26 @@ import UniformTypeIdentifiers
     chain: for (index, mod) in m.modifiers.enumerated() {
         let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 611:
+        case 619:
             r = r.antialiased(a.bool(0))
-        case 612:
+        case 620:
             guard let p0 = d_Image_Interpolation(a.expr(0)) else { break chain }
             r = r.interpolation(p0)
-        case 613:
+        case 621:
             r = r.renderingMode(d_Image_TemplateRenderingMode(a.expr(0)))
         #if os(iOS) || os(macOS) || os(tvOS)
-        case 109:
+        case 111:
             r = r.allowedDynamicRange(d_Image_DynamicRange(a.expr(0)))
         #endif
-        case 535:
+        case 543:
             r = r.symbolRenderingMode(d_SymbolRenderingMode(a.expr(0)))
-        case 536:
+        case 544:
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
             r = r.symbolVariableValueMode(d_SymbolVariableValueMode(a.expr(0)))
-        case 533:
+        case 541:
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { break chain }
             r = r.symbolColorRenderingMode(d_SymbolColorRenderingMode(a.expr(0)))
-        case 614:
+        case 622:
             guard let p0 = d_EdgeInsets(a.expr(0)) else { break chain }
             guard let p1 = d_Image_ResizingMode(a.expr(1)) else { break chain }
             r = r.resizable(capInsets: p0, resizingMode: p1)
@@ -47,72 +47,72 @@ import UniformTypeIdentifiers
     chain: for (index, mod) in m.modifiers.enumerated() {
         let a = Args(node: m.node, src: mod, modifierIndex: index)
         switch mod.id {
-        case 267:
+        case 269:
             r = r.fontDesign(d_Font_Design(a.expr(0)))
-        case 268:
+        case 270:
             r = r.fontWeight(d_Font_Weight(a.expr(0)))
-        case 360:
+        case 362:
             r = r.monospaced(a.bool(0))
-        case 615:
+        case 623:
             r = r.strikethrough(a.bool(0), color: d_Color(a.expr(1)))
-        case 527:
+        case 535:
             guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
             r = r.strikethrough(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
-        case 140:
+        case 142:
             r = r.baselineOffset(a.cgFloat(0))
-        case 270:
+        case 272:
             r = r.foregroundColor(d_Color(a.expr(0)))
-        case 271:
+        case 273:
             guard let p0 = dp_ShapeStyle(a.expr(0)) else { break chain }
             @MainActor func open<Q0: ShapeStyle>(_ q0: Q0) -> Text { r.foregroundStyle(q0) }
             r = open(p0)
-        case 361:
+        case 363:
             r = r.monospacedDigit()
-        case 516:
+        case 524:
             r = r.speechAdjustedPitch(a.double(0))
-        case 597:
+        case 605:
             r = r.typesettingLanguage(Locale.Language(identifier: a.string(0)), isEnabled: a.bool(1))
-        case 598:
+        case 606:
             guard let p0 = d_TypesettingLanguage(a.expr(0)) else { break chain }
             r = r.typesettingLanguage(p0, isEnabled: a.bool(1))
-        case 518:
+        case 526:
             r = r.speechAnnouncementsQueued(a.bool(0))
-        case 519:
+        case 527:
             r = r.speechSpellsOutCharacters(a.bool(0))
-        case 517:
+        case 525:
             r = r.speechAlwaysIncludesPunctuation(a.bool(0))
-        case 616:
+        case 624:
             r = r.bold()
-        case 143:
+        case 145:
             r = r.bold(a.bool(0))
-        case 266:
+        case 268:
             r = r.font(d_Font(a.expr(0)))
-        case 617:
+        case 625:
             r = r.italic()
-        case 314:
+        case 316:
             r = r.italic(a.bool(0))
-        case 315:
+        case 317:
             r = r.kerning(a.cgFloat(0))
-        case 589:
+        case 597:
             r = r.tracking(a.cgFloat(0))
-        case 269:
+        case 271:
             r = r.fontWidth(d_Font_Width(a.expr(0)))
-        case 560:
+        case 568:
             guard let p0 = d_Text_Scale(a.expr(0)) else { break chain }
             r = r.textScale(p0, isEnabled: a.bool(1))
-        case 618:
+        case 626:
             r = r.underline(a.bool(0), color: d_Color(a.expr(1)))
-        case 599:
+        case 607:
             guard let p1 = d_Text_LineStyle_Pattern(a.expr(1)) else { break chain }
             r = r.underline(a.bool(0), pattern: p1, color: d_Color(a.expr(2)))
-        case 92:
+        case 94:
             guard let p0 = d_AccessibilityTextContentType(a.expr(0)) else { break chain }
             r = r.accessibilityTextContentType(p0)
-        case 74:
+        case 75:
             r = r.accessibilityLabel(Text(a.string(0)))
-        case 73:
+        case 74:
             r = r.accessibilityLabel(LocalizedStringResource(String.LocalizationValue(a.string(0))))
-        case 55:
+        case 56:
             guard let p0 = d_AccessibilityHeadingLevel(a.expr(0)) else { break chain }
             r = r.accessibilityHeading(p0)
         default: break chain
@@ -123,4 +123,4 @@ import UniformTypeIdentifiers
     return r
 }
 
-let generatedSelfModifierIds: Set<Int32> = [55, 73, 74, 92, 109, 140, 143, 266, 267, 268, 269, 270, 271, 314, 315, 360, 361, 516, 517, 518, 519, 527, 533, 535, 536, 560, 589, 597, 598, 599, 611, 612, 613, 614, 615, 616, 617, 618]
+let generatedSelfModifierIds: Set<Int32> = [56, 74, 75, 94, 111, 142, 145, 268, 269, 270, 271, 272, 273, 316, 317, 362, 363, 524, 525, 526, 527, 535, 541, 543, 544, 568, 597, 605, 606, 607, 619, 620, 621, 622, 623, 624, 625, 626]

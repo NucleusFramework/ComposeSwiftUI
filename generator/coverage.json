@@ -15086,8 +15086,8 @@
   "usr": "s:7SwiftUI11ColorPickerVA2A4TextVRszrlE_9selection15supportsOpacityACyAEG10Foundation23LocalizedStringResourceV_AA7BindingVyAA0C0VGSbtcfc",
   "path": "ColorPicker.init(_:selection:supportsOpacity:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param selection: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -15108,8 +15108,8 @@
   "usr": "s:7SwiftUI11ColorPickerVA2A4TextVRszrlE_9selection15supportsOpacityACyAEGAA18LocalizedStringKeyV_AA7BindingVyAA0C0VGSbtcfc",
   "path": "ColorPicker.init(_:selection:supportsOpacity:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param selection: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -15130,8 +15130,8 @@
   "usr": "s:7SwiftUI11ColorPickerVA2A4TextVRszrlE_9selection15supportsOpacityACyAEGqd___AA7BindingVyAA0C0VGSbtcSyRd__lufc",
   "path": "ColorPicker.init(_:selection:supportsOpacity:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param selection: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -15152,8 +15152,8 @@
   "usr": "s:7SwiftUI11ColorPickerV9selection15supportsOpacity5labelACyxGAA7BindingVyAA0C0VG_SbxyXEtcfc",
   "path": "ColorPicker.init(selection:supportsOpacity:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param selection: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -55231,8 +55231,8 @@
   "usr": "s:7SwiftUI19NavigationSplitViewV16columnVisibility22preferredCompactColumn7sidebar7content6detailACyxq_q0_GAA7BindingVyAA0cdeG0VG_AKyAA0cdeJ0VGxyXEq_yXEq0_yXEtcfc",
   "path": "NavigationSplitView.init(columnVisibility:preferredCompactColumn:sidebar:content:detail:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param columnVisibility: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -55244,8 +55244,8 @@
   "usr": "s:7SwiftUI19NavigationSplitViewV16columnVisibility22preferredCompactColumn7sidebar6detailACyxAA05EmptyE0Vq0_GAA7BindingVyAA0cdeG0VG_ALyAA0cdeJ0VGxyXEq0_yXEtcAIRs_rlufc",
   "path": "NavigationSplitView.init(columnVisibility:preferredCompactColumn:sidebar:detail:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param columnVisibility: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -55257,8 +55257,8 @@
   "usr": "s:7SwiftUI19NavigationSplitViewV16columnVisibility7sidebar7content6detailACyxq_q0_GAA7BindingVyAA0cdeG0VG_xyXEq_yXEq0_yXEtcfc",
   "path": "NavigationSplitView.init(columnVisibility:sidebar:content:detail:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param columnVisibility: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -55270,8 +55270,8 @@
   "usr": "s:7SwiftUI19NavigationSplitViewV16columnVisibility7sidebar6detailACyxAA05EmptyE0Vq0_GAA7BindingVyAA0cdeG0VG_xyXEq0_yXEtcAHRs_rlufc",
   "path": "NavigationSplitView.init(columnVisibility:sidebar:detail:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param columnVisibility: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -55283,8 +55283,8 @@
   "usr": "s:7SwiftUI19NavigationSplitViewV22preferredCompactColumn7sidebar7content6detailACyxq_q0_GAA7BindingVyAA0cdeH0VG_xyXEq_yXEq0_yXEtcfc",
   "path": "NavigationSplitView.init(preferredCompactColumn:sidebar:content:detail:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param preferredCompactColumn: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -55296,8 +55296,8 @@
   "usr": "s:7SwiftUI19NavigationSplitViewV22preferredCompactColumn7sidebar6detailACyxAA05EmptyE0Vq0_GAA7BindingVyAA0cdeH0VG_xyXEq0_yXEtcAHRs_rlufc",
   "path": "NavigationSplitView.init(preferredCompactColumn:sidebar:detail:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param preferredCompactColumn: Binding<value>",
+  "status": "generated",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos",
@@ -58589,8 +58589,8 @@
   "usr": "s:7SwiftUI4PathVyACyACzXEcfc",
   "path": "Path.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param callback: callback of value",
+  "status": "rejected",
+  "detail": "swift-macos: cannot convert value of type '(Path) -> Void' to expected argument type '(inout Path) -> ()'",
   "platforms": [
    "ios",
    "macos",
@@ -101160,8 +101160,8 @@
   "usr": "s:7SwiftUI4ViewPAAE29accessibilityAdjustableActionyAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGyAA0I19AdjustmentDirectionOcF",
   "path": "View.accessibilityAdjustableAction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param handler: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -102331,8 +102331,8 @@
   "usr": "s:7SwiftUI4ViewPAAE25accessibilityScrollActionyAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGyAA4EdgeOcF",
   "path": "View.accessibilityScrollAction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param handler: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108136,8 +108136,8 @@
   "usr": "s:7SwiftUI4ViewPAAE17onContinuousHover15coordinateSpace7performQrAA010CoordinateH0O_yAA0F5PhaseOctF",
   "path": "View.onContinuousHover(coordinateSpace:perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108148,8 +108148,8 @@
   "usr": "s:7SwiftUI4ViewPAAE17onContinuousHover15coordinateSpace7performQrqd___yAA0F5PhaseOctAA010CoordinateH8ProtocolRd__lF",
   "path": "View.onContinuousHover(coordinateSpace:perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108611,8 +108611,8 @@
   "usr": "s:7SwiftUI4ViewPAAE15onPencilSqueeze7performQryAA0eF12GesturePhaseOc_tF",
   "path": "View.onPencilSqueeze(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos"
@@ -108736,8 +108736,8 @@
   "usr": "s:7SwiftUI4ViewPAAE12onTapGesture5count15coordinateSpace10inputKinds7performQrSi_qd__AA0f5InputK0VySo7CGPointVctAA010CoordinateI8ProtocolRd__lF",
   "path": "View.onTapGesture(count:coordinateSpace:inputKinds:perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108749,8 +108749,8 @@
   "usr": "s:7SwiftUI4ViewPAAE12onTapGesture5count15coordinateSpace7performQrSi_AA010CoordinateI0OySo7CGPointVctF",
   "path": "View.onTapGesture(count:coordinateSpace:perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",
@@ -108761,8 +108761,8 @@
   "usr": "s:7SwiftUI4ViewPAAE12onTapGesture5count15coordinateSpace7performQrSi_qd__ySo7CGPointVctAA010CoordinateI8ProtocolRd__lF",
   "path": "View.onTapGesture(count:coordinateSpace:perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of value",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",

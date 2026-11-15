@@ -8,10 +8,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Status | Entries |
 |---|---|
-| ✅ generated | 3627 (44.1%) |
+| ✅ generated | 3649 (44.4%) |
 | ☑️ covered | 28 (0.3%) |
 | ⛔ rejected | 15 (0.2%) |
-| ➖ skipped | 2334 (28.4%) |
+| ➖ skipped | 2312 (28.1%) |
 | · n/a | 1100 (13.4%) |
 | ? unmatched | 1116 (13.6%) |
 | **total** | **8220** |
@@ -20,9 +20,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Kind | ✅ | ☑️ | ⛔ | ➖ | · | ? |
 |---|---|---|---|---|---|---|
-| method | 1143 | 28 | 14 | 1280 | 0 | 666 |
+| method | 1157 | 28 | 14 | 1266 | 0 | 666 |
 | property | 1032 | 0 | 0 | 108 | 879 | 264 |
-| init | 575 | 0 | 1 | 411 | 0 | 63 |
+| init | 583 | 0 | 1 | 403 | 0 | 63 |
 | struct | 470 | 0 | 0 | 412 | 0 | 63 |
 | case | 284 | 0 | 0 | 23 | 0 | 28 |
 | protocol | 44 | 0 | 0 | 75 | 0 | 3 |
@@ -46,11 +46,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | type unknown | 32 |
 | generic constrained to ['RandomAccessCollection'] | 30 |
 | generic constrained to nothing | 28 |
-| callback of value | 20 |
 | generic constrained to ['Gesture'] | 18 |
 | nested function type | 17 |
 | type Namespace.ID not bridged | 16 |
-| Binding<value> | 15 |
 | unknown type Result | 12 |
 | generic constrained to ['Identifiable'] | 10 |
 | generic constrained to ['Collection'] | 10 |
@@ -63,7 +61,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | unknown type UITextContentType | 8 |
 | closure returning [T] | 8 |
 | unknown type F.FormatInput | 8 |
+| Binding<value> | 7 |
 | type Image not bridged | 7 |
+| generic constrained to ['RandomAccessCollection', 'RandomAccessCollection', 'RandomAccessC | 7 |
 
 ## All entries
 
@@ -663,12 +663,12 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | struct | [NavigationSplitView](https://developer.apple.com/documentation/swiftui/navigationsplitview) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(sidebar:detail:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(sidebar:content:detail:)) | view (1/1 overloads bridged) |
-| ➖ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:sidebar:detail:)) | param columnVisibility: Binding<value> |
-| ➖ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:sidebar:content:detail:)) | param columnVisibility: Binding<value> |
-| ➖ | init | [init(preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(preferredcompactcolumn:sidebar:detail:)) | param preferredCompactColumn: Binding<value> |
-| ➖ | init | [init(preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(preferredcompactcolumn:sidebar:content:detail:)) | param preferredCompactColumn: Binding<value> |
-| ➖ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:preferredcompactcolumn:sidebar:detail:)) | param columnVisibility: Binding<value> |
-| ➖ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:preferredcompactcolumn:sidebar:content:detail:)) | param columnVisibility: Binding<value> |
+| ✅ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:sidebar:detail:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:sidebar:content:detail:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(preferredcompactcolumn:sidebar:detail:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(preferredcompactcolumn:sidebar:content:detail:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:preferredcompactcolumn:sidebar:detail:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(columnVisibility: Binding<NavigationSplitViewVisibility>, preferredCompactColumn: Binding<NavigationSplitViewColumn>, sidebar: () -> Sidebar, content: () -> Content, detail: () -> Detail)](https://developer.apple.com/documentation/swiftui/navigationsplitview/init(columnvisibility:preferredcompactcolumn:sidebar:content:detail:)) | view (1/1 overloads bridged) |
 | ✅ | method | [func navigationSplitViewStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationsplitviewstyle(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func navigationSplitViewColumnWidth(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationsplitviewcolumnwidth(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func navigationSplitViewColumnWidth(min: CGFloat?, ideal: CGFloat, max: CGFloat?) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationsplitviewcolumnwidth(min:ideal:max:)) | modifier (1/1 overloads bridged) |
@@ -1785,8 +1785,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | method | [func accessibilityAction<I, Label>(intent: I, label: () -> Label) -> some View](https://developer.apple.com/documentation/swiftui/view/accessibilityaction(intent:label:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | method | [func accessibilityAction<I>(AccessibilityActionKind, intent: I) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityaction(_:intent:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | method | [func accessibilityAction(named:intent:)](https://developer.apple.com/documentation/swiftui/view/accessibilityaction(named:intent:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| ➖ | method | [func accessibilityAdjustableAction((AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityadjustableaction(_:)) | param handler: callback of value |
-| ➖ | method | [func accessibilityScrollAction((Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityscrollaction(_:)) | param handler: callback of value |
+| ✅ | method | [func accessibilityAdjustableAction((AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityadjustableaction(_:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func accessibilityScrollAction((Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityscrollaction(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func accessibilityScrollStatus(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/accessibilityscrollstatus(_:isenabled:)) | modifier (4/4 overloads bridged) |
 | ✅ | method | [func accessibilityActivationPoint(_:)](https://developer.apple.com/documentation/swiftui/view/accessibilityactivationpoint(_:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func accessibilityActivationPoint(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/accessibilityactivationpoint(_:isenabled:)) | modifier (2/2 overloads bridged) |
@@ -2283,7 +2283,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | method | [func onGeometryChange3D(for:of:action:)](https://developer.apple.com/documentation/swiftui/view/ongeometrychange3d(for:of:action:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ✅ | method | [func onInteractiveResizeChange((Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/oninteractiveresizechange(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onTapGesture(count: Int, perform: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:perform:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onTapGesture(count: Int, coordinateSpace: some CoordinateSpaceProtocol, inputKinds: GestureInputKinds, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:inputkinds:perform:)) | param action: callback of value |
+| ✅ | method | [func onTapGesture(count: Int, coordinateSpace: some CoordinateSpaceProtocol, inputKinds: GestureInputKinds, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:inputkinds:perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, maximumDistance: CGFloat, perform: () -> Void, onPressingChanged: ((Bool) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:maximumdistance:perform:onpressingchanged:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, maximumDistance: CGFloat, inputKinds: GestureInputKinds, perform: () -> Void, onPressingChanged: ((Bool) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:maximumdistance:inputkinds:perform:onpressingchanged:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, perform: () -> Void, onPressingChanged: ((Bool) -> Void)?) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:perform:onpressingchanged:)) | modifier (1/1 overloads bridged) |
@@ -2300,10 +2300,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func simultaneousGesture<T>(T, name: String, isEnabled: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/simultaneousgesture(_:name:isenabled:)) | param gesture: generic constrained to ['Gesture'] |
 | ✅ | method | [func defersSystemGestures(on: Edge.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/deferssystemgestures(on:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func onPencilDoubleTap(perform: (PencilDoubleTapGestureValue) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpencildoubletap(perform:)) | param action: type PencilDoubleTapGestureValue not bridged |
-| ➖ | method | [func onPencilSqueeze(perform: (PencilSqueezeGesturePhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpencilsqueeze(perform:)) | param action: callback of value |
+| ✅ | method | [func onPencilSqueeze(perform: (PencilSqueezeGesturePhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpencilsqueeze(perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func allowsWindowActivationEvents() -> some View](https://developer.apple.com/documentation/swiftui/view/allowswindowactivationevents()) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func allowsWindowActivationEvents(Bool?) -> some View](https://developer.apple.com/documentation/swiftui/view/allowswindowactivationevents(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onTapGesture(count:coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)) | param action: callback of value |
+| ✅ | method | [func onTapGesture(count:coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)) | modifier (2/2 overloads bridged) |
 | ➖ | method | [func onKeyPress(KeyEquivalent, action: () -> KeyPress.Result) -> some View](https://developer.apple.com/documentation/swiftui/view/onkeypress(_:action:)) | param action: closure returning KeyPress.Result |
 | ➖ | method | [func onKeyPress(phases: KeyPress.Phases, action: (KeyPress) -> KeyPress.Result) -> some View](https://developer.apple.com/documentation/swiftui/view/onkeypress(phases:action:)) | param action: builder with parameters |
 | ➖ | method | [func onKeyPress(KeyEquivalent, phases: KeyPress.Phases, action: (KeyPress) -> KeyPress.Result) -> some View](https://developer.apple.com/documentation/swiftui/view/onkeypress(_:phases:action:)) | param action: builder with parameters |
@@ -2332,7 +2332,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func defaultHoverEffect(_:)](https://developer.apple.com/documentation/swiftui/view/defaulthovereffect(_:)) | modifier (2/2 overloads bridged) |
 | ? | method | [func listRowHoverEffect(HoverEffect?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowhovereffect(_:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | method | [func listRowHoverEffectDisabled(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowhovereffectdisabled(_:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| ➖ | method | [func onContinuousHover(coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)) | param action: callback of value |
+| ✅ | method | [func onContinuousHover(coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func pointerVisibility(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/pointervisibility(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func pointerStyle(PointerStyle?) -> some View](https://developer.apple.com/documentation/swiftui/view/pointerstyle(_:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func focused<Value>(FocusState<Value>.Binding, equals: Value) -> some View](https://developer.apple.com/documentation/swiftui/view/focused(_:equals:)) | param binding: type FocusState.Binding not bridged |
@@ -2801,7 +2801,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func cornerRadius(CGFloat, antialiased: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/cornerradius(_:antialiased:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func dropDestination<T>(for: T.Type, action: ([T], CGPoint) -> Bool, isTargeted: (Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/dropdestination(for:action:istargeted:)) | param action: builder with parameters |
 | ✅ | method | [func onChange<V>(of: V, perform: (V) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onTapGesture(count: Int, coordinateSpace: CoordinateSpace, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)-36x9h) | param action: callback of value |
+| ✅ | method | [func onTapGesture(count: Int, coordinateSpace: CoordinateSpace, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)-36x9h) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, maximumDistance: CGFloat, pressing: ((Bool) -> Void)?, perform: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:maximumdistance:pressing:perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, pressing: ((Bool) -> Void)?, perform: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:pressing:perform:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func onPasteCommand(of: [String], perform: ([NSItemProvider]) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)-4f78f) | param payloadAction: unknown type NSItemProvider |
@@ -2809,7 +2809,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func onDrop(of: [String], delegate: any DropDelegate) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)-2vr9o) | param delegate: generic constrained to ['DropDelegate'] |
 | ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param isTargeted: optional binding |
 | ✅ | method | [func focusable(Bool, onFocusChange: (Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/focusable(_:onfocuschange:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onContinuousHover(coordinateSpace: CoordinateSpace, perform: (HoverPhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)-8gyrl) | param action: callback of value |
+| ✅ | method | [func onContinuousHover(coordinateSpace: CoordinateSpace, perform: (HoverPhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)-8gyrl) | modifier (2/2 overloads bridged) |
 | ➖ | method | [func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> some View](https://developer.apple.com/documentation/swiftui/view/actionsheet(ispresented:content:)) | param content: closure returning ActionSheet |
 | ➖ | method | [func actionSheet<T>(item: Binding<T?>, content: (T) -> ActionSheet) -> some View](https://developer.apple.com/documentation/swiftui/view/actionsheet(item:content:)) | param item: generic constrained to ['Identifiable'] |
 | ➖ | method | [func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View](https://developer.apple.com/documentation/swiftui/view/alert(ispresented:content:)) | param content: closure returning Alert |
@@ -4778,8 +4778,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var calendar: Calendar](https://developer.apple.com/documentation/swiftui/environmentvalues/calendar) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var timeZone: TimeZone](https://developer.apple.com/documentation/swiftui/environmentvalues/timezone) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [ColorPicker](https://developer.apple.com/documentation/swiftui/colorpicker) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(_:selection:supportsOpacity:)](https://developer.apple.com/documentation/swiftui/colorpicker/init(_:selection:supportsopacity:)) | param selection: Binding<value> |
-| ➖ | init | [init(selection:supportsOpacity:label:)](https://developer.apple.com/documentation/swiftui/colorpicker/init(selection:supportsopacity:label:)) | param selection: Binding<value> |
+| ✅ | init | [init(_:selection:supportsOpacity:)](https://developer.apple.com/documentation/swiftui/colorpicker/init(_:selection:supportsopacity:)) | view (3/6 overloads bridged) |
+| ✅ | init | [init(selection:supportsOpacity:label:)](https://developer.apple.com/documentation/swiftui/colorpicker/init(selection:supportsopacity:label:)) | view (1/2 overloads bridged) |
 | ➖ | struct | [Gauge](https://developer.apple.com/documentation/swiftui/gauge) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init<V>(value: V, in: ClosedRange<V>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/gauge/init(value:in:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init<V>(value: V, in: ClosedRange<V>, label: () -> Label, currentValueLabel: () -> CurrentValueLabel)](https://developer.apple.com/documentation/swiftui/gauge/init(value:in:label:currentvaluelabel:)) | view (1/1 overloads bridged) |
@@ -6904,7 +6904,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | | Kind | API | Detail |
 |---|---|---|---|
 | ✅ | method | [func onTapGesture(count: Int, perform: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:perform:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onTapGesture(count: Int, coordinateSpace: some CoordinateSpaceProtocol, inputKinds: GestureInputKinds, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:inputkinds:perform:)) | param action: callback of value |
+| ✅ | method | [func onTapGesture(count: Int, coordinateSpace: some CoordinateSpaceProtocol, inputKinds: GestureInputKinds, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:inputkinds:perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [TapGesture](https://developer.apple.com/documentation/swiftui/tapgesture) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(count: Int)](https://developer.apple.com/documentation/swiftui/tapgesture/init(count:)) | value member of TapGesture (1/1 overloads bridged) |
 | ✅ | init | [init(count: Int, inputKinds: GestureInputKinds)](https://developer.apple.com/documentation/swiftui/tapgesture/init(count:inputkinds:)) | value member of TapGesture (1/1 overloads bridged) |
@@ -7019,7 +7019,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let subviews: GestureMask](https://developer.apple.com/documentation/swiftui/gesturemask/subviews) | value member of GestureMask (1/1 overloads bridged) |
 | ✅ | property | [static let none: GestureMask](https://developer.apple.com/documentation/swiftui/gesturemask/none) | value member of GestureMask (1/1 overloads bridged) |
 | ➖ | method | [func onPencilDoubleTap(perform: (PencilDoubleTapGestureValue) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpencildoubletap(perform:)) | param action: type PencilDoubleTapGestureValue not bridged |
-| ➖ | method | [func onPencilSqueeze(perform: (PencilSqueezeGesturePhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpencilsqueeze(perform:)) | param action: callback of value |
+| ✅ | method | [func onPencilSqueeze(perform: (PencilSqueezeGesturePhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpencilsqueeze(perform:)) | modifier (1/1 overloads bridged) |
 | · | property | [var preferredPencilDoubleTapAction: PencilPreferredAction](https://developer.apple.com/documentation/swiftui/environmentvalues/preferredpencildoubletapaction) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var preferredPencilSqueezeAction: PencilPreferredAction](https://developer.apple.com/documentation/swiftui/environmentvalues/preferredpencilsqueezeaction) | instance property / subscript (read side, not a view-building API) |
 | ✅ | struct | [PencilPreferredAction](https://developer.apple.com/documentation/swiftui/pencilpreferredaction) | Kotlin value class (1/1 overloads bridged) |
@@ -7130,7 +7130,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | struct | [RotationGesture](https://developer.apple.com/documentation/swiftui/rotationgesture) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(minimumAngleDelta: Angle)](https://developer.apple.com/documentation/swiftui/rotationgesture/init(minimumangledelta:)) | value member of RotationGesture (1/1 overloads bridged) |
 | · | property | [var minimumAngleDelta: Angle](https://developer.apple.com/documentation/swiftui/rotationgesture/minimumangledelta) | instance property / subscript (read side, not a view-building API) |
-| ➖ | method | [func onTapGesture(count:coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)) | param action: callback of value |
+| ✅ | method | [func onTapGesture(count:coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)) | modifier (2/2 overloads bridged) |
 | ➖ | method | [func onKeyPress(KeyEquivalent, action: () -> KeyPress.Result) -> some View](https://developer.apple.com/documentation/swiftui/view/onkeypress(_:action:)) | param action: closure returning KeyPress.Result |
 | ➖ | method | [func onKeyPress(phases: KeyPress.Phases, action: (KeyPress) -> KeyPress.Result) -> some View](https://developer.apple.com/documentation/swiftui/view/onkeypress(phases:action:)) | param action: builder with parameters |
 | ➖ | method | [func onKeyPress(KeyEquivalent, phases: KeyPress.Phases, action: (KeyPress) -> KeyPress.Result) -> some View](https://developer.apple.com/documentation/swiftui/view/onkeypress(_:phases:action:)) | param action: builder with parameters |
@@ -7213,7 +7213,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | method | [static func toggledTemporarily(trigger: some Equatable) -> HoverEffectPhaseOverride](https://developer.apple.com/documentation/swiftui/hovereffectphaseoverride/toggledtemporarily(trigger:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | struct | [OrnamentHoverContentEffect](https://developer.apple.com/documentation/swiftui/ornamenthovercontenteffect) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | struct | [OrnamentHoverEffect](https://developer.apple.com/documentation/swiftui/ornamenthovereffect) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| ➖ | method | [func onContinuousHover(coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)) | param action: callback of value |
+| ✅ | method | [func onContinuousHover(coordinateSpace:perform:)](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func pointerStyle(PointerStyle?) -> some View](https://developer.apple.com/documentation/swiftui/view/pointerstyle(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [PointerStyle](https://developer.apple.com/documentation/swiftui/pointerstyle) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let `default`: PointerStyle](https://developer.apple.com/documentation/swiftui/pointerstyle/default) | value member of PointerStyle (1/1 overloads bridged) |
@@ -7710,8 +7710,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ? | method | [func accessibilityAction<I, Label>(intent: I, label: () -> Label) -> some View](https://developer.apple.com/documentation/swiftui/view/accessibilityaction(intent:label:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | method | [func accessibilityAction<I>(AccessibilityActionKind, intent: I) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityaction(_:intent:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ? | method | [func accessibilityAction(named:intent:)](https://developer.apple.com/documentation/swiftui/view/accessibilityaction(named:intent:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
-| ➖ | method | [func accessibilityAdjustableAction((AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityadjustableaction(_:)) | param handler: callback of value |
-| ➖ | method | [func accessibilityScrollAction((Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityscrollaction(_:)) | param handler: callback of value |
+| ✅ | method | [func accessibilityAdjustableAction((AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityadjustableaction(_:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func accessibilityScrollAction((Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibilityscrollaction(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func accessibilityActions<Content>(category: AccessibilityActionCategory, () -> Content) -> some View](https://developer.apple.com/documentation/swiftui/view/accessibilityactions(category:_:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [AccessibilityActionKind](https://developer.apple.com/documentation/swiftui/accessibilityactionkind) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let `default`: AccessibilityActionKind](https://developer.apple.com/documentation/swiftui/accessibilityactionkind/default) | value member of AccessibilityActionKind (1/1 overloads bridged) |

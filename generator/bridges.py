@@ -90,10 +90,10 @@ class Bridge:
         if k == "optional" and self.inner.kind in ("action", "async_action"):
             return ["%s?.let { SAction(it) }" % name]
         if k == "callback":
-            return ["SValueCallback { %s(it as %s) }" % (name, self.inner.kt)]
+            return [self.inner.kotlin_receive(name)]
         if k == "binding":
             cb = "on" + name[0].upper() + name[1:] + "Change"
-            return [name, "SValueCallback { %s(it as %s) }" % (cb, self.inner.kt)]
+            return [name, self.inner.kotlin_receive(cb)]
         if k == "slot":
             return ["slotContent(%s)" % name]
         if k in ("drange", "irange"):
@@ -111,6 +111,18 @@ class Bridge:
         if k == "optional" and self.inner.kind in ("lsk", "lsr"):
             return ["%s?.key" % name]
         return [name]
+
+    def kotlin_receive(self, fn):
+        """SValueCallback passing a value sent by Swift to the Kotlin function `fn`."""
+        if self.kind == "value":
+            # Swift encodes values as plain SExpr (see e_* encoders): rebuild the typed Kotlin value
+            ctor = "cgValue(e) as %s" % self.kt if self.kt in CG_VALUES else "%s(e.id, e.args)" % self.kt
+            return "SValueCallback { (it as? SExpr)?.let { e -> %s(%s) } }" % (fn, ctor)
+        return "SValueCallback { %s(it as %s) }" % (fn, self.kt)
+
+    @property
+    def encoder(self):
+        return "e_" + self.swift_type[2:]
 
     # Swift ---------------------------------------------------------------------------------
 
@@ -137,6 +149,8 @@ class Bridge:
             return ["let %s = %s.action(%d)" % (var, src, i)], "{ %s() }" % var
         if k == "callback":
             inner = self.inner
+            if inner.kind == "value":
+                return [], "%s.callback(%d, box: { %s($0) ?? NSNull() })" % (src, i, inner.encoder)
             if inner.kind == "url":
                 return [], "%s.callback(%d, box: { (v: URL) in KBox.string(v.absoluteString) })" % (src, i)
             if inner.conv:
@@ -145,6 +159,10 @@ class Bridge:
             return [], "%s.callback(%d, box: %s)" % (src, i, inner.box())
         if k == "binding":
             inner = self.inner
+            if inner.kind == "value":
+                return ["guard let %s0 = %s(%s.expr(%d)) else { %s }" % (var, inner.swift_type, src, i, fallback)], \
+                    "%s.binding(%d, read: { %s($0.expr($1)) ?? %s0 }, box: { %s($0) ?? NSNull() })" % (
+                        src, i, inner.swift_type, var, inner.encoder)
             if inner.conv:
                 name, to, failable, back, fallback = inner.conv
                 get = to % ("%s.wrappedValue" % var)
@@ -213,6 +231,8 @@ class Bridge:
                 "hash": "hashable", "float": "float", "date": "date"}[self.kind]
 
 
+CG_VALUES = ("CGPoint", "CGSize", "CGRect", "CGVector", "CGAffineTransform")
+
 PRIMS = {
     "String": ("str", "String"), "Substring": ("str", "String"), "Bool": ("bool", "Boolean"),
     "Int": ("int", "Int"), "Double": ("double", "Double"), "TimeInterval": ("double", "Double"),
@@ -267,6 +287,32 @@ class Classifier:
         self.model = model
         self.values = values  # usr -> ValueType
         self.protos = protos  # usr -> ProtoType
+        self.encoders = set()  # value types sent back to Kotlin (usr)
+
+    def encodable(self, b):
+        """Value bridges that Swift can send back to Kotlin (enums and Equatable types, CG values)."""
+        if b.kind != "value":
+            return False
+        if b.kt in CG_VALUES:
+            return True
+        usr = next(iter(b.refs))
+        sym = self.model.syms[usr]
+        if sym.kind == "swift.enum" or sym.dotted == "Color" or (
+                {"s:SQ", "s:SH"} & self.model.all_protocols(sym) and self._closed(sym)):
+            self.encoders.add(usr)
+            return True
+        return False
+
+    @staticmethod
+    def _closed(sym):
+        """Equatable struct whose values are all static members: each one maps back to a Kotlin static.
+        Types built by initializers or factories (`.height(300)`) can't be sent back."""
+        for c in sym.children:
+            if c.kind == "swift.init" and "from decoder" not in c.decl:
+                return False
+            if c.kind == "swift.type.method" and c.returns() in (sym.name, "Self", sym.dotted):
+                return False
+        return True
 
     def classify(self, t, ctx, top=True):
         k = t.kind
@@ -308,7 +354,7 @@ class Classifier:
             return self._constrained(ctx.conf.get(name, []), ctx, t)
         if name == "Binding" and t.args:
             inner = self.classify(t.args[0], ctx, top=False)
-            ok = not (inner.conv and inner.conv[3] is None) and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
+            ok = self.encodable(inner) or not (inner.conv and inner.conv[3] is None) and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
                 inner.kind == "optional" and inner.inner.kind == "hash")
             if not ok:
                 raise Unsupported("Binding<%s>" % inner.kind)
@@ -328,7 +374,7 @@ class Classifier:
         # `V.Stride` / `V.Value` of a generic numeric parameter: same bridge as V
         if "." in name and name.split(".")[0] in ctx.generic_names and name.split(".")[1] in ("Stride",):
             return self.classify(T("name", name=name.split(".")[0]), ctx, top)
-        if name in ("CGPoint", "CGSize", "CGRect", "CGVector", "CGAffineTransform"):
+        if name in CG_VALUES:
             return Bridge("value", name, swift_type="d_" + name)
         if name in PRIMS:
             kind, kt = PRIMS[name]
@@ -387,7 +433,7 @@ class Classifier:
                 return Bridge("async_action" if t.is_async else "action", "() -> Unit")
             if len(t.params) == 1 and not t.is_async:
                 inner = self.classify(t.params[0], ctx, top=False)
-                if not (inner.conv and inner.conv[3] is None) and inner.kind in (
+                if self.encodable(inner) or not (inner.conv and inner.conv[3] is None) and inner.kind in (
                         "str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url"):
                     return Bridge("callback", "(%s) -> Unit" % inner.kt, inner=inner)
                 raise Unsupported("callback of %s" % inner.kind)

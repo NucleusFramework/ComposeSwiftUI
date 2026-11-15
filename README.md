@@ -107,6 +107,7 @@ translation:
 | `CGFloat` | `Double` |
 | `Int8` … `UInt64` | `Int` (truncated on the Swift side) |
 | `URL`, `UTType`, `Locale`, `Locale.Language`, `Character` | `String`: the URL, the type identifier (`"public.png"`), the locale or language identifier, one character |
+| `ColorPicker("Tint", selection: $color)`, `NavigationSplitView(columnVisibility: $v)` | `ColorPicker("Tint", selection = color, onSelectionChange = { color = it })`, same pattern for every binding |
 | `listRowBackground(Color.red)`, `mask(Circle())` (a view passed as a value) | `Modifier.listRowBackground { ColorView(Color.red) }`, `Modifier.mask { … }` |
 | `"**Bold**"` or a localization key | `LocalizedKey("hello.title")`. A plain `String` is shown verbatim. |
 

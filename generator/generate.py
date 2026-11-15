@@ -709,8 +709,21 @@ class Generator:
 
         def lsk_m(params):
             return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in params)
+        # parameter names of the variants whose trailing lambda takes no argument, by modifier name
+        action_params = {}
+        for item, params in self.modifiers:
+            if params and params[-1][2].kind in ("action", "async_action"):
+                action_params.setdefault(item.sym.name, set()).update(self.kt_name_for(l, i) for l, i, _, _ in params)
         for n, (item, params) in enumerate(sorted(self.modifiers, key=lambda x: (x[0].sym.deprecated, stand_in(x[1]), lsk_m(x[1])))):
             decls, encs = self.kt_params(params)
+            if params and params[-1][2].kind == "callback" and params[-1][2].inner.kind == "value" and item.sym.name in action_params:
+                # `Modifier.x { … }` would match both `() -> Unit` and `(T) -> Unit`: require a parameter the
+                # no-argument variant doesn't have, so a bare trailing lambda keeps calling that one
+                own = [d for d in decls[:-1] if d[0] not in action_params[item.sym.name] and d[2] is not None]
+                if not own:
+                    self.status(item.sym, "skipped", "trailing lambda ambiguous with the no-argument variant")
+                    continue
+                decls = [(kn, kt, None if (kn, kt, kd, x) == own[0] else kd, x) for kn, kt, kd, x in decls]
             types = tuple(t.rstrip("?") for _, t, _, _ in decls)
             mname = item.sym.name
             suffixed = False
@@ -964,6 +977,88 @@ class Generator:
         return ["@MainActor func open<%s>(%s) -> %s {" % (gens, ps, result_type), "    return %s" % expr, "}",
                 "return open(%s)" % ", ".join(p for p, _, _ in self.opened)]
 
+    PAYLOAD_BOX = {"str": "KBox.string", "bool": "KBox.bool", "int": "KBox.int", "double": "KBox.double",
+                   "cgfloat": "KBox.cgFloat", "float": "KBox.float", "date": "KBox.date", "hash": "KBox.hashable"}
+
+    def _payload_box(self, b, x, todo):
+        """Swift expression sending payload `x` (bridged as `b`) to Kotlin, or None."""
+        if b.kind in self.PAYLOAD_BOX and not b.conv:
+            return "%s(%s)" % (self.PAYLOAD_BOX[b.kind], x)
+        if b.kind == "optional" and b.inner.kind in self.PAYLOAD_BOX and not b.inner.conv:
+            return "(%s.map { %s($0) } ?? NSNull())" % (x, self.PAYLOAD_BOX[b.inner.kind])
+        if b.kind == "value" and self.classifier.encodable(b):
+            todo.extend(b.refs)
+            return "(%s(%s) ?? NSNull())" % (b.encoder, x)
+        return None
+
+    def emit_encoders(self, path, header):
+        """`e_T(T) -> SExpr?`: the Kotlin value of a Swift value, for bindings and callbacks of value types.
+        Matches enum cases (with payloads) and, for Equatable types, static members; `nil` when none match."""
+        out = Out(path)
+        out.add(header)
+        todo, done = list(self.classifier.encoders), set()
+        while todo:
+            usr = todo.pop()
+            if usr in done or usr not in self.values:
+                continue
+            done.add(usr)
+            vt = self.values[usr]
+            sym = vt.sym
+            is_enum = sym.kind == "swift.enum"
+            equatable = bool({"s:SQ", "s:SH"} & self.model.all_protocols(sym))
+            tp = self.type_platforms(usr)
+            ifline, avail = platform_guard(tp)
+            swift_t = ".".join(sym.path)
+            lines = []
+            for item, kind, params, _ in vt.members:
+                if item.key in self.rejected:
+                    continue
+                name = self._swift_member(item.sym.name)
+                sid = "SExpr(id: %d, args: [])" % item.id
+                if kind == "case" or (kind in ("static", "pstatic") and equatable and not is_enum):
+                    cond = ("case .%s = v" if kind == "case" else "v == .%s") % name
+                    body = "return %s" % sid
+                elif kind == "casefn":
+                    boxes = [self._payload_box(b, "x%d" % n, todo) for n, (_, _, b, _) in enumerate(params)]
+                    if None in boxes:
+                        continue
+                    cond = "case .%s(%s) = v" % (name, ", ".join("let x%d" % n for n in range(len(params))))
+                    body = "return SExpr(id: %d, args: [%s])" % (item.id, ", ".join(boxes))
+                else:
+                    continue
+                plats = dict(item.platforms)
+                rel = {p: v for p, v in plats.items() if v > max(tp.get(p, (0, 0)), DEPLOYMENT[p])}
+                case_if = platform_guard(plats)[0] if set(plats) != set(tp) & set(PLATFORMS) else None
+                if case_if:
+                    lines.append(case_if)
+                check = "if %s { %s }" % (cond, body)
+                if rel:
+                    _, av = platform_guard({p: plats.get(p, DEPLOYMENT[p]) for p in PLATFORMS})
+                    check = "if #available(%s) { %s }" % (av, check)
+                lines.append("    " + check)
+                if case_if:
+                    lines.append("#endif")
+            if swift_t == "Color":
+                # any other color: its sRGB components, through `Color(_:red:green:blue:opacity:)`
+                rgba = [it for it, k, prm, _ in vt.members if k == "init"
+                        and [lbl for lbl, _, _, _ in prm] == ["_", "red", "green", "blue", "opacity"]]
+                if rgba:
+                    cs = self.model.lookup_type("Color.RGBColorSpace")
+                    todo.append(cs.usr)
+                    lines.append("    let r = v.resolve(in: EnvironmentValues())")
+                    lines.append("    return SExpr(id: %d, args: [e_Color_RGBColorSpace(.sRGB) ?? NSNull(), %s])" % (
+                        rgba[0].id, ", ".join("KBox.double(Double(r.%s))" % c for c in ("red", "green", "blue", "opacity"))))
+            if not lines or not lines[-1].strip().startswith("return SExpr"):
+                lines.append("    return nil")
+            if ifline:
+                out.add(ifline)
+            attr = "@available(%s)\n" % avail if avail else ""
+            out.add("%s@MainActor func e_%s(_ v: %s) -> SExpr? {\n%s\n}" % (attr, "_".join(sym.path), swift_t, "\n".join(lines)),
+                    "type:" + usr)
+            if ifline:
+                out.add("#endif")
+        return out
+
     def swift_wrap(self, plats, body_lines, fallback_return, indent="        "):
         ifline, avail = platform_guard(plats)
         lines = []
@@ -1032,6 +1127,7 @@ class Generator:
             o.add("    default: return nil\n    }\n}")
             if ifline:
                 o.add("#endif")
+        enc = self.emit_encoders(os.path.join(root, "GenEncoders.swift"), header)
         # protocol decoders
         po = Out(os.path.join(root, "GenProtocolDecoders.swift"))
         po.add(header)
@@ -1185,7 +1281,7 @@ class Generator:
         reg.add("@MainActor enum GeneratedChain {\n    @_semantics(\"optimize.sil.specialize.generic.never\")\n    static func apply<V: View>(_ v: V, _ id: Int, _ a: Args, _ m: NodeModel, _ i: Int) -> AnyView? {\n        switch id %% %d {\n%s\n        default: return nil\n        }\n    }\n}\n" % (
             nchunks, "\n".join("        case %d: return GeneratedChain%d.apply(v, id, a, m, i)" % (i, i) for i in range(nchunks))))
         reg.add("public enum ComposeGenerated {\n    @MainActor public static func registerAll() {\n        GeneratedViews.register()\n        ComposeRegistry.selfModifierIds = generatedSelfModifierIds\n    }\n}")
-        for o in dec_outs + [po, vo, smo] + mo + [reg]:
+        for o in dec_outs + [enc, po, vo, smo] + mo + [reg]:
             o.write()
             self.line_map.append((o.path, o.ranges))
 

@@ -37,6 +37,17 @@ import AppKit
     return CGAffineTransform(a: a.double(0), b: a.double(1), c: a.double(2), d: a.double(3), tx: a.double(4), ty: a.double(5))
 }
 
+// Encoders: the Kotlin value of a CoreGraphics value, for bindings and callbacks (rebuilt by Kotlin `cgValue`).
+@MainActor func e_CGPoint(_ v: CGPoint) -> SExpr? { SExpr(id: 1, args: [KBox.cgFloat(v.x), KBox.cgFloat(v.y)]) }
+@MainActor func e_CGSize(_ v: CGSize) -> SExpr? { SExpr(id: 2, args: [KBox.cgFloat(v.width), KBox.cgFloat(v.height)]) }
+@MainActor func e_CGRect(_ v: CGRect) -> SExpr? {
+    SExpr(id: 3, args: [KBox.cgFloat(v.minX), KBox.cgFloat(v.minY), KBox.cgFloat(v.width), KBox.cgFloat(v.height)])
+}
+@MainActor func e_CGVector(_ v: CGVector) -> SExpr? { SExpr(id: 4, args: [KBox.cgFloat(v.dx), KBox.cgFloat(v.dy)]) }
+@MainActor func e_CGAffineTransform(_ v: CGAffineTransform) -> SExpr? {
+    SExpr(id: 6, args: [v.a, v.b, v.c, v.d, v.tx, v.ty].map { KBox.cgFloat($0) })
+}
+
 @MainActor enum HandwrittenRenderers {
     static func register() {
         ComposeRegistry.views[100_000] = { m in

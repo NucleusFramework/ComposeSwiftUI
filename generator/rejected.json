@@ -1,5 +1,6 @@
 {
  "member:s:7SwiftUI4PathV4path2inACSo6CGRectV_tF": "kotlin: Names _, __, ___, ... are reserved in Kotlin.",
+ "member:s:7SwiftUI4PathVyACyACzXEcfc": "swift-macos: cannot convert value of type '(Path) -> Void' to expected argument type '(inout Path) -> ()'",
  "member:s:7SwiftUI5ColorVyACxcSHRzAA10ShapeStyleRzAC11ResolvedHDRV0F0AaDPRtzlufc": "swift-macos: no exact matches in call to initializer ",
  "member:s:7SwiftUI5ColorVyACxcSHRzAA10ShapeStyleRzAC8ResolvedVAeaDPRtzlufc": "swift-macos: no exact matches in call to initializer ",
  "member:s:7SwiftUI5ShapePA2A19ConcentricRectangleVRszrlE4rect17uniformTopCorners0g6BottomI0AeA4EdgeO6CornerO5StyleV_ANtFZ": "kotlin: Conflicting overloads:",

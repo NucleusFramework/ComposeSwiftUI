@@ -266,6 +266,46 @@ public fun ColorView(color: Color, modifier: Modifier = Modifier) {
 }
 
 /**
+ * SwiftUI `ColorPicker.init(selection:supportsOpacity:label:)`
+ *
+ * ```swift
+ * nonisolated init(selection: Binding<Color>, supportsOpacity: Bool = true, @ContentBuilder label: () -> Label)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun ColorPicker(
+    selection: Color,
+    modifier: Modifier = Modifier,
+    supportsOpacity: Boolean = true,
+    onSelectionChange: (Color) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(32, listOf(selection, SValueCallback { (it as? SExpr)?.let { e -> onSelectionChange(Color(e.id, e.args)) } }, supportsOpacity), modifier, content = content)
+}
+
+/**
+ * SwiftUI `ColorPicker.init(_:selection:supportsOpacity:)`
+ *
+ * ```swift
+ * nonisolated init<S>(_ title: S, selection: Binding<Color>, supportsOpacity: Bool = true) where S : StringProtocol
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun ColorPicker(
+    title: String,
+    selection: Color,
+    modifier: Modifier = Modifier,
+    supportsOpacity: Boolean = true,
+    onSelectionChange: (Color) -> Unit,
+) {
+    SwiftView(35, listOf(title, selection, SValueCallback { (it as? SExpr)?.let { e -> onSelectionChange(Color(e.id, e.args)) } }, supportsOpacity), modifier)
+}
+
+/**
  * SwiftUI `ConcentricRectangle`
  *
  * ```swift
@@ -277,7 +317,7 @@ public fun ColorView(color: Color, modifier: Modifier = Modifier) {
 @HiddenFromObjC
 @Composable
 public fun ConcentricRectangleView(concentricRectangle: ConcentricRectangle, modifier: Modifier = Modifier) {
-    SwiftView(32, listOf(concentricRectangle), modifier)
+    SwiftView(36, listOf(concentricRectangle), modifier)
 }
 
 /**
@@ -292,7 +332,7 @@ public fun ConcentricRectangleView(concentricRectangle: ConcentricRectangle, mod
 @HiddenFromObjC
 @Composable
 public fun ContainerRelativeShapeView(containerRelativeShape: ContainerRelativeShape, modifier: Modifier = Modifier) {
-    SwiftView(33, listOf(containerRelativeShape), modifier)
+    SwiftView(37, listOf(containerRelativeShape), modifier)
 }
 
 /**
@@ -311,7 +351,7 @@ public fun ContentUnavailableView(
     description: @Composable () -> Unit,
     actions: @Composable () -> Unit,
 ) {
-    SwiftView(34, listOf(SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, description, actions))
+    SwiftView(38, listOf(SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, description, actions))
 }
 
 /**
@@ -329,7 +369,7 @@ public fun ControlGroup(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(41, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(45, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -346,7 +386,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(42, listOf(), modifier, content = content)
+    SwiftView(46, listOf(), modifier, content = content)
 }
 
 /**
@@ -365,7 +405,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(45, listOf(title, systemImage.name), modifier, content = content)
+    SwiftView(49, listOf(title, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -383,7 +423,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(51, listOf(title), modifier, content = content)
+    SwiftView(55, listOf(title), modifier, content = content)
 }
 
 /**
@@ -403,7 +443,7 @@ public fun DatePicker(
     onSelectionChange: (Double) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(52, listOf(selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier, content = content)
+    SwiftView(56, listOf(selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier, content = content)
 }
 
 /**
@@ -423,7 +463,7 @@ public fun DatePicker(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(56, listOf(title, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
+    SwiftView(60, listOf(title, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
 }
 
 /**
@@ -438,7 +478,7 @@ public fun DatePicker(
 @HiddenFromObjC
 @Composable
 public fun DefaultDocumentGroupLaunchActionsView(defaultDocumentGroupLaunchActions: DefaultDocumentGroupLaunchActions, modifier: Modifier = Modifier) {
-    SwiftView(60, listOf(defaultDocumentGroupLaunchActions), modifier)
+    SwiftView(64, listOf(defaultDocumentGroupLaunchActions), modifier)
 }
 
 /**
@@ -453,7 +493,7 @@ public fun DefaultDocumentGroupLaunchActionsView(defaultDocumentGroupLaunchActio
 @HiddenFromObjC
 @Composable
 public fun DefaultGlassEffectShapeView(defaultGlassEffectShape: DefaultGlassEffectShape, modifier: Modifier = Modifier) {
-    SwiftView(61, listOf(defaultGlassEffectShape), modifier)
+    SwiftView(65, listOf(defaultGlassEffectShape), modifier)
 }
 
 /**
@@ -473,7 +513,7 @@ public fun DisclosureGroup(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(62, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(66, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -491,7 +531,7 @@ public fun DisclosureGroup(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(63, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(67, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -511,7 +551,7 @@ public fun DisclosureGroup(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(66, listOf(label, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(70, listOf(label, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -529,7 +569,7 @@ public fun DisclosureGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(69, listOf(label), modifier, content = content)
+    SwiftView(73, listOf(label), modifier, content = content)
 }
 
 /**
@@ -545,7 +585,7 @@ public fun DisclosureGroup(
 public fun Divider(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(70, listOf(), modifier)
+    SwiftView(74, listOf(), modifier)
 }
 
 /**
@@ -560,7 +600,7 @@ public fun Divider(
 @HiddenFromObjC
 @Composable
 public fun EditButtonView(editButton: EditButton, modifier: Modifier = Modifier) {
-    SwiftView(71, listOf(editButton), modifier)
+    SwiftView(75, listOf(editButton), modifier)
 }
 
 /**
@@ -575,7 +615,7 @@ public fun EditButtonView(editButton: EditButton, modifier: Modifier = Modifier)
 @HiddenFromObjC
 @Composable
 public fun EllipseView(ellipse: Ellipse, modifier: Modifier = Modifier) {
-    SwiftView(72, listOf(ellipse), modifier)
+    SwiftView(76, listOf(ellipse), modifier)
 }
 
 /**
@@ -590,7 +630,7 @@ public fun EllipseView(ellipse: Ellipse, modifier: Modifier = Modifier) {
 @HiddenFromObjC
 @Composable
 public fun EllipticalGradientView(ellipticalGradient: EllipticalGradient, modifier: Modifier = Modifier) {
-    SwiftView(73, listOf(ellipticalGradient), modifier)
+    SwiftView(77, listOf(ellipticalGradient), modifier)
 }
 
 /**
@@ -606,7 +646,7 @@ public fun EllipticalGradientView(ellipticalGradient: EllipticalGradient, modifi
 public fun EmptyView(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(74, listOf(), modifier)
+    SwiftView(78, listOf(), modifier)
 }
 
 /**
@@ -623,7 +663,7 @@ public fun Form(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(76, listOf(), modifier, content = content)
+    SwiftView(80, listOf(), modifier, content = content)
 }
 
 /**
@@ -644,7 +684,7 @@ public fun Gauge(
     currentValueLabel: @Composable () -> Unit,
     markedValueLabels: @Composable () -> Unit,
 ) {
-    SwiftView(77, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, currentValueLabel, markedValueLabels))
+    SwiftView(81, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(label, currentValueLabel, markedValueLabels))
 }
 
 /**
@@ -667,7 +707,7 @@ public fun Gauge(
     maximumValueLabel: @Composable () -> Unit,
     markedValueLabels: @Composable () -> Unit,
 ) {
-    SwiftView(78, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SSlotRef(4)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel, markedValueLabels))
+    SwiftView(82, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SSlotRef(4)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel, markedValueLabels))
 }
 
 /**
@@ -689,7 +729,7 @@ public fun Gauge(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(79, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
+    SwiftView(83, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3)), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -709,7 +749,7 @@ public fun Gauge(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(80, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
+    SwiftView(84, listOf(value, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
 }
 
 /**
@@ -728,7 +768,7 @@ public fun Gauge(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(81, listOf(value, listOf(bounds.start, bounds.endInclusive)), modifier, content = content)
+    SwiftView(85, listOf(value, listOf(bounds.start, bounds.endInclusive)), modifier, content = content)
 }
 
 /**
@@ -746,7 +786,7 @@ public fun GlassEffectContainer(
     spacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(82, listOf(spacing), modifier, content = content)
+    SwiftView(86, listOf(spacing), modifier, content = content)
 }
 
 /**
@@ -766,7 +806,7 @@ public fun Grid(
     verticalSpacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(83, listOf(alignment, horizontalSpacing, verticalSpacing), modifier, content = content)
+    SwiftView(87, listOf(alignment, horizontalSpacing, verticalSpacing), modifier, content = content)
 }
 
 /**
@@ -784,7 +824,7 @@ public fun GridRow(
     alignment: VerticalAlignment? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(84, listOf(alignment), modifier, content = content)
+    SwiftView(88, listOf(alignment), modifier, content = content)
 }
 
 /**
@@ -801,7 +841,7 @@ public fun Group(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(85, listOf(), modifier, content = content)
+    SwiftView(89, listOf(), modifier, content = content)
 }
 
 /**
@@ -819,7 +859,7 @@ public fun GroupBox(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(87, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(91, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -837,7 +877,7 @@ public fun GroupBox(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(90, listOf(title), modifier, content = content)
+    SwiftView(94, listOf(title), modifier, content = content)
 }
 
 /**
@@ -854,7 +894,7 @@ public fun GroupBox(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(91, listOf(), modifier, content = content)
+    SwiftView(95, listOf(), modifier, content = content)
 }
 
 /**
@@ -871,7 +911,7 @@ public fun HSplitView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(92, listOf(), modifier, content = content)
+    SwiftView(96, listOf(), modifier, content = content)
 }
 
 /**
@@ -890,7 +930,7 @@ public fun HStack(
     spacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(93, listOf(alignment, spacing), modifier, content = content)
+    SwiftView(97, listOf(alignment, spacing), modifier, content = content)
 }
 
 /**
@@ -905,7 +945,7 @@ public fun HStack(
 @HiddenFromObjC
 @Composable
 public fun HelpLinkView(helpLink: HelpLink, modifier: Modifier = Modifier) {
-    SwiftView(94, listOf(helpLink), modifier)
+    SwiftView(98, listOf(helpLink), modifier)
 }
 
 /**
@@ -923,7 +963,7 @@ public fun Image(
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(95, listOf(decorative, variableValue), modifier)
+    SwiftView(99, listOf(decorative, variableValue), modifier)
 }
 
 /**
@@ -940,7 +980,7 @@ public fun Image(
     decorative: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(96, listOf(decorative), modifier)
+    SwiftView(100, listOf(decorative), modifier)
 }
 
 /**
@@ -958,7 +998,7 @@ public fun Image(
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(97, listOf(systemName.name, variableValue), modifier)
+    SwiftView(101, listOf(systemName.name, variableValue), modifier)
 }
 
 /**
@@ -975,7 +1015,7 @@ public fun Image(
     systemName: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(98, listOf(systemName.name), modifier)
+    SwiftView(102, listOf(systemName.name), modifier)
 }
 
 /**
@@ -994,7 +1034,7 @@ public fun ImageVariableValue(
     variableValue: Double?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(100, listOf(name, variableValue), modifier)
+    SwiftView(104, listOf(name, variableValue), modifier)
 }
 
 /**
@@ -1012,7 +1052,7 @@ public fun Label(
     title: @Composable () -> Unit,
     icon: @Composable () -> Unit,
 ) {
-    SwiftView(104, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(title, icon))
+    SwiftView(108, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(title, icon))
 }
 
 /**
@@ -1030,7 +1070,7 @@ public fun Label(
     systemImage: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(107, listOf(title, systemImage.name), modifier)
+    SwiftView(111, listOf(title, systemImage.name), modifier)
 }
 
 /**
@@ -1048,7 +1088,7 @@ public fun LabeledContent(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(116, listOf(title), modifier, content = content)
+    SwiftView(120, listOf(title), modifier, content = content)
 }
 
 /**
@@ -1066,7 +1106,7 @@ public fun LabeledContent(
     value: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(119, listOf(title, value), modifier)
+    SwiftView(123, listOf(title, value), modifier)
 }
 
 /**
@@ -1084,7 +1124,7 @@ public fun LabeledContent(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(120, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(124, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1105,7 +1145,7 @@ public fun LazyHGrid(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(121, listOf(rows.toList(), alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(125, listOf(rows.toList(), alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1125,7 +1165,7 @@ public fun LazyHStack(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(122, listOf(alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(126, listOf(alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1146,7 +1186,7 @@ public fun LazyVGrid(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(123, listOf(columns.toList(), alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(127, listOf(columns.toList(), alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1166,7 +1206,7 @@ public fun LazyVStack(
     pinnedViews: PinnedScrollableViews? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(124, listOf(alignment, spacing, pinnedViews), modifier, content = content)
+    SwiftView(128, listOf(alignment, spacing, pinnedViews), modifier, content = content)
 }
 
 /**
@@ -1181,7 +1221,7 @@ public fun LazyVStack(
 @HiddenFromObjC
 @Composable
 public fun LinearGradientView(linearGradient: LinearGradient, modifier: Modifier = Modifier) {
-    SwiftView(125, listOf(linearGradient), modifier)
+    SwiftView(129, listOf(linearGradient), modifier)
 }
 
 /**
@@ -1199,7 +1239,7 @@ public fun Link(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(126, listOf(destination), modifier, content = content)
+    SwiftView(130, listOf(destination), modifier, content = content)
 }
 
 /**
@@ -1217,7 +1257,7 @@ public fun Link(
     destination: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(129, listOf(title, destination), modifier)
+    SwiftView(133, listOf(title, destination), modifier)
 }
 
 /**
@@ -1236,7 +1276,7 @@ public fun List(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(130, listOf(selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(134, listOf(selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -1253,7 +1293,7 @@ public fun List(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(131, listOf(), modifier, content = content)
+    SwiftView(135, listOf(), modifier, content = content)
 }
 
 /**
@@ -1272,7 +1312,7 @@ public fun Menu(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(132, listOf(SSlotRef(0), SAction(primaryAction)), modifier, slots = listOf(label), content = content)
+    SwiftView(136, listOf(SSlotRef(0), SAction(primaryAction)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1290,7 +1330,7 @@ public fun Menu(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(133, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(137, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1309,7 +1349,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(138, listOf(title, systemImage.name), modifier, content = content)
+    SwiftView(142, listOf(title, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -1328,7 +1368,7 @@ public fun Menu(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(146, listOf(title, SAction(primaryAction)), modifier, content = content)
+    SwiftView(150, listOf(title, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -1346,7 +1386,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(149, listOf(title), modifier, content = content)
+    SwiftView(153, listOf(title), modifier, content = content)
 }
 
 /**
@@ -1364,7 +1404,7 @@ public fun MenuButton(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(152, listOf(title), modifier, content = content)
+    SwiftView(156, listOf(title), modifier, content = content)
 }
 
 /**
@@ -1382,7 +1422,7 @@ public fun NavigationLink(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(155, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(159, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -1403,7 +1443,7 @@ public fun NavigationLink(
     onSelectionChange: (Any?) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(159, listOf(destinationName, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+    SwiftView(163, listOf(destinationName, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
 }
 
 /**
@@ -1421,7 +1461,7 @@ public fun NavigationLink(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(160, listOf(destinationName), modifier, content = content)
+    SwiftView(164, listOf(destinationName), modifier, content = content)
 }
 
 /**
@@ -1441,7 +1481,7 @@ public fun NavigationLink(
     onIsActiveChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(161, listOf(destinationName, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+    SwiftView(165, listOf(destinationName, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -1459,7 +1499,7 @@ public fun NavigationLink(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(175, listOf(value), modifier, content = content)
+    SwiftView(179, listOf(value), modifier, content = content)
 }
 
 /**
@@ -1478,7 +1518,7 @@ public fun NavigationLinkValue(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(176, listOf(value), modifier, content = content)
+    SwiftView(180, listOf(value), modifier, content = content)
 }
 
 /**
@@ -1496,7 +1536,7 @@ public fun NavigationLink(
     value: Any?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(181, listOf(title, value), modifier)
+    SwiftView(185, listOf(title, value), modifier)
 }
 
 /**
@@ -1515,7 +1555,134 @@ public fun NavigationLinkValue(
     value: Any?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(182, listOf(title, value), modifier)
+    SwiftView(186, listOf(title, value), modifier)
+}
+
+/**
+ * SwiftUI `NavigationSplitView.init(columnVisibility:preferredCompactColumn:sidebar:detail:)`
+ *
+ * ```swift
+ * nonisolated init(columnVisibility: Binding<NavigationSplitViewVisibility>, preferredCompactColumn: Binding<NavigationSplitViewColumn>, @ContentBuilder sidebar: () -> Sidebar, @ContentBuilder detail: () -> Detail) where Content == EmptyView
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationSplitView(
+    columnVisibility: NavigationSplitViewVisibility,
+    preferredCompactColumn: NavigationSplitViewColumn,
+    modifier: Modifier = Modifier,
+    onColumnVisibilityChange: (NavigationSplitViewVisibility) -> Unit,
+    onPreferredCompactColumnChange: (NavigationSplitViewColumn) -> Unit,
+    sidebar: @Composable () -> Unit,
+    detail: @Composable () -> Unit,
+) {
+    SwiftView(187, listOf(columnVisibility, SValueCallback { (it as? SExpr)?.let { e -> onColumnVisibilityChange(NavigationSplitViewVisibility(e.id, e.args)) } }, preferredCompactColumn, SValueCallback { (it as? SExpr)?.let { e -> onPreferredCompactColumnChange(NavigationSplitViewColumn(e.id, e.args)) } }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
+}
+
+/**
+ * SwiftUI `NavigationSplitView.init(columnVisibility:preferredCompactColumn:sidebar:content:detail:)`
+ *
+ * ```swift
+ * nonisolated init(columnVisibility: Binding<NavigationSplitViewVisibility>, preferredCompactColumn: Binding<NavigationSplitViewColumn>, @ContentBuilder sidebar: () -> Sidebar, @ContentBuilder content: () -> Content, @ContentBuilder detail: () -> Detail)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationSplitView(
+    columnVisibility: NavigationSplitViewVisibility,
+    preferredCompactColumn: NavigationSplitViewColumn,
+    modifier: Modifier = Modifier,
+    onColumnVisibilityChange: (NavigationSplitViewVisibility) -> Unit,
+    onPreferredCompactColumnChange: (NavigationSplitViewColumn) -> Unit,
+    sidebar: @Composable () -> Unit,
+    content: @Composable () -> Unit,
+    detail: @Composable () -> Unit,
+) {
+    SwiftView(188, listOf(columnVisibility, SValueCallback { (it as? SExpr)?.let { e -> onColumnVisibilityChange(NavigationSplitViewVisibility(e.id, e.args)) } }, preferredCompactColumn, SValueCallback { (it as? SExpr)?.let { e -> onPreferredCompactColumnChange(NavigationSplitViewColumn(e.id, e.args)) } }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
+}
+
+/**
+ * SwiftUI `NavigationSplitView.init(columnVisibility:sidebar:detail:)`
+ *
+ * ```swift
+ * nonisolated init(columnVisibility: Binding<NavigationSplitViewVisibility>, @ContentBuilder sidebar: () -> Sidebar, @ContentBuilder detail: () -> Detail) where Content == EmptyView
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationSplitView(
+    columnVisibility: NavigationSplitViewVisibility,
+    modifier: Modifier = Modifier,
+    onColumnVisibilityChange: (NavigationSplitViewVisibility) -> Unit,
+    sidebar: @Composable () -> Unit,
+    detail: @Composable () -> Unit,
+) {
+    SwiftView(189, listOf(columnVisibility, SValueCallback { (it as? SExpr)?.let { e -> onColumnVisibilityChange(NavigationSplitViewVisibility(e.id, e.args)) } }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
+}
+
+/**
+ * SwiftUI `NavigationSplitView.init(columnVisibility:sidebar:content:detail:)`
+ *
+ * ```swift
+ * nonisolated init(columnVisibility: Binding<NavigationSplitViewVisibility>, @ContentBuilder sidebar: () -> Sidebar, @ContentBuilder content: () -> Content, @ContentBuilder detail: () -> Detail)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationSplitView(
+    columnVisibility: NavigationSplitViewVisibility,
+    modifier: Modifier = Modifier,
+    onColumnVisibilityChange: (NavigationSplitViewVisibility) -> Unit,
+    sidebar: @Composable () -> Unit,
+    content: @Composable () -> Unit,
+    detail: @Composable () -> Unit,
+) {
+    SwiftView(190, listOf(columnVisibility, SValueCallback { (it as? SExpr)?.let { e -> onColumnVisibilityChange(NavigationSplitViewVisibility(e.id, e.args)) } }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
+}
+
+/**
+ * SwiftUI `NavigationSplitView.init(preferredCompactColumn:sidebar:detail:)`
+ *
+ * ```swift
+ * nonisolated init(preferredCompactColumn: Binding<NavigationSplitViewColumn>, @ContentBuilder sidebar: () -> Sidebar, @ContentBuilder detail: () -> Detail) where Content == EmptyView
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationSplitView(
+    preferredCompactColumn: NavigationSplitViewColumn,
+    modifier: Modifier = Modifier,
+    onPreferredCompactColumnChange: (NavigationSplitViewColumn) -> Unit,
+    sidebar: @Composable () -> Unit,
+    detail: @Composable () -> Unit,
+) {
+    SwiftView(191, listOf(preferredCompactColumn, SValueCallback { (it as? SExpr)?.let { e -> onPreferredCompactColumnChange(NavigationSplitViewColumn(e.id, e.args)) } }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
+}
+
+/**
+ * SwiftUI `NavigationSplitView.init(preferredCompactColumn:sidebar:content:detail:)`
+ *
+ * ```swift
+ * nonisolated init(preferredCompactColumn: Binding<NavigationSplitViewColumn>, @ContentBuilder sidebar: () -> Sidebar, @ContentBuilder content: () -> Content, @ContentBuilder detail: () -> Detail)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC
+@Composable
+public fun NavigationSplitView(
+    preferredCompactColumn: NavigationSplitViewColumn,
+    modifier: Modifier = Modifier,
+    onPreferredCompactColumnChange: (NavigationSplitViewColumn) -> Unit,
+    sidebar: @Composable () -> Unit,
+    content: @Composable () -> Unit,
+    detail: @Composable () -> Unit,
+) {
+    SwiftView(192, listOf(preferredCompactColumn, SValueCallback { (it as? SExpr)?.let { e -> onPreferredCompactColumnChange(NavigationSplitViewColumn(e.id, e.args)) } }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
 }
 
 /**
@@ -1533,7 +1700,7 @@ public fun NavigationSplitView(
     sidebar: @Composable () -> Unit,
     detail: @Composable () -> Unit,
 ) {
-    SwiftView(183, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
+    SwiftView(193, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail))
 }
 
 /**
@@ -1552,7 +1719,7 @@ public fun NavigationSplitView(
     content: @Composable () -> Unit,
     detail: @Composable () -> Unit,
 ) {
-    SwiftView(184, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
+    SwiftView(194, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(sidebar, detail), content = content)
 }
 
 /**
@@ -1569,7 +1736,7 @@ public fun NavigationStack(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(185, listOf(), modifier, content = content)
+    SwiftView(195, listOf(), modifier, content = content)
 }
 
 /**
@@ -1586,7 +1753,7 @@ public fun NavigationView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(186, listOf(), modifier, content = content)
+    SwiftView(196, listOf(), modifier, content = content)
 }
 
 /**
@@ -1604,7 +1771,7 @@ public fun OffsetShape(
     offset: CGSize,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(211, listOf(shape, offset), modifier)
+    SwiftView(221, listOf(shape, offset), modifier)
 }
 
 /**
@@ -1619,7 +1786,7 @@ public fun OffsetShape(
 @HiddenFromObjC
 @Composable
 public fun PathView(path: Path, modifier: Modifier = Modifier) {
-    SwiftView(212, listOf(path), modifier)
+    SwiftView(222, listOf(path), modifier)
 }
 
 /**
@@ -1640,7 +1807,7 @@ public fun Picker(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(214, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel), content = content)
+    SwiftView(224, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel), content = content)
 }
 
 /**
@@ -1660,7 +1827,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(215, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(225, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -1681,7 +1848,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(218, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(228, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -1701,7 +1868,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(221, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(231, listOf(title, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -1723,7 +1890,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(224, listOf(title, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(234, listOf(title, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -1744,7 +1911,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(227, listOf(title, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(237, listOf(title, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -1764,7 +1931,7 @@ public fun ProgressView(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(235, listOf(value, total, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
+    SwiftView(245, listOf(value, total, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
 }
 
 /**
@@ -1783,7 +1950,7 @@ public fun ProgressView(
     total: Double = 1.0,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(236, listOf(value, total), modifier, content = content)
+    SwiftView(246, listOf(value, total), modifier, content = content)
 }
 
 /**
@@ -1801,7 +1968,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(237, listOf(value, total), modifier)
+    SwiftView(247, listOf(value, total), modifier)
 }
 
 /**
@@ -1818,7 +1985,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(239, listOf(), modifier, content = content)
+    SwiftView(249, listOf(), modifier, content = content)
 }
 
 /**
@@ -1834,7 +2001,7 @@ public fun ProgressView(
 public fun ProgressView(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(240, listOf(), modifier)
+    SwiftView(250, listOf(), modifier)
 }
 
 /**
@@ -1851,7 +2018,7 @@ public fun ProgressView(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(243, listOf(title), modifier)
+    SwiftView(253, listOf(title), modifier)
 }
 
 /**
@@ -1870,7 +2037,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(247, listOf(title, value, total), modifier)
+    SwiftView(257, listOf(title, value, total), modifier)
 }
 
 /**
@@ -1885,7 +2052,7 @@ public fun ProgressView(
 @HiddenFromObjC
 @Composable
 public fun RadialGradientView(radialGradient: RadialGradient, modifier: Modifier = Modifier) {
-    SwiftView(248, listOf(radialGradient), modifier)
+    SwiftView(258, listOf(radialGradient), modifier)
 }
 
 /**
@@ -1900,7 +2067,7 @@ public fun RadialGradientView(radialGradient: RadialGradient, modifier: Modifier
 @HiddenFromObjC
 @Composable
 public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) {
-    SwiftView(249, listOf(rectangle), modifier)
+    SwiftView(259, listOf(rectangle), modifier)
 }
 
 /**
@@ -1916,7 +2083,7 @@ public fun RectangleView(rectangle: Rectangle, modifier: Modifier = Modifier) {
 public fun RenameButton(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(250, listOf(), modifier)
+    SwiftView(260, listOf(), modifier)
 }
 
 /**
@@ -1935,7 +2102,7 @@ public fun RotatedShape(
     modifier: Modifier = Modifier,
     anchor: UnitPoint = UnitPoint.center,
 ) {
-    SwiftView(251, listOf(shape, angle, anchor), modifier)
+    SwiftView(261, listOf(shape, angle, anchor), modifier)
 }
 
 /**
@@ -1950,7 +2117,7 @@ public fun RotatedShape(
 @HiddenFromObjC
 @Composable
 public fun RoundedRectangleView(roundedRectangle: RoundedRectangle, modifier: Modifier = Modifier) {
-    SwiftView(252, listOf(roundedRectangle), modifier)
+    SwiftView(262, listOf(roundedRectangle), modifier)
 }
 
 /**
@@ -1969,7 +2136,7 @@ public fun ScaledShape(
     modifier: Modifier = Modifier,
     anchor: UnitPoint = UnitPoint.center,
 ) {
-    SwiftView(253, listOf(shape, scale, anchor), modifier)
+    SwiftView(263, listOf(shape, scale, anchor), modifier)
 }
 
 /**
@@ -1988,7 +2155,7 @@ public fun ScrollView(
     showsIndicators: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(254, listOf(axes, showsIndicators), modifier, content = content)
+    SwiftView(264, listOf(axes, showsIndicators), modifier, content = content)
 }
 
 /**
@@ -2006,7 +2173,7 @@ public fun ScrollView(
     axes: Axis.Set = Axis.Set.vertical,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(255, listOf(axes), modifier, content = content)
+    SwiftView(265, listOf(axes), modifier, content = content)
 }
 
 /**
@@ -2025,7 +2192,7 @@ public fun Section(
     header: @Composable () -> Unit,
     footer: @Composable () -> Unit,
 ) {
-    SwiftView(256, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(header, footer), content = content)
+    SwiftView(266, listOf(SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(header, footer), content = content)
 }
 
 /**
@@ -2045,7 +2212,7 @@ public fun Section(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(259, listOf(title, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(269, listOf(title, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2063,7 +2230,7 @@ public fun Section(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(262, listOf(title), modifier, content = content)
+    SwiftView(272, listOf(title), modifier, content = content)
 }
 
 /**
@@ -2083,7 +2250,7 @@ public fun Section(
     content: @Composable () -> Unit,
     header: @Composable () -> Unit,
 ) {
-    SwiftView(265, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(header), content = content)
+    SwiftView(275, listOf(isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }, SSlotRef(0)), modifier, slots = listOf(header), content = content)
 }
 
 /**
@@ -2101,7 +2268,7 @@ public fun Section(
     content: @Composable () -> Unit,
     header: @Composable () -> Unit,
 ) {
-    SwiftView(266, listOf(SSlotRef(0)), modifier, slots = listOf(header), content = content)
+    SwiftView(276, listOf(SSlotRef(0)), modifier, slots = listOf(header), content = content)
 }
 
 /**
@@ -2118,7 +2285,7 @@ public fun Section(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(268, listOf(), modifier, content = content)
+    SwiftView(278, listOf(), modifier, content = content)
 }
 
 /**
@@ -2138,7 +2305,7 @@ public fun SecureField(
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(275, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(285, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -2157,7 +2324,7 @@ public fun SecureField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(278, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(288, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -2174,7 +2341,7 @@ public fun SettingsLink(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(279, listOf(), modifier, content = content)
+    SwiftView(289, listOf(), modifier, content = content)
 }
 
 /**
@@ -2190,7 +2357,7 @@ public fun SettingsLink(
 public fun SettingsLink(
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(280, listOf(), modifier)
+    SwiftView(290, listOf(), modifier)
 }
 
 /**
@@ -2216,7 +2383,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(293, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
+    SwiftView(303, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2243,7 +2410,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(295, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
+    SwiftView(305, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, neutralValue, enabledBounds?.let { listOf(it.start, it.endInclusive) }, SSlotRef(0), SSlotRef(1), SSlotRef(2), SSlotRef(3), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, currentValueLabel, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2267,7 +2434,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(297, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
+    SwiftView(307, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2290,7 +2457,7 @@ public fun Slider(
     minimumValueLabel: @Composable () -> Unit,
     maximumValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(298, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
+    SwiftView(308, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SSlotRef(0), SSlotRef(1), SSlotRef(2), SValueCallback { onEditingChanged(it as Boolean) }), modifier, slots = listOf(label, minimumValueLabel, maximumValueLabel))
 }
 
 /**
@@ -2311,7 +2478,7 @@ public fun Slider(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(299, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(309, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2333,7 +2500,7 @@ public fun Slider(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(300, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(310, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2356,7 +2523,7 @@ public fun SliderValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(301, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(311, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2378,7 +2545,7 @@ public fun SliderValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(302, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(312, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2398,7 +2565,7 @@ public fun Slider(
     onValueChange: (Double) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(303, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(313, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2419,7 +2586,7 @@ public fun Slider(
     onValueChange: (Double) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(304, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(314, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2436,7 +2603,7 @@ public fun Spacer(
     modifier: Modifier = Modifier,
     minLength: Double? = null,
 ) {
-    SwiftView(305, listOf(minLength), modifier)
+    SwiftView(315, listOf(minLength), modifier)
 }
 
 /**
@@ -2458,7 +2625,7 @@ public fun Stepper(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(306, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(316, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2481,7 +2648,7 @@ public fun StepperValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(307, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(317, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2502,7 +2669,7 @@ public fun Stepper(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(308, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(318, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2524,7 +2691,7 @@ public fun StepperValue(
     onEditingChanged: (Boolean) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    SwiftView(309, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
+    SwiftView(319, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2546,7 +2713,7 @@ public fun Stepper(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(312, listOf(title, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(322, listOf(title, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2567,7 +2734,7 @@ public fun Stepper(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(315, listOf(title, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(325, listOf(title, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2584,7 +2751,7 @@ public fun TabView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(318, listOf(), modifier, content = content)
+    SwiftView(328, listOf(), modifier, content = content)
 }
 
 /**
@@ -2601,7 +2768,7 @@ public fun Text(
     verbatim: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(320, listOf(verbatim), modifier)
+    SwiftView(330, listOf(verbatim), modifier)
 }
 
 /**
@@ -2619,7 +2786,7 @@ public fun Text(
     style: Text.DateStyle,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(321, listOf(date, style), modifier)
+    SwiftView(331, listOf(date, style), modifier)
 }
 
 /**
@@ -2634,7 +2801,7 @@ public fun Text(
 @HiddenFromObjC
 @Composable
 public fun TextEditorView(textEditor: TextEditor, modifier: Modifier = Modifier) {
-    SwiftView(327, listOf(textEditor), modifier)
+    SwiftView(337, listOf(textEditor), modifier)
 }
 
 /**
@@ -2655,7 +2822,7 @@ public fun TextField(
     onEditingChanged: (Boolean) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(331, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
+    SwiftView(341, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -2675,7 +2842,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     onEditingChanged: (Boolean) -> Unit,
 ) {
-    SwiftView(333, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(343, listOf(title, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -2695,7 +2862,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(336, listOf(title, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
+    SwiftView(346, listOf(title, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
 }
 
 /**
@@ -2715,7 +2882,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(344, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(354, listOf(title, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -2734,7 +2901,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(347, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(357, listOf(title, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -2749,7 +2916,7 @@ public fun TextField(
 @HiddenFromObjC
 @Composable
 public fun TextInputBorderShapeView(textInputBorderShape: TextInputBorderShape, modifier: Modifier = Modifier) {
-    SwiftView(352, listOf(textInputBorderShape), modifier)
+    SwiftView(362, listOf(textInputBorderShape), modifier)
 }
 
 /**
@@ -2768,7 +2935,7 @@ public fun Toggle(
     onIsOnChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(353, listOf(isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier, content = content)
+    SwiftView(363, listOf(isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -2787,7 +2954,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(356, listOf(title, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(366, listOf(title, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -2807,7 +2974,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(359, listOf(title, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(369, listOf(title, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -2825,7 +2992,7 @@ public fun TransformedShape(
     transform: CGAffineTransform,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(363, listOf(shape, transform), modifier)
+    SwiftView(373, listOf(shape, transform), modifier)
 }
 
 /**
@@ -2840,7 +3007,7 @@ public fun TransformedShape(
 @HiddenFromObjC
 @Composable
 public fun UnevenRoundedRectangleView(unevenRoundedRectangle: UnevenRoundedRectangle, modifier: Modifier = Modifier) {
-    SwiftView(364, listOf(unevenRoundedRectangle), modifier)
+    SwiftView(374, listOf(unevenRoundedRectangle), modifier)
 }
 
 /**
@@ -2857,7 +3024,7 @@ public fun VSplitView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(365, listOf(), modifier, content = content)
+    SwiftView(375, listOf(), modifier, content = content)
 }
 
 /**
@@ -2876,7 +3043,7 @@ public fun VStack(
     spacing: Double? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(366, listOf(alignment, spacing), modifier, content = content)
+    SwiftView(376, listOf(alignment, spacing), modifier, content = content)
 }
 
 /**
@@ -2894,7 +3061,7 @@ public fun ViewThatFits(
     axes: Axis.Set? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(367, listOf(axes), modifier, content = content)
+    SwiftView(377, listOf(axes), modifier, content = content)
 }
 
 /**
@@ -2911,7 +3078,7 @@ public fun WindowVisibilityToggle(
     windowID: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(368, listOf(windowID), modifier)
+    SwiftView(378, listOf(windowID), modifier)
 }
 
 /**
@@ -2929,7 +3096,7 @@ public fun ZStack(
     alignment: Alignment = Alignment.center,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(369, listOf(alignment), modifier, content = content)
+    SwiftView(379, listOf(alignment), modifier, content = content)
 }
 
 /**
@@ -2947,7 +3114,7 @@ public fun Label(
     image: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(113, listOf(title, image), modifier)
+    SwiftView(117, listOf(title, image), modifier)
 }
 
 /**
@@ -3107,6 +3274,47 @@ public fun ButtonSystemImage(
 }
 
 /**
+ * SwiftUI `ColorPicker.init(_:selection:supportsOpacity:)`
+ *
+ * ```swift
+ * @export(implementation) nonisolated init(_ titleResource: LocalizedStringResource, selection: Binding<Color>, supportsOpacity: Bool = true)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC
+@Composable
+public fun ColorPicker(
+    titleResource: LocalizedKey,
+    selection: Color,
+    modifier: Modifier = Modifier,
+    supportsOpacity: Boolean = true,
+    onSelectionChange: (Color) -> Unit,
+) {
+    SwiftView(33, listOf(titleResource.key, selection, SValueCallback { (it as? SExpr)?.let { e -> onSelectionChange(Color(e.id, e.args)) } }, supportsOpacity), modifier)
+}
+
+/**
+ * SwiftUI `ColorPicker.init(_:selection:supportsOpacity:)`
+ *
+ * ```swift
+ * nonisolated init(_ titleKey: LocalizedStringKey, selection: Binding<Color>, supportsOpacity: Bool = true)
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@Deprecated("Use ColorPicker(titleKey = …)", level = DeprecationLevel.WARNING)
+@HiddenFromObjC
+@Composable
+public fun ColorPickerSelection(
+    titleKey: LocalizedKey,
+    selection: Color,
+    modifier: Modifier = Modifier,
+    supportsOpacity: Boolean = true,
+    onSelectionChange: (Color) -> Unit,
+) {
+    SwiftView(34, listOf(titleKey.key, selection, SValueCallback { (it as? SExpr)?.let { e -> onSelectionChange(Color(e.id, e.args)) } }, supportsOpacity), modifier)
+}
+
+/**
  * SwiftUI `ContentUnavailableView.init(_:systemImage:description:)`
  *
  * ```swift
@@ -3122,7 +3330,7 @@ public fun ContentUnavailableView(
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(35, listOf(title.key, systemImage.name, description), modifier)
+    SwiftView(39, listOf(title.key, systemImage.name, description), modifier)
 }
 
 /**
@@ -3142,7 +3350,7 @@ public fun ContentUnavailableViewSystemImage(
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(36, listOf(title.key, systemImage.name, description), modifier)
+    SwiftView(40, listOf(title.key, systemImage.name, description), modifier)
 }
 
 /**
@@ -3161,7 +3369,7 @@ public fun ContentUnavailableView(
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(37, listOf(title, systemImage.name, description), modifier)
+    SwiftView(41, listOf(title, systemImage.name, description), modifier)
 }
 
 /**
@@ -3180,7 +3388,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(43, listOf(titleResource.key, systemImage.name), modifier, content = content)
+    SwiftView(47, listOf(titleResource.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3200,7 +3408,7 @@ public fun ControlGroupSystemImage(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(44, listOf(titleKey.key, systemImage.name), modifier, content = content)
+    SwiftView(48, listOf(titleKey.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3218,7 +3426,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(49, listOf(titleResource.key), modifier, content = content)
+    SwiftView(53, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -3238,7 +3446,7 @@ public fun DatePicker(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(54, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
+    SwiftView(58, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
 }
 
 /**
@@ -3259,7 +3467,7 @@ public fun DatePickerSelection(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(55, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
+    SwiftView(59, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier)
 }
 
 /**
@@ -3279,7 +3487,7 @@ public fun DisclosureGroup(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(64, listOf(titleResource.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(68, listOf(titleResource.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3300,7 +3508,7 @@ public fun DisclosureGroupIsExpanded(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(65, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(69, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3318,7 +3526,7 @@ public fun DisclosureGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(67, listOf(titleResource.key), modifier, content = content)
+    SwiftView(71, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -3336,7 +3544,7 @@ public fun GroupBox(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(88, listOf(titleResource.key), modifier, content = content)
+    SwiftView(92, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -3355,7 +3563,7 @@ public fun Image(
     label: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(99, listOf(name, variableValue, label), modifier)
+    SwiftView(103, listOf(name, variableValue, label), modifier)
 }
 
 /**
@@ -3373,7 +3581,7 @@ public fun Image(
     label: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(101, listOf(name, label), modifier)
+    SwiftView(105, listOf(name, label), modifier)
 }
 
 /**
@@ -3391,7 +3599,7 @@ public fun Label(
     systemImage: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(105, listOf(titleResource.key, systemImage.name), modifier)
+    SwiftView(109, listOf(titleResource.key, systemImage.name), modifier)
 }
 
 /**
@@ -3410,7 +3618,7 @@ public fun LabelSystemImage(
     systemImage: SFSymbol,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(106, listOf(titleKey.key, systemImage.name), modifier)
+    SwiftView(110, listOf(titleKey.key, systemImage.name), modifier)
 }
 
 /**
@@ -3428,7 +3636,7 @@ public fun LabeledContent(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(114, listOf(titleResource.key), modifier, content = content)
+    SwiftView(118, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -3446,7 +3654,7 @@ public fun LabeledContent(
     value: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(117, listOf(titleResource.key, value), modifier)
+    SwiftView(121, listOf(titleResource.key, value), modifier)
 }
 
 /**
@@ -3465,7 +3673,7 @@ public fun LabeledContentValue(
     value: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(118, listOf(titleKey.key, value), modifier)
+    SwiftView(122, listOf(titleKey.key, value), modifier)
 }
 
 /**
@@ -3483,7 +3691,7 @@ public fun Link(
     destination: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(127, listOf(titleResource.key, destination), modifier)
+    SwiftView(131, listOf(titleResource.key, destination), modifier)
 }
 
 /**
@@ -3502,7 +3710,7 @@ public fun LinkDestination(
     destination: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(128, listOf(titleKey.key, destination), modifier)
+    SwiftView(132, listOf(titleKey.key, destination), modifier)
 }
 
 /**
@@ -3522,7 +3730,7 @@ public fun Menu(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(134, listOf(titleResource.key, systemImage.name, SAction(primaryAction)), modifier, content = content)
+    SwiftView(138, listOf(titleResource.key, systemImage.name, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3543,7 +3751,7 @@ public fun MenuSystemImage(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(135, listOf(titleKey.key, systemImage.name, SAction(primaryAction)), modifier, content = content)
+    SwiftView(139, listOf(titleKey.key, systemImage.name, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3562,7 +3770,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(136, listOf(titleResource.key, systemImage.name), modifier, content = content)
+    SwiftView(140, listOf(titleResource.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3582,7 +3790,7 @@ public fun MenuSystemImage(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(137, listOf(titleKey.key, systemImage.name), modifier, content = content)
+    SwiftView(141, listOf(titleKey.key, systemImage.name), modifier, content = content)
 }
 
 /**
@@ -3601,7 +3809,7 @@ public fun Menu(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(144, listOf(titleResource.key, SAction(primaryAction)), modifier, content = content)
+    SwiftView(148, listOf(titleResource.key, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3621,7 +3829,7 @@ public fun MenuPrimaryAction(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(145, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content)
+    SwiftView(149, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -3639,7 +3847,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(147, listOf(titleResource.key), modifier, content = content)
+    SwiftView(151, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -3657,7 +3865,7 @@ public fun MenuButton(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(151, listOf(titleKey.key), modifier, content = content)
+    SwiftView(155, listOf(titleKey.key), modifier, content = content)
 }
 
 /**
@@ -3675,7 +3883,7 @@ public fun NavigationLink(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(166, listOf(titleResource.key), modifier, content = content)
+    SwiftView(170, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -3693,7 +3901,7 @@ public fun NavigationLink(
     value: Any?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(177, listOf(titleResource.key, value), modifier)
+    SwiftView(181, listOf(titleResource.key, value), modifier)
 }
 
 /**
@@ -3712,7 +3920,7 @@ public fun NavigationLinkValue(
     value: Any?,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(178, listOf(titleResource.key, value), modifier)
+    SwiftView(182, listOf(titleResource.key, value), modifier)
 }
 
 /**
@@ -3733,7 +3941,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(216, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(226, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3755,7 +3963,7 @@ public fun PickerSelection(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(217, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(227, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3775,7 +3983,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(219, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(229, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3796,7 +4004,7 @@ public fun PickerSelection(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(220, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(230, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3818,7 +4026,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(222, listOf(titleResource.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(232, listOf(titleResource.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3841,7 +4049,7 @@ public fun PickerSystemImage(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(223, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(233, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -3862,7 +4070,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(225, listOf(titleResource.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(235, listOf(titleResource.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3884,7 +4092,7 @@ public fun PickerSystemImage(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(226, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(236, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -3901,7 +4109,7 @@ public fun ProgressView(
     titleResource: LocalizedKey,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(241, listOf(titleResource.key), modifier)
+    SwiftView(251, listOf(titleResource.key), modifier)
 }
 
 /**
@@ -3920,7 +4128,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(245, listOf(titleResource.key, value, total), modifier)
+    SwiftView(255, listOf(titleResource.key, value, total), modifier)
 }
 
 /**
@@ -3940,7 +4148,7 @@ public fun ProgressViewValue(
     modifier: Modifier = Modifier,
     total: Double = 1.0,
 ) {
-    SwiftView(246, listOf(titleKey.key, value, total), modifier)
+    SwiftView(256, listOf(titleKey.key, value, total), modifier)
 }
 
 /**
@@ -3960,7 +4168,7 @@ public fun Section(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(257, listOf(titleResource.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(267, listOf(titleResource.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3981,7 +4189,7 @@ public fun SectionIsExpanded(
     onIsExpandedChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(258, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
+    SwiftView(268, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -3999,7 +4207,7 @@ public fun Section(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(260, listOf(titleResource.key), modifier, content = content)
+    SwiftView(270, listOf(titleResource.key), modifier, content = content)
 }
 
 /**
@@ -4019,7 +4227,7 @@ public fun SecureField(
     onTextChange: (String) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(270, listOf(text, SValueCallback { onTextChange(it as String) }, prompt), modifier, content = content)
+    SwiftView(280, listOf(text, SValueCallback { onTextChange(it as String) }, prompt), modifier, content = content)
 }
 
 /**
@@ -4039,7 +4247,7 @@ public fun SecureField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(271, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+    SwiftView(281, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -4060,7 +4268,7 @@ public fun SecureFieldText(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(272, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+    SwiftView(282, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -4080,7 +4288,7 @@ public fun SecureField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(273, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+    SwiftView(283, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -4100,7 +4308,7 @@ public fun SecureField(
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(274, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(284, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -4119,7 +4327,7 @@ public fun SecureField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(276, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(286, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -4139,7 +4347,7 @@ public fun SecureFieldText(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(277, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(287, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -4158,7 +4366,7 @@ public fun ShareLink(
     subject: String? = null,
     message: String? = null,
 ) {
-    SwiftView(281, listOf(item, subject, message), modifier)
+    SwiftView(291, listOf(item, subject, message), modifier)
 }
 
 /**
@@ -4178,7 +4386,7 @@ public fun ShareLinkItem(
     subject: String? = null,
     message: String? = null,
 ) {
-    SwiftView(282, listOf(item, subject, message), modifier)
+    SwiftView(292, listOf(item, subject, message), modifier)
 }
 
 /**
@@ -4198,7 +4406,7 @@ public fun ShareLink(
     subject: String? = null,
     message: String? = null,
 ) {
-    SwiftView(283, listOf(titleKey.key, item, subject, message), modifier)
+    SwiftView(293, listOf(titleKey.key, item, subject, message), modifier)
 }
 
 /**
@@ -4218,7 +4426,7 @@ public fun ShareLink(
     subject: String? = null,
     message: String? = null,
 ) {
-    SwiftView(284, listOf(title, item, subject, message), modifier)
+    SwiftView(294, listOf(title, item, subject, message), modifier)
 }
 
 /**
@@ -4239,7 +4447,7 @@ public fun ShareLinkItem(
     subject: String? = null,
     message: String? = null,
 ) {
-    SwiftView(285, listOf(titleResource.key, item, subject, message), modifier)
+    SwiftView(295, listOf(titleResource.key, item, subject, message), modifier)
 }
 
 /**
@@ -4260,7 +4468,7 @@ public fun ShareLinkItem(
     subject: String? = null,
     message: String? = null,
 ) {
-    SwiftView(286, listOf(title, item, subject, message), modifier)
+    SwiftView(296, listOf(title, item, subject, message), modifier)
 }
 
 /**
@@ -4280,7 +4488,7 @@ public fun ShareLink(
     message: String? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(291, listOf(item, subject, message), modifier, content = content)
+    SwiftView(301, listOf(item, subject, message), modifier, content = content)
 }
 
 /**
@@ -4301,7 +4509,7 @@ public fun ShareLinkItem(
     message: String? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(292, listOf(item, subject, message), modifier, content = content)
+    SwiftView(302, listOf(item, subject, message), modifier, content = content)
 }
 
 /**
@@ -4323,7 +4531,7 @@ public fun Stepper(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(310, listOf(titleResource.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(320, listOf(titleResource.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -4346,7 +4554,7 @@ public fun StepperValue(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(311, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(321, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -4367,7 +4575,7 @@ public fun Stepper(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(313, listOf(titleResource.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(323, listOf(titleResource.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -4389,7 +4597,7 @@ public fun StepperValue(
     onValueChange: (Int) -> Unit,
     onEditingChanged: (Boolean) -> Unit = {},
 ) {
-    SwiftView(314, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(324, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -4407,7 +4615,7 @@ public fun Text(
     modifier: Modifier = Modifier,
     tableName: String? = null,
 ) {
-    SwiftView(322, listOf(key.key, tableName), modifier)
+    SwiftView(332, listOf(key.key, tableName), modifier)
 }
 
 /**
@@ -4424,7 +4632,7 @@ public fun Text(
     resource: LocalizedKey,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(324, listOf(resource.key), modifier)
+    SwiftView(334, listOf(resource.key), modifier)
 }
 
 /**
@@ -4445,7 +4653,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(328, listOf(text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier, content = content)
+    SwiftView(338, listOf(text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier, content = content)
 }
 
 /**
@@ -4465,7 +4673,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(329, listOf(text, SValueCallback { onTextChange(it as String) }, prompt), modifier, content = content)
+    SwiftView(339, listOf(text, SValueCallback { onTextChange(it as String) }, prompt), modifier, content = content)
 }
 
 /**
@@ -4486,7 +4694,7 @@ public fun TextField(
     onEditingChanged: (Boolean) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(330, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
+    SwiftView(340, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -4506,7 +4714,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     onEditingChanged: (Boolean) -> Unit,
 ) {
-    SwiftView(332, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
+    SwiftView(342, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SValueCallback { onEditingChanged(it as Boolean) }), modifier)
 }
 
 /**
@@ -4526,7 +4734,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(334, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
+    SwiftView(344, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
 }
 
 /**
@@ -4547,7 +4755,7 @@ public fun TextFieldText(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(335, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
+    SwiftView(345, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier)
 }
 
 /**
@@ -4568,7 +4776,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(337, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
+    SwiftView(347, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
 }
 
 /**
@@ -4590,7 +4798,7 @@ public fun TextFieldText(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(338, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
+    SwiftView(348, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
 }
 
 /**
@@ -4611,7 +4819,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(339, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
+    SwiftView(349, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier)
 }
 
 /**
@@ -4631,7 +4839,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(340, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+    SwiftView(350, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -4652,7 +4860,7 @@ public fun TextFieldText(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(341, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+    SwiftView(351, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -4672,7 +4880,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(342, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
+    SwiftView(352, listOf(title, text, SValueCallback { onTextChange(it as String) }, prompt), modifier)
 }
 
 /**
@@ -4692,7 +4900,7 @@ public fun TextField(
     onTextChange: (String) -> Unit,
     onCommit: () -> Unit,
 ) {
-    SwiftView(343, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
+    SwiftView(353, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, SAction(onCommit)), modifier)
 }
 
 /**
@@ -4711,7 +4919,7 @@ public fun TextField(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(345, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(355, listOf(titleResource.key, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -4731,7 +4939,7 @@ public fun TextFieldText(
     modifier: Modifier = Modifier,
     onTextChange: (String) -> Unit,
 ) {
-    SwiftView(346, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier)
+    SwiftView(356, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier)
 }
 
 /**
@@ -4750,7 +4958,7 @@ public fun TextFieldLink(
     onSubmit: (String) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(348, listOf(prompt, SValueCallback { onSubmit(it as String) }), modifier, content = content)
+    SwiftView(358, listOf(prompt, SValueCallback { onSubmit(it as String) }), modifier, content = content)
 }
 
 /**
@@ -4769,7 +4977,7 @@ public fun TextFieldLink(
     prompt: String? = null,
     onSubmit: (String) -> Unit,
 ) {
-    SwiftView(349, listOf(titleResource.key, prompt, SValueCallback { onSubmit(it as String) }), modifier)
+    SwiftView(359, listOf(titleResource.key, prompt, SValueCallback { onSubmit(it as String) }), modifier)
 }
 
 /**
@@ -4789,7 +4997,7 @@ public fun TextFieldLinkPrompt(
     prompt: String? = null,
     onSubmit: (String) -> Unit,
 ) {
-    SwiftView(350, listOf(titleKey.key, prompt, SValueCallback { onSubmit(it as String) }), modifier)
+    SwiftView(360, listOf(titleKey.key, prompt, SValueCallback { onSubmit(it as String) }), modifier)
 }
 
 /**
@@ -4808,7 +5016,7 @@ public fun TextFieldLink(
     prompt: String? = null,
     onSubmit: (String) -> Unit,
 ) {
-    SwiftView(351, listOf(title, prompt, SValueCallback { onSubmit(it as String) }), modifier)
+    SwiftView(361, listOf(title, prompt, SValueCallback { onSubmit(it as String) }), modifier)
 }
 
 /**
@@ -4827,7 +5035,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(354, listOf(titleResource.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(364, listOf(titleResource.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -4847,7 +5055,7 @@ public fun ToggleIsOn(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(355, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(365, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -4867,7 +5075,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(357, listOf(titleResource.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(367, listOf(titleResource.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -4888,7 +5096,7 @@ public fun ToggleSystemImage(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(358, listOf(titleKey.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(368, listOf(titleKey.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -4907,7 +5115,7 @@ public fun ContentUnavailableView(
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(38, listOf(title.key, image, description), modifier)
+    SwiftView(42, listOf(title.key, image, description), modifier)
 }
 
 /**
@@ -4927,7 +5135,7 @@ public fun ContentUnavailableViewImage(
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(39, listOf(title.key, image, description), modifier)
+    SwiftView(43, listOf(title.key, image, description), modifier)
 }
 
 /**
@@ -4946,7 +5154,7 @@ public fun ContentUnavailableView(
     modifier: Modifier = Modifier,
     description: String? = null,
 ) {
-    SwiftView(40, listOf(title, image, description), modifier)
+    SwiftView(44, listOf(title, image, description), modifier)
 }
 
 /**
@@ -4964,7 +5172,7 @@ public fun Label(
     image: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(109, listOf(titleResource.key, image), modifier)
+    SwiftView(113, listOf(titleResource.key, image), modifier)
 }
 
 /**
@@ -4983,7 +5191,7 @@ public fun LabelImage(
     image: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(111, listOf(titleKey.key, image), modifier)
+    SwiftView(115, listOf(titleKey.key, image), modifier)
 }
 
 /**
@@ -5021,7 +5229,7 @@ public fun DatePicker(
     onSelectionChange: (Double) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(53, listOf(selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier, content = content)
+    SwiftView(57, listOf(selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier, content = content)
 }
 
 /**
@@ -5042,7 +5250,7 @@ public fun DatePicker(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(59, listOf(title, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier)
+    SwiftView(63, listOf(title, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier)
 }
 
 /**
@@ -5062,7 +5270,7 @@ public fun FillShapeView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(75, listOf(shape, style, fillStyle), modifier, content = content)
+    SwiftView(79, listOf(shape, style, fillStyle), modifier, content = content)
 }
 
 /**
@@ -5080,7 +5288,7 @@ public fun MenuButton(
     label: @Composable () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(150, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(154, listOf(SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -5098,7 +5306,7 @@ public fun NewDocumentButton(
     contentType: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(190, listOf(title, contentType), modifier)
+    SwiftView(200, listOf(title, contentType), modifier)
 }
 
 /**
@@ -5117,7 +5325,7 @@ public fun NewDocumentButton(
     source: DocumentCreationSource,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(193, listOf(title, contentType, source), modifier)
+    SwiftView(203, listOf(title, contentType, source), modifier)
 }
 
 /**
@@ -5136,7 +5344,7 @@ public fun NewDocumentButton(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(197, listOf(title, contentType, source), modifier)
+    SwiftView(207, listOf(title, contentType, source), modifier)
 }
 
 /**
@@ -5154,7 +5362,7 @@ public fun NewDocumentButton(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(202, listOf(title, contentType), modifier)
+    SwiftView(212, listOf(title, contentType), modifier)
 }
 
 /**
@@ -5173,7 +5381,7 @@ public fun NewDocumentButtonContentType(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(209, listOf(title, contentType), modifier)
+    SwiftView(219, listOf(title, contentType), modifier)
 }
 
 /**
@@ -5194,7 +5402,7 @@ public fun PickerSelection(
     label: @Composable () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(213, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
+    SwiftView(223, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content)
 }
 
 /**
@@ -5214,7 +5422,7 @@ public fun ProgressView(
     label: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(234, listOf(listOf(timerInterval.start, timerInterval.endInclusive), countsDown, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
+    SwiftView(244, listOf(listOf(timerInterval.start, timerInterval.endInclusive), countsDown, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(label, currentValueLabel))
 }
 
 /**
@@ -5233,7 +5441,7 @@ public fun ProgressView(
     countsDown: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(238, listOf(listOf(timerInterval.start, timerInterval.endInclusive), countsDown), modifier, content = content)
+    SwiftView(248, listOf(listOf(timerInterval.start, timerInterval.endInclusive), countsDown), modifier, content = content)
 }
 
 /**
@@ -5251,7 +5459,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
     countsDown: Boolean = true,
 ) {
-    SwiftView(244, listOf(listOf(timerInterval.start, timerInterval.endInclusive), countsDown), modifier)
+    SwiftView(254, listOf(listOf(timerInterval.start, timerInterval.endInclusive), countsDown), modifier)
 }
 
 /**
@@ -5275,7 +5483,7 @@ public fun SliderValue(
     maximumValueLabel: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(294, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label))
+    SwiftView(304, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label))
 }
 
 /**
@@ -5300,7 +5508,7 @@ public fun SliderValue(
     maximumValueLabel: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(296, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label))
+    SwiftView(306, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label))
 }
 
 /**
@@ -5321,7 +5529,7 @@ public fun StrokeBorderShapeView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(316, listOf(shape, style, strokeStyle, isAntialiased), modifier, content = content)
+    SwiftView(326, listOf(shape, style, strokeStyle, isAntialiased), modifier, content = content)
 }
 
 /**
@@ -5342,7 +5550,7 @@ public fun StrokeShapeView(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(317, listOf(shape, style, strokeStyle, isAntialiased), modifier, content = content)
+    SwiftView(327, listOf(shape, style, strokeStyle, isAntialiased), modifier, content = content)
 }
 
 /**
@@ -5362,7 +5570,7 @@ public fun Text(
     countsDown: Boolean = true,
     showsHours: Boolean = true,
 ) {
-    SwiftView(319, listOf(listOf(timerInterval.start, timerInterval.endInclusive), pauseTime, countsDown, showsHours), modifier)
+    SwiftView(329, listOf(listOf(timerInterval.start, timerInterval.endInclusive), pauseTime, countsDown, showsHours), modifier)
 }
 
 /**
@@ -5379,7 +5587,7 @@ public fun Text(
     dates: ClosedFloatingPointRange<Double>,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(325, listOf(listOf(dates.start, dates.endInclusive)), modifier)
+    SwiftView(335, listOf(listOf(dates.start, dates.endInclusive)), modifier)
 }
 
 /**
@@ -5437,7 +5645,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(48, listOf(title, image), modifier, content = content)
+    SwiftView(52, listOf(title, image), modifier, content = content)
 }
 
 /**
@@ -5456,7 +5664,7 @@ public fun LabelImage(
     image: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(112, listOf(title, image), modifier)
+    SwiftView(116, listOf(title, image), modifier)
 }
 
 /**
@@ -5475,7 +5683,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(143, listOf(title, image), modifier, content = content)
+    SwiftView(147, listOf(title, image), modifier, content = content)
 }
 
 /**
@@ -5497,7 +5705,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(230, listOf(title, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(240, listOf(title, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -5518,7 +5726,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(233, listOf(title, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(243, listOf(title, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -5538,7 +5746,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(362, listOf(title, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(372, listOf(title, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -5559,7 +5767,7 @@ public fun DatePicker(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(57, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier)
+    SwiftView(61, listOf(titleResource.key, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier)
 }
 
 /**
@@ -5581,7 +5789,7 @@ public fun DatePickerSelection(
     displayedComponents: DatePickerComponents? = null,
     onSelectionChange: (Double) -> Unit,
 ) {
-    SwiftView(58, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier)
+    SwiftView(62, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier)
 }
 
 /**
@@ -5599,7 +5807,7 @@ public fun NewDocumentButton(
     contentType: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(187, listOf(title.key, contentType), modifier)
+    SwiftView(197, listOf(title.key, contentType), modifier)
 }
 
 /**
@@ -5618,7 +5826,7 @@ public fun NewDocumentButtonContentType(
     contentType: String,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(188, listOf(title.key, contentType), modifier)
+    SwiftView(198, listOf(title.key, contentType), modifier)
 }
 
 /**
@@ -5637,7 +5845,7 @@ public fun NewDocumentButton(
     source: DocumentCreationSource,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(191, listOf(title.key, contentType, source), modifier)
+    SwiftView(201, listOf(title.key, contentType, source), modifier)
 }
 
 /**
@@ -5657,7 +5865,7 @@ public fun NewDocumentButtonContentType(
     source: DocumentCreationSource,
     modifier: Modifier = Modifier,
 ) {
-    SwiftView(192, listOf(title.key, contentType, source), modifier)
+    SwiftView(202, listOf(title.key, contentType, source), modifier)
 }
 
 /**
@@ -5676,7 +5884,7 @@ public fun NewDocumentButton(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(194, listOf(title.key, contentType, source), modifier)
+    SwiftView(204, listOf(title.key, contentType, source), modifier)
 }
 
 /**
@@ -5696,7 +5904,7 @@ public fun NewDocumentButtonContentType(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(195, listOf(title.key, contentType, source), modifier)
+    SwiftView(205, listOf(title.key, contentType, source), modifier)
 }
 
 /**
@@ -5715,7 +5923,7 @@ public fun NewDocumentButton(
     label: String? = null,
     contentType: String? = null,
 ) {
-    SwiftView(196, listOf(label, contentType, source), modifier)
+    SwiftView(206, listOf(label, contentType, source), modifier)
 }
 
 /**
@@ -5735,7 +5943,7 @@ public fun NewDocumentButtonContentType(
     modifier: Modifier = Modifier,
     label: String? = null,
 ) {
-    SwiftView(198, listOf(label, contentType, source), modifier)
+    SwiftView(208, listOf(label, contentType, source), modifier)
 }
 
 /**
@@ -5753,7 +5961,7 @@ public fun NewDocumentButton(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(199, listOf(title.key, contentType), modifier)
+    SwiftView(209, listOf(title.key, contentType), modifier)
 }
 
 /**
@@ -5772,7 +5980,7 @@ public fun NewDocumentButtonContentType(
     modifier: Modifier = Modifier,
     contentType: String? = null,
 ) {
-    SwiftView(200, listOf(title.key, contentType), modifier)
+    SwiftView(210, listOf(title.key, contentType), modifier)
 }
 
 /**
@@ -5790,7 +5998,7 @@ public fun NewDocumentButton(
     label: String? = null,
     contentType: String? = null,
 ) {
-    SwiftView(201, listOf(label, contentType), modifier)
+    SwiftView(211, listOf(label, contentType), modifier)
 }
 
 /**
@@ -5809,7 +6017,7 @@ public fun NewDocumentButtonContentType(
     label: String? = null,
     contentType: String? = null,
 ) {
-    SwiftView(207, listOf(label, contentType), modifier)
+    SwiftView(217, listOf(label, contentType), modifier)
 }
 
 /**
@@ -5908,7 +6116,7 @@ public fun ControlGroup(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(46, listOf(titleResource.key, image), modifier, content = content)
+    SwiftView(50, listOf(titleResource.key, image), modifier, content = content)
 }
 
 /**
@@ -5928,7 +6136,7 @@ public fun ControlGroupImage(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(47, listOf(titleKey.key, image), modifier, content = content)
+    SwiftView(51, listOf(titleKey.key, image), modifier, content = content)
 }
 
 /**
@@ -5948,7 +6156,7 @@ public fun Menu(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(139, listOf(titleResource.key, image, SAction(primaryAction)), modifier, content = content)
+    SwiftView(143, listOf(titleResource.key, image, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -5969,7 +6177,7 @@ public fun MenuImage(
     primaryAction: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(140, listOf(titleKey.key, image, SAction(primaryAction)), modifier, content = content)
+    SwiftView(144, listOf(titleKey.key, image, SAction(primaryAction)), modifier, content = content)
 }
 
 /**
@@ -5988,7 +6196,7 @@ public fun Menu(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(141, listOf(titleResource.key, image), modifier, content = content)
+    SwiftView(145, listOf(titleResource.key, image), modifier, content = content)
 }
 
 /**
@@ -6008,7 +6216,7 @@ public fun MenuImage(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(142, listOf(titleKey.key, image), modifier, content = content)
+    SwiftView(146, listOf(titleKey.key, image), modifier, content = content)
 }
 
 /**
@@ -6030,7 +6238,7 @@ public fun Picker(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(228, listOf(titleResource.key, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(238, listOf(titleResource.key, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -6053,7 +6261,7 @@ public fun PickerImage(
     content: @Composable () -> Unit,
     currentValueLabel: @Composable () -> Unit,
 ) {
-    SwiftView(229, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
+    SwiftView(239, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content)
 }
 
 /**
@@ -6074,7 +6282,7 @@ public fun Picker(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(231, listOf(titleResource.key, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(241, listOf(titleResource.key, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -6096,7 +6304,7 @@ public fun PickerImage(
     onSelectionChange: (Any) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(232, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
+    SwiftView(242, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content)
 }
 
 /**
@@ -6116,7 +6324,7 @@ public fun Toggle(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(360, listOf(titleResource.key, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(370, listOf(titleResource.key, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -6137,7 +6345,7 @@ public fun ToggleImage(
     modifier: Modifier = Modifier,
     onIsOnChange: (Boolean) -> Unit,
 ) {
-    SwiftView(361, listOf(titleKey.key, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
+    SwiftView(371, listOf(titleKey.key, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier)
 }
 
 /**
@@ -6159,7 +6367,7 @@ public fun NavigationLink(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(157, listOf(tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(161, listOf(tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -6180,7 +6388,7 @@ public fun NavigationLink(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(158, listOf(isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(162, listOf(isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(0), SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -6202,7 +6410,7 @@ public fun NavigationLinkTag(
     onSelectionChange: (Any?) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(172, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+    SwiftView(176, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
 }
 
 /**
@@ -6223,7 +6431,7 @@ public fun NavigationLinkIsActive(
     onIsActiveChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(174, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+    SwiftView(178, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -6245,7 +6453,7 @@ public fun NavigationLink(
     onSelectionChange: (Any?) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(171, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+    SwiftView(175, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
 }
 
 /**
@@ -6266,7 +6474,7 @@ public fun NavigationLink(
     onIsActiveChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(173, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+    SwiftView(177, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -6288,7 +6496,7 @@ public fun NavigationLinkTag(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(153, listOf(SSlotRef(0), tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(157, listOf(SSlotRef(0), tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -6309,7 +6517,7 @@ public fun NavigationLinkIsActive(
     destination: @Composable () -> Unit,
     label: @Composable () -> Unit,
 ) {
-    SwiftView(156, listOf(SSlotRef(0), isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(1)), modifier, slots = listOf(destination, label))
+    SwiftView(160, listOf(SSlotRef(0), isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(1)), modifier, slots = listOf(destination, label))
 }
 
 /**
@@ -6331,7 +6539,7 @@ public fun NavigationLinkTag(
     onSelectionChange: (Any?) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(162, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
+    SwiftView(166, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content)
 }
 
 /**
@@ -6352,7 +6560,7 @@ public fun NavigationLinkIsActive(
     onIsActiveChange: (Boolean) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(164, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
+    SwiftView(168, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content)
 }
 
 /**
@@ -6382,6 +6590,26 @@ public fun Button(
 }
 
 /**
+ * SwiftUI `ColorPicker` initializers that differ only by argument labels, selected by the labels you pass
+ * (e.g. `Image(systemName = SFSymbol.star)`).
+ */
+@HiddenFromObjC
+@Composable
+@Suppress("NAME_SHADOWING")
+public fun ColorPicker(
+    titleKey: LocalizedKey? = null,
+    selection: Color? = null,
+    supportsOpacity: Boolean? = null,
+    modifier: Modifier = Modifier,
+    onSelectionChange: ((Color) -> Unit)? = null,
+) {
+    when {
+        titleKey != null && selection != null && onSelectionChange != null -> { val titleKey = titleKey!!; val selection = selection!!; val supportsOpacity = supportsOpacity ?: true; val onSelectionChange = onSelectionChange!!; SwiftView(34, listOf(titleKey.key, selection, SValueCallback { (it as? SExpr)?.let { e -> onSelectionChange(Color(e.id, e.args)) } }, supportsOpacity), modifier) }
+        else -> error("No SwiftUI ColorPicker initializer takes this combination of arguments")
+    }
+}
+
+/**
  * SwiftUI `ContentUnavailableView` initializers that differ only by argument labels, selected by the labels you pass
  * (e.g. `Image(systemName = SFSymbol.star)`).
  */
@@ -6396,8 +6624,8 @@ public fun ContentUnavailableView(
     modifier: Modifier = Modifier,
 ) {
     when {
-        title != null && systemImage != null && image == null -> { val title = title!!; val systemImage = systemImage!!; SwiftView(36, listOf(title.key, systemImage.name, description), modifier) }
-        title != null && image != null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(39, listOf(title.key, image, description), modifier) }
+        title != null && systemImage != null && image == null -> { val title = title!!; val systemImage = systemImage!!; SwiftView(40, listOf(title.key, systemImage.name, description), modifier) }
+        title != null && image != null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(43, listOf(title.key, image, description), modifier) }
         else -> error("No SwiftUI ContentUnavailableView initializer takes this combination of arguments")
     }
 }
@@ -6417,8 +6645,8 @@ public fun ControlGroup(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && content != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(44, listOf(titleKey.key, systemImage.name), modifier, content = content) }
-        titleKey != null && image != null && content != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; val content = content!!; SwiftView(47, listOf(titleKey.key, image), modifier, content = content) }
+        titleKey != null && systemImage != null && content != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(48, listOf(titleKey.key, systemImage.name), modifier, content = content) }
+        titleKey != null && image != null && content != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; val content = content!!; SwiftView(51, listOf(titleKey.key, image), modifier, content = content) }
         else -> error("No SwiftUI ControlGroup initializer takes this combination of arguments")
     }
 }
@@ -6439,8 +6667,8 @@ public fun DatePicker(
     onSelectionChange: ((Double) -> Unit)? = null,
 ) {
     when {
-        titleKey != null && selection != null && range != null && onSelectionChange != null -> { val titleKey = titleKey!!; val selection = selection!!; val range = range!!; val onSelectionChange = onSelectionChange!!; SwiftView(58, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier) }
-        titleKey != null && selection != null && onSelectionChange != null && range == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; SwiftView(55, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier) }
+        titleKey != null && selection != null && range != null && onSelectionChange != null -> { val titleKey = titleKey!!; val selection = selection!!; val range = range!!; val onSelectionChange = onSelectionChange!!; SwiftView(62, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, listOf(range.start, range.endInclusive), displayedComponents), modifier) }
+        titleKey != null && selection != null && onSelectionChange != null && range == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; SwiftView(59, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Double) }, displayedComponents), modifier) }
         else -> error("No SwiftUI DatePicker initializer takes this combination of arguments")
     }
 }
@@ -6460,7 +6688,7 @@ public fun DisclosureGroup(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && isExpanded != null && onIsExpandedChange != null && content != null -> { val titleKey = titleKey!!; val isExpanded = isExpanded!!; val onIsExpandedChange = onIsExpandedChange!!; val content = content!!; SwiftView(65, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content) }
+        titleKey != null && isExpanded != null && onIsExpandedChange != null && content != null -> { val titleKey = titleKey!!; val isExpanded = isExpanded!!; val onIsExpandedChange = onIsExpandedChange!!; val content = content!!; SwiftView(69, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content) }
         else -> error("No SwiftUI DisclosureGroup initializer takes this combination of arguments")
     }
 }
@@ -6478,7 +6706,7 @@ public fun Image(
     modifier: Modifier = Modifier,
 ) {
     when {
-        name != null -> { val name = name!!; SwiftView(100, listOf(name, variableValue), modifier) }
+        name != null -> { val name = name!!; SwiftView(104, listOf(name, variableValue), modifier) }
         else -> error("No SwiftUI Image initializer takes this combination of arguments")
     }
 }
@@ -6498,9 +6726,9 @@ public fun Label(
     modifier: Modifier = Modifier,
 ) {
     when {
-        titleKey != null && systemImage != null && image == null && title == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; SwiftView(106, listOf(titleKey.key, systemImage.name), modifier) }
-        titleKey != null && image != null && systemImage == null && title == null -> { val titleKey = titleKey!!; val image = image!!; SwiftView(111, listOf(titleKey.key, image), modifier) }
-        title != null && image != null && titleKey == null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(112, listOf(title, image), modifier) }
+        titleKey != null && systemImage != null && image == null && title == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; SwiftView(110, listOf(titleKey.key, systemImage.name), modifier) }
+        titleKey != null && image != null && systemImage == null && title == null -> { val titleKey = titleKey!!; val image = image!!; SwiftView(115, listOf(titleKey.key, image), modifier) }
+        title != null && image != null && titleKey == null && systemImage == null -> { val title = title!!; val image = image!!; SwiftView(116, listOf(title, image), modifier) }
         else -> error("No SwiftUI Label initializer takes this combination of arguments")
     }
 }
@@ -6518,7 +6746,7 @@ public fun LabeledContent(
     modifier: Modifier = Modifier,
 ) {
     when {
-        titleKey != null && value != null -> { val titleKey = titleKey!!; val value = value!!; SwiftView(118, listOf(titleKey.key, value), modifier) }
+        titleKey != null && value != null -> { val titleKey = titleKey!!; val value = value!!; SwiftView(122, listOf(titleKey.key, value), modifier) }
         else -> error("No SwiftUI LabeledContent initializer takes this combination of arguments")
     }
 }
@@ -6536,7 +6764,7 @@ public fun Link(
     modifier: Modifier = Modifier,
 ) {
     when {
-        titleKey != null && destination != null -> { val titleKey = titleKey!!; val destination = destination!!; SwiftView(128, listOf(titleKey.key, destination), modifier) }
+        titleKey != null && destination != null -> { val titleKey = titleKey!!; val destination = destination!!; SwiftView(132, listOf(titleKey.key, destination), modifier) }
         else -> error("No SwiftUI Link initializer takes this combination of arguments")
     }
 }
@@ -6557,11 +6785,11 @@ public fun Menu(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && primaryAction != null && content != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(135, listOf(titleKey.key, systemImage.name, SAction(primaryAction)), modifier, content = content) }
-        titleKey != null && image != null && primaryAction != null && content != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(140, listOf(titleKey.key, image, SAction(primaryAction)), modifier, content = content) }
-        titleKey != null && systemImage != null && content != null && image == null && primaryAction == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(137, listOf(titleKey.key, systemImage.name), modifier, content = content) }
-        titleKey != null && primaryAction != null && content != null && systemImage == null && image == null -> { val titleKey = titleKey!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(145, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content) }
-        titleKey != null && image != null && content != null && systemImage == null && primaryAction == null -> { val titleKey = titleKey!!; val image = image!!; val content = content!!; SwiftView(142, listOf(titleKey.key, image), modifier, content = content) }
+        titleKey != null && systemImage != null && primaryAction != null && content != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(139, listOf(titleKey.key, systemImage.name, SAction(primaryAction)), modifier, content = content) }
+        titleKey != null && image != null && primaryAction != null && content != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(144, listOf(titleKey.key, image, SAction(primaryAction)), modifier, content = content) }
+        titleKey != null && systemImage != null && content != null && image == null && primaryAction == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val content = content!!; SwiftView(141, listOf(titleKey.key, systemImage.name), modifier, content = content) }
+        titleKey != null && primaryAction != null && content != null && systemImage == null && image == null -> { val titleKey = titleKey!!; val primaryAction = primaryAction!!; val content = content!!; SwiftView(149, listOf(titleKey.key, SAction(primaryAction)), modifier, content = content) }
+        titleKey != null && image != null && content != null && systemImage == null && primaryAction == null -> { val titleKey = titleKey!!; val image = image!!; val content = content!!; SwiftView(146, listOf(titleKey.key, image), modifier, content = content) }
         else -> error("No SwiftUI Menu initializer takes this combination of arguments")
     }
 }
@@ -6589,15 +6817,15 @@ public fun NavigationLink(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        title != null && isActive != null && onIsActiveChange != null && content != null && value == null && titleResource == null && tag == null && selection == null && titleKey == null && onSelectionChange == null && destination == null && label == null -> { val title = title!!; val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val content = content!!; SwiftView(174, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content) }
-        isActive != null && onIsActiveChange != null && destination != null && label != null && value == null && title == null && titleResource == null && tag == null && selection == null && titleKey == null && onSelectionChange == null && content == null -> { val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val destination = destination!!; val label = label!!; SwiftView(156, listOf(SSlotRef(0), isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(1)), modifier, slots = listOf(destination, label)) }
-        titleKey != null && isActive != null && onIsActiveChange != null && content != null && value == null && title == null && titleResource == null && tag == null && selection == null && onSelectionChange == null && destination == null && label == null -> { val titleKey = titleKey!!; val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val content = content!!; SwiftView(164, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content) }
-        title != null && tag != null && onSelectionChange != null && content != null && value == null && titleResource == null && isActive == null && titleKey == null && onIsActiveChange == null && destination == null && label == null -> { val title = title!!; val tag = tag!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(172, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content) }
-        tag != null && onSelectionChange != null && destination != null && label != null && value == null && title == null && titleResource == null && isActive == null && titleKey == null && onIsActiveChange == null && content == null -> { val tag = tag!!; val onSelectionChange = onSelectionChange!!; val destination = destination!!; val label = label!!; SwiftView(153, listOf(SSlotRef(0), tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(1)), modifier, slots = listOf(destination, label)) }
-        titleKey != null && tag != null && onSelectionChange != null && content != null && value == null && title == null && titleResource == null && isActive == null && onIsActiveChange == null && destination == null && label == null -> { val titleKey = titleKey!!; val tag = tag!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(162, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content) }
-        content != null && title == null && titleResource == null && tag == null && selection == null && isActive == null && titleKey == null && onSelectionChange == null && onIsActiveChange == null && destination == null && label == null -> { val content = content!!; SwiftView(176, listOf(value), modifier, content = content) }
-        title != null && titleResource == null && tag == null && selection == null && isActive == null && titleKey == null && onSelectionChange == null && onIsActiveChange == null && destination == null && label == null && content == null -> { val title = title!!; SwiftView(182, listOf(title, value), modifier) }
-        titleResource != null && title == null && tag == null && selection == null && isActive == null && titleKey == null && onSelectionChange == null && onIsActiveChange == null && destination == null && label == null && content == null -> { val titleResource = titleResource!!; SwiftView(178, listOf(titleResource.key, value), modifier) }
+        title != null && isActive != null && onIsActiveChange != null && content != null && value == null && titleResource == null && tag == null && selection == null && titleKey == null && onSelectionChange == null && destination == null && label == null -> { val title = title!!; val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val content = content!!; SwiftView(178, listOf(title, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content) }
+        isActive != null && onIsActiveChange != null && destination != null && label != null && value == null && title == null && titleResource == null && tag == null && selection == null && titleKey == null && onSelectionChange == null && content == null -> { val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val destination = destination!!; val label = label!!; SwiftView(160, listOf(SSlotRef(0), isActive, SValueCallback { onIsActiveChange(it as Boolean) }, SSlotRef(1)), modifier, slots = listOf(destination, label)) }
+        titleKey != null && isActive != null && onIsActiveChange != null && content != null && value == null && title == null && titleResource == null && tag == null && selection == null && onSelectionChange == null && destination == null && label == null -> { val titleKey = titleKey!!; val isActive = isActive!!; val onIsActiveChange = onIsActiveChange!!; val content = content!!; SwiftView(168, listOf(titleKey.key, isActive, SValueCallback { onIsActiveChange(it as Boolean) }), modifier, content = content) }
+        title != null && tag != null && onSelectionChange != null && content != null && value == null && titleResource == null && isActive == null && titleKey == null && onIsActiveChange == null && destination == null && label == null -> { val title = title!!; val tag = tag!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(176, listOf(title, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content) }
+        tag != null && onSelectionChange != null && destination != null && label != null && value == null && title == null && titleResource == null && isActive == null && titleKey == null && onIsActiveChange == null && content == null -> { val tag = tag!!; val onSelectionChange = onSelectionChange!!; val destination = destination!!; val label = label!!; SwiftView(157, listOf(SSlotRef(0), tag, selection, SValueCallback { onSelectionChange(it as Any?) }, SSlotRef(1)), modifier, slots = listOf(destination, label)) }
+        titleKey != null && tag != null && onSelectionChange != null && content != null && value == null && title == null && titleResource == null && isActive == null && onIsActiveChange == null && destination == null && label == null -> { val titleKey = titleKey!!; val tag = tag!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(166, listOf(titleKey.key, tag, selection, SValueCallback { onSelectionChange(it as Any?) }), modifier, content = content) }
+        content != null && title == null && titleResource == null && tag == null && selection == null && isActive == null && titleKey == null && onSelectionChange == null && onIsActiveChange == null && destination == null && label == null -> { val content = content!!; SwiftView(180, listOf(value), modifier, content = content) }
+        title != null && titleResource == null && tag == null && selection == null && isActive == null && titleKey == null && onSelectionChange == null && onIsActiveChange == null && destination == null && label == null && content == null -> { val title = title!!; SwiftView(186, listOf(title, value), modifier) }
+        titleResource != null && title == null && tag == null && selection == null && isActive == null && titleKey == null && onSelectionChange == null && onIsActiveChange == null && destination == null && label == null && content == null -> { val titleResource = titleResource!!; SwiftView(182, listOf(titleResource.key, value), modifier) }
         else -> error("No SwiftUI NavigationLink initializer takes this combination of arguments")
     }
 }
@@ -6617,9 +6845,9 @@ public fun NewDocumentButton(
     modifier: Modifier = Modifier,
 ) {
     when {
-        contentType != null && source != null && title == null -> { val contentType = contentType!!; val source = source!!; SwiftView(198, listOf(label, contentType, source), modifier) }
-        title != null && source == null && label == null -> { val title = title!!; SwiftView(209, listOf(title, contentType), modifier) }
-        title == null && source == null -> { SwiftView(207, listOf(label, contentType), modifier) }
+        contentType != null && source != null && title == null -> { val contentType = contentType!!; val source = source!!; SwiftView(208, listOf(label, contentType, source), modifier) }
+        title != null && source == null && label == null -> { val title = title!!; SwiftView(219, listOf(title, contentType), modifier) }
+        title == null && source == null -> { SwiftView(217, listOf(label, contentType), modifier) }
         else -> error("No SwiftUI NewDocumentButton initializer takes this combination of arguments")
     }
 }
@@ -6643,13 +6871,13 @@ public fun Picker(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && image == null && label == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(223, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
-        titleKey != null && image != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && systemImage == null && label == null -> { val titleKey = titleKey!!; val image = image!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(229, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
-        titleKey != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && systemImage == null && image == null && label == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(217, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
-        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && image == null && currentValueLabel == null && label == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(226, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
-        titleKey != null && image != null && selection != null && onSelectionChange != null && content != null && systemImage == null && currentValueLabel == null && label == null -> { val titleKey = titleKey!!; val image = image!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(232, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
-        titleKey != null && selection != null && onSelectionChange != null && content != null && systemImage == null && image == null && currentValueLabel == null && label == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(220, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
-        selection != null && onSelectionChange != null && label != null && content != null && titleKey == null && systemImage == null && image == null && currentValueLabel == null -> { val selection = selection!!; val onSelectionChange = onSelectionChange!!; val label = label!!; val content = content!!; SwiftView(213, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content) }
+        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && image == null && label == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(233, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
+        titleKey != null && image != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && systemImage == null && label == null -> { val titleKey = titleKey!!; val image = image!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(239, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
+        titleKey != null && selection != null && onSelectionChange != null && content != null && currentValueLabel != null && systemImage == null && image == null && label == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; val currentValueLabel = currentValueLabel!!; SwiftView(227, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(currentValueLabel), content = content) }
+        titleKey != null && systemImage != null && selection != null && onSelectionChange != null && content != null && image == null && currentValueLabel == null && label == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(236, listOf(titleKey.key, systemImage.name, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
+        titleKey != null && image != null && selection != null && onSelectionChange != null && content != null && systemImage == null && currentValueLabel == null && label == null -> { val titleKey = titleKey!!; val image = image!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(242, listOf(titleKey.key, image, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
+        titleKey != null && selection != null && onSelectionChange != null && content != null && systemImage == null && image == null && currentValueLabel == null && label == null -> { val titleKey = titleKey!!; val selection = selection!!; val onSelectionChange = onSelectionChange!!; val content = content!!; SwiftView(230, listOf(titleKey.key, selection, SValueCallback { onSelectionChange(it as Any) }), modifier, content = content) }
+        selection != null && onSelectionChange != null && label != null && content != null && titleKey == null && systemImage == null && image == null && currentValueLabel == null -> { val selection = selection!!; val onSelectionChange = onSelectionChange!!; val label = label!!; val content = content!!; SwiftView(223, listOf(selection, SValueCallback { onSelectionChange(it as Any) }, SSlotRef(0)), modifier, slots = listOf(label), content = content) }
         else -> error("No SwiftUI Picker initializer takes this combination of arguments")
     }
 }
@@ -6668,7 +6896,7 @@ public fun ProgressView(
     modifier: Modifier = Modifier,
 ) {
     when {
-        titleKey != null -> { val titleKey = titleKey!!; val total = total ?: 1.0; SwiftView(246, listOf(titleKey.key, value, total), modifier) }
+        titleKey != null -> { val titleKey = titleKey!!; val total = total ?: 1.0; SwiftView(256, listOf(titleKey.key, value, total), modifier) }
         else -> error("No SwiftUI ProgressView initializer takes this combination of arguments")
     }
 }
@@ -6688,7 +6916,7 @@ public fun Section(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleKey != null && isExpanded != null && onIsExpandedChange != null && content != null -> { val titleKey = titleKey!!; val isExpanded = isExpanded!!; val onIsExpandedChange = onIsExpandedChange!!; val content = content!!; SwiftView(258, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content) }
+        titleKey != null && isExpanded != null && onIsExpandedChange != null && content != null -> { val titleKey = titleKey!!; val isExpanded = isExpanded!!; val onIsExpandedChange = onIsExpandedChange!!; val content = content!!; SwiftView(268, listOf(titleKey.key, isExpanded, SValueCallback { onIsExpandedChange(it as Boolean) }), modifier, content = content) }
         else -> error("No SwiftUI Section initializer takes this combination of arguments")
     }
 }
@@ -6708,8 +6936,8 @@ public fun SecureField(
     onTextChange: ((String) -> Unit)? = null,
 ) {
     when {
-        titleKey != null && text != null && onTextChange != null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(277, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier) }
-        titleKey != null && text != null && onTextChange != null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(272, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier) }
+        titleKey != null && text != null && onTextChange != null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(287, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier) }
+        titleKey != null && text != null && onTextChange != null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(282, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier) }
         else -> error("No SwiftUI SecureField initializer takes this combination of arguments")
     }
 }
@@ -6731,10 +6959,10 @@ public fun ShareLink(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        titleResource != null && item != null && title == null && content == null -> { val titleResource = titleResource!!; val item = item!!; SwiftView(285, listOf(titleResource.key, item, subject, message), modifier) }
-        title != null && item != null && titleResource == null && content == null -> { val title = title!!; val item = item!!; SwiftView(286, listOf(title, item, subject, message), modifier) }
-        item != null && content != null && titleResource == null && title == null -> { val item = item!!; val content = content!!; SwiftView(292, listOf(item, subject, message), modifier, content = content) }
-        item != null && titleResource == null && title == null && content == null -> { val item = item!!; SwiftView(282, listOf(item, subject, message), modifier) }
+        titleResource != null && item != null && title == null && content == null -> { val titleResource = titleResource!!; val item = item!!; SwiftView(295, listOf(titleResource.key, item, subject, message), modifier) }
+        title != null && item != null && titleResource == null && content == null -> { val title = title!!; val item = item!!; SwiftView(296, listOf(title, item, subject, message), modifier) }
+        item != null && content != null && titleResource == null && title == null -> { val item = item!!; val content = content!!; SwiftView(302, listOf(item, subject, message), modifier, content = content) }
+        item != null && titleResource == null && title == null && content == null -> { val item = item!!; SwiftView(292, listOf(item, subject, message), modifier) }
         else -> error("No SwiftUI ShareLink initializer takes this combination of arguments")
     }
 }
@@ -6759,10 +6987,10 @@ public fun Slider(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        value != null && bounds != null && onValueChange != null && minimumValueLabel != null && maximumValueLabel != null && label != null && step == null && content == null -> { val value = value!!; val bounds = bounds!!; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val minimumValueLabel = minimumValueLabel!!; val maximumValueLabel = maximumValueLabel!!; val label = label!!; SwiftView(294, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label)) }
-        value != null && bounds != null && onValueChange != null && minimumValueLabel != null && maximumValueLabel != null && label != null && content == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1.0; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val minimumValueLabel = minimumValueLabel!!; val maximumValueLabel = maximumValueLabel!!; val label = label!!; SwiftView(296, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label)) }
-        value != null && bounds != null && onValueChange != null && content != null && step == null && minimumValueLabel == null && maximumValueLabel == null && label == null -> { val value = value!!; val bounds = bounds!!; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(302, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
-        value != null && bounds != null && onValueChange != null && content != null && minimumValueLabel == null && maximumValueLabel == null && label == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1.0; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(301, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        value != null && bounds != null && onValueChange != null && minimumValueLabel != null && maximumValueLabel != null && label != null && step == null && content == null -> { val value = value!!; val bounds = bounds!!; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val minimumValueLabel = minimumValueLabel!!; val maximumValueLabel = maximumValueLabel!!; val label = label!!; SwiftView(304, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label)) }
+        value != null && bounds != null && onValueChange != null && minimumValueLabel != null && maximumValueLabel != null && label != null && content == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1.0; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val minimumValueLabel = minimumValueLabel!!; val maximumValueLabel = maximumValueLabel!!; val label = label!!; SwiftView(306, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }, SSlotRef(0), SSlotRef(1), SSlotRef(2)), modifier, slots = listOf(minimumValueLabel, maximumValueLabel, label)) }
+        value != null && bounds != null && onValueChange != null && content != null && step == null && minimumValueLabel == null && maximumValueLabel == null && label == null -> { val value = value!!; val bounds = bounds!!; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(312, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        value != null && bounds != null && onValueChange != null && content != null && minimumValueLabel == null && maximumValueLabel == null && label == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1.0; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(311, listOf(value, SValueCallback { onValueChange(it as Double) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
         else -> error("No SwiftUI Slider initializer takes this combination of arguments")
     }
 }
@@ -6785,10 +7013,10 @@ public fun Stepper(
     content: (@Composable () -> Unit)? = null,
 ) {
     when {
-        value != null && bounds != null && onValueChange != null && content != null && titleKey == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(307, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
-        titleKey != null && value != null && bounds != null && onValueChange != null && content == null -> { val titleKey = titleKey!!; val value = value!!; val bounds = bounds!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; SwiftView(311, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier) }
-        value != null && onValueChange != null && content != null && bounds == null && titleKey == null -> { val value = value!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(309, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
-        titleKey != null && value != null && onValueChange != null && bounds == null && content == null -> { val titleKey = titleKey!!; val value = value!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; SwiftView(314, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier) }
+        value != null && bounds != null && onValueChange != null && content != null && titleKey == null -> { val value = value!!; val bounds = bounds!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(317, listOf(value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        titleKey != null && value != null && bounds != null && onValueChange != null && content == null -> { val titleKey = titleKey!!; val value = value!!; val bounds = bounds!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; SwiftView(321, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, listOf(bounds.start, bounds.endInclusive), step, SValueCallback { onEditingChanged(it as Boolean) }), modifier) }
+        value != null && onValueChange != null && content != null && bounds == null && titleKey == null -> { val value = value!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; val content = content!!; SwiftView(319, listOf(value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier, content = content) }
+        titleKey != null && value != null && onValueChange != null && bounds == null && content == null -> { val titleKey = titleKey!!; val value = value!!; val step = step ?: 1; val onValueChange = onValueChange!!; val onEditingChanged = onEditingChanged ?: {}; SwiftView(324, listOf(titleKey.key, value, SValueCallback { onValueChange(it as Int) }, step, SValueCallback { onEditingChanged(it as Boolean) }), modifier) }
         else -> error("No SwiftUI Stepper initializer takes this combination of arguments")
     }
 }
@@ -6809,10 +7037,10 @@ public fun TextField(
     onTextChange: ((String) -> Unit)? = null,
 ) {
     when {
-        titleKey != null && text != null && axis != null && onTextChange != null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val axis = axis!!; val onTextChange = onTextChange!!; SwiftView(335, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier) }
-        titleKey != null && text != null && axis != null && onTextChange != null -> { val titleKey = titleKey!!; val text = text!!; val axis = axis!!; val onTextChange = onTextChange!!; SwiftView(338, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier) }
-        titleKey != null && text != null && onTextChange != null && axis == null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(346, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier) }
-        titleKey != null && text != null && onTextChange != null && axis == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(341, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier) }
+        titleKey != null && text != null && axis != null && onTextChange != null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val axis = axis!!; val onTextChange = onTextChange!!; SwiftView(345, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, axis), modifier) }
+        titleKey != null && text != null && axis != null && onTextChange != null -> { val titleKey = titleKey!!; val text = text!!; val axis = axis!!; val onTextChange = onTextChange!!; SwiftView(348, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt, axis), modifier) }
+        titleKey != null && text != null && onTextChange != null && axis == null && prompt == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(356, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }), modifier) }
+        titleKey != null && text != null && onTextChange != null && axis == null -> { val titleKey = titleKey!!; val text = text!!; val onTextChange = onTextChange!!; SwiftView(351, listOf(titleKey.key, text, SValueCallback { onTextChange(it as String) }, prompt), modifier) }
         else -> error("No SwiftUI TextField initializer takes this combination of arguments")
     }
 }
@@ -6831,7 +7059,7 @@ public fun TextFieldLink(
     onSubmit: ((String) -> Unit)? = null,
 ) {
     when {
-        titleKey != null && onSubmit != null -> { val titleKey = titleKey!!; val onSubmit = onSubmit!!; SwiftView(350, listOf(titleKey.key, prompt, SValueCallback { onSubmit(it as String) }), modifier) }
+        titleKey != null && onSubmit != null -> { val titleKey = titleKey!!; val onSubmit = onSubmit!!; SwiftView(360, listOf(titleKey.key, prompt, SValueCallback { onSubmit(it as String) }), modifier) }
         else -> error("No SwiftUI TextFieldLink initializer takes this combination of arguments")
     }
 }
@@ -6852,9 +7080,9 @@ public fun Toggle(
     onIsOnChange: ((Boolean) -> Unit)? = null,
 ) {
     when {
-        titleKey != null && systemImage != null && isOn != null && onIsOnChange != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(358, listOf(titleKey.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
-        titleKey != null && image != null && isOn != null && onIsOnChange != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(361, listOf(titleKey.key, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
-        titleKey != null && isOn != null && onIsOnChange != null && systemImage == null && image == null -> { val titleKey = titleKey!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(355, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
+        titleKey != null && systemImage != null && isOn != null && onIsOnChange != null && image == null -> { val titleKey = titleKey!!; val systemImage = systemImage!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(368, listOf(titleKey.key, systemImage.name, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
+        titleKey != null && image != null && isOn != null && onIsOnChange != null && systemImage == null -> { val titleKey = titleKey!!; val image = image!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(371, listOf(titleKey.key, image, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
+        titleKey != null && isOn != null && onIsOnChange != null && systemImage == null && image == null -> { val titleKey = titleKey!!; val isOn = isOn!!; val onIsOnChange = onIsOnChange!!; SwiftView(365, listOf(titleKey.key, isOn, SValueCallback { onIsOnChange(it as Boolean) }), modifier) }
         else -> error("No SwiftUI Toggle initializer takes this combination of arguments")
     }
 }

@@ -39,6 +39,19 @@ public class CGAffineTransform(
     public val ty: Double = 0.0,
 ) : SExpr(6, listOf(a, b, c, d, tx, ty))
 
+/** Rebuilds a CoreGraphics value sent by Swift as a plain [SExpr] (bindings and callbacks of value types). */
+internal fun cgValue(e: SExpr): Any? {
+    val d = e.args.map { (it as? Number)?.toDouble() ?: 0.0 }
+    return when (e.id) {
+        1 -> CGPoint(d[0], d[1])
+        2 -> CGSize(d[0], d[1])
+        3 -> CGRect(d[0], d[1], d[2], d[3])
+        4 -> CGVector(d[0], d[1])
+        6 -> CGAffineTransform(d[0], d[1], d[2], d[3], d[4], d[5])
+        else -> null
+    }
+}
+
 internal object HandwrittenIds {
     const val SHAPE_VIEW = 100_000
     const val GEOMETRY_READER = 100_001

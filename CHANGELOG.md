@@ -18,6 +18,12 @@
 - `ClosedRange<Date>` parameters as `ClosedFloatingPointRange<Double>` of epoch seconds: `DatePicker(…, range = …)`,
   `ProgressView(timerInterval = …)`, `Text(timerInterval = …)`.
 - `Transferable` payloads as `String` (`ShareLink(item = "…")`), and `CGAffineTransform` (`Modifier.transformEffect`).
+- Bindings and callbacks of SwiftUI value types, when Swift can send the value back: enums, closed sets of static
+  values and `Color`. New: `ColorPicker(selection, onSelectionChange)`,
+  `NavigationSplitView(columnVisibility, onColumnVisibilityChange, preferredCompactColumn, …)`,
+  `Modifier.onTapGesture(coordinateSpace = …) { point -> }`, `Modifier.onContinuousHover`,
+  `Modifier.accessibilityAdjustableAction`, `Modifier.accessibilityScrollAction`, `Modifier.onPencilSqueeze`.
+  A color picked by the user arrives as `Color(red, green, blue, opacity)` in sRGB.
 
 ### Changed
 

@@ -138,7 +138,35 @@ import UniformTypeIdentifiers
             guard let v = d_Color(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
+#if os(iOS) || os(macOS)
         r[32] = { m in
+            let a = m.args
+            guard let p00 = d_Color(a.expr(0)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ColorPicker(selection: a.binding(0, read: { d_Color($0.expr($1)) ?? p00 }, box: { e_Color($0) ?? NSNull() }), supportsOpacity: a.bool(2), label: { ChildrenView(m) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS)
+        r[33] = { m in
+            let a = m.args
+            guard let p10 = d_Color(a.expr(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ColorPicker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.binding(1, read: { d_Color($0.expr($1)) ?? p10 }, box: { e_Color($0) ?? NSNull() }), supportsOpacity: a.bool(3)), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS)
+        r[34] = { m in
+            let a = m.args
+            guard let p10 = d_Color(a.expr(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ColorPicker(LocalizedStringKey(a.string(0)), selection: a.binding(1, read: { d_Color($0.expr($1)) ?? p10 }, box: { e_Color($0) ?? NSNull() }), supportsOpacity: a.bool(3)), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS)
+        r[35] = { m in
+            let a = m.args
+            guard let p10 = d_Color(a.expr(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ColorPicker(a.string(0), selection: a.binding(1, read: { d_Color($0.expr($1)) ?? p10 }, box: { e_Color($0) ?? NSNull() }), supportsOpacity: a.bool(3)), m, m.consumedPrefix)
+        }
+#endif
+        r[36] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
                 guard let v = d_ConcentricRectangle(a.expr(0)) else { return AnyView(EmptyView()) }
@@ -146,157 +174,157 @@ import UniformTypeIdentifiers
             }
             return AnyView(EmptyView())
         }
-        r[33] = { m in
+        r[37] = { m in
             let a = m.args
             guard let v = d_ContainerRelativeShape(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[34] = { m in
+        r[38] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(label: { a.slot(0) }, description: { a.slot(1) }, actions: { a.slot(2) }), m, m.consumedPrefix)
         }
-        r[35] = { m in
+        r[39] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[36] = { m in
+        r[40] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(LocalizedStringKey(a.string(0)), systemImage: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[37] = { m in
+        r[41] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(a.string(0), systemImage: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[38] = { m in
+        r[42] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[39] = { m in
+        r[43] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(LocalizedStringKey(a.string(0)), image: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[40] = { m in
+        r[44] = { m in
             let a = m.args
             return ModChain.apply(ContentUnavailableView(a.string(0), image: a.string(1), description: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[41] = { m in
+        r[45] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(content: { ChildrenView(m) }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[42] = { m in
+        r[46] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[43] = { m in
+        r[47] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[44] = { m in
+        r[48] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[45] = { m in
+        r[49] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(a.string(0), systemImage: a.string(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[46] = { m in
+        r[50] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[47] = { m in
+        r[51] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(LocalizedStringKey(a.string(0)), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[48] = { m in
+        r[52] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(a.string(0), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[49] = { m in
+        r[53] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[51] = { m in
+        r[55] = { m in
             let a = m.args
             return ModChain.apply(ControlGroup(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[52] = { m in
+        r[56] = { m in
             let a = m.args
             let p1: DatePickerComponents = a.isNil(2) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(2)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(selection: a.dateBinding(0), displayedComponents: p1, label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[53] = { m in
+        r[57] = { m in
             let a = m.args
             let p2: DatePickerComponents = a.isNil(3) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(3)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(selection: a.dateBinding(0), in: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(2)), displayedComponents: p2, label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[54] = { m in
+        r[58] = { m in
             let a = m.args
             let p2: DatePickerComponents = a.isNil(3) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(3)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.dateBinding(1), displayedComponents: p2), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[55] = { m in
+        r[59] = { m in
             let a = m.args
             let p2: DatePickerComponents = a.isNil(3) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(3)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(LocalizedStringKey(a.string(0)), selection: a.dateBinding(1), displayedComponents: p2), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[56] = { m in
+        r[60] = { m in
             let a = m.args
             let p2: DatePickerComponents = a.isNil(3) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(3)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(a.string(0), selection: a.dateBinding(1), displayedComponents: p2), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[57] = { m in
+        r[61] = { m in
             let a = m.args
             let p3: DatePickerComponents = a.isNil(4) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(4)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.dateBinding(1), in: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(3)), displayedComponents: p3), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[58] = { m in
+        r[62] = { m in
             let a = m.args
             let p3: DatePickerComponents = a.isNil(4) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(4)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(LocalizedStringKey(a.string(0)), selection: a.dateBinding(1), in: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(3)), displayedComponents: p3), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[59] = { m in
+        r[63] = { m in
             let a = m.args
             let p3: DatePickerComponents = a.isNil(4) ? [.hourAndMinute, .date] : (d_DatePickerComponents(a.expr(4)) ?? [.hourAndMinute, .date])
             return ModChain.apply(DatePicker(a.string(0), selection: a.dateBinding(1), in: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(3)), displayedComponents: p3), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[60] = { m in
+        r[64] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let v = d_DefaultDocumentGroupLaunchActions(a.expr(0)) else { return AnyView(EmptyView()) }
@@ -305,7 +333,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-        r[61] = { m in
+        r[65] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
                 guard let v = d_DefaultGlassEffectShape(a.expr(0)) else { return AnyView(EmptyView()) }
@@ -314,73 +342,73 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #if os(iOS) || os(macOS)
-        r[62] = { m in
+        r[66] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(isExpanded: a.boolBinding(0), content: { ChildrenView(m) }, label: { a.slot(2) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[63] = { m in
+        r[67] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(content: { ChildrenView(m) }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[64] = { m in
+        r[68] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), isExpanded: a.boolBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[65] = { m in
+        r[69] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(LocalizedStringKey(a.string(0)), isExpanded: a.boolBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[66] = { m in
+        r[70] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(a.string(0), isExpanded: a.boolBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[67] = { m in
+        r[71] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[69] = { m in
+        r[73] = { m in
             let a = m.args
             return ModChain.apply(DisclosureGroup(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[70] = { m in
+        r[74] = { m in
             let a = m.args
             return ModChain.apply(Divider(), m, m.consumedPrefix)
         }
 #if os(iOS)
-        r[71] = { m in
+        r[75] = { m in
             let a = m.args
             guard let v = d_EditButton(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
 #endif
-        r[72] = { m in
+        r[76] = { m in
             let a = m.args
             guard let v = d_Ellipse(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[73] = { m in
+        r[77] = { m in
             let a = m.args
             guard let v = d_EllipticalGradient(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[74] = { m in
+        r[78] = { m in
             let a = m.args
             return ModChain.apply(EmptyView(), m, m.consumedPrefix)
         }
-        r[75] = { m in
+        r[79] = { m in
             let a = m.args
             guard let p0 = dp_Shape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = dp_ShapeStyle(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -390,479 +418,511 @@ import UniformTypeIdentifiers
             }
             return open(p0, p1)
         }
-        r[76] = { m in
+        r[80] = { m in
             let a = m.args
             return ModChain.apply(Form(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[77] = { m in
+        r[81] = { m in
             let a = m.args
             return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { a.slot(2) }, currentValueLabel: { a.slot(3) }, markedValueLabels: { a.slot(4) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[78] = { m in
+        r[82] = { m in
             let a = m.args
             return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { a.slot(2) }, currentValueLabel: { a.slot(3) }, minimumValueLabel: { a.slot(4) }, maximumValueLabel: { a.slot(5) }, markedValueLabels: { a.slot(6) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[79] = { m in
+        r[83] = { m in
             let a = m.args
             return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { a.slot(2) }, currentValueLabel: { a.slot(3) }, minimumValueLabel: { a.slot(4) }, maximumValueLabel: { a.slot(5) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[80] = { m in
+        r[84] = { m in
             let a = m.args
             return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { a.slot(2) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[81] = { m in
+        r[85] = { m in
             let a = m.args
             return ModChain.apply(Gauge(value: a.double(0), in: a.doubleRange(1), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[82] = { m in
+        r[86] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
                 return ModChain.apply(GlassEffectContainer(spacing: a.cgFloatOpt(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[83] = { m in
+        r[87] = { m in
             let a = m.args
             guard let p0 = d_Alignment(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(Grid(alignment: p0, horizontalSpacing: a.cgFloatOpt(1), verticalSpacing: a.cgFloatOpt(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[84] = { m in
+        r[88] = { m in
             let a = m.args
             return ModChain.apply(GridRow(alignment: d_VerticalAlignment(a.expr(0)), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[85] = { m in
+        r[89] = { m in
             let a = m.args
             return ModChain.apply(Group(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS)
-        r[87] = { m in
+        r[91] = { m in
             let a = m.args
             return ModChain.apply(GroupBox(content: { ChildrenView(m) }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[88] = { m in
+        r[92] = { m in
             let a = m.args
             return ModChain.apply(GroupBox(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[90] = { m in
+        r[94] = { m in
             let a = m.args
             return ModChain.apply(GroupBox(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[91] = { m in
+        r[95] = { m in
             let a = m.args
             return ModChain.apply(GroupBox(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
-        r[92] = { m in
+        r[96] = { m in
             let a = m.args
             return ModChain.apply(HSplitView(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[93] = { m in
+        r[97] = { m in
             let a = m.args
             guard let p0 = d_VerticalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(HStack(alignment: p0, spacing: a.cgFloatOpt(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #if os(macOS)
-        r[94] = { m in
+        r[98] = { m in
             let a = m.args
             guard let v = d_HelpLink(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
 #endif
-        r[95] = { m in
+        r[99] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(decorative: a.string(0), variableValue: a.doubleOpt(1)), m), m, m.consumedPrefix)
         }
-        r[96] = { m in
+        r[100] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(decorative: a.string(0)), m), m, m.consumedPrefix)
         }
-        r[97] = { m in
+        r[101] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(systemName: a.string(0), variableValue: a.doubleOpt(1)), m), m, m.consumedPrefix)
         }
-        r[98] = { m in
+        r[102] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(systemName: a.string(0)), m), m, m.consumedPrefix)
         }
-        r[99] = { m in
+        r[103] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(a.string(0), variableValue: a.doubleOpt(1), label: Text(a.string(2))), m), m, m.consumedPrefix)
         }
-        r[100] = { m in
+        r[104] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(a.string(0), variableValue: a.doubleOpt(1)), m), m, m.consumedPrefix)
         }
-        r[101] = { m in
+        r[105] = { m in
             let a = m.args
             return ModChain.apply(sm_Image(Image(a.string(0), label: Text(a.string(1))), m), m, m.consumedPrefix)
         }
-        r[104] = { m in
+        r[108] = { m in
             let a = m.args
             return ModChain.apply(Label(title: { a.slot(0) }, icon: { a.slot(1) }), m, m.consumedPrefix)
         }
-        r[105] = { m in
+        r[109] = { m in
             let a = m.args
             return ModChain.apply(Label(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1)), m, m.consumedPrefix)
         }
-        r[106] = { m in
+        r[110] = { m in
             let a = m.args
             return ModChain.apply(Label(LocalizedStringKey(a.string(0)), systemImage: a.string(1)), m, m.consumedPrefix)
         }
-        r[107] = { m in
+        r[111] = { m in
             let a = m.args
             return ModChain.apply(Label(a.string(0), systemImage: a.string(1)), m, m.consumedPrefix)
         }
-        r[109] = { m in
+        r[113] = { m in
             let a = m.args
             return ModChain.apply(Label(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: a.string(1)), m, m.consumedPrefix)
         }
-        r[111] = { m in
+        r[115] = { m in
             let a = m.args
             return ModChain.apply(Label(LocalizedStringKey(a.string(0)), image: a.string(1)), m, m.consumedPrefix)
         }
-        r[112] = { m in
+        r[116] = { m in
             let a = m.args
             return ModChain.apply(Label(a.string(0), image: ImageResource(name: a.string(1), bundle: .main)), m, m.consumedPrefix)
         }
-        r[113] = { m in
+        r[117] = { m in
             let a = m.args
             return ModChain.apply(Label(a.string(0), image: a.string(1)), m, m.consumedPrefix)
         }
-        r[114] = { m in
+        r[118] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
                 return ModChain.apply(LabeledContent(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[116] = { m in
+        r[120] = { m in
             let a = m.args
             return ModChain.apply(LabeledContent(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[117] = { m in
+        r[121] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
                 return ModChain.apply(LabeledContent(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.string(1)), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[118] = { m in
+        r[122] = { m in
             let a = m.args
             return ModChain.apply(LabeledContent(LocalizedStringKey(a.string(0)), value: a.string(1)), m, m.consumedPrefix)
         }
-        r[119] = { m in
+        r[123] = { m in
             let a = m.args
             return ModChain.apply(LabeledContent(a.string(0), value: a.string(1)), m, m.consumedPrefix)
         }
-        r[120] = { m in
+        r[124] = { m in
             let a = m.args
             return ModChain.apply(LabeledContent(content: { ChildrenView(m) }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
-        r[121] = { m in
+        r[125] = { m in
             let a = m.args
             guard let p1 = d_VerticalAlignment(a.expr(1)) else { return AnyView(EmptyView()) }
             let p3: PinnedScrollableViews = a.isNil(3) ? .init() : (d_PinnedScrollableViews(a.expr(3)) ?? .init())
             return ModChain.apply(LazyHGrid(rows: a.exprList(0).compactMap { d_GridItem($0) }, alignment: p1, spacing: a.cgFloatOpt(2), pinnedViews: p3, content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[122] = { m in
+        r[126] = { m in
             let a = m.args
             guard let p0 = d_VerticalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
             let p2: PinnedScrollableViews = a.isNil(2) ? .init() : (d_PinnedScrollableViews(a.expr(2)) ?? .init())
             return ModChain.apply(LazyHStack(alignment: p0, spacing: a.cgFloatOpt(1), pinnedViews: p2, content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[123] = { m in
+        r[127] = { m in
             let a = m.args
             guard let p1 = d_HorizontalAlignment(a.expr(1)) else { return AnyView(EmptyView()) }
             let p3: PinnedScrollableViews = a.isNil(3) ? .init() : (d_PinnedScrollableViews(a.expr(3)) ?? .init())
             return ModChain.apply(LazyVGrid(columns: a.exprList(0).compactMap { d_GridItem($0) }, alignment: p1, spacing: a.cgFloatOpt(2), pinnedViews: p3, content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[124] = { m in
+        r[128] = { m in
             let a = m.args
             guard let p0 = d_HorizontalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
             let p2: PinnedScrollableViews = a.isNil(2) ? .init() : (d_PinnedScrollableViews(a.expr(2)) ?? .init())
             return ModChain.apply(LazyVStack(alignment: p0, spacing: a.cgFloatOpt(1), pinnedViews: p2, content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[125] = { m in
+        r[129] = { m in
             let a = m.args
             guard let v = d_LinearGradient(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[126] = { m in
+        r[130] = { m in
             let a = m.args
             guard let p0 = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(Link(destination: p0, label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[127] = { m in
+        r[131] = { m in
             let a = m.args
             guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
             return ModChain.apply(Link(LocalizedStringResource(String.LocalizationValue(a.string(0))), destination: p1), m, m.consumedPrefix)
         }
-        r[128] = { m in
+        r[132] = { m in
             let a = m.args
             guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
             return ModChain.apply(Link(LocalizedStringKey(a.string(0)), destination: p1), m, m.consumedPrefix)
         }
-        r[129] = { m in
+        r[133] = { m in
             let a = m.args
             guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
             return ModChain.apply(Link(a.string(0), destination: p1), m, m.consumedPrefix)
         }
 #if os(macOS)
-        r[130] = { m in
+        r[134] = { m in
             let a = m.args
             return ModChain.apply(List(selection: a.hashableBinding(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[131] = { m in
+        r[135] = { m in
             let a = m.args
             return ModChain.apply(List(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[132] = { m in
+        r[136] = { m in
             let a = m.args
             return ModChain.apply(Menu(content: { ChildrenView(m) }, label: { a.slot(0) }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[133] = { m in
+        r[137] = { m in
             let a = m.args
             return ModChain.apply(Menu(content: { ChildrenView(m) }, label: { a.slot(0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[134] = { m in
+        r[138] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ChildrenView(m) }, primaryAction: a.action(2)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[135] = { m in
+        r[139] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ChildrenView(m) }, primaryAction: a.action(2)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[136] = { m in
+        r[140] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[137] = { m in
+        r[141] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), systemImage: a.string(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[138] = { m in
+        r[142] = { m in
             let a = m.args
             return ModChain.apply(Menu(a.string(0), systemImage: a.string(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[139] = { m in
+        r[143] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }, primaryAction: a.action(2)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[140] = { m in
+        r[144] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }, primaryAction: a.action(2)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[141] = { m in
+        r[145] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[142] = { m in
+        r[146] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[143] = { m in
+        r[147] = { m in
             let a = m.args
             return ModChain.apply(Menu(a.string(0), image: ImageResource(name: a.string(1), bundle: .main), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[144] = { m in
+        r[148] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[145] = { m in
+        r[149] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringKey(a.string(0)), content: { ChildrenView(m) }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[146] = { m in
+        r[150] = { m in
             let a = m.args
             return ModChain.apply(Menu(a.string(0), content: { ChildrenView(m) }, primaryAction: a.action(1)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[147] = { m in
+        r[151] = { m in
             let a = m.args
             return ModChain.apply(Menu(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(tvOS)
-        r[149] = { m in
+        r[153] = { m in
             let a = m.args
             return ModChain.apply(Menu(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
-        r[150] = { m in
+        r[154] = { m in
             let a = m.args
             return ModChain.apply(MenuButton(label: a.slot(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
-        r[151] = { m in
+        r[155] = { m in
             let a = m.args
             return ModChain.apply(MenuButton(LocalizedStringKey(a.string(0)), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
-        r[152] = { m in
+        r[156] = { m in
             let a = m.args
             return ModChain.apply(MenuButton(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[153] = { m in
+        r[157] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(destination: a.slot(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), label: { a.slot(4) }), m, m.consumedPrefix)
         }
-        r[155] = { m in
+        r[159] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(destination: { a.slot(0) }, label: { a.slot(1) }), m, m.consumedPrefix)
         }
-        r[156] = { m in
+        r[160] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(destination: a.slot(0), isActive: a.boolBinding(1), label: { a.slot(3) }), m, m.consumedPrefix)
         }
-        r[157] = { m in
+        r[161] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(tag: a.hashable(0), selection: a.optionalHashableBinding(1), destination: { a.slot(3) }, label: { a.slot(4) }), m, m.consumedPrefix)
         }
-        r[158] = { m in
+        r[162] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(isActive: a.boolBinding(0), destination: { a.slot(2) }, label: { a.slot(3) }), m, m.consumedPrefix)
         }
 #if os(watchOS)
-        r[159] = { m in
+        r[163] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(destinationName: a.string(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
-        r[160] = { m in
+        r[164] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(destinationName: a.string(0), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
-        r[161] = { m in
+        r[165] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(destinationName: a.string(0), isActive: a.boolBinding(1), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[162] = { m in
+        r[166] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), destination: ChildrenView(m), tag: a.hashable(1), selection: a.optionalHashableBinding(2)), m, m.consumedPrefix)
         }
-        r[164] = { m in
+        r[168] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), destination: ChildrenView(m), isActive: a.boolBinding(1)), m, m.consumedPrefix)
         }
-        r[166] = { m in
+        r[170] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), destination: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[171] = { m in
+        r[175] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), tag: a.hashable(1), selection: a.optionalHashableBinding(2), destination: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[172] = { m in
+        r[176] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(a.string(0), tag: a.hashable(1), selection: a.optionalHashableBinding(2), destination: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[173] = { m in
+        r[177] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(LocalizedStringKey(a.string(0)), isActive: a.boolBinding(1), destination: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[174] = { m in
+        r[178] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(a.string(0), isActive: a.boolBinding(1), destination: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[175] = { m in
+        r[179] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(value: a.hashableOpt(0), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[176] = { m in
+        r[180] = { m in
             let a = m.args
             return ModChain.apply(NavigationLink(value: a.hashableOpt(0), label: { ChildrenView(m) }), m, m.consumedPrefix)
-        }
-        r[177] = { m in
-            let a = m.args
-            return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.hashableOpt(1)), m, m.consumedPrefix)
-        }
-        r[178] = { m in
-            let a = m.args
-            return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.hashableOpt(1)), m, m.consumedPrefix)
         }
         r[181] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(a.string(0), value: a.hashableOpt(1)), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.hashableOpt(1)), m, m.consumedPrefix)
         }
         r[182] = { m in
             let a = m.args
-            return ModChain.apply(NavigationLink(a.string(0), value: a.hashableOpt(1)), m, m.consumedPrefix)
-        }
-        r[183] = { m in
-            let a = m.args
-            return ModChain.apply(NavigationSplitView(sidebar: { a.slot(0) }, detail: { a.slot(1) }), m, m.consumedPrefix)
-        }
-        r[184] = { m in
-            let a = m.args
-            return ModChain.apply(NavigationSplitView(sidebar: { a.slot(0) }, content: { ChildrenView(m) }, detail: { a.slot(1) }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.hashableOpt(1)), m, m.consumedPrefix)
         }
         r[185] = { m in
             let a = m.args
-            return ModChain.apply(NavigationStack(root: { ChildrenView(m) }), m, m.consumedPrefix)
+            return ModChain.apply(NavigationLink(a.string(0), value: a.hashableOpt(1)), m, m.consumedPrefix)
         }
         r[186] = { m in
+            let a = m.args
+            return ModChain.apply(NavigationLink(a.string(0), value: a.hashableOpt(1)), m, m.consumedPrefix)
+        }
+        r[187] = { m in
+            let a = m.args
+            guard let p00 = d_NavigationSplitViewVisibility(a.expr(0)) else { return AnyView(EmptyView()) }
+            guard let p10 = d_NavigationSplitViewColumn(a.expr(2)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(NavigationSplitView(columnVisibility: a.binding(0, read: { d_NavigationSplitViewVisibility($0.expr($1)) ?? p00 }, box: { e_NavigationSplitViewVisibility($0) ?? NSNull() }), preferredCompactColumn: a.binding(2, read: { d_NavigationSplitViewColumn($0.expr($1)) ?? p10 }, box: { e_NavigationSplitViewColumn($0) ?? NSNull() }), sidebar: { a.slot(4) }, detail: { a.slot(5) }), m, m.consumedPrefix)
+        }
+        r[188] = { m in
+            let a = m.args
+            guard let p00 = d_NavigationSplitViewVisibility(a.expr(0)) else { return AnyView(EmptyView()) }
+            guard let p10 = d_NavigationSplitViewColumn(a.expr(2)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(NavigationSplitView(columnVisibility: a.binding(0, read: { d_NavigationSplitViewVisibility($0.expr($1)) ?? p00 }, box: { e_NavigationSplitViewVisibility($0) ?? NSNull() }), preferredCompactColumn: a.binding(2, read: { d_NavigationSplitViewColumn($0.expr($1)) ?? p10 }, box: { e_NavigationSplitViewColumn($0) ?? NSNull() }), sidebar: { a.slot(4) }, content: { ChildrenView(m) }, detail: { a.slot(5) }), m, m.consumedPrefix)
+        }
+        r[189] = { m in
+            let a = m.args
+            guard let p00 = d_NavigationSplitViewVisibility(a.expr(0)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(NavigationSplitView(columnVisibility: a.binding(0, read: { d_NavigationSplitViewVisibility($0.expr($1)) ?? p00 }, box: { e_NavigationSplitViewVisibility($0) ?? NSNull() }), sidebar: { a.slot(2) }, detail: { a.slot(3) }), m, m.consumedPrefix)
+        }
+        r[190] = { m in
+            let a = m.args
+            guard let p00 = d_NavigationSplitViewVisibility(a.expr(0)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(NavigationSplitView(columnVisibility: a.binding(0, read: { d_NavigationSplitViewVisibility($0.expr($1)) ?? p00 }, box: { e_NavigationSplitViewVisibility($0) ?? NSNull() }), sidebar: { a.slot(2) }, content: { ChildrenView(m) }, detail: { a.slot(3) }), m, m.consumedPrefix)
+        }
+        r[191] = { m in
+            let a = m.args
+            guard let p00 = d_NavigationSplitViewColumn(a.expr(0)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(NavigationSplitView(preferredCompactColumn: a.binding(0, read: { d_NavigationSplitViewColumn($0.expr($1)) ?? p00 }, box: { e_NavigationSplitViewColumn($0) ?? NSNull() }), sidebar: { a.slot(2) }, detail: { a.slot(3) }), m, m.consumedPrefix)
+        }
+        r[192] = { m in
+            let a = m.args
+            guard let p00 = d_NavigationSplitViewColumn(a.expr(0)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(NavigationSplitView(preferredCompactColumn: a.binding(0, read: { d_NavigationSplitViewColumn($0.expr($1)) ?? p00 }, box: { e_NavigationSplitViewColumn($0) ?? NSNull() }), sidebar: { a.slot(2) }, content: { ChildrenView(m) }, detail: { a.slot(3) }), m, m.consumedPrefix)
+        }
+        r[193] = { m in
+            let a = m.args
+            return ModChain.apply(NavigationSplitView(sidebar: { a.slot(0) }, detail: { a.slot(1) }), m, m.consumedPrefix)
+        }
+        r[194] = { m in
+            let a = m.args
+            return ModChain.apply(NavigationSplitView(sidebar: { a.slot(0) }, content: { ChildrenView(m) }, detail: { a.slot(1) }), m, m.consumedPrefix)
+        }
+        r[195] = { m in
+            let a = m.args
+            return ModChain.apply(NavigationStack(root: { ChildrenView(m) }), m, m.consumedPrefix)
+        }
+        r[196] = { m in
             let a = m.args
             return ModChain.apply(NavigationView(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS)
-        r[187] = { m in
+        r[197] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -872,7 +932,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[188] = { m in
+        r[198] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -882,7 +942,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[190] = { m in
+        r[200] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -892,7 +952,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[191] = { m in
+        r[201] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -903,7 +963,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[192] = { m in
+        r[202] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -914,7 +974,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[193] = { m in
+        r[203] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -925,7 +985,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[194] = { m in
+        r[204] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p2 = d_DocumentCreationSource(a.expr(2)) else { return AnyView(EmptyView()) }
@@ -935,7 +995,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[195] = { m in
+        r[205] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p2 = d_DocumentCreationSource(a.expr(2)) else { return AnyView(EmptyView()) }
@@ -945,7 +1005,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[196] = { m in
+        r[206] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p2 = d_DocumentCreationSource(a.expr(2)) else { return AnyView(EmptyView()) }
@@ -955,7 +1015,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[197] = { m in
+        r[207] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p2 = d_DocumentCreationSource(a.expr(2)) else { return AnyView(EmptyView()) }
@@ -965,7 +1025,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS)
-        r[198] = { m in
+        r[208] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 guard let p1 = UTType(a.string(1)) else { return AnyView(EmptyView()) }
@@ -976,7 +1036,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[199] = { m in
+        r[209] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 return ModChain.apply(NewDocumentButton(LocalizedStringResource(String.LocalizationValue(a.string(0))), contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
@@ -985,7 +1045,7 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[200] = { m in
+        r[210] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 return ModChain.apply(NewDocumentButton(LocalizedStringKey(a.string(0)), contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
@@ -994,42 +1054,42 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS)
-        r[201] = { m in
-            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
-                let a = m.args
-                return ModChain.apply(NewDocumentButton(a.stringOpt(0).map { Text($0) }, contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
-            }
-            return AnyView(EmptyView())
-        }
-#endif
-#if os(iOS) || os(macOS)
-        r[202] = { m in
-            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
-                let a = m.args
-                return ModChain.apply(NewDocumentButton(a.string(0), contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
-            }
-            return AnyView(EmptyView())
-        }
-#endif
-#if os(iOS) || os(macOS)
-        r[207] = { m in
-            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
-                let a = m.args
-                return ModChain.apply(NewDocumentButton(a.stringOpt(0).map { Text($0) }, contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
-            }
-            return AnyView(EmptyView())
-        }
-#endif
-#if os(iOS) || os(macOS)
-        r[209] = { m in
-            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
-                let a = m.args
-                return ModChain.apply(NewDocumentButton(a.string(0), contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
-            }
-            return AnyView(EmptyView())
-        }
-#endif
         r[211] = { m in
+            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
+                let a = m.args
+                return ModChain.apply(NewDocumentButton(a.stringOpt(0).map { Text($0) }, contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
+            }
+            return AnyView(EmptyView())
+        }
+#endif
+#if os(iOS) || os(macOS)
+        r[212] = { m in
+            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
+                let a = m.args
+                return ModChain.apply(NewDocumentButton(a.string(0), contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
+            }
+            return AnyView(EmptyView())
+        }
+#endif
+#if os(iOS) || os(macOS)
+        r[217] = { m in
+            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
+                let a = m.args
+                return ModChain.apply(NewDocumentButton(a.stringOpt(0).map { Text($0) }, contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
+            }
+            return AnyView(EmptyView())
+        }
+#endif
+#if os(iOS) || os(macOS)
+        r[219] = { m in
+            if #available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
+                let a = m.args
+                return ModChain.apply(NewDocumentButton(a.string(0), contentType: a.stringOpt(1).flatMap { UTType($0) }), m, m.consumedPrefix)
+            }
+            return AnyView(EmptyView())
+        }
+#endif
+        r[221] = { m in
             let a = m.args
             guard let p0 = dp_Shape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = d_CGSize(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -1038,192 +1098,192 @@ import UniformTypeIdentifiers
             }
             return open(p0)
         }
-        r[212] = { m in
+        r[222] = { m in
             let a = m.args
             guard let v = d_Path(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[213] = { m in
+        r[223] = { m in
             let a = m.args
             return ModChain.apply(Picker(selection: a.hashableBinding(0), label: a.slot(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[214] = { m in
+        r[224] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(selection: a.hashableBinding(0), content: { ChildrenView(m) }, label: { a.slot(2) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[215] = { m in
+        r[225] = { m in
             let a = m.args
             return ModChain.apply(Picker(selection: a.hashableBinding(0), content: { ChildrenView(m) }, label: { a.slot(2) }), m, m.consumedPrefix)
         }
-        r[216] = { m in
+        r[226] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.hashableBinding(1), content: { ChildrenView(m) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[217] = { m in
+        r[227] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), selection: a.hashableBinding(1), content: { ChildrenView(m) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[218] = { m in
+        r[228] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(a.string(0), selection: a.hashableBinding(1), content: { ChildrenView(m) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[219] = { m in
+        r[229] = { m in
             let a = m.args
             return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), selection: a.hashableBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[220] = { m in
+        r[230] = { m in
             let a = m.args
             return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), selection: a.hashableBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[221] = { m in
+        r[231] = { m in
             let a = m.args
             return ModChain.apply(Picker(a.string(0), selection: a.hashableBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[222] = { m in
+        r[232] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ChildrenView(m) }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[223] = { m in
+        r[233] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ChildrenView(m) }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[224] = { m in
+        r[234] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(a.string(0), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ChildrenView(m) }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[225] = { m in
+        r[235] = { m in
             let a = m.args
             return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[226] = { m in
+        r[236] = { m in
             let a = m.args
             return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[227] = { m in
+        r[237] = { m in
             let a = m.args
             return ModChain.apply(Picker(a.string(0), systemImage: a.string(1), selection: a.hashableBinding(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[228] = { m in
+        r[238] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: ImageResource(name: a.string(1), bundle: .main), selection: a.hashableBinding(2), content: { ChildrenView(m) }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[229] = { m in
+        r[239] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), image: ImageResource(name: a.string(1), bundle: .main), selection: a.hashableBinding(2), content: { ChildrenView(m) }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[230] = { m in
+        r[240] = { m in
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 let a = m.args
                 return ModChain.apply(Picker(a.string(0), image: ImageResource(name: a.string(1), bundle: .main), selection: a.hashableBinding(2), content: { ChildrenView(m) }, currentValueLabel: { a.slot(4) }), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[231] = { m in
+        r[241] = { m in
             let a = m.args
             return ModChain.apply(Picker(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: ImageResource(name: a.string(1), bundle: .main), selection: a.hashableBinding(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[232] = { m in
+        r[242] = { m in
             let a = m.args
             return ModChain.apply(Picker(LocalizedStringKey(a.string(0)), image: ImageResource(name: a.string(1), bundle: .main), selection: a.hashableBinding(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[233] = { m in
+        r[243] = { m in
             let a = m.args
             return ModChain.apply(Picker(a.string(0), image: ImageResource(name: a.string(1), bundle: .main), selection: a.hashableBinding(2), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[234] = { m in
+        r[244] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(timerInterval: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(0)), countsDown: a.bool(1), label: { a.slot(2) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
         }
-        r[235] = { m in
+        r[245] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(value: a.doubleOpt(0), total: a.double(1), label: { a.slot(2) }, currentValueLabel: { a.slot(3) }), m, m.consumedPrefix)
         }
-        r[236] = { m in
+        r[246] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(value: a.doubleOpt(0), total: a.double(1), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[237] = { m in
+        r[247] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(value: a.doubleOpt(0), total: a.double(1)), m, m.consumedPrefix)
         }
-        r[238] = { m in
+        r[248] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(timerInterval: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(0)), countsDown: a.bool(1), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[239] = { m in
+        r[249] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[240] = { m in
+        r[250] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(), m, m.consumedPrefix)
         }
-        r[241] = { m in
+        r[251] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(LocalizedStringResource(String.LocalizationValue(a.string(0)))), m, m.consumedPrefix)
         }
-        r[243] = { m in
+        r[253] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(a.string(0)), m, m.consumedPrefix)
         }
-        r[244] = { m in
+        r[254] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(timerInterval: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(0)), countsDown: a.bool(1)), m, m.consumedPrefix)
         }
-        r[245] = { m in
+        r[255] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.doubleOpt(1), total: a.double(2)), m, m.consumedPrefix)
         }
-        r[246] = { m in
+        r[256] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(LocalizedStringKey(a.string(0)), value: a.doubleOpt(1), total: a.double(2)), m, m.consumedPrefix)
         }
-        r[247] = { m in
+        r[257] = { m in
             let a = m.args
             return ModChain.apply(ProgressView(a.string(0), value: a.doubleOpt(1), total: a.double(2)), m, m.consumedPrefix)
         }
-        r[248] = { m in
+        r[258] = { m in
             let a = m.args
             guard let v = d_RadialGradient(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[249] = { m in
+        r[259] = { m in
             let a = m.args
             guard let v = d_Rectangle(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[250] = { m in
+        r[260] = { m in
             let a = m.args
             return ModChain.apply(RenameButton(), m, m.consumedPrefix)
         }
-        r[251] = { m in
+        r[261] = { m in
             let a = m.args
             guard let p0 = dp_Shape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = d_Angle(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -1233,12 +1293,12 @@ import UniformTypeIdentifiers
             }
             return open(p0)
         }
-        r[252] = { m in
+        r[262] = { m in
             let a = m.args
             guard let v = d_RoundedRectangle(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
-        r[253] = { m in
+        r[263] = { m in
             let a = m.args
             guard let p0 = dp_Shape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = d_CGSize(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -1248,156 +1308,156 @@ import UniformTypeIdentifiers
             }
             return open(p0)
         }
-        r[254] = { m in
+        r[264] = { m in
             let a = m.args
             guard let p0 = d_Axis_Set(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(ScrollView(p0, showsIndicators: a.bool(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[255] = { m in
+        r[265] = { m in
             let a = m.args
             guard let p0 = d_Axis_Set(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(ScrollView(p0, content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[256] = { m in
+        r[266] = { m in
             let a = m.args
             return ModChain.apply(Section(content: { ChildrenView(m) }, header: { a.slot(0) }, footer: { a.slot(1) }), m, m.consumedPrefix)
         }
-        r[257] = { m in
+        r[267] = { m in
             let a = m.args
             return ModChain.apply(Section(LocalizedStringResource(String.LocalizationValue(a.string(0))), isExpanded: a.boolBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[258] = { m in
+        r[268] = { m in
             let a = m.args
             return ModChain.apply(Section(LocalizedStringKey(a.string(0)), isExpanded: a.boolBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[259] = { m in
+        r[269] = { m in
             let a = m.args
             return ModChain.apply(Section(a.string(0), isExpanded: a.boolBinding(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[260] = { m in
+        r[270] = { m in
             let a = m.args
             return ModChain.apply(Section(LocalizedStringResource(String.LocalizationValue(a.string(0))), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[262] = { m in
+        r[272] = { m in
             let a = m.args
             return ModChain.apply(Section(a.string(0), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[265] = { m in
+        r[275] = { m in
             let a = m.args
             return ModChain.apply(Section(isExpanded: a.boolBinding(0), content: { ChildrenView(m) }, header: { a.slot(2) }), m, m.consumedPrefix)
         }
-        r[266] = { m in
+        r[276] = { m in
             let a = m.args
             return ModChain.apply(Section(content: { ChildrenView(m) }, header: { a.slot(0) }), m, m.consumedPrefix)
         }
-        r[268] = { m in
+        r[278] = { m in
             let a = m.args
             return ModChain.apply(Section(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[270] = { m in
+        r[280] = { m in
             let a = m.args
             return ModChain.apply(SecureField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[271] = { m in
+        r[281] = { m in
             let a = m.args
             return ModChain.apply(SecureField(LocalizedStringResource(String.LocalizationValue(a.string(0))), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[272] = { m in
+        r[282] = { m in
             let a = m.args
             return ModChain.apply(SecureField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[273] = { m in
+        r[283] = { m in
             let a = m.args
             return ModChain.apply(SecureField(a.string(0), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[274] = { m in
+        r[284] = { m in
             let a = m.args
             return ModChain.apply(SecureField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), onCommit: a.action(3)), m, m.consumedPrefix)
         }
-        r[275] = { m in
+        r[285] = { m in
             let a = m.args
             return ModChain.apply(SecureField(a.string(0), text: a.stringBinding(1), onCommit: a.action(3)), m, m.consumedPrefix)
         }
-        r[276] = { m in
+        r[286] = { m in
             let a = m.args
             return ModChain.apply(SecureField(LocalizedStringResource(String.LocalizationValue(a.string(0))), text: a.stringBinding(1)), m, m.consumedPrefix)
         }
-        r[277] = { m in
+        r[287] = { m in
             let a = m.args
             return ModChain.apply(SecureField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1)), m, m.consumedPrefix)
         }
-        r[278] = { m in
+        r[288] = { m in
             let a = m.args
             return ModChain.apply(SecureField(a.string(0), text: a.stringBinding(1)), m, m.consumedPrefix)
         }
 #if os(macOS)
-        r[279] = { m in
+        r[289] = { m in
             let a = m.args
             return ModChain.apply(SettingsLink(label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(macOS)
-        r[280] = { m in
+        r[290] = { m in
             let a = m.args
             return ModChain.apply(SettingsLink(), m, m.consumedPrefix)
-        }
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-        r[281] = { m in
-            let a = m.args
-            guard let p0 = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(item: p0, subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
-        }
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-        r[282] = { m in
-            let a = m.args
-            return ModChain.apply(ShareLink(item: a.string(0), subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
-        }
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-        r[283] = { m in
-            let a = m.args
-            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(LocalizedStringKey(a.string(0)), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
-        }
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-        r[284] = { m in
-            let a = m.args
-            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(Text(a.string(0)), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
-        }
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-        r[285] = { m in
-            let a = m.args
-            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
-        }
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-        r[286] = { m in
-            let a = m.args
-            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(a.string(0), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[291] = { m in
             let a = m.args
             guard let p0 = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
-            return ModChain.apply(ShareLink(item: p0, subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ChildrenView(m) }), m, m.consumedPrefix)
+            return ModChain.apply(ShareLink(item: p0, subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[292] = { m in
             let a = m.args
-            return ModChain.apply(ShareLink(item: a.string(0), subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ChildrenView(m) }), m, m.consumedPrefix)
+            return ModChain.apply(ShareLink(item: a.string(0), subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
         r[293] = { m in
+            let a = m.args
+            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ShareLink(LocalizedStringKey(a.string(0)), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS) || os(watchOS)
+        r[294] = { m in
+            let a = m.args
+            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ShareLink(Text(a.string(0)), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS) || os(watchOS)
+        r[295] = { m in
+            let a = m.args
+            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ShareLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS) || os(watchOS)
+        r[296] = { m in
+            let a = m.args
+            guard let p1 = URL(string: a.string(1)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ShareLink(a.string(0), item: p1, subject: a.stringOpt(2).map { Text($0) }, message: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS) || os(watchOS)
+        r[301] = { m in
+            let a = m.args
+            guard let p0 = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
+            return ModChain.apply(ShareLink(item: p0, subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ChildrenView(m) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS) || os(watchOS)
+        r[302] = { m in
+            let a = m.args
+            return ModChain.apply(ShareLink(item: a.string(0), subject: a.stringOpt(1).map { Text($0) }, message: a.stringOpt(2).map { Text($0) }, label: { ChildrenView(m) }), m, m.consumedPrefix)
+        }
+#endif
+#if os(iOS) || os(macOS) || os(watchOS)
+        r[303] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 17.0, watchOS 26.0, *) {
                 let a = m.args
                 return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), neutralValue: a.doubleOpt(3), enabledBounds: a.doubleRangeOpt(4), label: { a.slot(5) }, currentValueLabel: { a.slot(6) }, minimumValueLabel: { a.slot(7) }, maximumValueLabel: { a.slot(8) }, onEditingChanged: a.callback(9, box: KBox.bool)), m, m.consumedPrefix)
@@ -1406,13 +1466,13 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[294] = { m in
+        r[304] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), onEditingChanged: a.callback(3, box: KBox.bool), minimumValueLabel: a.slot(4), maximumValueLabel: a.slot(5), label: { a.slot(6) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[295] = { m in
+        r[305] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 17.0, watchOS 26.0, *) {
                 let a = m.args
                 return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), neutralValue: a.doubleOpt(4), enabledBounds: a.doubleRangeOpt(5), label: { a.slot(6) }, currentValueLabel: { a.slot(7) }, minimumValueLabel: { a.slot(8) }, maximumValueLabel: { a.slot(9) }, onEditingChanged: a.callback(10, box: KBox.bool)), m, m.consumedPrefix)
@@ -1421,124 +1481,124 @@ import UniformTypeIdentifiers
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[296] = { m in
+        r[306] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), onEditingChanged: a.callback(4, box: KBox.bool), minimumValueLabel: a.slot(5), maximumValueLabel: a.slot(6), label: { a.slot(7) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[297] = { m in
+        r[307] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), label: { a.slot(4) }, minimumValueLabel: { a.slot(5) }, maximumValueLabel: { a.slot(6) }, onEditingChanged: a.callback(7, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[298] = { m in
+        r[308] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), label: { a.slot(3) }, minimumValueLabel: { a.slot(4) }, maximumValueLabel: { a.slot(5) }, onEditingChanged: a.callback(6, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[299] = { m in
+        r[309] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), onEditingChanged: a.callback(3, box: KBox.bool), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[300] = { m in
+        r[310] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), onEditingChanged: a.callback(4, box: KBox.bool), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[301] = { m in
+        r[311] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), label: { ChildrenView(m) }, onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[302] = { m in
+        r[312] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), label: { ChildrenView(m) }, onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[303] = { m in
+        r[313] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[304] = { m in
+        r[314] = { m in
             let a = m.args
             return ModChain.apply(Slider(value: a.doubleBinding(0), in: a.doubleRange(2), step: a.double(3), onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
-        r[305] = { m in
+        r[315] = { m in
             let a = m.args
             return ModChain.apply(Spacer(minLength: a.cgFloatOpt(0)), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[306] = { m in
+        r[316] = { m in
             let a = m.args
             return ModChain.apply(Stepper(value: a.intBinding(0), in: a.intRange(2), step: a.int(3), onEditingChanged: a.callback(4, box: KBox.bool), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[307] = { m in
+        r[317] = { m in
             let a = m.args
             return ModChain.apply(Stepper(value: a.intBinding(0), in: a.intRange(2), step: a.int(3), label: { ChildrenView(m) }, onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[308] = { m in
+        r[318] = { m in
             let a = m.args
             return ModChain.apply(Stepper(value: a.intBinding(0), step: a.int(2), onEditingChanged: a.callback(3, box: KBox.bool), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[309] = { m in
+        r[319] = { m in
             let a = m.args
             return ModChain.apply(Stepper(value: a.intBinding(0), step: a.int(2), label: { ChildrenView(m) }, onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[310] = { m in
+        r[320] = { m in
             let a = m.args
             return ModChain.apply(Stepper(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.intBinding(1), in: a.intRange(3), step: a.int(4), onEditingChanged: a.callback(5, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[311] = { m in
+        r[321] = { m in
             let a = m.args
             return ModChain.apply(Stepper(LocalizedStringKey(a.string(0)), value: a.intBinding(1), in: a.intRange(3), step: a.int(4), onEditingChanged: a.callback(5, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[312] = { m in
+        r[322] = { m in
             let a = m.args
             return ModChain.apply(Stepper(a.string(0), value: a.intBinding(1), in: a.intRange(3), step: a.int(4), onEditingChanged: a.callback(5, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[313] = { m in
+        r[323] = { m in
             let a = m.args
             return ModChain.apply(Stepper(LocalizedStringResource(String.LocalizationValue(a.string(0))), value: a.intBinding(1), step: a.int(3), onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[314] = { m in
+        r[324] = { m in
             let a = m.args
             return ModChain.apply(Stepper(LocalizedStringKey(a.string(0)), value: a.intBinding(1), step: a.int(3), onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
 #if os(iOS) || os(macOS) || os(watchOS)
-        r[315] = { m in
+        r[325] = { m in
             let a = m.args
             return ModChain.apply(Stepper(a.string(0), value: a.intBinding(1), step: a.int(3), onEditingChanged: a.callback(4, box: KBox.bool)), m, m.consumedPrefix)
         }
 #endif
-        r[316] = { m in
+        r[326] = { m in
             let a = m.args
             guard let p0 = dp_InsettableShape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = dp_ShapeStyle(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -1548,7 +1608,7 @@ import UniformTypeIdentifiers
             }
             return open(p0, p1)
         }
-        r[317] = { m in
+        r[327] = { m in
             let a = m.args
             guard let p0 = dp_Shape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = dp_ShapeStyle(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -1558,157 +1618,157 @@ import UniformTypeIdentifiers
             }
             return open(p0, p1)
         }
-        r[318] = { m in
+        r[328] = { m in
             let a = m.args
             return ModChain.apply(TabView(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[319] = { m in
+        r[329] = { m in
             let a = m.args
             return ModChain.apply(sm_Text(Text(timerInterval: ({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(0)), pauseTime: a.dateOpt(1), countsDown: a.bool(2), showsHours: a.bool(3)), m), m, m.consumedPrefix)
         }
-        r[320] = { m in
+        r[330] = { m in
             let a = m.args
             return ModChain.apply(sm_Text(Text(verbatim: a.string(0)), m), m, m.consumedPrefix)
         }
-        r[321] = { m in
+        r[331] = { m in
             let a = m.args
             guard let p1 = d_Text_DateStyle(a.expr(1)) else { return AnyView(EmptyView()) }
             return ModChain.apply(sm_Text(Text(a.date(0), style: p1), m), m, m.consumedPrefix)
         }
-        r[322] = { m in
+        r[332] = { m in
             let a = m.args
             return ModChain.apply(sm_Text(Text(LocalizedStringKey(a.string(0)), tableName: a.stringOpt(1)), m), m, m.consumedPrefix)
         }
-        r[324] = { m in
+        r[334] = { m in
             let a = m.args
             return ModChain.apply(sm_Text(Text(LocalizedStringResource(String.LocalizationValue(a.string(0)))), m), m, m.consumedPrefix)
         }
-        r[325] = { m in
+        r[335] = { m in
             let a = m.args
             return ModChain.apply(sm_Text(Text(({ (r: ClosedRange<Double>) in Date(timeIntervalSince1970: r.lowerBound)...Date(timeIntervalSince1970: r.upperBound) })(a.doubleRange(0))), m), m, m.consumedPrefix)
         }
 #if os(iOS) || os(macOS)
-        r[327] = { m in
+        r[337] = { m in
             let a = m.args
             guard let v = d_TextEditor(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
 #endif
-        r[328] = { m in
+        r[338] = { m in
             let a = m.args
             guard let p2 = d_Axis(a.expr(3)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, axis: p2, label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[329] = { m in
+        r[339] = { m in
             let a = m.args
             return ModChain.apply(TextField(text: a.stringBinding(0), prompt: a.stringOpt(2).map { Text($0) }, label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[330] = { m in
+        r[340] = { m in
             let a = m.args
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), onEditingChanged: a.callback(3, box: KBox.bool), onCommit: a.action(4)), m, m.consumedPrefix)
         }
-        r[331] = { m in
+        r[341] = { m in
             let a = m.args
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1), onEditingChanged: a.callback(3, box: KBox.bool), onCommit: a.action(4)), m, m.consumedPrefix)
         }
-        r[332] = { m in
+        r[342] = { m in
             let a = m.args
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
-        r[333] = { m in
+        r[343] = { m in
             let a = m.args
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1), onEditingChanged: a.callback(3, box: KBox.bool)), m, m.consumedPrefix)
         }
-        r[334] = { m in
+        r[344] = { m in
             let a = m.args
             guard let p2 = d_Axis(a.expr(3)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(LocalizedStringResource(String.LocalizationValue(a.string(0))), text: a.stringBinding(1), axis: p2), m, m.consumedPrefix)
         }
-        r[335] = { m in
+        r[345] = { m in
             let a = m.args
             guard let p2 = d_Axis(a.expr(3)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), axis: p2), m, m.consumedPrefix)
         }
-        r[336] = { m in
+        r[346] = { m in
             let a = m.args
             guard let p2 = d_Axis(a.expr(3)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1), axis: p2), m, m.consumedPrefix)
         }
-        r[337] = { m in
+        r[347] = { m in
             let a = m.args
             guard let p3 = d_Axis(a.expr(4)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(LocalizedStringResource(String.LocalizationValue(a.string(0))), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }, axis: p3), m, m.consumedPrefix)
         }
-        r[338] = { m in
+        r[348] = { m in
             let a = m.args
             guard let p3 = d_Axis(a.expr(4)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }, axis: p3), m, m.consumedPrefix)
         }
-        r[339] = { m in
+        r[349] = { m in
             let a = m.args
             guard let p3 = d_Axis(a.expr(4)) else { return AnyView(EmptyView()) }
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }, axis: p3), m, m.consumedPrefix)
         }
-        r[340] = { m in
+        r[350] = { m in
             let a = m.args
             return ModChain.apply(TextField(LocalizedStringResource(String.LocalizationValue(a.string(0))), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[341] = { m in
+        r[351] = { m in
             let a = m.args
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[342] = { m in
+        r[352] = { m in
             let a = m.args
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1), prompt: a.stringOpt(3).map { Text($0) }), m, m.consumedPrefix)
         }
-        r[343] = { m in
+        r[353] = { m in
             let a = m.args
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1), onCommit: a.action(3)), m, m.consumedPrefix)
         }
-        r[344] = { m in
+        r[354] = { m in
             let a = m.args
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1), onCommit: a.action(3)), m, m.consumedPrefix)
         }
-        r[345] = { m in
+        r[355] = { m in
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 let a = m.args
                 return ModChain.apply(TextField(LocalizedStringResource(String.LocalizationValue(a.string(0))), text: a.stringBinding(1)), m, m.consumedPrefix)
             }
             return AnyView(EmptyView())
         }
-        r[346] = { m in
+        r[356] = { m in
             let a = m.args
             return ModChain.apply(TextField(LocalizedStringKey(a.string(0)), text: a.stringBinding(1)), m, m.consumedPrefix)
         }
-        r[347] = { m in
+        r[357] = { m in
             let a = m.args
             return ModChain.apply(TextField(a.string(0), text: a.stringBinding(1)), m, m.consumedPrefix)
         }
 #if os(watchOS)
-        r[348] = { m in
+        r[358] = { m in
             let a = m.args
             return ModChain.apply(TextFieldLink(prompt: a.stringOpt(0).map { Text($0) }, label: { ChildrenView(m) }, onSubmit: a.callback(1, box: KBox.string)), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
-        r[349] = { m in
+        r[359] = { m in
             let a = m.args
             return ModChain.apply(TextFieldLink(LocalizedStringResource(String.LocalizationValue(a.string(0))), prompt: a.stringOpt(1).map { Text($0) }, onSubmit: a.callback(2, box: KBox.string)), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
-        r[350] = { m in
+        r[360] = { m in
             let a = m.args
             return ModChain.apply(TextFieldLink(LocalizedStringKey(a.string(0)), prompt: a.stringOpt(1).map { Text($0) }, onSubmit: a.callback(2, box: KBox.string)), m, m.consumedPrefix)
         }
 #endif
 #if os(watchOS)
-        r[351] = { m in
+        r[361] = { m in
             let a = m.args
             return ModChain.apply(TextFieldLink(a.string(0), prompt: a.stringOpt(1).map { Text($0) }, onSubmit: a.callback(2, box: KBox.string)), m, m.consumedPrefix)
         }
 #endif
-        r[352] = { m in
+        r[362] = { m in
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 let a = m.args
                 guard let v = d_TextInputBorderShape(a.expr(0)) else { return AnyView(EmptyView()) }
@@ -1716,47 +1776,47 @@ import UniformTypeIdentifiers
             }
             return AnyView(EmptyView())
         }
-        r[353] = { m in
+        r[363] = { m in
             let a = m.args
             return ModChain.apply(Toggle(isOn: a.boolBinding(0), label: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[354] = { m in
+        r[364] = { m in
             let a = m.args
             return ModChain.apply(Toggle(LocalizedStringResource(String.LocalizationValue(a.string(0))), isOn: a.boolBinding(1)), m, m.consumedPrefix)
         }
-        r[355] = { m in
+        r[365] = { m in
             let a = m.args
             return ModChain.apply(Toggle(LocalizedStringKey(a.string(0)), isOn: a.boolBinding(1)), m, m.consumedPrefix)
         }
-        r[356] = { m in
+        r[366] = { m in
             let a = m.args
             return ModChain.apply(Toggle(a.string(0), isOn: a.boolBinding(1)), m, m.consumedPrefix)
         }
-        r[357] = { m in
+        r[367] = { m in
             let a = m.args
             return ModChain.apply(Toggle(LocalizedStringResource(String.LocalizationValue(a.string(0))), systemImage: a.string(1), isOn: a.boolBinding(2)), m, m.consumedPrefix)
         }
-        r[358] = { m in
+        r[368] = { m in
             let a = m.args
             return ModChain.apply(Toggle(LocalizedStringKey(a.string(0)), systemImage: a.string(1), isOn: a.boolBinding(2)), m, m.consumedPrefix)
         }
-        r[359] = { m in
+        r[369] = { m in
             let a = m.args
             return ModChain.apply(Toggle(a.string(0), systemImage: a.string(1), isOn: a.boolBinding(2)), m, m.consumedPrefix)
         }
-        r[360] = { m in
+        r[370] = { m in
             let a = m.args
             return ModChain.apply(Toggle(LocalizedStringResource(String.LocalizationValue(a.string(0))), image: ImageResource(name: a.string(1), bundle: .main), isOn: a.boolBinding(2)), m, m.consumedPrefix)
         }
-        r[361] = { m in
+        r[371] = { m in
             let a = m.args
             return ModChain.apply(Toggle(LocalizedStringKey(a.string(0)), image: ImageResource(name: a.string(1), bundle: .main), isOn: a.boolBinding(2)), m, m.consumedPrefix)
         }
-        r[362] = { m in
+        r[372] = { m in
             let a = m.args
             return ModChain.apply(Toggle(a.string(0), image: ImageResource(name: a.string(1), bundle: .main), isOn: a.boolBinding(2)), m, m.consumedPrefix)
         }
-        r[363] = { m in
+        r[373] = { m in
             let a = m.args
             guard let p0 = dp_Shape(a.expr(0)) else { return AnyView(EmptyView()) }
             guard let p1 = d_CGAffineTransform(a.expr(1)) else { return AnyView(EmptyView()) }
@@ -1765,29 +1825,29 @@ import UniformTypeIdentifiers
             }
             return open(p0)
         }
-        r[364] = { m in
+        r[374] = { m in
             let a = m.args
             guard let v = d_UnevenRoundedRectangle(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(v, m, 0)
         }
 #if os(macOS)
-        r[365] = { m in
+        r[375] = { m in
             let a = m.args
             return ModChain.apply(VSplitView(content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #endif
-        r[366] = { m in
+        r[376] = { m in
             let a = m.args
             guard let p0 = d_HorizontalAlignment(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(VStack(alignment: p0, spacing: a.cgFloatOpt(1), content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
-        r[367] = { m in
+        r[377] = { m in
             let a = m.args
             let p0: Axis.Set = a.isNil(0) ? [.horizontal, .vertical] : (d_Axis_Set(a.expr(0)) ?? [.horizontal, .vertical])
             return ModChain.apply(ViewThatFits(in: p0, content: { ChildrenView(m) }), m, m.consumedPrefix)
         }
 #if os(macOS)
-        r[368] = { m in
+        r[378] = { m in
             if #available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
                 return ModChain.apply(WindowVisibilityToggle(windowID: a.string(0)), m, m.consumedPrefix)
@@ -1795,7 +1855,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-        r[369] = { m in
+        r[379] = { m in
             let a = m.args
             guard let p0 = d_Alignment(a.expr(0)) else { return AnyView(EmptyView()) }
             return ModChain.apply(ZStack(alignment: p0, content: { ChildrenView(m) }), m, m.consumedPrefix)
