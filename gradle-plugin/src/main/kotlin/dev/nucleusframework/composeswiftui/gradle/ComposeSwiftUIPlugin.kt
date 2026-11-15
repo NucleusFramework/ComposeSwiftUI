@@ -4,13 +4,25 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.work.DisableCachingByDefault
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.konan.target.Family
@@ -58,11 +70,13 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 }
             }
 
+            val previews = registerPreviews(project, kotlin)
             val sync = project.tasks.register("syncComposeSwiftUIRenderer", SyncComposeSwiftUIRendererTask::class.java) { task ->
                 task.group = "compose swiftui"
                 task.description = "Writes the Compose SwiftUI renderer (Swift sources) into the Xcode project."
                 task.outputDirectory.set(extension.swiftOutputDir.orElse(defaultOutputDir(project)))
                 task.frameworkName.set(extension.frameworkName.orElse(project.provider { firstFrameworkName(kotlin) }))
+                task.previewsSwiftFile.set(previews.flatMap { it.swiftOutputFile })
             }
             // Runs with the KMP Xcode build phase, so the renderer always matches the library version.
             project.tasks.configureEach { task ->
@@ -74,6 +88,49 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             }
         }
     }
+
+    /**
+     * `@Preview` support: the generated Kotlin file is compiled into every Apple framework (one copy per target,
+     * so no source directory is shared between source sets), and the Swift file is copied by the sync task.
+     */
+    private fun registerPreviews(project: Project, kotlin: KotlinMultiplatformExtension) =
+        project.tasks.register("generateComposeSwiftUIPreviews", GenerateComposeSwiftUIPreviewsTask::class.java) { task ->
+            task.group = "compose swiftui"
+            task.description = "Generates the Kotlin and Swift code that shows the @Preview composables in Xcode."
+            task.sources.from(project.provider { previewSourceDirs(project, kotlin) })
+            task.targetNames.set(project.provider { appleMainCompilations(kotlin).map { it.target.name } })
+            task.kotlinOutputDirectory.set(project.layout.buildDirectory.dir("generated/composeSwiftUI/previews/kotlin"))
+            task.swiftOutputFile.set(
+                project.layout.buildDirectory.file("generated/composeSwiftUI/previews/${PreviewCodegen.SWIFT_FILE_NAME}"),
+            )
+        }.also { previews ->
+            kotlin.targets.withType(KotlinNativeTarget::class.java).configureEach { target ->
+                if (target.konanTarget.family.isAppleFamily) {
+                    target.compilations.named(KotlinCompilation.MAIN_COMPILATION_NAME) { compilation ->
+                        compilation.defaultSourceSet.kotlin.srcDir(previews.flatMap { it.kotlinOutputDirectory.dir(target.name) })
+                    }
+                }
+            }
+        }
+
+    /**
+     * Hand-written source directories compiled into every Apple framework (e.g. `commonMain`, `appleMain`,
+     * `iosMain` for an iOS-only app), so a preview found there can be called from each target. Generated
+     * directories (under the build directory) are skipped.
+     */
+    private fun previewSourceDirs(project: Project, kotlin: KotlinMultiplatformExtension): List<File> {
+        val sourceSets = appleMainCompilations(kotlin)
+            .map { it.allKotlinSourceSets.toSet() }
+            .reduceOrNull { shared, sourceSet -> shared intersect sourceSet }
+            .orEmpty()
+        val buildDir = project.layout.buildDirectory.get().asFile
+        return sourceSets.flatMap { it.kotlin.srcDirs }.filter { !it.startsWith(buildDir) }.sorted()
+    }
+
+    private fun appleMainCompilations(kotlin: KotlinMultiplatformExtension) =
+        kotlin.targets.withType(KotlinNativeTarget::class.java)
+            .filter { it.konanTarget.family.isAppleFamily }
+            .map { it.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME) }
 
     private fun applyComposeCompiler(project: Project) {
         try {
@@ -117,6 +174,12 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
     @get:Input
     abstract val frameworkName: Property<String>
 
+    /** `ComposeSwiftUIPreviews.swift`, written next to the renderer. */
+    @get:InputFile
+    @get:Optional
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val previewsSwiftFile: RegularFileProperty
+
     @get:Input
     val rendererVersion: String = BuildConfig.LIBRARY_VERSION
 
@@ -130,7 +193,7 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
         val files = index.lines().filter { it.isNotBlank() }
 
         out.mkdirs()
-        val wanted = files.toSet() + setOf("KotlinModule.swift", README)
+        val wanted = files.toSet() + setOf("KotlinModule.swift", README, PreviewCodegen.SWIFT_FILE_NAME)
         // Remove files of an older renderer version (only inside our own folder).
         out.walkBottomUp().filter { it.isFile }.forEach { file ->
             if (file.relativeTo(out).invariantSeparatorsPath !in wanted) file.delete()
@@ -144,6 +207,7 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
             }
         }
         writeIfChanged(out.resolve("KotlinModule.swift"), "@_exported import ${frameworkName.get()}\n")
+        previewsSwiftFile.orNull?.asFile?.let { writeIfChanged(out.resolve(PreviewCodegen.SWIFT_FILE_NAME), it.readText()) }
         writeIfChanged(
             out.resolve(README),
             "Generated by the dev.nucleusframework.compose-swiftui Gradle plugin ($rendererVersion).\n" +
@@ -158,5 +222,43 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
 
     private companion object {
         const val README = "README.txt"
+    }
+}
+
+/**
+ * Finds the `@Preview @Composable` functions and generates `ComposeSwiftUIPreviews` (Kotlin, one file per Apple
+ * target) and `ComposeSwiftUIPreviews.swift` (the `#Preview`s and the gallery, copied into the Xcode project by
+ * [SyncComposeSwiftUIRendererTask]). Files are still generated when there is no preview.
+ */
+@CacheableTask
+abstract class GenerateComposeSwiftUIPreviewsTask : DefaultTask() {
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val sources: ConfigurableFileCollection
+
+    @get:Input
+    abstract val targetNames: ListProperty<String>
+
+    @get:OutputDirectory
+    abstract val kotlinOutputDirectory: DirectoryProperty
+
+    @get:OutputFile
+    abstract val swiftOutputFile: RegularFileProperty
+
+    @TaskAction
+    fun generate() {
+        val previews = sources.asFileTree.matching { it.include("**/*.kt") }.files
+            .sorted()
+            .flatMap { PreviewScanner.scan(it.readText()) }
+        val entries = PreviewScanner.entries(previews)
+
+        val kotlinRoot = kotlinOutputDirectory.get().asFile
+        kotlinRoot.deleteRecursively()
+        val kotlinCode = PreviewCodegen.kotlin(entries)
+        for (target in targetNames.get()) {
+            kotlinRoot.resolve("$target/${PreviewCodegen.OBJECT_NAME}.kt").apply { parentFile.mkdirs() }.writeText(kotlinCode)
+        }
+        swiftOutputFile.get().asFile.apply { parentFile.mkdirs() }.writeText(PreviewCodegen.swift(entries))
+        logger.info("Compose SwiftUI: ${entries.size} preview(s): ${entries.joinToString { it.function.qualifiedName }}")
     }
 }

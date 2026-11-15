@@ -121,6 +121,36 @@ API:
 | A Swift view (MapKit, `UIViewRepresentable`…) | `NativeView("map")` + `ComposeRegistry.nativeViews["map"] = { args in … }` |
 | Values passed from Swift | `ComposeView(input: value) { … }` + `hostInput<T>()` in Kotlin |
 
+## Previews
+
+Compose SwiftUI draws with real SwiftUI, so previews render in Xcode's canvas, not in Android Studio. Annotate a
+top-level, parameterless composable with `@Preview`:
+
+```kotlin
+@Preview(name = "Counter")
+@Composable
+fun CounterPreview() {
+    NavigationStack { CounterScreen() }
+}
+```
+
+On every build, the plugin writes `ComposeSwiftUIPreviews.swift` next to the renderer (`iosApp/ComposeSwiftUI`), with
+one Swift `#Preview` per annotated function. Open that file in Xcode to see the previews in the canvas. The same file
+declares `ComposeSwiftUIPreviewGallery`, a SwiftUI view that lists every preview, so you can also browse them on a
+simulator or device, for example from a debug menu:
+
+```swift
+.sheet(isPresented: $showPreviews) { ComposeSwiftUIPreviewGallery() }
+```
+
+- Previews are found by scanning the sources, so any annotation named `Preview` works, including
+  `org.jetbrains.compose.ui.tooling.preview.Preview`. The function must be declared at the start of a line (not
+  indented), must not be private and must take no parameters.
+- Only source sets compiled into every Apple framework are scanned: `commonMain`, `appleMain`, and `iosMain` for an
+  iOS-only app. A preview in `iosMain` is skipped if the module also has macOS targets.
+- If you added the `ComposeSwiftUI` folder to Xcode as a group before this version, add the new
+  `ComposeSwiftUIPreviews.swift` file to the app target once.
+
 ## Using it with other Compose libraries
 
 ### Navigation 3

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `@Preview` for Compose SwiftUI composables, rendered in Xcode's canvas. The Gradle plugin finds top-level,
+  parameterless `@Preview @Composable` functions (any annotation named `Preview` works) and writes
+  `ComposeSwiftUIPreviews.swift` next to the renderer, with one Swift `#Preview` per function and a
+  `ComposeSwiftUIPreviewGallery` view that lists them all. The task is `generateComposeSwiftUIPreviews`.
+- The sample app has two previews and opens the gallery from its home screen.
+
 ## 0.2.1
 
 ### Added

@@ -86,7 +86,15 @@ private fun HomeScreenRows() = listOf(
 
 @androidx.compose.runtime.Composable
 private fun HomeScreen(onOpen: (Route) -> Unit, onShowText: () -> Unit) {
-    List(modifier = Modifier.navigationTitle("Compose SwiftUI")) {
+    var showPreviews by remember { mutableStateOf(false) }
+    List(
+        modifier = Modifier
+            .navigationTitle("Compose SwiftUI")
+            // The generated ComposeSwiftUIPreviewGallery (Swift), registered as a native view in SampleApp.swift.
+            .sheet(isPresented = showPreviews, onIsPresentedChange = { showPreviews = it }) {
+                NativeView("previewGallery")
+            },
+    ) {
         Section(title = stringResource(Res.string.examples_title)) {
             for ((route, title, icon) in HomeScreenRows()) {
                 Button(action = { onOpen(route) }) {
@@ -95,6 +103,9 @@ private fun HomeScreen(onOpen: (Route) -> Unit, onShowText: () -> Unit) {
             }
             Button(action = onShowText) {
                 Label("Open the Styled text tab", systemImage = "arrow.right.circle.fill")
+            }
+            Button(action = { showPreviews = true }) {
+                Label("Browse the @Preview composables", systemImage = "eye")
             }
         }
     }
@@ -162,4 +173,21 @@ private fun ParagraphScreen() {
             }
         }
     }
+}
+
+// Previews: shown in Xcode's canvas from the generated iosApp/ComposeSwiftUI/ComposeSwiftUIPreviews.swift, and
+// listed by ComposeSwiftUIPreviewGallery (the "Browse the @Preview composables" row of the home screen).
+
+@Preview(name = "Counter")
+@androidx.compose.runtime.Composable
+fun CounterScreenPreview() {
+    WithComposeResources {
+        NavigationStack { CounterScreen() }
+    }
+}
+
+@androidx.compose.runtime.Composable
+@Preview(name = "Styled text")
+fun StyledTextScreenPreview() {
+    StyledTextScreen()
 }

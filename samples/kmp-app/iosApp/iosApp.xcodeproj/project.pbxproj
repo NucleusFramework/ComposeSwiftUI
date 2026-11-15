@@ -15,6 +15,7 @@
 		2A5D78DA81F110F6F49C1392 /* GenModifiers7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F68E222CAB8EBE41ED74 /* GenModifiers7.swift */; };
 		3ABD26950B1C28076A3C5328 /* GenModifiers1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D65B8660062301F7F5709 /* GenModifiers1.swift */; };
 		3AD878629C38BE47968DA6DE /* GenDecoders5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B672764C3827C8295175CB /* GenDecoders5.swift */; };
+		3B2691FAF6C5BA7FBCA163F1 /* ComposeSwiftUIPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBF537FE7FCA9FB5840325E /* ComposeSwiftUIPreviews.swift */; };
 		41DB7488E445FC4CDA7CD009 /* GenDecoders2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677996633148E100CF8B6B87 /* GenDecoders2.swift */; };
 		45AAA8005478C84018E9D104 /* GenModifiers3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */; };
 		4D00BF741965F7CC509DE13A /* GenModifiers5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC69AC5162C37FDE60343ED9 /* GenModifiers5.swift */; };
@@ -49,6 +50,7 @@
 		6B8BF59EAE48D3AF64D3BC1B /* GenModifiers3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers3.swift; sourceTree = "<group>"; };
 		7B58C3DABB175DDBA81F9D08 /* GenProtocolDecoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenProtocolDecoders.swift; sourceTree = "<group>"; };
 		86038AE1032E284E79B32AD6 /* iosApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FBF537FE7FCA9FB5840325E /* ComposeSwiftUIPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeSwiftUIPreviews.swift; sourceTree = "<group>"; };
 		A56D65B8660062301F7F5709 /* GenModifiers1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenModifiers1.swift; sourceTree = "<group>"; };
 		AFADC2B5E1375A1EF68B39DA /* GenDecoders3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders3.swift; sourceTree = "<group>"; };
 		BFC8CB8E396099504DC1E6A6 /* GenDecoders0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDecoders0.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				52A9162FBC423C6E1219DFC0 /* Args.swift */,
+				8FBF537FE7FCA9FB5840325E /* ComposeSwiftUIPreviews.swift */,
 				56C6A2FFB790A722FB7483E0 /* Core.swift */,
 				36383731CAECE4330150F7E2 /* Handwritten.swift */,
 				EFC5F5DDDE53545B4B33D2A5 /* KotlinModule.swift */,
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03346C3D10B81C7E89C8440A /* Args.swift in Sources */,
+				3B2691FAF6C5BA7FBCA163F1 /* ComposeSwiftUIPreviews.swift in Sources */,
 				68442AA27F477A45C0F0456C /* Core.swift in Sources */,
 				E2CE26B31D71548D81A75399 /* GenDecoders0.swift in Sources */,
 				D2260FE9021483D273A1EC5A /* GenDecoders1.swift in Sources */,
