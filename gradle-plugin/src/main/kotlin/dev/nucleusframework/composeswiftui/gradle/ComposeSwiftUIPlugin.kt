@@ -144,10 +144,11 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             task.hostSwiftFile.set(previews.flatMap { it.hostSwiftOutputFile })
             task.device.set(extension.previewDevice)
             // Compose Multiplatform resources, when the module uses them (the app bundle must carry them).
+            // Wire the task's outputs, not the task itself: a Task can't be stored in the configuration cache.
             task.composeResources.from(
                 project.provider {
                     val name = "assemble${framework.get().target.name.replaceFirstChar { it.uppercase() }}MainResources"
-                    if (name in project.tasks.names) listOf(project.tasks.named(name)) else emptyList()
+                    if (name in project.tasks.names) project.tasks.named(name).get().outputs.files else project.files()
                 },
             )
             task.workDirectory.set(project.layout.buildDirectory.dir("composeSwiftUI/previewHost"))

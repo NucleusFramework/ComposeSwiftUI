@@ -43,7 +43,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.3.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.3.2"
    }
 
    kotlin {
@@ -163,11 +163,20 @@ fun CounterPreview() {
 
 ### In IntelliJ IDEA and Android Studio
 
-Install the IDE plugin: download `compose-swiftui-intellij-plugin-<version>.zip` from the
-[GitHub releases](https://github.com/NucleusFramework/ComposeSwiftUI/releases), then *Settings › Plugins › ⚙ ›
-Install Plugin from Disk*. To build it yourself: `./gradlew -p intellij-plugin buildPlugin`. A Kotlin file with previews opens in a split editor, code on the
-left and the rendered previews on the right, like Compose's own preview. Each preview has a gutter icon that renders
-it and scrolls to it, and the previews are rendered again every time the file is saved.
+Previews in the IDE need the Compose SwiftUI IDE plugin. It is not on the JetBrains Marketplace yet, so for now it is
+installed manually:
+
+1. Download `compose-swiftui-intellij-plugin-<version>.zip` from the
+   [GitHub releases](https://github.com/NucleusFramework/ComposeSwiftUI/releases), or build it with
+   `./gradlew -p intellij-plugin buildPlugin` (the zip lands in `intellij-plugin/build/distributions/`).
+2. In the IDE, open *Settings › Plugins › ⚙ › Install Plugin from Disk…*, pick the zip, and restart the IDE when it
+   asks.
+
+Repeat these steps to update: the IDE won't offer updates for a plugin installed from disk.
+
+A Kotlin file with previews opens in a split editor, code on the left and the rendered previews on the right, like
+Compose's own preview. Each preview has a gutter icon that renders it and scrolls to it, and the previews are rendered
+again every time the file is saved.
 
 Rendering runs the `renderComposeSwiftUIPreviews` Gradle task: it links the debug framework of the simulator target
 (`iosSimulatorArm64`, or `iosX64` on Intel Macs), builds a small host app with the renderer, and snapshots every

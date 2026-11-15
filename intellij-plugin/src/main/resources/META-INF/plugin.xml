@@ -1,4 +1,5 @@
-<idea-plugin>
+<!-- Loading the plugin dynamically leaves the previews blank until a restart, so ask for one. -->
+<idea-plugin require-restart="true">
     <id>dev.nucleusframework.compose-swiftui</id>
     <name>Compose SwiftUI</name>
     <vendor url="https://github.com/NucleusFramework/ComposeSwiftUI">Nucleus Framework</vendor>

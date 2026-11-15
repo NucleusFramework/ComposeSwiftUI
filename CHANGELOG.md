@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2
+
+### Fixed
+
+- `renderComposeSwiftUIPreviews` works with the configuration cache in modules that use Compose Multiplatform
+  resources. It used to fail with "cannot serialize object of type AssembleTargetResourcesTask".
+- The IntelliJ plugin asks for an IDE restart after it is installed. Without the restart, the previews stayed blank.
+
 ## 0.3.1
 
 ### Added
