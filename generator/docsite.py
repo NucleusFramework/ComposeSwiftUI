@@ -8,7 +8,7 @@ usage: docsite.py <repo-root> <out-dir>
   explanation. Apple's documentation text is not copied.
 - Guides: the README sections, CHANGELOG and benchmark results, rendered from Markdown.
 """
-import glob, html, json, os, re, shutil, sys
+import glob, hashlib, html, json, os, re, shutil, struct, subprocess, sys, urllib.request, zlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from doc_content import CONTENT, TOPICS
 
@@ -16,6 +16,23 @@ ROOT, OUT = sys.argv[1], sys.argv[2]
 GEN = os.path.join(ROOT, "runtime/src/generated/kotlin/dev/nucleusframework/composeswiftui")
 APPLE = "https://developer.apple.com/documentation/swiftui/"
 REPO = "https://github.com/NucleusFramework/ComposeSwiftUI"
+SITE = "https://nucleusframework.github.io/ComposeSwiftUI/"
+
+def latest_version():
+    """The latest GitHub release tag (e.g. "v0.3.0"); falls back to the newest git tag, then to "dev"."""
+    try:
+        req = urllib.request.Request("https://api.github.com/repos/NucleusFramework/ComposeSwiftUI/releases/latest",
+                                     headers={"Accept": "application/vnd.github+json"})
+        if os.environ.get("GITHUB_TOKEN"):
+            req.add_header("Authorization", "Bearer " + os.environ["GITHUB_TOKEN"])
+        return json.load(urllib.request.urlopen(req, timeout=10))["tag_name"]
+    except Exception:
+        tags = subprocess.run(["git", "-C", ROOT, "tag", "--sort=-v:refname"], capture_output=True, text=True).stdout.split()
+        return tags[0] if tags else "dev"
+
+VERSION = latest_version()
+# Full-text search: Pagefind (open source) indexes the built pages; the search then runs in the browser, offline too.
+PAGEFIND = "pagefind@1.5.2"
 
 def esc(s):
     return html.escape(s, quote=True)
@@ -188,12 +205,13 @@ def markdown(md):
     out, lines, i = [], md.split("\n"), 0
     while i < len(lines):
         l = lines[i]
-        if l.startswith("```"):
-            lang = l[3:].strip()
+        if l.lstrip().startswith("```"):  # fences may be indented under a list item
+            indent = len(l) - len(l.lstrip())
+            lang = l.strip()[3:].strip()
             code = []
             i += 1
-            while i < len(lines) and not lines[i].startswith("```"):
-                code.append(lines[i]); i += 1
+            while i < len(lines) and not lines[i].lstrip().startswith("```"):
+                code.append(lines[i][indent:] if lines[i][:indent].isspace() else lines[i].lstrip()); i += 1
             out.append('<pre><code class="language-%s">%s</code></pre>' % (esc(lang or "plaintext"), esc("\n".join(code))))
         elif re.match(r"^#{1,4} ", l):
             n = len(l.split(" ")[0])
@@ -210,7 +228,7 @@ def markdown(md):
                 t.append("<tr>" + "".join("<td>%s</td>" % inline(c) for c in cells(r)) + "</tr>")
             out.append("".join(t) + "</tbody></table>")
         elif re.match(r"^\s*(- |\d+\. )", l):
-            ordered = bool(re.match(r"^\s*\d+\. ", l))
+            number = re.match(r"^\s*(\d+)\. ", l)  # a list split by a code block keeps its numbering
             items = []
             while i < len(lines) and (re.match(r"^\s*(- |\d+\. )", lines[i]) or (lines[i].startswith("  ") and items)):
                 if re.match(r"^\s*(- |\d+\. )", lines[i]):
@@ -221,11 +239,12 @@ def markdown(md):
                     items[-1] += " " + lines[i].strip()
                 i += 1
             i -= 1
-            tag = "ol" if ordered else "ul"
-            out.append("<%s>%s</%s>" % (tag, "".join("<li>%s</li>" % inline(x) for x in items), tag))
+            tag = "ol" if number else "ul"
+            start = ' start="%s"' % number.group(1) if number and number.group(1) != "1" else ""
+            out.append("<%s%s>%s</%s>" % (tag, start, "".join("<li>%s</li>" % inline(x) for x in items), tag))
         elif l.strip():
             para = [l]
-            while i + 1 < len(lines) and lines[i + 1].strip() and not re.match(r"^(#|```|\||\s*- |\s*\d+\. )", lines[i + 1]):
+            while i + 1 < len(lines) and lines[i + 1].strip() and not re.match(r"^(#|\s*```|\||\s*- |\s*\d+\. )", lines[i + 1]):
                 i += 1; para.append(lines[i])
             out.append("<p>%s</p>" % inline(" ".join(x.strip() for x in para)))
         i += 1
@@ -248,46 +267,83 @@ def sections(md):
 # ---- page layout (modelled on the structure of Apple's documentation pages) --------------------------------
 
 CSS = """
-:root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--soft:#f5f5f7;--code:#f5f5f7;--accent:#0066cc;--side:#fafafc;--pill:#fff}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1d1d1f;--fg:#f5f5f7;--muted:#a1a1a6;--line:#424245;--soft:#2c2c2e;--code:#2c2c2e;--accent:#2997ff;--side:#161617;--pill:#4a4a4e;color-scheme:dark}}
-:root[data-theme=dark]{--bg:#1d1d1f;--fg:#f5f5f7;--muted:#a1a1a6;--line:#424245;--soft:#2c2c2e;--code:#2c2c2e;--accent:#2997ff;--side:#161617;--pill:#4a4a4e;color-scheme:dark}
-.theme{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}.theme button{display:grid;place-items:center;width:28px;height:24px;border:0;border-radius:999px;background:none;color:var(--muted);cursor:pointer;transition:background .2s,color .2s}.theme button:hover{color:var(--fg)}.theme button[aria-pressed=true]{background:var(--pill);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.15)}.theme button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-*{box-sizing:border-box}html,body{margin:0}body{font:17px/1.47 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;background:var(--bg);color:var(--fg)}
+:root{--bg:#fff;--fg:#1d1d1f;--muted:#6e6e73;--faint:#86868b;--line:#d2d2d7;--soft:#f5f5f7;--code:#f5f5f7;--accent:#0066cc;--side:#fff;--sel:#e8e8ed;--pill:#fff;
+--kw:#ad3da4;--ty:#703daa;--str:#d12f1b;--num:#272ad8;--com:#707f8c;--fn:#3e8087}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#f5f5f7;--muted:#a1a1a6;--faint:#86868b;--line:#424245;--soft:#1d1d1f;--code:#1d1d1f;--accent:#2997ff;--side:#000;--sel:#333336;--pill:#4a4a4e;
+--kw:#ff7ab2;--ty:#dabaff;--str:#ff8170;--num:#d9c97c;--com:#7f8c98;--fn:#67b7a4;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#000;--fg:#f5f5f7;--muted:#a1a1a6;--faint:#86868b;--line:#424245;--soft:#1d1d1f;--code:#1d1d1f;--accent:#2997ff;--side:#000;--sel:#333336;--pill:#4a4a4e;
+--kw:#ff7ab2;--ty:#dabaff;--str:#ff8170;--num:#d9c97c;--com:#7f8c98;--fn:#67b7a4;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:17px/1.47 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-.top{height:52px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:22px;padding:0 22px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:saturate(180%) blur(20px);z-index:2}
-.top .brand{font-weight:600;color:var(--fg);font-size:17px}.top a{font-size:14px;color:var(--fg)}.top .sp{flex:1}
+/* top bar */
+.top{height:52px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:24px;padding:0 22px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:saturate(180%) blur(20px);z-index:2}
+.top .brand{font-weight:600;color:var(--fg);font-size:21px;letter-spacing:-.01em}.top a{font-size:14px;color:var(--fg)}.top .sp{flex:1}
+.theme{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}
+.theme button{display:grid;place-items:center;width:28px;height:24px;border:0;border-radius:999px;background:none;color:var(--muted);cursor:pointer;transition:background .2s,color .2s}
+.theme button:hover{color:var(--fg)}.theme button[aria-pressed=true]{background:var(--pill);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.theme button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.searchbtn{display:flex;align-items:center;gap:8px;height:32px;padding:0 8px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--muted);font:14px -apple-system,sans-serif;cursor:pointer;min-width:200px}
+.searchbtn span{flex:1;text-align:left}.searchbtn kbd{font:12px -apple-system,sans-serif;border:1px solid var(--line);border-radius:4px;padding:0 5px;background:var(--bg)}
+.searchbtn:hover{color:var(--fg)}.searchbtn:focus-visible{outline:2px solid var(--accent)}
+dialog.search{width:min(720px,calc(100vw - 32px));max-height:min(640px,calc(100vh - 120px));margin:80px auto 0;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:auto}
+dialog.search::backdrop{background:rgba(0,0,0,.35);backdrop-filter:blur(2px)}
+#search{--pagefind-ui-scale:.85;--pagefind-ui-primary:var(--accent);--pagefind-ui-text:var(--fg);--pagefind-ui-background:var(--bg);--pagefind-ui-border:var(--line);--pagefind-ui-tag:var(--soft);--pagefind-ui-border-radius:10px;--pagefind-ui-font:-apple-system,BlinkMacSystemFont,sans-serif}
+.top .ver{margin-left:-12px;font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px}.top .ver:hover{text-decoration:none;color:var(--fg)}
+/* sidebar */
+.sidetoggle{display:grid;place-items:center;width:32px;height:32px;margin-left:-6px;border:0;border-radius:8px;background:none;color:var(--fg);cursor:pointer}
+.sidetoggle:hover{background:var(--soft)}.sidetoggle:focus-visible{outline:2px solid var(--accent)}.sidetoggle svg{width:19px;height:19px}
+.side{transition:margin-left .25s ease,visibility .25s}.noside .side{margin-left:-321px;visibility:hidden}
+#tree[hidden]{display:none}.side .none{color:var(--muted);padding:5px 10px;margin:0}
 .wrap{display:flex;min-height:calc(100vh - 52px)}
-.side{width:280px;flex:none;border-right:1px solid var(--line);background:var(--side);padding:16px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow:auto;font-size:14px}
-.side h4{margin:16px 20px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.side a{display:block;padding:3px 20px;color:var(--fg)}.side a.on{background:var(--soft);font-weight:600}
-.side input{margin:0 16px 8px;width:calc(100% - 32px);padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font-size:14px}
+.side{width:320px;flex:none;border-right:1px solid var(--line);background:var(--side);position:sticky;top:52px;height:calc(100vh - 52px);display:flex;flex-direction:column;font-size:15px}
+.side .scroll{flex:1;overflow:auto;padding:14px 12px 20px}
+.side h4{margin:14px 10px 4px;font-size:15px;font-weight:600;color:var(--faint)}#tree h4:first-child{margin-top:4px}
+.side a{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:8px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side a:hover{text-decoration:none;background:var(--soft)}.side a.on{background:var(--sel);font-weight:600}
+.ic{flex:none;display:inline-grid;place-items:center;width:15px;height:15px;border:1px solid var(--faint);border-radius:4px;font:600 10px/1 -apple-system,sans-serif;color:var(--faint)}
+.side .filter{border-top:1px solid var(--line);padding:12px}
+.side input{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);font-size:15px}
+.side input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+/* page */
 main{flex:1;min-width:0}
-.hero{background:var(--soft);border-bottom:1px solid var(--line);padding:40px 56px 32px}
-.eyebrow{color:var(--muted);font-size:15px;margin-bottom:4px}.hero h1{font-size:40px;line-height:1.1;margin:0 0 12px;font-weight:700;letter-spacing:-.01em}
-.abstract{font-size:21px;line-height:1.38;margin:0 0 16px;max-width:760px}
-.chips span{display:inline-block;border:1px solid var(--line);border-radius:12px;padding:1px 10px;margin:0 6px 6px 0;font-size:13px;color:var(--muted)}
-.content{padding:32px 56px 64px;max-width:980px}
-h2{font-size:28px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--line)}h2:first-child{border-top:0;margin-top:0}
-h3{font-size:20px;margin:28px 0 10px}
-code{font:.88em "SF Mono",ui-monospace,Menlo,monospace}p code,li code,td code{background:var(--code);padding:1px 5px;border-radius:5px}
-pre code.hljs{background:none;padding:0}pre{background:var(--code);padding:14px 16px;border-radius:12px;overflow:auto;font-size:15px;line-height:1.5}
-.decl{border:1px solid var(--line);background:var(--bg)}
-.topic{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}.topic:last-child{border-bottom:0}
-.topic .sig{font:14px "SF Mono",ui-monospace,Menlo,monospace;flex:1;min-width:0;overflow-wrap:anywhere}
-.topic .meta{color:var(--muted);font-size:13px;margin-top:3px;font-family:-apple-system,sans-serif}
-table{border-collapse:collapse;width:100%;margin:12px 0;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:16px 0}
-.card{border:1px solid var(--line);border-radius:14px;padding:16px}.card b{display:block;margin-bottom:4px;color:var(--fg)}.card span{color:var(--muted);font-size:14px}
-#results a{display:block;padding:4px 20px}
-footer{color:var(--muted);font-size:13px;padding:24px 56px;border-top:1px solid var(--line)}
-@media(max-width:820px){.side{display:none}.hero,.content,footer{padding-left:20px;padding-right:20px}}
+.hero,.content{max-width:920px;padding-left:80px;padding-right:80px}
+.hero{padding-top:44px}
+.crumbs{font-size:15px;color:var(--muted);margin-bottom:22px}.crumbs a{color:var(--fg);text-decoration:underline;text-underline-offset:2px}.crumbs i{font-style:normal;margin:0 6px}
+.eyebrow{color:var(--muted);font-size:21px;font-weight:500;margin-bottom:6px}
+.hero h1{font-size:44px;line-height:1.08;margin:0 0 14px;font-weight:700;letter-spacing:-.015em;overflow-wrap:anywhere}
+.abstract{font-size:21px;line-height:1.38;margin:0 0 14px;font-weight:500}
+.avail{font-size:15px;color:var(--fg);margin-bottom:8px}.avail span+span::before{content:"|";color:var(--faint);margin:0 10px}
+.content{padding-top:12px;padding-bottom:72px}
+h2{font-size:34px;line-height:1.1;margin:48px 0 20px;padding-top:44px;border-top:1px solid var(--line);font-weight:700;letter-spacing:-.01em}
+h2.first{border-top:0;padding-top:0;margin-top:16px}
+h3{font-size:24px;margin:34px 0 14px;font-weight:600}
+p{margin:0 0 16px}
+code{font:.88em "SF Mono",ui-monospace,Menlo,monospace}p code,li code,td code{color:var(--fg)}
+pre{background:var(--code);padding:14px 16px;border-radius:15px;overflow:auto;font-size:15px;line-height:1.66;margin:0 0 24px}
+pre code{font-size:15px}.decl{margin:24px 0 0}
+/* syntax colours (Xcode-like) */
+.hljs-keyword,.hljs-meta,.hljs-literal{color:var(--kw)}.hljs-type,.hljs-title.class_,.hljs-built_in{color:var(--ty)}
+.hljs-string{color:var(--str)}.hljs-number{color:var(--num)}.hljs-comment{color:var(--com);font-style:italic}.hljs-title.function_{color:var(--fn)}
+/* topics */
+.topic{padding:0 0 18px}
+.topic .sig{font:15px/1.6 "SF Mono",ui-monospace,Menlo,monospace;color:var(--muted);overflow-wrap:anywhere}.topic .sig b{font-weight:400;color:var(--accent)}
+.topic .meta{color:var(--fg);font-size:16px;margin:2px 0 0 40px}.topic .meta code{color:var(--muted)}
+table{border-collapse:collapse;width:100%;margin:12px 0 24px;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}th{font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:4px 16px;margin:16px 0}
+.card{display:block;border:1px solid var(--line);border-radius:16px;padding:18px 20px;transition:border-color .2s}.card:hover{text-decoration:none;border-color:var(--faint)}
+.card b{display:block;margin-bottom:4px;color:var(--fg)}.card span{color:var(--muted);font-size:14px}
+.grid:has(.card){gap:14px}
+#results a{padding:5px 10px}
+footer{color:var(--muted);font-size:13px;padding:22px 80px;background:var(--soft);border-top:1px solid var(--line)}
+@media(max-width:820px){.searchbtn{min-width:0}.searchbtn span,.searchbtn kbd{display:none}.side{position:fixed;left:0;z-index:3;margin-left:-321px;visibility:hidden;box-shadow:0 10px 30px rgba(0,0,0,.2)}.mside .side{margin-left:0;visibility:visible}.hero,.content,footer{padding-left:20px;padding-right:20px}.hero h1{font-size:34px}}
 """
 
 def page_url(key):
     return "reference/%s.html" % slug(key)
 
 def sidebar(up, current):
-    out = ['<nav class="side"><input id="q" placeholder="Filter" autocomplete="off"><div id="results"></div><div id="tree">',
+    out = ['<nav class="side"><div class="scroll"><div id="results"></div><div id="tree">',
            '<h4>Essentials</h4><a href="%sindex.html">Overview</a><a href="%sguide.html">Guide</a><a href="%sreference.html">All APIs</a>' % (up, up, up)]
     for title, keys in TOPICS:
         links = [k for k in keys if k in pages]
@@ -297,36 +353,38 @@ def sidebar(up, current):
         for k in links:
             name = pages[k]["title"]
             name = name if not k.startswith("modifier-") else name + "(_:)"
-            out.append('<a href="%s%s"%s>%s</a>' % (up, page_url(k), ' class="on"' if k == current else "", esc(name)))
+            out.append('<a href="%s%s"%s><span class="ic">%s</span>%s</a>' % (up, page_url(k), ' class="on"' if k == current else "", "M" if k.startswith("modifier-") else kind_label(pages[k])[0], esc(name)))
     out.append('<h4>More</h4><a href="%sbenchmarks.html">Benchmarks</a><a href="%schangelog.html">Changelog</a><a href="%scontributing.html">Contributing</a>' % (up, up, up))
-    out.append("""</div></nav><script>
-const UP='%s';let idx=null;const q=document.getElementById('q'),res=document.getElementById('results'),tree=document.getElementById('tree');
-q.addEventListener('input',async()=>{const s=q.value.trim().toLowerCase();if(!s){res.innerHTML='';tree.style.display='';return}
-if(!idx)idx=await (await fetch(UP+'search.json')).json();tree.style.display='none';
-const hits=idx.filter(e=>e.n.toLowerCase().includes(s)).sort((a,b)=>a.n.toLowerCase().indexOf(s)-b.n.toLowerCase().indexOf(s)||a.n.length-b.n.length).slice(0,50);
-res.innerHTML=hits.map(e=>`<a href="${UP+e.u}">${e.n}</a>`).join('')||'<a>No results</a>'});
-</script>""" % up)
+    out.append("""</div></div><div class="filter"><input id="q" placeholder="Filter" autocomplete="off" aria-label="Filter"></div></nav>""")
     return "".join(out)
+
+HLJS = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>'
+THEMES = [("system", '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>'),
+          ("light", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+          ("dark", '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>')]
+THEME_SWITCH = '<div class="theme" role="group" aria-label="Appearance">%s</div>' % "".join(
+    '<button type="button" data-t="%s" title="%s" aria-label="%s appearance">%s</button>' % (t, t.title(), t.title(), SVG % d) for t, d in THEMES)
+SIDE_TOGGLE = '<button type="button" class="sidetoggle" title="Toggle sidebar" aria-label="Toggle sidebar">%s</button>' % (
+    SVG % '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16M5.5 8h1.5M5.5 11h1.5"/>')
+
+SEARCH_BOX = ('<button type="button" class="searchbtn" aria-label="Search the documentation">%s<span>Search</span><kbd>⌘K</kbd></button>'
+              '<dialog class="search" aria-label="Search"><div id="search"></div></dialog>'
+              % (SVG % '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'))
 
 def layout(title, body, depth=0, current=None):
     up = "../" * depth
+    # The theme and the sidebar state are applied in <head>, before first paint, to avoid a flash.
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css">
-<link id="hl-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme:light)">
-<link id="hl-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme:dark)">
-<script>
-// Theme: "light", "dark" or "system" (follows the OS). Applied before first paint to avoid a flash.
-function setTheme(t){const r=document.documentElement;if(t==='system')r.removeAttribute('data-theme');else r.dataset.theme=t;
-document.getElementById('hl-light').media=t==='system'?'(prefers-color-scheme:light)':t==='light'?'all':'not all';
-document.getElementById('hl-dark').media=t==='system'?'(prefers-color-scheme:dark)':t==='dark'?'all':'not all';
-document.querySelectorAll('.theme button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t));
-try{t==='system'?localStorage.removeItem('theme'):localStorage.setItem('theme',t)}catch(e){}}
-let THEME='system';try{THEME=localStorage.getItem('theme')||'system'}catch(e){}setTheme(THEME);
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer onload="hljs.highlightAll()"></script></head><body>
-<div class="top"><a class="brand" href="%sindex.html">Compose SwiftUI</a><span class="sp"></span><a href="%sguide.html">Guide</a><a href="%sreference.html">API</a><a href="%s">GitHub</a><div class="theme" role="group" aria-label="Appearance"><button type="button" data-t="system" title="System" aria-label="System appearance" onclick="setTheme(this.dataset.t)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></button><button type="button" data-t="light" title="Light" aria-label="Light appearance" onclick="setTheme(this.dataset.t)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-t="dark" title="Dark" aria-label="Dark appearance" onclick="setTheme(this.dataset.t)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div><script>setTheme(THEME)</script></div>
-<div class="wrap">%s<main>%s<footer>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps.</footer></main></div></body></html>
-""" % (esc(title), up, up, up, up, REPO, sidebar(up, current), body)
+<title>%s | Compose SwiftUI</title><link rel="stylesheet" href="%sstyle.css"><link rel="manifest" href="%smanifest.webmanifest">
+<link rel="icon" href="%sicon-192.png"><link rel="apple-touch-icon" href="%sicon-192.png">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme:dark)">
+<script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('side')==='closed')document.documentElement.classList.add('noside')}catch(e){}</script>
+<link rel="alternate" type="text/plain" title="LLM documentation" href="%sllms.txt">
+<script src="%s" defer></script><script src="%sapp.js" defer></script></head><body>
+<div class="top">%s<a class="brand" href="%sindex.html">Compose SwiftUI</a><a class="ver" href="%s/releases/tag/%s" title="Latest release">%s</a><span class="sp"></span>%s<a href="%sguide.html">Guide</a><a href="%sreference.html">API</a><a href="%s">GitHub</a>%s</div>
+<div class="wrap">%s<main data-pagefind-body>%s<footer data-pagefind-ignore>SwiftUI is a trademark of Apple Inc. Each reference page links to Apple's documentation of the SwiftUI API it maps.</footer></main></div></body></html>
+""" % (esc(title), up, up, up, up, up, HLJS, up, SIDE_TOGGLE, up, REPO, VERSION, esc(VERSION), SEARCH_BOX, up, up, REPO, THEME_SWITCH, sidebar(up, current), body)
 
 def write(rel, content):
     path = os.path.join(OUT, rel)
@@ -335,6 +393,15 @@ def write(rel, content):
 
 def chips(avail):
     return "".join("<span>%s</span>" % esc(a.strip()) for a in avail.split(",") if a.strip())
+
+def crumbs(up, *parts):
+    """Breadcrumb trail: (label, href) pairs, the last one being the current page."""
+    links = ['<a href="%s%s">%s</a>' % (up, h, esc(t)) for t, h in parts[:-1]]
+    return '<nav class="crumbs" data-pagefind-ignore>%s<i>/</i>%s</nav>' % ("<i>/</i>".join(links), esc(parts[-1][0]))
+
+def sig_html(k):
+    """Topic signature: declared names and parameter labels in the accent colour, the rest muted."""
+    return re.sub(r"\b([A-Za-z_]\w*)(?=\(|:)", r"<b>\1</b>", esc(k))
 
 def topic_groups(p):
     """Sorts a page's entries into topic groups, like the Topics section of a documentation page."""
@@ -383,20 +450,21 @@ guide_parts = [(t, b) for t, b in sections(readme) if t not in ("Contributing", 
 
 cards = "".join('<a class="card" href="%s"><b>%s</b><span>%s</span></a>' % (page_url(keys[0]), esc(t), esc(", ".join(pages[k]["title"] for k in keys[:4] if k in pages)))
                 for t, keys in TOPICS if keys and keys[0] in pages)
-index_body = """<div class="hero"><div class="eyebrow">Framework</div><h1>Compose SwiftUI</h1>
+index_body = """<div class="hero"><div class="eyebrow" data-pagefind-ignore>Framework</div><h1>Compose SwiftUI</h1>
 <p class="abstract">Write SwiftUI screens in Kotlin with the Compose runtime, and keep your view models.</p>
-<div class="chips"><span>iOS 17.0+</span><span>macOS 14.0+</span><span>tvOS 17.0+</span><span>watchOS 10.0+</span></div></div>
+<div class="avail" data-pagefind-ignore><span>iOS 17.0+</span><span>macOS 14.0+</span><span>tvOS 17.0+</span><span>watchOS 10.0+</span></div></div>
 <div class="content"><h2>Overview</h2>%s<h2>Topics</h2><div class="grid">%s</div>
 <p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a></p></div>""" % (intro_html, cards, len(entries))
 write("index.html", layout("Compose SwiftUI", index_body))
 
 toc = "".join('<li><a href="#%s">%s</a></li>' % (slug(t.lower()), esc(t)) for t, _ in guide_parts)
-guide_body = '<div class="hero"><div class="eyebrow">Article</div><h1>Guide</h1><p class="abstract">Set up Compose SwiftUI, write screens and use it with other Compose libraries.</p></div><div class="content"><ul>%s</ul>%s</div>' % (
+guide_body = '<div class="hero">' + crumbs("", ("Compose SwiftUI", "index.html"), ("Guide", "")) + '<div class="eyebrow" data-pagefind-ignore>Article</div><h1>Guide</h1><p class="abstract">Set up Compose SwiftUI, write screens and use it with other Compose libraries.</p></div><div class="content"><ul>%s</ul>%s</div>' % (
     toc, "".join('<h2 id="%s">%s</h2>%s' % (slug(t.lower()), esc(t), markdown(b)) for t, b in guide_parts))
 write("guide.html", layout("Guide", guide_body))
 
 def article(title, abstract, md_html):
-    return '<div class="hero"><div class="eyebrow">Article</div><h1>%s</h1><p class="abstract">%s</p></div><div class="content">%s</div>' % (esc(title), esc(abstract), md_html)
+    return '<div class="hero">%s<div class="eyebrow" data-pagefind-ignore>Article</div><h1>%s</h1><p class="abstract">%s</p></div><div class="content">%s</div>' % (
+        crumbs("", ("Compose SwiftUI", "index.html"), (title, "")), esc(title), esc(abstract), md_html)
 
 perf = dict(sections(readme)).get("Performance", "")
 results = open(os.path.join(ROOT, "docs/bench/RESULTS.md")).read()
@@ -423,9 +491,10 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
     types = sorted((e for e in p["entries"] if e["kotlin"].startswith(("class", "interface"))),
                    key=lambda e: e["swift"] != p["title"])  # the page's own type first
     primary = min(callables, key=lambda e: len(e["kotlin"])) if callables else (types[0] if types else first)
-    body = ['<div class="hero"><div class="eyebrow">%s</div><h1>%s</h1><p class="abstract">%s</p><div class="chips">%s</div></div><div class="content">'
-            % (kind_label(p), esc(display), inline(abstract), chips(primary["avail"]))]
-    body.append('<h2>Declaration</h2><pre class="decl"><code class="language-kotlin">%s</code></pre>' % esc(primary["kotlin"]))
+    body = ['<div class="hero">%s<div class="eyebrow" data-pagefind-ignore>%s</div><h1>%s</h1><p class="abstract">%s</p><div class="avail" data-pagefind-ignore>%s</div></div><div class="content">'
+            % (crumbs("../", ("Compose SwiftUI", "index.html"), ("APIs", "reference.html"), (display, "")),
+               kind_label(p), esc(display), inline(abstract), chips(primary["avail"]))]
+    body.append('<pre class="decl"><code class="language-kotlin">%s</code></pre>' % esc(primary["kotlin"]))
     body.append("<h2>Overview</h2>")
     if overview:
         body.append("<p>%s</p>" % inline(overview))
@@ -433,7 +502,7 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
         body.append('<pre><code class="language-kotlin">%s</code></pre>' % esc(example))
     elif primary["kind"] in ("view", "modifier") and sketch(primary):
         body.append('<pre><code class="language-kotlin">%s</code></pre>' % esc(sketch(primary)))
-    body.append('<p>This is the Kotlin form of SwiftUI <code>%s</code>: <a href="%s">SwiftUI documentation</a>. '
+    body.append('<p>This is the Kotlin form of SwiftUI <code>%s</code>: <a href="%s" target="_blank" rel="noopener">SwiftUI documentation</a>. '
                 'In Swift it reads:</p><pre><code class="language-swift">%s</code></pre>' % (esc(primary["swift"]), apple_url(primary, p), esc(primary["swiftDecl"])))
     body.append("<h2>Topics</h2>")
     for g, items in topic_groups(p):
@@ -444,11 +513,11 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
                 meta += " · " + esc(e["avail"])
             if e["notes"]:
                 meta += " · " + inline(e["notes"])
-            body.append('<div class="topic"><div class="sig">%s<div class="meta">%s</div></div></div>' % (esc(e["kotlin"]), meta))
+            body.append('<div class="topic"><div class="sig">%s</div><div class="meta">%s</div></div>' % (sig_html(e["kotlin"]), meta))
     body.append("</div>")
     write(rel, layout(display, "".join(body), depth=1, current=key))
 
-ref = ['<div class="hero"><div class="eyebrow">API Collection</div><h1>All APIs</h1><p class="abstract">Every SwiftUI API that '
+ref = ['<div class="hero">' + crumbs("", ("Compose SwiftUI", "index.html"), ("All APIs", "")) + '<div class="eyebrow" data-pagefind-ignore>API Collection</div><h1>All APIs</h1><p class="abstract">Every SwiftUI API that '
        'Compose SwiftUI supports, generated from Apple\'s SDK and compiled for iOS, macOS, tvOS and watchOS.</p></div><div class="content">',
        '<p>APIs with a Kotlin-specific shape (navigation paths, item presentations, gestures, lazy lists, mixed-style text) are '
        'described in the <a href="guide.html#writing-screens">guide</a>.</p>']
@@ -459,3 +528,256 @@ ref.append("</div>")
 write("reference.html", layout("All APIs", "".join(ref)))
 write("search.json", json.dumps(search, separators=(",", ":")))
 print("entries=%d pages=%d views=%d modifiers=%d types=%d" % (len(entries), len(pages), len(cats["Views"]), len(cats["Modifiers"]), len(cats["Types"])))
+
+
+# ---- offline app: shared script, manifest, icons and service worker --------------------------------------------
+
+APP_JS = r"""// Shared client code: theme, sidebar, filter, single-page navigation and offline support.
+const BASE = new URL('.', document.currentScript.src);
+const root = document.documentElement;
+const narrow = matchMedia('(max-width:820px)');
+
+function store(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v) } catch (e) {} }
+const escHtml = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})[c]);
+
+function setTheme(t) {
+  if (t === 'system') root.removeAttribute('data-theme'); else root.dataset.theme = t;
+  store('theme', t === 'system' ? null : t);
+  syncTheme();
+}
+function syncTheme() {
+  const t = root.dataset.theme || 'system';
+  document.querySelectorAll('.theme button').forEach(b => b.setAttribute('aria-pressed', b.dataset.t === t));
+}
+
+// Wide screens collapse the sidebar (remembered); narrow screens open it as an overlay.
+function toggleSidebar() {
+  if (narrow.matches) root.classList.toggle('mside');
+  else store('side', root.classList.toggle('noside') ? 'closed' : null);
+}
+
+let index = null;
+async function filter(query) {
+  const s = query.trim().toLowerCase(), res = document.getElementById('results'), tree = document.getElementById('tree');
+  if (!s) { res.innerHTML = ''; tree.hidden = false; return }
+  index ??= await (await fetch(new URL('search.json', BASE))).json();
+  tree.hidden = true;
+  const hits = index.filter(e => e.n.toLowerCase().includes(s))
+    .sort((a, b) => a.n.toLowerCase().indexOf(s) - b.n.toLowerCase().indexOf(s) || a.n.length - b.n.length).slice(0, 50);
+  res.innerHTML = hits.map(e => `<a href="${new URL(e.u, BASE)}">${escHtml(e.n)}</a>`).join('') || '<p class="none">No results</p>';
+}
+
+function hydrate() {
+  syncTheme();
+  if (window.hljs) {
+    document.querySelectorAll('pre code').forEach(c => hljs.highlightElement(c));
+    // Inline code in tables: Swift under a "SwiftUI"/"Swift" header, Kotlin elsewhere.
+    document.querySelectorAll('td code:not(.hljs)').forEach(c => {
+      const th = c.closest('table').querySelectorAll('th')[c.closest('td').cellIndex];
+      const language = /^swift(ui)?$/i.test(th?.textContent.trim() ?? '') ? 'swift' : 'kotlin';
+      c.innerHTML = hljs.highlight(c.textContent, {language}).value;
+      c.classList.add('hljs');
+    });
+  }
+  document.querySelector('.side a.on')?.scrollIntoView({block: 'nearest'});
+}
+
+// Single-page navigation: every page shares the same shell, so a link swaps the body instead of reloading.
+let here = location.pathname;
+async function go(url, push) {
+  let doc;
+  try {
+    const r = await fetch(url);
+    if (!r.ok) throw r.status;
+    doc = new DOMParser().parseFromString(await r.text(), 'text/html');
+  } catch (e) { location.href = url; return }
+  const sideScroll = document.querySelector('.side .scroll')?.scrollTop ?? 0;
+  if (push) history.pushState(null, '', url);  // before the swap, so relative links resolve against the new page
+  here = location.pathname;
+  document.title = doc.title;
+  document.body.replaceWith(doc.body);
+  root.classList.remove('mside');
+  document.querySelector('.side .scroll').scrollTop = sideScroll;
+  hydrate();
+  const target = url.hash && document.getElementById(decodeURIComponent(url.hash.slice(1)));
+  target ? target.scrollIntoView() : scrollTo(0, 0);
+  checkForUpdate();
+}
+
+document.addEventListener('click', e => {
+  const button = e.target.closest('button');
+  if (button?.dataset.t) return setTheme(button.dataset.t);
+  if (button?.classList.contains('sidetoggle')) return toggleSidebar();
+  const a = e.target.closest('a[href]');
+  if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target) return;
+  const url = new URL(a.href);
+  if (url.origin !== location.origin || !url.pathname.startsWith(BASE.pathname)) return;
+  if (url.pathname === location.pathname && url.hash) return;  // in-page anchor: the browser scrolls
+  e.preventDefault();
+  go(url, true);
+});
+// Search: Pagefind's UI, loaded on first use and mounted in the dialog of the current body.
+let pagefindLoaded = null;
+function loadPagefind() {
+  return pagefindLoaded ??= new Promise((resolve, reject) => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = new URL('pagefind/pagefind-ui.css', BASE);
+    const js = document.createElement('script');
+    js.src = new URL('pagefind/pagefind-ui.js', BASE); js.onload = resolve; js.onerror = reject;
+    document.head.append(css, js);
+  });
+}
+async function openSearch() {
+  const dialog = document.querySelector('dialog.search');
+  dialog.showModal();
+  await loadPagefind();
+  const box = document.getElementById('search');
+  if (!box.childElementCount) new PagefindUI({element: box, bundlePath: new URL('pagefind/', BASE).href, showSubResults: true, showImages: false, resetStyles: false});
+  box.querySelector('input')?.focus();
+}
+document.addEventListener('keydown', e => {
+  const typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement?.tagName);
+  if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) { e.preventDefault(); openSearch() }
+});
+document.addEventListener('click', e => {
+  if (e.target.closest('.searchbtn')) openSearch();
+  else if (e.target.matches('dialog.search')) e.target.close();  // click on the backdrop
+});
+document.addEventListener('input', e => { if (e.target.id === 'q') filter(e.target.value) });
+addEventListener('popstate', () => { if (location.pathname !== here) go(new URL(location.href), false) });
+
+// Offline: the service worker serves the whole release from its cache. When a new release is published, the
+// browser installs the new worker, which replaces the cache and takes over; the page then reloads onto it.
+function checkForUpdate() { navigator.serviceWorker?.getRegistration().then(r => r?.update()).catch(() => {}) }
+if ('serviceWorker' in navigator) {
+  const hadWorker = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register(new URL('sw.js', BASE)).catch(() => {});
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadWorker) location.reload() });
+}
+
+hydrate();
+"""
+
+SW_JS = r"""// Generated by docsite.py. VERSION is a hash of the release, so every publish changes this file: the browser
+// installs it, it precaches the new release, then deletes the previous one.
+const PREFIX = 'composeswiftui-', VERSION = PREFIX + '%s';
+const FILES = %s;
+
+self.addEventListener('install', e => {
+  self.skipWaiting();
+  e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES.map(f => new Request(f, {cache: 'reload'})))));
+});
+
+self.addEventListener('activate', e => e.waitUntil(
+  caches.keys()
+    .then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== VERSION).map(k => caches.delete(k))))
+    .then(() => self.clients.claim())));
+
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(caches.open(VERSION)
+    .then(c => c.match(e.request, {ignoreSearch: true}))
+    .then(r => r || fetch(e.request)));
+});
+"""
+
+def icon_png(size):
+    """App icon: a white "</>" on a blue gradient, full bleed (inside the maskable safe zone) and dependency-free."""
+    k = size / 512
+    segments = [((196, 168), (116, 256)), ((116, 256), (196, 344)), ((316, 168), (396, 256)), ((396, 256), (316, 344)),
+                ((282, 150), (230, 362))]
+    segments = [((ax * k, ay * k), (bx * k, by * k)) for (ax, ay), (bx, by) in segments]
+    radius = 17 * k
+
+    def dist(px, py, seg):
+        (ax, ay), (bx, by) = seg
+        dx, dy = bx - ax, by - ay
+        t = max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)))
+        return ((px - ax - t * dx) ** 2 + (py - ay - t * dy) ** 2) ** 0.5
+
+    rows = []
+    for y in range(size):
+        f = y / size
+        bg = (10 + (94 - 10) * f, 132 + (92 - 132) * f, 255 + (230 - 255) * f)
+        row = bytearray(b"\0")
+        for x in range(size):
+            alpha = max(0.0, min(1.0, radius - min(dist(x + .5, y + .5, s) for s in segments) + .5))
+            row += bytes(int(c + (255 - c) * alpha) for c in bg)
+        rows.append(bytes(row))
+
+    def chunk(tag, data):
+        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xffffffff)
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", size, size, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(b"".join(rows), 9)) + chunk(b"IEND", b""))
+
+write("app.js", APP_JS)
+for n in (192, 512):
+    open(os.path.join(OUT, "icon-%d.png" % n), "wb").write(icon_png(n))
+write("manifest.webmanifest", json.dumps({
+    "name": "Compose SwiftUI", "short_name": "Compose SwiftUI",
+    "description": "Documentation of Compose SwiftUI: SwiftUI screens in Kotlin.",
+    "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#ffffff", "theme_color": "#ffffff",
+    "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+              {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+              {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}]}, indent=1))
+
+html_pages = sorted(os.path.relpath(f, OUT) for f in glob.glob(os.path.join(OUT, "**", "*.html"), recursive=True))
+write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n'
+      % "".join("<url><loc>%s%s</loc></url>\n" % (SITE, "" if f == "index.html" else f) for f in html_pages))
+write("robots.txt", "User-agent: *\nAllow: /\nSitemap: %ssitemap.xml\n" % SITE)
+
+# ---- llms.txt (llmstxt.org): what an agent needs to write Compose SwiftUI code -----------------------------------
+
+DEFAULT_AVAIL = "iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+"
+
+def api_text(key, p):
+    """One API page as plain text: every Kotlin declaration with the SwiftUI API it maps."""
+    name = p["title"] + ("(_:)" if p["category"] == "Modifiers" else "")
+    abstract = CONTENT.get(key, ("",))[0]
+    lines = ["### %s" % name, ""] + ([abstract, ""] if abstract else [])
+    for e in p["entries"]:
+        extra = "".join(" · " + x for x in (e["avail"] if e["avail"] != DEFAULT_AVAIL else "", e["notes"]) if x)
+        lines.append("- `%s` ← SwiftUI `%s`%s" % (collapse(e["kotlin"]), e["swift"], extra))
+    return "\n".join(lines) + "\n"
+
+summary = "Write SwiftUI screens in Kotlin with the Compose runtime: composables build a tree of real SwiftUI views."
+rules = """Latest release: %s (Gradle plugin `id("dev.nucleusframework.compose-swiftui") version "%s"`).
+Platforms: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ unless an API says otherwise.
+
+Key rules for writing Compose SwiftUI code:
+- Views are Kotlin functions named like SwiftUI (`Text`, `VStack`, `Button`...); Swift labels become named arguments (`spacing = 8.0`).
+- Modifiers are a chain passed as `modifier = Modifier.padding().font(Font.title)`, applied in chain order as in Swift.
+- Bindings are a value plus a change callback (`isOn = on, onIsOnChange = { on = it }`); state uses Compose `remember`/`mutableStateOf`.
+- `CGFloat` is `Double`; leading-dot Swift members are qualified (`.secondary` → `ShapeStyle.secondary`).
+- A screen is `fun myScreen() = composeSwiftUI { ... }`, shown from Swift with `ComposeView { MyScreenKt.myScreen() }`.
+- Only APIs listed in the reference exist; for anything Kotlin-specific (navigation, sheets, lists, styled text) follow the guide.""" % (VERSION, VERSION.lstrip("v"))
+
+llms = ["# Compose SwiftUI", "", "> " + summary, "", rules, "",
+        "## Docs", "",
+        "- [Full documentation for LLMs](%sllms-full.txt): the guide and every API mapping in one file" % SITE,
+        "- [Guide](%sguide.html): setup, writing screens, previews, interop, how it works, limitations" % SITE,
+        "- [All APIs](%sreference.html): every supported SwiftUI view, modifier and type" % SITE,
+        "- [Source code](%s)" % REPO, ""]
+for t, keys in TOPICS:
+    links = [k for k in keys if k in pages]
+    if links:
+        llms += ["## %s" % t, ""] + ["- [%s](%s%s)" % (pages[k]["title"], SITE, page_url(k)) for k in links] + [""]
+llms += ["## Optional", "", "- [Benchmarks](%sbenchmarks.html)" % SITE, "- [Changelog](%schangelog.html)" % SITE, ""]
+write("llms.txt", "\n".join(llms))
+
+full = ["# Compose SwiftUI", "", "> " + summary, "", rules, "", "# Guide", ""]
+full += ["## %s\n\n%s\n" % (t, b.strip()) for t, b in guide_parts]
+full += ["# API reference", "", "Format: `Kotlin declaration` ← SwiftUI API it maps · availability when it differs from the default · notes.", ""]
+for cat in ("Views", "Modifiers", "Types"):
+    full += ["## %s" % cat, ""] + [api_text(k, p) for k, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower())
+                                   if p["category"] == cat]
+write("llms-full.txt", "\n".join(full))
+
+subprocess.run(["npx", "--yes", PAGEFIND, "--site", OUT, "--quiet"], check=True)
+
+files = sorted(os.path.relpath(f, OUT) for f in glob.glob(os.path.join(OUT, "**", "*"), recursive=True)
+               if os.path.isfile(f) and not f.endswith(".nojekyll"))
+digest = hashlib.sha256(HLJS.encode())
+for f in files:
+    digest.update(f.encode() + b"\0" + open(os.path.join(OUT, f), "rb").read())
+write("sw.js", SW_JS % (digest.hexdigest()[:16], json.dumps(["./"] + files + [HLJS], separators=(",", ":"))))
