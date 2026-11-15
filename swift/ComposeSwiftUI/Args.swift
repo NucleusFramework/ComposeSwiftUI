@@ -82,9 +82,21 @@ public struct Args {
     // MARK: Bindings (encoded as value at `i`, setter callback at `i + 1`)
 
     public func binding<T>(_ i: Int, read: @escaping (Args, Int) -> T, box: @escaping (T) -> Any?) -> Binding<T> {
-        guard let node = self.node else { return .constant(read(self, i)) }
-        let modifierIndex = self.modifierIndex
         let callback = src.argCallback(index: k(i + 1))
+        guard let node = self.node else {
+            // Nested expression (e.g. `TextEditor(text:)` inside `TextEditorView`): not addressable
+            // for silent writes, so keep the last written value locally until Kotlin re-renders.
+            let cell = BindingBox(read(self, i))
+            return Binding(
+                get: { cell.value },
+                set: { newValue in
+                    cell.value = newValue
+                    callback?.invoke(value: box(newValue))
+                    ComposeSwiftUIHostKt.flushCompose()
+                }
+            )
+        }
+        let modifierIndex = self.modifierIndex
         return Binding(
             get: {
                 // Read the live value: it may have been written silently since this render.
@@ -150,6 +162,11 @@ public struct Args {
         guard index >= 0, let node else { return SlotView(model: nil) }
         return SlotView(model: node.slot(index: index).map(NodeModel.of))
     }
+}
+
+private final class BindingBox<T> {
+    var value: T
+    init(_ value: T) { self.value = value }
 }
 
 /// Kotlin boxing helpers for values sent back to Kotlin.
