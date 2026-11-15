@@ -91022,8 +91022,8 @@
   "usr": "s:7SwiftUI10TextEditorV4text9selectionAcA7BindingVy10Foundation16AttributedStringVG_AGyAA0iC9SelectionVGSgtcfc",
   "path": "TextEditor.init(text:selection:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "param text: Binding<str>",
+  "status": "generated",
+  "detail": "value member of TextEditor",
   "platforms": [
    "ios",
    "macos"
@@ -108534,8 +108534,8 @@
   "usr": "s:7SwiftUI4ViewPAAE9onOpenURL7performQry10Foundation0F0Vc_tF",
   "path": "View.onOpenURL(perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "param action: callback of url",
+  "status": "generated",
+  "detail": "modifier",
   "platforms": [
    "ios",
    "macos",

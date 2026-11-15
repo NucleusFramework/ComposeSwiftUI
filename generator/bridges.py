@@ -51,7 +51,7 @@ class Bridge:
         self.cb_kind = cb_kind
         # slot passed to Swift as a view value (`V`) instead of a `() -> V` builder closure
         self.bare = False
-        # Swift type built from the base kind (see CONVS): (type name, conversion template, failable)
+        # Swift type built from the base kind (see CONVS): (type name, to template, failable, back template, fallback)
         self.conv = None
 
     @property
@@ -105,7 +105,7 @@ class Bridge:
     def swift_decode(self, i, var, fallback, src="a"):
         """Returns (statements, expression) decoding Kotlin arg(s) starting at index i."""
         if self.conv:
-            _, tpl, failable = self.conv
+            _, tpl, failable = self.conv[:3]
             base = Bridge(self.kind, self.kt)
             stmts, expr = base.swift_decode(i, var, fallback, src)
             if failable:
@@ -124,9 +124,23 @@ class Bridge:
         if k == "async_action":
             return ["let %s = %s.action(%d)" % (var, src, i)], "{ %s() }" % var
         if k == "callback":
-            return [], "%s.callback(%d, box: %s)" % (src, i, self.inner.box())
+            inner = self.inner
+            if inner.kind == "url":
+                return [], "%s.callback(%d, box: { (v: URL) in KBox.string(v.absoluteString) })" % (src, i)
+            if inner.conv:
+                return [], "%s.callback(%d, box: { (v: %s) in %s(%s) })" % (
+                    src, i, inner.conv[0], inner.box(), inner.conv[3] % "v")
+            return [], "%s.callback(%d, box: %s)" % (src, i, inner.box())
         if k == "binding":
-            return [], "%s.%sBinding(%d)" % (src, self.inner.binding_kind(), i)
+            inner = self.inner
+            if inner.conv:
+                name, to, failable, back, fallback = inner.conv
+                get = to % ("%s.wrappedValue" % var)
+                if failable:
+                    get = "(%s ?? %s)" % (get, fallback)
+                return ["let %s = %s.%sBinding(%d)" % (var, src, inner.binding_kind(), i)], \
+                    "Binding<%s>(get: { %s }, set: { %s.wrappedValue = %s })" % (name, get, var, back % "$0")
+            return [], "%s.%sBinding(%d)" % (src, inner.binding_kind(), i)
         if k == "slot":
             return [], ("%s.slot(%d)" if self.bare else "{ %s.slot(%d) }") % (src, i)
         if k == "url":
@@ -196,15 +210,16 @@ PRIMS = {
     "Date": ("date", "Double"),
 }
 
-# Swift types carried as a Kotlin primitive: name -> (base kind, Swift conversion of the base value, failable)
+# Swift types carried as a Kotlin primitive:
+# name -> (base kind, Swift value from the base value, base value back from the Swift value, fallback if failable)
 CONVS = {
-    **{t: ("int", t + "(truncatingIfNeeded: %s)", False)
+    **{t: ("int", t + "(truncatingIfNeeded: %s)", "Int(truncatingIfNeeded: %s)", None)
        for t in ("Int8", "Int16", "Int32", "Int64", "UInt", "UInt8", "UInt16", "UInt32", "UInt64")},
-    "Character": ("str", "(%s.first ?? \" \")", False),
-    "AttributedString": ("str", "AttributedString(%s)", False),
-    "Locale": ("str", "Locale(identifier: %s)", False),
-    "Locale.Language": ("str", "Locale.Language(identifier: %s)", False),
-    "UTType": ("str", "UTType(%s)", True),
+    "Character": ("str", "(%s.first ?? \" \")", "String(%s)", None),
+    "AttributedString": ("str", "AttributedString(%s)", "String(%s.characters)", None),
+    "Locale": ("str", "Locale(identifier: %s)", "%s.identifier", None),
+    "Locale.Language": ("str", "Locale.Language(identifier: %s)", "%s.maximalIdentifier", None),
+    "UTType": ("str", "UTType(%s)", "%s.identifier", ".item"),
 }
 
 GENERIC_PRIMS = {
@@ -276,7 +291,7 @@ class Classifier:
             return self._constrained(ctx.conf.get(name, []), ctx, t)
         if name == "Binding" and t.args:
             inner = self.classify(t.args[0], ctx, top=False)
-            ok = not inner.conv and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
+            ok = inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
                 inner.kind == "optional" and inner.inner.kind == "hash")
             if not ok:
                 raise Unsupported("Binding<%s>" % inner.kind)
@@ -299,9 +314,9 @@ class Classifier:
             kind, kt = PRIMS[name]
             return Bridge(kind, kt)
         if name in CONVS:
-            kind, tpl, failable = CONVS[name]
+            kind, to, back, fallback = CONVS[name]
             b = Bridge(kind, PRIMS["Int" if kind == "int" else "String"][1])
-            b.conv = (name, tpl, failable)
+            b.conv = (name, to, fallback is not None, back, fallback)
             return b
         if name == "Self" and ctx.scope:
             sym = self.model.lookup_type(".".join(ctx.scope))
@@ -350,7 +365,7 @@ class Classifier:
                 return Bridge("async_action" if t.is_async else "action", "() -> Unit")
             if len(t.params) == 1 and not t.is_async:
                 inner = self.classify(t.params[0], ctx, top=False)
-                if not inner.conv and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date"):
+                if inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url"):
                     return Bridge("callback", "(%s) -> Unit" % inner.kt, inner=inner)
                 raise Unsupported("callback of %s" % inner.kind)
             raise Unsupported("closure with %d params" % len(t.params))

@@ -749,6 +749,7 @@ Modifier.onLongPressGesture(minimumDuration: Double? = null, maximumDistance: Do
 Modifier.onLongPressGestureMinimumDuration(minimumDuration: Double = 0.5, maximumDistance: Double = 10.0, perform: () -> Unit)
 Modifier.onLongPressGestureMinimumDuration(minimumDuration: Double = 0.5, perform: () -> Unit)
 Modifier.onLongTouchGesture(minimumDuration: Double = 0.5, perform: () -> Unit)
+Modifier.onOpenURL(perform: (String) -> Unit)
 Modifier.onOpenURL(prefersInApp: Boolean)
 Modifier.onScrollVisibilityChange(threshold: Double = 0.5, action: (Boolean) -> Unit)
 Modifier.onSubmit(triggers: SubmitTriggers = SubmitTriggers.text, action: () -> Unit)

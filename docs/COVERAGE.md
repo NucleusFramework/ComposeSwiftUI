@@ -8,10 +8,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Status | Entries |
 |---|---|
-| ✅ generated | 3568 (43.4%) |
+| ✅ generated | 3606 (43.9%) |
 | ☑️ covered | 28 (0.3%) |
 | ⛔ rejected | 15 (0.2%) |
-| ➖ skipped | 2393 (29.1%) |
+| ➖ skipped | 2355 (28.6%) |
 | · n/a | 1100 (13.4%) |
 | ? unmatched | 1116 (13.6%) |
 | **total** | **8220** |
@@ -20,10 +20,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Kind | ✅ | ☑️ | ⛔ | ➖ | · | ? |
 |---|---|---|---|---|---|---|
-| method | 1128 | 28 | 14 | 1295 | 0 | 666 |
+| method | 1139 | 28 | 14 | 1284 | 0 | 666 |
 | property | 1032 | 0 | 0 | 108 | 879 | 264 |
-| init | 533 | 0 | 1 | 453 | 0 | 63 |
-| struct | 468 | 0 | 0 | 414 | 0 | 63 |
+| init | 558 | 0 | 1 | 428 | 0 | 63 |
+| struct | 470 | 0 | 0 | 412 | 0 | 63 |
 | case | 284 | 0 | 0 | 23 | 0 | 28 |
 | protocol | 44 | 0 | 0 | 75 | 0 | 3 |
 | associatedtype | 0 | 0 | 0 | 3 | 97 | 1 |
@@ -39,13 +39,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Reason | Entries |
 |---|---|
-| not a view, modifier or value-producing member | 1177 |
-| type not constructible from Kotlin (generic or no bridgeable members) | 472 |
+| not a view, modifier or value-producing member | 1174 |
+| type not constructible from Kotlin (generic or no bridgeable members) | 470 |
 | protocol without bridgeable conformers | 75 |
-| builder with parameters | 49 |
-| unknown type UTType | 41 |
+| builder with parameters | 71 |
 | type unknown | 32 |
-| bare View value | 30 |
 | generic constrained to nothing | 28 |
 | generic constrained to ['RandomAccessCollection'] | 27 |
 | callback of value | 20 |
@@ -56,12 +54,14 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | unknown type ImageResource | 13 |
 | generic constrained to ['Identifiable'] | 10 |
 | generic constrained to ['Collection'] | 10 |
+| unknown type Result | 10 |
 | generic constrained to ['RandomAccessCollection', 'RangeReplaceableCollection'] | 10 |
 | unknown type WritableKeyPath | 10 |
 | type FocusState.Binding not bridged | 10 |
 | generic constrained to ['MutableCollection', 'RandomAccessCollection'] | 10 |
 | generic constrained to ['Transferable'] | 9 |
 | closure with 2 params | 9 |
+| unknown type Range | 8 |
 | unknown type UITextContentType | 8 |
 | closure returning [T] | 8 |
 
@@ -588,18 +588,18 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func documentLaunchTitle(_:)](https://developer.apple.com/documentation/swiftui/scene/documentlaunchtitle(_:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func documentLaunchSubtitle(_:)](https://developer.apple.com/documentation/swiftui/scene/documentlaunchsubtitle(_:)) | not a view, modifier or value-producing member |
 | ➖ | struct | [DocumentLaunchView](https://developer.apple.com/documentation/swiftui/documentlaunchview) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(_:for:_:onDocumentOpen:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:background:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:backgroundaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:backgroundaccessoryview:overlayaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:background:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:overlayaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:backgroundAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:backgroundaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:backgroundaccessoryview:overlayaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:_:onDocumentOpen:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:overlayaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:backgroundaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:backgroundaccessoryview:overlayaccessoryview:)) | param contentTypes: unknown type UTType |
-| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:overlayaccessoryview:)) | param contentTypes: unknown type UTType |
+| ➖ | init | [init(_:for:_:onDocumentOpen:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:background:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:backgroundaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:background:backgroundAccessoryView:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:backgroundaccessoryview:overlayaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:background:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:background:overlayaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:backgroundAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:backgroundaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:backgroundaccessoryview:overlayaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:_:onDocumentOpen:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:_:ondocumentopen:overlayaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:backgroundaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:backgroundAccessoryView:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:backgroundaccessoryview:overlayaccessoryview:)) | param onDocumentOpen: builder with parameters |
+| ➖ | init | [init(_:for:backgroundStyle:_:onDocumentOpen:overlayAccessoryView:)](https://developer.apple.com/documentation/swiftui/documentlaunchview/init(_:for:backgroundstyle:_:ondocumentopen:overlayaccessoryview:)) | param onDocumentOpen: builder with parameters |
 | · | property | [var body: some View](https://developer.apple.com/documentation/swiftui/documentlaunchview/body) | type alias / associated type (no runtime surface) |
 | ✅ | method | [func documentLaunchTitle(_:)](https://developer.apple.com/documentation/swiftui/view/documentlaunchtitle(_:)) | modifier (4/4 overloads bridged) |
 | ✅ | method | [func documentLaunchSubtitle(_:)](https://developer.apple.com/documentation/swiftui/view/documentlaunchsubtitle(_:)) | modifier (4/4 overloads bridged) |
@@ -611,10 +611,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/defaultdocumentgrouplaunchactions/init()) | value member of DefaultDocumentGroupLaunchActions (1/1 overloads bridged) |
 | ➖ | struct | [NewDocumentButton](https://developer.apple.com/documentation/swiftui/newdocumentbutton) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(_:contentType:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:)) | view (4/4 overloads bridged) |
-| ➖ | init | [init(_:contentType:prepareDocumentURL:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:preparedocumenturl:)) | param contentType: unknown type UTType |
+| ✅ | init | [init(_:contentType:prepareDocumentURL:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:preparedocumenturl:)) | view (4/4 overloads bridged) |
 | ✅ | init | [init(_:contentType:source:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:source:)) | view (4/4 overloads bridged) |
-| ➖ | init | [init(Text?, contentType: UTType, source: DocumentCreationSource, () async throws -> URL?)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:source:_:)) | param contentType: unknown type UTType |
-| ➖ | init | [init(_:contentType:source:prepareDocumentURL:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:source:preparedocumenturl:)) | param contentType: unknown type UTType |
+| ✅ | init | [init(Text?, contentType: UTType, source: DocumentCreationSource, () async throws -> URL?)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:source:_:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(_:contentType:source:prepareDocumentURL:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:source:preparedocumenturl:)) | view (3/3 overloads bridged) |
 | ✅ | init | [init(_:for:contentType:prepareDocument:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:for:contenttype:preparedocument:)) | view (8/8 overloads bridged) |
 | ➖ | struct | [DefaultNewDocumentButtonLabel](https://developer.apple.com/documentation/swiftui/defaultnewdocumentbuttonlabel) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | struct | [DocumentCreationSource](https://developer.apple.com/documentation/swiftui/documentcreationsource) | Kotlin value class (1/1 overloads bridged) |
@@ -678,7 +678,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static var doubleColumn: NavigationSplitViewVisibility](https://developer.apple.com/documentation/swiftui/navigationsplitviewvisibility/doublecolumn) | value member of NavigationSplitViewVisibility (1/1 overloads bridged) |
 | ✅ | property | [static var detailOnly: NavigationSplitViewVisibility](https://developer.apple.com/documentation/swiftui/navigationsplitviewvisibility/detailonly) | value member of NavigationSplitViewVisibility (1/1 overloads bridged) |
 | ➖ | struct | [NavigationLink](https://developer.apple.com/documentation/swiftui/navigationlink) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ✅ | init | [init(_:destination:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:destination:)) | view (3/5 overloads bridged) |
+| ✅ | init | [init(_:destination:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:destination:)) | view (5/5 overloads bridged) |
 | ✅ | init | [init(_:value:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:value:)) | view (6/6 overloads bridged) |
 | ✅ | init | [init(value:label:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(value:label:)) | view (2/2 overloads bridged) |
 | ➖ | method | [func isDetailLink(Bool) -> some View](https://developer.apple.com/documentation/swiftui/navigationlink/isdetaillink(_:)) | not a view, modifier or value-producing member |
@@ -689,11 +689,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | init | [init(destinationName: String, isActive: Binding<Bool>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destinationname:isactive:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init<V>(destinationName: String, tag: V, selection: Binding<V?>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destinationname:tag:selection:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(destinationName: String, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destinationname:label:)) | view (1/1 overloads bridged) |
-| ➖ | init | [init(_:destination:isActive:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:destination:isactive:)) | param destination: bare View value |
-| ➖ | init | [init(destination: Destination, isActive: Binding<Bool>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destination:isactive:label:)) | param destination: bare View value |
-| ➖ | init | [init(_:destination:tag:selection:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:destination:tag:selection:)) | param destination: bare View value |
-| ➖ | init | [init<V>(destination: Destination, tag: V, selection: Binding<V?>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destination:tag:selection:label:)) | param destination: bare View value |
-| ✅ | init | [init(destination:label:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destination:label:)) | view (1/2 overloads bridged) |
+| ✅ | init | [init(_:destination:isActive:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:destination:isactive:)) | view (2/2 overloads bridged) |
+| ✅ | init | [init(destination: Destination, isActive: Binding<Bool>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destination:isactive:label:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(_:destination:tag:selection:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(_:destination:tag:selection:)) | view (2/2 overloads bridged) |
+| ✅ | init | [init<V>(destination: Destination, tag: V, selection: Binding<V?>, label: () -> Label)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destination:tag:selection:label:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(destination:label:)](https://developer.apple.com/documentation/swiftui/navigationlink/init(destination:label:)) | view (2/2 overloads bridged) |
 | ➖ | struct | [NavigationView](https://developer.apple.com/documentation/swiftui/navigationview) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(content: () -> Content)](https://developer.apple.com/documentation/swiftui/navigationview/init(content:)) | view (1/1 overloads bridged) |
 | ✅ | method | [func navigationViewStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationviewstyle(_:)) | modifier (1/1 overloads bridged) |
@@ -1022,9 +1022,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func fileExporter<T>(isPresented: Binding<Bool>, item: T?, contentTypes: [UTType], defaultFilename: String?, onCompletion: (Result<URL, any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:item:contenttypes:defaultfilename:oncompletion:oncancellation:)) | param item: generic constrained to ['Transferable'] |
 | ➖ | method | [func fileExporter<C, T>(isPresented: Binding<Bool>, items: C, contentTypes: [UTType], onCompletion: (Result<[URL], any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:items:contenttypes:oncompletion:oncancellation:)) | param items: generic constrained to ['Collection'] |
 | ✅ | method | [func fileExporterFilenameLabel(_:)](https://developer.apple.com/documentation/swiftui/view/fileexporterfilenamelabel(_:)) | modifier (4/4 overloads bridged) |
-| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:)) | param allowedContentTypes: unknown type UTType |
-| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: (Result<URL, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:oncompletion:)) | param allowedContentTypes: unknown type UTType |
-| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:oncancellation:)) | param allowedContentTypes: unknown type UTType |
+| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:)) | param onCompletion: unknown type Result |
+| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: (Result<URL, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:oncompletion:)) | param onCompletion: unknown type Result |
+| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:oncancellation:)) | param onCompletion: unknown type Result |
 | ➖ | method | [func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: (Result<URL, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:file:oncompletion:)) | param onCompletion: unknown type Result |
 | ➖ | method | [func fileMover<C>(isPresented: Binding<Bool>, files: C, onCompletion: (Result<[URL], any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:files:oncompletion:)) | param files: generic constrained to ['Collection'] |
 | ➖ | method | [func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: (Result<URL, any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:file:oncompletion:oncancellation:)) | param onCompletion: unknown type Result |
@@ -1855,7 +1855,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func background(_:in:fillStyle:)](https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func background(in:fillStyle:)](https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func alternatingRowBackgrounds(AlternatingRowBackgroundBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func listRowBackground<V>(V?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)) | param view: bare View value |
+| ✅ | method | [func listRowBackground<V>(V?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func scrollContentBackground(Visibility) -> some View](https://developer.apple.com/documentation/swiftui/view/scrollcontentbackground(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func containerBackground<S>(S, for: ContainerBackgroundPlacement) -> some View](https://developer.apple.com/documentation/swiftui/view/containerbackground(_:for:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func containerBackground<V>(for: ContainerBackgroundPlacement, alignment: Alignment, content: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/containerbackground(for:alignment:content:)) | modifier (1/1 overloads bridged) |
@@ -1945,7 +1945,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func minimumScaleFactor(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/minimumscalefactor(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func tracking(CGFloat) -> some View](https://developer.apple.com/documentation/swiftui/view/tracking(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func truncationMode(Text.TruncationMode) -> some View](https://developer.apple.com/documentation/swiftui/view/truncationmode(_:)) | modifier (1/1 overloads bridged) |
-| ✅ | method | [func typesettingLanguage(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/typesettinglanguage(_:isenabled:)) | modifier (1/2 overloads bridged) |
+| ✅ | method | [func typesettingLanguage(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/typesettinglanguage(_:isenabled:)) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func writingDirection(strategy: Text.WritingDirectionStrategy) -> some View](https://developer.apple.com/documentation/swiftui/view/writingdirection(strategy:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func lineLimit(_:)](https://developer.apple.com/documentation/swiftui/view/linelimit(_:)) | modifier (2/4 overloads bridged) |
 | ✅ | method | [func lineLimit(Int, reservesSpace: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/linelimit(_:reservesspace:)) | modifier (1/1 overloads bridged) |
@@ -2357,8 +2357,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func pasteDestination<T>(for: T.Type, action: ([T]) -> Void, validator: ([T]) -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/pastedestination(for:action:validator:)) | param action: generic constrained to ['Transferable'] |
 | ➖ | method | [func onCopyCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)) | param payloadAction: nested function type |
 | ➖ | method | [func onCutCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)) | param payloadAction: nested function type |
-| ➖ | method | [func onPasteCommand(of:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onPasteCommand(of:validator:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | method | [func onPasteCommand(of:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)) | param payloadAction: unknown type NSItemProvider |
+| ➖ | method | [func onPasteCommand(of:validator:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)) | param validator: builder with parameters |
 | ✅ | method | [func dragConfiguration(DragConfiguration) -> some View](https://developer.apple.com/documentation/swiftui/view/dragconfiguration(_:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func dragContainer(for:in:_:)](https://developer.apple.com/documentation/swiftui/view/dragcontainer(for:in:_:)) | param payload: builder with parameters |
 | ➖ | method | [func dragContainer(for:itemID:in:_:)](https://developer.apple.com/documentation/swiftui/view/dragcontainer(for:itemid:in:_:)) | param itemID: unknown type KeyPath |
@@ -2378,8 +2378,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func onDrag<V>(() -> NSItemProvider, preview: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:preview:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDrag(() -> NSItemProvider) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDragSessionUpdated((DragSession) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ondragsessionupdated(_:)) | param onUpdate: type DragSession not bridged |
-| ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onDrop(of:delegate:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param isTargeted: optional binding |
+| ➖ | method | [func onDrop(of:delegate:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)) | param delegate: generic constrained to ['DropDelegate'] |
 | ➖ | method | [func onDropSessionUpdated((DropSession) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ondropsessionupdated(_:)) | param onUpdate: type DropSession not bridged |
 | ✅ | method | [func springLoadingBehavior(SpringLoadingBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/springloadingbehavior(_:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func reorderContainer<Item>(for: Item.Type, isEnabled: Bool, move: (ReorderDifference<Item.ID, ReorderableSingleCollectionIdentifier>) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/reordercontainer(for:isenabled:move:)) | param item: type unknown |
@@ -2428,7 +2428,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func task(name: String?, executorPreference: any TaskExecutor, priority: TaskPriority, file: String, line: Int, action: sending () async -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/task(name:executorpreference:priority:file:line:action:)) | param taskExecutor: generic constrained to ['TaskExecutor'] |
 | ✅ | method | [func task(name: String?, priority: TaskPriority, file: String, line: Int, sending () async -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/task(name:priority:file:line:_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func renameAction(_:)](https://developer.apple.com/documentation/swiftui/view/renameaction(_:)) | modifier (1/2 overloads bridged) |
-| ➖ | method | [func onOpenURL(perform: (URL) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/onopenurl(perform:)) | param action: callback of url |
+| ✅ | method | [func onOpenURL(perform: (URL) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/onopenurl(perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onOpenURL(prefersInApp: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/onopenurl(prefersinapp:)) | modifier (1/1 overloads bridged) |
 | ? | method | [func widgetURL(URL?) -> some View](https://developer.apple.com/documentation/swiftui/view/widgeturl(_:)) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ➖ | method | [func asyncImageURLSession(URLSession) -> some View](https://developer.apple.com/documentation/swiftui/view/asyncimageurlsession(_:)) | param urlSession: unknown type URLSession |
@@ -2436,9 +2436,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func allowsHitTesting(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/allowshittesting(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func contentShape<S>(S, eoFill: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/contentshape(_:eofill:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func contentShape<S>(ContentShapeKinds, S, eoFill: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/contentshape(_:_:eofill:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider]) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:)) | param contentTypes: unknown type UTType |
-| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider], onEdit: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:onedit:)) | param contentTypes: unknown type UTType |
-| ➖ | method | [func importsItemProviders([UTType], onImport: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/importsitemproviders(_:onimport:)) | param contentTypes: unknown type UTType |
+| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider]) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:)) | param onExport: closure returning [NSItemProvider] |
+| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider], onEdit: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:onedit:)) | param onExport: closure returning [NSItemProvider] |
+| ➖ | method | [func importsItemProviders([UTType], onImport: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/importsitemproviders(_:onimport:)) | param onImport: builder with parameters |
 | ➖ | method | [func exportableToServices<T>(@autoclosure () -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/exportabletoservices(_:)) | param payload: closure returning [T] |
 | ➖ | method | [func exportableToServices<T>(@autoclosure () -> [T], onEdit: ([T]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/exportabletoservices(_:onedit:)) | param payload: closure returning [T] |
 | ➖ | method | [func importableFromServices<T>(for: T.Type, action: ([T]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/importablefromservices(for:action:)) | param action: builder with parameters |
@@ -2524,9 +2524,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func fileExporter<T>(isPresented: Binding<Bool>, item: T?, contentTypes: [UTType], defaultFilename: String?, onCompletion: (Result<URL, any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:item:contenttypes:defaultfilename:oncompletion:oncancellation:)) | param item: generic constrained to ['Transferable'] |
 | ➖ | method | [func fileExporter<C, T>(isPresented: Binding<Bool>, items: C, contentTypes: [UTType], onCompletion: (Result<[URL], any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:items:contenttypes:oncompletion:oncancellation:)) | param items: generic constrained to ['Collection'] |
 | ✅ | method | [func fileExporterFilenameLabel(_:)](https://developer.apple.com/documentation/swiftui/view/fileexporterfilenamelabel(_:)) | modifier (4/4 overloads bridged) |
-| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:)) | param allowedContentTypes: unknown type UTType |
-| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: (Result<URL, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:oncompletion:)) | param allowedContentTypes: unknown type UTType |
-| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:oncancellation:)) | param allowedContentTypes: unknown type UTType |
+| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:)) | param onCompletion: unknown type Result |
+| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: (Result<URL, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:oncompletion:)) | param onCompletion: unknown type Result |
+| ➖ | method | [func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: (Result<[URL], any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:oncancellation:)) | param onCompletion: unknown type Result |
 | ➖ | method | [func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: (Result<URL, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:file:oncompletion:)) | param onCompletion: unknown type Result |
 | ➖ | method | [func fileMover<C>(isPresented: Binding<Bool>, files: C, onCompletion: (Result<[URL], any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:files:oncompletion:)) | param files: generic constrained to ['Collection'] |
 | ➖ | method | [func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: (Result<URL, any Error>) -> Void, onCancellation: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:file:oncompletion:oncancellation:)) | param onCompletion: unknown type Result |
@@ -2776,17 +2776,17 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func accessibility(sortPriority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier>](https://developer.apple.com/documentation/swiftui/view/accessibility(sortpriority:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func colorScheme(ColorScheme) -> some View](https://developer.apple.com/documentation/swiftui/view/colorscheme(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func listRowPlatterColor(Color?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowplattercolor(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func background<Background>(Background, alignment: Alignment) -> some View](https://developer.apple.com/documentation/swiftui/view/background(_:alignment:)) | param background: bare View value |
-| ➖ | method | [func overlay<Overlay>(Overlay, alignment: Alignment) -> some View](https://developer.apple.com/documentation/swiftui/view/overlay(_:alignment:)) | param overlay: bare View value |
+| ✅ | method | [func background<Background>(Background, alignment: Alignment) -> some View](https://developer.apple.com/documentation/swiftui/view/background(_:alignment:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func overlay<Overlay>(Overlay, alignment: Alignment) -> some View](https://developer.apple.com/documentation/swiftui/view/overlay(_:alignment:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func foregroundColor(Color?) -> some View](https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)) | modifier (1/1 overloads bridged) |
 | ? | method | [func complicationForeground() -> some View](https://developer.apple.com/documentation/swiftui/view/complicationforeground()) | not in the SwiftUI module for iOS/macOS: other framework overlay (Charts, MapKit, StoreKit, PhotosUI, TipKit…) or visionOS/watchOS/tvOS-only |
 | ➖ | method | [func autocapitalization(UITextAutocapitalizationType) -> some View](https://developer.apple.com/documentation/swiftui/view/autocapitalization(_:)) | param style: unknown type UITextAutocapitalizationType |
 | ✅ | method | [func disableAutocorrection(Bool?) -> some View](https://developer.apple.com/documentation/swiftui/view/disableautocorrection(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func navigationBarTitle(_:)](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:)) | modifier (3/3 overloads bridged) |
 | ✅ | method | [func navigationBarTitle(_:displayMode:)](https://developer.apple.com/documentation/swiftui/view/navigationbartitle(_:displaymode:)) | modifier (3/3 overloads bridged) |
-| ➖ | method | [func navigationBarItems<L>(leading: L) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbaritems(leading:)) | param leading: bare View value |
-| ➖ | method | [func navigationBarItems<L, T>(leading: L, trailing: T) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbaritems(leading:trailing:)) | param leading: bare View value |
-| ➖ | method | [func navigationBarItems<T>(trailing: T) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbaritems(trailing:)) | param trailing: bare View value |
+| ✅ | method | [func navigationBarItems<L>(leading: L) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbaritems(leading:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func navigationBarItems<L, T>(leading: L, trailing: T) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbaritems(leading:trailing:)) | modifier (1/1 overloads bridged) |
+| ✅ | method | [func navigationBarItems<T>(trailing: T) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbaritems(trailing:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func navigationBarHidden(Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/navigationbarhidden(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func statusBar(hidden: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/statusbar(hidden:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func contextMenu<MenuItems>(ContextMenu<MenuItems>?) -> some View](https://developer.apple.com/documentation/swiftui/view/contextmenu(_:)) | param contextMenu: type ContextMenu not bridged |
@@ -2796,7 +2796,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func edgesIgnoringSafeArea(Edge.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/edgesignoringsafearea(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func coordinateSpace<T>(name: T) -> some View](https://developer.apple.com/documentation/swiftui/view/coordinatespace(name:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func accentColor(Color?) -> some View](https://developer.apple.com/documentation/swiftui/view/accentcolor(_:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func mask<Mask>(Mask) -> some View](https://developer.apple.com/documentation/swiftui/view/mask(_:)) | param mask: bare View value |
+| ✅ | method | [func mask<Mask>(Mask) -> some View](https://developer.apple.com/documentation/swiftui/view/mask(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func animation(Animation?) -> some View](https://developer.apple.com/documentation/swiftui/view/animation(_:)-1hc0p) | modifier (2/2 overloads bridged) |
 | ✅ | method | [func cornerRadius(CGFloat, antialiased: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/cornerradius(_:antialiased:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func dropDestination<T>(for: T.Type, action: ([T], CGPoint) -> Bool, isTargeted: (Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/dropdestination(for:action:istargeted:)) | param action: builder with parameters |
@@ -2804,10 +2804,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func onTapGesture(count: Int, coordinateSpace: CoordinateSpace, perform: (CGPoint) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)-36x9h) | param action: callback of value |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, maximumDistance: CGFloat, pressing: ((Bool) -> Void)?, perform: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:maximumdistance:pressing:perform:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func onLongPressGesture(minimumDuration: Double, pressing: ((Bool) -> Void)?, perform: () -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:pressing:perform:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func onPasteCommand(of: [String], perform: ([NSItemProvider]) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)-4f78f) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onPasteCommand<Payload>(of: [String], validator: ([NSItemProvider]) -> Payload?, perform: (Payload) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)-964k1) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onDrop(of: [String], delegate: any DropDelegate) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)-2vr9o) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | method | [func onPasteCommand(of: [String], perform: ([NSItemProvider]) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)-4f78f) | param payloadAction: unknown type NSItemProvider |
+| ➖ | method | [func onPasteCommand<Payload>(of: [String], validator: ([NSItemProvider]) -> Payload?, perform: (Payload) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)-964k1) | param validator: builder with parameters |
+| ➖ | method | [func onDrop(of: [String], delegate: any DropDelegate) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)-2vr9o) | param delegate: generic constrained to ['DropDelegate'] |
+| ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param isTargeted: optional binding |
 | ✅ | method | [func focusable(Bool, onFocusChange: (Bool) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/focusable(_:onfocuschange:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func onContinuousHover(coordinateSpace: CoordinateSpace, perform: (HoverPhase) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)-8gyrl) | param action: callback of value |
 | ➖ | method | [func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> some View](https://developer.apple.com/documentation/swiftui/view/actionsheet(ispresented:content:)) | param content: closure returning ActionSheet |
@@ -2970,15 +2970,15 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | init | [init(_:)](https://developer.apple.com/documentation/swiftui/tuplecontent/init(_:)) | param content: type tuple |
 | · | property | [var content: (repeat each Content)](https://developer.apple.com/documentation/swiftui/tuplecontent/content) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [AnyView](https://developer.apple.com/documentation/swiftui/anyview) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init<V>(V)](https://developer.apple.com/documentation/swiftui/anyview/init(_:)) | param view: bare View value |
-| ➖ | init | [init<V>(erasing: V)](https://developer.apple.com/documentation/swiftui/anyview/init(erasing:)) | param view: bare View value |
+| ✅ | init | [init<V>(V)](https://developer.apple.com/documentation/swiftui/anyview/init(_:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init<V>(erasing: V)](https://developer.apple.com/documentation/swiftui/anyview/init(erasing:)) | view (1/1 overloads bridged) |
 | ➖ | struct | [EmptyView](https://developer.apple.com/documentation/swiftui/emptyview) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/emptyview/init()) | view (1/1 overloads bridged) |
 | ➖ | struct | [EquatableView](https://developer.apple.com/documentation/swiftui/equatableview) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ⛔ | init | [init(content: Content)](https://developer.apple.com/documentation/swiftui/equatableview/init(content:)) | swift-macos: generic struct 'EquatableView' requires that 'AnyHashable' conform to 'View' |
 | · | property | [var content: Content](https://developer.apple.com/documentation/swiftui/equatableview/content) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [SubscriptionView](https://developer.apple.com/documentation/swiftui/subscriptionview) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(content: Content, publisher: PublisherType, action: (PublisherType.Output) -> Void)](https://developer.apple.com/documentation/swiftui/subscriptionview/init(content:publisher:action:)) | param content: bare View value |
+| ➖ | init | [init(content: Content, publisher: PublisherType, action: (PublisherType.Output) -> Void)](https://developer.apple.com/documentation/swiftui/subscriptionview/init(content:publisher:action:)) | param publisher: generic constrained to ['Publisher', 'Publisher'] |
 | · | property | [var publisher: PublisherType](https://developer.apple.com/documentation/swiftui/subscriptionview/publisher) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var action: (PublisherType.Output) -> Void](https://developer.apple.com/documentation/swiftui/subscriptionview/action) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var content: Content](https://developer.apple.com/documentation/swiftui/subscriptionview/content) | instance property / subscript (read side, not a view-building API) |
@@ -3951,7 +3951,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | associatedtype | [Value](https://developer.apple.com/documentation/swiftui/transactionkey/value) | type alias / associated type (no runtime surface) |
 | ➖ | struct | [Text](https://developer.apple.com/documentation/swiftui/text) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(LocalizedStringKey, tableName: String?, bundle: Bundle?, comment: StaticString?)](https://developer.apple.com/documentation/swiftui/text/init(_:tablename:bundle:comment:)) | view (1/1 overloads bridged) |
-| ✅ | init | [init(_:)](https://developer.apple.com/documentation/swiftui/text/init(_:)) | view (2/6 overloads bridged) |
+| ✅ | init | [init(_:)](https://developer.apple.com/documentation/swiftui/text/init(_:)) | view (3/6 overloads bridged) |
 | ✅ | init | [init(verbatim: String)](https://developer.apple.com/documentation/swiftui/text/init(verbatim:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(Date, style: Text.DateStyle)](https://developer.apple.com/documentation/swiftui/text/init(_:style:)) | view (1/1 overloads bridged) |
 | ➖ | init | [init(_:format:)](https://developer.apple.com/documentation/swiftui/text/init(_:format:)) | param input: unknown type F.FormatInput |
@@ -4090,7 +4090,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | init | [init(_:text:onCommit:)](https://developer.apple.com/documentation/swiftui/securefield/init(_:text:oncommit:)) | view (2/2 overloads bridged) |
 | ✅ | struct | [TextEditor](https://developer.apple.com/documentation/swiftui/texteditor) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(text: Binding<String>)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:)) | value member of TextEditor (1/1 overloads bridged) |
-| ➖ | init | [init(text:selection:)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:selection:)) | param text: unknown type AttributedString |
+| ✅ | init | [init(text:selection:)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:selection:)) | value member of TextEditor (1/2 overloads bridged) |
 | ✅ | method | [func textSelection<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/textselection(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | protocol | [TextSelectability](https://developer.apple.com/documentation/swiftui/textselectability) | Kotlin interface (1/1 overloads bridged) |
 | ✅ | property | [static var enabled: EnabledTextSelectability](https://developer.apple.com/documentation/swiftui/textselectability/enabled) | value member of EnabledTextSelectability (1/1 overloads bridged) |
@@ -4313,8 +4313,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [static func buildLimitedAvailability<D>(D) -> AttributedTextFormatting.AnyDefinition<Scope>](https://developer.apple.com/documentation/swiftui/attributedtextformatting/definitionbuilder/buildlimitedavailability(_:)) | not a view, modifier or value-producing member |
 | ➖ | struct | [AttributedTextFormatting.EmptyDefinition](https://developer.apple.com/documentation/swiftui/attributedtextformatting/emptydefinition) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | init | [init()](https://developer.apple.com/documentation/swiftui/attributedtextformatting/emptydefinition/init()) | not a view, modifier or value-producing member |
-| ➖ | struct | [AttributedTextFormatting.Transferable](https://developer.apple.com/documentation/swiftui/attributedtextformatting/transferable) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(text: AttributedString, in: EnvironmentValues)](https://developer.apple.com/documentation/swiftui/attributedtextformatting/transferable/init(text:in:)) | not a view, modifier or value-producing member |
+| ✅ | struct | [AttributedTextFormatting.Transferable](https://developer.apple.com/documentation/swiftui/attributedtextformatting/transferable) | Kotlin value class (1/1 overloads bridged) |
+| ✅ | init | [init(text: AttributedString, in: EnvironmentValues)](https://developer.apple.com/documentation/swiftui/attributedtextformatting/transferable/init(text:in:)) | value member of AttributedTextFormatting.Transferable (1/1 overloads bridged) |
 | ➖ | struct | [AttributedTextFormatting.TupleDefinition](https://developer.apple.com/documentation/swiftui/attributedtextformatting/tupledefinition) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | init | [init(definition: repeat each Definition)](https://developer.apple.com/documentation/swiftui/attributedtextformatting/tupledefinition/init(definition:)) | not a view, modifier or value-producing member |
 | ➖ | struct | [AttributedTextFormatting.ValueConstraint](https://developer.apple.com/documentation/swiftui/attributedtextformatting/valueconstraint) | type not constructible from Kotlin (generic or no bridgeable members) |
@@ -4359,9 +4359,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func calendar(Calendar) -> SystemFormatStyle.DateReference](https://developer.apple.com/documentation/swiftui/systemformatstyle/datereference/calendar(_:)) | param calendar: unknown type Calendar |
 | ✅ | struct | [SystemFormatStyle.Stopwatch](https://developer.apple.com/documentation/swiftui/systemformatstyle/stopwatch) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(startingAt: Date, showsHours: Bool, maxFieldCount: Int, maxPrecision: Duration)](https://developer.apple.com/documentation/swiftui/systemformatstyle/stopwatch/init(startingat:showshours:maxfieldcount:maxprecision:)) | value member of SystemFormatStyle.Stopwatch (1/1 overloads bridged) |
-| ➖ | struct | [SystemFormatStyle.Timer](https://developer.apple.com/documentation/swiftui/systemformatstyle/timer) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(countingDownIn: Range<Date>, showsHours: Bool, maxFieldCount: Int, maxPrecision: Duration)](https://developer.apple.com/documentation/swiftui/systemformatstyle/timer/init(countingdownin:showshours:maxfieldcount:maxprecision:)) | not a view, modifier or value-producing member |
-| ➖ | init | [init(countingUpIn: Range<Date>, showsHours: Bool, maxFieldCount: Int, maxPrecision: Duration)](https://developer.apple.com/documentation/swiftui/systemformatstyle/timer/init(countingupin:showshours:maxfieldcount:maxprecision:)) | not a view, modifier or value-producing member |
+| ✅ | struct | [SystemFormatStyle.Timer](https://developer.apple.com/documentation/swiftui/systemformatstyle/timer) | Kotlin value class (1/1 overloads bridged) |
+| ➖ | init | [init(countingDownIn: Range<Date>, showsHours: Bool, maxFieldCount: Int, maxPrecision: Duration)](https://developer.apple.com/documentation/swiftui/systemformatstyle/timer/init(countingdownin:showshours:maxfieldcount:maxprecision:)) | param interval: unknown type Range |
+| ➖ | init | [init(countingUpIn: Range<Date>, showsHours: Bool, maxFieldCount: Int, maxPrecision: Duration)](https://developer.apple.com/documentation/swiftui/systemformatstyle/timer/init(countingupin:showshours:maxfieldcount:maxprecision:)) | param interval: unknown type Range |
 | ➖ | struct | [TimeDataSource](https://developer.apple.com/documentation/swiftui/timedatasource) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | property | [static var currentDate: TimeDataSource<Date>](https://developer.apple.com/documentation/swiftui/timedatasource/currentdate) | not a view, modifier or value-producing member |
 | ➖ | method | [static func dateRange(endingAt: Date) -> TimeDataSource<Range<Date>>](https://developer.apple.com/documentation/swiftui/timedatasource/daterange(endingat:)) | not a view, modifier or value-producing member |
@@ -4430,10 +4430,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func appendLiteral(String)](https://developer.apple.com/documentation/swiftui/localizedstringkey/stringinterpolation/appendliteral(_:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func appendInterpolation(accessibilityName: Color)](https://developer.apple.com/documentation/swiftui/localizedstringkey/stringinterpolation/appendinterpolation(accessibilityname:)) | not a view, modifier or value-producing member |
 | · | property | [var locale: Locale](https://developer.apple.com/documentation/swiftui/environmentvalues/locale) | instance property / subscript (read side, not a view-building API) |
-| ✅ | method | [func typesettingLanguage(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/typesettinglanguage(_:isenabled:)) | modifier (1/2 overloads bridged) |
+| ✅ | method | [func typesettingLanguage(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/view/typesettinglanguage(_:isenabled:)) | modifier (2/2 overloads bridged) |
 | ✅ | struct | [TypesettingLanguage](https://developer.apple.com/documentation/swiftui/typesettinglanguage) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: TypesettingLanguage](https://developer.apple.com/documentation/swiftui/typesettinglanguage/automatic) | value member of TypesettingLanguage (1/1 overloads bridged) |
-| ➖ | method | [static func explicit(Locale.Language) -> TypesettingLanguage](https://developer.apple.com/documentation/swiftui/typesettinglanguage/explicit(_:)) | param language: unknown type Locale.Language |
+| ✅ | method | [static func explicit(Locale.Language) -> TypesettingLanguage](https://developer.apple.com/documentation/swiftui/typesettinglanguage/explicit(_:)) | value member of TypesettingLanguage (1/1 overloads bridged) |
 | ➖ | struct | [Image](https://developer.apple.com/documentation/swiftui/image) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(String, bundle: Bundle?)](https://developer.apple.com/documentation/swiftui/image/init(_:bundle:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(String, variableValue: Double?, bundle: Bundle?)](https://developer.apple.com/documentation/swiftui/image/init(_:variablevalue:bundle:)) | view (1/1 overloads bridged) |
@@ -4609,11 +4609,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | struct | [EditButton](https://developer.apple.com/documentation/swiftui/editbutton) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/editbutton/init()) | value member of EditButton (1/1 overloads bridged) |
 | ➖ | struct | [PasteButton](https://developer.apple.com/documentation/swiftui/pastebutton) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(supportedContentTypes: [UTType], payloadAction: ([NSItemProvider]) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedcontenttypes:payloadaction:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | init | [init(supportedContentTypes: [UTType], payloadAction: ([NSItemProvider]) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedcontenttypes:payloadaction:)) | param payloadAction: unknown type NSItemProvider |
 | ➖ | init | [init<T>(payloadType: T.Type, onPaste: ([T]) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(payloadtype:onpaste:)) | param payloadType: type unknown |
 | ➖ | init | [init(supportedTypes: [String], payloadAction: ([NSItemProvider]) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedtypes:payloadaction:)) | param payloadAction: unknown type NSItemProvider |
 | ➖ | init | [init<Payload>(supportedTypes: [String], validator: ([NSItemProvider]) -> Payload?, payloadAction: (Payload) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedtypes:validator:payloadaction:)) | param validator: builder with parameters |
-| ➖ | init | [init<Payload>(supportedContentTypes: [UTType], validator: ([NSItemProvider]) -> Payload?, payloadAction: (Payload) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedcontenttypes:validator:payloadaction:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | init | [init<Payload>(supportedContentTypes: [UTType], validator: ([NSItemProvider]) -> Payload?, payloadAction: (Payload) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedcontenttypes:validator:payloadaction:)) | param validator: builder with parameters |
 | ➖ | struct | [RenameButton](https://developer.apple.com/documentation/swiftui/renamebutton) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/renamebutton/init()) | view (1/1 overloads bridged) |
 | ➖ | struct | [Link](https://developer.apple.com/documentation/swiftui/link) | type not constructible from Kotlin (generic or no bridgeable members) |
@@ -4700,8 +4700,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var body: Self.Body](https://developer.apple.com/documentation/swiftui/slidertickcontent/body-swift.property) | type alias / associated type (no runtime surface) |
 | ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, onEditingChanged: (Bool) -> Void, label: () -> Label)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:oneditingchanged:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, step: V.Stride, onEditingChanged: (Bool) -> Void, label: () -> Label)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:step:oneditingchanged:label:)) | view (1/1 overloads bridged) |
-| ➖ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, onEditingChanged: (Bool) -> Void, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, label: () -> Label)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:oneditingchanged:minimumvaluelabel:maximumvaluelabel:label:)) | param minimumValueLabel: bare View value |
-| ➖ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, step: V.Stride, onEditingChanged: (Bool) -> Void, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, label: () -> Label)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:step:oneditingchanged:minimumvaluelabel:maximumvaluelabel:label:)) | param minimumValueLabel: bare View value |
+| ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, onEditingChanged: (Bool) -> Void, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, label: () -> Label)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:oneditingchanged:minimumvaluelabel:maximumvaluelabel:label:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, step: V.Stride, onEditingChanged: (Bool) -> Void, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, label: () -> Label)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:step:oneditingchanged:minimumvaluelabel:maximumvaluelabel:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, neutralValue: V?, enabledBounds: ClosedRange<V>?, label: () -> Label, currentValueLabel: () -> some View, minimumValueLabel: () -> ValueLabel, maximumValueLabel: () -> ValueLabel, onEditingChanged: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:neutralvalue:enabledbounds:label:currentvaluelabel:minimumvaluelabel:maximumvaluelabel:oneditingchanged:)) | view (1/1 overloads bridged) |
 | ➖ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, neutralValue: V?, enabledBounds: ClosedRange<V>?, label: () -> Label, currentValueLabel: () -> some View, minimumValueLabel: () -> ValueLabel, maximumValueLabel: () -> ValueLabel, ticks: () -> some SliderTickContent, onEditingChanged: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:neutralvalue:enabledbounds:label:currentvaluelabel:minimumvaluelabel:maximumvaluelabel:ticks:oneditingchanged:)) | param value: unparsable type (some SliderTickContent).Value |
 | ✅ | init | [init<V>(value: Binding<V>, in: ClosedRange<V>, step: V.Stride, neutralValue: V?, enabledBounds: ClosedRange<V>?, label: () -> Label, currentValueLabel: () -> some View, minimumValueLabel: () -> ValueLabel, maximumValueLabel: () -> ValueLabel, tick: (V) -> SliderTick<V>?, onEditingChanged: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/slider/init(value:in:step:neutralvalue:enabledbounds:label:currentvaluelabel:minimumvaluelabel:maximumvaluelabel:tick:oneditingchanged:)) | view (1/1 overloads bridged) |
@@ -4735,7 +4735,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | struct | [Picker](https://developer.apple.com/documentation/swiftui/picker) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(_:selection:content:)](https://developer.apple.com/documentation/swiftui/picker/init(_:selection:content:)) | view (3/3 overloads bridged) |
 | ✅ | init | [init(selection: Binding<SelectionValue>, content: () -> Content, label: () -> Label)](https://developer.apple.com/documentation/swiftui/picker/init(selection:content:label:)) | view (1/1 overloads bridged) |
-| ➖ | init | [init(selection: Binding<SelectionValue>, label: Label, content: () -> Content)](https://developer.apple.com/documentation/swiftui/picker/init(selection:label:content:)) | param label: bare View value |
+| ✅ | init | [init(selection: Binding<SelectionValue>, label: Label, content: () -> Content)](https://developer.apple.com/documentation/swiftui/picker/init(selection:label:content:)) | view (1/1 overloads bridged) |
 | ➖ | init | [init(_:sources:selection:content:)](https://developer.apple.com/documentation/swiftui/picker/init(_:sources:selection:content:)) | param sources: generic constrained to ['RandomAccessCollection'] |
 | ➖ | init | [init<C>(sources: C, selection: KeyPath<C.Element, Binding<SelectionValue>>, content: () -> Content, label: () -> Label)](https://developer.apple.com/documentation/swiftui/picker/init(sources:selection:content:label:)) | param sources: generic constrained to ['RandomAccessCollection'] |
 | ➖ | init | [init(_:image:selection:content:)](https://developer.apple.com/documentation/swiftui/picker/init(_:image:selection:content:)) | param image: unknown type ImageResource |
@@ -4958,7 +4958,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let priority: MenuOrder](https://developer.apple.com/documentation/swiftui/menuorder/priority) | value member of MenuOrder (1/1 overloads bridged) |
 | ➖ | struct | [MenuButton](https://developer.apple.com/documentation/swiftui/menubutton) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(_:content:)](https://developer.apple.com/documentation/swiftui/menubutton/init(_:content:)) | view (2/2 overloads bridged) |
-| ➖ | init | [init(label: Label, content: () -> Content)](https://developer.apple.com/documentation/swiftui/menubutton/init(label:content:)) | param label: bare View value |
+| ✅ | init | [init(label: Label, content: () -> Content)](https://developer.apple.com/documentation/swiftui/menubutton/init(label:content:)) | view (1/1 overloads bridged) |
 | ✅ | method | [func menuButtonStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/menubuttonstyle(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | protocol | [MenuButtonStyle](https://developer.apple.com/documentation/swiftui/menubuttonstyle) | Kotlin interface (1/1 overloads bridged) |
 | ✅ | struct | [BorderlessButtonMenuButtonStyle](https://developer.apple.com/documentation/swiftui/borderlessbuttonmenubuttonstyle) | Kotlin value class (1/1 overloads bridged) |
@@ -5165,14 +5165,14 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var dash: [CGFloat]](https://developer.apple.com/documentation/swiftui/strokestyle/dash) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var dashPhase: CGFloat](https://developer.apple.com/documentation/swiftui/strokestyle/dashphase) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [StrokeShapeView](https://developer.apple.com/documentation/swiftui/strokeshapeview) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(shape: Content, style: Style, strokeStyle: StrokeStyle, isAntialiased: Bool, background: Background)](https://developer.apple.com/documentation/swiftui/strokeshapeview/init(shape:style:strokestyle:isantialiased:background:)) | param background: bare View value |
+| ✅ | init | [init(shape: Content, style: Style, strokeStyle: StrokeStyle, isAntialiased: Bool, background: Background)](https://developer.apple.com/documentation/swiftui/strokeshapeview/init(shape:style:strokestyle:isantialiased:background:)) | view (1/1 overloads bridged) |
 | · | property | [var background: Background](https://developer.apple.com/documentation/swiftui/strokeshapeview/background) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var isAntialiased: Bool](https://developer.apple.com/documentation/swiftui/strokeshapeview/isantialiased) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var shape: Content](https://developer.apple.com/documentation/swiftui/strokeshapeview/shape) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var strokeStyle: StrokeStyle](https://developer.apple.com/documentation/swiftui/strokeshapeview/strokestyle) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var style: Style](https://developer.apple.com/documentation/swiftui/strokeshapeview/style) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [StrokeBorderShapeView](https://developer.apple.com/documentation/swiftui/strokebordershapeview) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(shape: Content, style: Style, strokeStyle: StrokeStyle, isAntialiased: Bool, background: Background)](https://developer.apple.com/documentation/swiftui/strokebordershapeview/init(shape:style:strokestyle:isantialiased:background:)) | param background: bare View value |
+| ✅ | init | [init(shape: Content, style: Style, strokeStyle: StrokeStyle, isAntialiased: Bool, background: Background)](https://developer.apple.com/documentation/swiftui/strokebordershapeview/init(shape:style:strokestyle:isantialiased:background:)) | view (1/1 overloads bridged) |
 | · | property | [var background: Background](https://developer.apple.com/documentation/swiftui/strokebordershapeview/background) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var isAntialiased: Bool](https://developer.apple.com/documentation/swiftui/strokebordershapeview/isantialiased) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var shape: Content](https://developer.apple.com/documentation/swiftui/strokebordershapeview/shape) | instance property / subscript (read side, not a view-building API) |
@@ -5183,7 +5183,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var isEOFilled: Bool](https://developer.apple.com/documentation/swiftui/fillstyle/iseofilled) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var isAntialiased: Bool](https://developer.apple.com/documentation/swiftui/fillstyle/isantialiased) | instance property / subscript (read side, not a view-building API) |
 | ➖ | struct | [FillShapeView](https://developer.apple.com/documentation/swiftui/fillshapeview) | type not constructible from Kotlin (generic or no bridgeable members) |
-| ➖ | init | [init(shape: Content, style: Style, fillStyle: FillStyle, background: Background)](https://developer.apple.com/documentation/swiftui/fillshapeview/init(shape:style:fillstyle:background:)) | param background: bare View value |
+| ✅ | init | [init(shape: Content, style: Style, fillStyle: FillStyle, background: Background)](https://developer.apple.com/documentation/swiftui/fillshapeview/init(shape:style:fillstyle:background:)) | view (1/1 overloads bridged) |
 | · | property | [var background: Background](https://developer.apple.com/documentation/swiftui/fillshapeview/background) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var fillStyle: FillStyle](https://developer.apple.com/documentation/swiftui/fillshapeview/fillstyle) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var shape: Content](https://developer.apple.com/documentation/swiftui/fillshapeview/shape) | instance property / subscript (read side, not a view-building API) |
@@ -6233,7 +6233,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | enum | [Edge.Corner](https://developer.apple.com/documentation/swiftui/edge/corner) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | struct | [Edge.Corner.Set](https://developer.apple.com/documentation/swiftui/edge/corner/set) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(Edge.Corner)](https://developer.apple.com/documentation/swiftui/edge/corner/set/init(_:)) | value member of Edge.Corner.Set (1/1 overloads bridged) |
-| ➖ | init | [init(rawValue: Int8)](https://developer.apple.com/documentation/swiftui/edge/corner/set/init(rawvalue:)) | param rawValue: unknown type Int8 |
+| ✅ | init | [init(rawValue: Int8)](https://developer.apple.com/documentation/swiftui/edge/corner/set/init(rawvalue:)) | value member of Edge.Corner.Set (1/1 overloads bridged) |
 | ➖ | method | [func contains(Edge.Corner) -> Bool](https://developer.apple.com/documentation/swiftui/edge/corner/set/contains(_:)) | not a view, modifier or value-producing member |
 | ✅ | property | [static let all: Edge.Corner.Set](https://developer.apple.com/documentation/swiftui/edge/corner/set/all) | value member of Edge.Corner.Set (1/1 overloads bridged) |
 | ✅ | property | [static let bottom: Edge.Corner.Set](https://developer.apple.com/documentation/swiftui/edge/corner/set/bottom) | value member of Edge.Corner.Set (1/1 overloads bridged) |
@@ -6439,7 +6439,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func listSectionSeparatorTint(Color?, edges: VerticalEdge.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/listsectionseparatortint(_:edges:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func listRowSeparator(Visibility, edges: VerticalEdge.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowseparator(_:edges:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func listSectionSeparator(Visibility, edges: VerticalEdge.Set) -> some View](https://developer.apple.com/documentation/swiftui/view/listsectionseparator(_:edges:)) | modifier (1/1 overloads bridged) |
-| ➖ | method | [func listRowBackground<V>(V?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)) | param view: bare View value |
+| ✅ | method | [func listRowBackground<V>(V?) -> some View](https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func alternatingRowBackgrounds(AlternatingRowBackgroundBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/alternatingrowbackgrounds(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [AlternatingRowBackgroundBehavior](https://developer.apple.com/documentation/swiftui/alternatingrowbackgroundbehavior) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let automatic: AlternatingRowBackgroundBehavior](https://developer.apple.com/documentation/swiftui/alternatingrowbackgroundbehavior/automatic) | value member of AlternatingRowBackgroundBehavior (1/1 overloads bridged) |
@@ -6626,8 +6626,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | struct | [TableOutlineGroupContent](https://developer.apple.com/documentation/swiftui/tableoutlinegroupcontent) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | struct | [Group](https://developer.apple.com/documentation/swiftui/group) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | init | [init(content:)](https://developer.apple.com/documentation/swiftui/group/init(content:)) | view (1/6 overloads bridged) |
-| ➖ | init | [init<Base, Result>(sections: Base, transform: (SectionCollection) -> Result)](https://developer.apple.com/documentation/swiftui/group/init(sections:transform:)) | param view: bare View value |
-| ➖ | init | [init<Base, Result>(subviews: Base, transform: (SubviewsCollection) -> Result)](https://developer.apple.com/documentation/swiftui/group/init(subviews:transform:)) | param view: bare View value |
+| ➖ | init | [init<Base, Result>(sections: Base, transform: (SectionCollection) -> Result)](https://developer.apple.com/documentation/swiftui/group/init(sections:transform:)) | param transform: builder with parameters |
+| ➖ | init | [init<Base, Result>(subviews: Base, transform: (SubviewsCollection) -> Result)](https://developer.apple.com/documentation/swiftui/group/init(subviews:transform:)) | param transform: builder with parameters |
 | ➖ | struct | [GroupElementsOfContent](https://developer.apple.com/documentation/swiftui/groupelementsofcontent) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | struct | [GroupSectionsOfContent](https://developer.apple.com/documentation/swiftui/groupsectionsofcontent) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | struct | [Section](https://developer.apple.com/documentation/swiftui/section) | type not constructible from Kotlin (generic or no bridgeable members) |
@@ -6638,9 +6638,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | init | [init(content: () -> Content, header: () -> Parent, footer: () -> Footer)](https://developer.apple.com/documentation/swiftui/section/init(content:header:footer:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(_:isExpanded:content:)](https://developer.apple.com/documentation/swiftui/section/init(_:isexpanded:content:)) | view (3/6 overloads bridged) |
 | ✅ | init | [init(isExpanded:content:header:)](https://developer.apple.com/documentation/swiftui/section/init(isexpanded:content:header:)) | view (1/2 overloads bridged) |
-| ➖ | init | [init(header: Parent, content: () -> Content)](https://developer.apple.com/documentation/swiftui/section/init(header:content:)) | param header: bare View value |
-| ➖ | init | [init(footer: Footer, content: () -> Content)](https://developer.apple.com/documentation/swiftui/section/init(footer:content:)) | param footer: bare View value |
-| ➖ | init | [init(header: Parent, footer: Footer, content: () -> Content)](https://developer.apple.com/documentation/swiftui/section/init(header:footer:content:)) | param header: bare View value |
+| ✅ | init | [init(header: Parent, content: () -> Content)](https://developer.apple.com/documentation/swiftui/section/init(header:content:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(footer: Footer, content: () -> Content)](https://developer.apple.com/documentation/swiftui/section/init(footer:content:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(header: Parent, footer: Footer, content: () -> Content)](https://developer.apple.com/documentation/swiftui/section/init(header:footer:content:)) | view (1/1 overloads bridged) |
 | ➖ | method | [func collapsible(Bool) -> some View](https://developer.apple.com/documentation/swiftui/section/collapsible(_:)) | not a view, modifier or value-producing member |
 | ➖ | struct | [SectionCollection](https://developer.apple.com/documentation/swiftui/sectioncollection) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ➖ | struct | [SectionConfiguration](https://developer.apple.com/documentation/swiftui/sectionconfiguration) | type not constructible from Kotlin (generic or no bridgeable members) |
@@ -6656,8 +6656,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | init | [init(Data)](https://developer.apple.com/documentation/swiftui/foreach/init(_:)) | param data: generic constrained to ['RandomAccessCollection', 'RandomAccessCollection', 'RandomAccessCollection'] |
 | ➖ | init | [init(_:content:)](https://developer.apple.com/documentation/swiftui/foreach/init(_:content:)) | param data: unknown type Range |
 | ➖ | init | [init(_:id:content:)](https://developer.apple.com/documentation/swiftui/foreach/init(_:id:content:)) | param data: generic constrained to ['RandomAccessCollection', 'RandomAccessCollection', 'RandomAccessCollection'] |
-| ➖ | init | [init<V>(sections: V, content: (SectionConfiguration) -> Content)](https://developer.apple.com/documentation/swiftui/foreach/init(sections:content:)) | param view: bare View value |
-| ➖ | init | [init<V>(subviews: V, content: (Subview) -> Content)](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:)) | param view: bare View value |
+| ➖ | init | [init<V>(sections: V, content: (SectionConfiguration) -> Content)](https://developer.apple.com/documentation/swiftui/foreach/init(sections:content:)) | param content: builder with parameters |
+| ➖ | init | [init<V>(subviews: V, content: (Subview) -> Content)](https://developer.apple.com/documentation/swiftui/foreach/init(subviews:content:)) | param content: builder with parameters |
 | ➖ | init | [init<C, R>(Binding<C>, editActions: EditActions<C>, content: (Binding<C.Element>) -> R)](https://developer.apple.com/documentation/swiftui/foreach/init(_:editactions:content:)) | param data: generic constrained to ['MutableCollection', 'RandomAccessCollection'] |
 | ➖ | init | [init<C, R>(Binding<C>, id: KeyPath<C.Element, ID>, editActions: EditActions<C>, content: (Binding<C.Element>) -> R)](https://developer.apple.com/documentation/swiftui/foreach/init(_:id:editactions:content:)) | param data: generic constrained to ['MutableCollection', 'RandomAccessCollection'] |
 | · | property | [var content: (Data.Element) -> Content](https://developer.apple.com/documentation/swiftui/foreach/content) | instance property / subscript (read side, not a view-building API) |
@@ -6697,7 +6697,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | init | [init(content: () -> Content)](https://developer.apple.com/documentation/swiftui/groupbox/init(content:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(content: () -> Content, label: () -> Label)](https://developer.apple.com/documentation/swiftui/groupbox/init(content:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(_:content:)](https://developer.apple.com/documentation/swiftui/groupbox/init(_:content:)) | view (3/3 overloads bridged) |
-| ➖ | init | [init(label: Label, content: () -> Content)](https://developer.apple.com/documentation/swiftui/groupbox/init(label:content:)) | param label: bare View value |
+| ✅ | init | [init(label: Label, content: () -> Content)](https://developer.apple.com/documentation/swiftui/groupbox/init(label:content:)) | view (1/1 overloads bridged) |
 | ➖ | init | [init(GroupBoxStyleConfiguration)](https://developer.apple.com/documentation/swiftui/groupbox/init(_:)) | param configuration: type GroupBoxStyleConfiguration not bridged |
 | ✅ | method | [func groupBoxStyle<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/groupboxstyle(_:)) | modifier (1/1 overloads bridged) |
 | ➖ | struct | [Form](https://developer.apple.com/documentation/swiftui/form) | type not constructible from Kotlin (generic or no bridgeable members) |
@@ -7181,7 +7181,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let `return`: KeyEquivalent](https://developer.apple.com/documentation/swiftui/keyequivalent/return) | value member of KeyEquivalent (1/1 overloads bridged) |
 | ✅ | property | [static let space: KeyEquivalent](https://developer.apple.com/documentation/swiftui/keyequivalent/space) | value member of KeyEquivalent (1/1 overloads bridged) |
 | ✅ | property | [static let tab: KeyEquivalent](https://developer.apple.com/documentation/swiftui/keyequivalent/tab) | value member of KeyEquivalent (1/1 overloads bridged) |
-| ➖ | init | [init(Character)](https://developer.apple.com/documentation/swiftui/keyequivalent/init(_:)) | param character: unknown type Character |
+| ✅ | init | [init(Character)](https://developer.apple.com/documentation/swiftui/keyequivalent/init(_:)) | value member of KeyEquivalent (1/1 overloads bridged) |
 | · | property | [var character: Character](https://developer.apple.com/documentation/swiftui/keyequivalent/character) | instance property / subscript (read side, not a view-building API) |
 | ✅ | struct | [EventModifiers](https://developer.apple.com/documentation/swiftui/eventmodifiers) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let all: EventModifiers](https://developer.apple.com/documentation/swiftui/eventmodifiers/all) | value member of EventModifiers (1/1 overloads bridged) |
@@ -7413,8 +7413,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func pasteDestination<T>(for: T.Type, action: ([T]) -> Void, validator: ([T]) -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/pastedestination(for:action:validator:)) | param action: generic constrained to ['Transferable'] |
 | ➖ | method | [func onCopyCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)) | param payloadAction: nested function type |
 | ➖ | method | [func onCutCommand(perform: (() -> [NSItemProvider])?) -> some View](https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)) | param payloadAction: nested function type |
-| ➖ | method | [func onPasteCommand(of:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onPasteCommand(of:validator:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | method | [func onPasteCommand(of:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)) | param payloadAction: unknown type NSItemProvider |
+| ➖ | method | [func onPasteCommand(of:validator:perform:)](https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:validator:perform:)) | param validator: builder with parameters |
 | ✅ | method | [func dragConfiguration(DragConfiguration) -> some View](https://developer.apple.com/documentation/swiftui/view/dragconfiguration(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | struct | [DragConfiguration](https://developer.apple.com/documentation/swiftui/dragconfiguration) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | struct | [DragConfiguration.OperationsOutsideApp](https://developer.apple.com/documentation/swiftui/dragconfiguration/operationsoutsideapp-swift.struct) | Kotlin value class (1/2 overloads bridged) |
@@ -7483,8 +7483,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func itemProvider(Optional<() -> NSItemProvider?>) -> some View](https://developer.apple.com/documentation/swiftui/view/itemprovider(_:)) | param action: nested function type |
 | ➖ | method | [func onDrag<V>(() -> NSItemProvider, preview: () -> V) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:preview:)) | param data: closure returning NSItemProvider |
 | ➖ | method | [func onDrag(() -> NSItemProvider) -> some View](https://developer.apple.com/documentation/swiftui/view/ondrag(_:)) | param data: closure returning NSItemProvider |
-| ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param supportedContentTypes: unknown type UTType |
-| ➖ | method | [func onDrop(of:delegate:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)) | param supportedContentTypes: unknown type UTType |
+| ➖ | method | [func onDrop(of:isTargeted:perform:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)) | param isTargeted: optional binding |
+| ➖ | method | [func onDrop(of:delegate:)](https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)) | param delegate: generic constrained to ['DropDelegate'] |
 | ➖ | protocol | [DropDelegate](https://developer.apple.com/documentation/swiftui/dropdelegate) | protocol without bridgeable conformers |
 | ➖ | method | [func dropEntered(info: DropInfo)](https://developer.apple.com/documentation/swiftui/dropdelegate/dropentered(info:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func dropEntered(info: DropInfo)](https://developer.apple.com/documentation/swiftui/dropdelegate/dropentered(info:)-2tqut) | not a view, modifier or value-producing member |
@@ -7628,7 +7628,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func callAsFunction(URL)](https://developer.apple.com/documentation/swiftui/openurlaction/callasfunction(_:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func callAsFunction(URL, completion: (Bool) -> Void)](https://developer.apple.com/documentation/swiftui/openurlaction/callasfunction(_:completion:)) | not a view, modifier or value-producing member |
 | ➖ | method | [func callAsFunction(URL, prefersInApp: Bool)](https://developer.apple.com/documentation/swiftui/openurlaction/callasfunction(_:prefersinapp:)) | not a view, modifier or value-producing member |
-| ➖ | method | [func onOpenURL(perform: (URL) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/onopenurl(perform:)) | param action: callback of url |
+| ✅ | method | [func onOpenURL(perform: (URL) -> ()) -> some View](https://developer.apple.com/documentation/swiftui/view/onopenurl(perform:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func handlesExternalEvents(matching: Set<String>) -> some Scene](https://developer.apple.com/documentation/swiftui/scene/handlesexternalevents(matching:)) | not a view, modifier or value-producing member |
 | ✅ | method | [func handlesExternalEvents(preferring: Set<String>, allowing: Set<String>) -> some View](https://developer.apple.com/documentation/swiftui/view/handlesexternalevents(preferring:allowing:)) | modifier (1/1 overloads bridged) |
 | ➖ | method | [func backgroundTask<D, R>(BackgroundTask<D, R>, action: (D) async -> R) -> some Scene](https://developer.apple.com/documentation/swiftui/scene/backgroundtask(_:action:)) | not a view, modifier or value-producing member |
@@ -7658,9 +7658,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ➖ | method | [func importableFromServices<T>(for: T.Type, action: ([T]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/importablefromservices(for:action:)) | param action: builder with parameters |
 | ➖ | method | [func exportableToServices<T>(@autoclosure () -> [T]) -> some View](https://developer.apple.com/documentation/swiftui/view/exportabletoservices(_:)) | param payload: closure returning [T] |
 | ➖ | method | [func exportableToServices<T>(@autoclosure () -> [T], onEdit: ([T]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/exportabletoservices(_:onedit:)) | param payload: closure returning [T] |
-| ➖ | method | [func importsItemProviders([UTType], onImport: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/importsitemproviders(_:onimport:)) | param contentTypes: unknown type UTType |
-| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider]) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:)) | param contentTypes: unknown type UTType |
-| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider], onEdit: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:onedit:)) | param contentTypes: unknown type UTType |
+| ➖ | method | [func importsItemProviders([UTType], onImport: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/importsitemproviders(_:onimport:)) | param onImport: builder with parameters |
+| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider]) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:)) | param onExport: closure returning [NSItemProvider] |
+| ➖ | method | [func exportsItemProviders([UTType], onExport: () -> [NSItemProvider], onEdit: ([NSItemProvider]) -> Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:onedit:)) | param onExport: closure returning [NSItemProvider] |
 
 ### Accessibility
 
@@ -7745,7 +7745,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | struct | [AccessibilityDirectTouchOptions](https://developer.apple.com/documentation/swiftui/accessibilitydirecttouchoptions) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | property | [static let requiresActivation: AccessibilityDirectTouchOptions](https://developer.apple.com/documentation/swiftui/accessibilitydirecttouchoptions/requiresactivation) | value member of AccessibilityDirectTouchOptions (1/1 overloads bridged) |
 | ✅ | property | [static let silentOnTouch: AccessibilityDirectTouchOptions](https://developer.apple.com/documentation/swiftui/accessibilitydirecttouchoptions/silentontouch) | value member of AccessibilityDirectTouchOptions (1/1 overloads bridged) |
-| ➖ | init | [init(rawValue: AccessibilityDirectTouchOptions.RawValue)](https://developer.apple.com/documentation/swiftui/accessibilitydirecttouchoptions/init(rawvalue:)) | param rawValue: unknown type UInt |
+| ✅ | init | [init(rawValue: AccessibilityDirectTouchOptions.RawValue)](https://developer.apple.com/documentation/swiftui/accessibilitydirecttouchoptions/init(rawvalue:)) | value member of AccessibilityDirectTouchOptions (1/1 overloads bridged) |
 | ➖ | struct | [AccessibilityZoomGestureAction](https://developer.apple.com/documentation/swiftui/accessibilityzoomgestureaction) | type not constructible from Kotlin (generic or no bridgeable members) |
 | ✅ | property | [let direction: AccessibilityZoomGestureAction.Direction](https://developer.apple.com/documentation/swiftui/accessibilityzoomgestureaction/direction-swift.property) | Kotlin value class (1/2 overloads bridged) |
 | ✅ | enum | [AccessibilityZoomGestureAction.Direction](https://developer.apple.com/documentation/swiftui/accessibilityzoomgestureaction/direction-swift.enum) | Kotlin value class (1/2 overloads bridged) |

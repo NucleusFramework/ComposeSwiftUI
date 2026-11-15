@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- APIs that take a view as a value instead of a `@ViewBuilder` closure: `Modifier.listRowBackground { … }`,
+  `Modifier.mask { … }`, the `background`/`overlay(_:alignment:)` and `navigationBarItems` variants, `AnyView`,
+  `FillShapeView`/`StrokeShapeView`/`StrokeBorderShapeView`, `MenuButton`, and the remaining `NavigationLink`,
+  `Picker` and `Slider` overloads (`NavigationLinkTag`, `NavigationLinkIsActive`, `PickerSelection`, `SliderValue`).
+- Fixed-width integers (`Int8` … `UInt64`) as `Int`, and `UTType`, `Locale`, `Locale.Language`, `Character` and
+  `AttributedString` as `String`, for plain, optional and list parameters, bindings and callbacks. New APIs include
+  the `OptionSet` `rawValue` initializers, `Modifier.typesettingLanguage`, `TextEditor(text:)` over an
+  `AttributedString`, and the `contentType` variants of `NewDocumentButton`.
+- `Modifier.onOpenURL { url -> }`: callbacks receive a `URL` as its absolute string.
+
+### Changed
+
+- `NewDocumentButtonSource` (deprecated alias) is now `NewDocumentButtonContentType`.
+
 ## 0.4.1
 
 ### Added

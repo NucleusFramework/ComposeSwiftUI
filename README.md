@@ -105,6 +105,9 @@ translation:
 | `ForEach(items, id: \.id) { … }` | `for (item in items) key(item.id) { … }`, or `LazyForEach(items, key = { it.id }) { … }` for long lists |
 | `Color.red.opacity(0.5)`, `.secondary` | `Color.red.opacity(0.5)`, `ShapeStyle.secondary` |
 | `CGFloat` | `Double` |
+| `Int8` … `UInt64` | `Int` (truncated on the Swift side) |
+| `URL`, `UTType`, `Locale`, `Locale.Language`, `Character` | `String`: the URL, the type identifier (`"public.png"`), the locale or language identifier, one character |
+| `listRowBackground(Color.red)`, `mask(Circle())` (a view passed as a value) | `Modifier.listRowBackground { ColorView(Color.red) }`, `Modifier.mask { … }` |
 | `"**Bold**"` or a localization key | `LocalizedKey("hello.title")`. A plain `String` is shown verbatim. |
 
 Modifiers apply in the order you chain them, exactly as in Swift.
@@ -328,8 +331,9 @@ every row is composed and kept up to date even off screen.
 ## Limitations
 
 - visionOS isn't supported: Kotlin/Native has no visionOS target.
-- APIs that take Swift-only types (`UTType`, `Transferable`, `KeyPath`…) aren't available. For mixed-style
-  text, use `Text(StyledString)` instead of `AttributedString`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
+- APIs that take Swift-only types (`Transferable`, `KeyPath`, `DateComponents`, `Range`…) aren't available. An
+  `AttributedString` parameter or binding takes a plain `String` (attributes are dropped); for mixed-style text, use
+  `Text(StyledString)`. [docs/COVERAGE.md](docs/COVERAGE.md) gives the reason for each one.
 - Data-driven containers such as `List(data)` and `Table` take a Kotlin loop or `LazyForEach` instead of a collection.
 - On iOS, two benchmark screens differ from plain SwiftUI by less than a pixel (one SF Symbol, and the search field
   placeholder after updates).

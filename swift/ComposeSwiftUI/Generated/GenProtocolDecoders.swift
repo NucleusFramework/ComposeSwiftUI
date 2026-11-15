@@ -6,9 +6,9 @@ import UniformTypeIdentifiers
 @MainActor func dp_AccessibilityQuickActionStyle(_ e: SExpr?) -> (any AccessibilityQuickActionStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 2852:
+    case 2853:
         return d_AccessibilityQuickActionOutlineStyle(e)
-    case 2851:
+    case 2852:
         return d_AccessibilityQuickActionPromptStyle(e)
     default: return HandwrittenValues.decode(e) as? any AccessibilityQuickActionStyle
     }
@@ -18,11 +18,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_ArrangementViewStyle(_ e: SExpr?) -> (any ArrangementViewStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1189, 2820:
+    case 1189, 2821:
         return d_AutomaticArrangementViewStyle(e)
-    case 1977, 1978, 2819:
+    case 1977, 1978, 2820:
         return d_OverlayArrangementViewStyle(e)
-    case 2297, 2298, 2818:
+    case 2297, 2298, 2819:
         return d_SplitArrangementViewStyle(e)
     default: return HandwrittenValues.decode(e) as? any ArrangementViewStyle
     }
@@ -31,20 +31,20 @@ import UniformTypeIdentifiers
 @MainActor func dp_ControlGroupStyle(_ e: SExpr?) -> (any ControlGroupStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 2792:
+    case 2793:
         return d_AutomaticControlGroupStyle(e)
     #if os(iOS) || os(macOS)
-    case 1342, 2789:
+    case 1342, 2790:
         return d_CompactMenuControlGroupStyle(e)
     #endif
-    case 1928, 2790:
+    case 1928, 2791:
         return d_MenuControlGroupStyle(e)
     #if os(iOS) || os(macOS)
-    case 1955, 2788:
+    case 1955, 2789:
         return d_NavigationControlGroupStyle(e)
     #endif
     #if os(iOS) || os(macOS)
-    case 1989, 2791:
+    case 1989, 2792:
         return d_PaletteControlGroupStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any ControlGroupStyle
@@ -76,11 +76,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_CoordinateSpaceProtocol(_ e: SExpr?) -> (any CoordinateSpaceProtocol)? {
     guard let e else { return nil }
     switch e.id {
-    case 1678, 2847:
+    case 1678, 2848:
         return d_GlobalCoordinateSpace(e)
-    case 1899, 2843:
+    case 1899, 2844:
         return d_LocalCoordinateSpace(e)
-    case 2844, 2845, 2846:
+    case 2845, 2846, 2847:
         return d_NamedCoordinateSpace(e)
     default: return HandwrittenValues.decode(e) as? any CoordinateSpaceProtocol
     }
@@ -90,13 +90,13 @@ import UniformTypeIdentifiers
 @MainActor func dp_CustomHoverEffect(_ e: SExpr?) -> (any CustomHoverEffect)? {
     guard let e else { return nil }
     switch e.id {
-    case 1192, 2794:
+    case 1192, 2795:
         return d_AutomaticHoverEffect(e)
-    case 1780, 2795:
+    case 1780, 2796:
         return d_HighlightHoverEffect(e)
     case 1800, 1801, 1802, 1803:
         return d_HoverEffect(e)
-    case 1881, 2793:
+    case 1881, 2794:
         return d_LiftHoverEffect(e)
     default: return HandwrittenValues.decode(e) as? any CustomHoverEffect
     }
@@ -107,25 +107,25 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(iOS) || os(macOS)
-    case 1341, 2779:
+    case 1341, 2780:
         return d_CompactDatePickerStyle(e)
     #endif
-    case 1405, 2780:
+    case 1405, 2781:
         return d_DefaultDatePickerStyle(e)
     #if os(macOS)
-    case 1559, 2777:
+    case 1559, 2778:
         return d_FieldDatePickerStyle(e)
     #endif
     #if os(iOS) || os(macOS)
-    case 1684, 2781:
+    case 1684, 2782:
         return d_GraphicalDatePickerStyle(e)
     #endif
     #if os(macOS)
-    case 2314, 2776:
+    case 2314, 2777:
         return d_StepperFieldDatePickerStyle(e)
     #endif
     #if os(iOS) || os(watchOS)
-    case 2619, 2778:
+    case 2620, 2779:
         return d_WheelDatePickerStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any DatePickerStyle
@@ -136,7 +136,7 @@ import UniformTypeIdentifiers
 @MainActor func dp_DisclosureGroupStyle(_ e: SExpr?) -> (any DisclosureGroupStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1190, 2821:
+    case 1190, 2822:
         return d_AutomaticDisclosureGroupStyle(e)
     default: return HandwrittenValues.decode(e) as? any DisclosureGroupStyle
     }
@@ -145,11 +145,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_FormStyle(_ e: SExpr?) -> (any FormStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1191, 2869:
+    case 1191, 2870:
         return d_AutomaticFormStyle(e)
-    case 1320, 2867:
+    case 1320, 2868:
         return d_ColumnsFormStyle(e)
-    case 1767, 2868:
+    case 1767, 2869:
         return d_GroupedFormStyle(e)
     default: return HandwrittenValues.decode(e) as? any FormStyle
     }
@@ -158,24 +158,24 @@ import UniformTypeIdentifiers
 @MainActor func dp_GaugeStyle(_ e: SExpr?) -> (any GaugeStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1086, 2660:
+    case 1086, 2661:
         return d_AccessoryCircularCapacityGaugeStyle(e)
-    case 1087, 2658:
+    case 1087, 2659:
         return d_AccessoryCircularGaugeStyle(e)
-    case 1088, 2659:
+    case 1088, 2660:
         return d_AccessoryLinearCapacityGaugeStyle(e)
-    case 1089, 2657:
+    case 1089, 2658:
         return d_AccessoryLinearGaugeStyle(e)
     #if os(watchOS)
-    case 1273, 1274, 1275, 2663:
+    case 1273, 1274, 1275, 2664:
         return d_CircularGaugeStyle(e)
     #endif
-    case 1409, 2662:
+    case 1409, 2663:
         return d_DefaultGaugeStyle(e)
-    case 1882, 2656:
+    case 1882, 2657:
         return d_LinearCapacityGaugeStyle(e)
     #if os(watchOS)
-    case 1883, 1884, 1885, 2661:
+    case 1883, 1884, 1885, 2662:
         return d_LinearGaugeStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any GaugeStyle
@@ -186,7 +186,7 @@ import UniformTypeIdentifiers
 @MainActor func dp_GroupBoxStyle(_ e: SExpr?) -> (any GroupBoxStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1411, 2762:
+    case 1411, 2763:
         return d_DefaultGroupBoxStyle(e)
     default: return HandwrittenValues.decode(e) as? any GroupBoxStyle
     }
@@ -197,11 +197,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_ImmersionStyle(_ e: SExpr?) -> (any ImmersionStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1193, 2768:
+    case 1193, 2769:
         return d_AutomaticImmersionStyle(e)
-    case 1655, 2767:
+    case 1655, 2768:
         return d_FullImmersionStyle(e)
-    case 2078, 2079, 2763, 2764, 2765, 2766:
+    case 2078, 2079, 2764, 2765, 2766, 2767:
         return d_ProgressiveImmersionStyle(e)
     default: return HandwrittenValues.decode(e) as? any ImmersionStyle
     }
@@ -211,7 +211,7 @@ import UniformTypeIdentifiers
 @MainActor func dp_IndexViewStyle(_ e: SExpr?) -> (any IndexViewStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1979, 2769, 2770:
+    case 1979, 2770, 2771:
         return d_PageIndexViewStyle(e)
     default: return HandwrittenValues.decode(e) as? any IndexViewStyle
     }
@@ -220,24 +220,24 @@ import UniformTypeIdentifiers
 @MainActor func dp_InsettableShape(_ e: SExpr?) -> (any InsettableShape)? {
     guard let e else { return nil }
     switch e.id {
-    case 1248, 1249, 1250, 1251, 1252, 2853:
+    case 1248, 1249, 1250, 1251, 1252, 2854:
         return d_ButtonBorderShape(e)
-    case 1265, 2863, 2864:
+    case 1265, 2864, 2865:
         return d_Capsule(e)
-    case 1272, 2862:
+    case 1272, 2863:
         return d_Circle(e)
-    case 1357, 2855:
+    case 1357, 2856:
         return d_ContainerRelativeShape(e)
-    case 1533, 2865:
+    case 1533, 2866:
         return d_Ellipse(e)
-    case 2098, 2866:
+    case 2098, 2867:
         return d_Rectangle(e)
-    case 2116, 2117, 2856, 2857:
+    case 2116, 2117, 2857, 2858:
         return d_RoundedRectangle(e)
-    case 2439, 2440, 2441, 2854:
+    case 2440, 2441, 2442, 2855:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_TextInputBorderShape(e) }
         return nil
-    case 2551, 2552, 2860, 2861:
+    case 2552, 2553, 2861, 2862:
         return d_UnevenRoundedRectangle(e)
     default: return HandwrittenValues.decode(e) as? any InsettableShape
     }
@@ -245,13 +245,13 @@ import UniformTypeIdentifiers
 @MainActor func dp_LabelStyle(_ e: SExpr?) -> (any LabelStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1412, 2665:
+    case 1412, 2666:
         return d_DefaultLabelStyle(e)
-    case 1806, 2666:
+    case 1806, 2667:
         return d_IconOnlyLabelStyle(e)
-    case 2459, 2664:
+    case 2460, 2665:
         return d_TitleAndIconLabelStyle(e)
-    case 2461, 2667:
+    case 2462, 2668:
         return d_TitleOnlyLabelStyle(e)
     default: return HandwrittenValues.decode(e) as? any LabelStyle
     }
@@ -259,7 +259,7 @@ import UniformTypeIdentifiers
 @MainActor func dp_LabeledContentStyle(_ e: SExpr?) -> (any LabeledContentStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1194, 2814:
+    case 1194, 2815:
         return d_AutomaticLabeledContentStyle(e)
     default: return HandwrittenValues.decode(e) as? any LabeledContentStyle
     }
@@ -268,35 +268,35 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(macOS)
-    case 1237, 1238, 2878, 2879:
+    case 1237, 1238, 2879, 2880:
         return d_BorderedListStyle(e)
     #endif
     #if os(watchOS)
-    case 1267, 2880:
+    case 1267, 2881:
         return d_CarouselListStyle(e)
     #endif
-    case 1413, 2875:
+    case 1413, 2876:
         return d_DefaultListStyle(e)
     #if os(watchOS)
-    case 1537, 2870:
+    case 1537, 2871:
         return d_EllipticalListStyle(e)
     #endif
     #if os(iOS) || os(tvOS)
-    case 1768, 2876:
+    case 1768, 2877:
         return d_GroupedListStyle(e)
     #endif
     #if os(iOS)
-    case 1832, 2871:
+    case 1832, 2872:
         return d_InsetGroupedListStyle(e)
     #endif
     #if os(iOS) || os(macOS)
-    case 1833, 1834, 2872, 2873:
+    case 1833, 1834, 2873, 2874:
         return d_InsetListStyle(e)
     #endif
-    case 2029, 2874:
+    case 2029, 2875:
         return d_PlainListStyle(e)
     #if os(iOS) || os(macOS)
-    case 2273, 2877:
+    case 2273, 2878:
         return d_SidebarListStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any ListStyle
@@ -306,11 +306,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_MenuBarExtraStyle(_ e: SExpr?) -> (any MenuBarExtraStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1195, 2798:
+    case 1195, 2799:
         return d_AutomaticMenuBarExtraStyle(e)
-    case 2091, 2797:
+    case 2091, 2798:
         return d_PullDownMenuBarExtraStyle(e)
-    case 2636, 2796:
+    case 2637, 2797:
         return d_WindowMenuBarExtraStyle(e)
     default: return HandwrittenValues.decode(e) as? any MenuBarExtraStyle
     }
@@ -337,14 +337,14 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(macOS)
-    case 1234, 2881:
+    case 1234, 2882:
         return d_BorderedButtonMenuStyle(e)
     #endif
-    case 1244, 1245, 2882:
+    case 1244, 1245, 2883:
         return d_BorderlessButtonMenuStyle(e)
-    case 1253, 2883:
+    case 1253, 2884:
         return d_ButtonMenuStyle(e)
-    case 1415, 2884:
+    case 1415, 2885:
         return d_DefaultMenuStyle(e)
     default: return HandwrittenValues.decode(e) as? any MenuStyle
     }
@@ -353,11 +353,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_NavigationSplitViewStyle(_ e: SExpr?) -> (any NavigationSplitViewStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1196, 2850:
+    case 1196, 2851:
         return d_AutomaticNavigationSplitViewStyle(e)
-    case 1209, 2849:
+    case 1209, 2850:
         return d_BalancedNavigationSplitViewStyle(e)
-    case 2085, 2848:
+    case 2085, 2849:
         return d_ProminentDetailNavigationSplitViewStyle(e)
     default: return HandwrittenValues.decode(e) as? any NavigationSplitViewStyle
     }
@@ -369,10 +369,10 @@ import UniformTypeIdentifiers
     case 1170:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_AnyNavigationTransition(e) }
         return nil
-    case 2822:
+    case 2823:
         return d_AutomaticNavigationTransition(e)
     #if os(iOS) || os(tvOS) || os(watchOS)
-    case 2823:
+    case 2824:
         if #available(iOS 27.0, macOS 14.0, tvOS 27.0, watchOS 27.0, *) { return d_CrossFadeNavigationTransition(e) }
         return nil
     #endif
@@ -383,17 +383,17 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(iOS) || os(macOS)
-    case 2816:
+    case 2817:
         return d_ColumnNavigationViewStyle(e)
     #endif
-    case 1416, 2817:
+    case 1416, 2818:
         return d_DefaultNavigationViewStyle(e)
     #if os(iOS) || os(macOS) || os(tvOS)
     case 1437:
         return d_DoubleColumnNavigationViewStyle(e)
     #endif
     #if os(iOS) || os(tvOS) || os(watchOS)
-    case 2313, 2815:
+    case 2313, 2816:
         return d_StackNavigationViewStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any NavigationViewStyle
@@ -402,20 +402,20 @@ import UniformTypeIdentifiers
 @MainActor func dp_PickerStyle(_ e: SExpr?) -> (any PickerStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1417, 2742:
+    case 1417, 2743:
         return d_DefaultPickerStyle(e)
-    case 1831, 2741:
+    case 1831, 2742:
         return d_InlinePickerStyle(e)
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 1932, 2738:
+    case 1932, 2739:
         return d_MenuPickerStyle(e)
     #endif
     #if os(iOS) || os(tvOS) || os(watchOS)
-    case 1956, 2737:
+    case 1956, 2738:
         return d_NavigationLinkPickerStyle(e)
     #endif
     #if os(iOS) || os(macOS)
-    case 1990, 2743:
+    case 1990, 2744:
         return d_PalettePickerStyle(e)
     #endif
     #if os(macOS)
@@ -423,20 +423,20 @@ import UniformTypeIdentifiers
         return d_PopUpButtonPickerStyle(e)
     #endif
     #if os(macOS)
-    case 2097, 2736:
+    case 2097, 2737:
         return d_RadioGroupPickerStyle(e)
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2212, 2744:
+    case 2212, 2745:
         return d_SegmentedPickerStyle(e)
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2397, 2739:
+    case 2397, 2740:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 10.0, *) { return d_TabsPickerStyle(e) }
         return nil
     #endif
     #if os(iOS) || os(watchOS)
-    case 2620, 2740:
+    case 2621, 2741:
         return d_WheelPickerStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any PickerStyle
@@ -446,13 +446,13 @@ import UniformTypeIdentifiers
 @MainActor func dp_PresentationSizing(_ e: SExpr?) -> (any PresentationSizing)? {
     guard let e else { return nil }
     switch e.id {
-    case 2807:
+    case 2808:
         return d_AutomaticPresentationSizing(e)
-    case 2806:
+    case 2807:
         return d_FittedPresentationSizing(e)
-    case 2804:
-        return d_FormPresentationSizing(e)
     case 2805:
+        return d_FormPresentationSizing(e)
+    case 2806:
         return d_PagePresentationSizing(e)
     default: return HandwrittenValues.decode(e) as? any PresentationSizing
     }
@@ -461,36 +461,36 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(macOS)
-    case 1084, 2828:
+    case 1084, 2829:
         return d_AccessoryBarActionButtonStyle(e)
     #endif
     #if os(macOS)
-    case 1085, 2825:
+    case 1085, 2826:
         return d_AccessoryBarButtonStyle(e)
     #endif
-    case 1235, 1236, 2835:
+    case 1235, 1236, 2836:
         return d_BorderedButtonStyle(e)
-    case 1239, 2827:
+    case 1239, 2828:
         return d_BorderedProminentButtonStyle(e)
-    case 1246, 2824:
+    case 1246, 2825:
         return d_BorderlessButtonStyle(e)
     #if os(tvOS)
-    case 1266, 2829:
+    case 1266, 2830:
         return d_CardButtonStyle(e)
     #endif
-    case 1404, 2834:
+    case 1404, 2835:
         return d_DefaultButtonStyle(e)
-    case 1672, 1673, 2831, 2832:
+    case 1672, 1673, 2832, 2833:
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) { return d_GlassButtonStyle(e) }
         return nil
-    case 1677, 2826:
+    case 1677, 2827:
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) { return d_GlassProminentButtonStyle(e) }
         return nil
     #if os(macOS)
-    case 1891, 2830:
+    case 1891, 2831:
         return d_LinkButtonStyle(e)
     #endif
-    case 2028, 2833:
+    case 2028, 2834:
         return d_PlainButtonStyle(e)
     default: return HandwrittenValues.decode(e) as? any PrimitiveButtonStyle
     }
@@ -498,11 +498,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_ProgressViewStyle(_ e: SExpr?) -> (any ProgressViewStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1276, 1277, 2801:
+    case 1276, 1277, 2802:
         return d_CircularProgressViewStyle(e)
-    case 1418, 2800:
+    case 1418, 2801:
         return d_DefaultProgressViewStyle(e)
-    case 1889, 1890, 2799:
+    case 1889, 1890, 2800:
         return d_LinearProgressViewStyle(e)
     default: return HandwrittenValues.decode(e) as? any ProgressViewStyle
     }
@@ -511,15 +511,15 @@ import UniformTypeIdentifiers
 @MainActor func dp_RoundedRectangularShape(_ e: SExpr?) -> (any RoundedRectangularShape)? {
     guard let e else { return nil }
     switch e.id {
-    case 1265, 2863, 2864:
+    case 1265, 2864, 2865:
         return d_Capsule(e)
-    case 1272, 2862:
+    case 1272, 2863:
         return d_Circle(e)
-    case 2098, 2866:
+    case 2098, 2867:
         return d_Rectangle(e)
-    case 2116, 2117, 2856, 2857:
+    case 2116, 2117, 2857, 2858:
         return d_RoundedRectangle(e)
-    case 2551, 2552, 2860, 2861:
+    case 2552, 2553, 2861, 2862:
         return d_UnevenRoundedRectangle(e)
     default: return HandwrittenValues.decode(e) as? any RoundedRectangularShape
     }
@@ -530,9 +530,9 @@ import UniformTypeIdentifiers
     case 1171:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) { return d_AnyScrollTargetBehavior(e) }
         return nil
-    case 1988, 2840:
+    case 1988, 2841:
         return d_PagingScrollTargetBehavior(e)
-    case 2605, 2606, 2607, 2836, 2837, 2838, 2839:
+    case 2606, 2607, 2608, 2837, 2838, 2839, 2840:
         return d_ViewAlignedScrollTargetBehavior(e)
     default: return HandwrittenValues.decode(e) as? any ScrollTargetBehavior
     }
@@ -542,32 +542,32 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1172:
         return d_AnyShape(e)
-    case 1248, 1249, 1250, 1251, 1252, 2853:
+    case 1248, 1249, 1250, 1251, 1252, 2854:
         return d_ButtonBorderShape(e)
-    case 1265, 2863, 2864:
+    case 1265, 2864, 2865:
         return d_Capsule(e)
-    case 1272, 2862:
+    case 1272, 2863:
         return d_Circle(e)
-    case 1343, 1344, 1345, 1346, 1347, 1348, 1349, 1350, 1351, 2858, 2859:
+    case 1343, 1344, 1345, 1346, 1347, 1348, 1349, 1350, 1351, 2859, 2860:
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) { return d_ConcentricRectangle(e) }
         return nil
-    case 1357, 2855:
+    case 1357, 2856:
         return d_ContainerRelativeShape(e)
     case 1410:
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) { return d_DefaultGlassEffectShape(e) }
         return nil
-    case 1533, 2865:
+    case 1533, 2866:
         return d_Ellipse(e)
     case 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009:
         return d_Path(e)
-    case 2098, 2866:
+    case 2098, 2867:
         return d_Rectangle(e)
-    case 2116, 2117, 2856, 2857:
+    case 2116, 2117, 2857, 2858:
         return d_RoundedRectangle(e)
-    case 2439, 2440, 2441, 2854:
+    case 2440, 2441, 2442, 2855:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_TextInputBorderShape(e) }
         return nil
-    case 2551, 2552, 2860, 2861:
+    case 2552, 2553, 2861, 2862:
         return d_UnevenRoundedRectangle(e)
     default: return HandwrittenValues.decode(e) as? any Shape
     }
@@ -575,54 +575,54 @@ import UniformTypeIdentifiers
 @MainActor func dp_ShapeStyle(_ e: SExpr?) -> (any ShapeStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1126, 1127, 1128, 1129, 1130, 1131, 2688, 2689, 2690, 2691, 2692, 2693:
+    case 1126, 1127, 1128, 1129, 1130, 1131, 2689, 2690, 2691, 2692, 2693, 2694:
         return d_AngularGradient(e)
     case 1168, 1169:
         return d_AnyGradient(e)
     case 1173:
         return d_AnyShapeStyle(e)
-    case 1205, 2668:
+    case 1205, 2669:
         return d_BackgroundStyle(e)
-    case 1278, 1279, 1280, 1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292, 1293, 1294, 1295, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1304, 1305, 1306, 2697, 2698, 2699, 2700, 2701, 2702, 2703, 2704, 2705, 2706, 2707, 2708, 2709, 2710, 2711, 2712:
+    case 1278, 1279, 1280, 1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292, 1293, 1294, 1295, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1304, 1305, 1306, 2698, 2699, 2700, 2701, 2702, 2703, 2704, 2705, 2706, 2707, 2708, 2709, 2710, 2711, 2712, 2713:
         return d_Color(e)
     case 1310:
         return d_Color_Resolved(e)
     case 1311:
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) { return d_Color_ResolvedHDR(e) }
         return nil
-    case 1534, 1535, 1536, 2694, 2695, 2696:
+    case 1534, 1535, 1536, 2695, 2696, 2697:
         return d_EllipticalGradient(e)
-    case 1564, 2677:
+    case 1564, 2678:
         return d_FillShapeStyle(e)
-    case 1639, 2669:
+    case 1639, 2670:
         return d_ForegroundStyle(e)
     case 1679, 1680:
         return d_Gradient(e)
-    case 1775, 1776, 1777, 1778, 1779, 2670, 2671, 2672, 2673, 2674:
+    case 1775, 1776, 1777, 1778, 1779, 2671, 2672, 2673, 2674, 2675:
         return d_HierarchicalShapeStyle(e)
-    case 1886, 1887, 1888, 2682, 2683, 2684:
+    case 1886, 1887, 1888, 2683, 2684, 2685:
         return d_LinearGradient(e)
-    case 1892, 2678:
+    case 1892, 2679:
         return d_LinkShapeStyle(e)
-    case 1914, 1915, 1916, 1917, 1918, 1919, 1920, 2713, 2714, 2715, 2716, 2717, 2718:
+    case 1914, 1915, 1916, 1917, 1918, 1919, 1920, 2714, 2715, 2716, 2717, 2718, 2719:
         return d_Material(e)
-    case 2027, 2675:
+    case 2027, 2676:
         return d_PlaceholderTextShapeStyle(e)
-    case 2094, 2095, 2096, 2685, 2686, 2687:
+    case 2094, 2095, 2096, 2686, 2687, 2688:
         return d_RadialGradient(e)
     #if os(iOS) || os(macOS)
-    case 2213, 2680:
+    case 2213, 2681:
         return d_SelectionShapeStyle(e)
     #endif
-    case 2247, 2681:
+    case 2247, 2682:
         return d_SeparatorShapeStyle(e)
     #if os(iOS) || os(macOS) || os(tvOS)
     case 2248:
         return d_Shader(e)
     #endif
-    case 2458, 2679:
+    case 2459, 2680:
         return d_TintShapeStyle(e)
-    case 2621, 2676:
+    case 2622, 2677:
         return d_WindowBackgroundShapeStyle(e)
     default: return HandwrittenValues.decode(e) as? any ShapeStyle
     }
@@ -631,32 +631,32 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(watchOS)
-    case 1268, 2760:
+    case 1268, 2761:
         return d_CarouselTabViewStyle(e)
     #endif
-    case 1419, 2758:
+    case 1419, 2759:
         return d_DefaultTabViewStyle(e)
     #if os(macOS)
-    case 1769, 2759:
+    case 1769, 2760:
         if #available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) { return d_GroupedTabViewStyle(e) }
         return nil
     #endif
     #if os(iOS) || os(tvOS) || os(watchOS)
-    case 1984, 2756, 2757:
+    case 1984, 2757, 2758:
         return d_PageTabViewStyle(e)
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2271, 2755:
+    case 2271, 2756:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, *) { return d_SidebarAdaptableTabViewStyle(e) }
         return nil
     #endif
     #if os(iOS) || os(macOS) || os(tvOS)
-    case 2362, 2761:
+    case 2362, 2762:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, *) { return d_TabBarOnlyTabViewStyle(e) }
         return nil
     #endif
     #if os(watchOS)
-    case 2600, 2601, 2753, 2754:
+    case 2601, 2602, 2754, 2755:
         return d_VerticalPageTabViewStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any TabViewStyle
@@ -666,13 +666,13 @@ import UniformTypeIdentifiers
 @MainActor func dp_TableStyle(_ e: SExpr?) -> (any TableStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 2723:
+    case 2724:
         return d_AutomaticTableStyle(e)
     #if os(macOS)
-    case 1240, 1241, 2721, 2722:
+    case 1240, 1241, 2722, 2723:
         return d_BorderedTableStyle(e)
     #endif
-    case 1835, 1836, 2719, 2720:
+    case 1835, 1836, 2720, 2721:
         return d_InsetTableStyle(e)
     default: return HandwrittenValues.decode(e) as? any TableStyle
     }
@@ -682,9 +682,9 @@ import UniformTypeIdentifiers
 @MainActor func dp_TextEditorStyle(_ e: SExpr?) -> (any TextEditorStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1197, 2783:
+    case 1197, 2784:
         return d_AutomaticTextEditorStyle(e)
-    case 2030, 2782:
+    case 2030, 2783:
         return d_PlainTextEditorStyle(e)
     default: return HandwrittenValues.decode(e) as? any TextEditorStyle
     }
@@ -693,19 +693,19 @@ import UniformTypeIdentifiers
 @MainActor func dp_TextFieldStyle(_ e: SExpr?) -> (any TextFieldStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1242, 2775:
+    case 1242, 2776:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_BorderedTextFieldStyle(e) }
         return nil
-    case 1420, 2774:
+    case 1420, 2775:
         return d_DefaultTextFieldStyle(e)
-    case 2031, 2773:
+    case 2031, 2774:
         return d_PlainTextFieldStyle(e)
     #if os(iOS) || os(macOS)
-    case 2113, 2772:
+    case 2113, 2773:
         return d_RoundedBorderTextFieldStyle(e)
     #endif
     #if os(macOS)
-    case 2312, 2771:
+    case 2312, 2772:
         return d_SquareBorderTextFieldStyle(e)
     #endif
     default: return HandwrittenValues.decode(e) as? any TextFieldStyle
@@ -715,9 +715,9 @@ import UniformTypeIdentifiers
 @MainActor func dp_TextSelectability(_ e: SExpr?) -> (any TextSelectability)? {
     guard let e else { return nil }
     switch e.id {
-    case 2803:
+    case 2804:
         return d_DisabledTextSelectability(e)
-    case 2802:
+    case 2803:
         return d_EnabledTextSelectability(e)
     default: return HandwrittenValues.decode(e) as? any TextSelectability
     }
@@ -727,9 +727,9 @@ import UniformTypeIdentifiers
 @MainActor func dp_TextVariantPreference(_ e: SExpr?) -> (any TextVariantPreference)? {
     guard let e else { return nil }
     switch e.id {
-    case 2842:
+    case 2843:
         return d_FixedTextVariant(e)
-    case 2841:
+    case 2842:
         return d_SizeDependentTextVariant(e)
     default: return HandwrittenValues.decode(e) as? any TextVariantPreference
     }
@@ -737,11 +737,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_TimelineSchedule(_ e: SExpr?) -> (any TimelineSchedule)? {
     guard let e else { return nil }
     switch e.id {
-    case 1167, 2786, 2787:
+    case 1167, 2787, 2788:
         return d_AnimationTimelineSchedule(e)
-    case 1557, 2784:
+    case 1557, 2785:
         return d_EveryMinuteTimelineSchedule(e)
-    case 2023, 2785:
+    case 2023, 2786:
         return d_PeriodicTimelineSchedule(e)
     default: return HandwrittenValues.decode(e) as? any TimelineSchedule
     }
@@ -750,16 +750,16 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     switch e.id {
     #if os(iOS) || os(macOS) || os(watchOS)
-    case 1264, 2745:
+    case 1264, 2746:
         return d_ButtonToggleStyle(e)
     #endif
     #if os(macOS)
-    case 1269, 2748:
+    case 1269, 2749:
         return d_CheckboxToggleStyle(e)
     #endif
-    case 1421, 2747:
+    case 1421, 2748:
         return d_DefaultToggleStyle(e)
-    case 2335, 2336, 2746:
+    case 2335, 2336, 2747:
         if #available(iOS 17.0, macOS 14.0, tvOS 18.0, watchOS 10.0, *) { return d_SwitchToggleStyle(e) }
         return nil
     default: return HandwrittenValues.decode(e) as? any ToggleStyle
@@ -777,14 +777,14 @@ import UniformTypeIdentifiers
 @MainActor func dp_WindowStyle(_ e: SExpr?) -> (any WindowStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1423, 2751:
+    case 1423, 2752:
         return d_DefaultWindowStyle(e)
-    case 1774, 2749:
+    case 1774, 2750:
         return d_HiddenTitleBarWindowStyle(e)
-    case 2032, 2750:
+    case 2032, 2751:
         if #available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) { return d_PlainWindowStyle(e) }
         return nil
-    case 2460, 2752:
+    case 2461, 2753:
         return d_TitleBarWindowStyle(e)
     default: return HandwrittenValues.decode(e) as? any WindowStyle
     }
@@ -794,13 +794,13 @@ import UniformTypeIdentifiers
 @MainActor func dp_WindowToolbarStyle(_ e: SExpr?) -> (any WindowToolbarStyle)? {
     guard let e else { return nil }
     switch e.id {
-    case 1424, 2810:
+    case 1424, 2811:
         return d_DefaultWindowToolbarStyle(e)
-    case 1558, 2813:
+    case 1558, 2814:
         return d_ExpandedWindowToolbarStyle(e)
-    case 2553, 2554, 2808, 2809:
+    case 2554, 2555, 2809, 2810:
         return d_UnifiedCompactWindowToolbarStyle(e)
-    case 2555, 2556, 2811, 2812:
+    case 2556, 2557, 2812, 2813:
         return d_UnifiedWindowToolbarStyle(e)
     default: return HandwrittenValues.decode(e) as? any WindowToolbarStyle
     }
