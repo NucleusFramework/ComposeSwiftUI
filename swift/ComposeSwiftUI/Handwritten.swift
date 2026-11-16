@@ -416,6 +416,26 @@ struct EnvironmentReporter: View {
     }
 }
 
+/// Kotlin `ScaledMetric`: reports the `@ScaledMetric` value to Kotlin, which composes the content with it.
+struct ScaledMetricReporter: View {
+    let m: NodeModel
+    @ScaledMetric private var scaled: Double
+
+    init(m: NodeModel) {
+        self.m = m
+        let a = m.args
+        _scaled = a.isNil(1) ? ScaledMetric(wrappedValue: a.double(0))
+            : ScaledMetric(wrappedValue: a.double(0), relativeTo: d_Font_TextStyle(a.expr(1)) ?? .body)
+    }
+
+    var body: some View {
+        let report = m.args.callback(2, box: { (d: Double) -> Any? in KotlinDouble(value: d) })
+        ChildrenView(m)
+            .onAppear { report(scaled) }
+            .onChange(of: scaled) { _, value in report(value) }
+    }
+}
+
 /// A SwiftUI `Layout` delegating to a Kotlin `LayoutPolicy`.
 struct KotlinLayout: Layout {
     let policy: LayoutPolicy
@@ -466,6 +486,7 @@ struct KotlinLayout: Layout {
             }, m, 0)
         }
         ComposeRegistry.views[100_003] = { m in ModChain.apply(EnvironmentReporter(m: m), m, 0) }
+        ComposeRegistry.views[100_066] = { m in ModChain.apply(ScaledMetricReporter(m: m), m, 0) }
         ComposeRegistry.views[100_004] = { m in ModChain.apply(NamespaceScopeView(m: m, id: Int64(m.args.int(0))), m, 0) }
         ComposeRegistry.views[100_005] = { m in
             guard let policy = m.args.raw(0) as? LayoutPolicy else { return AnyView(ChildrenView(m)) }
@@ -563,17 +584,36 @@ private struct KotlinTabs: View {
 
     var body: some View {
         let _ = m.version
-        TabView(selection: $selection) {
+        customized(TabView(selection: $selection) {
             ForEach(m.children, id: \.nodeId) { child in
                 if child.kind == 100_059 {
                     TabSection(child.args.string(0)) {
                         ForEach(child.children, id: \.nodeId) { kotlinTab($0) }
                     }
+                    .customizationID(child.args.stringOpt(1) ?? child.args.string(0))
                 } else {
                     kotlinTab(child)
                 }
             }
+        })
+    }
+
+    /// `tabViewCustomization` bound to the Kotlin JSON (TabViewCustomization is Codable).
+    @ViewBuilder private func customized(_ view: some View) -> some View {
+        #if os(iOS) || os(macOS) || os(visionOS)
+        if !m.args.isNil(3) {
+            let report = m.args.callback(3, box: { (s: String) -> Any? in s })
+            view.tabViewCustomization(Binding(get: {
+                m.args.stringOpt(2).flatMap { try? JSONDecoder().decode(TabViewCustomization.self, from: Data($0.utf8)) } ?? TabViewCustomization()
+            }, set: { value in
+                if let data = try? JSONEncoder().encode(value) { report(String(decoding: data, as: UTF8.self)) }
+            }))
+        } else {
+            view
         }
+        #else
+        view
+        #endif
     }
 }
 
@@ -605,9 +645,10 @@ private func kotlinTab(_ c: NodeModel) -> some TabContent<AnyHashable> {
     let role = d_TabRole(c.args.expr(3))
     let badge = c.args.stringOpt(4).map { Text($0) }
     if let symbol = c.args.stringOpt(1) {
-        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge)
+        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge).customizationID(c.args.stringOpt(5) ?? c.args.string(0))
     } else {
         Tab(c.args.string(0), image: "", value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge)
+            .customizationID(c.args.stringOpt(5) ?? c.args.string(0))
     }
 }
 
@@ -798,7 +839,7 @@ struct KotlinTabView: View {
     var body: some View {
         // The iOS 18 Tab API carries sections and roles; plain tabs keep the older tabItem form.
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *),
-           m.children.contains(where: { $0.kind == 100_059 || ($0.kind == 100_009 && !$0.args.isNil(3)) }) {
+           !m.args.isNil(3) || m.children.contains(where: { $0.kind == 100_059 || ($0.kind == 100_009 && !$0.args.isNil(3)) }) {
             KotlinTabs(m: m, selection: $selection)
                 .onChange(of: kotlinSelection) { _, new in selection = new }
                 .onChange(of: selection) { _, new in

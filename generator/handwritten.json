@@ -195,7 +195,7 @@
     "HelpLink.init(anchor:": "HelpLink(destination) (generated)",
     "SymbolEffectTransition.init(": "Modifier.contentTransition(ContentTransition.symbolEffect) (generated)",
     "ProjectionTransform.init(": "Modifier.rotation3DEffect / transformEffect(CGAffineTransform)",
-    "View.tabViewCustomization(": "TabView(selection) { Tab } (Kotlin-held tab order)",
+    "View.tabViewCustomization(": "TabView(selection, onSelectionChange, customization, onCustomizationChange)",
     "View.lineHeight(": "Modifier.lineHeight(LineHeight)",
     "Slider.init(value:in:neutralValue:enabledBounds:label:currentValueLabel:minimumValueLabel:maximumValueLabel:ticks:": "Slider(title, value, bounds, ticks, onValueChange, neutralValue)",
     "ArrangementView.init(_:)": "Modifier.arrangementViewStyle { StyleLabel(); StyleContent() }",
@@ -360,7 +360,9 @@
     "RefreshAction.callAsFunction()": "EnvironmentReader { env -> env.actions.refresh() }",
     "EnvironmentValues.rename": "EnvironmentReader { env -> env.actions.rename() }",
     "RenameAction.callAsFunction()": "EnvironmentReader { env -> env.actions.rename() }",
-    "DismissAction.callAsFunction()": "EnvironmentReader { env -> env.dismiss() }"
+    "DismissAction.callAsFunction()": "EnvironmentReader { env -> env.dismiss() }",
+    "ScaledMetric.init(": "ScaledMetric(value, relativeTo) { scaled -> }",
+    "TabContent.customizationID(": "Tab(customizationId = …) / TabSection(customizationId = …)"
   },
   "not_applicable": {
     "init(from:)": "Codable decoding: Kotlin builds values directly",

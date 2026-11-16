@@ -270,6 +270,29 @@ TabView(tab, onSelectionChange = { tab = it }, modifier = Modifier.tabViewStyle(
 }
 ```
 
+On iPad and Mac, users can reorder and hide the tabs of a sidebar-adaptable `TabView` when it has a customization
+(`tabViewCustomization`). Pass it as JSON (SwiftUI's `TabViewCustomization` is `Codable`) and store the string
+wherever you persist settings; `customizationId` names each tab and section in it (the title by default):
+
+```kotlin
+@Composable
+fun CustomizableTabs(saved: String?, onSave: (String) -> Unit) {
+    var tab by remember { mutableStateOf("inbox") }
+    TabView(
+        tab,
+        onSelectionChange = { tab = it },
+        modifier = Modifier.tabViewStyle(TabViewStyle.sidebarAdaptable),
+        customization = saved,
+        onCustomizationChange = onSave,
+    ) {
+        Tab("Inbox", systemImage = SFSymbol.tray, value = "inbox", customizationId = "inbox") { Text("Inbox") }
+        TabSection("Folders", customizationId = "folders") {
+            Tab("Work", systemImage = SFSymbol.folder, value = "work", customizationId = "work") { Text("Work") }
+        }
+    }
+}
+```
+
 ## Toolbars and titles
 
 ### Titles

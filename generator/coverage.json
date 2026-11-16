@@ -66465,8 +66465,8 @@
   "usr": "s:7SwiftUI12ScaledMetricV12wrappedValueACyxGx_tcfc",
   "path": "ScaledMetric.init(wrappedValue:)",
   "kind": "swift.init",
-  "status": "n/a",
-  "detail": "Swift property wrapper: Kotlin state (remember, view models, NamespaceScope) replaces it",
+  "status": "covered",
+  "detail": "hand-written: ScaledMetric(value, relativeTo) { scaled -> }",
   "platforms": [
    "ios",
    "macos",
@@ -66478,8 +66478,8 @@
   "usr": "s:7SwiftUI12ScaledMetricV12wrappedValue10relativeToACyxGx_AA4FontV9TextStyleOtcfc",
   "path": "ScaledMetric.init(wrappedValue:relativeTo:)",
   "kind": "swift.init",
-  "status": "n/a",
-  "detail": "Swift property wrapper: Kotlin state (remember, view models, NamespaceScope) replaces it",
+  "status": "covered",
+  "detail": "hand-written: ScaledMetric(value, relativeTo) { scaled -> }",
   "platforms": [
    "ios",
    "macos",
@@ -82974,8 +82974,8 @@
   "usr": "s:7SwiftUI10TabContentPAAE15customizationIDyQrSSF",
   "path": "TabContent.customizationID(_:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "requirement or default of a Swift protocol adopted by app-defined types",
+  "status": "covered",
+  "detail": "hand-written: Tab(customizationId = \u2026) / TabSection(customizationId = \u2026)",
   "platforms": [
    "ios",
    "macos",
@@ -111068,7 +111068,7 @@
   "path": "View.tabViewCustomization(_:)",
   "kind": "swift.method",
   "status": "covered",
-  "detail": "hand-written: TabView(selection) { Tab } (Kotlin-held tab order)",
+  "detail": "hand-written: TabView(selection, onSelectionChange, customization, onCustomizationChange)",
   "platforms": [
    "ios",
    "macos"

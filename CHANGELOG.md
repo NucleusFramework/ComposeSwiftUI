@@ -27,6 +27,8 @@
 - `PayWithApplePayButton`: `onAuthorize` and `merchantSession` are `suspend`, so the sheet waits for your server.
 - `EnvironmentReader`: `env.actions` (`openURL`, `openWindow`, `dismissWindow`, `openSettings`, `dismissSearch`,
   `refresh`, `rename`), `isSearching`, `increasedContrast`, `supportsMultipleWindows`.
+- `ScaledMetric(24.0) { size -> }` (`@ScaledMetric`), and tab customization: `TabView(customization, onCustomizationChange)`
+  with `Tab(customizationId = …)` / `TabSection(customizationId = …)` (iPad sidebar, Mac).
 - `nativeSuspendFunction { }`: a Kotlin `suspend` function a `NativeView` renderer awaits with `kotlinAwait`.
 
 ### Changed

@@ -9,10 +9,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | Status | Entries |
 |---|---|
 | ✅ generated | 3794 (46.2%) |
-| ☑️ covered | 1258 (15.3%) |
+| ☑️ covered | 1261 (15.3%) |
 | ⛔ rejected | 0 (0.0%) |
 | ➖ skipped | 0 (0.0%) |
-| · n/a | 3168 (38.5%) |
+| · n/a | 3165 (38.5%) |
 | ? unmatched | 0 (0.0%) |
 | **total** | **8220** |
 
@@ -20,9 +20,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Kind | ✅ | ☑️ | ⛔ | ➖ | · | ? |
 |---|---|---|---|---|---|---|
-| method | 1181 | 887 | 0 | 0 | 1063 | 0 |
+| method | 1181 | 888 | 0 | 0 | 1062 | 0 |
 | property | 1152 | 112 | 0 | 0 | 1019 | 0 |
-| init | 586 | 229 | 0 | 0 | 235 | 0 |
+| init | 586 | 231 | 0 | 0 | 233 | 0 |
 | struct | 466 | 5 | 0 | 0 | 474 | 0 |
 | case | 286 | 15 | 0 | 0 | 34 | 0 |
 | protocol | 44 | 0 | 0 | 0 | 78 | 0 |
@@ -821,8 +821,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 ](https://developer.apple.com/documentation/swiftui/tabcontent/contextmenu(menuitems:)) | requirement or default of a Swift protocol adopted by app-defined types |
 | · | method | [func customizationBehavior(TabCustomizationBehavior, for: AdaptableTabBarPlacement...) -> some TabContent<Self.TabValue>
 ](https://developer.apple.com/documentation/swiftui/tabcontent/customizationbehavior(_:for:)) | requirement or default of a Swift protocol adopted by app-defined types |
-| · | method | [func customizationID(String) -> some TabContent<Self.TabValue>
-](https://developer.apple.com/documentation/swiftui/tabcontent/customizationid(_:)) | requirement or default of a Swift protocol adopted by app-defined types |
+| ☑️ | method | [func customizationID(String) -> some TabContent<Self.TabValue>
+](https://developer.apple.com/documentation/swiftui/tabcontent/customizationid(_:)) | hand-written: Tab(customizationId = …) / TabSection(customizationId = …) |
 | · | method | [func defaultSectionExpansion(TabSectionExpansion) -> some TabContent<Self.TabValue>
 ](https://developer.apple.com/documentation/swiftui/tabcontent/defaultsectionexpansion(_:)) | requirement or default of a Swift protocol adopted by app-defined types |
 | ✅ | struct | [TabSectionExpansion](https://developer.apple.com/documentation/swiftui/tabsectionexpansion) | Kotlin value class (1/1 overloads bridged) |
@@ -864,7 +864,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | method | [func accessibilityValue(_:isEnabled:)](https://developer.apple.com/documentation/swiftui/tabcontent/accessibilityvalue(_:isenabled:)) | requirement or default of a Swift protocol adopted by app-defined types |
 | · | struct | [AnyTabContent](https://developer.apple.com/documentation/swiftui/anytabcontent) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
 | · | init | [init<T>(T)](https://developer.apple.com/documentation/swiftui/anytabcontent/init(_:)) | value handed to Swift closures (proxies, contexts, configurations): hand-written APIs expose what views need |
-| ☑️ | method | [func tabViewCustomization(Binding<TabViewCustomization>?) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewcustomization(_:)) | hand-written: TabView(selection) { Tab } (Kotlin-held tab order) |
+| ☑️ | method | [func tabViewCustomization(Binding<TabViewCustomization>?) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewcustomization(_:)) | hand-written: TabView(selection, onSelectionChange, customization, onCustomizationChange) |
 | ✅ | struct | [TabViewCustomization](https://developer.apple.com/documentation/swiftui/tabviewcustomization) | Kotlin value class (1/1 overloads bridged) |
 | · | struct | [TabViewCustomization.SectionCustomization](https://developer.apple.com/documentation/swiftui/tabviewcustomization/sectioncustomization) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
 | · | property | [var tabOrder: [String]?](https://developer.apple.com/documentation/swiftui/tabviewcustomization/sectioncustomization/taborder) | instance property / subscript (read side, not a view-building API) |
@@ -1979,7 +1979,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | method | [func tabBarMinimizeBehavior(TabBarMinimizeBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/tabbarminimizebehavior(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func tabViewBottomAccessory<Content>(content: () -> Content) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewbottomaccessory(content:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func tabViewBottomAccessory<Content>(isEnabled: Bool, content: () -> Content) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewbottomaccessory(isenabled:content:)) | modifier (1/1 overloads bridged) |
-| ☑️ | method | [func tabViewCustomization(Binding<TabViewCustomization>?) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewcustomization(_:)) | hand-written: TabView(selection) { Tab } (Kotlin-held tab order) |
+| ☑️ | method | [func tabViewCustomization(Binding<TabViewCustomization>?) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewcustomization(_:)) | hand-written: TabView(selection, onSelectionChange, customization, onCustomizationChange) |
 | ✅ | method | [func tabViewSearchActivation(TabSearchActivation) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewsearchactivation(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func tabViewSidebarHeader<Content>(content: () -> Content) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewsidebarheader(content:)) | modifier (1/1 overloads bridged) |
 | ✅ | method | [func tabViewSidebarFooter<Content>(content: () -> Content) -> some View](https://developer.apple.com/documentation/swiftui/view/tabviewsidebarfooter(content:)) | modifier (1/1 overloads bridged) |
@@ -4223,8 +4223,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [var isAccessibilitySize: Bool](https://developer.apple.com/documentation/swiftui/dynamictypesize/isaccessibilitysize) | instance property / subscript (read side, not a view-building API) |
 | · | init | [init?(UIContentSizeCategory)](https://developer.apple.com/documentation/swiftui/dynamictypesize/init(_:)) | conversion from UIKit / AppKit types |
 | · | struct | [ScaledMetric](https://developer.apple.com/documentation/swiftui/scaledmetric) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
-| · | init | [init(wrappedValue: Value)](https://developer.apple.com/documentation/swiftui/scaledmetric/init(wrappedvalue:)) | Swift property wrapper: Kotlin state (remember, view models, NamespaceScope) replaces it |
-| · | init | [init(wrappedValue: Value, relativeTo: Font.TextStyle)](https://developer.apple.com/documentation/swiftui/scaledmetric/init(wrappedvalue:relativeto:)) | Swift property wrapper: Kotlin state (remember, view models, NamespaceScope) replaces it |
+| ☑️ | init | [init(wrappedValue: Value)](https://developer.apple.com/documentation/swiftui/scaledmetric/init(wrappedvalue:)) | hand-written: ScaledMetric(value, relativeTo) { scaled -> } |
+| ☑️ | init | [init(wrappedValue: Value, relativeTo: Font.TextStyle)](https://developer.apple.com/documentation/swiftui/scaledmetric/init(wrappedvalue:relativeto:)) | hand-written: ScaledMetric(value, relativeTo) { scaled -> } |
 | · | property | [var wrappedValue: Value](https://developer.apple.com/documentation/swiftui/scaledmetric/wrappedvalue) | instance property / subscript (read side, not a view-building API) |
 | ✅ | protocol | [TextVariantPreference](https://developer.apple.com/documentation/swiftui/textvariantpreference) | Kotlin interface (1/1 overloads bridged) |
 | ✅ | property | [static var fixed: FixedTextVariant](https://developer.apple.com/documentation/swiftui/textvariantpreference/fixed) | value member of FixedTextVariant (1/1 overloads bridged) |

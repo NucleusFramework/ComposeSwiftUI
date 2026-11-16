@@ -23,6 +23,7 @@ internal object ExtraIds {
     const val STYLED_TEXT = 100_007
     const val TAB_VIEW = 100_008
     const val TAB = 100_009
+    const val SCALED_METRIC = 100_066
 
     const val FOCUSED = 100_001
     const val DRAG = 100_002
@@ -557,6 +558,10 @@ public fun <T : Any> NavDisplay(
 /**
  * SwiftUI `TabView(selection:)`: the selected tab is Kotlin state. Each child is a [Tab] whose `value` matches
  * a possible [selection]; tapping a tab calls [onSelectionChange] with that value.
+ *
+ * With [onCustomizationChange], `tabViewCustomization(_:)` (iOS 18 / macOS 15, iPad sidebar and Mac): users reorder
+ * and hide the tabs and sections that have a `customizationId`; the customization travels as its JSON encoding
+ * ([customization], null at first), which you persist like any string.
  */
 @HiddenFromObjC
 @Composable
@@ -564,10 +569,13 @@ public fun <T : Any> TabView(
     selection: T,
     onSelectionChange: (T) -> Unit,
     modifier: Modifier = Modifier,
+    customization: String? = null,
+    onCustomizationChange: ((String) -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
     @Suppress("UNCHECKED_CAST")
-    SwiftView(ExtraIds.TAB_VIEW, listOf(selection, SValueCallback { onSelectionChange(it as T) }), modifier, content = content)
+    SwiftView(ExtraIds.TAB_VIEW, listOf(selection, SValueCallback { onSelectionChange(it as T) }, customization,
+        onCustomizationChange?.let { f -> SValueCallback { f(it as String) } }), modifier, content = content)
 }
 
 /**
@@ -576,14 +584,15 @@ public fun <T : Any> TabView(
  */
 @HiddenFromObjC
 @Composable
-public fun TabSection(title: String, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
-    SwiftView(CompletionIds.TAB_SECTION, listOf(title), modifier, content = content)
+public fun TabSection(title: String, modifier: Modifier = Modifier, customizationId: String? = null, content: @Composable () -> Unit) {
+    SwiftView(CompletionIds.TAB_SECTION, listOf(title, customizationId), modifier, content = content)
 }
 
 /**
  * SwiftUI `Tab(_:systemImage:value:role:)`, for use in a [TabView] or a [TabSection]. [value] is the tag compared
  * with the `TabView` selection; leave it null when the `TabView` has no selection. [role] (`TabRole.search`) needs
- * iOS 18 / macOS 15 / tvOS 18 / watchOS 11; [badge] shows a count or a short text on the tab item.
+ * iOS 18 / macOS 15 / tvOS 18 / watchOS 11; [badge] shows a count or a short text on the tab item; [customizationId]
+ * (`customizationID(_:)`, the title by default) identifies the tab in the [TabView]'s customization.
  */
 @HiddenFromObjC
 @Composable
@@ -594,9 +603,10 @@ public fun Tab(
     modifier: Modifier = Modifier,
     role: TabRole? = null,
     badge: String? = null,
+    customizationId: String? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(ExtraIds.TAB, listOf(title, systemImage?.name, value, role, badge), modifier, content = content)
+    SwiftView(ExtraIds.TAB, listOf(title, systemImage?.name, value, role, badge, customizationId), modifier, content = content)
 }
 
 // ---- mixed-style text ----------------------------------------------------------------------------
@@ -820,3 +830,14 @@ public infix fun SearchSuggestionsPlacement.Set.union(other: SearchSuggestionsPl
 /** SwiftUI `SearchSuggestionsPlacement.Set.union(_:)`. */
 @HiddenFromObjC
 public operator fun SearchSuggestionsPlacement.Set.plus(other: SearchSuggestionsPlacement.Set): SearchSuggestionsPlacement.Set = union(other)
+
+/**
+ * SwiftUI `@ScaledMetric`: [value] scaled with the user's Dynamic Type size, relative to the [relativeTo] text style
+ * (body by default). Use it for icon sizes, spacing or frames that should grow with the text.
+ */
+@HiddenFromObjC
+@Composable
+public fun ScaledMetric(value: Double, relativeTo: Font.TextStyle? = null, content: @Composable (scaled: Double) -> Unit) {
+    var scaled by remember(value) { mutableStateOf(value) }
+    SwiftView(ExtraIds.SCALED_METRIC, listOf(value, relativeTo, SValueCallback { scaled = (it as Number).toDouble() }), Modifier) { content(scaled) }
+}

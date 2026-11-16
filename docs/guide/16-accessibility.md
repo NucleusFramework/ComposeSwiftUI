@@ -305,6 +305,20 @@ private fun DynamicTypeSize.ordinalIndex() = typeSizes.indexOf(this)
 simpler: it picks the first child that fits, without reading the size at all. `EnvironmentReader` reports after the
 first layout pass, so the first composition sees the default size (`large`).
 
+To make a size grow with the text (an icon, a padding, a fixed frame), `ScaledMetric` is SwiftUI's `@ScaledMetric`:
+
+```kotlin
+@Composable
+fun AvatarRow(name: String) {
+    ScaledMetric(32.0, relativeTo = Font.TextStyle.body) { size ->
+        HStack {
+            Image(systemName = SFSymbol("person.crop.circle"), modifier = Modifier.resizable().frame(width = size, height = size))
+            Text(name)
+        }
+    }
+}
+```
+
 To cap or force the size of part of the screen:
 
 ```kotlin
