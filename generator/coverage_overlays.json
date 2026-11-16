@@ -3899,7 +3899,7 @@
   "path": "AppIntentConfiguration.init(kind:intent:provider:content:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -24243,7 +24243,7 @@
   "path": "IntentConfiguration.init(kind:intent:provider:content:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -42880,7 +42880,7 @@
   "path": "RelevanceConfiguration.init(kind:provider:content:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "watchos"
   ]
@@ -46856,7 +46856,7 @@
   "path": "StaticConfiguration.init(kind:provider:content:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63911,7 +63911,7 @@
   "path": "WidgetConfiguration.associatedKind(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "watchos"
   ]
@@ -63921,7 +63921,7 @@
   "path": "WidgetConfiguration.configurationDisplayName(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63933,7 +63933,7 @@
   "path": "WidgetConfiguration.configurationDisplayName(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63945,7 +63945,7 @@
   "path": "WidgetConfiguration.configurationDisplayName(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63957,7 +63957,7 @@
   "path": "WidgetConfiguration.configurationDisplayName(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63969,7 +63969,7 @@
   "path": "WidgetConfiguration.containerBackgroundRemovable(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63981,7 +63981,7 @@
   "path": "WidgetConfiguration.contentMarginsDisabled()",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -63993,7 +63993,7 @@
   "path": "WidgetConfiguration.description(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64005,7 +64005,7 @@
   "path": "WidgetConfiguration.description(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64017,7 +64017,7 @@
   "path": "WidgetConfiguration.description(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64029,7 +64029,7 @@
   "path": "WidgetConfiguration.description(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64041,7 +64041,7 @@
   "path": "WidgetConfiguration.disfavoredLocations(_:for:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "watchos"
@@ -64052,7 +64052,7 @@
   "path": "WidgetConfiguration.onBackgroundURLSessionEvents(matching:_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64064,7 +64064,7 @@
   "path": "WidgetConfiguration.onBackgroundURLSessionEvents(matching:_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64076,7 +64076,7 @@
   "path": "WidgetConfiguration.promptsForUserConfiguration()",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos"
@@ -64087,7 +64087,7 @@
   "path": "WidgetConfiguration.pushHandler(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64099,7 +64099,7 @@
   "path": "WidgetConfiguration.supplementalActivityFamilies(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios"
   ]
@@ -64109,7 +64109,7 @@
   "path": "WidgetConfiguration.supportedFamilies(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios",
    "macos",
@@ -64121,7 +64121,7 @@
   "path": "WidgetConfiguration.supportedMountingStyles(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "widget configuration: the widget extension's Swift entry point",
+  "detail": "widget configuration: the extension's Swift entry point (WidgetKit requires it); its timeline and views come from Kotlin through ComposeTimelineProvider and ComposeWidgetView",
   "platforms": [
    "ios"
   ]

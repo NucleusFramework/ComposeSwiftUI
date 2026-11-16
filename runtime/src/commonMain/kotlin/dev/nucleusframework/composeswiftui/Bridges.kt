@@ -201,3 +201,19 @@ interface TextForIdProvider {
 interface DropOperationProvider {
     fun operation(x: Double, y: Double, itemsCount: Int): Any?
 }
+
+// Widgets and Live Activities whose content is Compose: the widget extension's `Widget` stays a few lines of Swift
+// (WidgetKit requires it), with `ComposeTimelineProvider` and `ComposeWidgetView` from WidgetKit.swift.
+
+/** One widget timeline entry: its date (epoch seconds) and the [input] the Kotlin widget content renders. */
+public class WidgetTimelineEntry(public val date: Double, public val input: String, public val relevance: Double? = null)
+
+/**
+ * A widget timeline returned by Kotlin to `ComposeTimelineProvider`: its [entries] and when WidgetKit asks for the
+ * next one ([reloadAfter] in epoch seconds; null reloads at the end, unless [never]).
+ */
+public class WidgetTimeline(
+    public val entries: List<WidgetTimelineEntry>,
+    public val reloadAfter: Double? = null,
+    public val never: Boolean = false,
+)

@@ -13,6 +13,9 @@
   FamilyControls, FinanceKitUI, ImagePlayground, JournalingSuggestions, GameSave, ClassKitUI, SecurityUI,
   AutomatedDeviceEnrollment, and the CoreLocation / CoreMotion anchors: the SwiftUI APIs these frameworks declare in
   their own module.
+- Widgets written in Kotlin: `WidgetTimeline` from Kotlin, `ComposeTimelineProvider` and `ComposeWidgetView` in
+  WidgetKit.swift (the extension keeps a few-line Swift `@main`).
+- `spatialAnchors(nearbyInteractionSession = …)`: NearbyInteraction origin anchor with an `NISession` created in Kotlin.
 - `recordingEditor` on iOS and tvOS devices, with the tvOS `mode`.
 - Every entry of Apple's SwiftUI documentation index is now generated, bridged or classified in `docs/COVERAGE.md`
   (none left unmatched); visionOS-only APIs are listed as such.

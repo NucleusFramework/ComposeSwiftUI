@@ -1,6 +1,16 @@
 // WidgetKit and ActivityKit view APIs for Compose SwiftUI content shown in widgets and Live Activities (runtime
 // AppFrameworks.kt). Add this file to the target that renders the content and call
-// `ComposeIntegrations.registerWidgetKit()`. Widget and control configurations stay Swift (`Widget`, `ControlWidget`).
+// `ComposeIntegrations.registerWidgetKit()`. The widget's `@main` entry point stays Swift (WidgetKit requires it), but
+// its timeline and views can come from Kotlin:
+//
+//     @main struct WeatherWidget: Widget {
+//         var body: some WidgetConfiguration {
+//             StaticConfiguration(kind: "weather", provider: ComposeTimelineProvider { family in WeatherKt.timeline(family: family) }) { entry in
+//                 ComposeWidgetView(entry) { input, family in WeatherKt.widget(input: input, family: family) }
+//             }
+//             .configurationDisplayName("Weather")
+//         }
+//     }
 #if os(iOS) || os(macOS) || os(watchOS)
 import SwiftUI
 import WidgetKit
@@ -64,6 +74,63 @@ public extension ComposeIntegrations {
         }
         #endif
         return v
+    }
+}
+
+/// A timeline entry carrying the Kotlin input of the widget content.
+public struct ComposeWidgetEntry: TimelineEntry {
+    public let date: Date
+    public let input: String
+    public let relevance: TimelineEntryRelevance?
+}
+
+/// A `TimelineProvider` backed by Kotlin: [timeline] receives the widget family (`WidgetFamily` description, e.g.
+/// "systemSmall") and returns a Kotlin `WidgetTimeline`. The placeholder and snapshot use its first entry.
+public struct ComposeTimelineProvider: TimelineProvider {
+    let timeline: @MainActor (String) -> WidgetTimeline
+
+    public init(_ timeline: @escaping @MainActor (String) -> WidgetTimeline) { self.timeline = timeline }
+
+    @MainActor private func entries(_ context: Context) -> (WidgetTimeline, [ComposeWidgetEntry]) {
+        let t = timeline("\(context.family)")
+        let list = t.entries.map { e in
+            ComposeWidgetEntry(date: Date(timeIntervalSince1970: e.date), input: e.input,
+                               relevance: e.relevance.map { TimelineEntryRelevance(score: Float(truncating: $0)) })
+        }
+        return (t, list)
+    }
+
+    public func placeholder(in context: Context) -> ComposeWidgetEntry {
+        MainActor.assumeIsolated { entries(context).1.first } ?? ComposeWidgetEntry(date: Date(), input: "", relevance: nil)
+    }
+
+    public func getSnapshot(in context: Context, completion: @escaping (ComposeWidgetEntry) -> Void) {
+        Task { @MainActor in completion(entries(context).1.first ?? ComposeWidgetEntry(date: Date(), input: "", relevance: nil)) }
+    }
+
+    public func getTimeline(in context: Context, completion: @escaping (Timeline<ComposeWidgetEntry>) -> Void) {
+        Task { @MainActor in
+            let (t, list) = entries(context)
+            let policy: TimelineReloadPolicy = t.never ? .never : t.reloadAfter.map { .after(Date(timeIntervalSince1970: Double(truncating: $0))) } ?? .atEnd
+            completion(Timeline(entries: list, policy: policy))
+        }
+    }
+}
+
+/// The Compose content of a widget entry: [makeHost] gets the entry's input and the widget family description.
+public struct ComposeWidgetView: View {
+    let entry: ComposeWidgetEntry
+    let makeHost: (String, String) -> ComposeSwiftUIHost
+    @Environment(\.widgetFamily) private var family
+
+    public init(_ entry: ComposeWidgetEntry, _ makeHost: @escaping (String, String) -> ComposeSwiftUIHost) {
+        self.entry = entry
+        self.makeHost = makeHost
+    }
+
+    public var body: some View {
+        let family = "\(family)"
+        ComposeView(input: "\(family)|\(entry.input)") { makeHost(entry.input, family) }
     }
 }
 

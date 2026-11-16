@@ -291,6 +291,19 @@ The other frameworks follow the same pattern:
 | `WidgetKit.swift` | `registerWidgetKit()` | `Modifier.widgetStyle`, `widgetLabel`, `activityStyle`, `controlWidgetText`, `AccessoryWidgetGroup`, `WidgetImage` |
 | `AppServices.swift` | `registerHealthKitUI()`, `registerContactsUI()`, `registerFamilyControls()`, `registerFinanceKitUI()`, `registerAutomatedDeviceEnrollment()`, `registerImagePlayground()`, `registerGameSave()`, `registerClassKitUI()`, `registerSecurityUI()`, `registerJournalingSuggestions()`, `registerSpatialAnchors()` | `Modifier.healthDataAccessRequest`, `ContactAccessButton`, `FamilyActivityPicker`, `AddOrderToWalletButton`, `TransactionPicker`, `Modifier.imagePlaygroundSheet`, `JournalingSuggestionsPicker`, `Modifier.gameSaveSyncingAlert`, `AssignedDocumentLabel`, `Modifier.certificateSheet`… |
 
+Widgets can be written in Kotlin too: the extension keeps its few-line Swift `@main` (WidgetKit requires it), and
+`ComposeTimelineProvider` / `ComposeWidgetView` (WidgetKit.swift) take the timeline and the views from Kotlin:
+
+```swift
+@main struct WeatherWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "weather", provider: ComposeTimelineProvider { family in WeatherKt.timeline(family: family) }) { entry in
+            ComposeWidgetView(entry) { input, family in WeatherKt.widget(input: input, family: family) }
+        }
+    }
+}
+```
+
 A register function exists only on the platforms its framework supports, so call it under the same `#if os(…)`.
 
 Swift-only data stays on the Swift side: map items are coordinates and names, chart values are strings, numbers or
