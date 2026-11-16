@@ -9,10 +9,10 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | Status | Entries |
 |---|---|
 | ✅ generated | 3798 (46.2%) |
-| ☑️ covered | 1200 (14.6%) |
+| ☑️ covered | 1201 (14.6%) |
 | ⛔ rejected | 0 (0.0%) |
 | ➖ skipped | 0 (0.0%) |
-| · n/a | 3222 (39.2%) |
+| · n/a | 3221 (39.2%) |
 | ? unmatched | 0 (0.0%) |
 | **total** | **8220** |
 
@@ -20,7 +20,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Kind | ✅ | ☑️ | ⛔ | ➖ | · | ? |
 |---|---|---|---|---|---|---|
-| method | 1181 | 874 | 0 | 0 | 1076 | 0 |
+| method | 1181 | 875 | 0 | 0 | 1075 | 0 |
 | property | 1152 | 67 | 0 | 0 | 1064 | 0 |
 | init | 586 | 229 | 0 | 0 | 235 | 0 |
 | struct | 470 | 5 | 0 | 0 | 470 | 0 |
@@ -2804,7 +2804,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | method | [func multiSeatDataSharingConsentSheet(isPresented: Binding<Bool>, subscriptionGroupID: String, onCompletion: (Result<Void, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/multiseatdatasharingconsentsheet(ispresented:subscriptiongroupid:oncompletion:)) | not in the 27.2 SDKs (documented for a later release) |
 | · | method | [func multiSeatInvitationBehavior(MultiSeatInvitationBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/multiseatinvitationbehavior(_:)) | not in the 27.2 SDKs (documented for a later release) |
 | · | method | [func multiSeatInvitationSheet(isPresented: Binding<Bool>, subscriptionGroupID: String, onCompletion: (Result<Void, any Error>) -> Void) -> some View](https://developer.apple.com/documentation/swiftui/view/multiseatinvitationsheet(ispresented:subscriptiongroupid:oncompletion:)) | not in the 27.2 SDKs (documented for a later release) |
-| · | method | [func nearbyInteractionOriginAnchor(session: NISession, isEnabled: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/nearbyinteractionoriginanchor(session:isenabled:)) | needs an NISession running with a peer configuration (Swift) |
+| ☑️ | method | [func nearbyInteractionOriginAnchor(session: NISession, isEnabled: Bool) -> some View](https://developer.apple.com/documentation/swiftui/view/nearbyinteractionoriginanchor(session:isenabled:)) | hand-written (NearbyInteraction integration): Modifier.spatialAnchors(nearbyInteractionSession, nearbyInteraction) |
 | · | method | [func toolbarContainerBehavior(ToolbarContainerBehavior) -> some View](https://developer.apple.com/documentation/swiftui/view/toolbarcontainerbehavior(_:)) | not in the 27.2 SDKs (documented for a later release) |
 | · | typealias | [ContentBuilder](https://developer.apple.com/documentation/swiftui/contentbuilder) | type alias / associated type (no runtime surface) |
 | · | struct | [ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |

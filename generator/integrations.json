@@ -410,7 +410,8 @@
     "View.certificateSheet(": "Modifier.certificateSheet(certificates, onDismiss, title, message, helpUrl)",
     "View.automatedDeviceEnrollmentAddition(": "Modifier.automatedDeviceEnrollmentAddition(isPresented, onDismiss)",
     "View.locationHeadingAnchor(": "Modifier.spatialAnchors(locationHeading)",
-    "View.deviceMotionAnchor(": "Modifier.spatialAnchors(deviceMotion)"
+    "View.deviceMotionAnchor(": "Modifier.spatialAnchors(deviceMotion)",
+    "View.nearbyInteractionOriginAnchor(": "Modifier.spatialAnchors(nearbyInteractionSession, nearbyInteraction)"
   },
   "not_applicable": {
     "MapContentBuilder.": "Swift result-builder method",
@@ -549,7 +550,6 @@
     "WidgetBundle.main()": "Swift @main entry point of the widget extension",
     "ControlWidget.main()": "Swift @main entry point of the widget extension",
     "View.journalingSuggestionsPicker(isPresented:journalingSuggestionToken:": "presentation token handed to the app by the system (Swift)",
-    "View.nearbyInteractionOriginAnchor(": "needs an NISession running with a peer configuration (Swift)",
     "View.homeEmbeddedNavigationDestination(": "Home app extension navigation over Swift-typed values"
   },
   "doc_only": {

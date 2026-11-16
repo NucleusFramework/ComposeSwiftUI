@@ -509,9 +509,17 @@ public fun Modifier.automatedDeviceEnrollmentAddition(isPresented: Boolean, onDi
     element(AppFrameworkIds.DEVICE_ENROLLMENT, isPresented, SValueCallback { if (it == false) onDismiss() })
 
 /**
- * CoreLocation `locationHeadingAnchor(manager:isEnabled:)` and CoreMotion `deviceMotionAnchor(manager:isEnabled:)`
- * (iOS 27), with app-wide managers.
+ * CoreLocation `locationHeadingAnchor(manager:isEnabled:)`, CoreMotion `deviceMotionAnchor(manager:isEnabled:)` and
+ * NearbyInteraction `nearbyInteractionOriginAnchor(session:isEnabled:)` (iOS 27.2 devices). Pass the app's own
+ * `CLLocationManager` / `CMMotionManager` (app-wide ones otherwise) and a running `NISession`, created from Kotlin
+ * through the platform interop.
  */
 @HiddenFromObjC
-public fun Modifier.spatialAnchors(locationHeading: Boolean? = null, deviceMotion: Boolean? = null): Modifier =
-    element(AppFrameworkIds.SPATIAL_ANCHORS, locationHeading, deviceMotion)
+public fun Modifier.spatialAnchors(
+    locationHeading: Boolean? = null,
+    deviceMotion: Boolean? = null,
+    locationManager: Any? = null,
+    motionManager: Any? = null,
+    nearbyInteractionSession: Any? = null,
+    nearbyInteraction: Boolean = true,
+): Modifier = element(AppFrameworkIds.SPATIAL_ANCHORS, locationHeading, deviceMotion, locationManager, motionManager, nearbyInteractionSession, nearbyInteraction)

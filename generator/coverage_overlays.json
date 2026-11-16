@@ -60937,8 +60937,8 @@
   "usr": "s:7SwiftUI4ViewP019_NearbyInteraction_aB0E06nearbyE12OriginAnchor7session9isEnabledQrSo9NISessionC_SbtF",
   "path": "View.nearbyInteractionOriginAnchor(session:isEnabled:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "needs an NISession running with a peer configuration (Swift)",
+  "status": "covered",
+  "detail": "hand-written (NearbyInteraction integration): Modifier.spatialAnchors(nearbyInteractionSession, nearbyInteraction)",
   "platforms": [
    "ios"
   ]
