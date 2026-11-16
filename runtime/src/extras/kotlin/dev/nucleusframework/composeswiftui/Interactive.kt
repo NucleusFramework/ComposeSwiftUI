@@ -474,7 +474,7 @@ public fun List(
 
 /**
  * SwiftUI `List(selection: Binding<Set<…>>)`: rows marked `Modifier.tag(key)` can be selected together (on iOS, in
- * edit mode: add an `EditButton`). Single selection is `List(selection, onSelectionChange)`.
+ * edit mode: add an `EditButton`). Single selection is `List(selectedKey, onSelectedKeyChange)`.
  */
 @HiddenFromObjC
 @Composable

@@ -20,6 +20,7 @@ internal object CompletionIds {
     const val MIXED_TOGGLE = 100_055
     const val MIXED_PICKER = 100_056
     const val REQUEST_IMAGE = 100_057
+    const val FORMATTED_TEXT = 100_064
 
     const val GROUP_BOX_STYLE = 100_080
     const val LABELED_CONTENT_STYLE = 100_081
@@ -576,4 +577,23 @@ public fun Gradient.colorSpace(space: Gradient.ColorSpace): AnyGradient =
 @Composable
 public fun Text(text: String, variant: TextVariantPreference, modifier: Modifier = Modifier) {
     SwiftView(CompletionIds.TEXT_VARIANT, listOf(text, variant), modifier)
+}
+
+/**
+ * SwiftUI `Text(_:format:)` for a number (Foundation `FloatingPointFormatStyle`): formatted for the user's locale by
+ * the system (`Text(0.25, NumberFormat.Percent)` shows "25 %" in French) and animatable with
+ * `contentTransition(.numericText())`. [fractionDigits] sets the precision; [grouping] = false drops the thousands
+ * separators of `NumberFormat.Number`.
+ */
+@HiddenFromObjC
+@Composable
+public fun Text(
+    value: Double,
+    format: NumberFormat,
+    modifier: Modifier = Modifier,
+    fractionDigits: IntRange? = null,
+    grouping: Boolean = true,
+) {
+    SwiftView(CompletionIds.FORMATTED_TEXT,
+        listOf(value, listOf(format.kind, fractionDigits?.first, fractionDigits?.last, grouping, format.code)), modifier)
 }

@@ -383,5 +383,5 @@ fun TranslatedReviews(state: ReviewsState) {
 language. The first time a language pair is used, the system may ask the user to download the language. `error` is
 non-null, with an empty list, when the session fails (unsupported pair, download declined).
 
-Only a change of `texts` starts a new translation; changing `source` or `target` alone does not. `preferredStrategy` is
-accepted but not yet forwarded to the Translation session.
+A change of `texts`, `source`, `target` or `preferredStrategy` starts a new translation. `preferredStrategy`
+(`TranslationStrategy.highFidelity` or `lowLatency`) needs iOS / macOS 26.4 and is ignored on earlier versions.

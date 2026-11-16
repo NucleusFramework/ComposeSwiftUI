@@ -438,6 +438,7 @@ private func dragPhase(_ p: Any) -> Int {
         #if os(iOS) || os(macOS)
         ComposeRegistry.views[100_053] = { m in ModChain.apply(SelectionTextFieldView(m: m), m, 0) }
         ComposeRegistry.views[100_054] = { m in ModChain.apply(SelectionTextEditorView(m: m), m, 0) }
+        ComposeRegistry.views[100_064] = { m in ModChain.apply(formattedNumber(m.args), m, 0) }
         #endif
         ComposeRegistry.views[100_055] = { m in
             let report = m.args.callback(2, box: { (v: NSArray) -> Any? in v })
@@ -677,5 +678,31 @@ extension CompletionRenderers {
     case 13: return s.stroke(lineWidth: a.cgFloat(2))
     case 14: return s.stroke(style: d_StrokeStyle(a.expr(2)) ?? StrokeStyle())
     default: return nil
+    }
+}
+
+/// Kotlin `Text(value, NumberFormat)`: [kind, minFraction, maxFraction, grouping, currency code].
+@MainActor private func formattedNumber(_ a: Args) -> Text {
+    let f = a.list(1)
+    func int(_ i: Int) -> Int? { i < f.count ? (f[i] as? NSNumber)?.intValue : nil }
+    let precision: NumberFormatStyleConfiguration.Precision? = switch (int(1), int(2)) {
+    case let (lo?, hi?): .fractionLength(lo...max(lo, hi))
+    case let (lo?, nil): .fractionLength(lo...)
+    case let (nil, hi?): .fractionLength(...hi)
+    default: nil
+    }
+    let value = a.double(0)
+    switch int(0) ?? 0 {
+    case 1:
+        let style = FloatingPointFormatStyle<Double>.Percent()
+        return Text(value, format: precision.map { style.precision($0) } ?? style)
+    case 2:
+        let style = FloatingPointFormatStyle<Double>.Currency(code: f.count > 4 ? f[4] as? String ?? "USD" : "USD")
+        return Text(value, format: precision.map { style.precision($0) } ?? style)
+    default:
+        var style = FloatingPointFormatStyle<Double>.number
+        if let precision { style = style.precision(precision) }
+        if (f.count > 3 ? (f[3] as? NSNumber)?.boolValue : true) == false { style = style.grouping(.never) }
+        return Text(value, format: style)
     }
 }

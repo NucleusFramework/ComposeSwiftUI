@@ -187,7 +187,8 @@ VStack(modifier = Modifier.environment(colorScheme = ColorScheme.dark).environme
 
 To read SwiftUI environment values in Kotlin, place an `EnvironmentReader`. Its content receives a
 `SwiftUIEnvironment` with `colorScheme`, `dynamicTypeSize`, `horizontalSizeClass`, `verticalSizeClass`, `locale`,
-`layoutDirection`, `isEnabled`, `isPresented` and `dismiss`:
+`layoutDirection`, `isEnabled`, `isPresented`, `dismiss`, `scenePhase` and the accessibility preferences
+(`reduceMotion`, `reduceTransparency`, `differentiateWithoutColor`, `invertColors`, `voiceOverEnabled`, `boldText`):
 
 ```kotlin
 @Composable
@@ -236,16 +237,28 @@ fun SearchResults(query: String, search: suspend (String) -> List<String>) {
 
 | SwiftUI | Compose SwiftUI |
 |---|---|
-| `.task { await load() }` | `LaunchedEffect(Unit) { load() }` |
-| `.task(id: query) { … }` | `LaunchedEffect(query) { … }` |
+| `.task { await load() }` | `Modifier.task { load() }`, or `LaunchedEffect(Unit) { load() }` |
+| `.task(id: query) { … }` | `Modifier.task(id = query) { … }`, or `LaunchedEffect(query) { … }` |
 | `.onChange(of: value) { old, new in … }` | `LaunchedEffect(value) { … }`, or `snapshotFlow { value }` in a coroutine |
 | `.onAppear { }`, `.onDisappear { }` | `Modifier.onAppear { }`, `Modifier.onDisappear { }` |
 | cleanup in `.onDisappear` | `DisposableEffect(key) { onDispose { } }` |
 | `Task { }` from a button | `val scope = rememberCoroutineScope()`, then `scope.launch { }` |
 
-The generated `Modifier.task { }` and `Modifier.onChange(value) { }` exist too, but their Kotlin lambdas are plain
-(non-suspending) callbacks. Prefer `LaunchedEffect` for asynchronous work: it is cancelled and restarted by Compose,
-without a round trip through Swift.
+`Modifier.task { }` takes a `suspend` lambda and follows SwiftUI's rules: the coroutine starts when the view appears
+and is cancelled when it disappears (Swift task cancellation cancels the coroutine), and `task(id = key)` restarts it
+when `key` changes. `LaunchedEffect` follows the composition instead (next section). Use `task` for work tied to what
+is on screen, `LaunchedEffect` for work tied to the composable's life:
+
+```kotlin
+@Composable
+fun LiveScore(matchId: String, scores: (String) -> kotlinx.coroutines.flow.Flow<String>) {
+    var score by remember { mutableStateOf("–") }
+    // Collects only while the text is visible, even inside an unselected tab.
+    Text(score, modifier = Modifier.task(id = matchId) { scores(matchId).collect { score = it } })
+}
+```
+
+The generated `Modifier.onChange(value) { }` exists too; `LaunchedEffect(value)` is usually simpler.
 
 ### Composition is not visibility
 
@@ -277,9 +290,18 @@ A `ComposeView` owns one composition:
 3. When the `ComposeView` leaves the hierarchy, the composition is disposed: `DisposableEffect`s run `onDispose`,
    coroutines are cancelled, and its view models are cleared.
 
-The app's scene phase (active, inactive, background) is not readable from Kotlin directly: `EnvironmentReader` doesn't
-expose it. Pass it from Swift as an input (next section), or observe it in shared Kotlin code through your platform
-layer.
+The app's scene phase (active, inactive, background) is in `EnvironmentReader`:
+
+```kotlin
+@Composable
+fun SyncWhileActive(sync: suspend () -> Unit) {
+    EnvironmentReader { env ->
+        if (env.scenePhase == ScenePhase.active) {
+            LaunchedEffect(Unit) { sync() }   // cancelled when the app goes inactive or to the background
+        }
+    }
+}
+```
 
 ## Passing data from Swift
 
@@ -311,20 +333,20 @@ reads it, recomposing what depends on it:
 
 ```swift
 struct ProfileTab: View {
-    @Environment(\.scenePhase) private var scenePhase
+    @AppStorage("isPro") private var isPro = false
     let userId: String
 
     var body: some View {
-        ComposeView(input: "\(userId)|\(scenePhase == .active)") { ProfileTabKt.profileTab() }
+        ComposeView(input: "\(userId)|\(isPro)") { ProfileTabKt.profileTab() }
     }
 }
 ```
 
 ```kotlin
 fun profileTab() = composeSwiftUI {
-    val (userId, active) = hostInput<String>().split("|")
+    val (userId, pro) = hostInput<String>().split("|")
     Text("User $userId", modifier = Modifier.font(Font.headline))
-    if (active == "true") Text("Online")
+    if (pro == "true") Text("Pro")
 }
 ```
 
@@ -334,17 +356,17 @@ created in Swift (Kotlin classes are `NSObject`s, hence `Hashable`, compared wit
 cleanest way to pass several values:
 
 ```kotlin
-data class ProfileInput(val userId: String, val isActive: Boolean)
+data class ProfileInput(val userId: String, val isPro: Boolean)
 
 fun profileTabTyped() = composeSwiftUI {
     val input = hostInput<ProfileInput>()
     Text("User ${input.userId}")
-    if (input.isActive) Text("Online")
+    if (input.isPro) Text("Pro")
 }
 ```
 
 ```swift
-ComposeView(input: ProfileInput(userId: userId, isActive: scenePhase == .active)) { ProfileTabKt.profileTabTyped() }
+ComposeView(input: ProfileInput(userId: userId, isPro: isPro)) { ProfileTabKt.profileTabTyped() }
 ```
 
 The first composition already sees the initial input.

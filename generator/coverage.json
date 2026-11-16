@@ -20214,8 +20214,8 @@
   "usr": "s:7SwiftUI33DefaultDocumentGroupLaunchActionsV",
   "path": "DefaultDocumentGroupLaunchActions",
   "kind": "swift.struct",
-  "status": "generated",
-  "detail": "Kotlin value class",
+  "status": "n/a",
+  "detail": "type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations)",
   "platforms": [
    "ios",
    "macos"
@@ -20248,7 +20248,7 @@
   "path": "DefaultDocumentGroupLaunchActions.init()",
   "kind": "swift.init",
   "status": "generated",
-  "detail": "value member of DefaultDocumentGroupLaunchActions",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -26985,8 +26985,8 @@
   "usr": "s:7SwiftUI10EditButtonV",
   "path": "EditButton",
   "kind": "swift.struct",
-  "status": "generated",
-  "detail": "Kotlin value class",
+  "status": "n/a",
+  "detail": "type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations)",
   "platforms": [
    "ios"
   ]
@@ -27016,7 +27016,7 @@
   "path": "EditButton.init()",
   "kind": "swift.init",
   "status": "generated",
-  "detail": "value member of EditButton",
+  "detail": "view",
   "platforms": [
    "ios"
   ]
@@ -40070,8 +40070,8 @@
   "usr": "s:7SwiftUI8HelpLinkV",
   "path": "HelpLink",
   "kind": "swift.struct",
-  "status": "generated",
-  "detail": "Kotlin value class",
+  "status": "n/a",
+  "detail": "type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations)",
   "platforms": [
    "macos"
   ]
@@ -40101,7 +40101,7 @@
   "path": "HelpLink.init(action:)",
   "kind": "swift.init",
   "status": "generated",
-  "detail": "value member of HelpLink",
+  "detail": "view",
   "platforms": [
    "macos"
   ]
@@ -40131,7 +40131,7 @@
   "path": "HelpLink.init(destination:)",
   "kind": "swift.init",
   "status": "generated",
-  "detail": "value member of HelpLink",
+  "detail": "view",
   "platforms": [
    "macos"
   ]
@@ -90978,8 +90978,8 @@
   "usr": "s:7SwiftUI10TextEditorV",
   "path": "TextEditor",
   "kind": "swift.struct",
-  "status": "generated",
-  "detail": "Kotlin value class",
+  "status": "n/a",
+  "detail": "type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations)",
   "platforms": [
    "ios",
    "macos"
@@ -91012,7 +91012,7 @@
   "path": "TextEditor.init(text:)",
   "kind": "swift.init",
   "status": "generated",
-  "detail": "value member of TextEditor",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"
@@ -91023,7 +91023,7 @@
   "path": "TextEditor.init(text:selection:)",
   "kind": "swift.init",
   "status": "generated",
-  "detail": "value member of TextEditor",
+  "detail": "view",
   "platforms": [
    "ios",
    "macos"

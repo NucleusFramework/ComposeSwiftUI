@@ -276,7 +276,7 @@ public fun FamilyActivityPicker(
     SwiftView(AppFrameworkIds.FAMILY_ACTIVITY_PICKER, listOf(selection, SValueCallback { onSelectionChange(it as String) }, headerText, footerText), modifier)
 }
 
-/** FamilyControls `familyActivityPicker(title:headerText:footerText:isPresented:selection:)` (iOS / macOS). */
+/** FamilyControls `familyActivityPicker(title:headerText:footerText:isPresented:selection:)` (iOS; `title` needs iOS 26.2). */
 @HiddenFromObjC
 public fun Modifier.familyActivityPicker(
     isPresented: Boolean,

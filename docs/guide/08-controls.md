@@ -238,11 +238,11 @@ selection as a `TextRange` of UTF-16 offsets (iOS 18 / macOS 15; a plain field e
 
 ### Multi-line text
 
-A plain `TextEditor` is built from a `TextEditor` value passed to `TextEditorView`:
+`TextEditor` edits multi-line text:
 
 ```kotlin
 var notes by remember { mutableStateOf("") }
-TextEditorView(TextEditor(notes, onTextChange = { notes = it }), modifier = Modifier.frame(minHeight = 120.0))
+TextEditor(notes, modifier = Modifier.frame(minHeight = 120.0), onTextChange = { notes = it })
 ```
 
 For a few lines, a vertical `TextField` is usually nicer: it has a placeholder and sizes itself.

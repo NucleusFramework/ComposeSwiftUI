@@ -1206,7 +1206,7 @@ public fun Modifier.tableColumnHeaders(visibility: Visibility): Modifier = eleme
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.task(name: String? = null, file: String? = null, line: Int? = null, action: () -> Unit): Modifier = element(565, name, file, line, SAction(action))
+public fun Modifier.task(name: String? = null, file: String? = null, line: Int? = null, action: suspend () -> Unit): Modifier = element(565, name, file, line, SAsyncAction(action))
 
 /**
  * SwiftUI `View.textInputAutocapitalization(_:)`

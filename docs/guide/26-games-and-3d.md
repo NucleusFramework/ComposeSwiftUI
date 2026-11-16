@@ -86,9 +86,9 @@ the view shows an empty scene.
 
 Things to know:
 
-- The scene is created once, when the view first appears, and kept for the life of the view. Changing `sceneFileName`
-  or `sceneClassName` afterwards doesn't load another scene: to switch levels, give the view a new identity, for example
-  `key(level) { SpriteView(sceneFileName = level) }`, or switch scenes inside SpriteKit with `view?.presentScene(_:)`.
+- The scene is created when the view first appears and kept while `sceneFileName` and `sceneClassName` stay the same.
+  Changing either one builds the new scene, so `SpriteView(sceneFileName = level)` switches levels; switching scenes
+  inside SpriteKit with `view?.presentScene(_:)` (for a custom transition) works too.
 - `isPaused` and `preferredFramesPerSecond` apply live.
 - On watchOS, `options` and `debugOptions` are ignored (SwiftUI's watchOS `SpriteView` doesn't take them).
 - Game state that the Kotlin UI needs (score, lives) has to cross from the scene to Kotlin. Keep it in a Kotlin object

@@ -62,14 +62,15 @@ kotlin {
 
 The plugin does three things when the Kotlin Multiplatform plugin is present:
 
-1. Adds `dev.nucleusframework:compose-swiftui` (same version as the plugin) as an `api` dependency of `commonMain`. It
-   brings the Compose runtime, `kotlinx-coroutines-core` and `androidx.lifecycle:lifecycle-viewmodel` with it.
+1. Adds `dev.nucleusframework:compose-swiftui` (same version as the plugin) as an `api` dependency of `commonMain`, or
+   of `appleMain` when the module also has non-Apple targets (Android, JVM…). It brings the Compose runtime, `kotlinx-coroutines-core` and `androidx.lifecycle:lifecycle-viewmodel` with it.
 2. Applies the Compose compiler plugin (`org.jetbrains.kotlin.plugin.compose`). You don't need to declare it; if you
    do, use the same version as Kotlin.
 3. Exports the library from every Apple framework binary, so the Swift renderer can see its classes through your
    framework. You don't need `export(...)` yourself.
 
-Screens are plain Kotlin, so they can live in `commonMain`. Code that touches UIKit or AppKit (`Image(uiImage)`,
+Screens are plain Kotlin, so they can live in `commonMain` (in `appleMain` if the module also targets Android or the
+JVM). Code that touches UIKit or AppKit (`Image(uiImage)`,
 `UIKitView`) goes in `iosMain` / `macosMain`.
 
 ### More platforms
@@ -90,10 +91,25 @@ kotlin {
 ```
 
 The library is published for `iosArm64`, `iosSimulatorArm64`, `iosX64`, `macosArm64`, `macosX64`, `tvosArm64`,
-`tvosSimulatorArm64`, `watchosArm64`, `watchosDeviceArm64` and `watchosSimulatorArm64`, and the plugin adds it to
-`commonMain`. Apply the plugin to a module whose targets are all Apple targets: if your shared module also targets
-Android or the JVM, put the Compose SwiftUI screens in a separate Apple-only module that depends on it and produces
-the framework.
+`tvosSimulatorArm64`, `watchosArm64`, `watchosDeviceArm64` and `watchosSimulatorArm64` only.
+
+### A shared module with Android or JVM targets
+
+You can apply the plugin to a shared module that also targets Android, the JVM or the web. The plugin then adds the
+library to `appleMain` instead of `commonMain` (to each Apple target's main source set if you disabled the default
+hierarchy template), so the other targets still compile. Write the Compose SwiftUI screens in `appleMain` (or
+`iosMain`…); `commonMain` keeps your view models and domain code, shared with Android:
+
+```kts
+kotlin {
+    androidTarget()
+    iosArm64(); iosSimulatorArm64()
+    listOf(iosArm64(), iosSimulatorArm64()).forEach { it.binaries.framework { baseName = "Shared" } }
+}
+```
+
+A separate Apple-only module that depends on the shared one and produces the framework still works, if you prefer to
+keep the SwiftUI screens out of the shared module.
 
 ### Plugin options
 
@@ -106,8 +122,11 @@ composeSwiftUI {
     swiftOutputDir = layout.projectDirectory.dir("../iosApp/ComposeSwiftUI")
     // Kotlin framework imported by the renderer. Default: the baseName of the first Apple framework.
     frameworkName = "Shared"
-    // Library version added to commonMain. Default: the plugin version. Keep them equal.
+    // Library version added to commonMain (appleMain when the module also has non-Apple targets).
+    // Default: the plugin version. Keep them equal.
     libraryVersion = "0.6.0"
+    // Integration files written to ComposeSwiftUIIntegrations, by name without .swift. Default: all of them.
+    integrations.set(listOf("MapKit", "Charts", "StoreKit"))
     // Simulator used to render previews in the IDE. Default: the booted one, else the first iPhone.
     previewDevice = "iPhone 17 Pro"
 }
@@ -134,7 +153,7 @@ iosApp/
     KotlinModule.swift             # @_exported import Shared
     ComposeSwiftUIPreviews.swift   # one #Preview per @Preview function, and ComposeSwiftUIPreviewGallery
     README.txt
-  ComposeSwiftUIIntegrations/      # opt-in framework renderers: add only the ones you use
+  ComposeSwiftUIIntegrations/      # opt-in framework renderers (all, or the `integrations` list)
     MapKit.swift, Charts.swift, StoreKit.swift, PhotosUI.swift, WebKit.swift, AVKit.swift, …
 ```
 
@@ -229,7 +248,9 @@ fun profileScreen() = composeSwiftUI {
 The SwiftUI APIs of other Apple frameworks (MapKit, Swift Charts, StoreKit, PhotosUI, WebKit…) are always present in
 the Kotlin library, but their renderers are opt-in, so your app only links the frameworks it uses. For each framework:
 
-1. Add its file from `ComposeSwiftUIIntegrations/` to the app target (only that file, not the whole folder).
+1. Add its file from `ComposeSwiftUIIntegrations/` to the app target. With the default settings the folder holds every
+   integration, so add only the files you use; if you set `integrations` in the `composeSwiftUI { }` block, the folder
+   holds only those and you can add the whole folder.
 2. Call its register function once at launch, before the first `ComposeView` is shown.
 
 ```swift
@@ -251,9 +272,9 @@ struct MyApp: App {
 ```
 
 A register function only exists on the platforms its framework supports, so wrap the call in the same `#if os(…)` as
-the file (each file's header comment says which platforms it covers). Some files register several frameworks
-separately, for example `SystemServices.swift` (`registerAppIntents()`, `registerDeviceActivity()`, `registerWatchKit()`…)
-and `AppServices.swift` (`registerHealthKitUI()`, `registerContactsUI()`…); you can delete the sections you don't use.
+the file (each file's header comment says which platforms it covers). There is one file per framework
+(`HealthKitUI.swift` for `registerHealthKitUI()`, `AppIntents.swift` for `registerAppIntents()`…); `MusicKit.swift`
+also holds DataDetection.
 
 If you forget to register, the framework's views render as a red "Unsupported view kind" text and its modifiers do
 nothing. The full list of files and functions is in [Apple frameworks](apple-frameworks.md).
@@ -275,6 +296,9 @@ Multiplatform screen, Compose Multiplatform string resources and the preview gal
    `Completions.swift` and `Generated/GenEncoders.swift`, and previews added `ComposeSwiftUIPreviews.swift`.
 4. Since 0.5.0 the integrations are opt-in: if you upgrade from an older version and use maps, charts or StoreKit, add
    their files and register them.
+5. After 0.6.0, `AppServices.swift` and `SystemServices.swift` were split into one file per framework (`HealthKitUI.swift`,
+   `AppIntents.swift`…). The sync deletes the old files: add the new files you use to the target. The register
+   functions are unchanged.
 
 Read the "Changed" sections of the CHANGELOG for source changes, such as the `SFSymbol` type for `systemImage`
 parameters in 0.4.0 or the trailing lambda binding the main closure in 0.5.0.

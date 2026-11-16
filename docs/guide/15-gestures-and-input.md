@@ -358,8 +358,8 @@ HStack {
     Button("Cancel", modifier = Modifier.keyboardShortcut(KeyEquivalent.escape, modifiers = EventModifiers(rawValue = 0))) { }
     Button("Export", modifier = Modifier.keyboardShortcut(
         KeyEquivalent.character("e"),
-        // EventModifiers values are not combinable in Kotlin; use the raw bits (shift 1 shl 17, command 1 shl 20).
-        modifiers = EventModifiers(rawValue = (1 shl 17) or (1 shl 20)),
+        // Swift's [.shift, .command]
+        modifiers = EventModifiers.shift + EventModifiers.command,
     )) { }
 }
 ```
@@ -373,6 +373,7 @@ view has focus.
 ```kotlin
 var hovering by remember { mutableStateOf(false) }
 var inside by remember { mutableStateOf(false) }
+var pointer by remember { mutableStateOf<CGPoint?>(null) }
 VStack {
     Text(
         "Hover me",
@@ -384,8 +385,9 @@ VStack {
     ShapeView(
         Rectangle(),
         fill = if (inside) Color.green else Color.gray,
-        modifier = Modifier.frame(width = 200.0, height = 100.0).onContinuousHover(coordinateSpace = CoordinateSpace.local) { phase ->
+        modifier = Modifier.frame(width = 200.0, height = 100.0).onContinuousHover { phase ->
             inside = phase != HoverPhase.ended
+            pointer = phase.location
         },
     )
 }
@@ -399,11 +401,10 @@ VStack {
 | `pointerStyle(PointerStyle.link)` | macOS 15 |
 | `help("Tooltip")` | tooltip on macOS (and with a pointer on iPadOS) |
 
-Pass the coordinate space explicitly (`CoordinateSpace.local`): two overloads of `onContinuousHover` have a default
-for it, so a call without it is ambiguous. The callback receives `HoverPhase.active(point)` or `HoverPhase.ended`; compare with `HoverPhase.ended` to know
-whether the pointer is inside. The location is carried by the Swift enum and is not exposed as a Kotlin property: if
-you need pointer coordinates, a `dragGesture(minimumDistance = 0.0)` on iOS or a [native view](interop.md) are the
-alternatives.
+The coordinate space defaults to `CoordinateSpace.local`; pass `coordinateSpace = CoordinateSpace.global` (or a
+named space) to change it. The callback receives `HoverPhase.active(point)` or `HoverPhase.ended`: compare with
+`HoverPhase.ended` to know whether the pointer is inside, and read `phase.location` (a `CGPoint?`, null once the
+pointer has left) for its coordinates in that space. `hoverEffect()` without arguments uses `HoverEffect.automatic`.
 
 ## Apple Pencil
 

@@ -523,7 +523,7 @@ public fun Modifier.frame(width: Double? = null, height: Double? = null, alignme
  * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
 @HiddenFromObjC
-public fun Modifier.glassEffect(glass: Glass = Glass.regular, shape: Shape): Modifier = element(283, glass, shape)
+public fun Modifier.glassEffect(glass: Glass = Glass.regular, shape: Shape = DefaultGlassEffectShape()): Modifier = element(283, glass, shape)
 
 /**
  * SwiftUI `View.gridCellColumns(_:)`
@@ -1206,7 +1206,7 @@ public fun Modifier.tabViewStyle(style: TabViewStyle): Modifier = element(560, s
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.task(id: Any, name: String? = null, file: String? = null, line: Int? = null, action: () -> Unit): Modifier = element(564, id, name, file, line, SAction(action))
+public fun Modifier.task(id: Any, name: String? = null, file: String? = null, line: Int? = null, action: suspend () -> Unit): Modifier = element(564, id, name, file, line, SAsyncAction(action))
 
 /**
  * SwiftUI `View.textFieldStyle(_:)`

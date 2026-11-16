@@ -348,14 +348,14 @@ public fun SectorMark(
     annotationContent: (@Composable () -> Unit)? = null,
 ) = mark(6, listOf(angle), listOf(innerRadius.encode(), outerRadius.encode(), angularInset), style, annotation, annotationContent, null, null)
 
-/** The vectorized plots (iOS 18 / macOS 15): one node for many points. */
+/** The plot kinds of [ChartPlot]: one Kotlin node for many points. */
 @HiddenFromObjC
 public enum class PlotKind { bar, line, point, area, rule, rectangle, sector }
 
 /**
- * Swift Charts vectorized plots (`BarPlot`, `LinePlot`, `PointPlot`, `AreaPlot`, `RulePlot`, `RectanglePlot`,
- * `SectorPlot`; iOS 18 / macOS 15) over [data]: each projection maps an item to its value (labels come from the first
- * item). Use the same projections as the mark of the same [kind] (`x`/`y`, ranges, `series`).
+ * The data-driven form of Swift Charts plots (`BarPlot`, `LinePlot`, `PointPlot`, `AreaPlot`, `RulePlot`,
+ * `RectanglePlot`, `SectorPlot`) over [data]: one Kotlin node, which Swift draws as one mark per item (every OS the
+ * marks support). Each projection maps an item to its value (labels come from the first item). Use the same projections as the mark of the same [kind] (`x`/`y`, ranges, `series`).
  */
 @HiddenFromObjC
 @Composable

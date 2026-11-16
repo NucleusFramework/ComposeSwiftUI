@@ -153,11 +153,24 @@ Canvas(modifier = Modifier.frame(width = 120.0, height = 120.0)) {
 }
 ```
 
+Arcs draw rings and pie slices directly:
+
+```kotlin
+@Composable
+fun Ring(progress: Double) {
+    Canvas(modifier = Modifier.frame(width = 100.0, height = 100.0)) {
+        val r = minOf(width, height) / 2 - 6.0
+        stroke(Color.gray.opacity(0.2), lineWidth = 12.0) { arc(width / 2, height / 2, r, 0.0, 360.0, false) }
+        stroke(Color.green, lineWidth = 12.0) { relativeArc(width / 2, height / 2, r, -90.0, 360.0 * progress) }
+        fill(Color.blue.opacity(0.1)) { roundedRect(20.0, 40.0, width - 40.0, 20.0, cornerRadius = 6.0) }
+    }
+}
+```
+
 Gotchas:
 
-- Inside a `Canvas`, paths support `moveTo`, `lineTo`, `quadTo`, `curveTo`, `close`, `rect`, `ellipse` and nested
-  `path { }`. The arc and rounded-rectangle commands are only decoded by `PathShape`: in a canvas they stop the path
-  at that point. Approximate arcs with `curveTo`, or draw a `ShapeView` instead.
+- Inside a `Canvas`, every `PathBuilder` command works, arcs and rounded rectangles included, but in points: radii
+  and corner radii are absolute, not fractions of the shorter side as in a `PathShape`.
 - `onDraw` reads Kotlin values at draw time but is not observed by Compose. Pass state in as parameters (or read it
   into a local `val` before `Canvas`) so a state change recomposes the canvas and SwiftUI redraws it.
 - Images other than SF Symbols, filters, blend modes and resolved symbols are not available in a canvas. For layered

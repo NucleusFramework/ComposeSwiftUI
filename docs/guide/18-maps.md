@@ -69,8 +69,12 @@ fun CityMap(city: CLLocationCoordinate2D) {
 }
 ```
 
-`onPositionChange` is called when a camera move ends (pan, zoom, rotate), always with a `MapCameraPosition.Region`.
-Setting `position` to a new value moves the camera; setting it back to the value the map just reported does nothing.
+`onPositionChange` is called when a user's camera move ends (pan, zoom, rotate). It reports a
+`MapCameraPosition.Camera` when your `position` was a camera or the map is pitched or rotated, so the heading and
+pitch are kept, and a `MapCameraPosition.Region` otherwise. A `userLocation`, `item` or `automatic` position stays as
+you set it (following the user, framing the item or the content) until the user pans the map; only then is it replaced
+by the reported region or camera. Setting `position` to a new value moves the camera; setting it back to the value
+the map just reported does nothing.
 If you pass `position` without `onPositionChange`, the map still moves under the user's fingers, and Kotlin only moves
 it when your value changes.
 

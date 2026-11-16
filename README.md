@@ -246,6 +246,8 @@ simulator or device, for example from a debug menu:
 The SwiftUI views and modifiers of MapKit, Swift Charts and StoreKit are available from Kotlin. Each framework has its
 own renderer file, which the Gradle plugin writes to `iosApp/ComposeSwiftUIIntegrations` next to the renderer. Add
 only the files you need to the app target, so your app links only those frameworks, and register each once at launch.
+To keep only those files in the folder (and add the whole folder), list them in Gradle:
+`composeSwiftUI { integrations.set(listOf("MapKit", "Charts", "StoreKit")) }`.
 
 ```swift
 @main
@@ -291,10 +293,27 @@ The other frameworks follow the same pattern:
 | `Translation.swift` | `registerTranslation()` | `translationPresentation`, `translationTask` |
 | `SpriteKit.swift` | `registerSpriteKit()` | `SpriteView`, `SceneView`, game controller events |
 | `RealityKit.swift` | `registerRealityKit()` | `RealityView` with bundled models, `Modifier.realityViewStyle` |
-| `SystemServices.swift` | `registerAppIntents()`, `registerDeviceActivity()`, `registerWatchKit()`, `registerManagedAppDistribution()`, `registerPermissionKit()`, `registerScreenCaptureKit()`, `registerWorkoutKit()`, `registerDeviceDiscoveryUI()` | `ShortcutsLink`, `DeviceActivityReport`, `NowPlayingView`, `ManagedContentView`, `CommunicationLimitsButton`, `Modifier.recordingEditor`, `Modifier.workoutPreview`, `DevicePicker` |
+| `AppIntents.swift` | `registerAppIntents()` | `ShortcutsLink`, App Intents views |
+| `DeviceActivity.swift` | `registerDeviceActivity()` | `DeviceActivityReport` |
+| `WatchKit.swift` | `registerWatchKit()` | `NowPlayingView` |
+| `ManagedAppDistribution.swift` | `registerManagedAppDistribution()` | `ManagedContentView` |
+| `PermissionKit.swift` | `registerPermissionKit()` | `CommunicationLimitsButton` |
+| `ScreenCaptureKit.swift` | `registerScreenCaptureKit()` | `Modifier.recordingEditor` |
+| `WorkoutKit.swift` | `registerWorkoutKit()` | `Modifier.workoutPreview` |
+| `DeviceDiscoveryUI.swift` | `registerDeviceDiscoveryUI()` | `DevicePicker` |
 | `TipKit.swift` | `registerTipKit()` | `TipView`, `Modifier.popoverTip`, `Modifier.tipStyle`, `Modifier.tipAnchor` |
 | `WidgetKit.swift` | `registerWidgetKit()` | `Modifier.widgetStyle`, `widgetLabel`, `activityStyle`, `controlWidgetText`, `AccessoryWidgetGroup`, `WidgetImage` |
-| `AppServices.swift` | `registerHealthKitUI()`, `registerContactsUI()`, `registerFamilyControls()`, `registerFinanceKitUI()`, `registerAutomatedDeviceEnrollment()`, `registerImagePlayground()`, `registerGameSave()`, `registerClassKitUI()`, `registerSecurityUI()`, `registerJournalingSuggestions()`, `registerSpatialAnchors()` | `Modifier.healthDataAccessRequest`, `ContactAccessButton`, `FamilyActivityPicker`, `AddOrderToWalletButton`, `TransactionPicker`, `Modifier.imagePlaygroundSheet`, `JournalingSuggestionsPicker`, `Modifier.gameSaveSyncingAlert`, `AssignedDocumentLabel`, `Modifier.certificateSheet`… |
+| `HealthKitUI.swift` | `registerHealthKitUI()` | `Modifier.healthDataAccessRequest` |
+| `ContactsUI.swift` | `registerContactsUI()` | `ContactAccessButton`, `Modifier.contactAccessPicker` |
+| `FamilyControls.swift` | `registerFamilyControls()` | `FamilyActivityPicker` |
+| `FinanceKitUI.swift` | `registerFinanceKitUI()` | `AddOrderToWalletButton`, `TransactionPicker` |
+| `AutomatedDeviceEnrollment.swift` | `registerAutomatedDeviceEnrollment()` | `Modifier.automatedDeviceEnrollmentAddition` |
+| `ImagePlayground.swift` | `registerImagePlayground()` | `Modifier.imagePlaygroundSheet` |
+| `GameSave.swift` | `registerGameSave()` | `Modifier.gameSaveSyncingAlert` |
+| `ClassKitUI.swift` | `registerClassKitUI()` | `AssignedDocumentLabel` |
+| `SecurityUI.swift` | `registerSecurityUI()` | `Modifier.certificateSheet` |
+| `JournalingSuggestions.swift` | `registerJournalingSuggestions()` | `JournalingSuggestionsPicker` |
+| `SpatialAnchors.swift` | `registerSpatialAnchors()` | `Modifier.spatialAnchors` |
 
 Widgets can be written in Kotlin too: the extension keeps its few-line Swift `@main` (WidgetKit requires it), and
 `ComposeTimelineProvider` / `ComposeWidgetView` (WidgetKit.swift) take the timeline and the views from Kotlin:

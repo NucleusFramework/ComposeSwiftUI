@@ -350,7 +350,7 @@ public fun SubscriptionOptionGroupSet(
 
 /**
  * StoreKit `SubscriptionOfferView(id:prefersPromotionalIcon:…)` (a product) or `(groupID:visibleRelationship:…)`
- * (the best offer of a group) (iOS 26 / macOS 26).
+ * (the best offer of a group) (iOS 26; not rendered on macOS).
  */
 @HiddenFromObjC
 @Composable

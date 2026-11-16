@@ -41,12 +41,19 @@ private struct TranslationTaskModifier: ViewModifier {
                 }
             }
             .onChange(of: texts, initial: true) { _, _ in
-                if configuration == nil {
-                    configuration = TranslationSession.Configuration(source: source, target: target)
-                } else {
-                    configuration?.invalidate()
-                }
+                if configuration == nil { configuration = Self.configuration(source, target, a.intOpt(3)) } else { configuration?.invalidate() }
             }
+            // A new language pair or strategy needs a new configuration: invalidate() only reruns the same one.
+            .onChange(of: "\(a.stringOpt(1) ?? "")|\(a.stringOpt(2) ?? "")|\(a.intOpt(3) ?? -1)") { _, _ in
+                configuration = Self.configuration(source, target, a.intOpt(3))
+            }
+    }
+
+    private static func configuration(_ source: Locale.Language?, _ target: Locale.Language?, _ strategy: Int?) -> TranslationSession.Configuration {
+        if let strategy, #available(iOS 26.4, macOS 26.4, *) {
+            return TranslationSession.Configuration(source: source, target: target, preferredStrategy: strategy == 1 ? .lowLatency : .highFidelity)
+        }
+        return TranslationSession.Configuration(source: source, target: target)
     }
 }
 #endif

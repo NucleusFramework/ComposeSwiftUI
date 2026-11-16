@@ -126,9 +126,38 @@ extension ComposeGenerated {
         case 6: return d_CGAffineTransform(e)
         case 7: return AdvancedValues.decode(e)
         case 8, 9, 10, 11, 12, 13, 14: return CompletionValues.decode(e)
+        case 15: return OptionSetUnion.decode(e)
         case 5: return KotlinPathShape(commands: Args(expr: e).list(0).compactMap { ($0 as? NSNumber)?.doubleValue })
         default: return ComposeRegistry.values[e.id]?(e)
         }
+    }
+}
+
+
+/// Kotlin `union` / `+` of option set members (value id 15): the type name, then the two operands.
+@MainActor enum OptionSetUnion {
+    static func decode(_ e: SExpr) -> Any? {
+        let a = Args(expr: e)
+        switch a.string(0) {
+        case "Edge.Set": return union(d_Edge_Set, a)
+        case "Axis.Set": return union(d_Axis_Set, a)
+        case "EventModifiers": return union(d_EventModifiers, a)
+        case "HorizontalEdge.Set": return union(d_HorizontalEdge_Set, a)
+        case "VerticalEdge.Set": return union(d_VerticalEdge_Set, a)
+        case "SafeAreaRegions": return union(d_SafeAreaRegions, a)
+        case "ContentShapeKinds": return union(d_ContentShapeKinds, a)
+        case "AccessibilityTraits": return union(d_AccessibilityTraits, a)
+        case "AccessibilityTechnologies": return union(d_AccessibilityTechnologies, a)
+        case "MatchedGeometryProperties": return union(d_MatchedGeometryProperties, a)
+        case "GestureMask": return union(d_GestureMask, a)
+        case "SearchSuggestionsPlacement.Set": return union(d_SearchSuggestionsPlacement_Set, a)
+        default: return nil
+        }
+    }
+
+    private static func union<T: SetAlgebra>(_ decode: (SExpr?) -> T?, _ a: Args) -> T? {
+        guard let x = decode(a.expr(1)), let y = decode(a.expr(2)) else { return decode(a.expr(1)) ?? decode(a.expr(2)) }
+        return x.union(y)
     }
 }
 
@@ -276,6 +305,13 @@ struct EnvironmentReporter: View {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.isPresented) private var isPresented
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+    @Environment(\.accessibilityInvertColors) private var invertColors
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
+    @Environment(\.legibilityWeight) private var legibilityWeight
 
     private var snapshot: [String] {
         var hsc = "", vsc = ""
@@ -285,7 +321,10 @@ struct EnvironmentReporter: View {
         #endif
         return [colorScheme == .dark ? "dark" : "light", String(describing: dynamicTypeSize), hsc, vsc,
                 locale.identifier, layoutDirection == .rightToLeft ? "rightToLeft" : "leftToRight",
-                isEnabled ? "1" : "0", isPresented ? "1" : "0"]
+                isEnabled ? "1" : "0", isPresented ? "1" : "0",
+                scenePhase == .background ? "background" : scenePhase == .inactive ? "inactive" : "active",
+                reduceMotion ? "1" : "0", reduceTransparency ? "1" : "0", differentiateWithoutColor ? "1" : "0",
+                invertColors ? "1" : "0", voiceOverEnabled ? "1" : "0", legibilityWeight == .bold ? "1" : "0"]
     }
 
     var body: some View {
@@ -300,7 +339,7 @@ struct EnvironmentReporter: View {
         let values: [Any] = [s[0] as NSString, s[1] as NSString, s[2].isEmpty ? NSNull() : s[2] as NSString,
                              s[3].isEmpty ? NSNull() : s[3] as NSString, s[4] as NSString, s[5] as NSString,
                              KotlinBoolean(value: s[6] == "1"), KotlinBoolean(value: s[7] == "1"),
-                             ClosureAction { dismiss() }]
+                             ClosureAction { dismiss() }, s[8] as NSString] + s[9...].map { KotlinBoolean(value: $0 == "1") }
         m.args.callback(0, box: { (v: [Any]) -> Any? in v as NSArray })(values)
     }
 }
@@ -337,13 +376,21 @@ struct KotlinLayout: Layout {
 
 @MainActor enum ExtraRenderers {
     static func register() {
-        // NavigationStack(path:) driven by Kotlin; destinations are slots indexed by path position.
+        // NavigationStack(path:) driven by Kotlin; destinations are slots indexed by path position. A
+        // NavigationLink(value:) inside it appends its Kotlin value: Kotlin pushes it and the path is indices again.
         ComposeRegistry.views[100_002] = { m in
             let node = m.node
-            let pop = m.args.callback(1, box: KBox.int)
-            let path = Binding<[Int]>(get: { Array(0..<Int(node.argInt(index: 0))) }, set: { pop($0.count) })
+            let change = m.args.callback(1, box: { (x: Any) -> Any? in x })
+            let path = Binding<[AnyHashable]>(get: { (0..<Int(node.argInt(index: 0))).map { AnyHashable($0) } }, set: { new in
+                if let pushed = new.last?.base as? KHashable { change([pushed.object] as NSArray) } else { change(KBox.int(new.count)) }
+            })
             return ModChain.apply(NavigationStack(path: path) {
-                ChildrenView(m).navigationDestination(for: Int.self) { i in SlotView(model: m.slot(i)) }
+                // Path elements are AnyHashable: indices into the Kotlin destinations, or the value a Kotlin
+                // `NavigationLink(value:)` presents, which the setter above turns into the next index at once.
+                ChildrenView(m)
+                    .navigationDestination(for: AnyHashable.self) { v in
+                        if let i = v.base as? Int { SlotView(model: m.slot(i)) }
+                    }
             }, m, 0)
         }
         ComposeRegistry.views[100_003] = { m in ModChain.apply(EnvironmentReporter(m: m), m, 0) }
@@ -370,7 +417,7 @@ struct KotlinLayout: Layout {
             let title = a.string(0)
             let tab = ZStack { ChildrenView(m) }.tabItem {
                 if a.isNil(1) { Text(verbatim: title) } else { Label(title, systemImage: a.string(1)) }
-            }
+            }.kotlinBadge(a.stringOpt(4).map { Text($0) })
             return a.isNil(2) ? ModChain.apply(tab, m, 0) : ModChain.apply(tab.tag(a.hashable(2)), m, 0)
         }
 
@@ -458,13 +505,37 @@ private struct KotlinTabs: View {
     }
 }
 
+// Tab badges don't exist on tvOS and watchOS.
+private extension View {
+    func kotlinBadge(_ badge: Text?) -> some View {
+        #if os(tvOS) || os(watchOS)
+        self
+        #else
+        self.badge(badge)
+        #endif
+    }
+}
+
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
-@TabContentBuilder<AnyHashable>
+private extension TabContent {
+    func kotlinBadge(_ badge: Text?) -> some TabContent<TabValue> {
+        #if os(tvOS) || os(watchOS)
+        self
+        #else
+        self.badge(badge)
+        #endif
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor @TabContentBuilder<AnyHashable>
 private func kotlinTab(_ c: NodeModel) -> some TabContent<AnyHashable> {
+    let role = d_TabRole(c.args.expr(3))
+    let badge = c.args.stringOpt(4).map { Text($0) }
     if let symbol = c.args.stringOpt(1) {
-        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2)) { ZStack { ChildrenView(c) } }
+        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge)
     } else {
-        Tab(c.args.string(0), image: "", value: c.args.hashable(2)) { ZStack { ChildrenView(c) } }
+        Tab(c.args.string(0), image: "", value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge)
     }
 }
 
@@ -653,7 +724,9 @@ struct KotlinTabView: View {
     }
 
     var body: some View {
-        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *), m.children.contains(where: { $0.kind == 100_059 }) {
+        // The iOS 18 Tab API carries sections and roles; plain tabs keep the older tabItem form.
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *),
+           m.children.contains(where: { $0.kind == 100_059 || ($0.kind == 100_009 && !$0.args.isNil(3)) }) {
             KotlinTabs(m: m, selection: $selection)
                 .onChange(of: kotlinSelection) { _, new in selection = new }
                 .onChange(of: selection) { _, new in

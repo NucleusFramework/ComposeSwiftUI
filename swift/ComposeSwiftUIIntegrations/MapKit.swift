@@ -216,8 +216,14 @@ private struct KotlinMap: View {
             }
             .onMapCameraChange(frequency: .onEnd) { ctx in
                 guard !m.args.isNil(1) else { return }
-                let r = ctx.region
-                let values = [1, r.center.latitude, r.center.longitude, r.span.latitudeDelta, r.span.longitudeDelta]
+                let kind = m.args.isNil(0) ? 0 : Int(MapKitValues.num(m.args.list(0), 0))
+                // A user-location, item or automatic position moves the camera by itself: keep it until the user pans.
+                if [0, 3, 4].contains(kind) && !position.positionedByUser { return }
+                let c = ctx.camera, r = ctx.region
+                // Report a camera when Kotlin uses one or the map is tilted / rotated, a region otherwise.
+                let values: [Double] = kind == 2 || c.pitch != 0 || c.heading != 0
+                    ? [2, c.centerCoordinate.latitude, c.centerCoordinate.longitude, c.distance, c.heading, c.pitch]
+                    : [1, r.center.latitude, r.center.longitude, r.span.latitudeDelta, r.span.longitudeDelta]
                 applied = values
                 m.args.callback(1, box: { (l: [Double]) -> Any? in l.map { KotlinDouble(value: $0) } as NSArray })(values)
             }

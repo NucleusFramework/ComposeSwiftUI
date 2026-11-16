@@ -71,7 +71,7 @@ VStack(alignment = HorizontalAlignment.leading) {
 }
 ```
 
-Combine traits with `union`: `AccessibilityTraits.isButton.union(AccessibilityTraits.isSelected)`. Prefer a real
+Combine traits with `+` (or `union`): `AccessibilityTraits.isButton + AccessibilityTraits.isSelected`. Prefer a real
 `Button` over `onTapGesture` + `isButton`: it is focusable, works with Full Keyboard Access and the tvOS focus engine,
 and gets the right traits for free.
 
@@ -323,34 +323,29 @@ for small fixed-size controls such as tab bar items.
 
 ## Reduce motion and other preferences
 
-SwiftUI's `accessibilityReduceMotion`, `accessibilityReduceTransparency`, `accessibilityDifferentiateWithoutColor`
-and similar environment values are not readable from Kotlin. SwiftUI already adapts its own system animations, but
-your custom `withAnimation`, `phaseAnimator` or `keyframeAnimator` effects keep running. Pass the preference from
-Swift with `ComposeView(input:)` (see [Interop](interop.md)):
-
-```swift
-struct RootView: View {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    var body: some View {
-        // KotlinBoolean (from the Kotlin framework) arrives in Kotlin as a Boolean
-        ComposeView(input: KotlinBoolean(value: reduceMotion)) { MainKt.app() }
-    }
-}
-```
+SwiftUI already adapts its own system animations to Reduce Motion, but your custom `withAnimation`, `phaseAnimator`
+or `keyframeAnimator` effects keep running. `EnvironmentReader` exposes the accessibility preferences: `reduceMotion`,
+`reduceTransparency`, `differentiateWithoutColor`, `invertColors`, `voiceOverEnabled` and `boldText`.
 
 ```kotlin
-fun app() = composeSwiftUI {
-    val reduceMotion = hostInput<Boolean?>() ?: false
+@Composable
+fun ExpandingCard() {
     var expanded by remember { mutableStateOf(false) }
-    Button("Toggle") {
-        withAnimation(if (reduceMotion) null else Animation.spring) { expanded = !expanded }
+    EnvironmentReader { env ->
+        Button(if (expanded) "Collapse" else "Expand") {
+            withAnimation(if (env.reduceMotion) null else Animation.spring) { expanded = !expanded }
+        }
+        if (expanded) {
+            Text("Details", modifier = Modifier.background(
+                if (env.reduceTransparency) Color.gray else Color.gray.opacity(0.3)))
+        }
     }
 }
 ```
 
-`withAnimation(null) { }` applies the change without animation. In a larger app, put the preference in a
-`CompositionLocal` at the root instead of passing it down.
+`withAnimation(null) { }` applies the change without animation. Like every `EnvironmentReader` value, the preferences
+arrive after the first layout pass (the first composition sees `false`). In a larger app, read them once near the
+root and provide them through a `CompositionLocal`.
 
 ## Testing
 

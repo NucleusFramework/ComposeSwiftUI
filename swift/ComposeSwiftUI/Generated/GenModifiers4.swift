@@ -308,8 +308,8 @@ import UniformTypeIdentifiers
         case 564:
             let p2: String = a.isNil(2) ? #fileID : a.string(2)
             let p3: Int = a.isNil(3) ? #line : a.int(3)
-            let p4 = a.action(4)
-            return ModChain.apply(v.task(id: a.hashable(0), name: a.stringOpt(1), file: p2, line: p3, { p4() }), m, i + 1)
+            let p4 = a.asyncAction(4)
+            return ModChain.apply(v.task(id: a.hashable(0), name: a.stringOpt(1), file: p2, line: p3, { await p4() }), m, i + 1)
         case 572:
             if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
                 guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }

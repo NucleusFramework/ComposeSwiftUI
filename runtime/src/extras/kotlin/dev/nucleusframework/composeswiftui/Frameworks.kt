@@ -185,9 +185,15 @@ public class WebViewController {
     public fun goBack() { handle?.invoke(listOf(4)) }
     public fun goForward() { handle?.invoke(listOf(5)) }
 
-    /** Runs JavaScript in the page; [onResult] receives the result as a string, or the error. */
-    public fun evaluateJavaScript(script: String, onResult: (String?) -> Unit = {}) {
-        handle?.invoke(listOf(6, script, SValueCallback { onResult(it as String?) }))
+    /**
+     * Runs JavaScript in the page: [onResult] receives the result as a string (null when the script returns nothing),
+     * [onError] the message of a JavaScript or WebKit error (then [onResult] isn't called).
+     */
+    public fun evaluateJavaScript(script: String, onError: (String) -> Unit = {}, onResult: (String?) -> Unit = {}) {
+        handle?.invoke(listOf(6, script, SValueCallback { v ->
+            val l = v as List<*>
+            if (l[0] == true) onError(l[1] as String) else onResult(l[1] as String?)
+        }))
     }
 
     internal fun update(v: Any?) {
@@ -471,7 +477,8 @@ public enum class TranslationStrategy { highFidelity, lowLatency }
 
 /**
  * Translation `translationTask(source:target:preferredStrategy:action:)`: translates [texts] from [source] to
- * [target] (BCP 47 language codes, null to detect / use the user's language) whenever they change.
+ * [target] (BCP 47 language codes, null to detect / use the user's language) whenever any of them changes.
+ * [preferredStrategy] needs iOS / macOS 26.4 (ignored before).
  */
 @HiddenFromObjC
 public fun Modifier.translationTask(
@@ -548,6 +555,7 @@ public fun SceneView(
 }
 
 // ---- PassKit -----------------------------------------------------------------------------------------------------
+// PassKit's SwiftUI views and modifiers render on iOS only (PassKit.swift): elsewhere they show nothing.
 
 /** PassKit `PayWithApplePayButtonLabel`. */
 @HiddenFromObjC
@@ -922,7 +930,7 @@ public sealed class WorkoutGoal {
 }
 
 /**
- * WorkoutKit `workoutPreview(_:isPresented:)` (iOS 17 / watchOS 10): previews a single-goal workout of the HealthKit
+ * WorkoutKit `workoutPreview(_:isPresented:)` (iOS 17 / watchOS 11): previews a single-goal workout of the HealthKit
  * activity type [activityType] (`HKWorkoutActivityType` raw value, e.g. 37 = running) and sends it to Apple Watch.
  */
 @HiddenFromObjC

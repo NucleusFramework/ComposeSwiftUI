@@ -25,9 +25,10 @@ Almost the whole API lives in `commonMain`, so most screens are written once:
 With the default hierarchy template, Kotlin creates `appleMain`, `iosMain`, `macosMain`, `tvosMain` and `watchosMain`
 for you as soon as the targets are declared.
 
-`commonMain` here means "common to your Apple targets": the library only has Apple targets, and the Gradle plugin adds
-it to `commonMain`. A module that also targets Android or the JVM cannot apply the plugin; keep the shared logic in
-its own module and the Compose SwiftUI screens in an Apple-only module (see [Interop](interop.md)).
+`commonMain` here means "common to your Apple targets": the library only has Apple targets, and in a module whose
+targets are all Apple the Gradle plugin adds it to `commonMain`. In a module that also targets Android or the JVM, the
+plugin adds it to `appleMain` instead: the screens go in `appleMain` and the table's `commonMain` row becomes
+`appleMain` (view models can stay in `commonMain`). See [Interop](interop.md) for both layouts.
 
 ## Availability: compile everywhere, no-op where missing
 

@@ -578,7 +578,7 @@ public fun Modifier.help(text: String): Modifier = element(297, text)
  * Availability: iOS 18.0+, macOS: unavailable (no-op), tvOS 18.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
-public fun Modifier.hoverEffect(effect: CustomHoverEffect = CustomHoverEffect.automatic, isEnabled: Boolean = true): Modifier = element(301, effect, isEnabled)
+public fun Modifier.hoverEffect(effect: CustomHoverEffect, isEnabled: Boolean = true): Modifier = element(301, effect, isEnabled)
 
 /**
  * SwiftUI `View.id(_:)`
@@ -985,7 +985,7 @@ public fun Modifier.privacySensitive(sensitive: Boolean = true): Modifier = elem
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
 @HiddenFromObjC
-public fun Modifier.refreshable(action: () -> Unit): Modifier = element(470, SAction(action))
+public fun Modifier.refreshable(action: suspend () -> Unit): Modifier = element(470, SAsyncAction(action))
 
 /**
  * SwiftUI `View.safeAreaBar(edge:alignment:spacing:content:)`

@@ -232,8 +232,14 @@ Text(
 ```
 
 Option sets (`Edge.Set`, `Axis.Set`…) are classes with the predefined values as constants (`Edge.Set.horizontal`,
-`Edge.Set.all`) and a `rawValue` constructor. There is no union operator, so `[.top, .leading]` is written as a raw
-value or, for a modifier like `padding`, as two modifiers.
+`Edge.Set.all`) and a `rawValue` constructor. Swift's array literal `[.top, .leading]` is written with `+` (or
+`union`): `Edge.Set.top + Edge.Set.leading`. This works for `Edge.Set`, `Axis.Set`, `HorizontalEdge.Set`,
+`VerticalEdge.Set`, `EventModifiers`, `SafeAreaRegions`, `ContentShapeKinds`, `AccessibilityTraits`,
+`AccessibilityTechnologies`, `MatchedGeometryProperties`, `GestureMask` and `SearchSuggestionsPlacement.Set`.
+
+```kotlin
+Text("Inset", modifier = Modifier.padding(Edge.Set.top + Edge.Set.leading, 12.0))
+```
 
 ## ShapeStyle and Color
 
@@ -279,7 +285,6 @@ name derived from the distinguishing label:
 |---|---|
 | `Font.system(size:weight:design:)` with optional weight and design | `Font.systemSize(size, weight, design)` |
 | `Font.custom(_:fixedSize:)` | `Font.customName(name, fixedSize)` |
-| `NavigationLink(value:label:)` with a `Codable` value | `NavigationLinkValue(value) { … }` |
 | `NavigationLink(_:tag:selection:)`, `NavigationLink(_:isActive:)` | `NavigationLinkTag(…)`, `NavigationLinkIsActive(…)` |
 | `Image(_:variableValue:bundle:)` | `ImageVariableValue(name, variableValue)` |
 | `Slider(value:in:step:label:onEditingChanged:)` | `SliderValue(value, bounds, step, onValueChange) { … }` |

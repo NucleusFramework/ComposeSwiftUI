@@ -291,8 +291,8 @@ import UniformTypeIdentifiers
         case 565:
             let p1: String = a.isNil(1) ? #fileID : a.string(1)
             let p2: Int = a.isNil(2) ? #line : a.int(2)
-            let p3 = a.action(3)
-            return ModChain.apply(v.task(name: a.stringOpt(0), file: p1, line: p2, { p3() }), m, i + 1)
+            let p3 = a.asyncAction(3)
+            return ModChain.apply(v.task(name: a.stringOpt(0), file: p1, line: p2, { await p3() }), m, i + 1)
 #if os(macOS)
         case 573:
             if #available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {

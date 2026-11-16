@@ -85,10 +85,14 @@ class Bridge:
 
     def kotlin_encode(self, name):
         k = self.kind
-        if k in ("action", "async_action"):
+        if k == "action":
             return ["SAction(%s)" % name]
-        if k == "optional" and self.inner.kind in ("action", "async_action"):
+        if k == "async_action":
+            return ["SAsyncAction(%s)" % name]
+        if k == "optional" and self.inner.kind == "action":
             return ["%s?.let { SAction(it) }" % name]
+        if k == "optional" and self.inner.kind == "async_action":
+            return ["%s?.let { SAsyncAction(it) }" % name]
         if k == "callback":
             return [self.inner.kotlin_receive(name)]
         if k == "callbackn":
@@ -175,7 +179,7 @@ class Bridge:
         if k in simple:
             return [], simple[k] % (src, i)
         if k == "async_action":
-            return ["let %s = %s.action(%d)" % (var, src, i)], "{ %s() }" % var
+            return ["let %s = %s.asyncAction(%d)" % (var, src, i)], "{ await %s() }" % var
         if k == "callbackn":
             xs = ["x%d" % n for n in range(len(self.params))]
             return ["let %s = %s.callback(%d, box: { (v: NSArray) -> Any? in v })" % (var, src, i)], \
@@ -252,7 +256,7 @@ class Bridge:
             if inner.kind == "value":
                 return [], "%s(%s.expr(%d))" % (inner.swift_type, src, i)
             if inner.kind == "async_action":
-                return ["let %s = %s.actionOpt(%d)" % (var, src, i)], "%s.map { f in { f() } }" % var
+                return ["let %s = %s.isNil(%d) ? nil : %s.asyncAction(%d)" % (var, src, i, src, i)], "%s.map { f in { await f() } }" % var
             raise Unsupported("optional of %s" % inner.kind)
         raise Unsupported("decode %s" % k)
 
@@ -473,7 +477,7 @@ class Classifier:
         is_void = res.kind == "name" and res.name in ("Void", "()")
         if is_void:
             if not t.params:
-                return Bridge("async_action" if t.is_async else "action", "() -> Unit")
+                return Bridge("async_action", "suspend () -> Unit") if t.is_async else Bridge("action", "() -> Unit")
             if len(t.params) == 1 and not t.is_async:
                 inner = self.classify(t.params[0], ctx, top=False)
                 if self.encodable(inner) or not (inner.conv and inner.conv[3] is None) and inner.kind in (

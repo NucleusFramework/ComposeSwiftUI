@@ -235,8 +235,8 @@ import UniformTypeIdentifiers
             return open(p0)
 #endif
         case 470:
-            let p0 = a.action(0)
-            return ModChain.apply(v.refreshable(action: { p0() }), m, i + 1)
+            let p0 = a.asyncAction(0)
+            return ModChain.apply(v.refreshable(action: { await p0() }), m, i + 1)
         case 478:
             guard let p0 = d_EdgeInsets(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.safeAreaPadding(p0), m, i + 1)

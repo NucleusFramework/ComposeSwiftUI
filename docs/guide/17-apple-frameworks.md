@@ -56,7 +56,10 @@ If you forget to register a framework:
    `iosApp/ComposeSwiftUIIntegrations`, one Swift file per framework. If you changed `swiftOutputDir`, the folder is
    its sibling. Like the renderer, it is rewritten on every build: don't edit the files.
 2. Add the files you need to your app target in Xcode (add them as references, without copying, so updates reach
-   you). Don't add the whole folder: you would link every framework.
+   you). By default the folder holds every integration, so don't add the whole folder: you would link every
+   framework. Alternatively, list the ones you use in Gradle; the folder then contains only those files (the others
+   are removed) and you can add the whole folder to the target. An unknown name fails the build with the list of
+   available ones.
 3. Call the register function of each file once at launch, before the first `ComposeView` is shown. `App.init` is the
    natural place.
 
@@ -74,6 +77,12 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup { ComposeView { MainKt.app() } }
     }
+}
+```
+
+```kts
+composeSwiftUI {
+    integrations.set(listOf("MapKit", "Charts", "HealthKitUI"))   // file names without .swift
 }
 ```
 
@@ -128,28 +137,28 @@ entry point. See [Tips and widgets](tips-and-widgets.md).
 | `WebKit.swift` | `registerWebKit()` | iOS 26, macOS 26 | `WebView`, `WebViewController`, `Modifier.webViewStyle` | [Web and sign-in](web-and-sign-in.md) |
 | `AuthenticationServices.swift` | `registerAuthenticationServices()` | all (web authentication: not tvOS; `LocationButton`: iOS, watchOS; `LocalAuthenticationView`: macOS 15) | `SignInWithAppleButton`, passkey and password requests, web authentication sessions, `LocationButton` | [Web and sign-in](web-and-sign-in.md) |
 | `PassKit.swift` | `registerPassKit()` | iOS 16 | `PayWithApplePayButton`, `AddPassToWalletButton`, Pay Later, identity verification | [Payments and Wallet](payments-and-wallet.md) |
-| `AppServices.swift` | `registerFinanceKitUI()` | iOS 17.4 | `AddOrderToWalletButton`, `TransactionPicker` | [Payments and Wallet](payments-and-wallet.md) |
+| `FinanceKitUI.swift` | `registerFinanceKitUI()` | iOS 17.4 | `AddOrderToWalletButton`, `TransactionPicker` | [Payments and Wallet](payments-and-wallet.md) |
 | `TipKit.swift` | `registerTipKit(_ options:)` | iOS 17, macOS 14, tvOS 17, watchOS 10 | `TipView`, `Modifier.popoverTip`, `Modifier.tipStyle`, `Modifier.tipAnchor` | [Tips and widgets](tips-and-widgets.md) |
 | `WidgetKit.swift` | `registerWidgetKit()` | iOS, macOS, watchOS | `Modifier.widgetStyle`, `widgetLabel`, `activityStyle`, `AccessoryWidgetGroup`, `WidgetImage`, `ComposeTimelineProvider` | [Tips and widgets](tips-and-widgets.md) |
 | `Translation.swift` | `registerTranslation()` | iOS 18, macOS 15 | `translationPresentation`, `translationTask` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerAppIntents()` | iOS, macOS, watchOS | `ShortcutsLink` and the App Intents views | [System services](system-services.md) |
-| `SystemServices.swift` | `registerDeviceActivity()` | iOS | `DeviceActivityReport` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerWatchKit()` | watchOS | `NowPlayingView` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerManagedAppDistribution()` | macOS 26.4 | `ManagedContentView` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerPermissionKit()` | iOS 26, macOS 26 | `CommunicationLimitsButton` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerScreenCaptureKit()` | iOS 27, macOS 27, tvOS 27 (SDKs that ship it) | `Modifier.recordingEditor` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerWorkoutKit()` | iOS 17, watchOS 11 | `Modifier.workoutPreview` | [System services](system-services.md) |
-| `SystemServices.swift` | `registerDeviceDiscoveryUI()` | tvOS 16 | `DevicePicker` | [System services](system-services.md) |
-| `AppServices.swift` | `registerHealthKitUI()` | iOS 17, watchOS 10.2 | `Modifier.healthDataAccessRequest` | [System services](system-services.md) |
-| `AppServices.swift` | `registerContactsUI()` | iOS 18 | `ContactAccessButton` | [System services](system-services.md) |
-| `AppServices.swift` | `registerFamilyControls()` | iOS 16 | `FamilyActivityPicker` | [System services](system-services.md) |
-| `AppServices.swift` | `registerAutomatedDeviceEnrollment()` | iOS 18 | `Modifier.automatedDeviceEnrollmentAddition` | [System services](system-services.md) |
-| `AppServices.swift` | `registerImagePlayground()` | iOS 18.1, macOS 15.1 | `Modifier.imagePlaygroundSheet` | [System services](system-services.md) |
-| `AppServices.swift` | `registerJournalingSuggestions()` | iOS 17.2 (SDKs that ship it) | `JournalingSuggestionsPicker` | [System services](system-services.md) |
-| `AppServices.swift` | `registerClassKitUI()` | iOS 27, macOS 27 | `AssignedDocumentLabel` | [System services](system-services.md) |
-| `AppServices.swift` | `registerSecurityUI()` | iOS 27, macOS 27, tvOS 27, watchOS 27 (SDKs that ship it) | `Modifier.certificateSheet` | [System services](system-services.md) |
-| `AppServices.swift` | `registerSpatialAnchors()` | iOS 27.2 (SDKs that ship it) | `Modifier.spatialAnchors` (location heading, device motion, Nearby Interaction) | [System services](system-services.md) |
-| `AppServices.swift` | `registerGameSave()` | iOS 27, macOS 27 | `Modifier.gameSaveSyncingAlert` | [Games and 3D](games-and-3d.md) |
+| `AppIntents.swift` | `registerAppIntents()` | iOS, macOS, watchOS | `ShortcutsLink` and the App Intents views | [System services](system-services.md) |
+| `DeviceActivity.swift` | `registerDeviceActivity()` | iOS | `DeviceActivityReport` | [System services](system-services.md) |
+| `WatchKit.swift` | `registerWatchKit()` | watchOS | `NowPlayingView` | [System services](system-services.md) |
+| `ManagedAppDistribution.swift` | `registerManagedAppDistribution()` | macOS 26.4 | `ManagedContentView` | [System services](system-services.md) |
+| `PermissionKit.swift` | `registerPermissionKit()` | iOS 26, macOS 26 | `CommunicationLimitsButton` | [System services](system-services.md) |
+| `ScreenCaptureKit.swift` | `registerScreenCaptureKit()` | iOS 27, macOS 27, tvOS 27 (SDKs that ship it) | `Modifier.recordingEditor` | [System services](system-services.md) |
+| `WorkoutKit.swift` | `registerWorkoutKit()` | iOS 17, watchOS 11 | `Modifier.workoutPreview` | [System services](system-services.md) |
+| `DeviceDiscoveryUI.swift` | `registerDeviceDiscoveryUI()` | tvOS 16 | `DevicePicker` | [System services](system-services.md) |
+| `HealthKitUI.swift` | `registerHealthKitUI()` | iOS 17, watchOS 10.2 | `Modifier.healthDataAccessRequest` | [System services](system-services.md) |
+| `ContactsUI.swift` | `registerContactsUI()` | iOS 18 | `ContactAccessButton` | [System services](system-services.md) |
+| `FamilyControls.swift` | `registerFamilyControls()` | iOS 16 | `FamilyActivityPicker` | [System services](system-services.md) |
+| `AutomatedDeviceEnrollment.swift` | `registerAutomatedDeviceEnrollment()` | iOS 18 | `Modifier.automatedDeviceEnrollmentAddition` | [System services](system-services.md) |
+| `ImagePlayground.swift` | `registerImagePlayground()` | iOS 18.1, macOS 15.1 | `Modifier.imagePlaygroundSheet` | [System services](system-services.md) |
+| `JournalingSuggestions.swift` | `registerJournalingSuggestions()` | iOS 17.2 (SDKs that ship it) | `JournalingSuggestionsPicker` | [System services](system-services.md) |
+| `ClassKitUI.swift` | `registerClassKitUI()` | iOS 27, macOS 27 | `AssignedDocumentLabel` | [System services](system-services.md) |
+| `SecurityUI.swift` | `registerSecurityUI()` | iOS 27, macOS 27, tvOS 27, watchOS 27 (SDKs that ship it) | `Modifier.certificateSheet` | [System services](system-services.md) |
+| `SpatialAnchors.swift` | `registerSpatialAnchors()` | iOS 27.2 (SDKs that ship it) | `Modifier.spatialAnchors` (location heading, device motion, Nearby Interaction) | [System services](system-services.md) |
+| `GameSave.swift` | `registerGameSave()` | iOS 27, macOS 27 | `Modifier.gameSaveSyncingAlert` | [Games and 3D](games-and-3d.md) |
 | `SpriteKit.swift` | `registerSpriteKit()` | all (game controller events: iOS 26) | `SpriteView`, `SceneView`, `handlesGameControllerEvents` | [Games and 3D](games-and-3d.md) |
 | `RealityKit.swift` | `registerRealityKit()` | iOS 18, macOS 15 | `RealityView` with bundled models, `Modifier.realityViewStyle` | [Games and 3D](games-and-3d.md) |
 
@@ -160,11 +169,11 @@ list every API.
 
 ### Files with several frameworks
 
-`SystemServices.swift` and `AppServices.swift` group many small frameworks, and `MusicKit.swift` holds MusicKit and
-DataDetection. Each framework is a separate `#if` section with its own register function, but the whole file is
-compiled, so it imports every framework it contains. Add the file, then delete the sections of the frameworks you don't
-use, or Xcode links them anyway. Since the plugin rewrites the file on every build, copy it into your project (under
-another name) instead of editing the generated one.
+Each file holds one framework, with two exceptions: `MusicKit.swift` also holds DataDetection, and `SpriteKit.swift`
+covers SpriteKit, SceneKit and GameController. Adding such a file links every framework it imports. (In 0.6.0 and earlier,
+`AppServices.swift` and `SystemServices.swift` grouped many small frameworks; they are now one file per framework, the
+register functions are unchanged, and the plugin deletes the old files on sync: replace them in your target with the
+files you use.)
 
 ## What stays in Swift
 

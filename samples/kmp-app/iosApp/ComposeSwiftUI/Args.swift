@@ -2,6 +2,9 @@ import SwiftUI
 
 /// Typed access to the arguments Kotlin encoded for a view init, a modifier or an expression.
 /// Reads go through Kotlin's typed accessors (`SArgs`): no NSArray bridging, no dynamic casts.
+/// Swift renderers spell "no value" as `NSNull()` (it fits in arrays); Kotlin expects `null`.
+@inline(__always) func kotlinValue(_ v: Any?) -> Any? { v is NSNull ? nil : v }
+
 public struct Args {
     let node: SNode?
     let src: any SArgs
@@ -66,6 +69,26 @@ public struct Args {
         }
     }
 
+    /// A Kotlin `suspend () -> Unit` (`SAsyncAction`): awaiting it runs the coroutine to its end; cancelling the
+    /// Swift task cancels it.
+    public func asyncAction(_ i: Int) -> @Sendable () async -> Void {
+        let action = UncheckedSendable(raw(i) as? SAsyncAction)
+        return {
+            guard let action = action.value else { return }
+            let cancel = UncheckedSendable<SwiftAction?>(nil)
+            await withTaskCancellationHandler {
+                await withCheckedContinuation { (done: CheckedContinuation<Void, Never>) in
+                    Task { @MainActor in
+                        cancel.value = action.start(done: ClosureAction { done.resume() })
+                        ComposeSwiftUIHostKt.flushCompose()
+                    }
+                }
+            } onCancel: {
+                Task { @MainActor in cancel.value?.run() }
+            }
+        }
+    }
+
     public func actionOpt(_ i: Int) -> (() -> Void)? {
         isNil(i) ? nil : action(i)
     }
@@ -74,7 +97,7 @@ public struct Args {
     public func callback<T>(_ i: Int, box: @escaping (T) -> Any? = { $0 }) -> (T) -> Void {
         guard let callback = src.argCallback(index: k(i)) else { return { _ in } }
         return {
-            callback.invoke(value: box($0))
+            callback.invoke(value: kotlinValue(box($0)))
             ComposeSwiftUIHostKt.flushCompose()
         }
     }
@@ -84,14 +107,14 @@ public struct Args {
     public func binding<T>(_ i: Int, read: @escaping (Args, Int) -> T, box: @escaping (T) -> Any?) -> Binding<T> {
         let callback = src.argCallback(index: k(i + 1))
         guard let node = self.node else {
-            // Nested expression (e.g. `TextEditor(text:)` inside `TextEditorView`): not addressable
+            // Nested expression (a binding inside a value argument): not addressable
             // for silent writes, so keep the last written value locally until Kotlin re-renders.
             let cell = BindingBox(read(self, i))
             return Binding(
                 get: { cell.value },
                 set: { newValue in
                     cell.value = newValue
-                    callback?.invoke(value: box(newValue))
+                    callback?.invoke(value: kotlinValue(box(newValue)))
                     ComposeSwiftUIHostKt.flushCompose()
                 }
             )
@@ -107,7 +130,7 @@ public struct Args {
                 return read(Args(node: node, src: node, modifierIndex: nil), i)
             },
             set: { newValue in
-                let boxed = box(newValue)
+                let boxed = kotlinValue(box(newValue))
                 if let modifierIndex {
                     node.setModifierArgSilently(modifierIndex: Int32(modifierIndex), argIndex: Int32(i), value: boxed)
                 } else {
@@ -199,4 +222,10 @@ public struct KHashable: Hashable {
 
     public static func == (lhs: KHashable, rhs: KHashable) -> Bool { lhs.object.isEqual(rhs.object) }
     public func hash(into hasher: inout Hasher) { hasher.combine(object.hash) }
+}
+
+/// Carries a Kotlin object into `@Sendable` closures that only touch it on the main actor.
+final class UncheckedSendable<T>: @unchecked Sendable {
+    var value: T
+    init(_ value: T) { self.value = value }
 }

@@ -127,7 +127,8 @@ works like any other sheet.
 
 The control styles `buttons`, `picker` and `prominentPicker` work everywhere; `compactPicker`, `pagedPicker`,
 `pagedProminentPicker`, the placements, `optionGroupStyle` and `pickerItemShape` need iOS 18 / macOS 15. The
-`redeemCode` button needs macOS 15 on the Mac.
+`redeemCode` button needs macOS 15 on the Mac; on macOS 14 its visibility is ignored and the other buttons
+(`restorePurchases` included) keep theirs.
 
 Use `Modifier.containerBackground(style, ContainerBackgroundPlacement.subscriptionStore)` (or
 `subscriptionStoreHeader`, `subscriptionStoreFullHeight`) to color the store, and
@@ -282,6 +283,8 @@ fun ProGate(content: @Composable (isPro: Boolean) -> Unit) {
   `null` when the user doesn't own it.
 - `subscriptionStatusTask(groupId)` gives one `StoreSubscriptionStatus` per subscription of the user in the group (family
   sharing can add one): the renewal `state`, the latest transaction, `willAutoRenew` and the `autoRenewProductId`.
+  `state` is one of `"subscribed"`, `"expired"`, `"inBillingRetryPeriod"`, `"inGracePeriod"` or `"revoked"`
+  (StoreKit's `Product.SubscriptionInfo.RenewalState` names).
 
 These tasks run while the view is on screen. For app-wide state, keep the result in a shared model (or compute
 entitlements in Swift from `Transaction.currentEntitlements` and pass them to Kotlin).

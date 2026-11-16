@@ -51,7 +51,7 @@ as the page loads, so reading them in a composable recomposes it:
 | `canGoBack`, `canGoForward` | the back-forward list |
 | `load(url)`, `loadHtml(html, baseUrl)` | `load(_:)`, `load(html:baseURL:)` |
 | `reload()`, `stopLoading()`, `goBack()`, `goForward()` | the page navigation methods |
-| `evaluateJavaScript(script) { result -> }` | `callJavaScript(_:)` |
+| `evaluateJavaScript(script, onError) { result -> }` | `callJavaScript(_:)` |
 
 ```kotlin
 @Composable
@@ -76,17 +76,22 @@ fun Browser() {
 The controller attaches when the `WebView` appears; calls made before that are ignored. Keep it in `remember` (or a view
 model) so it survives recompositions.
 
-`evaluateJavaScript` returns the script's result converted to a string. A JavaScript error is delivered to the same
-callback as its localized message, so return a value you can recognize when you need to tell them apart:
+`evaluateJavaScript(script, onError) { result -> }` returns the script's result converted to a string, or `null` when
+the script returns nothing. A JavaScript error goes to `onError` with its localized message instead:
 
 ```kotlin
 @Composable
 fun PageTitleReader(controller: WebViewController) {
     var heading by remember { mutableStateOf<String?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
     Button("Read heading") {
-        controller.evaluateJavaScript("return document.querySelector('h1')?.textContent ?? ''") { heading = it }
+        controller.evaluateJavaScript(
+            "return document.querySelector('h1')?.textContent",
+            onError = { message -> error = message },
+        ) { result -> heading = result }
     }
     heading?.let { Text(it) }
+    error?.let { Text(it, modifier = Modifier.foregroundStyle(Color.red)) }
 }
 ```
 

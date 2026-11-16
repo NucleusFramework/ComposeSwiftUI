@@ -330,9 +330,7 @@ fun TasksWithPath(vm: TasksViewModel) {
     ) {
         List(modifier = Modifier.navigationTitle("Tasks")) {
             for (task in tasks) key(task.id) {
-                Button(action = { path = path + task.id }) {
-                    Text(task.title)
-                }
+                NavigationLink(value = task.id) { Text(task.title) }
             }
             Button("Add and open") {
                 vm.add("New task")
@@ -343,7 +341,8 @@ fun TasksWithPath(vm: TasksViewModel) {
 }
 ```
 
-Appending to `path` pushes; the back button and swipe back call `onPathChange` with the shortened list. The path
+`NavigationLink(value = task.id)` pushes its value (`onPathChange` receives `path + task.id`), and assigning `path`
+pushes from code, as "Add and open" does; the back button and swipe back call `onPathChange` with the shortened list. The path
 holds any Kotlin values (ids, sealed route classes). If you use Navigation 3, `NavDisplay(backStack)` does the same
 with a `NavBackStack`; see [Navigation](navigation.md).
 

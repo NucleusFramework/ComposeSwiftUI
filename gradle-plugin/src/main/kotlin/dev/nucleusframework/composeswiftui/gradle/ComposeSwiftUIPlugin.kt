@@ -24,6 +24,7 @@ import org.gradle.api.tasks.TaskProvider
 import org.gradle.work.DisableCachingByDefault
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
@@ -41,7 +42,7 @@ abstract class ComposeSwiftUIExtension {
     /** Kotlin framework imported by the renderer. Default: `baseName` of the first Apple framework. */
     abstract val frameworkName: Property<String>
 
-    /** Library version added to `commonMain`. Default: the plugin version. */
+    /** Library version added to `commonMain` (`appleMain` when the module has non-Apple targets). Default: the plugin version. */
     abstract val libraryVersion: Property<String>
 
     /**
@@ -49,6 +50,13 @@ abstract class ComposeSwiftUIExtension {
      * first available iPhone.
      */
     abstract val previewDevice: Property<String>
+
+    /**
+     * Opt-in framework renderers written to `ComposeSwiftUIIntegrations`, by file name without `.swift`
+     * (`listOf("MapKit", "Charts", "HealthKitUI")`). Default: all of them. Listing only the ones the app uses keeps
+     * the folder free of frameworks it doesn't link, so the whole folder can be added to the target.
+     */
+    abstract val integrations: ListProperty<String>
 }
 
 /**
@@ -66,8 +74,17 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             val kotlin = project.extensions.getByType(KotlinMultiplatformExtension::class.java)
             val coordinates = extension.libraryVersion.map { "dev.nucleusframework:compose-swiftui:$it" }
 
-            kotlin.sourceSets.named("commonMain") { sourceSet ->
-                sourceSet.dependencies { api(coordinates.get()) }
+            // The library is published for Apple targets only: a module that also targets Android or the JVM gets it
+            // in `appleMain` (or each Apple target's main source set without the default hierarchy).
+            project.afterEvaluate {
+                val apple = kotlin.targets.withType(KotlinNativeTarget::class.java).filter { it.konanTarget.family.isAppleFamily }
+                val others = kotlin.targets.filter { it.platformType != KotlinPlatformType.common && it !in apple }
+                val sourceSets = when {
+                    others.isEmpty() -> listOf(kotlin.sourceSets.getByName("commonMain"))
+                    else -> listOfNotNull(kotlin.sourceSets.findByName("appleMain"))
+                        .ifEmpty { apple.map { it.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME).defaultSourceSet } }
+                }
+                sourceSets.forEach { sourceSet -> sourceSet.dependencies { api(coordinates.get()) } }
             }
             kotlin.targets.withType(KotlinNativeTarget::class.java).configureEach { target ->
                 if (target.konanTarget.family.isAppleFamily) {
@@ -86,6 +103,7 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 task.outputDirectory.set(extension.swiftOutputDir.orElse(defaultOutputDir(project)))
                 task.frameworkName.set(extension.frameworkName.orElse(project.provider { firstFrameworkName(kotlin) }))
                 task.previewsSwiftFile.set(previews.flatMap { it.swiftOutputFile })
+                task.integrations.set(extension.integrations)
             }
             // Runs with the KMP Xcode build phase, so the renderer always matches the library version.
             project.tasks.configureEach { task ->
@@ -240,6 +258,11 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
     @get:Input
     val rendererVersion: String = BuildConfig.LIBRARY_VERSION
 
+    /** Integration files to write (names without `.swift`); empty: all. */
+    @get:Input
+    @get:Optional
+    abstract val integrations: ListProperty<String>
+
     @TaskAction
     fun sync() {
         val out = outputDirectory.get().asFile
@@ -262,7 +285,20 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
         }
         // Opt-in framework renderers, next to the renderer: add only the ones the app uses to its target.
         val integrationsOut = out.resolveSibling("ComposeSwiftUIIntegrations")
-        for (rel in all.filter { it.startsWith(INTEGRATIONS) }) {
+        val available = all.filter { it.startsWith(INTEGRATIONS) }
+        val selected = integrations.orNull.orEmpty().toSet()
+        val unknown = selected - available.map { it.removePrefix(INTEGRATIONS).removeSuffix(".swift") }.toSet()
+        if (unknown.isNotEmpty()) {
+            throw GradleException("Unknown Compose SwiftUI integrations $unknown; available: " +
+                available.joinToString { it.removePrefix(INTEGRATIONS).removeSuffix(".swift") })
+        }
+        val written = available.filter { selected.isEmpty() || it.removePrefix(INTEGRATIONS).removeSuffix(".swift") in selected }
+        // Integrations left out of the selection (or from older versions) go away; other files are the user's.
+        val ours = available.map { it.removePrefix(INTEGRATIONS) }.toSet() + RETIRED_INTEGRATIONS
+        integrationsOut.listFiles().orEmpty()
+            .filter { it.name in ours && "$INTEGRATIONS${it.name}" !in written }
+            .forEach { it.delete() }
+        for (rel in written) {
             val bytes = RendererResources.read(rel)
             val target = integrationsOut.resolve(rel.removePrefix(INTEGRATIONS))
             if (!target.exists() || !target.readBytes().contentEquals(bytes)) {
@@ -287,6 +323,9 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
     private companion object {
         const val README = "README.txt"
         const val INTEGRATIONS = "integrations/"
+
+        /** Integration files of older versions, split into one file per framework since. */
+        val RETIRED_INTEGRATIONS = setOf("AppServices.swift", "SystemServices.swift")
     }
 }
 

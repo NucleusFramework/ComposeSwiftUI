@@ -41,6 +41,18 @@ public extension ComposeIntegrations {
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 enum StoreEncoding {
+    /// `RenewalState` by name, as the Kotlin `StoreSubscriptionStatus.state` documents it.
+    static func renewalState(_ s: Product.SubscriptionInfo.RenewalState) -> String {
+        switch s {
+        case .subscribed: return "subscribed"
+        case .expired: return "expired"
+        case .inBillingRetryPeriod: return "inBillingRetryPeriod"
+        case .inGracePeriod: return "inGracePeriod"
+        case .revoked: return "revoked"
+        default: return "unknown(\(s.rawValue))"
+        }
+    }
+
     static func product(_ p: Product) -> NSArray {
         [p.id, p.displayName, p.description, p.displayPrice, KotlinDouble(value: NSDecimalNumber(decimal: p.price).doubleValue),
          p.type.rawValue, (p.subscription?.subscriptionGroupID as Any?) ?? NSNull(), KotlinBoolean(value: p.isFamilyShareable)] as NSArray
@@ -393,7 +405,7 @@ private struct KotlinSubscriptionOfferView: View {
         return c.productDescription(d_Visibility(at(s, 0) as? SExpr) ?? .automatic)
             .storeButton(vis(0), for: .cancellation)
             .storeButton(vis(1), for: .policies)
-            .storeButton(vis(2), for: StoreModifiers.buttonKindList[2])
+            .storeButton(StoreModifiers.redeemCodeAvailable ? vis(2) : vis(3), for: StoreModifiers.buttonKindList[2])
             .storeButton(vis(3), for: .restorePurchases)
             .storeButton(vis(4), for: .signIn)
             .subscriptionStoreButtonLabel(label)
@@ -417,6 +429,9 @@ enum ProductViewStyleKind { case automatic, compact, regular, large }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @MainActor enum StoreModifiers {
     static let buttonLabels: [SubscriptionStoreButtonLabel] = [.automatic, .action, .displayName, .price, .multiline, .singleLine]
+    /// `.redeemCode` needs macOS 15: before, its slot repeats `.restorePurchases` with the restore visibility.
+    static let redeemCodeAvailable: Bool = { if #available(iOS 17.0, macOS 15.0, *) { return true } else { return false } }()
+
     static let buttonKindList: [StoreButtonKind] = {
         if #available(iOS 17.0, macOS 15.0, *) { return [.cancellation, .policies, .redeemCode, .restorePurchases, .signIn] }
         return [.cancellation, .policies, .restorePurchases, .restorePurchases, .signIn]
@@ -750,7 +765,7 @@ private struct StoreTaskModifier: ViewModifier {
                         let list = statuses.map { s -> NSArray in
                             var renewal: Product.SubscriptionInfo.RenewalInfo?
                             if case .verified(let r) = s.renewalInfo { renewal = r }
-                            return [String(describing: s.state), StoreEncoding.transaction(s.transaction),
+                            return [StoreEncoding.renewalState(s.state), StoreEncoding.transaction(s.transaction),
                                     renewal.map { KotlinBoolean(value: $0.willAutoRenew) } ?? NSNull(),
                                     (renewal?.autoRenewPreference as Any?) ?? NSNull()] as NSArray
                         }

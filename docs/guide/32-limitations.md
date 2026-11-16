@@ -117,16 +117,12 @@ collections and key paths. In Kotlin, they take Kotlin lists and lambdas: a loop
 ## Smaller gaps
 
 - **Integers.** Swift's fixed-width integers (`Int8` … `UInt64`) are Kotlin `Int`, truncated on the Swift side.
-- **Option sets** (`Edge.Set`, `Axis.Set`…) have their predefined values and a `rawValue` constructor, but no union
-  operator: combine edges by chaining modifiers or with the raw value.
 - **Values SwiftUI hands to closures** (`GeometryProxy`, `ScrollViewProxy`, `ChartProxy`, layout and style
   configurations) are exposed through hand-written APIs that pass what views need (a size, a `scrollTo`, a value at a
   position), not the full Swift type.
 - **Environment reads.** `EnvironmentReader` exposes the commonly read values (color scheme, Dynamic Type size, size
-  classes, locale, layout direction, enabled and presented state, `dismiss`), and they arrive after the first layout
-  pass.
-- **Single selection.** SwiftUI's `List(selection:)` with a non-optional selection is macOS-only; use
-  `List(selectedKey, onSelectedKeyChange)`, which works on iOS and macOS.
+  classes, locale, layout direction, enabled and presented state, `dismiss`, scene phase, accessibility preferences),
+  and they arrive after the first layout pass.
 
 ## Platform and tooling constraints
 

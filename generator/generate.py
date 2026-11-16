@@ -28,7 +28,14 @@ FIRST_MEMBER_ID = 1000
 
 # Types that stay views only (never Kotlin value classes).
 VIEW_ONLY = {"Text", "Image", "AnyView", "EmptyView", "Namespace", "Never", "TupleView", "ModifiedContent",
-             "Spacer", "Divider", "ProgressView", "Label"}
+             "Spacer", "Divider", "ProgressView", "Label",
+             # views no SwiftUI API takes as a value: composables (`EditButton()`), not `EditButtonView(EditButton())`
+             "EditButton", "TextEditor", "HelpLink", "DefaultDocumentGroupLaunchActions"}
+# Notes on generated APIs whose Swift renderer goes beyond SwiftUI's own availability (hand-written overrides).
+KDOC_NOTES = {
+    "List.init(selection:content:)": "Compose SwiftUI renders it on iOS too: rows tagged with `Modifier.tag(key)` "
+                                     "are selectable (single selection), as with `List(selectedKey, onSelectedKeyChange)`.",
+}
 # Protocols that are never bridged as values.
 PROTO_BLOCKLIST = {"View", "App", "Scene", "Commands", "ToolbarContent", "CustomizableToolbarContent",
                    "DynamicProperty", "PreferenceKey", "EnvironmentKey", "ViewModifier", "Gesture",
@@ -271,6 +278,14 @@ class Generator:
                 for item, vt, kind in p.statics:
                     if item.sym.name == m.group(1) and kind == "pstatic" and item.key not in self.rejected:
                         return "%s.%s" % (p.kt_name, kotlin_name(m.group(1)))
+            # `in shape: some Shape = DefaultGlassEffectShape()`: a conforming value type's argument-less init
+            m = re.match(r"^([A-Za-z_][A-Za-z0-9_]*)\(\)$", d)
+            if m:
+                for vt in self.values.values():
+                    if vt.sym.name == m.group(1) and len(vt.sym.path) == 1:
+                        for item, kind, params, _ in vt.members:
+                            if kind == "init" and item.key not in self.rejected and all(q[3] is not None for q in params):
+                                return "%s()" % vt.kt_name
             return None
         return None
 
@@ -615,6 +630,8 @@ class Generator:
                  " * Availability: %s" % avail_doc(plats)]
         if extra:
             lines.append(" * " + extra)
+        if sym.dotted in KDOC_NOTES:
+            lines.append(" * " + KDOC_NOTES[sym.dotted])
         lines.append(" */")
         if sym.deprecated:
             lines.append('@Deprecated("Deprecated in SwiftUI")')
@@ -755,6 +772,7 @@ class Generator:
             o.add(header)
         seen = set()
         merged_mods = {}
+        defaulted = {}  # (modifier name, required parameters, parameter) -> Kotlin type of the first overload giving it a default
 
         def lsk_m(params):
             return any(b.kind in ("lsk", "lsr", "text") or (b.kind == "optional" and b.inner.kind in ("lsk", "lsr", "text")) for _, _, b, _ in params)
@@ -786,6 +804,18 @@ class Generator:
                 self.status(item.sym, "covered", "duplicate Kotlin signature")
                 continue
             seen.add((mname, types))
+            # Two overloads that differ only by the type of a defaulted parameter (`coordinateSpace: CoordinateSpace =
+            # .local` vs `CoordinateSpaceProtocol = .local`) make a call omitting it ambiguous: the later one keeps
+            # those parameters required.
+            required = tuple((kn, kt) for kn, kt, kd, _ in decls if kd is None)
+            for kn0, kt0, kd0, _ in [d for d in decls if d[2] is not None]:
+                other = defaulted.get((mname, required, kn0))
+                if other is not None and other != kt0:
+                    decls = [(kn, kt, None if kn == kn0 else kd, x) for kn, kt, kd, x in decls]
+            required = tuple((kn, kt) for kn, kt, kd, _ in decls if kd is None)
+            for kn0, kt0, kd0, _ in decls:
+                if kd0 is not None:
+                    defaulted.setdefault((mname, required, kn0), kt0)
             if suffixed:
                 merged_mods.setdefault(base_name, []).append(
                     {"ordered": [(kn, kt, kd) for kn, kt, kd, _ in decls], "encs": encs, "id": item.id})

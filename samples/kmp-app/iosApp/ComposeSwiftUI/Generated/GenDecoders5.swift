@@ -47,7 +47,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1086:
         return AccessoryCircularCapacityGaugeStyle()
-    case 2672:
+    case 2666:
         return .accessoryCircularCapacity
     default: return HandwrittenValues.decode(e) as? AccessoryCircularCapacityGaugeStyle
     }
@@ -173,7 +173,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1189:
         return AutomaticArrangementViewStyle()
-    case 2832:
+    case 2826:
         return .automatic
     default: return HandwrittenValues.decode(e) as? AutomaticArrangementViewStyle
     }
@@ -184,7 +184,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1194:
         return AutomaticLabeledContentStyle()
-    case 2826:
+    case 2820:
         return .automatic
     default: return HandwrittenValues.decode(e) as? AutomaticLabeledContentStyle
     }
@@ -196,7 +196,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1197:
         return AutomaticTextEditorStyle()
-    case 2795:
+    case 2789:
         return .automatic
     default: return HandwrittenValues.decode(e) as? AutomaticTextEditorStyle
     }
@@ -208,7 +208,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1209:
         return BalancedNavigationSplitViewStyle()
-    case 2861:
+    case 2855:
         return .balanced
     default: return HandwrittenValues.decode(e) as? BalancedNavigationSplitViewStyle
     }
@@ -222,9 +222,9 @@ import UniformTypeIdentifiers
         return BorderedListStyle(alternatesRowBackgrounds: a.bool(0))
     case 1238:
         return BorderedListStyle()
-    case 2896:
+    case 2890:
         return .bordered(alternatesRowBackgrounds: a.bool(0))
-    case 2897:
+    case 2891:
         return .bordered
     default: return HandwrittenValues.decode(e) as? BorderedListStyle
     }
@@ -236,7 +236,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1246:
         return BorderlessButtonStyle()
-    case 2836:
+    case 2830:
         return .borderless
     default: return HandwrittenValues.decode(e) as? BorderlessButtonStyle
     }
@@ -262,7 +262,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1269:
         return CheckboxToggleStyle()
-    case 2760:
+    case 2754:
         return .checkbox
     default: return HandwrittenValues.decode(e) as? CheckboxToggleStyle
     }
@@ -336,41 +336,41 @@ import UniformTypeIdentifiers
         return ConcentricRectangle(corners: p0, isUniform: a.bool(1))
     case 1352:
         return ConcentricRectangle()
-    case 2870:
+    case 2864:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         guard let p2 = d_Edge_Corner_Style(a.expr(2)) else { return nil }
         guard let p3 = d_Edge_Corner_Style(a.expr(3)) else { return nil }
         return .rect(topLeadingCorner: p0, topTrailingCorner: p1, bottomLeadingCorner: p2, bottomTrailingCorner: p3)
-    case 2871:
+    case 2865:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         return .rect(uniformTopCorners: p0, uniformBottomCorners: p1)
-    case 2872:
+    case 2866:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         guard let p2 = d_Edge_Corner_Style(a.expr(2)) else { return nil }
         return .rect(uniformTopCorners: p0, bottomLeadingCorner: p1, bottomTrailingCorner: p2)
-    case 2873:
+    case 2867:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         guard let p2 = d_Edge_Corner_Style(a.expr(2)) else { return nil }
         return .rect(uniformBottomCorners: p0, topLeadingCorner: p1, topTrailingCorner: p2)
-    case 2874:
+    case 2868:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         return .rect(uniformLeadingCorners: p0, uniformTrailingCorners: p1)
-    case 2875:
+    case 2869:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         guard let p2 = d_Edge_Corner_Style(a.expr(2)) else { return nil }
         return .rect(uniformLeadingCorners: p0, topTrailingCorner: p1, bottomTrailingCorner: p2)
-    case 2876:
+    case 2870:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         guard let p1 = d_Edge_Corner_Style(a.expr(1)) else { return nil }
         guard let p2 = d_Edge_Corner_Style(a.expr(2)) else { return nil }
         return .rect(uniformTrailingCorners: p0, topLeadingCorner: p1, bottomLeadingCorner: p2)
-    case 2877:
+    case 2871:
         guard let p0 = d_Edge_Corner_Style(a.expr(0)) else { return nil }
         return .rect(corners: p0, isUniform: a.bool(1))
     default: return HandwrittenValues.decode(e) as? ConcentricRectangle
@@ -404,1171 +404,1147 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ControlSize
     }
 }
-#if os(iOS) || os(macOS)
-@available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *)
-@MainActor func d_DefaultDocumentGroupLaunchActions(_ e: SExpr?) -> DefaultDocumentGroupLaunchActions? {
+@MainActor func d_DefaultFocusEvaluationPriority(_ e: SExpr?) -> DefaultFocusEvaluationPriority? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 1407:
-        return DefaultDocumentGroupLaunchActions()
-    default: return HandwrittenValues.decode(e) as? DefaultDocumentGroupLaunchActions
+        return .userInitiated
+    case 1408:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? DefaultFocusEvaluationPriority
     }
 }
-#endif
-@MainActor func d_DefaultListStyle(_ e: SExpr?) -> DefaultListStyle? {
+#if os(macOS)
+@MainActor func d_DefaultMenuButtonStyle(_ e: SExpr?) -> DefaultMenuButtonStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 1414:
-        return DefaultListStyle()
-    case 2893:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? DefaultListStyle
+        return DefaultMenuButtonStyle()
+    default: return HandwrittenValues.decode(e) as? DefaultMenuButtonStyle
     }
 }
-@MainActor func d_DefaultTabViewStyle(_ e: SExpr?) -> DefaultTabViewStyle? {
+#endif
+@MainActor func d_DefaultTextFieldStyle(_ e: SExpr?) -> DefaultTextFieldStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 1420:
-        return DefaultTabViewStyle()
-    case 2770:
+        return DefaultTextFieldStyle()
+    case 2780:
         return .automatic
-    default: return HandwrittenValues.decode(e) as? DefaultTabViewStyle
+    default: return HandwrittenValues.decode(e) as? DefaultTextFieldStyle
     }
 }
-@available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
-@MainActor func d_DeviceHinge_Status(_ e: SExpr?) -> DeviceHinge.Status? {
+@MainActor func d_DialogSeverity(_ e: SExpr?) -> DialogSeverity? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1426:
-        return .partiallyOpen
-    case 1427:
-        return .closed
     case 1428:
-        return .fullyOpen
-    default: return HandwrittenValues.decode(e) as? DeviceHinge.Status
+        return .critical
+    case 1429:
+        return .standard
+    case 1430:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? DialogSeverity
     }
 }
-#if os(iOS) || os(macOS) || os(tvOS)
-@MainActor func d_DoubleColumnNavigationViewStyle(_ e: SExpr?) -> DoubleColumnNavigationViewStyle? {
+#if os(iOS) || os(macOS)
+@available(iOS 26.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *)
+@MainActor func d_DragConfiguration(_ e: SExpr?) -> DragConfiguration? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 1438:
-        return DoubleColumnNavigationViewStyle()
-    default: return HandwrittenValues.decode(e) as? DoubleColumnNavigationViewStyle
+        guard let p0 = d_DragConfiguration_OperationsWithinApp(a.expr(0)) else { return nil }
+        guard let p1 = d_DragConfiguration_OperationsOutsideApp(a.expr(1)) else { return nil }
+        return DragConfiguration(operationsWithinApp: p0, operationsOutsideApp: p1)
+    #if os(macOS)
+    case 1439:
+        return DragConfiguration(allowMove: a.bool(0), allowDelete: a.bool(1))
+    #endif
+    case 1440:
+        return DragConfiguration(allowMove: a.bool(0))
+    default: return HandwrittenValues.decode(e) as? DragConfiguration
     }
 }
 #endif
 #if os(iOS) || os(macOS)
 @available(iOS 26.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *)
-@MainActor func d_DragSession_Phase(_ e: SExpr?) -> DragSession.Phase? {
+@MainActor func d_DropConfiguration(_ e: SExpr?) -> DropConfiguration? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1454:
-        return .dataTransferCompleted
-    case 1455:
-        guard let p0 = d_DropOperation(a.expr(0)) else { return nil }
-        return .ended(p0)
-    case 1456:
-        return .active
-    #if os(iOS)
-    case 1457:
-        guard let p0 = d_DropOperation(a.expr(0)) else { return nil }
-        return .ending(p0)
-    #endif
     case 1458:
-        return .initial
-    default: return HandwrittenValues.decode(e) as? DragSession.Phase
+        guard let p0 = d_DropOperation(a.expr(0)) else { return nil }
+        return DropConfiguration(operation: p0)
+    default: return HandwrittenValues.decode(e) as? DropConfiguration
     }
 }
 #endif
-@MainActor func d_DynamicTypeSize(_ e: SExpr?) -> DynamicTypeSize? {
+@MainActor func d_Edge(_ e: SExpr?) -> Edge? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1480:
-        return .accessibility1
-    case 1481:
-        return .accessibility2
-    case 1482:
-        return .accessibility3
-    case 1483:
-        return .accessibility4
-    case 1484:
-        return .accessibility5
-    case 1485:
-        return .large
-    case 1486:
-        return .small
-    case 1487:
-        return .medium
-    case 1488:
-        return .xLarge
-    case 1489:
-        return .xSmall
-    case 1490:
-        return .xxLarge
     case 1491:
-        return .xxxLarge
-    default: return HandwrittenValues.decode(e) as? DynamicTypeSize
-    }
-}
-@MainActor func d_Edge_Set(_ e: SExpr?) -> Edge.Set? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1518:
-        return .horizontal
-    case 1519:
-        return .all
-    case 1520:
         return .top
-    case 1521:
+    case 1492:
         return .bottom
-    case 1522:
+    case 1493:
         return .leading
-    case 1523:
-        return Edge.Set(rawValue: Int8(truncatingIfNeeded: a.int(0)))
-    case 1524:
+    case 1494:
         return .trailing
-    case 1525:
-        return .vertical
-    case 1526:
-        guard let p0 = d_Edge(a.expr(0)) else { return nil }
-        return Edge.Set(p0)
-    default: return HandwrittenValues.decode(e) as? Edge.Set
+    default: return HandwrittenValues.decode(e) as? Edge
     }
 }
-#if os(watchOS)
-@MainActor func d_EllipticalListStyle(_ e: SExpr?) -> EllipticalListStyle? {
+@MainActor func d_EdgeInsets(_ e: SExpr?) -> EdgeInsets? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1538:
-        return EllipticalListStyle()
-    case 2888:
-        return .elliptical
-    default: return HandwrittenValues.decode(e) as? EllipticalListStyle
+    case 1526:
+        return EdgeInsets(top: a.cgFloat(0), leading: a.cgFloat(1), bottom: a.cgFloat(2), trailing: a.cgFloat(3))
+    case 1527:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_EdgeInsets(a.expr(0)) else { return nil }
+            guard let p0 = d_RectangleCornerInsets(a.expr(1)) else { return nil }
+            guard let p1 = d_Edge_Set(a.expr(2)) else { return nil }
+            return base.inset(by: p0, edges: p1)
+        }
+        return nil
+    case 1528:
+        return EdgeInsets()
+    default: return HandwrittenValues.decode(e) as? EdgeInsets
+    }
+}
+#if os(iOS) || os(macOS)
+@MainActor func d_EmptyCommands(_ e: SExpr?) -> EmptyCommands? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1539:
+        return EmptyCommands()
+    default: return HandwrittenValues.decode(e) as? EmptyCommands
     }
 }
 #endif
-@MainActor func d_EmptyVisualEffect(_ e: SExpr?) -> EmptyVisualEffect? {
+#if os(iOS) || os(macOS)
+@MainActor func d_EnabledTextSelectability(_ e: SExpr?) -> EnabledTextSelectability? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1546:
-        return EmptyVisualEffect()
-    default: return HandwrittenValues.decode(e) as? EmptyVisualEffect
+    case 2808:
+        return .enabled
+    default: return HandwrittenValues.decode(e) as? EnabledTextSelectability
     }
 }
-#if os(macOS)
-@MainActor func d_ExpandedWindowToolbarStyle(_ e: SExpr?) -> ExpandedWindowToolbarStyle? {
+#endif
+#if os(iOS) || os(macOS)
+@MainActor func d_FileDialogBrowserOptions(_ e: SExpr?) -> FileDialogBrowserOptions? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 1559:
-        return ExpandedWindowToolbarStyle()
-    case 2825:
-        return .expanded
-    default: return HandwrittenValues.decode(e) as? ExpandedWindowToolbarStyle
+        return .displayFileExtensions
+    case 1560:
+        return .enumeratePackages
+    case 1561:
+        return .includeHiddenFiles
+    case 1562:
+        return FileDialogBrowserOptions(rawValue: a.int(0))
+    default: return HandwrittenValues.decode(e) as? FileDialogBrowserOptions
     }
 }
 #endif
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
-@MainActor func d_FixedTextVariant(_ e: SExpr?) -> FixedTextVariant? {
+@MainActor func d_Font(_ e: SExpr?) -> Font? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2854:
-        return .fixed
-    default: return HandwrittenValues.decode(e) as? FixedTextVariant
+    case 1569:
+        return .largeTitle
+    case 1570:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.monospaced()
+    case 1571:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.monospaced(a.bool(1))
+        }
+        return nil
+    case 1572:
+        return .subheadline
+    case 1573:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.monospacedDigit()
+    case 1574:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.lowercaseSmallCaps()
+    case 1575:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.lowercaseSmallCaps(a.bool(1))
+        }
+        return nil
+    case 1576:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.uppercaseSmallCaps()
+    case 1577:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.uppercaseSmallCaps(a.bool(1))
+        }
+        return nil
+    case 1578:
+        return .body
+    case 1579:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.bold()
+    case 1580:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.bold(a.bool(1))
+        }
+        return nil
+    case 1581:
+        return .title
+    case 1582:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        guard let p0 = d_Font_Width(a.expr(1)) else { return nil }
+        return base.width(p0)
+    case 1583:
+        guard let p2 = d_Font_TextStyle(a.expr(2)) else { return nil }
+        return .custom(a.string(0), size: a.cgFloat(1), relativeTo: p2)
+    case 1584:
+        return .custom(a.string(0), size: a.cgFloat(1))
+    case 1585:
+        return .custom(a.string(0), fixedSize: a.cgFloat(1))
+    case 1586:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.italic()
+    case 1587:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.italic(a.bool(1))
+        }
+        return nil
+    case 1588:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.scaled(by: a.cgFloat(1))
+        }
+        return nil
+    case 1589:
+        guard let p1 = d_Font_Weight(a.expr(1)) else { return nil }
+        guard let p2 = d_Font_Design(a.expr(2)) else { return nil }
+        return .system(size: a.cgFloat(0), weight: p1, design: p2)
+    case 1590:
+        return .system(size: a.cgFloat(0), weight: d_Font_Weight(a.expr(1)), design: d_Font_Design(a.expr(2)))
+    case 1591:
+        guard let p0 = d_Font_TextStyle(a.expr(0)) else { return nil }
+        return .system(p0, design: d_Font_Design(a.expr(1)), weight: d_Font_Weight(a.expr(2)))
+    case 1592:
+        guard let p0 = d_Font_TextStyle(a.expr(0)) else { return nil }
+        guard let p1 = d_Font_Design(a.expr(1)) else { return nil }
+        return .system(p0, design: p1)
+    case 1593:
+        return .title2
+    case 1594:
+        return .title3
+    case 1595:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        guard let p0 = d_Font_Weight(a.expr(1)) else { return nil }
+        return base.weight(p0)
+    case 1596:
+        return .callout
+    case 1597:
+        return .caption
+    case 1598:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            return .`default`
+        }
+        return nil
+    case 1599:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        guard let p0 = d_Font_Leading(a.expr(1)) else { return nil }
+        return base.leading(p0)
+    case 1600:
+        return .caption2
+    case 1601:
+        return .footnote
+    case 1602:
+        return .headline
+    case 1603:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.pointSize(a.cgFloat(1))
+        }
+        return nil
+    case 1604:
+        guard let base = d_Font(a.expr(0)) else { return nil }
+        return base.smallCaps()
+    case 1605:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let base = d_Font(a.expr(0)) else { return nil }
+            return base.smallCaps(a.bool(1))
+        }
+        return nil
+    default: return HandwrittenValues.decode(e) as? Font
     }
 }
-@MainActor func d_Font_Weight(_ e: SExpr?) -> Font.Weight? {
+@MainActor func d_ForegroundStyle(_ e: SExpr?) -> ForegroundStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1626:
-        return .ultraLight
-    case 1627:
-        return .bold
-    case 1628:
-        return .thin
-    case 1629:
-        return .black
-    case 1630:
-        return .heavy
-    case 1631:
-        return .light
-    case 1632:
-        return .medium
-    case 1633:
-        return .regular
-    case 1634:
-        return .semibold
-    default: return HandwrittenValues.decode(e) as? Font.Weight
+    case 1638:
+        return ForegroundStyle()
+    case 2675:
+        return .foreground
+    default: return HandwrittenValues.decode(e) as? ForegroundStyle
+    }
+}
+@available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
+@MainActor func d_GestureInputKinds(_ e: SExpr?) -> GestureInputKinds? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1655:
+        return .directTouch
+    case 1656:
+        return .indirectTouch
+    case 1657:
+        return .all
+    case 1658:
+        return .pencil
+    case 1659:
+        return .pointer
+    case 1660:
+        return GestureInputKinds(rawValue: Int8(truncatingIfNeeded: a.int(0)))
+    default: return HandwrittenValues.decode(e) as? GestureInputKinds
+    }
+}
+@MainActor func d_GlobalCoordinateSpace(_ e: SExpr?) -> GlobalCoordinateSpace? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1677:
+        return GlobalCoordinateSpace()
+    case 2853:
+        return .global
+    default: return HandwrittenValues.decode(e) as? GlobalCoordinateSpace
+    }
+}
+@MainActor func d_GraphicsContext_BlurOptions(_ e: SExpr?) -> GraphicsContext.BlurOptions? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1713:
+        return .dithersResult
+    case 1714:
+        return .opaque
+    case 1715:
+        return GraphicsContext.BlurOptions(rawValue: UInt32(truncatingIfNeeded: a.int(0)))
+    default: return HandwrittenValues.decode(e) as? GraphicsContext.BlurOptions
+    }
+}
+@MainActor func d_GraphicsContext_ShadowOptions(_ e: SExpr?) -> GraphicsContext.ShadowOptions? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1758:
+        return .shadowOnly
+    case 1759:
+        return .shadowAbove
+    case 1760:
+        return .invertsAlpha
+    case 1761:
+        return .disablesGroup
+    case 1762:
+        return GraphicsContext.ShadowOptions(rawValue: UInt32(truncatingIfNeeded: a.int(0)))
+    default: return HandwrittenValues.decode(e) as? GraphicsContext.ShadowOptions
     }
 }
 #if os(macOS)
 @available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *)
-@MainActor func d_FrameResizePosition(_ e: SExpr?) -> FrameResizePosition? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1648:
-        return .topLeading
-    case 1649:
-        return .topTrailing
-    case 1650:
-        return .bottomLeading
-    case 1651:
-        return .bottomTrailing
-    case 1652:
-        return .top
-    case 1653:
-        return .bottom
-    case 1654:
-        return .leading
-    case 1655:
-        return .trailing
-    default: return HandwrittenValues.decode(e) as? FrameResizePosition
-    }
-}
-#endif
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
-@MainActor func d_GlassEffectTransition(_ e: SExpr?) -> GlassEffectTransition? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1675:
-        return .materialize
-    case 1676:
-        return .matchedGeometry
-    case 1677:
-        return .identity
-    default: return HandwrittenValues.decode(e) as? GlassEffectTransition
-    }
-}
-#if os(iOS) || os(macOS)
-@MainActor func d_GraphicalDatePickerStyle(_ e: SExpr?) -> GraphicalDatePickerStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1685:
-        return GraphicalDatePickerStyle()
-    case 2793:
-        return .graphical
-    default: return HandwrittenValues.decode(e) as? GraphicalDatePickerStyle
-    }
-}
-#endif
-@MainActor func d_GraphicsContext_GradientOptions(_ e: SExpr?) -> GraphicsContext.GradientOptions? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1740:
-        return .linearColor
-    case 1741:
-        return .mirror
-    case 1742:
-        return .`repeat`
-    case 1743:
-        return GraphicsContext.GradientOptions(rawValue: UInt32(truncatingIfNeeded: a.int(0)))
-    default: return HandwrittenValues.decode(e) as? GraphicsContext.GradientOptions
-    }
-}
-@MainActor func d_GroupedFormStyle(_ e: SExpr?) -> GroupedFormStyle? {
+@MainActor func d_GroupedTabViewStyle(_ e: SExpr?) -> GroupedTabViewStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 1770:
-        return GroupedFormStyle()
-    case 2886:
+        return GroupedTabViewStyle()
+    case 2765:
         return .grouped
-    default: return HandwrittenValues.decode(e) as? GroupedFormStyle
-    }
-}
-#if os(macOS)
-@MainActor func d_HiddenTitleBarWindowStyle(_ e: SExpr?) -> HiddenTitleBarWindowStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1777:
-        return HiddenTitleBarWindowStyle()
-    case 2761:
-        return .hiddenTitleBar
-    default: return HandwrittenValues.decode(e) as? HiddenTitleBarWindowStyle
+    default: return HandwrittenValues.decode(e) as? GroupedTabViewStyle
     }
 }
 #endif
-@MainActor func d_HorizontalEdge(_ e: SExpr?) -> HorizontalEdge? {
+@MainActor func d_HorizontalAlignment(_ e: SExpr?) -> HorizontalAlignment? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1796:
+    #if os(iOS) || os(macOS)
+    case 1780:
+        return .listRowSeparatorLeading
+    #endif
+    #if os(iOS) || os(macOS)
+    case 1781:
+        return .listRowSeparatorTrailing
+    #endif
+    case 1782:
+        return .center
+    case 1783:
         return .leading
-    case 1797:
+    case 1784:
         return .trailing
-    default: return HandwrittenValues.decode(e) as? HorizontalEdge
+    default: return HandwrittenValues.decode(e) as? HorizontalAlignment
     }
 }
 #if os(iOS) || os(macOS) || os(tvOS)
-@MainActor func d_Image_DynamicRange(_ e: SExpr?) -> Image.DynamicRange? {
+@MainActor func d_HoverPhase(_ e: SExpr?) -> HoverPhase? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1811:
-        return .constrainedHigh
-    case 1812:
-        return .high
-    case 1813:
-        return .standard
-    default: return HandwrittenValues.decode(e) as? Image.DynamicRange
+    case 1803:
+        return .ended
+    case 1804:
+        guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
+        return .active(p0)
+    default: return HandwrittenValues.decode(e) as? HoverPhase
     }
 }
 #endif
-#if os(macOS)
-@MainActor func d_ImportFromDevicesCommands(_ e: SExpr?) -> ImportFromDevicesCommands? {
+@MainActor func d_Image_ResizingMode(_ e: SExpr?) -> Image.ResizingMode? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1833:
-        return ImportFromDevicesCommands()
-    default: return HandwrittenValues.decode(e) as? ImportFromDevicesCommands
+    case 1822:
+        return .tile
+    case 1823:
+        return .stretch
+    default: return HandwrittenValues.decode(e) as? Image.ResizingMode
     }
 }
-#endif
-@MainActor func d_InterfaceOrientation(_ e: SExpr?) -> InterfaceOrientation? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1841:
-        return .landscapeLeft
-    case 1842:
-        return .landscapeRight
-    case 1843:
-        return .portraitUpsideDown
-    case 1844:
-        return .portrait
-    default: return HandwrittenValues.decode(e) as? InterfaceOrientation
-    }
-}
-@MainActor func d_LayoutDirection(_ e: SExpr?) -> LayoutDirection? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1876:
-        return .leftToRight
-    case 1877:
-        return .rightToLeft
-    default: return HandwrittenValues.decode(e) as? LayoutDirection
-    }
-}
-#if os(watchOS)
-@MainActor func d_LinearGaugeStyle(_ e: SExpr?) -> LinearGaugeStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1886:
-        guard let p0 = d_Color(a.expr(0)) else { return nil }
-        return LinearGaugeStyle(tint: p0)
-    case 1887:
-        guard let p0 = d_Gradient(a.expr(0)) else { return nil }
-        return LinearGaugeStyle(tint: p0)
-    case 1888:
-        return LinearGaugeStyle()
-    case 2673:
-        return .linear
-    default: return HandwrittenValues.decode(e) as? LinearGaugeStyle
-    }
-}
-#endif
-#if os(iOS) || os(watchOS)
-@MainActor func d_ListSectionSpacing(_ e: SExpr?) -> ListSectionSpacing? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 1899:
-        return .custom(a.cgFloat(0))
-    case 1900:
-        return .compact
-    case 1901:
-        return .`default`
-    default: return HandwrittenValues.decode(e) as? ListSectionSpacing
-    }
-}
-#endif
 #if os(iOS) || os(macOS)
-@MainActor func d_MagnifyGesture(_ e: SExpr?) -> MagnifyGesture? {
+@MainActor func d_InsetListStyle(_ e: SExpr?) -> InsetListStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1911:
-        if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
-            guard let p1 = d_GestureInputKinds(a.expr(1)) else { return nil }
-            return MagnifyGesture(minimumScaleDelta: a.cgFloat(0), inputKinds: p1)
-        }
-        return nil
-    case 1912:
-        return MagnifyGesture(minimumScaleDelta: a.cgFloat(0))
-    default: return HandwrittenValues.decode(e) as? MagnifyGesture
+    #if os(macOS)
+    case 1832:
+        return InsetListStyle(alternatesRowBackgrounds: a.bool(0))
+    #endif
+    case 1833:
+        return InsetListStyle()
+    #if os(macOS)
+    case 2884:
+        return .inset(alternatesRowBackgrounds: a.bool(0))
+    #endif
+    case 2885:
+        return .inset
+    default: return HandwrittenValues.decode(e) as? InsetListStyle
     }
 }
 #endif
-@MainActor func d_MenuOrder(_ e: SExpr?) -> MenuOrder? {
+#if os(iOS) || os(macOS) || os(tvOS)
+@MainActor func d_KeyPress_Result(_ e: SExpr?) -> KeyPress.Result? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1932:
-        return .fixed
-    #if os(iOS)
-    case 1933:
-        return .priority
-    #endif
-    case 1934:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? MenuOrder
+    case 1863:
+        return .handled
+    case 1864:
+        return .ignored
+    default: return HandwrittenValues.decode(e) as? KeyPress.Result
+    }
+}
+#endif
+@MainActor func d_LegibilityWeight(_ e: SExpr?) -> LegibilityWeight? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1878:
+        return .bold
+    case 1879:
+        return .regular
+    default: return HandwrittenValues.decode(e) as? LegibilityWeight
     }
 }
 #if os(macOS)
-@MainActor func d_NSHostingSizingOptions(_ e: SExpr?) -> NSHostingSizingOptions? {
+@MainActor func d_LinkButtonStyle(_ e: SExpr?) -> LinkButtonStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1947:
-        return .standardBounds
-    case 1948:
-        return .intrinsicContentSize
-    case 1949:
-        return .preferredContentSize
-    case 1950:
-        return .maxSize
-    case 1951:
-        return .minSize
-    case 1952:
-        return NSHostingSizingOptions(rawValue: a.int(0))
-    default: return HandwrittenValues.decode(e) as? NSHostingSizingOptions
+    case 1890:
+        return LinkButtonStyle()
+    case 2836:
+        return .link
+    default: return HandwrittenValues.decode(e) as? LinkButtonStyle
     }
 }
 #endif
-@MainActor func d_NavigationPath(_ e: SExpr?) -> NavigationPath? {
+@MainActor func d_LocalizedStringKey_StringInterpolation(_ e: SExpr?) -> LocalizedStringKey.StringInterpolation? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1960:
-        return NavigationPath()
-    default: return HandwrittenValues.decode(e) as? NavigationPath
+    case 1902:
+        return LocalizedStringKey.StringInterpolation(literalCapacity: a.int(0), interpolationCount: a.int(1))
+    default: return HandwrittenValues.decode(e) as? LocalizedStringKey.StringInterpolation
     }
 }
-@MainActor func d_OpenURLAction_Result(_ e: SExpr?) -> OpenURLAction.Result? {
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func d_MaterialActiveAppearance(_ e: SExpr?) -> MaterialActiveAppearance? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1973:
-        return .systemAction
-    case 1974:
-        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
-            return .systemAction(a.stringOpt(0).flatMap { URL(string: $0) }, prefersInApp: a.bool(1))
-        }
-        return nil
-    case 1975:
-        guard let p0 = URL(string: a.string(0)) else { return nil }
-        return .systemAction(p0)
-    case 1976:
-        return .handled
-    case 1977:
-        return .discarded
-    default: return HandwrittenValues.decode(e) as? OpenURLAction.Result
+    case 1920:
+        return .matchWindow
+    case 1921:
+        return .active
+    #if os(macOS)
+    case 1922:
+        return .inactive
+    #endif
+    case 1923:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? MaterialActiveAppearance
+    }
+}
+#if os(macOS) || os(tvOS)
+@MainActor func d_MoveCommandDirection(_ e: SExpr?) -> MoveCommandDirection? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1934:
+        return .up
+    case 1935:
+        return .down
+    case 1936:
+        return .left
+    case 1937:
+        return .right
+    default: return HandwrittenValues.decode(e) as? MoveCommandDirection
+    }
+}
+#endif
+#if os(iOS) || os(tvOS) || os(watchOS)
+@MainActor func d_NavigationBarItem_TitleDisplayMode(_ e: SExpr?) -> NavigationBarItem.TitleDisplayMode? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    #if os(iOS) || os(watchOS)
+    case 1951:
+        return .large
+    #endif
+    case 1952:
+        return .inline
+    case 1953:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? NavigationBarItem.TitleDisplayMode
+    }
+}
+#endif
+@MainActor func d_OffsetTransition(_ e: SExpr?) -> OffsetTransition? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 1964:
+        guard let p0 = d_CGSize(a.expr(0)) else { return nil }
+        return OffsetTransition(p0)
+    case 2738:
+        return .offset(x: a.cgFloat(0), y: a.cgFloat(1))
+    case 2739:
+        guard let p0 = d_CGSize(a.expr(0)) else { return nil }
+        return .offset(p0)
+    default: return HandwrittenValues.decode(e) as? OffsetTransition
     }
 }
 #if os(iOS) || os(tvOS) || os(watchOS)
-@MainActor func d_PageTabViewStyle(_ e: SExpr?) -> PageTabViewStyle? {
+@MainActor func d_PageIndexViewStyle(_ e: SExpr?) -> PageIndexViewStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1987:
-        guard let p0 = d_PageTabViewStyle_IndexDisplayMode(a.expr(0)) else { return nil }
-        return PageTabViewStyle(indexDisplayMode: p0)
-    case 2768:
-        guard let p0 = d_PageTabViewStyle_IndexDisplayMode(a.expr(0)) else { return nil }
-        return .page(indexDisplayMode: p0)
-    case 2769:
+    case 1978:
+        guard let p0 = d_PageIndexViewStyle_BackgroundDisplayMode(a.expr(0)) else { return nil }
+        return PageIndexViewStyle(backgroundDisplayMode: p0)
+    case 2775:
+        guard let p0 = d_PageIndexViewStyle_BackgroundDisplayMode(a.expr(0)) else { return nil }
+        return .page(backgroundDisplayMode: p0)
+    case 2776:
         return .page
-    default: return HandwrittenValues.decode(e) as? PageTabViewStyle
+    default: return HandwrittenValues.decode(e) as? PageIndexViewStyle
     }
 }
 #endif
-@MainActor func d_Path(_ e: SExpr?) -> Path? {
+#if os(iOS) || os(macOS)
+@MainActor func d_PaletteControlGroupStyle(_ e: SExpr?) -> PaletteControlGroupStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 1997:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_StrokeStyle(a.expr(1)) else { return nil }
-        return base.strokedPath(p0)
-    case 1998:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        return base.trimmedPath(from: a.cgFloat(1), to: a.cgFloat(2))
-    case 1999:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        return base.normalized(eoFill: a.bool(1))
-    case 2000:
-        guard let p0 = d_CGRect(a.expr(0)) else { return nil }
-        guard let p1 = d_CGSize(a.expr(1)) else { return nil }
-        guard let p2 = d_RoundedCornerStyle(a.expr(2)) else { return nil }
-        return Path(roundedRect: p0, cornerSize: p1, style: p2)
-    case 2001:
-        guard let p0 = d_CGRect(a.expr(0)) else { return nil }
-        guard let p1 = d_RectangleCornerRadii(a.expr(1)) else { return nil }
-        guard let p2 = d_RoundedCornerStyle(a.expr(2)) else { return nil }
-        return Path(roundedRect: p0, cornerRadii: p1, style: p2)
-    case 2002:
-        guard let p0 = d_CGRect(a.expr(0)) else { return nil }
-        guard let p2 = d_RoundedCornerStyle(a.expr(2)) else { return nil }
-        return Path(roundedRect: p0, cornerRadius: a.cgFloat(1), style: p2)
-    case 2003:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_Path(a.expr(1)) else { return nil }
-        return base.subtracting(p0, eoFill: a.bool(2))
-    case 2004:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_Path(a.expr(1)) else { return nil }
-        return base.intersection(p0, eoFill: a.bool(2))
-    case 2005:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_Path(a.expr(1)) else { return nil }
-        return base.lineSubtraction(p0, eoFill: a.bool(2))
-    case 2006:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_Path(a.expr(1)) else { return nil }
-        return base.lineIntersection(p0, eoFill: a.bool(2))
-    case 2007:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_Path(a.expr(1)) else { return nil }
-        return base.symmetricDifference(p0, eoFill: a.bool(2))
-    case 2008:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_CGRect(a.expr(1)) else { return nil }
-        return base.path(in: p0)
-    case 2009:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_Path(a.expr(1)) else { return nil }
-        return base.union(p0, eoFill: a.bool(2))
-    case 2010:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        guard let p0 = d_CGAffineTransform(a.expr(1)) else { return nil }
-        return base.applying(p0)
-    case 2011:
-        guard let base = d_Path(a.expr(0)) else { return nil }
-        return base.offsetBy(dx: a.cgFloat(1), dy: a.cgFloat(2))
-    case 2012:
-        guard let p0 = d_CGRect(a.expr(0)) else { return nil }
-        return Path(ellipseIn: p0)
-    case 2013:
-        return Path()
-    case 2014:
-        guard let p0 = d_CGRect(a.expr(0)) else { return nil }
-        return Path(p0)
-    default: return HandwrittenValues.decode(e) as? Path
-    }
-}
-@MainActor func d_PlaceholderTextShapeStyle(_ e: SExpr?) -> PlaceholderTextShapeStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2032:
-        return PlaceholderTextShapeStyle()
-    case 2687:
-        return .placeholder
-    default: return HandwrittenValues.decode(e) as? PlaceholderTextShapeStyle
-    }
-}
-#if os(macOS)
-@available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *)
-@MainActor func d_PointerStyle(_ e: SExpr?) -> PointerStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2038:
-        return .grabActive
-    case 2039:
-        guard let p0 = d_FrameResizePosition(a.expr(0)) else { return nil }
-        guard let p1 = d_FrameResizeDirection_Set(a.expr(1)) else { return nil }
-        return .frameResize(position: p0, directions: p1)
-    case 2040:
-        guard let p0 = d_HorizontalDirection_Set(a.expr(0)) else { return nil }
-        return .columnResize(directions: p0)
-    case 2041:
-        return .columnResize
-    case 2042:
-        return .verticalText
-    case 2043:
-        return .rectSelection
-    case 2044:
-        return .horizontalText
-    case 2045:
-        return .link
-    case 2046:
-        guard let p1 = d_UnitPoint(a.expr(1)) else { return nil }
-        return .image(ImageResource(name: a.string(0), bundle: .main), hotSpot: p1)
-    case 2047:
-        return .zoomIn
-    case 2048:
-        return .`default`
-    case 2049:
-        return .zoomOut
-    case 2050:
-        return .grabIdle
-    case 2051:
-        guard let p0 = d_VerticalDirection_Set(a.expr(0)) else { return nil }
-        return .rowResize(directions: p0)
-    case 2052:
-        return .rowResize
-    default: return HandwrittenValues.decode(e) as? PointerStyle
+    case 1988:
+        return PaletteControlGroupStyle()
+    case 2797:
+        return .palette
+    default: return HandwrittenValues.decode(e) as? PaletteControlGroupStyle
     }
 }
 #endif
-@MainActor func d_PresentationDetent(_ e: SExpr?) -> PresentationDetent? {
+#if os(iOS) || os(macOS)
+@available(iOS 17.5, macOS 14.5, tvOS 17.0, watchOS 10.0, *)
+@MainActor func d_PencilSqueezeGesturePhase(_ e: SExpr?) -> PencilSqueezeGesturePhase? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2067:
-        return .large
-    case 2068:
-        return .height(a.cgFloat(0))
-    case 2069:
-        return .medium
-    case 2070:
-        return .fraction(a.cgFloat(0))
-    default: return HandwrittenValues.decode(e) as? PresentationDetent
-    }
-}
-@MainActor func d_ProjectionTransform(_ e: SExpr?) -> ProjectionTransform? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2086:
-        guard let base = d_ProjectionTransform(a.expr(0)) else { return nil }
-        guard let p0 = d_ProjectionTransform(a.expr(1)) else { return nil }
-        return base.concatenating(p0)
-    case 2087:
-        guard let base = d_ProjectionTransform(a.expr(0)) else { return nil }
-        return base.inverted()
-    case 2088:
-        return ProjectionTransform()
-    case 2089:
-        guard let p0 = d_CGAffineTransform(a.expr(0)) else { return nil }
-        return ProjectionTransform(p0)
-    default: return HandwrittenValues.decode(e) as? ProjectionTransform
-    }
-}
-@MainActor func d_PushTransition(_ e: SExpr?) -> PushTransition? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2100:
-        guard let p0 = d_Edge(a.expr(0)) else { return nil }
-        return PushTransition(edge: p0)
-    case 2740:
-        guard let p0 = d_Edge(a.expr(0)) else { return nil }
-        return .push(from: p0)
-    default: return HandwrittenValues.decode(e) as? PushTransition
-    }
-}
-@MainActor func d_RedactionReasons(_ e: SExpr?) -> RedactionReasons? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2109:
-        return .invalidated
-    case 2110:
-        return .placeholder
-    case 2111:
-        return .privacy
-    case 2112:
-        return RedactionReasons(rawValue: a.int(0))
-    default: return HandwrittenValues.decode(e) as? RedactionReasons
-    }
-}
-@MainActor func d_RoundedCornerStyle(_ e: SExpr?) -> RoundedCornerStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2121:
-        return .continuous
-    case 2122:
-        return .circular
-    default: return HandwrittenValues.decode(e) as? RoundedCornerStyle
-    }
-}
-#if os(macOS)
-@available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *)
-@MainActor func d_SceneLaunchBehavior(_ e: SExpr?) -> SceneLaunchBehavior? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2136:
-        return .suppressed
-    case 2137:
-        return .automatic
-    case 2138:
-        return .presented
-    default: return HandwrittenValues.decode(e) as? SceneLaunchBehavior
+    case 2023:
+        return .failed
+    default: return HandwrittenValues.decode(e) as? PencilSqueezeGesturePhase
     }
 }
 #endif
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
-@MainActor func d_ScrollContentOffsetAdjustmentBehavior(_ e: SExpr?) -> ScrollContentOffsetAdjustmentBehavior? {
+#if os(iOS) || os(macOS)
+@MainActor func d_PlainTextEditorStyle(_ e: SExpr?) -> PlainTextEditorStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2152:
-        return .disabled
-    case 2153:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? ScrollContentOffsetAdjustmentBehavior
-    }
-}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
-@MainActor func d_ScrollInputKind(_ e: SExpr?) -> ScrollInputKind? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    #if os(watchOS)
-    case 2169:
-        return .handGestureShortcut
-    #endif
-    default: return HandwrittenValues.decode(e) as? ScrollInputKind
-    }
-}
-@MainActor func d_ScrollTransitionPhase(_ e: SExpr?) -> ScrollTransitionPhase? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2195:
-        return .topLeading
-    case 2196:
-        return .bottomTrailing
-    case 2197:
-        return .identity
-    default: return HandwrittenValues.decode(e) as? ScrollTransitionPhase
-    }
-}
-@MainActor func d_SearchSuggestionsPlacement_Set(_ e: SExpr?) -> SearchSuggestionsPlacement.Set? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2214:
-        return .menu
-    case 2215:
-        return .content
-    case 2216:
-        return SearchSuggestionsPlacement.Set(rawValue: a.int(0))
-    default: return HandwrittenValues.decode(e) as? SearchSuggestionsPlacement.Set
-    }
-}
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
-@MainActor func d_SensoryFeedback_PressFeedback(_ e: SExpr?) -> SensoryFeedback.PressFeedback? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2241:
-        return .buttonIconOnly
-    case 2242:
-        return .tab
-    case 2243:
-        return .button
-    case 2244:
-        return .slider
-    case 2245:
-        return .toggle
-    default: return HandwrittenValues.decode(e) as? SensoryFeedback.PressFeedback
-    }
-}
-#if os(iOS) || os(macOS) || os(tvOS)
-@MainActor func d_Shader_Argument(_ e: SExpr?) -> Shader.Argument? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2256:
-        return .colorArray(a.exprList(0).compactMap { d_Color($0) })
-    case 2257:
-        return .boundingRect
-    case 2258:
-        guard let p0 = d_Color(a.expr(0)) else { return nil }
-        return .color(p0)
-    case 2259:
-        return .float(a.double(0))
-    case 2260:
-        guard let p0 = d_CGSize(a.expr(0)) else { return nil }
-        return .float2(p0)
-    case 2261:
-        guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
-        return .float2(p0)
-    case 2262:
-        guard let p0 = d_CGVector(a.expr(0)) else { return nil }
-        return .float2(p0)
-    case 2263:
-        return .float2(a.double(0), a.double(1))
-    case 2264:
-        return .float3(a.double(0), a.double(1), a.double(2))
-    case 2265:
-        return .float4(a.double(0), a.double(1), a.double(2), a.double(3))
-    default: return HandwrittenValues.decode(e) as? Shader.Argument
-    }
-}
-#endif
-#if os(iOS) || os(macOS) || os(tvOS)
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, *)
-@MainActor func d_SidebarAdaptableTabViewStyle(_ e: SExpr?) -> SidebarAdaptableTabViewStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2278:
-        return SidebarAdaptableTabViewStyle()
-    case 2767:
-        return .sidebarAdaptable
-    default: return HandwrittenValues.decode(e) as? SidebarAdaptableTabViewStyle
-    }
-}
-#endif
-#if os(watchOS)
-@MainActor func d_SnapshotData_SnapshotReason(_ e: SExpr?) -> SnapshotData.SnapshotReason? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2285:
-        return .appScheduled
-    case 2286:
-        return .appBackgrounded
-    case 2287:
-        return .complicationUpdate
-    case 2288:
-        return .returnToDefaultState
-    case 2289:
-        return .prelaunch
-    default: return HandwrittenValues.decode(e) as? SnapshotData.SnapshotReason
-    }
-}
-#endif
-#if os(iOS) || os(macOS) || os(watchOS)
-@MainActor func d_SpatialTapGesture(_ e: SExpr?) -> SpatialTapGesture? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2301:
-        if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
-            guard let p1 = dp_CoordinateSpaceProtocol(a.expr(1)) else { return nil }
-            guard let p2 = d_GestureInputKinds(a.expr(2)) else { return nil }
-            @MainActor func open<Q1: CoordinateSpaceProtocol>(_ q1: Q1) -> SpatialTapGesture? {
-                return SpatialTapGesture(count: a.int(0), coordinateSpace: q1, inputKinds: p2)
-            }
-            return open(p1)
-        }
-        return nil
-    case 2302:
-        guard let p1 = d_CoordinateSpace(a.expr(1)) else { return nil }
-        return SpatialTapGesture(count: a.int(0), coordinateSpace: p1)
-    case 2303:
-        guard let p1 = dp_CoordinateSpaceProtocol(a.expr(1)) else { return nil }
-        @MainActor func open<Q1: CoordinateSpaceProtocol>(_ q1: Q1) -> SpatialTapGesture? {
-            return SpatialTapGesture(count: a.int(0), coordinateSpace: q1)
-        }
-        return open(p1)
-    default: return HandwrittenValues.decode(e) as? SpatialTapGesture
-    }
-}
-#endif
-#if os(macOS)
-@MainActor func d_StepperFieldDatePickerStyle(_ e: SExpr?) -> StepperFieldDatePickerStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2321:
-        return StepperFieldDatePickerStyle()
+    case 2031:
+        return PlainTextEditorStyle()
     case 2788:
-        return .stepperField
-    default: return HandwrittenValues.decode(e) as? StepperFieldDatePickerStyle
+        return .plain
+    default: return HandwrittenValues.decode(e) as? PlainTextEditorStyle
     }
 }
 #endif
-@available(iOS 17.0, macOS 14.0, tvOS 18.0, watchOS 10.0, *)
-@MainActor func d_SwitchToggleStyle(_ e: SExpr?) -> SwitchToggleStyle? {
+@MainActor func d_PresentationAdaptation(_ e: SExpr?) -> PresentationAdaptation? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS) || os(macOS) || os(watchOS)
-    case 2342:
-        guard let p0 = d_Color(a.expr(0)) else { return nil }
-        return SwitchToggleStyle(tint: p0)
-    #endif
-    case 2343:
-        return SwitchToggleStyle()
-    case 2758:
-        return .switch
-    default: return HandwrittenValues.decode(e) as? SwitchToggleStyle
+    case 2051:
+        return .fullScreenCover
+    case 2052:
+        return .none
+    case 2053:
+        return .sheet
+    case 2054:
+        return .popover
+    case 2055:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? PresentationAdaptation
     }
 }
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
-@MainActor func d_SystemFormatStyle_DateOffset(_ e: SExpr?) -> SystemFormatStyle.DateOffset? {
+@MainActor func d_PreviewPlatform(_ e: SExpr?) -> PreviewPlatform? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2358:
-        return SystemFormatStyle.DateOffset(to: a.date(0), maxFieldCount: a.int(1))
-    case 2359:
-        guard let base = d_SystemFormatStyle_DateOffset(a.expr(0)) else { return nil }
-        return base.locale(Locale(identifier: a.string(1)))
-    case 2360:
-        guard let base = d_SystemFormatStyle_DateOffset(a.expr(0)) else { return nil }
-        return base.calendar(kotlinCalendar(a.string(1)))
-    default: return HandwrittenValues.decode(e) as? SystemFormatStyle.DateOffset
+    case 2073:
+        return .iOS
+    case 2074:
+        return .tvOS
+    case 2075:
+        return .macOS
+    case 2076:
+        return .watchOS
+    default: return HandwrittenValues.decode(e) as? PreviewPlatform
     }
 }
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
-@MainActor func d_TabBarPlacement(_ e: SExpr?) -> TabBarPlacement? {
+@MainActor func d_ProposedViewSize(_ e: SExpr?) -> ProposedViewSize? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2372:
-        return .topBar
-    case 2373:
-        return .bottomBar
-    case 2374:
-        return .pageIndicator
-    case 2375:
-        return .sidebar
-    case 2376:
-        return .ornament
-    default: return HandwrittenValues.decode(e) as? TabBarPlacement
+    case 2089:
+        return .unspecified
+    case 2090:
+        return .zero
+    case 2091:
+        return ProposedViewSize(width: a.cgFloatOpt(0), height: a.cgFloatOpt(1))
+    case 2092:
+        return .infinity
+    case 2093:
+        guard let p0 = d_CGSize(a.expr(0)) else { return nil }
+        return ProposedViewSize(p0)
+    default: return HandwrittenValues.decode(e) as? ProposedViewSize
     }
 }
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
-@MainActor func d_TabViewBottomAccessoryPlacement(_ e: SExpr?) -> TabViewBottomAccessoryPlacement? {
+@MainActor func d_Rectangle(_ e: SExpr?) -> Rectangle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2390:
-        return .inline
-    case 2391:
-        return .expanded
-    default: return HandwrittenValues.decode(e) as? TabViewBottomAccessoryPlacement
-    }
-}
-@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
-@MainActor func d_Text_AlignmentStrategy(_ e: SExpr?) -> Text.AlignmentStrategy? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2409:
-        return .layoutBased
-    case 2410:
-        return .writingDirectionBased
-    case 2411:
-        return .`default`
-    default: return HandwrittenValues.decode(e) as? Text.AlignmentStrategy
-    }
-}
-@MainActor func d_Text_LineStyle(_ e: SExpr?) -> Text.LineStyle? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2423:
-        return .single
-    case 2424:
-        guard let p0 = d_Text_LineStyle_Pattern(a.expr(0)) else { return nil }
-        return Text.LineStyle(pattern: p0, color: d_Color(a.expr(1)))
-    default: return HandwrittenValues.decode(e) as? Text.LineStyle
+    case 2101:
+        return Rectangle()
+    case 2878:
+        return .rect
+    default: return HandwrittenValues.decode(e) as? Rectangle
     }
 }
 #if os(iOS) || os(macOS)
-@MainActor func d_TextEditingCommands(_ e: SExpr?) -> TextEditingCommands? {
+@MainActor func d_RotateGesture(_ e: SExpr?) -> RotateGesture? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2441:
-        return TextEditingCommands()
-    default: return HandwrittenValues.decode(e) as? TextEditingCommands
+    case 2113:
+        if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
+            let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
+            guard let p1 = d_GestureInputKinds(a.expr(1)) else { return nil }
+            return RotateGesture(minimumAngleDelta: p0, inputKinds: p1)
+        }
+        return nil
+    case 2114:
+        let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
+        return RotateGesture(minimumAngleDelta: p0)
+    default: return HandwrittenValues.decode(e) as? RotateGesture
     }
 }
 #endif
-#if os(iOS)
-@MainActor func d_TextInputDictationBehavior(_ e: SExpr?) -> TextInputDictationBehavior? {
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
+@MainActor func d_RoundedRectangularShapeCorners_AnimatableData(_ e: SExpr?) -> RoundedRectangularShapeCorners.AnimatableData? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2454:
-        guard let p0 = d_TextInputDictationActivation(a.expr(0)) else { return nil }
-        return .inline(activation: p0)
-    case 2455:
+    case 2126:
+        return .zero
+    default: return HandwrittenValues.decode(e) as? RoundedRectangularShapeCorners.AnimatableData
+    }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func d_SceneRestorationBehavior(_ e: SExpr?) -> SceneRestorationBehavior? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    #if os(macOS)
+    case 2140:
+        return .disabled
+    #endif
+    case 2141:
         return .automatic
-    default: return HandwrittenValues.decode(e) as? TextInputDictationBehavior
+    default: return HandwrittenValues.decode(e) as? SceneRestorationBehavior
+    }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func d_ScrollGeometry(_ e: SExpr?) -> ScrollGeometry? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2157:
+        guard let p0 = d_CGPoint(a.expr(0)) else { return nil }
+        guard let p1 = d_CGSize(a.expr(1)) else { return nil }
+        guard let p2 = d_EdgeInsets(a.expr(2)) else { return nil }
+        guard let p3 = d_CGSize(a.expr(3)) else { return nil }
+        return ScrollGeometry(contentOffset: p0, contentSize: p1, contentInsets: p2, containerSize: p3)
+    default: return HandwrittenValues.decode(e) as? ScrollGeometry
+    }
+}
+@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, *)
+@MainActor func d_ScrollTargetBehaviorProperties(_ e: SExpr?) -> ScrollTargetBehaviorProperties? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2177:
+        return ScrollTargetBehaviorProperties()
+    default: return HandwrittenValues.decode(e) as? ScrollTargetBehaviorProperties
+    }
+}
+@available(iOS 17.1, macOS 14.1, tvOS 17.1, watchOS 10.1, *)
+@MainActor func d_SearchPresentationToolbarBehavior(_ e: SExpr?) -> SearchPresentationToolbarBehavior? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2202:
+        return .avoidHidingContent
+    case 2203:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? SearchPresentationToolbarBehavior
+    }
+}
+#if os(iOS) || os(macOS)
+@MainActor func d_SelectionShapeStyle(_ e: SExpr?) -> SelectionShapeStyle? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2216:
+        return SelectionShapeStyle()
+    case 2686:
+        return .selection
+    default: return HandwrittenValues.decode(e) as? SelectionShapeStyle
     }
 }
 #endif
-#if os(macOS)
-@MainActor func d_TitleBarWindowStyle(_ e: SExpr?) -> TitleBarWindowStyle? {
+@MainActor func d_SensoryFeedback_Weight(_ e: SExpr?) -> SensoryFeedback.Weight? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2247:
+        return .heavy
+    case 2248:
+        return .light
+    case 2249:
+        return .medium
+    default: return HandwrittenValues.decode(e) as? SensoryFeedback.Weight
+    }
+}
+#if os(iOS) || os(macOS) || os(tvOS)
+@MainActor func d_ShaderLibrary(_ e: SExpr?) -> ShaderLibrary? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2267:
+        guard let p0 = URL(string: a.string(0)) else { return nil }
+        return ShaderLibrary(url: p0)
+    case 2268:
+        return .`default`
+    default: return HandwrittenValues.decode(e) as? ShaderLibrary
+    }
+}
+#endif
+@MainActor func d_SidebarRowSize(_ e: SExpr?) -> SidebarRowSize? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2277:
+        return .large
+    case 2278:
+        return .small
+    case 2279:
+        return .medium
+    default: return HandwrittenValues.decode(e) as? SidebarRowSize
+    }
+}
+#if os(iOS) || os(macOS) || os(watchOS)
+@available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 11.0, *)
+@MainActor func d_SpatialEventCollection_Event_Kind(_ e: SExpr?) -> SpatialEventCollection.Event.Kind? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    #if os(macOS)
+    case 2289:
+        if #available(iOS 17.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
+            return .indirectPinch
+        }
+        return nil
+    #endif
+    case 2290:
+        return .touch
+    #if os(iOS)
+    case 2291:
+        return .pencil
+    #endif
+    #if os(iOS) || os(macOS)
+    case 2292:
+        return .pointer
+    #endif
+    default: return HandwrittenValues.decode(e) as? SpatialEventCollection.Event.Kind
+    }
+}
+#endif
+@MainActor func d_SpringLoadingBehavior(_ e: SExpr?) -> SpringLoadingBehavior? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2312:
+        return .enabled
+    case 2313:
+        return .disabled
+    case 2314:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? SpringLoadingBehavior
+    }
+}
+@MainActor func d_SubmitTriggers(_ e: SExpr?) -> SubmitTriggers? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2328:
+        return .text
+    case 2329:
+        return .search
+    case 2330:
+        return SubmitTriggers(rawValue: a.int(0))
+    default: return HandwrittenValues.decode(e) as? SubmitTriggers
+    }
+}
+@MainActor func d_SymbolRenderingMode(_ e: SExpr?) -> SymbolRenderingMode? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2342:
+        return .monochrome
+    case 2343:
+        return .multicolor
+    case 2344:
+        return .hierarchical
+    case 2345:
+        return .palette
+    default: return HandwrittenValues.decode(e) as? SymbolRenderingMode
+    }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func d_SystemFormatStyle_Timer(_ e: SExpr?) -> SystemFormatStyle.Timer? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2362:
+        guard let base = d_SystemFormatStyle_Timer(a.expr(0)) else { return nil }
+        return base.locale(Locale(identifier: a.string(1)))
+    default: return HandwrittenValues.decode(e) as? SystemFormatStyle.Timer
+    }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func d_TabRole(_ e: SExpr?) -> TabRole? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2379:
+        return .search
+    case 2380:
+        if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
+            return .prominent
+        }
+        return nil
+    default: return HandwrittenValues.decode(e) as? TabRole
+    }
+}
+#if os(iOS) || os(macOS)
+@MainActor func d_TableColumnCustomizationBehavior(_ e: SExpr?) -> TableColumnCustomizationBehavior? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2394:
+        return .visibility
+    case 2395:
+        guard let base = d_TableColumnCustomizationBehavior(a.expr(0)) else { return nil }
+        guard let p0 = d_TableColumnCustomizationBehavior(a.expr(1)) else { return nil }
+        return base.intersection(p0)
+    case 2396:
+        guard let base = d_TableColumnCustomizationBehavior(a.expr(0)) else { return nil }
+        guard let p0 = d_TableColumnCustomizationBehavior(a.expr(1)) else { return nil }
+        return base.symmetricDifference(p0)
+    case 2397:
+        return .all
+    case 2398:
+        guard let base = d_TableColumnCustomizationBehavior(a.expr(0)) else { return nil }
+        guard let p0 = d_TableColumnCustomizationBehavior(a.expr(1)) else { return nil }
+        return base.union(p0)
+    case 2399:
+        return .resize
+    case 2400:
+        return .reorder
+    case 2401:
+        return TableColumnCustomizationBehavior()
+    default: return HandwrittenValues.decode(e) as? TableColumnCustomizationBehavior
+    }
+}
+#endif
+@MainActor func d_Text_Layout_CharacterIndex(_ e: SExpr?) -> Text.Layout.CharacterIndex? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2415:
+        guard let base = d_Text_Layout_CharacterIndex(a.expr(0)) else { return nil }
+        return base.advanced(by: a.int(1))
+    default: return HandwrittenValues.decode(e) as? Text.Layout.CharacterIndex
+    }
+}
+@MainActor func d_Text_TruncationMode(_ e: SExpr?) -> Text.TruncationMode? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2428:
+        return .head
+    case 2429:
+        return .tail
+    case 2430:
+        return .middle
+    default: return HandwrittenValues.decode(e) as? Text.TruncationMode
+    }
+}
+@available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
+@MainActor func d_TextInputBorderShape(_ e: SExpr?) -> TextInputBorderShape? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2443:
+        return .roundedRectangle
+    case 2444:
+        return .capsule
+    case 2445:
+        return .automatic
+    case 2860:
+        return .textInputBorder
+    default: return HandwrittenValues.decode(e) as? TextInputBorderShape
+    }
+}
+@MainActor func d_TintShapeStyle(_ e: SExpr?) -> TintShapeStyle? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2462:
+        return TintShapeStyle()
+    case 2685:
+        return .tint
+    default: return HandwrittenValues.decode(e) as? TintShapeStyle
+    }
+}
+@MainActor func d_ToolbarCustomizationOptions(_ e: SExpr?) -> ToolbarCustomizationOptions? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     case 2470:
-        return TitleBarWindowStyle()
-    case 2764:
-        return .titleBar
-    default: return HandwrittenValues.decode(e) as? TitleBarWindowStyle
-    }
-}
-#endif
-@available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
-@MainActor func d_ToolbarItemAxisBehavior(_ e: SExpr?) -> ToolbarItemAxisBehavior? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    #if os(iOS)
-    case 2481:
-        return .horizontalOnly
-    #endif
-    #if os(iOS)
-    case 2482:
-        return .verticalPreferred
-    #endif
-    case 2483:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? ToolbarItemAxisBehavior
+        return .alwaysAvailable
+    case 2471:
+        return ToolbarCustomizationOptions(rawValue: a.int(0))
+    default: return HandwrittenValues.decode(e) as? ToolbarCustomizationOptions
     }
 }
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
-@MainActor func d_ToolbarMinimizationSafeAreaAdjustment(_ e: SExpr?) -> ToolbarMinimizationSafeAreaAdjustment? {
+@MainActor func d_ToolbarMinimizationBehavior(_ e: SExpr?) -> ToolbarMinimizationBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
     #if os(iOS)
-    case 2521:
-        return .enabled
+    case 2509:
+        return .onScrollUp
     #endif
     #if os(iOS)
-    case 2522:
-        return .disabled
+    case 2510:
+        return .onScrollDown
     #endif
-    case 2523:
+    #if os(iOS)
+    case 2511:
+        return .never
+    #endif
+    case 2512:
         return .automatic
-    default: return HandwrittenValues.decode(e) as? ToolbarMinimizationSafeAreaAdjustment
+    default: return HandwrittenValues.decode(e) as? ToolbarMinimizationBehavior
     }
 }
-@available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
-@MainActor func d_ToolbarVerticalBehavior(_ e: SExpr?) -> ToolbarVerticalBehavior? {
+@available(iOS 27.2, macOS 27.2, tvOS 27.2, watchOS 27.2, *)
+@MainActor func d_ToolbarTitleAlignment(_ e: SExpr?) -> ToolbarTitleAlignment? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2544:
-        return .disabled
-    case 2545:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? ToolbarVerticalBehavior
-    }
-}
-@MainActor func d_TypesettingLanguage(_ e: SExpr?) -> TypesettingLanguage? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2558:
-        return .explicit(Locale.Language(identifier: a.string(0)))
-    case 2559:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? TypesettingLanguage
-    }
-}
-@MainActor func d_UnitPoint(_ e: SExpr?) -> UnitPoint? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2578:
-        return .topLeading
-    case 2579:
-        return .topTrailing
-    case 2580:
-        return .bottomLeading
-    case 2581:
-        return .bottomTrailing
-    case 2582:
-        return UnitPoint(x: a.cgFloat(0), y: a.cgFloat(1))
-    case 2583:
-        return .top
-    case 2584:
-        return .zero
-    case 2585:
-        return .bottom
-    case 2586:
+    case 2531:
         return .center
-    case 2587:
+    case 2532:
         return .leading
-    case 2588:
-        return .trailing
-    case 2589:
-        return UnitPoint()
-    default: return HandwrittenValues.decode(e) as? UnitPoint
+    case 2533:
+        return .automatic
+    default: return HandwrittenValues.decode(e) as? ToolbarTitleAlignment
     }
 }
-@MainActor func d_VerticalEdge(_ e: SExpr?) -> VerticalEdge? {
+@MainActor func d_TransitionPhase(_ e: SExpr?) -> TransitionPhase? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2605:
-        return .top
-    case 2606:
-        return .bottom
-    default: return HandwrittenValues.decode(e) as? VerticalEdge
-    }
-}
-@MainActor func d_ViewSpacing(_ e: SExpr?) -> ViewSpacing? {
-    guard let e else { return nil }
-    let a = Args(expr: e)
-    switch e.id {
-    case 2625:
-        return .zero
-    case 2626:
-        guard let base = d_ViewSpacing(a.expr(0)) else { return nil }
-        guard let p0 = d_ViewSpacing(a.expr(1)) else { return nil }
-        guard let p1 = d_Edge_Set(a.expr(2)) else { return nil }
-        return base.union(p0, edges: p1)
-    case 2627:
-        return ViewSpacing()
-    default: return HandwrittenValues.decode(e) as? ViewSpacing
+    case 2548:
+        return .willAppear
+    case 2549:
+        return .didDisappear
+    case 2550:
+        return .identity
+    default: return HandwrittenValues.decode(e) as? TransitionPhase
     }
 }
 #if os(macOS)
-@available(iOS 17.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *)
-@MainActor func d_WindowIdealSize(_ e: SExpr?) -> WindowIdealSize? {
+@MainActor func d_UnifiedWindowToolbarStyle(_ e: SExpr?) -> UnifiedWindowToolbarStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2635:
-        return .fitToContent
-    case 2636:
-        return .maximum
-    case 2637:
-        return .automatic
-    default: return HandwrittenValues.decode(e) as? WindowIdealSize
+    case 2561:
+        return UnifiedWindowToolbarStyle(showsTitle: a.bool(0))
+    case 2562:
+        return UnifiedWindowToolbarStyle()
+    case 2817:
+        return .unified(showsTitle: a.bool(0))
+    case 2818:
+        return .unified
+    default: return HandwrittenValues.decode(e) as? UnifiedWindowToolbarStyle
+    }
+}
+#endif
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor func d_VerticalDirection(_ e: SExpr?) -> VerticalDirection? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2592:
+        return .up
+    case 2593:
+        return .down
+    default: return HandwrittenValues.decode(e) as? VerticalDirection
+    }
+}
+@MainActor func d_ViewAlignedScrollTargetBehavior(_ e: SExpr?) -> ViewAlignedScrollTargetBehavior? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2611:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let p0 = d_ViewAlignedScrollTargetBehavior_LimitBehavior(a.expr(0)) else { return nil }
+            return ViewAlignedScrollTargetBehavior(limitBehavior: p0, anchor: d_UnitPoint(a.expr(1)))
+        }
+        return nil
+    case 2612:
+        guard let p0 = d_ViewAlignedScrollTargetBehavior_LimitBehavior(a.expr(0)) else { return nil }
+        return ViewAlignedScrollTargetBehavior(limitBehavior: p0)
+    case 2613:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            return ViewAlignedScrollTargetBehavior(anchor: d_UnitPoint(a.expr(0)))
+        }
+        return nil
+    case 2842:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            guard let p0 = d_ViewAlignedScrollTargetBehavior_LimitBehavior(a.expr(0)) else { return nil }
+            return .viewAligned(limitBehavior: p0, anchor: d_UnitPoint(a.expr(1)))
+        }
+        return nil
+    case 2843:
+        guard let p0 = d_ViewAlignedScrollTargetBehavior_LimitBehavior(a.expr(0)) else { return nil }
+        return .viewAligned(limitBehavior: p0)
+    case 2844:
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            return .viewAligned(anchor: d_UnitPoint(a.expr(0)))
+        }
+        return nil
+    case 2845:
+        return .viewAligned
+    default: return HandwrittenValues.decode(e) as? ViewAlignedScrollTargetBehavior
+    }
+}
+@MainActor func d_WindowBackgroundShapeStyle(_ e: SExpr?) -> WindowBackgroundShapeStyle? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2627:
+        return WindowBackgroundShapeStyle()
+    case 2682:
+        return .windowBackground
+    default: return HandwrittenValues.decode(e) as? WindowBackgroundShapeStyle
+    }
+}
+#if os(macOS)
+@MainActor func d_WindowMenuBarExtraStyle(_ e: SExpr?) -> WindowMenuBarExtraStyle? {
+    guard let e else { return nil }
+    let a = Args(expr: e)
+    switch e.id {
+    case 2642:
+        return WindowMenuBarExtraStyle()
+    case 2802:
+        return .window
+    default: return HandwrittenValues.decode(e) as? WindowMenuBarExtraStyle
     }
 }
 #endif
 #if os(iOS) || os(macOS)
-@MainActor func d_WindowResizability(_ e: SExpr?) -> WindowResizability? {
+@available(iOS 18.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *)
+@MainActor func d_WritingToolsBehavior(_ e: SExpr?) -> WritingToolsBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    case 2653:
-        return .contentSize
-    case 2654:
-        return .contentMinSize
-    case 2655:
+    case 2657:
+        return .limited
+    case 2658:
+        return .complete
+    case 2659:
+        return .disabled
+    case 2660:
         return .automatic
-    default: return HandwrittenValues.decode(e) as? WindowResizability
+    default: return HandwrittenValues.decode(e) as? WritingToolsBehavior
     }
 }
 #endif

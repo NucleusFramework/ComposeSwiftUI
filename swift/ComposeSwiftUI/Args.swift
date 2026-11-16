@@ -69,6 +69,26 @@ public struct Args {
         }
     }
 
+    /// A Kotlin `suspend () -> Unit` (`SAsyncAction`): awaiting it runs the coroutine to its end; cancelling the
+    /// Swift task cancels it.
+    public func asyncAction(_ i: Int) -> @Sendable () async -> Void {
+        let action = UncheckedSendable(raw(i) as? SAsyncAction)
+        return {
+            guard let action = action.value else { return }
+            let cancel = UncheckedSendable<SwiftAction?>(nil)
+            await withTaskCancellationHandler {
+                await withCheckedContinuation { (done: CheckedContinuation<Void, Never>) in
+                    Task { @MainActor in
+                        cancel.value = action.start(done: ClosureAction { done.resume() })
+                        ComposeSwiftUIHostKt.flushCompose()
+                    }
+                }
+            } onCancel: {
+                Task { @MainActor in cancel.value?.run() }
+            }
+        }
+    }
+
     public func actionOpt(_ i: Int) -> (() -> Void)? {
         isNil(i) ? nil : action(i)
     }
@@ -87,7 +107,7 @@ public struct Args {
     public func binding<T>(_ i: Int, read: @escaping (Args, Int) -> T, box: @escaping (T) -> Any?) -> Binding<T> {
         let callback = src.argCallback(index: k(i + 1))
         guard let node = self.node else {
-            // Nested expression (e.g. `TextEditor(text:)` inside `TextEditorView`): not addressable
+            // Nested expression (a binding inside a value argument): not addressable
             // for silent writes, so keep the last written value locally until Kotlin re-renders.
             let cell = BindingBox(read(self, i))
             return Binding(
@@ -202,4 +222,10 @@ public struct KHashable: Hashable {
 
     public static func == (lhs: KHashable, rhs: KHashable) -> Bool { lhs.object.isEqual(rhs.object) }
     public func hash(into hasher: inout Hasher) { hasher.combine(object.hash) }
+}
+
+/// Carries a Kotlin object into `@Sendable` closures that only touch it on the main actor.
+final class UncheckedSendable<T>: @unchecked Sendable {
+    var value: T
+    init(_ value: T) { self.value = value }
 }

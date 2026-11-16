@@ -92,8 +92,25 @@ fun PostMeta(postedAt: Double, eventStart: Double, eventEnd: Double) {
 }
 ```
 
-SwiftUI's `Text(value, format:)` for numbers is not available: format numbers in Kotlin and pass the string. For
-input, `NumberField` parses and formats numbers in Swift (see [Controls](controls.md)).
+### Numbers
+
+`Text(value, format)` is SwiftUI's `Text(_:format:)` for a number: the system formats it for the user's locale
+(`0.25` as a percent is "25%" in English, "25 %" in French). `format` is the `NumberFormat` that `NumberField` uses
+too: `NumberFormat.Number`, `NumberFormat.Percent` or `NumberFormat.Currency("EUR")` (ISO 4217 code).
+`fractionDigits` sets the precision and `grouping = false` drops the thousands separators:
+
+```kotlin
+@Composable
+fun OrderSummary(total: Double, discount: Double, items: Double) {
+    VStack(alignment = HorizontalAlignment.leading) {
+        Text(total, NumberFormat.Currency("EUR"))                     // "€1,234.50" / "1 234,50 €"
+        Text(discount, NumberFormat.Percent, fractionDigits = 0..1)  // "12.5%"
+        Text(items, NumberFormat.Number, fractionDigits = 0..0, grouping = false)
+    }
+}
+```
+
+For input, `NumberField` parses and formats numbers in Swift (see [Controls](controls.md)).
 
 A counter that animates its digits uses a content transition:
 

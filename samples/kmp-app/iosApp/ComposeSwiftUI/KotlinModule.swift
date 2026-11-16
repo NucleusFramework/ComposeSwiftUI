@@ -1,1 +1,1 @@
-@_exported import BenchShared
+@_exported import Shared

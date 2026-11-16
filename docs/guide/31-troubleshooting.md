@@ -79,6 +79,25 @@ ComposeIntegrations.registerPhotosUI()
 
 If the error appears on every platform, the integration file isn't in the app target.
 
+### "AppServices.swift" or "SystemServices.swift" is missing after upgrading
+
+These two files were split into one file per framework (`HealthKitUI.swift`, `ContactsUI.swift`, `AppIntents.swift`,
+`WatchKit.swift`…), and the sync deletes the old ones. Remove the red references from the target and add the files
+of the frameworks you register; the register functions keep their names. The table in
+[Apple frameworks](apple-frameworks.md) maps each function to its file.
+
+### "Unknown Compose SwiftUI integrations [...]"
+
+A name in `composeSwiftUI { integrations.set(…) }` doesn't match an integration file. Use the file name without
+`.swift` (`"MapKit"`, `"HealthKitUI"`); the error lists the available names. An integration left out of the list is
+deleted from `ComposeSwiftUIIntegrations/` on the next build, so remove it from the Xcode target as well.
+
+### Compose SwiftUI APIs are unresolved in `commonMain` of a module with Android
+
+When the module also has non-Apple targets (Android, JVM…), the plugin adds the library to `appleMain`, not
+`commonMain`, because it is only published for Apple targets. Move the screens to `appleMain` (or `iosMain`) and keep
+view models and logic in `commonMain`.
+
 ## Previews
 
 ### The preview doesn't appear

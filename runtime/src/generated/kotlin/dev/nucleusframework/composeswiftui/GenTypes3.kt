@@ -856,7 +856,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val stepperField: StepperFieldDatePickerStyle get() = StepperFieldDatePickerStyle(2788, emptyList())
+        public val stepperField: StepperFieldDatePickerStyle get() = StepperFieldDatePickerStyle(2782, emptyList())
 /**
          * SwiftUI `DatePickerStyle.field`
          *
@@ -865,7 +865,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val field: FieldDatePickerStyle get() = FieldDatePickerStyle(2789, emptyList())
+        public val field: FieldDatePickerStyle get() = FieldDatePickerStyle(2783, emptyList())
 /**
          * SwiftUI `DatePickerStyle.wheel`
          *
@@ -874,7 +874,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
          */
-        public val wheel: WheelDatePickerStyle get() = WheelDatePickerStyle(2790, emptyList())
+        public val wheel: WheelDatePickerStyle get() = WheelDatePickerStyle(2784, emptyList())
 /**
          * SwiftUI `DatePickerStyle.compact`
          *
@@ -883,7 +883,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val compact: CompactDatePickerStyle get() = CompactDatePickerStyle(2791, emptyList())
+        public val compact: CompactDatePickerStyle get() = CompactDatePickerStyle(2785, emptyList())
 /**
          * SwiftUI `DatePickerStyle.automatic`
          *
@@ -892,7 +892,7 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
          */
-        public val automatic: DefaultDatePickerStyle get() = DefaultDatePickerStyle(2792, emptyList())
+        public val automatic: DefaultDatePickerStyle get() = DefaultDatePickerStyle(2786, emptyList())
 /**
          * SwiftUI `DatePickerStyle.graphical`
          *
@@ -901,41 +901,41 @@ import kotlin.native.HiddenFromObjC
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val graphical: GraphicalDatePickerStyle get() = GraphicalDatePickerStyle(2793, emptyList())
+        public val graphical: GraphicalDatePickerStyle get() = GraphicalDatePickerStyle(2787, emptyList())
     }
 }
 
 /**
- * SwiftUI `DefaultGlassEffectShape`
+ * SwiftUI `DefaultGroupBoxStyle`
  *
  * ```swift
- * struct DefaultGlassEffectShape
+ * nonisolated struct DefaultGroupBoxStyle
  * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public class DefaultGlassEffectShape internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), Shape {
+@HiddenFromObjC public class DefaultGroupBoxStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), GroupBoxStyle {
 /**
-     * SwiftUI `DefaultGlassEffectShape.init()`
+     * SwiftUI `DefaultGroupBoxStyle.init()`
      *
      * ```swift
-     * init()
+     * nonisolated init()
      * ```
-     * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
     public constructor() : this(1411, emptyList())
 }
 
 /**
- * SwiftUI `DefaultNavigationViewStyle`
+ * SwiftUI `DefaultPickerStyle`
  *
  * ```swift
- * struct DefaultNavigationViewStyle
+ * struct DefaultPickerStyle
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@HiddenFromObjC public class DefaultNavigationViewStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), NavigationViewStyle {
+@HiddenFromObjC public class DefaultPickerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PickerStyle {
 /**
-     * SwiftUI `DefaultNavigationViewStyle.init()`
+     * SwiftUI `DefaultPickerStyle.init()`
      *
      * ```swift
      * init()
@@ -946,2893 +946,2153 @@ import kotlin.native.HiddenFromObjC
 }
 
 /**
- * SwiftUI `DefaultToolbarItem`
+ * SwiftUI `DefaultWindowStyle`
  *
  * ```swift
- * nonisolated struct DefaultToolbarItem
- * ```
- * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
- */
-@HiddenFromObjC public class DefaultToolbarItem internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `DefaultToolbarItem.init(kind:placement:)`
-     *
-     * ```swift
-     * nonisolated init(kind: ToolbarDefaultItemKind, placement: ToolbarItemPlacement = .automatic)
-     * ```
-     * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-     */
-    public constructor(kind: ToolbarDefaultItemKind, placement: ToolbarItemPlacement = ToolbarItemPlacement.automatic) : this(1423, listOf(kind, placement))
-}
-
-/**
- * SwiftUI `DisabledTextSelectability`
- *
- * ```swift
- * struct DisabledTextSelectability
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class DisabledTextSelectability internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), TextSelectability {
-}
-
-/**
- * SwiftUI `DragDropPreviewsFormation`
- *
- * ```swift
- * struct DragDropPreviewsFormation
- * ```
- * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class DragDropPreviewsFormation internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `DragDropPreviewsFormation.list`
-         *
-         * ```swift
-         * static let list: DragDropPreviewsFormation
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val list: DragDropPreviewsFormation get() = DragDropPreviewsFormation(1446, emptyList())
-/**
-         * SwiftUI `DragDropPreviewsFormation.none`
-         *
-         * ```swift
-         * static let none: DragDropPreviewsFormation
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val none: DragDropPreviewsFormation get() = DragDropPreviewsFormation(1447, emptyList())
-/**
-         * SwiftUI `DragDropPreviewsFormation.pile`
-         *
-         * ```swift
-         * static let pile: DragDropPreviewsFormation
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val pile: DragDropPreviewsFormation get() = DragDropPreviewsFormation(1448, emptyList())
-/**
-         * SwiftUI `DragDropPreviewsFormation.stack`
-         *
-         * ```swift
-         * static let stack: DragDropPreviewsFormation
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val stack: DragDropPreviewsFormation get() = DragDropPreviewsFormation(1449, emptyList())
-/**
-         * SwiftUI `DragDropPreviewsFormation.default`
-         *
-         * ```swift
-         * static let `default`: DragDropPreviewsFormation
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val default: DragDropPreviewsFormation get() = DragDropPreviewsFormation(1450, emptyList())
-    }
-}
-
-/** Namespace for SwiftUI `DropSession` nested types. */
-@HiddenFromObjC public object DropSession {
-    /**
-     * SwiftUI `DropSession.Phase`
-     *
-     * ```swift
-     * enum Phase
-     * ```
-     * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public class Phase internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `DropSession.Phase.dataTransferCompleted`
-             *
-             * ```swift
-             * case dataTransferCompleted
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val dataTransferCompleted: DropSession.Phase get() = DropSession.Phase(1475, emptyList())
-/**
-             * SwiftUI `DropSession.Phase.ended(_:)`
-             *
-             * ```swift
-             * case ended(DropOperation)
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public fun ended(p0: DropOperation): DropSession.Phase = DropSession.Phase(1476, listOf(p0))
-/**
-             * SwiftUI `DropSession.Phase.active`
-             *
-             * ```swift
-             * case active
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val active: DropSession.Phase get() = DropSession.Phase(1477, emptyList())
-/**
-             * SwiftUI `DropSession.Phase.exiting`
-             *
-             * ```swift
-             * case exiting
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val exiting: DropSession.Phase get() = DropSession.Phase(1478, emptyList())
-/**
-             * SwiftUI `DropSession.Phase.entering`
-             *
-             * ```swift
-             * case entering
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val entering: DropSession.Phase get() = DropSession.Phase(1479, emptyList())
-        }
-    }
-
-}
-
-/**
- * SwiftUI `Ellipse`
- *
- * ```swift
- * @frozen struct Ellipse
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class Ellipse internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), InsettableShape, Shape {
-/**
-     * SwiftUI `Ellipse.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor() : this(1534, emptyList())
-}
-
-/**
- * SwiftUI `EmptyControlWidgetTemplate`
- *
- * ```swift
- * @MainActor @frozen @preconcurrency struct EmptyControlWidgetTemplate
- * ```
- * Availability: iOS 18.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS 26.0+
- */
-@HiddenFromObjC public class EmptyControlWidgetTemplate internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ControlWidgetTemplate {
-/**
-     * SwiftUI `EmptyControlWidgetTemplate.init()`
-     *
-     * ```swift
-     * @MainActor @preconcurrency init()
-     * ```
-     * Availability: iOS 18.0+, macOS 26.0+, tvOS: unavailable (no-op), watchOS 26.0+
-     */
-    public constructor() : this(1543, emptyList())
-}
-
-/**
- * SwiftUI `EventModifiers`
- *
- * ```swift
- * @frozen struct EventModifiers
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class EventModifiers internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `EventModifiers.init(rawValue:)`
-     *
-     * ```swift
-     * init(rawValue: Int)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(rawValue: Int) : this(1557, listOf(rawValue))
-    public companion object {
-/**
-         * SwiftUI `EventModifiers.numericPad`
-         *
-         * ```swift
-         * static let numericPad: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val numericPad: EventModifiers get() = EventModifiers(1549, emptyList())
-/**
-         * SwiftUI `EventModifiers.all`
-         *
-         * ```swift
-         * static let all: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val all: EventModifiers get() = EventModifiers(1550, emptyList())
-/**
-         * SwiftUI `EventModifiers.shift`
-         *
-         * ```swift
-         * static let shift: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val shift: EventModifiers get() = EventModifiers(1551, emptyList())
-/**
-         * SwiftUI `EventModifiers.option`
-         *
-         * ```swift
-         * static let option: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val option: EventModifiers get() = EventModifiers(1552, emptyList())
-/**
-         * SwiftUI `EventModifiers.command`
-         *
-         * ```swift
-         * static let command: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val command: EventModifiers get() = EventModifiers(1553, emptyList())
-/**
-         * SwiftUI `EventModifiers.control`
-         *
-         * ```swift
-         * static let control: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val control: EventModifiers get() = EventModifiers(1554, emptyList())
-/**
-         * SwiftUI `EventModifiers.capsLock`
-         *
-         * ```swift
-         * static let capsLock: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val capsLock: EventModifiers get() = EventModifiers(1555, emptyList())
-/**
-         * SwiftUI `EventModifiers.function`
-         *
-         * ```swift
-         * static let function: EventModifiers
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        @Deprecated("Deprecated in SwiftUI")
-        public val function: EventModifiers get() = EventModifiers(1556, emptyList())
-    }
-}
-
-/**
- * SwiftUI `FillStyle`
- *
- * ```swift
- * @frozen struct FillStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class FillStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `FillStyle.init(eoFill:antialiased:)`
-     *
-     * ```swift
-     * init(eoFill: Bool = false, antialiased: Bool = true)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(eoFill: Boolean = false, antialiased: Boolean = true) : this(1566, listOf(eoFill, antialiased))
-}
-
-/**
- * SwiftUI `FormPresentationSizing`
- *
- * ```swift
- * struct FormPresentationSizing
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC public class FormPresentationSizing internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PresentationSizing {
-}
-
-/**
- * SwiftUI `GestureInputKinds`
- *
- * ```swift
- * struct GestureInputKinds
- * ```
- * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
- */
-@HiddenFromObjC public class GestureInputKinds internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `GestureInputKinds.init(rawValue:)`
-     *
-     * ```swift
-     * init(rawValue: Int8)
-     * ```
-     * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-     */
-    public constructor(rawValue: Int) : this(1662, listOf(rawValue))
-    public companion object {
-/**
-         * SwiftUI `GestureInputKinds.directTouch`
-         *
-         * ```swift
-         * static let directTouch: GestureInputKinds
-         * ```
-         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-         */
-        public val directTouch: GestureInputKinds get() = GestureInputKinds(1657, emptyList())
-/**
-         * SwiftUI `GestureInputKinds.indirectTouch`
-         *
-         * ```swift
-         * static let indirectTouch: GestureInputKinds
-         * ```
-         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-         */
-        public val indirectTouch: GestureInputKinds get() = GestureInputKinds(1658, emptyList())
-/**
-         * SwiftUI `GestureInputKinds.all`
-         *
-         * ```swift
-         * static let all: GestureInputKinds
-         * ```
-         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-         */
-        public val all: GestureInputKinds get() = GestureInputKinds(1659, emptyList())
-/**
-         * SwiftUI `GestureInputKinds.pencil`
-         *
-         * ```swift
-         * static let pencil: GestureInputKinds
-         * ```
-         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-         */
-        public val pencil: GestureInputKinds get() = GestureInputKinds(1660, emptyList())
-/**
-         * SwiftUI `GestureInputKinds.pointer`
-         *
-         * ```swift
-         * static let pointer: GestureInputKinds
-         * ```
-         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-         */
-        public val pointer: GestureInputKinds get() = GestureInputKinds(1661, emptyList())
-    }
-}
-
-/**
- * SwiftUI `GlobalCoordinateSpace`
- *
- * ```swift
- * struct GlobalCoordinateSpace
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class GlobalCoordinateSpace internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), CoordinateSpaceProtocol {
-/**
-     * SwiftUI `GlobalCoordinateSpace.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor() : this(1679, emptyList())
-}
-
-/**
- * SwiftUI `GroupBoxStyle`
- *
- * ```swift
- * @MainActor @preconcurrency protocol GroupBoxStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public interface GroupBoxStyle {
-    public companion object {
-/**
-         * SwiftUI `GroupBoxStyle.automatic`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var automatic: DefaultGroupBoxStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val automatic: DefaultGroupBoxStyle get() = DefaultGroupBoxStyle(2774, emptyList())
-    }
-}
-
-/**
- * SwiftUI `HelpLink`
- *
- * ```swift
- * @MainActor @preconcurrency struct HelpLink
+ * struct DefaultWindowStyle
  * ```
  * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public class HelpLink internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+@HiddenFromObjC public class DefaultWindowStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), WindowStyle {
 /**
-     * SwiftUI `HelpLink.init(destination:)`
+     * SwiftUI `DefaultWindowStyle.init()`
      *
      * ```swift
-     * @MainActor @preconcurrency init(destination: URL)
+     * init()
      * ```
      * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
-    public constructor(destination: String) : this(1775, listOf(destination))
-/**
-     * SwiftUI `HelpLink.init(action:)`
-     *
-     * ```swift
-     * @MainActor @preconcurrency init(action: @escaping () -> Void)
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(action: () -> Unit) : this(1776, listOf(SAction(action)))
+    public constructor() : this(1423, emptyList())
 }
 
 /**
- * SwiftUI `HorizontalEdge`
+ * SwiftUI `DisclosureGroupStyle`
  *
  * ```swift
- * @frozen enum HorizontalEdge
+ * @MainActor @preconcurrency protocol DisclosureGroupStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public interface DisclosureGroupStyle {
+    public companion object {
+/**
+         * SwiftUI `DisclosureGroupStyle.automatic`
+         *
+         * ```swift
+         * @MainActor @preconcurrency static var automatic: AutomaticDisclosureGroupStyle { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val automatic: AutomaticDisclosureGroupStyle get() = AutomaticDisclosureGroupStyle(2827, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `DragGesture`
+ *
+ * ```swift
+ * @MainActor @preconcurrency struct DragGesture
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC public class DragGesture internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `DragGesture.init(minimumDistance:coordinateSpace:inputKinds:)`
+     *
+     * ```swift
+     * @MainActor @preconcurrency init(minimumDistance: CGFloat = 10, coordinateSpace: some CoordinateSpaceProtocol = .local, inputKinds: GestureInputKinds = .all)
+     * ```
+     * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS 27.0+
+     */
+    public constructor(minimumDistance: Double = 10.0, coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local, inputKinds: GestureInputKinds = GestureInputKinds.all) : this(1450, listOf(minimumDistance, coordinateSpace, inputKinds))
+/**
+     * SwiftUI `DragGesture.init(minimumDistance:coordinateSpace:)`
+     *
+     * ```swift
+     * @MainActor @preconcurrency init(minimumDistance: CGFloat = 10, coordinateSpace: CoordinateSpace = .local)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor(minimumDistance: Double = 10.0, coordinateSpace: CoordinateSpace = CoordinateSpace.local) : this(1451, listOf(minimumDistance, coordinateSpace))
+/**
+     * SwiftUI `DragGesture.init(minimumDistance:coordinateSpace:)`
+     *
+     * ```swift
+     * @MainActor @preconcurrency init(minimumDistance: CGFloat = 10, coordinateSpace: some CoordinateSpaceProtocol = .local)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor(minimumDistance: Double = 10.0, coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local) : this(1452, listOf(minimumDistance, coordinateSpace))
+}
+
+/**
+ * SwiftUI `DynamicTypeSize`
+ *
+ * ```swift
+ * enum DynamicTypeSize
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@HiddenFromObjC public class HorizontalEdge internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+@HiddenFromObjC public class DynamicTypeSize internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
     public companion object {
 /**
-         * SwiftUI `HorizontalEdge.leading`
+         * SwiftUI `DynamicTypeSize.accessibility1`
          *
          * ```swift
-         * case leading
+         * case accessibility1
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val leading: HorizontalEdge get() = HorizontalEdge(1796, emptyList())
+        public val accessibility1: DynamicTypeSize get() = DynamicTypeSize(1479, emptyList())
 /**
-         * SwiftUI `HorizontalEdge.trailing`
+         * SwiftUI `DynamicTypeSize.accessibility2`
          *
          * ```swift
-         * case trailing
+         * case accessibility2
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val trailing: HorizontalEdge get() = HorizontalEdge(1797, emptyList())
+        public val accessibility2: DynamicTypeSize get() = DynamicTypeSize(1480, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.accessibility3`
+         *
+         * ```swift
+         * case accessibility3
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val accessibility3: DynamicTypeSize get() = DynamicTypeSize(1481, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.accessibility4`
+         *
+         * ```swift
+         * case accessibility4
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val accessibility4: DynamicTypeSize get() = DynamicTypeSize(1482, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.accessibility5`
+         *
+         * ```swift
+         * case accessibility5
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val accessibility5: DynamicTypeSize get() = DynamicTypeSize(1483, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.large`
+         *
+         * ```swift
+         * case large
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val large: DynamicTypeSize get() = DynamicTypeSize(1484, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.small`
+         *
+         * ```swift
+         * case small
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val small: DynamicTypeSize get() = DynamicTypeSize(1485, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.medium`
+         *
+         * ```swift
+         * case medium
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val medium: DynamicTypeSize get() = DynamicTypeSize(1486, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.xLarge`
+         *
+         * ```swift
+         * case xLarge
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val xLarge: DynamicTypeSize get() = DynamicTypeSize(1487, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.xSmall`
+         *
+         * ```swift
+         * case xSmall
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val xSmall: DynamicTypeSize get() = DynamicTypeSize(1488, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.xxLarge`
+         *
+         * ```swift
+         * case xxLarge
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val xxLarge: DynamicTypeSize get() = DynamicTypeSize(1489, emptyList())
+/**
+         * SwiftUI `DynamicTypeSize.xxxLarge`
+         *
+         * ```swift
+         * case xxxLarge
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val xxxLarge: DynamicTypeSize get() = DynamicTypeSize(1490, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `EllipticalListStyle`
+ *
+ * ```swift
+ * struct EllipticalListStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC public class EllipticalListStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ListStyle {
+/**
+     * SwiftUI `EllipticalListStyle.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor() : this(1536, emptyList())
+}
+
+/**
+ * SwiftUI `EmptyVisualEffect`
+ *
+ * ```swift
+ * struct EmptyVisualEffect
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class EmptyVisualEffect internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), VisualEffect {
+/**
+     * SwiftUI `EmptyVisualEffect.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor() : this(1544, emptyList())
+}
+
+/**
+ * SwiftUI `ExpandedWindowToolbarStyle`
+ *
+ * ```swift
+ * struct ExpandedWindowToolbarStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class ExpandedWindowToolbarStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), WindowToolbarStyle {
+/**
+     * SwiftUI `ExpandedWindowToolbarStyle.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor() : this(1557, emptyList())
+}
+
+/**
+ * SwiftUI `FixedTextVariant`
+ *
+ * ```swift
+ * struct FixedTextVariant
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC public class FixedTextVariant internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), TextVariantPreference {
+}
+
+/**
+ * SwiftUI `FrameResizeDirection`
+ *
+ * ```swift
+ * @frozen enum FrameResizeDirection
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class FrameResizeDirection internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `FrameResizeDirection.inward`
+         *
+         * ```swift
+         * case inward
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val inward: FrameResizeDirection get() = FrameResizeDirection(1639, emptyList())
+/**
+         * SwiftUI `FrameResizeDirection.outward`
+         *
+         * ```swift
+         * case outward
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val outward: FrameResizeDirection get() = FrameResizeDirection(1640, emptyList())
     }
     /**
-     * SwiftUI `HorizontalEdge.Set`
+     * SwiftUI `FrameResizeDirection.Set`
      *
      * ```swift
      * @frozen struct Set
      * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
     public class Set internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
 /**
-         * SwiftUI `HorizontalEdge.Set.init(_:)`
+         * SwiftUI `FrameResizeDirection.Set.init(_:)`
          *
          * ```swift
-         * init(_ edge: HorizontalEdge)
+         * init(_ direction: FrameResizeDirection)
          * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public constructor(edge: HorizontalEdge) : this(1802, listOf(edge))
+        public constructor(direction: FrameResizeDirection) : this(1645, listOf(direction))
 /**
-         * SwiftUI `HorizontalEdge.Set.init(rawValue:)`
+         * SwiftUI `FrameResizeDirection.Set.init(rawValue:)`
          *
          * ```swift
          * init(rawValue: Int8)
          * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public constructor(rawValue: Int) : this(1800, listOf(rawValue))
-        public companion object {
-/**
-             * SwiftUI `HorizontalEdge.Set.all`
-             *
-             * ```swift
-             * static let all: HorizontalEdge.Set
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val all: HorizontalEdge.Set get() = HorizontalEdge.Set(1798, emptyList())
-/**
-             * SwiftUI `HorizontalEdge.Set.leading`
-             *
-             * ```swift
-             * static let leading: HorizontalEdge.Set
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val leading: HorizontalEdge.Set get() = HorizontalEdge.Set(1799, emptyList())
-/**
-             * SwiftUI `HorizontalEdge.Set.trailing`
-             *
-             * ```swift
-             * static let trailing: HorizontalEdge.Set
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val trailing: HorizontalEdge.Set get() = HorizontalEdge.Set(1801, emptyList())
-        }
-    }
-
-}
-
-/**
- * SwiftUI `ImmersionStyle`
- *
- * ```swift
- * protocol ImmersionStyle
- * ```
- * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public interface ImmersionStyle {
-    public companion object {
-/**
-         * SwiftUI `ImmersionStyle.progressive(aspectRatio:)`
-         *
-         * ```swift
-         * static func progressive(aspectRatio: ProgressiveImmersionAspectRatio) -> ProgressiveImmersionStyle
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public fun progressive(aspectRatio: ProgressiveImmersionAspectRatio): ProgressiveImmersionStyle = ProgressiveImmersionStyle(2775, listOf(aspectRatio))
-/**
-         * SwiftUI `ImmersionStyle.progressive`
-         *
-         * ```swift
-         * @export(implementation) static var progressive: ProgressiveImmersionStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val progressive: ProgressiveImmersionStyle get() = ProgressiveImmersionStyle(2776, emptyList())
-/**
-         * SwiftUI `ImmersionStyle.progressive(_:initialAmount:aspectRatio:)`
-         *
-         * ```swift
-         * static func progressive(_ immersionRange: ClosedRange<Double>, initialAmount: Double? = nil, aspectRatio: ProgressiveImmersionAspectRatio?) -> ProgressiveImmersionStyle
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public fun progressive(immersionRange: ClosedFloatingPointRange<Double>, initialAmount: Double? = null, aspectRatio: ProgressiveImmersionAspectRatio?): ProgressiveImmersionStyle = ProgressiveImmersionStyle(2777, listOf(listOf(immersionRange.start, immersionRange.endInclusive), initialAmount, aspectRatio))
-/**
-         * SwiftUI `ImmersionStyle.progressive(_:initialAmount:)`
-         *
-         * ```swift
-         * static func progressive(_ immersionRange: ClosedRange<Double>, initialAmount: Double? = nil) -> ProgressiveImmersionStyle
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public fun progressive(immersionRange: ClosedFloatingPointRange<Double>, initialAmount: Double? = null): ProgressiveImmersionStyle = ProgressiveImmersionStyle(2778, listOf(listOf(immersionRange.start, immersionRange.endInclusive), initialAmount))
-/**
-         * SwiftUI `ImmersionStyle.full`
-         *
-         * ```swift
-         * @export(implementation) static var full: FullImmersionStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val full: FullImmersionStyle get() = FullImmersionStyle(2779, emptyList())
-/**
-         * SwiftUI `ImmersionStyle.automatic`
-         *
-         * ```swift
-         * @export(implementation) static var automatic: AutomaticImmersionStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val automatic: AutomaticImmersionStyle get() = AutomaticImmersionStyle(2780, emptyList())
-    }
-}
-
-/**
- * SwiftUI `InsetTableStyle`
- *
- * ```swift
- * nonisolated struct InsetTableStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class InsetTableStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), TableStyle {
-/**
-     * SwiftUI `InsetTableStyle.init(alternatesRowBackgrounds:)`
-     *
-     * ```swift
-     * nonisolated init(alternatesRowBackgrounds: Bool)
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(alternatesRowBackgrounds: Boolean) : this(1838, listOf(alternatesRowBackgrounds))
-/**
-     * SwiftUI `InsetTableStyle.init()`
-     *
-     * ```swift
-     * nonisolated init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor() : this(1839, emptyList())
-}
-
-/**
- * SwiftUI `KeyboardShortcut`
- *
- * ```swift
- * struct KeyboardShortcut
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class KeyboardShortcut internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `KeyboardShortcut.init(_:modifiers:localization:)`
-     *
-     * ```swift
-     * init(_ key: KeyEquivalent, modifiers: EventModifiers = .command, localization: KeyboardShortcut.Localization)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(key: KeyEquivalent, modifiers: EventModifiers = EventModifiers.command, localization: KeyboardShortcut.Localization) : this(1871, listOf(key, modifiers, localization))
-/**
-     * SwiftUI `KeyboardShortcut.init(_:modifiers:)`
-     *
-     * ```swift
-     * init(_ key: KeyEquivalent, modifiers: EventModifiers = .command)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(key: KeyEquivalent, modifiers: EventModifiers = EventModifiers.command) : this(1872, listOf(key, modifiers))
-    public companion object {
-/**
-         * SwiftUI `KeyboardShortcut.cancelAction`
-         *
-         * ```swift
-         * static let cancelAction: KeyboardShortcut
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val cancelAction: KeyboardShortcut get() = KeyboardShortcut(1869, emptyList())
-/**
-         * SwiftUI `KeyboardShortcut.defaultAction`
-         *
-         * ```swift
-         * static let defaultAction: KeyboardShortcut
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val defaultAction: KeyboardShortcut get() = KeyboardShortcut(1870, emptyList())
-    }
-    /**
-     * SwiftUI `KeyboardShortcut.Localization`
-     *
-     * ```swift
-     * struct Localization
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public class Localization internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `KeyboardShortcut.Localization.withoutMirroring`
-             *
-             * ```swift
-             * static let withoutMirroring: KeyboardShortcut.Localization
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val withoutMirroring: KeyboardShortcut.Localization get() = KeyboardShortcut.Localization(1873, emptyList())
-/**
-             * SwiftUI `KeyboardShortcut.Localization.custom`
-             *
-             * ```swift
-             * static let custom: KeyboardShortcut.Localization
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val custom: KeyboardShortcut.Localization get() = KeyboardShortcut.Localization(1874, emptyList())
-/**
-             * SwiftUI `KeyboardShortcut.Localization.automatic`
-             *
-             * ```swift
-             * static let automatic: KeyboardShortcut.Localization
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-             */
-            public val automatic: KeyboardShortcut.Localization get() = KeyboardShortcut.Localization(1875, emptyList())
-        }
-    }
-
-}
-
-/**
- * SwiftUI `LegibilityWeight`
- *
- * ```swift
- * enum LegibilityWeight
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class LegibilityWeight internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `LegibilityWeight.bold`
-         *
-         * ```swift
-         * case bold
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val bold: LegibilityWeight get() = LegibilityWeight(1882, emptyList())
-/**
-         * SwiftUI `LegibilityWeight.regular`
-         *
-         * ```swift
-         * case regular
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val regular: LegibilityWeight get() = LegibilityWeight(1883, emptyList())
-    }
-}
-
-/**
- * SwiftUI `LinkButtonStyle`
- *
- * ```swift
- * nonisolated struct LinkButtonStyle
- * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class LinkButtonStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PrimitiveButtonStyle {
-/**
-     * SwiftUI `LinkButtonStyle.init()`
-     *
-     * ```swift
-     * nonisolated init()
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor() : this(1894, emptyList())
-}
-
-/**
- * SwiftUI `LocalizedStringKey`
- *
- * ```swift
- * @frozen struct LocalizedStringKey
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class LocalizedStringKey internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `LocalizedStringKey.init(stringLiteral:)`
-     *
-     * ```swift
-     * init(stringLiteral value: String)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(stringLiteral: String) : this(1903, listOf(stringLiteral))
-/**
-     * SwiftUI `LocalizedStringKey.init(stringInterpolation:)`
-     *
-     * ```swift
-     * init(stringInterpolation: LocalizedStringKey.StringInterpolation)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(stringInterpolation: LocalizedStringKey.StringInterpolation) : this(1904, listOf(stringInterpolation))
-    public companion object {
-/**
-         * SwiftUI `LocalizedStringKey.init(_:)`
-         *
-         * ```swift
-         * init(_ value: String)
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public fun value(value: String): LocalizedStringKey = LocalizedStringKey(1905, listOf(value))
-    }
-    /**
-     * SwiftUI `LocalizedStringKey.StringInterpolation`
-     *
-     * ```swift
-     * struct StringInterpolation
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public class StringInterpolation internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-         * SwiftUI `LocalizedStringKey.StringInterpolation.init(literalCapacity:interpolationCount:)`
-         *
-         * ```swift
-         * init(literalCapacity: Int, interpolationCount: Int)
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public constructor(literalCapacity: Int, interpolationCount: Int) : this(1906, listOf(literalCapacity, interpolationCount))
-    }
-
-}
-
-/**
- * SwiftUI `MaterialActiveAppearance`
- *
- * ```swift
- * struct MaterialActiveAppearance
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC public class MaterialActiveAppearance internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `MaterialActiveAppearance.matchWindow`
-         *
-         * ```swift
-         * static let matchWindow: MaterialActiveAppearance
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val matchWindow: MaterialActiveAppearance get() = MaterialActiveAppearance(1924, emptyList())
-/**
-         * SwiftUI `MaterialActiveAppearance.active`
-         *
-         * ```swift
-         * static let active: MaterialActiveAppearance
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val active: MaterialActiveAppearance get() = MaterialActiveAppearance(1925, emptyList())
-/**
-         * SwiftUI `MaterialActiveAppearance.inactive`
-         *
-         * ```swift
-         * static let inactive: MaterialActiveAppearance
-         * ```
          * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
          */
-        public val inactive: MaterialActiveAppearance get() = MaterialActiveAppearance(1926, emptyList())
-/**
-         * SwiftUI `MaterialActiveAppearance.automatic`
-         *
-         * ```swift
-         * static let automatic: MaterialActiveAppearance
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val automatic: MaterialActiveAppearance get() = MaterialActiveAppearance(1927, emptyList())
-    }
-}
-
-/**
- * SwiftUI `MenuPickerStyle`
- *
- * ```swift
- * struct MenuPickerStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class MenuPickerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PickerStyle {
-/**
-     * SwiftUI `MenuPickerStyle.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
-     */
-    public constructor() : this(1935, emptyList())
-}
-
-/**
- * SwiftUI `NSHostingSizingOptions`
- *
- * ```swift
- * struct NSHostingSizingOptions
- * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class NSHostingSizingOptions internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `NSHostingSizingOptions.init(rawValue:)`
-     *
-     * ```swift
-     * init(rawValue: Int)
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(rawValue: Int) : this(1952, listOf(rawValue))
-    public companion object {
-/**
-         * SwiftUI `NSHostingSizingOptions.standardBounds`
-         *
-         * ```swift
-         * static let standardBounds: NSHostingSizingOptions
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val standardBounds: NSHostingSizingOptions get() = NSHostingSizingOptions(1947, emptyList())
-/**
-         * SwiftUI `NSHostingSizingOptions.intrinsicContentSize`
-         *
-         * ```swift
-         * static let intrinsicContentSize: NSHostingSizingOptions
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val intrinsicContentSize: NSHostingSizingOptions get() = NSHostingSizingOptions(1948, emptyList())
-/**
-         * SwiftUI `NSHostingSizingOptions.preferredContentSize`
-         *
-         * ```swift
-         * static let preferredContentSize: NSHostingSizingOptions
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val preferredContentSize: NSHostingSizingOptions get() = NSHostingSizingOptions(1949, emptyList())
-/**
-         * SwiftUI `NSHostingSizingOptions.maxSize`
-         *
-         * ```swift
-         * static let maxSize: NSHostingSizingOptions
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val maxSize: NSHostingSizingOptions get() = NSHostingSizingOptions(1950, emptyList())
-/**
-         * SwiftUI `NSHostingSizingOptions.minSize`
-         *
-         * ```swift
-         * static let minSize: NSHostingSizingOptions
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val minSize: NSHostingSizingOptions get() = NSHostingSizingOptions(1951, emptyList())
-    }
-}
-
-/**
- * SwiftUI `NavigationPath`
- *
- * ```swift
- * struct NavigationPath
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class NavigationPath internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `NavigationPath.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor() : this(1960, emptyList())
-}
-
-/**
- * SwiftUI `OffsetTransition`
- *
- * ```swift
- * nonisolated struct OffsetTransition
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class OffsetTransition internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `OffsetTransition.init(_:)`
-     *
-     * ```swift
-     * nonisolated init(_ offset: CGSize)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(offset: CGSize) : this(1968, listOf(offset))
-}
-
-/**
- * SwiftUI `PageIndexViewStyle`
- *
- * ```swift
- * struct PageIndexViewStyle
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class PageIndexViewStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), IndexViewStyle {
-/**
-     * SwiftUI `PageIndexViewStyle.init(backgroundDisplayMode:)`
-     *
-     * ```swift
-     * init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic)
-     * ```
-     * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = PageIndexViewStyle.BackgroundDisplayMode.automatic) : this(1982, listOf(backgroundDisplayMode))
-    /**
-     * SwiftUI `PageIndexViewStyle.BackgroundDisplayMode`
-     *
-     * ```swift
-     * struct BackgroundDisplayMode
-     * ```
-     * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
-     */
-    public class BackgroundDisplayMode internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+        public constructor(rawValue: Int) : this(1644, listOf(rawValue))
         public companion object {
 /**
-             * SwiftUI `PageIndexViewStyle.BackgroundDisplayMode.interactive`
+             * SwiftUI `FrameResizeDirection.Set.all`
              *
              * ```swift
-             * static let interactive: PageIndexViewStyle.BackgroundDisplayMode
+             * static let all: FrameResizeDirection.Set
              * ```
-             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
+             * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
              */
-            public val interactive: PageIndexViewStyle.BackgroundDisplayMode get() = PageIndexViewStyle.BackgroundDisplayMode(1983, emptyList())
+            public val all: FrameResizeDirection.Set get() = FrameResizeDirection.Set(1641, emptyList())
 /**
-             * SwiftUI `PageIndexViewStyle.BackgroundDisplayMode.never`
+             * SwiftUI `FrameResizeDirection.Set.inward`
              *
              * ```swift
-             * static let never: PageIndexViewStyle.BackgroundDisplayMode
+             * static let inward: FrameResizeDirection.Set
              * ```
-             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+             * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
              */
-            public val never: PageIndexViewStyle.BackgroundDisplayMode get() = PageIndexViewStyle.BackgroundDisplayMode(1984, emptyList())
+            public val inward: FrameResizeDirection.Set get() = FrameResizeDirection.Set(1642, emptyList())
 /**
-             * SwiftUI `PageIndexViewStyle.BackgroundDisplayMode.always`
+             * SwiftUI `FrameResizeDirection.Set.outward`
              *
              * ```swift
-             * static let always: PageIndexViewStyle.BackgroundDisplayMode
+             * static let outward: FrameResizeDirection.Set
              * ```
-             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
+             * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
              */
-            public val always: PageIndexViewStyle.BackgroundDisplayMode get() = PageIndexViewStyle.BackgroundDisplayMode(1985, emptyList())
-/**
-             * SwiftUI `PageIndexViewStyle.BackgroundDisplayMode.automatic`
-             *
-             * ```swift
-             * static let automatic: PageIndexViewStyle.BackgroundDisplayMode
-             * ```
-             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
-             */
-            public val automatic: PageIndexViewStyle.BackgroundDisplayMode get() = PageIndexViewStyle.BackgroundDisplayMode(1986, emptyList())
+            public val outward: FrameResizeDirection.Set get() = FrameResizeDirection.Set(1643, emptyList())
         }
     }
 
 }
 
 /**
- * SwiftUI `PaletteSelectionEffect`
+ * SwiftUI `Glass`
  *
  * ```swift
- * struct PaletteSelectionEffect
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class PaletteSelectionEffect internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `PaletteSelectionEffect.symbolVariant(_:)`
-         *
-         * ```swift
-         * static func symbolVariant(_ variant: SymbolVariants) -> PaletteSelectionEffect
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public fun symbolVariant(variant: SymbolVariants): PaletteSelectionEffect = PaletteSelectionEffect(1994, listOf(variant))
-/**
-         * SwiftUI `PaletteSelectionEffect.custom`
-         *
-         * ```swift
-         * static let custom: PaletteSelectionEffect
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val custom: PaletteSelectionEffect get() = PaletteSelectionEffect(1995, emptyList())
-/**
-         * SwiftUI `PaletteSelectionEffect.automatic`
-         *
-         * ```swift
-         * static let automatic: PaletteSelectionEffect
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val automatic: PaletteSelectionEffect get() = PaletteSelectionEffect(1996, emptyList())
-    }
-}
-
-/**
- * SwiftUI `PinnedScrollableViews`
- *
- * ```swift
- * struct PinnedScrollableViews
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class PinnedScrollableViews internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `PinnedScrollableViews.init(rawValue:)`
-     *
-     * ```swift
-     * init(rawValue: UInt32)
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor(rawValue: Int) : this(2031, listOf(rawValue))
-    public companion object {
-/**
-         * SwiftUI `PinnedScrollableViews.sectionFooters`
-         *
-         * ```swift
-         * static let sectionFooters: PinnedScrollableViews
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val sectionFooters: PinnedScrollableViews get() = PinnedScrollableViews(2029, emptyList())
-/**
-         * SwiftUI `PinnedScrollableViews.sectionHeaders`
-         *
-         * ```swift
-         * static let sectionHeaders: PinnedScrollableViews
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val sectionHeaders: PinnedScrollableViews get() = PinnedScrollableViews(2030, emptyList())
-    }
-}
-
-/**
- * SwiftUI `PlainWindowStyle`
- *
- * ```swift
- * struct PlainWindowStyle
- * ```
- * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class PlainWindowStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), WindowStyle {
-/**
-     * SwiftUI `PlainWindowStyle.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor() : this(2037, emptyList())
-}
-
-/**
- * SwiftUI `PresentationContentInteraction`
- *
- * ```swift
- * struct PresentationContentInteraction
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class PresentationContentInteraction internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `PresentationContentInteraction.resizes`
-         *
-         * ```swift
-         * static var resizes: PresentationContentInteraction { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val resizes: PresentationContentInteraction get() = PresentationContentInteraction(2064, emptyList())
-/**
-         * SwiftUI `PresentationContentInteraction.scrolls`
-         *
-         * ```swift
-         * static var scrolls: PresentationContentInteraction { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val scrolls: PresentationContentInteraction get() = PresentationContentInteraction(2065, emptyList())
-/**
-         * SwiftUI `PresentationContentInteraction.automatic`
-         *
-         * ```swift
-         * static var automatic: PresentationContentInteraction { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val automatic: PresentationContentInteraction get() = PresentationContentInteraction(2066, emptyList())
-    }
-}
-
-/**
- * SwiftUI `PrimitiveButtonStyle`
- *
- * ```swift
- * @MainActor @preconcurrency protocol PrimitiveButtonStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public interface PrimitiveButtonStyle {
-    public companion object {
-/**
-         * SwiftUI `PrimitiveButtonStyle.borderless`
-         *
-         * ```swift
-         * @export(implementation) nonisolated static var borderless: BorderlessButtonStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val borderless: BorderlessButtonStyle get() = BorderlessButtonStyle(2836, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.accessoryBar`
-         *
-         * ```swift
-         * @MainActor @preconcurrency static var accessoryBar: AccessoryBarButtonStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val accessoryBar: AccessoryBarButtonStyle get() = AccessoryBarButtonStyle(2837, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.glassProminent`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var glassProminent: GlassProminentButtonStyle { get }
-         * ```
-         * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-         */
-        public val glassProminent: GlassProminentButtonStyle get() = GlassProminentButtonStyle(2838, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.borderedProminent`
-         *
-         * ```swift
-         * @export(implementation) nonisolated static var borderedProminent: BorderedProminentButtonStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val borderedProminent: BorderedProminentButtonStyle get() = BorderedProminentButtonStyle(2839, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.accessoryBarAction`
-         *
-         * ```swift
-         * @MainActor @preconcurrency static var accessoryBarAction: AccessoryBarActionButtonStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val accessoryBarAction: AccessoryBarActionButtonStyle get() = AccessoryBarActionButtonStyle(2840, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.card`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var card: CardButtonStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
-         */
-        public val card: CardButtonStyle get() = CardButtonStyle(2841, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.link`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var link: LinkButtonStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val link: LinkButtonStyle get() = LinkButtonStyle(2842, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.glass`
-         *
-         * ```swift
-         * @export(implementation) nonisolated static var glass: GlassButtonStyle { get }
-         * ```
-         * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-         */
-        public val glass: GlassButtonStyle get() = GlassButtonStyle(2843, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.glass(_:)`
-         *
-         * ```swift
-         * nonisolated static func glass(_ glass: Glass) -> Self
-         * ```
-         * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-         */
-        public fun glass(glass: Glass): GlassButtonStyle = GlassButtonStyle(2844, listOf(glass))
-/**
-         * SwiftUI `PrimitiveButtonStyle.plain`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var plain: PlainButtonStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val plain: PlainButtonStyle get() = PlainButtonStyle(2845, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.automatic`
-         *
-         * ```swift
-         * @export(implementation) nonisolated static var automatic: DefaultButtonStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val automatic: DefaultButtonStyle get() = DefaultButtonStyle(2846, emptyList())
-/**
-         * SwiftUI `PrimitiveButtonStyle.bordered`
-         *
-         * ```swift
-         * @export(implementation) nonisolated static var bordered: BorderedButtonStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val bordered: BorderedButtonStyle get() = BorderedButtonStyle(2847, emptyList())
-    }
-}
-
-/**
- * SwiftUI `ProminentDetailNavigationSplitViewStyle`
- *
- * ```swift
- * @MainActor @preconcurrency struct ProminentDetailNavigationSplitViewStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class ProminentDetailNavigationSplitViewStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), NavigationSplitViewStyle {
-/**
-     * SwiftUI `ProminentDetailNavigationSplitViewStyle.init()`
-     *
-     * ```swift
-     * @MainActor @preconcurrency init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor() : this(2092, emptyList())
-}
-
-/**
- * SwiftUI `RadioGroupPickerStyle`
- *
- * ```swift
- * struct RadioGroupPickerStyle
- * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class RadioGroupPickerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PickerStyle {
-/**
-     * SwiftUI `RadioGroupPickerStyle.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor() : this(2104, emptyList())
-}
-
-/**
- * SwiftUI `RotateGesture`
- *
- * ```swift
- * nonisolated struct RotateGesture
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class RotateGesture internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `RotateGesture.init(minimumAngleDelta:inputKinds:)`
-     *
-     * ```swift
-     * nonisolated init(minimumAngleDelta: Angle = .degrees(1), inputKinds: GestureInputKinds = .all)
-     * ```
-     * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(minimumAngleDelta: Angle? = null, inputKinds: GestureInputKinds = GestureInputKinds.all) : this(2117, listOf(minimumAngleDelta, inputKinds))
-/**
-     * SwiftUI `RotateGesture.init(minimumAngleDelta:)`
-     *
-     * ```swift
-     * nonisolated init(minimumAngleDelta: Angle = .degrees(1))
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(minimumAngleDelta: Angle? = null) : this(2118, listOf(minimumAngleDelta))
-}
-
-/**
- * SwiftUI `RoundedRectangularShapeCorners`
- *
- * ```swift
- * struct RoundedRectangularShapeCorners
+ * struct Glass
  * ```
  * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
  */
-@HiddenFromObjC public class RoundedRectangularShapeCorners internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+@HiddenFromObjC public class Glass internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
 /**
-     * SwiftUI `RoundedRectangularShapeCorners.init(topLeading:topTrailing:bottomLeading:bottomTrailing:)`
+     * SwiftUI `Glass.interactive(_:)`
      *
      * ```swift
-     * init(topLeading: Edge.Corner.Style = 0, topTrailing: Edge.Corner.Style = 0, bottomLeading: Edge.Corner.Style = 0, bottomTrailing: Edge.Corner.Style = 0)
+     * func interactive(_ isEnabled: Bool = true) -> Glass
      * ```
      * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
      */
-    public constructor(topLeading: Edge.Corner.Style? = null, topTrailing: Edge.Corner.Style? = null, bottomLeading: Edge.Corner.Style? = null, bottomTrailing: Edge.Corner.Style? = null) : this(2127, listOf(topLeading, topTrailing, bottomLeading, bottomTrailing))
+    public fun interactive(isEnabled: Boolean = true): Glass = Glass(1666, listOf(this, isEnabled))
 /**
-     * SwiftUI `RoundedRectangularShapeCorners.init(all:)`
+     * SwiftUI `Glass.tint(_:)`
      *
      * ```swift
-     * init(all: Edge.Corner.Style)
+     * func tint(_ color: Color?) -> Glass
      * ```
      * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
      */
-    public constructor(all: Edge.Corner.Style) : this(2128, listOf(all))
+    public fun tint(color: Color?): Glass = Glass(1667, listOf(this, color))
     public companion object {
 /**
-         * SwiftUI `RoundedRectangularShapeCorners.concentric(minimum:)`
+         * SwiftUI `Glass.clear`
          *
          * ```swift
-         * static func concentric(minimum: Edge.Corner.Style? = nil) -> RoundedRectangularShapeCorners
+         * static var clear: Glass { get }
          * ```
          * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
          */
-        public fun concentric(minimum: Edge.Corner.Style? = null): RoundedRectangularShapeCorners = RoundedRectangularShapeCorners(2125, listOf(minimum))
+        public val clear: Glass get() = Glass(1668, emptyList())
 /**
-         * SwiftUI `RoundedRectangularShapeCorners.concentric`
+         * SwiftUI `Glass.regular`
          *
          * ```swift
-         * static var concentric: RoundedRectangularShapeCorners { get }
+         * static var regular: Glass { get }
          * ```
          * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
          */
-        public val concentric: RoundedRectangularShapeCorners get() = RoundedRectangularShapeCorners(2126, emptyList())
+        public val regular: Glass get() = Glass(1669, emptyList())
 /**
-         * SwiftUI `RoundedRectangularShapeCorners.fixed(_:)`
+         * SwiftUI `Glass.identity`
          *
          * ```swift
-         * static func fixed(_ radius: CGFloat) -> RoundedRectangularShapeCorners
+         * static var identity: Glass { get }
          * ```
          * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
          */
-        public fun fixed(radius: Double): RoundedRectangularShapeCorners = RoundedRectangularShapeCorners(2129, listOf(radius))
+        public val identity: Glass get() = Glass(1670, emptyList())
     }
-    /**
-     * SwiftUI `RoundedRectangularShapeCorners.AnimatableData`
-     *
-     * ```swift
-     * struct AnimatableData
-     * ```
-     * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-     */
-    public class AnimatableData internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `RoundedRectangularShapeCorners.AnimatableData.zero`
-             *
-             * ```swift
-             * static var zero: RoundedRectangularShapeCorners.AnimatableData { get }
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val zero: RoundedRectangularShapeCorners.AnimatableData get() = RoundedRectangularShapeCorners.AnimatableData(2130, emptyList())
-        }
-    }
-
 }
 
 /**
- * SwiftUI `SceneRestorationBehavior`
+ * SwiftUI `GraphicalDatePickerStyle`
  *
  * ```swift
- * struct SceneRestorationBehavior
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC public class SceneRestorationBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `SceneRestorationBehavior.disabled`
-         *
-         * ```swift
-         * static let disabled: SceneRestorationBehavior
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val disabled: SceneRestorationBehavior get() = SceneRestorationBehavior(2144, emptyList())
-/**
-         * SwiftUI `SceneRestorationBehavior.automatic`
-         *
-         * ```swift
-         * static let automatic: SceneRestorationBehavior
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val automatic: SceneRestorationBehavior get() = SceneRestorationBehavior(2145, emptyList())
-    }
-}
-
-/**
- * SwiftUI `ScrollGeometry`
- *
- * ```swift
- * struct ScrollGeometry
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC public class ScrollGeometry internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `ScrollGeometry.init(contentOffset:contentSize:contentInsets:containerSize:)`
-     *
-     * ```swift
-     * init(contentOffset: CGPoint, contentSize: CGSize, contentInsets: EdgeInsets, containerSize: CGSize)
-     * ```
-     * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-     */
-    public constructor(contentOffset: CGPoint, contentSize: CGSize, contentInsets: EdgeInsets, containerSize: CGSize) : this(2161, listOf(contentOffset, contentSize, contentInsets, containerSize))
-}
-
-/**
- * SwiftUI `ScrollTargetBehavior`
- *
- * ```swift
- * protocol ScrollTargetBehavior
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public interface ScrollTargetBehavior {
-    public companion object {
-/**
-         * SwiftUI `ScrollTargetBehavior.viewAligned(limitBehavior:anchor:)`
-         *
-         * ```swift
-         * @export(implementation) static func viewAligned(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior, anchor: UnitPoint?) -> Self
-         * ```
-         * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-         */
-        public fun viewAligned(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior, anchor: UnitPoint?): ViewAlignedScrollTargetBehavior = ViewAlignedScrollTargetBehavior(2848, listOf(limitBehavior, anchor))
-/**
-         * SwiftUI `ScrollTargetBehavior.viewAligned(limitBehavior:)`
-         *
-         * ```swift
-         * @export(implementation) static func viewAligned(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior) -> Self
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public fun viewAligned(limitBehavior: ViewAlignedScrollTargetBehavior.LimitBehavior): ViewAlignedScrollTargetBehavior = ViewAlignedScrollTargetBehavior(2849, listOf(limitBehavior))
-/**
-         * SwiftUI `ScrollTargetBehavior.viewAligned(anchor:)`
-         *
-         * ```swift
-         * @export(implementation) static func viewAligned(anchor: UnitPoint?) -> Self
-         * ```
-         * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-         */
-        public fun viewAligned(anchor: UnitPoint?): ViewAlignedScrollTargetBehavior = ViewAlignedScrollTargetBehavior(2850, listOf(anchor))
-/**
-         * SwiftUI `ScrollTargetBehavior.viewAligned`
-         *
-         * ```swift
-         * @export(implementation) static var viewAligned: ViewAlignedScrollTargetBehavior { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val viewAligned: ViewAlignedScrollTargetBehavior get() = ViewAlignedScrollTargetBehavior(2851, emptyList())
-/**
-         * SwiftUI `ScrollTargetBehavior.paging`
-         *
-         * ```swift
-         * @export(implementation) static var paging: PagingScrollTargetBehavior { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val paging: PagingScrollTargetBehavior get() = PagingScrollTargetBehavior(2852, emptyList())
-    }
-}
-
-/**
- * SwiftUI `SearchScopeActivation`
- *
- * ```swift
- * struct SearchScopeActivation
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class SearchScopeActivation internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `SearchScopeActivation.onSearchPresentation`
-         *
-         * ```swift
-         * static var onSearchPresentation: SearchScopeActivation { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
-         */
-        public val onSearchPresentation: SearchScopeActivation get() = SearchScopeActivation(2208, emptyList())
-/**
-         * SwiftUI `SearchScopeActivation.onTextEntry`
-         *
-         * ```swift
-         * static var onTextEntry: SearchScopeActivation { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS 10.0+
-         */
-        public val onTextEntry: SearchScopeActivation get() = SearchScopeActivation(2209, emptyList())
-/**
-         * SwiftUI `SearchScopeActivation.automatic`
-         *
-         * ```swift
-         * static var automatic: SearchScopeActivation { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val automatic: SearchScopeActivation get() = SearchScopeActivation(2210, emptyList())
-    }
-}
-
-/**
- * SwiftUI `SeparatorShapeStyle`
- *
- * ```swift
- * struct SeparatorShapeStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class SeparatorShapeStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ShapeStyle {
-/**
-     * SwiftUI `SeparatorShapeStyle.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor() : this(2254, emptyList())
-}
-
-/**
- * SwiftUI `ShapeRole`
- *
- * ```swift
- * enum ShapeRole
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class ShapeRole internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `ShapeRole.fill`
-         *
-         * ```swift
-         * case fill
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val fill: ShapeRole get() = ShapeRole(2275, emptyList())
-/**
-         * SwiftUI `ShapeRole.stroke`
-         *
-         * ```swift
-         * case stroke
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val stroke: ShapeRole get() = ShapeRole(2276, emptyList())
-/**
-         * SwiftUI `ShapeRole.separator`
-         *
-         * ```swift
-         * case separator
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val separator: ShapeRole get() = ShapeRole(2277, emptyList())
-    }
-}
-
-/**
- * SwiftUI `SizeDependentTextVariant`
- *
- * ```swift
- * struct SizeDependentTextVariant
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC public class SizeDependentTextVariant internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), TextVariantPreference {
-}
-
-/**
- * SwiftUI `SpatialEventGesture`
- *
- * ```swift
- * nonisolated struct SpatialEventGesture
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS 11.0+
- */
-@HiddenFromObjC public class SpatialEventGesture internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `SpatialEventGesture.init(coordinateSpace:)`
-     *
-     * ```swift
-     * nonisolated init(coordinateSpace: any CoordinateSpaceProtocol = .local)
-     * ```
-     * Availability: iOS 18.0+, macOS 15.0+, tvOS: unavailable (no-op), watchOS 11.0+
-     */
-    public constructor(coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local) : this(2300, listOf(coordinateSpace))
-}
-
-/**
- * SwiftUI `StackNavigationViewStyle`
- *
- * ```swift
- * struct StackNavigationViewStyle
- * ```
- * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class StackNavigationViewStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), NavigationViewStyle {
-/**
-     * SwiftUI `StackNavigationViewStyle.init()`
-     *
-     * ```swift
-     * init()
-     * ```
-     * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
-     */
-    public constructor() : this(2320, emptyList())
-}
-
-/**
- * SwiftUI `SurroundingsEffect`
- *
- * ```swift
- * struct SurroundingsEffect
- * ```
- * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class SurroundingsEffect internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `SurroundingsEffect.colorMultiply(_:)`
-         *
-         * ```swift
-         * static func colorMultiply(_ color: Color) -> SurroundingsEffect
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public fun colorMultiply(color: Color): SurroundingsEffect = SurroundingsEffect(2337, listOf(color))
-/**
-         * SwiftUI `SurroundingsEffect.dim(intensity:)`
-         *
-         * ```swift
-         * static func dim(intensity: Double) -> SurroundingsEffect
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public fun dim(intensity: Double): SurroundingsEffect = SurroundingsEffect(2338, listOf(intensity))
-/**
-         * SwiftUI `SurroundingsEffect.dark`
-         *
-         * ```swift
-         * static var dark: SurroundingsEffect { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val dark: SurroundingsEffect get() = SurroundingsEffect(2339, emptyList())
-/**
-         * SwiftUI `SurroundingsEffect.semiDark`
-         *
-         * ```swift
-         * static var semiDark: SurroundingsEffect { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val semiDark: SurroundingsEffect get() = SurroundingsEffect(2340, emptyList())
-/**
-         * SwiftUI `SurroundingsEffect.ultraDark`
-         *
-         * ```swift
-         * static var ultraDark: SurroundingsEffect { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val ultraDark: SurroundingsEffect get() = SurroundingsEffect(2341, emptyList())
-    }
-}
-
-/**
- * SwiftUI `SymbolVariants`
- *
- * ```swift
- * struct SymbolVariants
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class SymbolVariants internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `SymbolVariants.fill`
-         *
-         * ```swift
-         * static let fill: SymbolVariants
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val fill: SymbolVariants get() = SymbolVariants(2352, emptyList())
-/**
-         * SwiftUI `SymbolVariants.none`
-         *
-         * ```swift
-         * static let none: SymbolVariants
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val none: SymbolVariants get() = SymbolVariants(2353, emptyList())
-/**
-         * SwiftUI `SymbolVariants.slash`
-         *
-         * ```swift
-         * static let slash: SymbolVariants
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val slash: SymbolVariants get() = SymbolVariants(2354, emptyList())
-/**
-         * SwiftUI `SymbolVariants.circle`
-         *
-         * ```swift
-         * static let circle: SymbolVariants
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val circle: SymbolVariants get() = SymbolVariants(2355, emptyList())
-/**
-         * SwiftUI `SymbolVariants.square`
-         *
-         * ```swift
-         * static let square: SymbolVariants
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val square: SymbolVariants get() = SymbolVariants(2356, emptyList())
-/**
-         * SwiftUI `SymbolVariants.rectangle`
-         *
-         * ```swift
-         * static let rectangle: SymbolVariants
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val rectangle: SymbolVariants get() = SymbolVariants(2357, emptyList())
-    }
-}
-
-/**
- * SwiftUI `TabPlacement`
- *
- * ```swift
- * struct TabPlacement
- * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
- */
-@HiddenFromObjC public class TabPlacement internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `TabPlacement.sidebarOnly`
-         *
-         * ```swift
-         * static let sidebarOnly: TabPlacement
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val sidebarOnly: TabPlacement get() = TabPlacement(2380, emptyList())
-/**
-         * SwiftUI `TabPlacement.pinned`
-         *
-         * ```swift
-         * static let pinned: TabPlacement
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val pinned: TabPlacement get() = TabPlacement(2381, emptyList())
-/**
-         * SwiftUI `TabPlacement.automatic`
-         *
-         * ```swift
-         * static let automatic: TabPlacement
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val automatic: TabPlacement get() = TabPlacement(2382, emptyList())
-    }
-}
-
-/**
- * SwiftUI `TabViewStyle`
- *
- * ```swift
- * @MainActor @preconcurrency protocol TabViewStyle
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public interface TabViewStyle {
-    public companion object {
-/**
-         * SwiftUI `TabViewStyle.verticalPage(transitionStyle:)`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static func verticalPage(transitionStyle: VerticalPageTabViewStyle.TransitionStyle) -> VerticalPageTabViewStyle
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
-         */
-        public fun verticalPage(transitionStyle: VerticalPageTabViewStyle.TransitionStyle): VerticalPageTabViewStyle = VerticalPageTabViewStyle(2765, listOf(transitionStyle))
-/**
-         * SwiftUI `TabViewStyle.verticalPage`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var verticalPage: VerticalPageTabViewStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
-         */
-        public val verticalPage: VerticalPageTabViewStyle get() = VerticalPageTabViewStyle(2766, emptyList())
-/**
-         * SwiftUI `TabViewStyle.sidebarAdaptable`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var sidebarAdaptable: SidebarAdaptableTabViewStyle { get }
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
-         */
-        public val sidebarAdaptable: SidebarAdaptableTabViewStyle get() = SidebarAdaptableTabViewStyle(2767, emptyList())
-/**
-         * SwiftUI `TabViewStyle.page(indexDisplayMode:)`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static func page(indexDisplayMode: PageTabViewStyle.IndexDisplayMode) -> PageTabViewStyle
-         * ```
-         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
-         */
-        public fun page(indexDisplayMode: PageTabViewStyle.IndexDisplayMode): PageTabViewStyle = PageTabViewStyle(2768, listOf(indexDisplayMode))
-/**
-         * SwiftUI `TabViewStyle.page`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var page: PageTabViewStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
-         */
-        public val page: PageTabViewStyle get() = PageTabViewStyle(2769, emptyList())
-/**
-         * SwiftUI `TabViewStyle.automatic`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var automatic: DefaultTabViewStyle { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val automatic: DefaultTabViewStyle get() = DefaultTabViewStyle(2770, emptyList())
-/**
-         * SwiftUI `TabViewStyle.grouped`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var grouped: GroupedTabViewStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val grouped: GroupedTabViewStyle get() = GroupedTabViewStyle(2771, emptyList())
-/**
-         * SwiftUI `TabViewStyle.carousel`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var carousel: CarouselTabViewStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
-         */
-        public val carousel: CarouselTabViewStyle get() = CarouselTabViewStyle(2772, emptyList())
-/**
-         * SwiftUI `TabViewStyle.tabBarOnly`
-         *
-         * ```swift
-         * @MainActor @export(implementation) @preconcurrency static var tabBarOnly: TabBarOnlyTabViewStyle { get }
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
-         */
-        public val tabBarOnly: TabBarOnlyTabViewStyle get() = TabBarOnlyTabViewStyle(2773, emptyList())
-    }
-}
-
-/** Namespace for SwiftUI `Text` nested types. */
-@HiddenFromObjC public object Text {
-    /**
-     * SwiftUI `Text.AlignmentStrategy`
-     *
-     * ```swift
-     * struct AlignmentStrategy
-     * ```
-     * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-     */
-    public class AlignmentStrategy internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `Text.AlignmentStrategy.layoutBased`
-             *
-             * ```swift
-             * static let layoutBased: Text.AlignmentStrategy
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val layoutBased: Text.AlignmentStrategy get() = Text.AlignmentStrategy(2409, emptyList())
-/**
-             * SwiftUI `Text.AlignmentStrategy.writingDirectionBased`
-             *
-             * ```swift
-             * static let writingDirectionBased: Text.AlignmentStrategy
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val writingDirectionBased: Text.AlignmentStrategy get() = Text.AlignmentStrategy(2410, emptyList())
-/**
-             * SwiftUI `Text.AlignmentStrategy.default`
-             *
-             * ```swift
-             * static let `default`: Text.AlignmentStrategy
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val default: Text.AlignmentStrategy get() = Text.AlignmentStrategy(2411, emptyList())
-        }
-    }
-
-    /**
-     * SwiftUI `Text.Case`
-     *
-     * ```swift
-     * enum Case
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public class Case internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `Text.Case.lowercase`
-             *
-             * ```swift
-             * case lowercase
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val lowercase: Text.Case get() = Text.Case(2412, emptyList())
-/**
-             * SwiftUI `Text.Case.uppercase`
-             *
-             * ```swift
-             * case uppercase
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val uppercase: Text.Case get() = Text.Case(2413, emptyList())
-        }
-    }
-
-    /**
-     * SwiftUI `Text.DateStyle`
-     *
-     * ```swift
-     * struct DateStyle
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public class DateStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `Text.DateStyle.date`
-             *
-             * ```swift
-             * static let date: Text.DateStyle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val date: Text.DateStyle get() = Text.DateStyle(2414, emptyList())
-/**
-             * SwiftUI `Text.DateStyle.time`
-             *
-             * ```swift
-             * static let time: Text.DateStyle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val time: Text.DateStyle get() = Text.DateStyle(2415, emptyList())
-/**
-             * SwiftUI `Text.DateStyle.timer`
-             *
-             * ```swift
-             * static let timer: Text.DateStyle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val timer: Text.DateStyle get() = Text.DateStyle(2416, emptyList())
-/**
-             * SwiftUI `Text.DateStyle.offset`
-             *
-             * ```swift
-             * static let offset: Text.DateStyle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val offset: Text.DateStyle get() = Text.DateStyle(2417, emptyList())
-/**
-             * SwiftUI `Text.DateStyle.relative`
-             *
-             * ```swift
-             * static let relative: Text.DateStyle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val relative: Text.DateStyle get() = Text.DateStyle(2418, emptyList())
-        }
-    }
-
-    /** Namespace for SwiftUI `Text.Layout` nested types. */
-    public object Layout {
-        /**
-         * SwiftUI `Text.Layout.CharacterIndex`
-         *
-         * ```swift
-         * @frozen struct CharacterIndex
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public class CharacterIndex internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-             * SwiftUI `Text.Layout.CharacterIndex.advanced(by:)`
-             *
-             * ```swift
-             * @export(implementation) func advanced(by n: Int) -> Text.Layout.CharacterIndex
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public fun advanced(n: Int): Text.Layout.CharacterIndex = Text.Layout.CharacterIndex(2419, listOf(this, n))
-        }
-
-        /**
-         * SwiftUI `Text.Layout.DrawingOptions`
-         *
-         * ```swift
-         * @frozen struct DrawingOptions
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public class DrawingOptions internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-             * SwiftUI `Text.Layout.DrawingOptions.init(rawValue:)`
-             *
-             * ```swift
-             * @export(implementation) init(rawValue: UInt32)
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public constructor(rawValue: Int) : this(2421, listOf(rawValue))
-            public companion object {
-/**
-                 * SwiftUI `Text.Layout.DrawingOptions.disablesSubpixelQuantization`
-                 *
-                 * ```swift
-                 * @export(implementation) static var disablesSubpixelQuantization: Text.Layout.DrawingOptions { get }
-                 * ```
-                 * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-                 */
-                public val disablesSubpixelQuantization: Text.Layout.DrawingOptions get() = Text.Layout.DrawingOptions(2420, emptyList())
-            }
-        }
-
-        /**
-         * SwiftUI `Text.Layout.TypographicBounds`
-         *
-         * ```swift
-         * @frozen struct TypographicBounds
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public class TypographicBounds internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-             * SwiftUI `Text.Layout.TypographicBounds.init()`
-             *
-             * ```swift
-             * @export(implementation) init()
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public constructor() : this(2422, emptyList())
-        }
-
-    }
-
-    /**
-     * SwiftUI `Text.LineStyle`
-     *
-     * ```swift
-     * struct LineStyle
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public class LineStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-         * SwiftUI `Text.LineStyle.init(pattern:color:)`
-         *
-         * ```swift
-         * init(pattern: Text.LineStyle.Pattern = .solid, color: Color? = nil)
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public constructor(pattern: Text.LineStyle.Pattern = Text.LineStyle.Pattern.solid, color: Color? = null) : this(2424, listOf(pattern, color))
-        public companion object {
-/**
-             * SwiftUI `Text.LineStyle.single`
-             *
-             * ```swift
-             * static let single: Text.LineStyle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val single: Text.LineStyle get() = Text.LineStyle(2423, emptyList())
-        }
-        /**
-         * SwiftUI `Text.LineStyle.Pattern`
-         *
-         * ```swift
-         * struct Pattern
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public class Pattern internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-            public companion object {
-/**
-                 * SwiftUI `Text.LineStyle.Pattern.dashDotDot`
-                 *
-                 * ```swift
-                 * static let dashDotDot: Text.LineStyle.Pattern
-                 * ```
-                 * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-                 */
-                public val dashDotDot: Text.LineStyle.Pattern get() = Text.LineStyle.Pattern(2425, emptyList())
-/**
-                 * SwiftUI `Text.LineStyle.Pattern.dot`
-                 *
-                 * ```swift
-                 * static let dot: Text.LineStyle.Pattern
-                 * ```
-                 * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-                 */
-                public val dot: Text.LineStyle.Pattern get() = Text.LineStyle.Pattern(2426, emptyList())
-/**
-                 * SwiftUI `Text.LineStyle.Pattern.dash`
-                 *
-                 * ```swift
-                 * static let dash: Text.LineStyle.Pattern
-                 * ```
-                 * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-                 */
-                public val dash: Text.LineStyle.Pattern get() = Text.LineStyle.Pattern(2427, emptyList())
-/**
-                 * SwiftUI `Text.LineStyle.Pattern.solid`
-                 *
-                 * ```swift
-                 * static let solid: Text.LineStyle.Pattern
-                 * ```
-                 * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-                 */
-                public val solid: Text.LineStyle.Pattern get() = Text.LineStyle.Pattern(2428, emptyList())
-/**
-                 * SwiftUI `Text.LineStyle.Pattern.dashDot`
-                 *
-                 * ```swift
-                 * static let dashDot: Text.LineStyle.Pattern
-                 * ```
-                 * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-                 */
-                public val dashDot: Text.LineStyle.Pattern get() = Text.LineStyle.Pattern(2429, emptyList())
-            }
-        }
-
-    }
-
-    /**
-     * SwiftUI `Text.Scale`
-     *
-     * ```swift
-     * struct Scale
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public class Scale internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `Text.Scale.default`
-             *
-             * ```swift
-             * static let `default`: Text.Scale
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val default: Text.Scale get() = Text.Scale(2430, emptyList())
-/**
-             * SwiftUI `Text.Scale.secondary`
-             *
-             * ```swift
-             * static let secondary: Text.Scale
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val secondary: Text.Scale get() = Text.Scale(2431, emptyList())
-        }
-    }
-
-    /**
-     * SwiftUI `Text.TruncationMode`
-     *
-     * ```swift
-     * enum TruncationMode
-     * ```
-     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-     */
-    public class TruncationMode internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `Text.TruncationMode.head`
-             *
-             * ```swift
-             * case head
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val head: Text.TruncationMode get() = Text.TruncationMode(2432, emptyList())
-/**
-             * SwiftUI `Text.TruncationMode.tail`
-             *
-             * ```swift
-             * case tail
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val tail: Text.TruncationMode get() = Text.TruncationMode(2433, emptyList())
-/**
-             * SwiftUI `Text.TruncationMode.middle`
-             *
-             * ```swift
-             * case middle
-             * ```
-             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-             */
-            public val middle: Text.TruncationMode get() = Text.TruncationMode(2434, emptyList())
-        }
-    }
-
-    /**
-     * SwiftUI `Text.WritingDirectionStrategy`
-     *
-     * ```swift
-     * struct WritingDirectionStrategy
-     * ```
-     * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-     */
-    public class WritingDirectionStrategy internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-        public companion object {
-/**
-             * SwiftUI `Text.WritingDirectionStrategy.layoutBased`
-             *
-             * ```swift
-             * static let layoutBased: Text.WritingDirectionStrategy
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val layoutBased: Text.WritingDirectionStrategy get() = Text.WritingDirectionStrategy(2435, emptyList())
-/**
-             * SwiftUI `Text.WritingDirectionStrategy.contentBased`
-             *
-             * ```swift
-             * static let contentBased: Text.WritingDirectionStrategy
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val contentBased: Text.WritingDirectionStrategy get() = Text.WritingDirectionStrategy(2436, emptyList())
-/**
-             * SwiftUI `Text.WritingDirectionStrategy.default`
-             *
-             * ```swift
-             * static let `default`: Text.WritingDirectionStrategy
-             * ```
-             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
-             */
-            public val default: Text.WritingDirectionStrategy get() = Text.WritingDirectionStrategy(2437, emptyList())
-        }
-    }
-
-}
-
-/**
- * SwiftUI `TextFormattingCommands`
- *
- * ```swift
- * nonisolated struct TextFormattingCommands
+ * nonisolated struct GraphicalDatePickerStyle
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public class TextFormattingCommands internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+@HiddenFromObjC public class GraphicalDatePickerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), DatePickerStyle {
 /**
-     * SwiftUI `TextFormattingCommands.init()`
+     * SwiftUI `GraphicalDatePickerStyle.init()`
      *
      * ```swift
      * nonisolated init()
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
      */
-    public constructor() : this(2444, emptyList())
+    public constructor() : this(1683, emptyList())
 }
 
 /**
- * SwiftUI `TextSelectability`
+ * SwiftUI `GroupedListStyle`
  *
  * ```swift
- * protocol TextSelectability
+ * struct GroupedListStyle
  * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public interface TextSelectability {
-    public companion object {
+@HiddenFromObjC public class GroupedListStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ListStyle {
 /**
-         * SwiftUI `TextSelectability.enabled`
-         *
-         * ```swift
-         * @export(implementation) static var enabled: EnabledTextSelectability { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val enabled: EnabledTextSelectability get() = EnabledTextSelectability(2814, emptyList())
-/**
-         * SwiftUI `TextSelectability.disabled`
-         *
-         * ```swift
-         * @export(implementation) static var disabled: DisabledTextSelectability { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val disabled: DisabledTextSelectability get() = DisabledTextSelectability(2815, emptyList())
-    }
+     * SwiftUI `GroupedListStyle.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS: unavailable (no-op)
+     */
+    public constructor() : this(1769, emptyList())
 }
 
 /**
- * SwiftUI `TitleAndIconLabelStyle`
+ * SwiftUI `HighlightHoverEffect`
  *
  * ```swift
- * nonisolated struct TitleAndIconLabelStyle
+ * struct HighlightHoverEffect
+ * ```
+ * Availability: iOS 18.0+, macOS: unavailable (no-op), tvOS 18.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class HighlightHoverEffect internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), CustomHoverEffect {
+/**
+     * SwiftUI `HighlightHoverEffect.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS 18.0+, macOS: unavailable (no-op), tvOS 18.0+, watchOS: unavailable (no-op)
+     */
+    public constructor() : this(1779, emptyList())
+}
+
+/**
+ * SwiftUI `IconOnlyLabelStyle`
+ *
+ * ```swift
+ * nonisolated struct IconOnlyLabelStyle
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@HiddenFromObjC public class TitleAndIconLabelStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), LabelStyle {
+@HiddenFromObjC public class IconOnlyLabelStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), LabelStyle {
 /**
-     * SwiftUI `TitleAndIconLabelStyle.init()`
+     * SwiftUI `IconOnlyLabelStyle.init()`
      *
      * ```swift
      * nonisolated init()
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor() : this(2469, emptyList())
+    public constructor() : this(1805, emptyList())
 }
 
 /**
- * SwiftUI `ToolbarCustomizationOptions`
+ * SwiftUI `InlinePickerStyle`
  *
  * ```swift
- * struct ToolbarCustomizationOptions
+ * struct InlinePickerStyle
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@HiddenFromObjC public class ToolbarCustomizationOptions internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+@HiddenFromObjC public class InlinePickerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PickerStyle {
 /**
-     * SwiftUI `ToolbarCustomizationOptions.init(rawValue:)`
+     * SwiftUI `InlinePickerStyle.init()`
      *
      * ```swift
-     * init(rawValue: Int)
+     * init()
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(rawValue: Int) : this(2477, listOf(rawValue))
-    public companion object {
-/**
-         * SwiftUI `ToolbarCustomizationOptions.alwaysAvailable`
-         *
-         * ```swift
-         * static var alwaysAvailable: ToolbarCustomizationOptions { get }
-         * ```
-         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
-         */
-        public val alwaysAvailable: ToolbarCustomizationOptions get() = ToolbarCustomizationOptions(2476, emptyList())
-    }
+    public constructor() : this(1830, emptyList())
 }
 
 /**
- * SwiftUI `ToolbarMinimizationBehavior`
+ * SwiftUI `InterfaceOrientation`
  *
  * ```swift
- * struct ToolbarMinimizationBehavior
- * ```
- * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
- */
-@HiddenFromObjC public class ToolbarMinimizationBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `ToolbarMinimizationBehavior.onScrollUp`
-         *
-         * ```swift
-         * static let onScrollUp: ToolbarMinimizationBehavior
-         * ```
-         * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val onScrollUp: ToolbarMinimizationBehavior get() = ToolbarMinimizationBehavior(2515, emptyList())
-/**
-         * SwiftUI `ToolbarMinimizationBehavior.onScrollDown`
-         *
-         * ```swift
-         * static let onScrollDown: ToolbarMinimizationBehavior
-         * ```
-         * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val onScrollDown: ToolbarMinimizationBehavior get() = ToolbarMinimizationBehavior(2516, emptyList())
-/**
-         * SwiftUI `ToolbarMinimizationBehavior.never`
-         *
-         * ```swift
-         * static let never: ToolbarMinimizationBehavior
-         * ```
-         * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val never: ToolbarMinimizationBehavior get() = ToolbarMinimizationBehavior(2517, emptyList())
-/**
-         * SwiftUI `ToolbarMinimizationBehavior.automatic`
-         *
-         * ```swift
-         * static var automatic: ToolbarMinimizationBehavior { get }
-         * ```
-         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
-         */
-        public val automatic: ToolbarMinimizationBehavior get() = ToolbarMinimizationBehavior(2518, emptyList())
-    }
-}
-
-/**
- * SwiftUI `ToolbarTitleAlignment`
- *
- * ```swift
- * struct ToolbarTitleAlignment
- * ```
- * Availability: iOS 27.2+, macOS 27.2+, tvOS 27.2+, watchOS 27.2+
- */
-@HiddenFromObjC public class ToolbarTitleAlignment internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
-/**
-         * SwiftUI `ToolbarTitleAlignment.center`
-         *
-         * ```swift
-         * static let center: ToolbarTitleAlignment
-         * ```
-         * Availability: iOS 27.2+, macOS 27.2+, tvOS 27.2+, watchOS 27.2+
-         */
-        public val center: ToolbarTitleAlignment get() = ToolbarTitleAlignment(2537, emptyList())
-/**
-         * SwiftUI `ToolbarTitleAlignment.leading`
-         *
-         * ```swift
-         * static let leading: ToolbarTitleAlignment
-         * ```
-         * Availability: iOS 27.2+, macOS 27.2+, tvOS 27.2+, watchOS 27.2+
-         */
-        public val leading: ToolbarTitleAlignment get() = ToolbarTitleAlignment(2538, emptyList())
-/**
-         * SwiftUI `ToolbarTitleAlignment.automatic`
-         *
-         * ```swift
-         * static let automatic: ToolbarTitleAlignment
-         * ```
-         * Availability: iOS 27.2+, macOS 27.2+, tvOS 27.2+, watchOS 27.2+
-         */
-        public val automatic: ToolbarTitleAlignment get() = ToolbarTitleAlignment(2539, emptyList())
-    }
-}
-
-/**
- * SwiftUI `TransitionPhase`
- *
- * ```swift
- * @frozen enum TransitionPhase
+ * struct InterfaceOrientation
  * ```
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
  */
-@HiddenFromObjC public class TransitionPhase internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+@HiddenFromObjC public class InterfaceOrientation internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
     public companion object {
 /**
-         * SwiftUI `TransitionPhase.willAppear`
+         * SwiftUI `InterfaceOrientation.landscapeLeft`
          *
          * ```swift
-         * case willAppear
+         * static let landscapeLeft: InterfaceOrientation
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val willAppear: TransitionPhase get() = TransitionPhase(2554, emptyList())
+        public val landscapeLeft: InterfaceOrientation get() = InterfaceOrientation(1837, emptyList())
 /**
-         * SwiftUI `TransitionPhase.didDisappear`
+         * SwiftUI `InterfaceOrientation.landscapeRight`
          *
          * ```swift
-         * case didDisappear
+         * static let landscapeRight: InterfaceOrientation
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val didDisappear: TransitionPhase get() = TransitionPhase(2555, emptyList())
+        public val landscapeRight: InterfaceOrientation get() = InterfaceOrientation(1838, emptyList())
 /**
-         * SwiftUI `TransitionPhase.identity`
+         * SwiftUI `InterfaceOrientation.portraitUpsideDown`
+         *
+         * ```swift
+         * static let portraitUpsideDown: InterfaceOrientation
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val portraitUpsideDown: InterfaceOrientation get() = InterfaceOrientation(1839, emptyList())
+/**
+         * SwiftUI `InterfaceOrientation.portrait`
+         *
+         * ```swift
+         * static let portrait: InterfaceOrientation
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val portrait: InterfaceOrientation get() = InterfaceOrientation(1840, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `LayoutDirection`
+ *
+ * ```swift
+ * enum LayoutDirection
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class LayoutDirection internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `LayoutDirection.leftToRight`
+         *
+         * ```swift
+         * case leftToRight
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val leftToRight: LayoutDirection get() = LayoutDirection(1872, emptyList())
+/**
+         * SwiftUI `LayoutDirection.rightToLeft`
+         *
+         * ```swift
+         * case rightToLeft
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val rightToLeft: LayoutDirection get() = LayoutDirection(1873, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `LinearGaugeStyle`
+ *
+ * ```swift
+ * nonisolated struct LinearGaugeStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC public class LinearGaugeStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), GaugeStyle {
+/**
+     * SwiftUI `LinearGaugeStyle.init(tint:)`
+     *
+     * ```swift
+     * nonisolated init(tint: Color)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor(tint: Color) : this(1882, listOf(tint))
+/**
+     * SwiftUI `LinearGaugeStyle.init(tint:)`
+     *
+     * ```swift
+     * nonisolated init(tint: Gradient)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor(tint: Gradient) : this(1883, listOf(tint))
+/**
+     * SwiftUI `LinearGaugeStyle.init()`
+     *
+     * ```swift
+     * nonisolated init()
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor() : this(1884, emptyList())
+}
+
+/**
+ * SwiftUI `ListSectionSpacing`
+ *
+ * ```swift
+ * struct ListSectionSpacing
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC public class ListSectionSpacing internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `ListSectionSpacing.custom(_:)`
+         *
+         * ```swift
+         * static func custom(_ spacing: CGFloat) -> ListSectionSpacing
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+         */
+        public fun custom(spacing: Double): ListSectionSpacing = ListSectionSpacing(1895, listOf(spacing))
+/**
+         * SwiftUI `ListSectionSpacing.compact`
+         *
+         * ```swift
+         * static let compact: ListSectionSpacing
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+         */
+        public val compact: ListSectionSpacing get() = ListSectionSpacing(1896, emptyList())
+/**
+         * SwiftUI `ListSectionSpacing.default`
+         *
+         * ```swift
+         * static let `default`: ListSectionSpacing
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+         */
+        public val default: ListSectionSpacing get() = ListSectionSpacing(1897, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `MagnifyGesture`
+ *
+ * ```swift
+ * nonisolated struct MagnifyGesture
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class MagnifyGesture internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `MagnifyGesture.init(minimumScaleDelta:inputKinds:)`
+     *
+     * ```swift
+     * nonisolated init(minimumScaleDelta: CGFloat = 0.01, inputKinds: GestureInputKinds = .all)
+     * ```
+     * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(minimumScaleDelta: Double = 0.01, inputKinds: GestureInputKinds = GestureInputKinds.all) : this(1907, listOf(minimumScaleDelta, inputKinds))
+/**
+     * SwiftUI `MagnifyGesture.init(minimumScaleDelta:)`
+     *
+     * ```swift
+     * nonisolated init(minimumScaleDelta: CGFloat = 0.01)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(minimumScaleDelta: Double = 0.01) : this(1908, listOf(minimumScaleDelta))
+}
+
+/**
+ * SwiftUI `MenuButtonStyle`
+ *
+ * ```swift
+ * protocol MenuButtonStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public interface MenuButtonStyle {
+}
+
+/**
+ * SwiftUI `MoveCommandDirection`
+ *
+ * ```swift
+ * enum MoveCommandDirection
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class MoveCommandDirection internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `MoveCommandDirection.up`
+         *
+         * ```swift
+         * case up
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+         */
+        public val up: MoveCommandDirection get() = MoveCommandDirection(1934, emptyList())
+/**
+         * SwiftUI `MoveCommandDirection.down`
+         *
+         * ```swift
+         * case down
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+         */
+        public val down: MoveCommandDirection get() = MoveCommandDirection(1935, emptyList())
+/**
+         * SwiftUI `MoveCommandDirection.left`
+         *
+         * ```swift
+         * case left
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+         */
+        public val left: MoveCommandDirection get() = MoveCommandDirection(1936, emptyList())
+/**
+         * SwiftUI `MoveCommandDirection.right`
+         *
+         * ```swift
+         * case right
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
+         */
+        public val right: MoveCommandDirection get() = MoveCommandDirection(1937, emptyList())
+    }
+}
+
+/** Namespace for SwiftUI `NavigationBarItem` nested types. */
+@HiddenFromObjC public object NavigationBarItem {
+    /**
+     * SwiftUI `NavigationBarItem.TitleDisplayMode`
+     *
+     * ```swift
+     * enum TitleDisplayMode
+     * ```
+     * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+     */
+    public class TitleDisplayMode internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+        public companion object {
+/**
+             * SwiftUI `NavigationBarItem.TitleDisplayMode.large`
+             *
+             * ```swift
+             * case large
+             * ```
+             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+             */
+            public val large: NavigationBarItem.TitleDisplayMode get() = NavigationBarItem.TitleDisplayMode(1951, emptyList())
+/**
+             * SwiftUI `NavigationBarItem.TitleDisplayMode.inline`
+             *
+             * ```swift
+             * case inline
+             * ```
+             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+             */
+            public val inline: NavigationBarItem.TitleDisplayMode get() = NavigationBarItem.TitleDisplayMode(1952, emptyList())
+/**
+             * SwiftUI `NavigationBarItem.TitleDisplayMode.automatic`
+             *
+             * ```swift
+             * case automatic
+             * ```
+             * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+             */
+            public val automatic: NavigationBarItem.TitleDisplayMode get() = NavigationBarItem.TitleDisplayMode(1953, emptyList())
+        }
+    }
+
+}
+
+/**
+ * SwiftUI `NavigationSplitViewVisibility`
+ *
+ * ```swift
+ * struct NavigationSplitViewVisibility
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class NavigationSplitViewVisibility internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `NavigationSplitViewVisibility.detailOnly`
+         *
+         * ```swift
+         * static var detailOnly: NavigationSplitViewVisibility { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val detailOnly: NavigationSplitViewVisibility get() = NavigationSplitViewVisibility(1960, emptyList())
+/**
+         * SwiftUI `NavigationSplitViewVisibility.doubleColumn`
+         *
+         * ```swift
+         * static var doubleColumn: NavigationSplitViewVisibility { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val doubleColumn: NavigationSplitViewVisibility get() = NavigationSplitViewVisibility(1961, emptyList())
+/**
+         * SwiftUI `NavigationSplitViewVisibility.all`
+         *
+         * ```swift
+         * static var all: NavigationSplitViewVisibility { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val all: NavigationSplitViewVisibility get() = NavigationSplitViewVisibility(1962, emptyList())
+/**
+         * SwiftUI `NavigationSplitViewVisibility.automatic`
+         *
+         * ```swift
+         * static var automatic: NavigationSplitViewVisibility { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val automatic: NavigationSplitViewVisibility get() = NavigationSplitViewVisibility(1963, emptyList())
+    }
+}
+
+/** Namespace for SwiftUI `OpenURLAction` nested types. */
+@HiddenFromObjC public object OpenURLAction {
+    /**
+     * SwiftUI `OpenURLAction.Result`
+     *
+     * ```swift
+     * struct Result
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public class Result internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+        public companion object {
+/**
+             * SwiftUI `OpenURLAction.Result.systemAction`
+             *
+             * ```swift
+             * static let systemAction: OpenURLAction.Result
+             * ```
+             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+             */
+            public val systemAction: OpenURLAction.Result get() = OpenURLAction.Result(1969, emptyList())
+/**
+             * SwiftUI `OpenURLAction.Result.systemAction(_:prefersInApp:)`
+             *
+             * ```swift
+             * static func systemAction(_ url: URL? = nil, prefersInApp: Bool) -> OpenURLAction.Result
+             * ```
+             * Availability: iOS 26.0+, macOS 26.0+, tvOS 26.0+, watchOS 26.0+
+             */
+            public fun systemAction(url: String? = null, prefersInApp: Boolean): OpenURLAction.Result = OpenURLAction.Result(1970, listOf(url, prefersInApp))
+/**
+             * SwiftUI `OpenURLAction.Result.systemAction(_:)`
+             *
+             * ```swift
+             * static func systemAction(_ url: URL) -> OpenURLAction.Result
+             * ```
+             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+             */
+            public fun systemAction(url: String): OpenURLAction.Result = OpenURLAction.Result(1971, listOf(url))
+/**
+             * SwiftUI `OpenURLAction.Result.handled`
+             *
+             * ```swift
+             * static let handled: OpenURLAction.Result
+             * ```
+             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+             */
+            public val handled: OpenURLAction.Result get() = OpenURLAction.Result(1972, emptyList())
+/**
+             * SwiftUI `OpenURLAction.Result.discarded`
+             *
+             * ```swift
+             * static let discarded: OpenURLAction.Result
+             * ```
+             * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+             */
+            public val discarded: OpenURLAction.Result get() = OpenURLAction.Result(1973, emptyList())
+        }
+    }
+
+}
+
+/**
+ * SwiftUI `PagingScrollTargetBehavior`
+ *
+ * ```swift
+ * struct PagingScrollTargetBehavior
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class PagingScrollTargetBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ScrollTargetBehavior {
+/**
+     * SwiftUI `PagingScrollTargetBehavior.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor() : this(1987, emptyList())
+}
+
+/**
+ * SwiftUI `PencilSqueezeGesturePhase`
+ *
+ * ```swift
+ * @frozen enum PencilSqueezeGesturePhase
+ * ```
+ * Availability: iOS 17.5+, macOS 14.5+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class PencilSqueezeGesturePhase internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `PencilSqueezeGesturePhase.failed`
+         *
+         * ```swift
+         * case failed
+         * ```
+         * Availability: iOS 17.5+, macOS 14.5+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val failed: PencilSqueezeGesturePhase get() = PencilSqueezeGesturePhase(2023, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `PlainListStyle`
+ *
+ * ```swift
+ * struct PlainListStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class PlainListStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ListStyle {
+/**
+     * SwiftUI `PlainListStyle.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor() : this(2030, emptyList())
+}
+
+/**
+ * SwiftUI `PopoverAttachmentAnchor`
+ *
+ * ```swift
+ * enum PopoverAttachmentAnchor
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class PopoverAttachmentAnchor internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `PopoverAttachmentAnchor.point(_:)`
+         *
+         * ```swift
+         * case point(UnitPoint)
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun point(p0: UnitPoint): PopoverAttachmentAnchor = PopoverAttachmentAnchor(2050, listOf(p0))
+    }
+}
+
+/**
+ * SwiftUI `PresentationSizing`
+ *
+ * ```swift
+ * protocol PresentationSizing
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC public interface PresentationSizing {
+    public companion object {
+/**
+         * SwiftUI `PresentationSizing.form`
+         *
+         * ```swift
+         * static var form: FormPresentationSizing { get }
+         * ```
+         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+         */
+        public val form: FormPresentationSizing get() = FormPresentationSizing(2810, emptyList())
+/**
+         * SwiftUI `PresentationSizing.page`
+         *
+         * ```swift
+         * static var page: PagePresentationSizing { get }
+         * ```
+         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+         */
+        public val page: PagePresentationSizing get() = PagePresentationSizing(2811, emptyList())
+/**
+         * SwiftUI `PresentationSizing.fitted`
+         *
+         * ```swift
+         * static var fitted: FittedPresentationSizing { get }
+         * ```
+         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+         */
+        public val fitted: FittedPresentationSizing get() = FittedPresentationSizing(2812, emptyList())
+/**
+         * SwiftUI `PresentationSizing.automatic`
+         *
+         * ```swift
+         * static var automatic: AutomaticPresentationSizing { get }
+         * ```
+         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+         */
+        public val automatic: AutomaticPresentationSizing get() = AutomaticPresentationSizing(2813, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `ProgressiveImmersionStyle`
+ *
+ * ```swift
+ * struct ProgressiveImmersionStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class ProgressiveImmersionStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), ImmersionStyle {
+/**
+     * SwiftUI `ProgressiveImmersionStyle.init(immersion:initialAmount:)`
+     *
+     * ```swift
+     * init(immersion: ClosedRange<Double>, initialAmount: Double? = nil)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(immersion: ClosedFloatingPointRange<Double>, initialAmount: Double? = null) : this(2080, listOf(listOf(immersion.start, immersion.endInclusive), initialAmount))
+/**
+     * SwiftUI `ProgressiveImmersionStyle.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor() : this(2081, emptyList())
+}
+
+/**
+ * SwiftUI `PullDownMenuButtonStyle`
+ *
+ * ```swift
+ * struct PullDownMenuButtonStyle
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class PullDownMenuButtonStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), MenuButtonStyle {
+/**
+     * SwiftUI `PullDownMenuButtonStyle.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor() : this(2095, emptyList())
+}
+
+/**
+ * SwiftUI `RectangleCornerRadii`
+ *
+ * ```swift
+ * @frozen struct RectangleCornerRadii
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class RectangleCornerRadii internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `RectangleCornerRadii.init(topLeading:bottomLeading:bottomTrailing:topTrailing:)`
+     *
+     * ```swift
+     * @export(implementation) init(topLeading: CGFloat = 0, bottomLeading: CGFloat = 0, bottomTrailing: CGFloat = 0, topTrailing: CGFloat = 0)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor(topLeading: Double = 0.0, bottomLeading: Double = 0.0, bottomTrailing: Double = 0.0, topTrailing: Double = 0.0) : this(2104, listOf(topLeading, bottomLeading, bottomTrailing, topTrailing))
+}
+
+/**
+ * SwiftUI `RoundedCornerStyle`
+ *
+ * ```swift
+ * enum RoundedCornerStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class RoundedCornerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `RoundedCornerStyle.continuous`
+         *
+         * ```swift
+         * case continuous
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val continuous: RoundedCornerStyle get() = RoundedCornerStyle(2117, emptyList())
+/**
+         * SwiftUI `RoundedCornerStyle.circular`
+         *
+         * ```swift
+         * case circular
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val circular: RoundedCornerStyle get() = RoundedCornerStyle(2118, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `SceneLaunchBehavior`
+ *
+ * ```swift
+ * struct SceneLaunchBehavior
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class SceneLaunchBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `SceneLaunchBehavior.suppressed`
+         *
+         * ```swift
+         * static let suppressed: SceneLaunchBehavior
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val suppressed: SceneLaunchBehavior get() = SceneLaunchBehavior(2132, emptyList())
+/**
+         * SwiftUI `SceneLaunchBehavior.automatic`
+         *
+         * ```swift
+         * static let automatic: SceneLaunchBehavior
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val automatic: SceneLaunchBehavior get() = SceneLaunchBehavior(2133, emptyList())
+/**
+         * SwiftUI `SceneLaunchBehavior.presented`
+         *
+         * ```swift
+         * static let presented: SceneLaunchBehavior
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val presented: SceneLaunchBehavior get() = SceneLaunchBehavior(2134, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `ScrollContentOffsetAdjustmentBehavior`
+ *
+ * ```swift
+ * struct ScrollContentOffsetAdjustmentBehavior
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC public class ScrollContentOffsetAdjustmentBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `ScrollContentOffsetAdjustmentBehavior.disabled`
+         *
+         * ```swift
+         * static var disabled: ScrollContentOffsetAdjustmentBehavior { get }
+         * ```
+         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+         */
+        public val disabled: ScrollContentOffsetAdjustmentBehavior get() = ScrollContentOffsetAdjustmentBehavior(2148, emptyList())
+/**
+         * SwiftUI `ScrollContentOffsetAdjustmentBehavior.automatic`
+         *
+         * ```swift
+         * static var automatic: ScrollContentOffsetAdjustmentBehavior { get }
+         * ```
+         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+         */
+        public val automatic: ScrollContentOffsetAdjustmentBehavior get() = ScrollContentOffsetAdjustmentBehavior(2149, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `ScrollInputKind`
+ *
+ * ```swift
+ * struct ScrollInputKind
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ */
+@HiddenFromObjC public class ScrollInputKind internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `ScrollInputKind.handGestureShortcut`
+         *
+         * ```swift
+         * static let handGestureShortcut: ScrollInputKind
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 11.0+
+         */
+        public val handGestureShortcut: ScrollInputKind get() = ScrollInputKind(2165, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `ScrollTransitionPhase`
+ *
+ * ```swift
+ * @frozen enum ScrollTransitionPhase
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class ScrollTransitionPhase internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `ScrollTransitionPhase.topLeading`
+         *
+         * ```swift
+         * case topLeading
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val topLeading: ScrollTransitionPhase get() = ScrollTransitionPhase(2191, emptyList())
+/**
+         * SwiftUI `ScrollTransitionPhase.bottomTrailing`
+         *
+         * ```swift
+         * case bottomTrailing
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val bottomTrailing: ScrollTransitionPhase get() = ScrollTransitionPhase(2192, emptyList())
+/**
+         * SwiftUI `ScrollTransitionPhase.identity`
          *
          * ```swift
          * case identity
          * ```
          * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
          */
-        public val identity: TransitionPhase get() = TransitionPhase(2556, emptyList())
+        public val identity: ScrollTransitionPhase get() = ScrollTransitionPhase(2193, emptyList())
     }
 }
 
 /**
- * SwiftUI `UnifiedWindowToolbarStyle`
+ * SwiftUI `SegmentedPickerStyle`
  *
  * ```swift
- * struct UnifiedWindowToolbarStyle
+ * struct SegmentedPickerStyle
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public class UnifiedWindowToolbarStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), WindowToolbarStyle {
+@HiddenFromObjC public class SegmentedPickerStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), PickerStyle {
 /**
-     * SwiftUI `UnifiedWindowToolbarStyle.init(showsTitle:)`
-     *
-     * ```swift
-     * init(showsTitle: Bool)
-     * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-     */
-    public constructor(showsTitle: Boolean) : this(2567, listOf(showsTitle))
-/**
-     * SwiftUI `UnifiedWindowToolbarStyle.init()`
+     * SwiftUI `SegmentedPickerStyle.init()`
      *
      * ```swift
      * init()
      * ```
-     * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
      */
-    public constructor() : this(2568, emptyList())
+    public constructor() : this(2215, emptyList())
 }
 
 /**
- * SwiftUI `VerticalDirection`
+ * SwiftUI `ShaderLibrary`
  *
  * ```swift
- * @frozen enum VerticalDirection
+ * @dynamicMemberLookup struct ShaderLibrary
  * ```
- * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public class VerticalDirection internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-    public companion object {
+@HiddenFromObjC public class ShaderLibrary internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
 /**
-         * SwiftUI `VerticalDirection.up`
-         *
-         * ```swift
-         * case up
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val up: VerticalDirection get() = VerticalDirection(2598, emptyList())
-/**
-         * SwiftUI `VerticalDirection.down`
-         *
-         * ```swift
-         * case down
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public val down: VerticalDirection get() = VerticalDirection(2599, emptyList())
-    }
-    /**
-     * SwiftUI `VerticalDirection.Set`
+     * SwiftUI `ShaderLibrary.init(url:)`
      *
      * ```swift
-     * @frozen struct Set
+     * init(url: URL)
      * ```
-     * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
      */
-    public class Set internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-         * SwiftUI `VerticalDirection.Set.init(_:)`
-         *
-         * ```swift
-         * init(_ direction: VerticalDirection)
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public constructor(direction: VerticalDirection) : this(2604, listOf(direction))
-/**
-         * SwiftUI `VerticalDirection.Set.init(rawValue:)`
-         *
-         * ```swift
-         * init(rawValue: Int8)
-         * ```
-         * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-         */
-        public constructor(rawValue: Int) : this(2603, listOf(rawValue))
-        public companion object {
-/**
-             * SwiftUI `VerticalDirection.Set.up`
-             *
-             * ```swift
-             * static let up: VerticalDirection.Set
-             * ```
-             * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-             */
-            public val up: VerticalDirection.Set get() = VerticalDirection.Set(2600, emptyList())
-/**
-             * SwiftUI `VerticalDirection.Set.all`
-             *
-             * ```swift
-             * static let all: VerticalDirection.Set
-             * ```
-             * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-             */
-            public val all: VerticalDirection.Set get() = VerticalDirection.Set(2601, emptyList())
-/**
-             * SwiftUI `VerticalDirection.Set.down`
-             *
-             * ```swift
-             * static let down: VerticalDirection.Set
-             * ```
-             * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS 11.0+
-             */
-            public val down: VerticalDirection.Set get() = VerticalDirection.Set(2602, emptyList())
-        }
-    }
-
-}
-
-/**
- * SwiftUI `VisualEffect`
- *
- * ```swift
- * protocol VisualEffect : Sendable, Animatable
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public interface VisualEffect {
-}
-
-/**
- * SwiftUI `WindowInteractionBehavior`
- *
- * ```swift
- * struct WindowInteractionBehavior
- * ```
- * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
- */
-@HiddenFromObjC public class WindowInteractionBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public constructor(url: String) : this(2267, listOf(url))
     public companion object {
 /**
-         * SwiftUI `WindowInteractionBehavior.enabled`
+         * SwiftUI `ShaderLibrary.default`
          *
          * ```swift
-         * static let enabled: WindowInteractionBehavior
+         * static let `default`: ShaderLibrary
          * ```
-         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
          */
-        public val enabled: WindowInteractionBehavior get() = WindowInteractionBehavior(2638, emptyList())
-/**
-         * SwiftUI `WindowInteractionBehavior.disabled`
-         *
-         * ```swift
-         * static let disabled: WindowInteractionBehavior
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val disabled: WindowInteractionBehavior get() = WindowInteractionBehavior(2639, emptyList())
-/**
-         * SwiftUI `WindowInteractionBehavior.automatic`
-         *
-         * ```swift
-         * static let automatic: WindowInteractionBehavior
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val automatic: WindowInteractionBehavior get() = WindowInteractionBehavior(2640, emptyList())
+        public val default: ShaderLibrary get() = ShaderLibrary(2268, emptyList())
     }
 }
 
 /**
- * SwiftUI `WindowStyle`
+ * SwiftUI `SidebarCommands`
  *
  * ```swift
- * protocol WindowStyle
+ * nonisolated struct SidebarCommands
  * ```
- * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
  */
-@HiddenFromObjC public interface WindowStyle {
-    public companion object {
+@HiddenFromObjC public class SidebarCommands internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
 /**
-         * SwiftUI `WindowStyle.hiddenTitleBar`
-         *
-         * ```swift
-         * @export(implementation) static var hiddenTitleBar: HiddenTitleBarWindowStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val hiddenTitleBar: HiddenTitleBarWindowStyle get() = HiddenTitleBarWindowStyle(2761, emptyList())
-/**
-         * SwiftUI `WindowStyle.plain`
-         *
-         * ```swift
-         * @export(implementation) static var plain: PlainWindowStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val plain: PlainWindowStyle get() = PlainWindowStyle(2762, emptyList())
-/**
-         * SwiftUI `WindowStyle.automatic`
-         *
-         * ```swift
-         * @export(implementation) static var automatic: DefaultWindowStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val automatic: DefaultWindowStyle get() = DefaultWindowStyle(2763, emptyList())
-/**
-         * SwiftUI `WindowStyle.titleBar`
-         *
-         * ```swift
-         * @export(implementation) static var titleBar: TitleBarWindowStyle { get }
-         * ```
-         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
-         */
-        public val titleBar: TitleBarWindowStyle get() = TitleBarWindowStyle(2764, emptyList())
-    }
-}
-
-/**
- * SwiftUI `ZStackLayout`
- *
- * ```swift
- * @frozen struct ZStackLayout
- * ```
- * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
- */
-@HiddenFromObjC public class ZStackLayout internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
-/**
-     * SwiftUI `ZStackLayout.init(alignment:)`
+     * SwiftUI `SidebarCommands.init()`
      *
      * ```swift
-     * init(alignment: Alignment = .center)
+     * nonisolated init()
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor() : this(2275, emptyList())
+}
+
+/**
+ * SwiftUI `SnapshotResponse`
+ *
+ * ```swift
+ * struct SnapshotResponse
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+ */
+@HiddenFromObjC public class SnapshotResponse internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `SnapshotResponse.init(restoredDefaultState:estimatedSnapshotExpiration:identifier:)`
+     *
+     * ```swift
+     * init(restoredDefaultState: Bool = false, estimatedSnapshotExpiration: Date? = nil, identifier: String? = nil)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS 10.0+
+     */
+    public constructor(restoredDefaultState: Boolean = false, estimatedSnapshotExpiration: Double? = null, identifier: String? = null) : this(2286, listOf(restoredDefaultState, estimatedSnapshotExpiration, identifier))
+}
+
+/**
+ * SwiftUI `Spring`
+ *
+ * ```swift
+ * struct Spring
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class Spring internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `Spring.init(settlingDuration:dampingRatio:epsilon:)`
+     *
+     * ```swift
+     * init(settlingDuration: TimeInterval, dampingRatio: Double, epsilon: Double = 0.001)
      * ```
      * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
      */
-    public constructor(alignment: Alignment = Alignment.center) : this(2667, listOf(alignment))
+    public constructor(settlingDuration: Double, dampingRatio: Double, epsilon: Double = 0.001) : this(2302, listOf(settlingDuration, dampingRatio, epsilon))
+/**
+     * SwiftUI `Spring.init(mass:stiffness:damping:allowOverDamping:)`
+     *
+     * ```swift
+     * init(mass: Double = 1.0, stiffness: Double, damping: Double, allowOverDamping: Bool = false)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor(mass: Double = 1.0, stiffness: Double, damping: Double, allowOverDamping: Boolean = false) : this(2303, listOf(mass, stiffness, damping, allowOverDamping))
+/**
+     * SwiftUI `Spring.init(duration:bounce:)`
+     *
+     * ```swift
+     * init(duration: TimeInterval = 0.5, bounce: Double = 0.0)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor(duration: Double = 0.5, bounce: Double = 0.0) : this(2310, listOf(duration, bounce))
+    public companion object {
+/**
+         * SwiftUI `Spring.bouncy(duration:extraBounce:)`
+         *
+         * ```swift
+         * @export(implementation) static func bouncy(duration: TimeInterval = 0.5, extraBounce: Double = 0.0) -> Spring
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun bouncy(duration: Double = 0.5, extraBounce: Double = 0.0): Spring = Spring(2304, listOf(duration, extraBounce))
+/**
+         * SwiftUI `Spring.bouncy`
+         *
+         * ```swift
+         * @export(implementation) static var bouncy: Spring { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val bouncy: Spring get() = Spring(2305, emptyList())
+/**
+         * SwiftUI `Spring.smooth(duration:extraBounce:)`
+         *
+         * ```swift
+         * @export(implementation) static func smooth(duration: TimeInterval = 0.5, extraBounce: Double = 0.0) -> Spring
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun smooth(duration: Double = 0.5, extraBounce: Double = 0.0): Spring = Spring(2306, listOf(duration, extraBounce))
+/**
+         * SwiftUI `Spring.smooth`
+         *
+         * ```swift
+         * @export(implementation) static var smooth: Spring { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val smooth: Spring get() = Spring(2307, emptyList())
+/**
+         * SwiftUI `Spring.snappy(duration:extraBounce:)`
+         *
+         * ```swift
+         * @export(implementation) static func snappy(duration: TimeInterval = 0.5, extraBounce: Double = 0.0) -> Spring
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun snappy(duration: Double = 0.5, extraBounce: Double = 0.0): Spring = Spring(2308, listOf(duration, extraBounce))
+/**
+         * SwiftUI `Spring.snappy`
+         *
+         * ```swift
+         * @export(implementation) static var snappy: Spring { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val snappy: Spring get() = Spring(2309, emptyList())
+/**
+         * SwiftUI `Spring.init(response:dampingRatio:)`
+         *
+         * ```swift
+         * init(response: Double, dampingRatio: Double)
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public fun response(response: Double, dampingRatio: Double): Spring = Spring(2311, listOf(response, dampingRatio))
+    }
+}
+
+/**
+ * SwiftUI `SubmitLabel`
+ *
+ * ```swift
+ * struct SubmitLabel
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class SubmitLabel internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `SubmitLabel.go`
+         *
+         * ```swift
+         * static var go: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val go: SubmitLabel get() = SubmitLabel(2319, emptyList())
+/**
+         * SwiftUI `SubmitLabel.done`
+         *
+         * ```swift
+         * static var done: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val done: SubmitLabel get() = SubmitLabel(2320, emptyList())
+/**
+         * SwiftUI `SubmitLabel.join`
+         *
+         * ```swift
+         * static var join: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val join: SubmitLabel get() = SubmitLabel(2321, emptyList())
+/**
+         * SwiftUI `SubmitLabel.next`
+         *
+         * ```swift
+         * static var next: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val next: SubmitLabel get() = SubmitLabel(2322, emptyList())
+/**
+         * SwiftUI `SubmitLabel.send`
+         *
+         * ```swift
+         * static var send: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val send: SubmitLabel get() = SubmitLabel(2323, emptyList())
+/**
+         * SwiftUI `SubmitLabel.route`
+         *
+         * ```swift
+         * static var route: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val route: SubmitLabel get() = SubmitLabel(2324, emptyList())
+/**
+         * SwiftUI `SubmitLabel.return`
+         *
+         * ```swift
+         * static var `return`: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val `return`: SubmitLabel get() = SubmitLabel(2325, emptyList())
+/**
+         * SwiftUI `SubmitLabel.search`
+         *
+         * ```swift
+         * static var search: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val search: SubmitLabel get() = SubmitLabel(2326, emptyList())
+/**
+         * SwiftUI `SubmitLabel.continue`
+         *
+         * ```swift
+         * static var `continue`: SubmitLabel { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val `continue`: SubmitLabel get() = SubmitLabel(2327, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `SymbolEffectTransition`
+ *
+ * ```swift
+ * @MainActor @frozen @preconcurrency struct SymbolEffectTransition
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class SymbolEffectTransition internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+}
+
+/**
+ * SwiftUI `TabBarOnlyTabViewStyle`
+ *
+ * ```swift
+ * nonisolated struct TabBarOnlyTabViewStyle
+ * ```
+ * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class TabBarOnlyTabViewStyle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), TabViewStyle {
+/**
+     * SwiftUI `TabBarOnlyTabViewStyle.init()`
+     *
+     * ```swift
+     * nonisolated init()
+     * ```
+     * Availability: iOS 18.0+, macOS 15.0+, tvOS 18.0+, watchOS: unavailable (no-op)
+     */
+    public constructor() : this(2367, emptyList())
+}
+
+/**
+ * SwiftUI `TabSectionExpansion`
+ *
+ * ```swift
+ * struct TabSectionExpansion
+ * ```
+ * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
+ */
+@HiddenFromObjC public class TabSectionExpansion internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `TabSectionExpansion.expanded`
+         *
+         * ```swift
+         * static let expanded: TabSectionExpansion
+         * ```
+         * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val expanded: TabSectionExpansion get() = TabSectionExpansion(2383, emptyList())
+/**
+         * SwiftUI `TabSectionExpansion.automatic`
+         *
+         * ```swift
+         * static let automatic: TabSectionExpansion
+         * ```
+         * Availability: iOS 27.0+, macOS 27.0+, tvOS 27.0+, watchOS 27.0+
+         */
+        public val automatic: TabSectionExpansion get() = TabSectionExpansion(2384, emptyList())
+/**
+         * SwiftUI `TabSectionExpansion.collapsed`
+         *
+         * ```swift
+         * static let collapsed: TabSectionExpansion
+         * ```
+         * Availability: iOS 27.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val collapsed: TabSectionExpansion get() = TabSectionExpansion(2385, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `TableStyle`
+ *
+ * ```swift
+ * @MainActor @preconcurrency protocol TableStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public interface TableStyle {
+    public companion object {
+/**
+         * SwiftUI `TableStyle.inset(alternatesRowBackgrounds:)`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static func inset(alternatesRowBackgrounds: Bool) -> InsetTableStyle
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun inset(alternatesRowBackgrounds: Boolean): InsetTableStyle = InsetTableStyle(2725, listOf(alternatesRowBackgrounds))
+/**
+         * SwiftUI `TableStyle.inset`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static var inset: InsetTableStyle { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val inset: InsetTableStyle get() = InsetTableStyle(2726, emptyList())
+/**
+         * SwiftUI `TableStyle.bordered(alternatesRowBackgrounds:)`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static func bordered(alternatesRowBackgrounds: Bool) -> BorderedTableStyle
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun bordered(alternatesRowBackgrounds: Boolean): BorderedTableStyle = BorderedTableStyle(2727, listOf(alternatesRowBackgrounds))
+/**
+         * SwiftUI `TableStyle.bordered`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static var bordered: BorderedTableStyle { get }
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val bordered: BorderedTableStyle get() = BorderedTableStyle(2728, emptyList())
+/**
+         * SwiftUI `TableStyle.automatic`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static var automatic: AutomaticTableStyle { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val automatic: AutomaticTableStyle get() = AutomaticTableStyle(2729, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `TextEditorStyle`
+ *
+ * ```swift
+ * @MainActor @preconcurrency protocol TextEditorStyle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public interface TextEditorStyle {
+    public companion object {
+/**
+         * SwiftUI `TextEditorStyle.plain`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static var plain: PlainTextEditorStyle { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val plain: PlainTextEditorStyle get() = PlainTextEditorStyle(2788, emptyList())
+/**
+         * SwiftUI `TextEditorStyle.automatic`
+         *
+         * ```swift
+         * @MainActor @export(implementation) @preconcurrency static var automatic: AutomaticTextEditorStyle { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val automatic: AutomaticTextEditorStyle get() = AutomaticTextEditorStyle(2789, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `TextInputDictationBehavior`
+ *
+ * ```swift
+ * struct TextInputDictationBehavior
+ * ```
+ * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class TextInputDictationBehavior internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `TextInputDictationBehavior.inline(activation:)`
+         *
+         * ```swift
+         * static func inline(activation: TextInputDictationActivation) -> TextInputDictationBehavior
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun inline(activation: TextInputDictationActivation): TextInputDictationBehavior = TextInputDictationBehavior(2448, listOf(activation))
+/**
+         * SwiftUI `TextInputDictationBehavior.automatic`
+         *
+         * ```swift
+         * static let automatic: TextInputDictationBehavior
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val automatic: TextInputDictationBehavior get() = TextInputDictationBehavior(2449, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `TimelineScheduleMode`
+ *
+ * ```swift
+ * enum TimelineScheduleMode
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class TimelineScheduleMode internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `TimelineScheduleMode.lowFrequency`
+         *
+         * ```swift
+         * case lowFrequency
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val lowFrequency: TimelineScheduleMode get() = TimelineScheduleMode(2460, emptyList())
+/**
+         * SwiftUI `TimelineScheduleMode.normal`
+         *
+         * ```swift
+         * case normal
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val normal: TimelineScheduleMode get() = TimelineScheduleMode(2461, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `ToolbarCommands`
+ *
+ * ```swift
+ * nonisolated struct ToolbarCommands
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class ToolbarCommands internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `ToolbarCommands.init()`
+     *
+     * ```swift
+     * nonisolated init()
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor() : this(2466, emptyList())
+}
+
+/**
+ * SwiftUI `ToolbarItemVisibilityPriority`
+ *
+ * ```swift
+ * struct ToolbarItemVisibilityPriority
+ * ```
+ * Availability: iOS 27.0+, macOS 26.1+, tvOS 27.0+, watchOS 27.0+
+ */
+@HiddenFromObjC public class ToolbarItemVisibilityPriority internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `ToolbarItemVisibilityPriority.init(higherThan:)`
+     *
+     * ```swift
+     * init(higherThan other: ToolbarItemVisibilityPriority)
+     * ```
+     * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(higherThan: ToolbarItemVisibilityPriority) : this(2500, listOf(higherThan))
+    public companion object {
+/**
+         * SwiftUI `ToolbarItemVisibilityPriority.low`
+         *
+         * ```swift
+         * static let low: ToolbarItemVisibilityPriority
+         * ```
+         * Availability: iOS 27.0+, macOS 26.1+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val low: ToolbarItemVisibilityPriority get() = ToolbarItemVisibilityPriority(2501, emptyList())
+/**
+         * SwiftUI `ToolbarItemVisibilityPriority.high`
+         *
+         * ```swift
+         * static let high: ToolbarItemVisibilityPriority
+         * ```
+         * Availability: iOS 27.0+, macOS 26.1+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val high: ToolbarItemVisibilityPriority get() = ToolbarItemVisibilityPriority(2502, emptyList())
+/**
+         * SwiftUI `ToolbarItemVisibilityPriority.automatic`
+         *
+         * ```swift
+         * static let automatic: ToolbarItemVisibilityPriority
+         * ```
+         * Availability: iOS 27.0+, macOS 26.1+, tvOS 27.0+, watchOS 27.0+
+         */
+        public val automatic: ToolbarItemVisibilityPriority get() = ToolbarItemVisibilityPriority(2503, emptyList())
+/**
+         * SwiftUI `ToolbarItemVisibilityPriority.init(lowerThan:)`
+         *
+         * ```swift
+         * init(lowerThan other: ToolbarItemVisibilityPriority)
+         * ```
+         * Availability: iOS 27.0+, macOS 27.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun lowerThan(lowerThan: ToolbarItemVisibilityPriority): ToolbarItemVisibilityPriority = ToolbarItemVisibilityPriority(2504, listOf(lowerThan))
+    }
+}
+
+/**
+ * SwiftUI `ToolbarRole`
+ *
+ * ```swift
+ * struct ToolbarRole
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class ToolbarRole internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `ToolbarRole.navigationStack`
+         *
+         * ```swift
+         * static var navigationStack: ToolbarRole { get }
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS 17.0+, watchOS 10.0+
+         */
+        public val navigationStack: ToolbarRole get() = ToolbarRole(2526, emptyList())
+/**
+         * SwiftUI `ToolbarRole.editor`
+         *
+         * ```swift
+         * static var editor: ToolbarRole { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val editor: ToolbarRole get() = ToolbarRole(2527, emptyList())
+/**
+         * SwiftUI `ToolbarRole.browser`
+         *
+         * ```swift
+         * static var browser: ToolbarRole { get }
+         * ```
+         * Availability: iOS 17.0+, macOS: unavailable (no-op), tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val browser: ToolbarRole get() = ToolbarRole(2528, emptyList())
+/**
+         * SwiftUI `ToolbarRole.automatic`
+         *
+         * ```swift
+         * static var automatic: ToolbarRole { get }
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val automatic: ToolbarRole get() = ToolbarRole(2529, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `TouchBarItemPresence`
+ *
+ * ```swift
+ * enum TouchBarItemPresence
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class TouchBarItemPresence internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `TouchBarItemPresence.default(_:)`
+         *
+         * ```swift
+         * case `default`(String)
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun default(p0: String): TouchBarItemPresence = TouchBarItemPresence(2543, listOf(p0))
+/**
+         * SwiftUI `TouchBarItemPresence.optional(_:)`
+         *
+         * ```swift
+         * case optional(String)
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun optional(p0: String): TouchBarItemPresence = TouchBarItemPresence(2544, listOf(p0))
+/**
+         * SwiftUI `TouchBarItemPresence.required(_:)`
+         *
+         * ```swift
+         * case required(String)
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 14.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public fun required(p0: String): TouchBarItemPresence = TouchBarItemPresence(2545, listOf(p0))
+    }
+}
+
+/**
+ * SwiftUI `UnevenRoundedRectangle`
+ *
+ * ```swift
+ * @frozen struct UnevenRoundedRectangle
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class UnevenRoundedRectangle internal constructor(id: Int, args: List<Any?>) : SExpr(id, args), InsettableShape, RoundedRectangularShape, Shape {
+/**
+     * SwiftUI `UnevenRoundedRectangle.init(cornerRadii:style:)`
+     *
+     * ```swift
+     * init(cornerRadii: RectangleCornerRadii, style: RoundedCornerStyle = .continuous)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor(cornerRadii: RectangleCornerRadii, style: RoundedCornerStyle = RoundedCornerStyle.continuous) : this(2557, listOf(cornerRadii, style))
+/**
+     * SwiftUI `UnevenRoundedRectangle.init(topLeadingRadius:bottomLeadingRadius:bottomTrailingRadius:topTrailingRadius:style:)`
+     *
+     * ```swift
+     * @export(implementation) init(topLeadingRadius: CGFloat = 0, bottomLeadingRadius: CGFloat = 0, bottomTrailingRadius: CGFloat = 0, topTrailingRadius: CGFloat = 0, style: RoundedCornerStyle = .continuous)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor(topLeadingRadius: Double = 0.0, bottomLeadingRadius: Double = 0.0, bottomTrailingRadius: Double = 0.0, topTrailingRadius: Double = 0.0, style: RoundedCornerStyle = RoundedCornerStyle.continuous) : this(2558, listOf(topLeadingRadius, bottomLeadingRadius, bottomTrailingRadius, topTrailingRadius, style))
+}
+
+/**
+ * SwiftUI `VStackLayout`
+ *
+ * ```swift
+ * @frozen struct VStackLayout
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class VStackLayout internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `VStackLayout.init(alignment:spacing:)`
+     *
+     * ```swift
+     * init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil)
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor(alignment: HorizontalAlignment = HorizontalAlignment.center, spacing: Double? = null) : this(2586, listOf(alignment, spacing))
+}
+
+/**
+ * SwiftUI `ViewSpacing`
+ *
+ * ```swift
+ * struct ViewSpacing
+ * ```
+ * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+ */
+@HiddenFromObjC public class ViewSpacing internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `ViewSpacing.union(_:edges:)`
+     *
+     * ```swift
+     * func union(_ other: ViewSpacing, edges: Edge.Set = .all) -> ViewSpacing
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public fun union(other: ViewSpacing, edges: Edge.Set = Edge.Set.all): ViewSpacing = ViewSpacing(2620, listOf(this, other, edges))
+/**
+     * SwiftUI `ViewSpacing.init()`
+     *
+     * ```swift
+     * init()
+     * ```
+     * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+     */
+    public constructor() : this(2621, emptyList())
+    public companion object {
+/**
+         * SwiftUI `ViewSpacing.zero`
+         *
+         * ```swift
+         * static let zero: ViewSpacing
+         * ```
+         * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+
+         */
+        public val zero: ViewSpacing get() = ViewSpacing(2619, emptyList())
+    }
+}
+
+/**
+ * SwiftUI `WindowDragGesture`
+ *
+ * ```swift
+ * nonisolated struct WindowDragGesture
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class WindowDragGesture internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `WindowDragGesture.init()`
+     *
+     * ```swift
+     * nonisolated init()
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor() : this(2628, emptyList())
+}
+
+/**
+ * SwiftUI `WindowPlacement`
+ *
+ * ```swift
+ * struct WindowPlacement
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class WindowPlacement internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+/**
+     * SwiftUI `WindowPlacement.init(x:y:width:height:)`
+     *
+     * ```swift
+     * init(x: CGFloat? = nil, y: CGFloat? = nil, width: CGFloat? = nil, height: CGFloat? = nil)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(x: Double? = null, y: Double? = null, width: Double? = null, height: Double? = null) : this(2643, listOf(x, y, width, height))
+/**
+     * SwiftUI `WindowPlacement.init(_:size:)`
+     *
+     * ```swift
+     * init(_ position: CGPoint? = nil, size: CGSize? = nil)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(position: CGPoint? = null, size: CGSize? = null) : this(2644, listOf(position, size))
+/**
+     * SwiftUI `WindowPlacement.init(_:size:)`
+     *
+     * ```swift
+     * init(_ position: UnitPoint, size: CGSize? = nil)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(position: UnitPoint, size: CGSize? = null) : this(2645, listOf(position, size))
+/**
+     * SwiftUI `WindowPlacement.init(_:width:height:)`
+     *
+     * ```swift
+     * init(_ position: UnitPoint, width: CGFloat? = nil, height: CGFloat? = nil)
+     * ```
+     * Availability: iOS: unavailable (no-op), macOS 15.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+     */
+    public constructor(position: UnitPoint, width: Double? = null, height: Double? = null) : this(2646, listOf(position, width, height))
+}
+
+/**
+ * SwiftUI `WorldTrackingLimitation`
+ *
+ * ```swift
+ * struct WorldTrackingLimitation
+ * ```
+ * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+ */
+@HiddenFromObjC public class WorldTrackingLimitation internal constructor(id: Int, args: List<Any?>) : SExpr(id, args) {
+    public companion object {
+/**
+         * SwiftUI `WorldTrackingLimitation.orientation`
+         *
+         * ```swift
+         * static let orientation: WorldTrackingLimitation
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val orientation: WorldTrackingLimitation get() = WorldTrackingLimitation(2655, emptyList())
+/**
+         * SwiftUI `WorldTrackingLimitation.translation`
+         *
+         * ```swift
+         * static let translation: WorldTrackingLimitation
+         * ```
+         * Availability: iOS: unavailable (no-op), macOS 26.0+, tvOS: unavailable (no-op), watchOS: unavailable (no-op)
+         */
+        public val translation: WorldTrackingLimitation get() = WorldTrackingLimitation(2656, emptyList())
+    }
 }
 

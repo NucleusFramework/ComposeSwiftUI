@@ -131,6 +131,22 @@ private struct TimelineDateView: View {
             case 4: p.closeSubpath(); i += 1
             case 5 where i + 4 < c.count: p.addEllipse(in: CGRect(x: c[i + 1], y: c[i + 2], width: c[i + 3], height: c[i + 4])); i += 5
             case 6 where i + 4 < c.count: p.addRect(CGRect(x: c[i + 1], y: c[i + 2], width: c[i + 3], height: c[i + 4])); i += 5
+            // Canvas coordinates are points, so the radii are too (PathShape scales them to its frame instead).
+            case 7 where i + 6 < c.count:
+                p.addArc(center: CGPoint(x: c[i + 1], y: c[i + 2]), radius: c[i + 3], startAngle: .degrees(c[i + 4]),
+                         endAngle: .degrees(c[i + 5]), clockwise: c[i + 6] != 0)
+                i += 7
+            case 8 where i + 5 < c.count:
+                p.addRelativeArc(center: CGPoint(x: c[i + 1], y: c[i + 2]), radius: c[i + 3], startAngle: .degrees(c[i + 4]), delta: .degrees(c[i + 5]))
+                i += 6
+            case 9 where i + 5 < c.count:
+                p.addArc(tangent1End: CGPoint(x: c[i + 1], y: c[i + 2]), tangent2End: CGPoint(x: c[i + 3], y: c[i + 4]), radius: c[i + 5])
+                i += 6
+            case 10 where i + 9 < c.count:
+                let radii = RectangleCornerRadii(topLeading: c[i + 5], bottomLeading: c[i + 6], bottomTrailing: c[i + 7], topTrailing: c[i + 8])
+                p.addRoundedRect(in: CGRect(x: c[i + 1], y: c[i + 2], width: c[i + 3], height: c[i + 4]), cornerRadii: radii,
+                                 style: c[i + 9] == 0 ? .circular : .continuous)
+                i += 10
             default: i = c.count
             }
         }

@@ -8,11 +8,11 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 
 | Status | Entries |
 |---|---|
-| ✅ generated | 3798 (46.2%) |
+| ✅ generated | 3794 (46.2%) |
 | ☑️ covered | 1201 (14.6%) |
 | ⛔ rejected | 0 (0.0%) |
 | ➖ skipped | 0 (0.0%) |
-| · n/a | 3221 (39.2%) |
+| · n/a | 3225 (39.2%) |
 | ? unmatched | 0 (0.0%) |
 | **total** | **8220** |
 
@@ -23,7 +23,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | method | 1181 | 875 | 0 | 0 | 1075 | 0 |
 | property | 1152 | 67 | 0 | 0 | 1064 | 0 |
 | init | 586 | 229 | 0 | 0 | 235 | 0 |
-| struct | 470 | 5 | 0 | 0 | 470 | 0 |
+| struct | 466 | 5 | 0 | 0 | 474 | 0 |
 | case | 286 | 15 | 0 | 0 | 34 | 0 |
 | protocol | 44 | 0 | 0 | 0 | 78 | 0 |
 | associatedtype | 0 | 0 | 0 | 0 | 101 | 0 |
@@ -582,8 +582,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | struct | [DocumentLaunchGeometryProxy](https://developer.apple.com/documentation/swiftui/documentlaunchgeometryproxy) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
 | · | property | [var frame: CGRect](https://developer.apple.com/documentation/swiftui/documentlaunchgeometryproxy/frame) | instance property / subscript (read side, not a view-building API) |
 | · | property | [var titleViewFrame: CGRect](https://developer.apple.com/documentation/swiftui/documentlaunchgeometryproxy/titleviewframe) | instance property / subscript (read side, not a view-building API) |
-| ✅ | struct | [DefaultDocumentGroupLaunchActions](https://developer.apple.com/documentation/swiftui/defaultdocumentgrouplaunchactions) | Kotlin value class (1/1 overloads bridged) |
-| ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/defaultdocumentgrouplaunchactions/init()) | value member of DefaultDocumentGroupLaunchActions (1/1 overloads bridged) |
+| · | struct | [DefaultDocumentGroupLaunchActions](https://developer.apple.com/documentation/swiftui/defaultdocumentgrouplaunchactions) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
+| ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/defaultdocumentgrouplaunchactions/init()) | view (1/1 overloads bridged) |
 | · | struct | [NewDocumentButton](https://developer.apple.com/documentation/swiftui/newdocumentbutton) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
 | ✅ | init | [init(_:contentType:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:)) | view (4/4 overloads bridged) |
 | ✅ | init | [init(_:contentType:prepareDocumentURL:)](https://developer.apple.com/documentation/swiftui/newdocumentbutton/init(_:contenttype:preparedocumenturl:)) | view (4/4 overloads bridged) |
@@ -4063,9 +4063,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | init | [init(_:text:prompt:)](https://developer.apple.com/documentation/swiftui/securefield/init(_:text:prompt:)) | view (3/3 overloads bridged) |
 | ✅ | init | [init(text: Binding<String>, prompt: Text?, label: () -> Label)](https://developer.apple.com/documentation/swiftui/securefield/init(text:prompt:label:)) | view (1/1 overloads bridged) |
 | ✅ | init | [init(_:text:onCommit:)](https://developer.apple.com/documentation/swiftui/securefield/init(_:text:oncommit:)) | view (2/2 overloads bridged) |
-| ✅ | struct | [TextEditor](https://developer.apple.com/documentation/swiftui/texteditor) | Kotlin value class (1/1 overloads bridged) |
-| ✅ | init | [init(text: Binding<String>)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:)) | value member of TextEditor (1/1 overloads bridged) |
-| ✅ | init | [init(text:selection:)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:selection:)) | value member of TextEditor (2/2 overloads bridged) |
+| · | struct | [TextEditor](https://developer.apple.com/documentation/swiftui/texteditor) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
+| ✅ | init | [init(text: Binding<String>)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(text:selection:)](https://developer.apple.com/documentation/swiftui/texteditor/init(text:selection:)) | view (2/2 overloads bridged) |
 | ✅ | method | [func textSelection<S>(S) -> some View](https://developer.apple.com/documentation/swiftui/view/textselection(_:)) | modifier (1/1 overloads bridged) |
 | ✅ | protocol | [TextSelectability](https://developer.apple.com/documentation/swiftui/textselectability) | Kotlin interface (1/1 overloads bridged) |
 | ✅ | property | [static var enabled: EnabledTextSelectability](https://developer.apple.com/documentation/swiftui/textselectability/enabled) | value member of EnabledTextSelectability (1/1 overloads bridged) |
@@ -4581,8 +4581,8 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | ✅ | property | [static let destructive: ButtonRole](https://developer.apple.com/documentation/swiftui/buttonrole/destructive) | value member of ButtonRole (1/1 overloads bridged) |
 | ✅ | property | [static let close: ButtonRole](https://developer.apple.com/documentation/swiftui/buttonrole/close) | value member of ButtonRole (1/1 overloads bridged) |
 | ✅ | property | [static let confirm: ButtonRole](https://developer.apple.com/documentation/swiftui/buttonrole/confirm) | value member of ButtonRole (1/1 overloads bridged) |
-| ✅ | struct | [EditButton](https://developer.apple.com/documentation/swiftui/editbutton) | Kotlin value class (1/1 overloads bridged) |
-| ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/editbutton/init()) | value member of EditButton (1/1 overloads bridged) |
+| · | struct | [EditButton](https://developer.apple.com/documentation/swiftui/editbutton) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
+| ✅ | init | [init()](https://developer.apple.com/documentation/swiftui/editbutton/init()) | view (1/1 overloads bridged) |
 | · | struct | [PasteButton](https://developer.apple.com/documentation/swiftui/pastebutton) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
 | ☑️ | init | [init(supportedContentTypes: [UTType], payloadAction: ([NSItemProvider]) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(supportedcontenttypes:payloadaction:)) | hand-written: PasteButton { strings -> } |
 | ☑️ | init | [init<T>(payloadType: T.Type, onPaste: ([T]) -> Void)](https://developer.apple.com/documentation/swiftui/pastebutton/init(payloadtype:onpaste:)) | hand-written: PasteButton { strings -> } |
@@ -4616,9 +4616,9 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | struct | [TextFieldLink](https://developer.apple.com/documentation/swiftui/textfieldlink) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
 | ✅ | init | [init(_:prompt:onSubmit:)](https://developer.apple.com/documentation/swiftui/textfieldlink/init(_:prompt:onsubmit:)) | view (3/3 overloads bridged) |
 | ✅ | init | [init(prompt: Text?, label: () -> Label, onSubmit: (String) -> Void)](https://developer.apple.com/documentation/swiftui/textfieldlink/init(prompt:label:onsubmit:)) | view (1/1 overloads bridged) |
-| ✅ | struct | [HelpLink](https://developer.apple.com/documentation/swiftui/helplink) | Kotlin value class (1/1 overloads bridged) |
-| ✅ | init | [init(action: () -> Void)](https://developer.apple.com/documentation/swiftui/helplink/init(action:)) | value member of HelpLink (1/1 overloads bridged) |
-| ✅ | init | [init(destination: URL)](https://developer.apple.com/documentation/swiftui/helplink/init(destination:)) | value member of HelpLink (1/1 overloads bridged) |
+| · | struct | [HelpLink](https://developer.apple.com/documentation/swiftui/helplink) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
+| ✅ | init | [init(action: () -> Void)](https://developer.apple.com/documentation/swiftui/helplink/init(action:)) | view (1/1 overloads bridged) |
+| ✅ | init | [init(destination: URL)](https://developer.apple.com/documentation/swiftui/helplink/init(destination:)) | view (1/1 overloads bridged) |
 | ☑️ | init | [init(anchor: NSHelpManager.AnchorName)](https://developer.apple.com/documentation/swiftui/helplink/init(anchor:)) | hand-written: HelpLink(destination) (generated) |
 | ☑️ | init | [init(anchor: NSHelpManager.AnchorName, book: NSHelpManager.BookName)](https://developer.apple.com/documentation/swiftui/helplink/init(anchor:book:)) | hand-written: HelpLink(destination) (generated) |
 | · | struct | [Slider](https://developer.apple.com/documentation/swiftui/slider) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |

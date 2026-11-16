@@ -70,7 +70,8 @@ public fun <T> ForEach(
 
 /**
  * SwiftUI `NavigationStack(path:)` with `navigationDestination(for:)`, driven by Kotlin state:
- * push by appending to [path], SwiftUI back navigation calls [onPathChange] with the truncated path.
+ * push by appending to [path], SwiftUI back navigation calls [onPathChange] with the truncated path. A
+ * `NavigationLink(value = v) { … }` inside the stack pushes `v` (it must be a [T]): [onPathChange] receives `path + v`.
  */
 @HiddenFromObjC
 @Composable
@@ -84,7 +85,10 @@ public fun <T : Any> NavigationStack(
     val slots: List<@Composable () -> Unit> = path.map { value -> { key(value) { destination(value) } } }
     SwiftView(
         ExtraIds.NAV_PATH,
-        listOf(path.size, SValueCallback { count -> onPathChange(path.take((count as Number).toInt())) }),
+        listOf(path.size, SValueCallback { v ->
+            @Suppress("UNCHECKED_CAST")
+            if (v is List<*>) onPathChange(path + (v[0] as T)) else onPathChange(path.take((v as Number).toInt()))
+        }),
         modifier,
         slots = slots,
         content = root,
@@ -153,13 +157,27 @@ public data class SwiftUIEnvironment(
     val isEnabled: Boolean = true,
     val isPresented: Boolean = false,
     val dismiss: () -> Unit = {},
+    /** `scenePhase`: active, inactive or background. */
+    val scenePhase: ScenePhase = ScenePhase.active,
+    /** `accessibilityReduceMotion`. */
+    val reduceMotion: Boolean = false,
+    /** `accessibilityReduceTransparency`. */
+    val reduceTransparency: Boolean = false,
+    /** `accessibilityDifferentiateWithoutColor`. */
+    val differentiateWithoutColor: Boolean = false,
+    /** `accessibilityInvertColors`. */
+    val invertColors: Boolean = false,
+    /** `accessibilityVoiceOverEnabled`. */
+    val voiceOverEnabled: Boolean = false,
+    /** `legibilityWeight == .bold` (Bold Text). */
+    val boldText: Boolean = false,
 ) {
     val isDark: Boolean get() = colorScheme == ColorScheme.dark
 }
 
 /**
  * Reads SwiftUI `@Environment` values (color scheme, dynamic type, size classes, locale, layout
- * direction, enabled/presented state, `dismiss`) where it is placed. Values arrive after the first
+ * direction, enabled/presented state, `dismiss`, scene phase, accessibility preferences) where it is placed. Values arrive after the first
  * layout pass (the first composition sees defaults).
  */
 @HiddenFromObjC
@@ -181,6 +199,13 @@ public fun EnvironmentReader(modifier: Modifier = Modifier, content: @Composable
                 isEnabled = v[6] as Boolean,
                 isPresented = v[7] as Boolean,
                 dismiss = { dismiss?.run() },
+                scenePhase = when (v[9]) { "background" -> ScenePhase.background; "inactive" -> ScenePhase.inactive; else -> ScenePhase.active },
+                reduceMotion = v[10] == true,
+                reduceTransparency = v[11] == true,
+                differentiateWithoutColor = v[12] == true,
+                invertColors = v[13] == true,
+                voiceOverEnabled = v[14] == true,
+                boldText = v[15] == true,
             )
             if (new.copy(dismiss = env.dismiss) != env) env = new
         }),
@@ -419,7 +444,25 @@ public class PathShape internal constructor(commands: List<Double>) : SExpr(5, l
     public constructor(build: PathBuilder.() -> Unit) : this(PathBuilder().apply(build).commands.toList())
 }
 
-/** Renders a Swift view registered with `ComposeRegistry.nativeViews[key]` (MapKit, UIKit wrappers…). */
+/**
+ * A Kotlin action to pass in a [NativeView]'s `args`: the Swift renderer gets it with `Args.action(i)`, which runs it
+ * and applies the resulting Compose changes. It is updated in place on recomposition, like the built-in callbacks.
+ */
+@HiddenFromObjC
+public fun nativeAction(action: () -> Unit): Any = SAction(action)
+
+/**
+ * A Kotlin callback to pass in a [NativeView]'s `args`: the Swift renderer gets it with `Args.callback(i)` and calls
+ * it with a value (Swift `String`, `Bool` / numbers boxed as `KotlinBoolean` / `KotlinInt`…, arrays as lists; `NSNull`
+ * arrives as null).
+ */
+@HiddenFromObjC
+public fun nativeCallback(callback: (Any?) -> Unit): Any = SValueCallback(callback)
+
+/**
+ * Renders a Swift view registered with `ComposeRegistry.nativeViews[key]` (MapKit, UIKit wrappers…). Pass actions
+ * and callbacks in [args] with [nativeAction] and [nativeCallback].
+ */
 @HiddenFromObjC
 @Composable
 public fun NativeView(key: String, modifier: Modifier = Modifier, vararg args: Any?) {
@@ -477,8 +520,9 @@ public fun TabSection(title: String, modifier: Modifier = Modifier, content: @Co
 }
 
 /**
- * SwiftUI `Tab(_:systemImage:value:)`, for use in a [TabView] or a [TabSection]. [value] is the tag compared with
- * the `TabView` selection; leave it null when the `TabView` has no selection.
+ * SwiftUI `Tab(_:systemImage:value:role:)`, for use in a [TabView] or a [TabSection]. [value] is the tag compared
+ * with the `TabView` selection; leave it null when the `TabView` has no selection. [role] (`TabRole.search`) needs
+ * iOS 18 / macOS 15 / tvOS 18 / watchOS 11; [badge] shows a count or a short text on the tab item.
  */
 @HiddenFromObjC
 @Composable
@@ -487,9 +531,11 @@ public fun Tab(
     systemImage: SFSymbol? = null,
     value: Any? = null,
     modifier: Modifier = Modifier,
+    role: TabRole? = null,
+    badge: String? = null,
     content: @Composable () -> Unit,
 ) {
-    SwiftView(ExtraIds.TAB, listOf(title, systemImage?.name, value), modifier, content = content)
+    SwiftView(ExtraIds.TAB, listOf(title, systemImage?.name, value, role, badge), modifier, content = content)
 }
 
 // ---- mixed-style text ----------------------------------------------------------------------------
@@ -606,3 +652,110 @@ public fun Text(text: StyledString, modifier: Modifier = Modifier) {
 }
 
 private const val STYLED_RUN_STRIDE = 9
+
+/** The pointer location of SwiftUI `HoverPhase.active(_:)` (in the modifier's coordinate space); null for `.ended`. */
+@HiddenFromObjC
+public val HoverPhase.location: CGPoint?
+    get() = (args.firstOrNull() as? SExpr)?.let { CGPoint((it.args[0] as Number).toDouble(), (it.args[1] as Number).toDouble()) }
+
+// ---- option sets ---------------------------------------------------------------------------------------
+
+// SwiftUI combines option set members with array literals (`[.top, .leading]`); Kotlin uses `+` or `union`.
+
+private const val OPTION_SET_UNION = 15
+
+/** SwiftUI `Edge.Set.union(_:)`: `Edge.Set.top + Edge.Set.leading` is Swift's `[.top, .leading]`. */
+@HiddenFromObjC
+public infix fun Edge.Set.union(other: Edge.Set): Edge.Set = Edge.Set(OPTION_SET_UNION, listOf("Edge.Set", this, other))
+
+/** SwiftUI `Edge.Set.union(_:)`. */
+@HiddenFromObjC
+public operator fun Edge.Set.plus(other: Edge.Set): Edge.Set = union(other)
+
+/** SwiftUI `Axis.Set.union(_:)`. */
+@HiddenFromObjC
+public infix fun Axis.Set.union(other: Axis.Set): Axis.Set = Axis.Set(OPTION_SET_UNION, listOf("Axis.Set", this, other))
+
+/** SwiftUI `Axis.Set.union(_:)`. */
+@HiddenFromObjC
+public operator fun Axis.Set.plus(other: Axis.Set): Axis.Set = union(other)
+
+/** SwiftUI `EventModifiers.union(_:)`. */
+@HiddenFromObjC
+public infix fun EventModifiers.union(other: EventModifiers): EventModifiers = EventModifiers(OPTION_SET_UNION, listOf("EventModifiers", this, other))
+
+/** SwiftUI `EventModifiers.union(_:)`. */
+@HiddenFromObjC
+public operator fun EventModifiers.plus(other: EventModifiers): EventModifiers = union(other)
+
+/** SwiftUI `HorizontalEdge.Set.union(_:)`. */
+@HiddenFromObjC
+public infix fun HorizontalEdge.Set.union(other: HorizontalEdge.Set): HorizontalEdge.Set = HorizontalEdge.Set(OPTION_SET_UNION, listOf("HorizontalEdge.Set", this, other))
+
+/** SwiftUI `HorizontalEdge.Set.union(_:)`. */
+@HiddenFromObjC
+public operator fun HorizontalEdge.Set.plus(other: HorizontalEdge.Set): HorizontalEdge.Set = union(other)
+
+/** SwiftUI `VerticalEdge.Set.union(_:)`. */
+@HiddenFromObjC
+public infix fun VerticalEdge.Set.union(other: VerticalEdge.Set): VerticalEdge.Set = VerticalEdge.Set(OPTION_SET_UNION, listOf("VerticalEdge.Set", this, other))
+
+/** SwiftUI `VerticalEdge.Set.union(_:)`. */
+@HiddenFromObjC
+public operator fun VerticalEdge.Set.plus(other: VerticalEdge.Set): VerticalEdge.Set = union(other)
+
+/** SwiftUI `SafeAreaRegions.union(_:)`. */
+@HiddenFromObjC
+public infix fun SafeAreaRegions.union(other: SafeAreaRegions): SafeAreaRegions = SafeAreaRegions(OPTION_SET_UNION, listOf("SafeAreaRegions", this, other))
+
+/** SwiftUI `SafeAreaRegions.union(_:)`. */
+@HiddenFromObjC
+public operator fun SafeAreaRegions.plus(other: SafeAreaRegions): SafeAreaRegions = union(other)
+
+/** SwiftUI `ContentShapeKinds.union(_:)`. */
+@HiddenFromObjC
+public infix fun ContentShapeKinds.union(other: ContentShapeKinds): ContentShapeKinds = ContentShapeKinds(OPTION_SET_UNION, listOf("ContentShapeKinds", this, other))
+
+/** SwiftUI `ContentShapeKinds.union(_:)`. */
+@HiddenFromObjC
+public operator fun ContentShapeKinds.plus(other: ContentShapeKinds): ContentShapeKinds = union(other)
+
+/** SwiftUI `AccessibilityTraits.union(_:)`. */
+@HiddenFromObjC
+public infix fun AccessibilityTraits.union(other: AccessibilityTraits): AccessibilityTraits = AccessibilityTraits(OPTION_SET_UNION, listOf("AccessibilityTraits", this, other))
+
+/** SwiftUI `AccessibilityTraits.union(_:)`. */
+@HiddenFromObjC
+public operator fun AccessibilityTraits.plus(other: AccessibilityTraits): AccessibilityTraits = union(other)
+
+/** SwiftUI `AccessibilityTechnologies.union(_:)`. */
+@HiddenFromObjC
+public infix fun AccessibilityTechnologies.union(other: AccessibilityTechnologies): AccessibilityTechnologies = AccessibilityTechnologies(OPTION_SET_UNION, listOf("AccessibilityTechnologies", this, other))
+
+/** SwiftUI `AccessibilityTechnologies.union(_:)`. */
+@HiddenFromObjC
+public operator fun AccessibilityTechnologies.plus(other: AccessibilityTechnologies): AccessibilityTechnologies = union(other)
+
+/** SwiftUI `MatchedGeometryProperties.union(_:)`. */
+@HiddenFromObjC
+public infix fun MatchedGeometryProperties.union(other: MatchedGeometryProperties): MatchedGeometryProperties = MatchedGeometryProperties(OPTION_SET_UNION, listOf("MatchedGeometryProperties", this, other))
+
+/** SwiftUI `MatchedGeometryProperties.union(_:)`. */
+@HiddenFromObjC
+public operator fun MatchedGeometryProperties.plus(other: MatchedGeometryProperties): MatchedGeometryProperties = union(other)
+
+/** SwiftUI `GestureMask.union(_:)`. */
+@HiddenFromObjC
+public infix fun GestureMask.union(other: GestureMask): GestureMask = GestureMask(OPTION_SET_UNION, listOf("GestureMask", this, other))
+
+/** SwiftUI `GestureMask.union(_:)`. */
+@HiddenFromObjC
+public operator fun GestureMask.plus(other: GestureMask): GestureMask = union(other)
+
+/** SwiftUI `SearchSuggestionsPlacement.Set.union(_:)`. */
+@HiddenFromObjC
+public infix fun SearchSuggestionsPlacement.Set.union(other: SearchSuggestionsPlacement.Set): SearchSuggestionsPlacement.Set = SearchSuggestionsPlacement.Set(OPTION_SET_UNION, listOf("SearchSuggestionsPlacement.Set", this, other))
+
+/** SwiftUI `SearchSuggestionsPlacement.Set.union(_:)`. */
+@HiddenFromObjC
+public operator fun SearchSuggestionsPlacement.Set.plus(other: SearchSuggestionsPlacement.Set): SearchSuggestionsPlacement.Set = union(other)

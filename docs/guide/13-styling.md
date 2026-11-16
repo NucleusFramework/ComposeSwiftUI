@@ -194,6 +194,13 @@ HStack(spacing = 16.0, modifier = Modifier.padding().glassEffect(Glass.regular, 
 }
 ```
 
+Both arguments are optional: `Modifier.glassEffect()` (or `glassEffect(Glass.clear)`) uses SwiftUI's default shape,
+`DefaultGlassEffectShape()`, a capsule.
+
+```kotlin
+Text("Glass", modifier = Modifier.padding().glassEffect())
+```
+
 - `Glass.regular` is the standard glass, `Glass.clear` is more transparent (for rich backgrounds), `Glass.identity`
   disables the effect (useful to toggle it without changing the view tree).
 - `Glass.regular.tint(Color.blue)` tints it; `Glass.regular.interactive()` makes it react to touches (scale, shimmer),

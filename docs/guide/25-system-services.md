@@ -4,20 +4,15 @@
 > Health data access, contacts, Screen Time, Image Playground, journaling suggestions, game saves, schoolwork, certificates, spatial anchors and the other system framework views, from Kotlin.
 
 This chapter covers the smaller framework integrations: the system services whose SwiftUI views are mostly one button,
-picker or sheet. They live in two files:
+picker or sheet. Each framework has its own file in `ComposeSwiftUIIntegrations/`, named after it (`HealthKitUI.swift`,
+`ContactsUI.swift`, `FamilyControls.swift`, `AppIntents.swift`…; the spatial anchors of CoreLocation, CoreMotion and
+NearbyInteraction are in `SpatialAnchors.swift`), and its own register function. FinanceKitUI is covered in
+[Payments and Wallet](payments-and-wallet.md).
 
-- `AppServices.swift`: HealthKitUI, ContactsUI, FamilyControls, ImagePlayground, JournalingSuggestions, GameSave,
-  ClassKitUI, SecurityUI, AutomatedDeviceEnrollment and the spatial anchors of CoreLocation, CoreMotion and
-  NearbyInteraction (plus FinanceKitUI, covered in [Payments and Wallet](payments-and-wallet.md)).
-- `SystemServices.swift`: AppIntents, DeviceActivity, WatchKit, ManagedAppDistribution, PermissionKit,
-  ScreenCaptureKit, WorkoutKit and DeviceDiscoveryUI.
-
-Each framework has its own register function, and each file is split into `#if os(…)` / `#if canImport(…)` sections.
-Every `import` in a file you add links that framework into the app. Linking frameworks you don't use (HealthKit,
-FamilyControls…) costs launch time and can draw questions in App Review, so trim the file to the sections you need.
-The Gradle plugin rewrites `ComposeSwiftUIIntegrations` on every build, so don't edit the file in place: copy it to your
-own sources, delete the unused sections there, and add the copy to the target instead of the original. Then register
-only what you use:
+Every `import` in a file you add links that framework into the app, and linking frameworks you don't use (HealthKit,
+FamilyControls…) costs launch time and can draw questions in App Review. Add only the files you use, or list them in
+`composeSwiftUI { integrations.set(listOf("HealthKitUI", "ContactsUI")) }` so the folder holds nothing else (see
+[Apple frameworks](apple-frameworks.md)). Then register them, under the platform conditions of each file:
 
 ```swift
 @main
@@ -36,26 +31,26 @@ struct MyApp: App {
 }
 ```
 
-| Register | Kotlin APIs | Platforms |
-|---|---|---|
-| `registerHealthKitUI()` | `Modifier.healthDataAccessRequest` | iOS 17, watchOS 10.2 |
-| `registerContactsUI()` | `ContactAccessButton`, `Modifier.contactAccessButtonStyle`, `Modifier.contactAccessPicker` | iOS 18 |
-| `registerFamilyControls()` | `FamilyActivityPicker`, `Modifier.familyActivityPicker`, `FamilyActivityLabel` | iOS 16 |
-| `registerImagePlayground()` | `Modifier.imagePlaygroundSheet`, `Modifier.imagePlaygroundStyle` | iOS 18.1, macOS 15.1 |
-| `registerJournalingSuggestions()` | `JournalingSuggestionsPicker`, `Modifier.journalingSuggestionsPicker` | iOS 17.2, devices only |
-| `registerGameSave()` | `Modifier.gameSaveSyncingAlert` | iOS 27, macOS 27 |
-| `registerClassKitUI()` | `AssignedDocumentLabel`, `AssignedDocumentSubmissionButton`, `Modifier.onAssignedDocument` | iOS 27, macOS 27 |
-| `registerSecurityUI()` | `Modifier.certificateSheet` | iOS 27, macOS 27, tvOS 27, watchOS 27 |
-| `registerAutomatedDeviceEnrollment()` | `Modifier.automatedDeviceEnrollmentAddition` | iOS 18 |
-| `registerSpatialAnchors()` | `Modifier.spatialAnchors` | iOS 27.2, devices |
-| `registerAppIntents()` | `ShortcutsLink`, `Modifier.shortcutsStyle` | iOS, macOS, watchOS, visionOS |
-| `registerDeviceActivity()` | `DeviceActivityReport` | iOS |
-| `registerWatchKit()` | `NowPlayingView` | watchOS |
-| `registerManagedAppDistribution()` | `ManagedContentView`, `Modifier.managedContentStyle` | macOS 26.4 |
-| `registerPermissionKit()` | `CommunicationLimitsButton` | iOS 26, macOS 26 |
-| `registerScreenCaptureKit()` | `Modifier.recordingEditor` | iOS 27, macOS 27, tvOS 27 |
-| `registerWorkoutKit()` | `Modifier.workoutPreview` | iOS 17, watchOS 11 |
-| `registerDeviceDiscoveryUI()` | `DevicePicker` | tvOS 16 |
+| File | Register | Kotlin APIs | Platforms |
+|---|---|---|---|
+| `HealthKitUI.swift` | `registerHealthKitUI()` | `Modifier.healthDataAccessRequest` | iOS 17, watchOS 10.2 |
+| `ContactsUI.swift` | `registerContactsUI()` | `ContactAccessButton`, `Modifier.contactAccessButtonStyle`, `Modifier.contactAccessPicker` | iOS 18 |
+| `FamilyControls.swift` | `registerFamilyControls()` | `FamilyActivityPicker`, `Modifier.familyActivityPicker`, `FamilyActivityLabel` | iOS 16 |
+| `ImagePlayground.swift` | `registerImagePlayground()` | `Modifier.imagePlaygroundSheet`, `Modifier.imagePlaygroundStyle` | iOS 18.1, macOS 15.1 |
+| `JournalingSuggestions.swift` | `registerJournalingSuggestions()` | `JournalingSuggestionsPicker`, `Modifier.journalingSuggestionsPicker` | iOS 17.2, devices only |
+| `GameSave.swift` | `registerGameSave()` | `Modifier.gameSaveSyncingAlert` | iOS 27, macOS 27 |
+| `ClassKitUI.swift` | `registerClassKitUI()` | `AssignedDocumentLabel`, `AssignedDocumentSubmissionButton`, `Modifier.onAssignedDocument` | iOS 27, macOS 27 |
+| `SecurityUI.swift` | `registerSecurityUI()` | `Modifier.certificateSheet` | iOS 27, macOS 27, tvOS 27, watchOS 27 |
+| `AutomatedDeviceEnrollment.swift` | `registerAutomatedDeviceEnrollment()` | `Modifier.automatedDeviceEnrollmentAddition` | iOS 18 |
+| `SpatialAnchors.swift` | `registerSpatialAnchors()` | `Modifier.spatialAnchors` | iOS 27.2, devices |
+| `AppIntents.swift` | `registerAppIntents()` | `ShortcutsLink`, `Modifier.shortcutsStyle` | iOS, macOS, watchOS, visionOS |
+| `DeviceActivity.swift` | `registerDeviceActivity()` | `DeviceActivityReport` | iOS |
+| `WatchKit.swift` | `registerWatchKit()` | `NowPlayingView` | watchOS |
+| `ManagedAppDistribution.swift` | `registerManagedAppDistribution()` | `ManagedContentView`, `Modifier.managedContentStyle` | macOS 26.4 |
+| `PermissionKit.swift` | `registerPermissionKit()` | `CommunicationLimitsButton` | iOS 26, macOS 26 |
+| `ScreenCaptureKit.swift` | `registerScreenCaptureKit()` | `Modifier.recordingEditor` | iOS 27, macOS 27, tvOS 27 |
+| `WorkoutKit.swift` | `registerWorkoutKit()` | `Modifier.workoutPreview` | iOS 17, watchOS 11 |
+| `DeviceDiscoveryUI.swift` | `registerDeviceDiscoveryUI()` | `DevicePicker` | tvOS 16 |
 
 ## HealthKitUI
 
@@ -81,7 +76,17 @@ VStack(
 
 The request runs each time `trigger` changes. `onResult` receives `null` once the user has answered the sheet, which does
 not mean every type was granted: HealthKit never tells an app whether read access was denied. Unknown identifiers are
-skipped silently. `objectType` switches to the per-object authorization variant (iOS).
+skipped silently. `objectType` switches to the per-object authorization variant (iOS), for
+`"HKVisionPrescriptionTypeIdentifier"` (vision prescriptions):
+
+```kotlin
+var askPrescriptions by remember { mutableStateOf(false) }
+Button("Share prescriptions", modifier = Modifier.healthDataAccessRequest(
+    readTypes = emptyList(),
+    objectType = "HKVisionPrescriptionTypeIdentifier",
+    trigger = askPrescriptions,
+) { error -> }) { askPrescriptions = !askPrescriptions }
+```
 
 The app needs the **HealthKit** capability and Info.plist strings: `NSHealthShareUsageDescription` (reading) and
 `NSHealthUpdateUsageDescription` (writing). Reading the data afterwards (`HKHealthStore` queries) is done in Swift or

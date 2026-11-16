@@ -42,6 +42,8 @@ private struct KotlinSpriteView: View {
                 Color.clear.onAppear { scene = makeScene(a, size: geo.size) }
             }
         }
+        // A new scene file or class builds a new scene.
+        .onChange(of: "\(a.stringOpt(0) ?? "")|\(a.stringOpt(1) ?? "")") { _, _ in scene = nil }
     }
 
     private func makeScene(_ a: Args, size: CGSize) -> SKScene {

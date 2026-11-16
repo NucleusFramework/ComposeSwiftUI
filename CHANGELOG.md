@@ -1,5 +1,46 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `NavigationLink(value = v) { … }` inside a Kotlin `NavigationStack(path, onPathChange, destination)` pushes `v`,
+  with the native disclosure chevron.
+- `Modifier.refreshable` and `Modifier.task` take `suspend () -> Unit`: the refresh indicator stays until the
+  coroutine ends, and cancelling the SwiftUI task cancels it.
+- `Tab(role = TabRole.search, badge = "3")`.
+- Option sets combine with `+` / `union`: `Modifier.padding(Edge.Set.top + Edge.Set.leading, 8.0)` (also `Axis.Set`,
+  `EventModifiers`, `SafeAreaRegions`, `AccessibilityTraits`…).
+- `Text(value, NumberFormat.Percent, fractionDigits = 1..1)`: locale-aware number, percent and currency text.
+- `EnvironmentReader` exposes the scene phase and the accessibility preferences (reduce motion, reduce
+  transparency, differentiate without color, invert colors, VoiceOver, bold text).
+- `HoverPhase.location`, `nativeAction { }` / `nativeCallback { }` for `NativeView` arguments.
+- `WebViewController.evaluateJavaScript(script, onError = …)`: JavaScript errors no longer reach `onResult`.
+- Gradle plugin: `composeSwiftUI { integrations.set(listOf("MapKit", "Charts")) }` writes only those integration
+  files.
+
+### Changed
+
+- `EditButton()` and `TextEditor(text, onTextChange = …)` are composables (`EditButtonView(EditButton())` and
+  `TextEditorView(…)` are gone).
+- `AppServices.swift` and `SystemServices.swift` are split into one integration file per framework
+  (`HealthKitUI.swift`, `FamilyControls.swift`, `AppIntents.swift`…), so an app links only what it uses.
+- The Gradle plugin adds the library to `appleMain` when the module also targets Android or the JVM.
+- `Modifier.glassEffect()`: the shape defaults to SwiftUI's `DefaultGlassEffectShape()`.
+
+### Fixed
+
+- `Canvas` paths stopped at `arc`, `relativeArc`, `tangentArc` and `roundedRect`.
+- `Modifier.onContinuousHover { }` and `Modifier.hoverEffect()` were ambiguous without their first argument.
+- `translationTask` ignored `preferredStrategy` and changes of `source` / `target`.
+- `Map` replaced a camera, user-location or item position with a region after the first camera change.
+- StoreKit: the redeem-code button visibility overrode restore purchases on macOS 14; subscription states arrive as
+  `subscribed`, `expired`, `inBillingRetryPeriod`, `inGracePeriod` or `revoked`.
+- `SpriteView` kept its first scene when the scene file or class changed.
+- `healthDataAccessRequest(objectType)` couldn't resolve the vision prescription type.
+- KDoc availability of `List(selection:)` on iOS, `SubscriptionOfferView`, PassKit, `familyActivityPicker` and
+  `workoutPreview`.
+
 ## 0.6.0
 
 ### Added

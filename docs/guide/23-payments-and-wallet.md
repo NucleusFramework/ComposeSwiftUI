@@ -3,7 +3,7 @@
 
 > Take Apple Pay payments, add passes and orders to Wallet, verify identity with Wallet and let users share transactions, from Kotlin.
 
-PassKit's SwiftUI views (`PassKit.swift`) and FinanceKitUI (`AppServices.swift`) are available from Kotlin. These are
+PassKit's SwiftUI views (`PassKit.swift`) and FinanceKitUI (`FinanceKitUI.swift`) are available from Kotlin. These are
 for physical goods, services and Wallet content; digital goods and subscriptions sold inside the app go through
 StoreKit instead (see [In-app purchases](in-app-purchases.md)).
 
@@ -15,7 +15,7 @@ struct MyApp: App {
         ComposeIntegrations.registerPassKit()       // PassKit.swift
         #endif
         #if os(iOS)
-        ComposeIntegrations.registerFinanceKitUI()  // AppServices.swift
+        ComposeIntegrations.registerFinanceKitUI()  // FinanceKitUI.swift
         #endif
     }
     var body: some Scene { WindowGroup { ComposeView { MainKt.app() } } }

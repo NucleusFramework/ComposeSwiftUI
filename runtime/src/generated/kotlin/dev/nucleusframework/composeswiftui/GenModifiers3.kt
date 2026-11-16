@@ -809,7 +809,7 @@ public fun Modifier.onAppear(perform: (() -> Unit)? = null): Modifier = element(
  * Availability: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS: unavailable (no-op)
  */
 @HiddenFromObjC
-public fun Modifier.onContinuousHover(coordinateSpace: CoordinateSpaceProtocol = CoordinateSpaceProtocol.local, perform: (HoverPhase) -> Unit): Modifier = element(405, coordinateSpace, SValueCallback { (it as? SExpr)?.let { e -> perform(HoverPhase(e.id, e.args)) } })
+public fun Modifier.onContinuousHover(coordinateSpace: CoordinateSpaceProtocol, perform: (HoverPhase) -> Unit): Modifier = element(405, coordinateSpace, SValueCallback { (it as? SExpr)?.let { e -> perform(HoverPhase(e.id, e.args)) } })
 
 /**
  * SwiftUI `View.onHover(perform:)`

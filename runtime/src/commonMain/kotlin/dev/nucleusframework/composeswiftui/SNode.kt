@@ -1,5 +1,8 @@
 package dev.nucleusframework.composeswiftui
 
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+
 /**
  * Receives change notifications for a [SNode]. Implemented on the Swift side by the
  * observable model that backs each rendered SwiftUI view.
@@ -13,6 +16,28 @@ interface SNodeObserver {
 class SAction internal constructor(internal var fn: () -> Unit) {
     fun invoke() = fn()
 }
+
+/**
+ * A Kotlin `suspend () -> Unit` passed to Swift for an `async` SwiftUI closure (`refreshable`, `task`): Swift awaits
+ * it ([start] runs it on the main thread and calls `done` when it ends) and cancels the coroutine through the returned
+ * action when the SwiftUI task is cancelled.
+ */
+class SAsyncAction internal constructor(internal var fn: suspend () -> Unit) {
+    fun start(done: SwiftAction): SwiftAction {
+        val job = asyncActionScope.launch {
+            try {
+                fn()
+            } finally {
+                done.run()
+            }
+        }
+        return object : SwiftAction {
+            override fun run() = job.cancel()
+        }
+    }
+}
+
+private val asyncActionScope = MainScope()
 
 /** Stable value callback handle passed to Swift (bindings, value-taking closures). */
 class SValueCallback internal constructor(internal var fn: (Any?) -> Unit) {
@@ -174,6 +199,7 @@ object SNodeKinds {
 private fun sameShape(a: Any?, b: Any?): Boolean = when {
     a === b -> true
     a is SAction -> b is SAction
+    a is SAsyncAction -> b is SAsyncAction
     a is SValueCallback -> b is SValueCallback
     a is List<*> && b is List<*> -> a.size == b.size && a.indices.all { sameShape(a[it], b[it]) }
     a is SExpr && b is SExpr -> a.id == b.id && sameShape(a.args, b.args)
@@ -183,6 +209,7 @@ private fun sameShape(a: Any?, b: Any?): Boolean = when {
 private fun transferCallbacks(old: Any?, new: Any?) {
     when {
         old is SAction && new is SAction -> old.fn = new.fn
+        old is SAsyncAction && new is SAsyncAction -> old.fn = new.fn
         old is SValueCallback && new is SValueCallback -> old.fn = new.fn
         old is List<*> && new is List<*> -> old.indices.forEach { transferCallbacks(old[it], new[it]) }
         old is SExpr && new is SExpr -> transferCallbacks(old.args, new.args)

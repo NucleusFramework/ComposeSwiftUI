@@ -210,36 +210,34 @@ interfaces) all work; pass a Kotlin object and read its properties in Swift for 
 
 ### Callbacks from a native view
 
-Pass a `KotlinFunction` (a public interface of the runtime) and call it from Swift. After calling Kotlin, call
-`ComposeSwiftUIHostKt.flushCompose()` so the resulting recomposition lands in the same SwiftUI transaction, like the
-built-in controls do:
+Wrap Kotlin lambdas with `nativeAction { }` (no argument) or `nativeCallback { value -> }` (one value) and pass them
+in the `args`. Swift reads them with `args.action(i)` and `args.callback(i)`, which call Kotlin and then flush
+Compose, so the resulting recomposition lands in the same SwiftUI transaction, like the built-in controls. The
+wrappers are updated in place on recomposition: no `remember` or `rememberUpdatedState` needed.
 
 ```kotlin
 @Composable
-fun StarPicker(stars: Int, onStarsChange: (Int) -> Unit) {
-    val currentOnChange by rememberUpdatedState(onStarsChange)
-    // remember: a new object on every recomposition would make the native view re-render each time
-    val callback = remember {
-        object : KotlinFunction {
-            override fun invoke(args: List<Any?>): Any? {
-                currentOnChange((args[0] as Number).toInt())
-                return null
-            }
-        }
-    }
-    NativeView("starPicker", Modifier, stars, callback)
+fun StarPicker(stars: Int, onStarsChange: (Int) -> Unit, onReset: () -> Unit) {
+    NativeView(
+        "starPicker", Modifier, stars,
+        nativeCallback { value -> onStarsChange((value as Number).toInt()) },
+        nativeAction(onReset),
+    )
 }
 ```
 
 ```swift
 ComposeRegistry.nativeViews["starPicker"] = { args in
-    let onChange = args.raw(2) as? KotlinFunction
-    return AnyView(StarPickerView(stars: args.int(1)) { newValue in
-        _ = onChange?.invoke(args: [KotlinInt(value: Int32(newValue))])
-        ComposeSwiftUIHostKt.flushCompose()
-    })
+    AnyView(StarPickerView(
+        stars: args.int(1),
+        onChange: args.callback(2) as (Int) -> Void,
+        onReset: args.action(3)
+    ))
 }
 ```
+
+The callback value arrives as its Kotlin representation: a Swift `String` as `String`, numbers and booleans boxed
+(read them as `Number` / `Boolean`), arrays as lists, and `NSNull` as `null`.
 
 Keep the value in Kotlin (state hoisting): the Swift view displays `stars` and reports changes, Kotlin decides. A
 `NativeView` keeps its SwiftUI identity while its key and position stay the same, so `@State` inside the Swift view
@@ -380,16 +378,21 @@ from libraries that only depend on `compose-runtime`.
 The usual setup keeps the logic shared and writes the UI natively on each side: Jetpack Compose on Android, Compose
 SwiftUI on Apple platforms, the same `ViewModel` classes underneath.
 
+The simplest layout applies the plugin to the shared module itself. The library is only published for Apple targets,
+so when the module also targets Android or the JVM the plugin adds it to `appleMain` instead of `commonMain`: view
+models stay in `commonMain`, Compose SwiftUI screens go in `appleMain` (or `iosMain`):
+
 ```
-shared/         android + iOS (+ macOS…) targets: ViewModels, repositories, models
-iosUi/          Apple targets only, Compose SwiftUI plugin: screens, depends on :shared
+shared/         android + iOS targets, Compose SwiftUI plugin
+  commonMain/   ViewModels, repositories, models
+  appleMain/    Compose SwiftUI screens
 androidApp/     Jetpack Compose screens, depends on :shared
-iosApp/         Xcode project: links the iosUi framework
+iosApp/         Xcode project: links the Shared framework
 ```
 
-The Compose SwiftUI library is only published for Apple targets, and the plugin adds it to `commonMain`, so apply the
-plugin in a module whose targets are all Apple (`iosUi` above). Export `:shared` from that module's framework if Swift
-code needs its classes too:
+To keep the SwiftUI screens out of the shared module, put them in a separate Apple-only module instead (`iosUi`
+below, depending on `:shared`; its `commonMain` gets the library). Export `:shared` from that module's framework if
+Swift code needs its classes too:
 
 ```kts
 // iosUi/build.gradle.kts

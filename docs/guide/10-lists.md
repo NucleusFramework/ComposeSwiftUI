@@ -202,7 +202,7 @@ The callback receives `Any?`: cast it back to your key type. Rows without a tag 
 iOS and macOS; on tvOS and watchOS the list is shown without selection.
 
 There is also a non-optional form, `List(selection, onSelectionChange)` (SwiftUI's `List(selection: Binding<Value>)`),
-for when a row must always be selected, typically a macOS sidebar. Prefer the `selectedKey` form unless you need that.
+for when a row must always be selected, typically a macOS sidebar; it works on iOS too (single selection). Prefer the `selectedKey` form unless you need that.
 
 Selection is the usual way to drive a `NavigationSplitView`: the sidebar list selects, the detail column shows the
 selected item. See [Navigation](navigation.md).
@@ -222,7 +222,7 @@ fun BulkEditor(contacts: List<Contact>) {
             onSelectedKeysChange = { selected = it },
             modifier = Modifier
                 .navigationTitle("${selected.size} selected")
-                .toolbarItem { EditButtonView(EditButton()) },
+                .toolbarItem { EditButton() },
         ) {
             for (c in contacts) key(c.id) { Text(c.name, modifier = Modifier.tag(c.id)) }
         }
@@ -273,7 +273,7 @@ fun EditableContacts() {
         mutableStateOf(listOf(Contact("1", "Ada", "ada@example.com"), Contact("2", "Grace", "grace@example.com")))
     }
     NavigationStack {
-        List(modifier = Modifier.navigationTitle("Contacts").toolbarItem { EditButtonView(EditButton()) }) {
+        List(modifier = Modifier.navigationTitle("Contacts").toolbarItem { EditButton() }) {
             ForEach(
                 contacts,
                 key = { it.id },
@@ -298,7 +298,7 @@ it.
 
 ### Edit mode
 
-`EditButtonView(EditButton())` toggles SwiftUI's own edit mode (iOS only). To own the state in Kotlin, for example to
+`EditButton()` toggles SwiftUI's own edit mode (iOS only). To own the state in Kotlin, for example to
 show a "Done" button of your own or to leave edit mode after a bulk action, put `Modifier.editMode` on the list:
 
 ```kotlin
@@ -312,20 +312,19 @@ Button(if (editing) "Done" else "Edit") { editing = !editing }
 ## Pull to refresh
 
 `Modifier.refreshable { }` adds pull to refresh to a list on iOS (other platforms have no built-in control for it, but
-SwiftUI still exposes the action to the views inside). The Kotlin action is a plain
-callback, not a suspend function: SwiftUI's spinner ends as soon as it returns. Start your loading from it (for
-example by calling a view model that launches a coroutine) and show progress from your own state if the load is
-long:
+SwiftUI still exposes the action to the views inside). The action is a `suspend` lambda, like Swift's `async`
+closure: SwiftUI's spinner stays until the coroutine returns, so call your suspending load directly:
 
 ```kotlin
 @Composable
-fun RefreshableInbox(messages: List<String>, isLoading: Boolean, onRefresh: () -> Unit) {
-    List(modifier = Modifier.refreshable(onRefresh)) {
-        if (isLoading) ProgressView()
+fun RefreshableInbox(messages: List<String>, reload: suspend () -> Unit) {
+    List(modifier = Modifier.refreshable { reload() }) {
         for (m in messages) key(m) { Text(m) }
     }
 }
 ```
+
+If the view disappears during the refresh, SwiftUI cancels its task and the coroutine is cancelled with it.
 
 ## Search
 

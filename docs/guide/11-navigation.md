@@ -47,8 +47,8 @@ on a stack is just a view.
 ### A path owned by Kotlin
 
 For anything beyond static links, keep the path in Kotlin state. `NavigationStack(path, onPathChange, destination)`
-shows `root`, then one `destination(route)` per element of `path`. Push by appending; SwiftUI's back button and swipe
-call `onPathChange` with the truncated path:
+shows `root`, then one `destination(route)` per element of `path`. Push with `NavigationLink(value = route)` or by
+appending to the path; SwiftUI's back button and swipe call `onPathChange` with the truncated path:
 
 ```kotlin
 sealed interface Route {
@@ -71,7 +71,7 @@ fun ContactsNavigation(contactIds: List<String>) {
     ) {
         List(modifier = Modifier.navigationTitle("Contacts").toolbarItem { Button("Settings", systemImage = SFSymbol.gear) { path = path + Route.Settings } }) {
             for (id in contactIds) key(id) {
-                Button(id) { path = path + Route.Contact(id) }
+                NavigationLink(value = Route.Contact(id)) { Text(id) }
             }
         }
     }
@@ -82,9 +82,10 @@ Because the path is plain state, deep links, "pop to root" (`path = emptyList()`
 (`path = listOf(a, b)`) are one assignment. Use data classes or objects as routes: each element's identity is its
 `equals`.
 
-SwiftUI's value-based `NavigationLink(value:)` needs `navigationDestination(for:)`, which has no Kotlin equivalent, so
-it does not push onto a Kotlin path. Use a `Button` that appends to the path (as above). A `Button` row has no
-disclosure chevron; add one yourself (`Image(systemName = SFSymbol.chevronRight)`) if you want it.
+`NavigationLink(value = v) { … }` inside the stack is SwiftUI's value-based link: tapping it calls `onPathChange`
+with `path + v` (so `v` must be one of your route types), and in a `List` it gets the native disclosure chevron. For
+pushes that don't come from a link (a toolbar button, a deep link, after a save), assign the path, as the Settings
+button above does.
 
 ### Destinations driven by a flag or an item
 
@@ -228,6 +229,20 @@ fun AppTabs() {
         }
         Tab("Search", systemImage = SFSymbol.magnifyingglass, value = AppTab.Search) { Text("Search") }
         Tab("Profile", systemImage = SFSymbol.personCropCircle, value = AppTab.Profile) { Text("Profile") }
+    }
+}
+```
+
+`Tab` also takes a `role` and a `badge`. `role = TabRole.search` (iOS 18, macOS 15, tvOS 18, watchOS 11) gives the
+search tab its system placement, separated from the others in the iOS 26 tab bar. `badge` shows a count or a short
+text on the tab item; tvOS and watchOS don't show it.
+
+```kotlin
+@Composable
+fun MailTabs(unread: Int) {
+    TabView {
+        Tab("Inbox", systemImage = SFSymbol.tray, badge = if (unread > 0) "$unread" else null) { Text("Inbox") }
+        Tab("Search", systemImage = SFSymbol.magnifyingglass, role = TabRole.search) { Text("Search") }
     }
 }
 ```
