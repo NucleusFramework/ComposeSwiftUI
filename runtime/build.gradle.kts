@@ -12,7 +12,7 @@ val publishVersion =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.7.0"
+        ?: "0.7.1"
 
 val coreOnly = providers.gradleProperty("csui.coreOnly").isPresent
 

@@ -100,10 +100,12 @@ public fun GeometryReader(
 }
 
 /**
- * SwiftUI `.toolbar { ToolbarItem(placement:) { content } }`. Can be chained several times.
+ * SwiftUI `.toolbar { ToolbarItem(placement:) { content }.sharedBackgroundVisibility(_:) }`. Can be chained several times.
+ * [sharedBackgroundVisibility] (iOS/macOS 26+, ignored elsewhere) hides the Liquid Glass capsule behind the item.
  */
 @HiddenFromObjC
 public fun Modifier.toolbarItem(
     placement: ToolbarItemPlacement = ToolbarItemPlacement.automatic,
+    sharedBackgroundVisibility: Visibility = Visibility.automatic,
     content: @Composable () -> Unit,
-): Modifier = element(HandwrittenIds.TOOLBAR_ITEM, placement, slotContent(content))
+): Modifier = element(HandwrittenIds.TOOLBAR_ITEM, placement, slotContent(content), sharedBackgroundVisibility)

@@ -268,6 +268,8 @@
     "Text.customAttribute(": "Modifier.textRenderer(granularity) { index, count -> }",
     "TextSelection.": "TextField / TextEditor(selection: TextRange?)",
     "ToolbarItem.init(": "Modifier.toolbarItem(placement) { }",
+    "ToolbarContent.sharedBackgroundVisibility(": "Modifier.toolbarItem(placement, sharedBackgroundVisibility) { }",
+    "CustomizableToolbarContent.sharedBackgroundVisibility(": "Modifier.toolbarItem(placement, sharedBackgroundVisibility) { }",
     "ToolbarItemGroup.init(": "Modifier.toolbarItem(placement) { } (one per item)",
     "ToolbarTitleMenu.init(": "Modifier.toolbarTitleMenu { } (generated)",
     "ToolbarOverflowMenu.init(": "Modifier.toolbarItem(placement) { Menu { } }",

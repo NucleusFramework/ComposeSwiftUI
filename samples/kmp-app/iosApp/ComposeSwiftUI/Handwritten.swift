@@ -87,6 +87,15 @@ import AppKit
         ComposeRegistry.modifiers[100_000] = { v, a, _ in
             guard let placement = d_ToolbarItemPlacement(a.expr(0)) else { return v }
             let content = a.slot(1)
+            #if os(iOS) || os(macOS)
+            // sharedBackgroundVisibility does not exist on tvOS / watchOS
+            if #available(iOS 26.0, macOS 26.0, *) {
+                let background = d_Visibility(a.expr(2)) ?? .automatic
+                return AnyView(v.toolbar {
+                    ToolbarItem(placement: placement) { content }.sharedBackgroundVisibility(background)
+                })
+            }
+            #endif
             return AnyView(v.toolbar { ToolbarItem(placement: placement) { content } })
         }
     }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1
+
+### Added
+
+- `Modifier.toolbarItem(placement, sharedBackgroundVisibility) { }`: SwiftUI's
+  `ToolbarContent.sharedBackgroundVisibility(_:)` (iOS 26 / macOS 26, ignored on tvOS, watchOS and earlier systems).
+  `Visibility.hidden` drops the Liquid Glass capsule behind the item.
+
 ## 0.7.0
 
 ### Added
