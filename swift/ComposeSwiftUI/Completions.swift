@@ -433,12 +433,18 @@ private func dragPhase(_ p: Any) -> Int {
         }
         #endif
         ComposeRegistry.views[100_050] = { m in AnyView(EditableForEach(model: m)) }
+        ComposeRegistry.views[100_064] = { m in ModChain.apply(formattedNumber(m.args), m, 0) }
+        ComposeRegistry.views[100_065] = { m in
+            let e = m.args.expr(0)
+            let layout = d_HStackLayout(e).map { AnyLayout($0) } ?? d_VStackLayout(e).map { AnyLayout($0) }
+                ?? d_ZStackLayout(e).map { AnyLayout($0) } ?? d_GridLayout(e).map { AnyLayout($0) } ?? AnyLayout(VStackLayout())
+            return ModChain.apply(layout { ChildrenView(m) }, m, 0)
+        }
         ComposeRegistry.views[100_051] = { m in AnyView(StyleContentView(m: m)) }
         ComposeRegistry.views[100_052] = { m in AnyView(StyleProgressFillView(m: m)) }
         #if os(iOS) || os(macOS)
         ComposeRegistry.views[100_053] = { m in ModChain.apply(SelectionTextFieldView(m: m), m, 0) }
         ComposeRegistry.views[100_054] = { m in ModChain.apply(SelectionTextEditorView(m: m), m, 0) }
-        ComposeRegistry.views[100_064] = { m in ModChain.apply(formattedNumber(m.args), m, 0) }
         #endif
         ComposeRegistry.views[100_055] = { m in
             let report = m.args.callback(2, box: { (v: NSArray) -> Any? in v })

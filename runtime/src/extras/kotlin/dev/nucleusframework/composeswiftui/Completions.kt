@@ -21,6 +21,7 @@ internal object CompletionIds {
     const val MIXED_PICKER = 100_056
     const val REQUEST_IMAGE = 100_057
     const val FORMATTED_TEXT = 100_064
+    const val ANY_LAYOUT = 100_065
 
     const val GROUP_BOX_STYLE = 100_080
     const val LABELED_CONTENT_STYLE = 100_081
@@ -596,4 +597,18 @@ public fun Text(
 ) {
     SwiftView(CompletionIds.FORMATTED_TEXT,
         listOf(value, listOf(format.kind, fractionDigits?.first, fractionDigits?.last, grouping, format.code)), modifier)
+}
+
+/**
+ * SwiftUI `AnyLayout`: lays [content] out with [layout] (`HStackLayout(…)`, `VStackLayout(…)`, `ZStackLayout(…)` or
+ * `GridLayout(…)`). Switching the layout keeps the children's identity, so SwiftUI animates them to their new
+ * places: `AnyLayout(if (wide) HStackLayout() else VStackLayout()) { … }`.
+ */
+@HiddenFromObjC
+@Composable
+public fun AnyLayout(layout: SExpr, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    require(layout is HStackLayout || layout is VStackLayout || layout is ZStackLayout || layout is GridLayout) {
+        "AnyLayout takes an HStackLayout, VStackLayout, ZStackLayout or GridLayout"
+    }
+    SwiftView(CompletionIds.ANY_LAYOUT, listOf(layout), modifier, content = content)
 }

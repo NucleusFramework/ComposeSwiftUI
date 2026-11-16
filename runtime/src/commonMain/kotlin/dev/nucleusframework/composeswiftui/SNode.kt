@@ -1,5 +1,6 @@
 package dev.nucleusframework.composeswiftui
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,30 @@ class SAsyncAction internal constructor(internal var fn: suspend () -> Unit) {
                 fn()
             } finally {
                 done.run()
+            }
+        }
+        return object : SwiftAction {
+            override fun run() = job.cancel()
+        }
+    }
+}
+
+/**
+ * A Kotlin `suspend` function with arguments and a result, passed to Swift where SwiftUI expects an `async` closure
+ * that returns a value: Swift awaits it ([start] calls `done` with `[result]`, `[null]` on failure or cancellation).
+ */
+class SAsyncFunction internal constructor(internal var fn: suspend (List<Any?>) -> Any?) {
+    fun start(args: List<Any?>, done: KotlinFunction): SwiftAction {
+        val job = asyncActionScope.launch {
+            var result: Any? = null
+            try {
+                result = fn(args)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                println("Compose SwiftUI: async callback failed: $e")
+            } finally {
+                done.invoke(listOf(result))
             }
         }
         return object : SwiftAction {
@@ -200,6 +225,7 @@ private fun sameShape(a: Any?, b: Any?): Boolean = when {
     a === b -> true
     a is SAction -> b is SAction
     a is SAsyncAction -> b is SAsyncAction
+    a is SAsyncFunction -> b is SAsyncFunction
     a is SValueCallback -> b is SValueCallback
     a is List<*> && b is List<*> -> a.size == b.size && a.indices.all { sameShape(a[it], b[it]) }
     a is SExpr && b is SExpr -> a.id == b.id && sameShape(a.args, b.args)
@@ -210,6 +236,7 @@ private fun transferCallbacks(old: Any?, new: Any?) {
     when {
         old is SAction && new is SAction -> old.fn = new.fn
         old is SAsyncAction && new is SAsyncAction -> old.fn = new.fn
+        old is SAsyncFunction && new is SAsyncFunction -> old.fn = new.fn
         old is SValueCallback && new is SValueCallback -> old.fn = new.fn
         old is List<*> && new is List<*> -> old.indices.forEach { transferCallbacks(old[it], new[it]) }
         old is SExpr && new is SExpr -> transferCallbacks(old.args, new.args)

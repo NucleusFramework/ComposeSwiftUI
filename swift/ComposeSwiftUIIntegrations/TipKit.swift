@@ -26,19 +26,35 @@ struct KotlinTip: Tip {
     let messageText: String?
     let systemImage: String?
     let actionList: [[String]]
+    var maxDisplayCount: Int? = nil
+    var maxDisplayDuration: Double? = nil
+    var ignoresDisplayFrequency = false
 
     var id: String { tipID }
     var title: Text { Text(titleText) }
     var message: Text? { messageText.map { Text($0) } }
     var image: Image? { systemImage.map { Image(systemName: $0) } }
     var actions: [Tips.Action] { actionList.map { Tips.Action(id: $0[0], title: $0[1]) } }
+    var options: [any TipOption] {
+        var o: [any TipOption] = []
+        if let maxDisplayCount { o.append(Tips.MaxDisplayCount(maxDisplayCount)) }
+        if let maxDisplayDuration, #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) { o.append(Tips.MaxDisplayDuration(maxDisplayDuration)) }
+        if ignoresDisplayFrequency { o.append(Tips.IgnoresDisplayFrequency(true)) }
+        return o
+    }
 
     @MainActor static func decode(_ a: Args, _ i: Int) -> KotlinTip? {
         guard !a.isNil(i) else { return nil }
         let l = a.list(i)
         func s(_ k: Int) -> String? { k < l.count ? l[k] as? String : nil }
         let acts = (l.count > 4 ? l[4] as? [Any] ?? [] : []).compactMap { $0 as? [Any] }.map { $0.map { $0 as? String ?? "" } }
-        return KotlinTip(tipID: s(0) ?? "", titleText: s(1) ?? "", messageText: s(2), systemImage: s(3), actionList: acts)
+        func value(_ k: Int) -> NSNumber? { k < l.count ? l[k] as? NSNumber : nil }
+        let tip = KotlinTip(tipID: s(0) ?? "", titleText: s(1) ?? "", messageText: s(2), systemImage: s(3), actionList: acts,
+                            maxDisplayCount: value(6)?.intValue, maxDisplayDuration: value(7)?.doubleValue,
+                            ignoresDisplayFrequency: value(8)?.boolValue ?? false)
+        // The user did what the tip suggests: TipKit stops showing it (it persists, so this is idempotent).
+        if value(5)?.boolValue == true { tip.invalidate(reason: .actionPerformed) }
+        return tip
     }
 }
 

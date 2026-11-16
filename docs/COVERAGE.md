@@ -6342,7 +6342,7 @@ Legend: ✅ generated and compiler-verified on every platform where Apple ships 
 | · | property | [static var defaultValue: Self.Value](https://developer.apple.com/documentation/swiftui/layoutvaluekey/defaultvalue) | requirement or default of a Swift protocol adopted by app-defined types |
 | · | associatedtype | [Value](https://developer.apple.com/documentation/swiftui/layoutvaluekey/value) | type alias / associated type (no runtime surface) |
 | · | struct | [AnyLayout](https://developer.apple.com/documentation/swiftui/anylayout) | type not built directly from Kotlin: its views and modifiers are bridged (or its values are passed to Swift closures, property wrappers, configurations) |
-| ☑️ | init | [init<L>(L)](https://developer.apple.com/documentation/swiftui/anylayout/init(_:)) | hand-written: CustomLayout(policy) { } / generated layouts |
+| ☑️ | init | [init<L>(L)](https://developer.apple.com/documentation/swiftui/anylayout/init(_:)) | hand-written: AnyLayout(HStackLayout() / VStackLayout() / ZStackLayout() / GridLayout()) { } |
 | ✅ | struct | [HStackLayout](https://developer.apple.com/documentation/swiftui/hstacklayout) | Kotlin value class (1/1 overloads bridged) |
 | ✅ | init | [init(alignment: VerticalAlignment, spacing: CGFloat?)](https://developer.apple.com/documentation/swiftui/hstacklayout/init(alignment:spacing:)) | value member of HStackLayout (1/1 overloads bridged) |
 | · | property | [var alignment: VerticalAlignment](https://developer.apple.com/documentation/swiftui/hstacklayout/alignment) | instance property / subscript (read side, not a view-building API) |

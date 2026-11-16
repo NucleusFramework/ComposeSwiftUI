@@ -229,7 +229,7 @@
     "TableRow.init(": "Table(rows) { … }",
     "TupleTableColumnContent.": "Table(rows) { column(…) }",
     "Tab.init(": "Tab(title, systemImage, value) { } inside TabView(selection)",
-    "AnyLayout.init(": "CustomLayout(policy) { } / generated layouts",
+    "AnyLayout.init(": "AnyLayout(HStackLayout() / VStackLayout() / ZStackLayout() / GridLayout()) { }",
     "EmptyView.init(": "EmptyView() (generated)",
     "Text.Layout.": "Modifier.textRenderer(granularity) { index, count -> }",
     "Shader.Argument.": "Shader.Argument.float/color… (generated)",

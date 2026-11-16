@@ -91,7 +91,28 @@ Rules that keep it fast:
 - Each row should be one view: wrap several views in an `HStack` or `VStack`.
 - A row recomposes when its item changes (by `equals`), so use immutable items such as data classes.
 - The list is fastest when the `LazyForEach` is its only child. You can still put several in `Section`s.
-- `LazyForEach` has no `onDelete`/`onMove`; use `ForEach` for editable lists.
+- `LazyForEach` takes `onDelete` and `onMove` like `ForEach` (swipe to delete, reordering in edit mode).
+- A row's `rememberSaveable` state survives the row scrolling off screen and back, as in a Compose `LazyColumn`.
+
+```kotlin
+@Composable
+fun LongEditableList(rows: List<String>, onRowsChange: (List<String>) -> Unit) {
+    List {
+        LazyForEach(
+            rows,
+            key = { it },
+            onDelete = { indices -> onRowsChange(rows.filterIndexed { i, _ -> i !in indices }) },
+            onMove = { indices, to ->
+                // SwiftUI's move(fromOffsets:toOffset:): `to` counts the moved rows still above it
+                val moved = indices.map { rows[it] }
+                val rest = rows.filterIndexed { i, _ -> i !in indices }
+                val at = to - indices.count { it < to }
+                onRowsChange(rest.take(at) + moved + rest.drop(at))
+            },
+        ) { row -> Text(row) }
+    }
+}
+```
 
 The [Performance](performance.md) chapter has numbers for both approaches.
 

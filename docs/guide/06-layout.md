@@ -521,9 +521,23 @@ A few points that differ from Swift's `Layout` protocol:
   policy from `LayoutSize.values["key"]`.
 - `remember` the policy (or make it an `object`): a new instance is a new argument, and SwiftUI lays the container out
   again.
-- `AnyLayout` (switching between `HStackLayout` and `VStackLayout` while keeping children's identity) is not
-  available. Switching with a Kotlin `if` between an `HStack` and a `VStack` works, but the children are recreated, so
-  their state and transitions restart.
+
+### Switching layouts
+
+`AnyLayout` takes an `HStackLayout`, `VStackLayout`, `ZStackLayout` or `GridLayout` value. Changing the layout keeps
+the children's identity, so their state survives and SwiftUI animates them to their new places (a Kotlin `if`
+between an `HStack` and a `VStack` would recreate them):
+
+```kotlin
+@Composable
+fun LayoutSwitcher(wide: Boolean) {
+    AnyLayout(if (wide) HStackLayout(spacing = 8.0) else VStackLayout(spacing = 8.0), modifier = Modifier.animation(Animation.default, value = wide)) {
+        Text("A")
+        Text("B")
+        Text("C")
+    }
+}
+```
 
 ## Coming from Compose UI
 

@@ -5838,7 +5838,7 @@
   "path": "AnyLayout.init(_:)",
   "kind": "swift.init",
   "status": "covered",
-  "detail": "hand-written: CustomLayout(policy) { } / generated layouts",
+  "detail": "hand-written: AnyLayout(HStackLayout() / VStackLayout() / ZStackLayout() / GridLayout()) { }",
   "platforms": [
    "ios",
    "macos",

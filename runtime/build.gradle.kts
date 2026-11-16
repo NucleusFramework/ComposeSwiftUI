@@ -36,6 +36,7 @@ kotlin {
             }
             dependencies {
                 api(libs.compose.runtime)
+                api(libs.compose.runtime.saveable)
                 api(libs.coroutines.core)
                 api(libs.lifecycle.viewmodel)
             }

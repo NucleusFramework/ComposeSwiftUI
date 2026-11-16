@@ -40,10 +40,11 @@ composable is simpler.
 
 ### What about rememberSaveable?
 
-The library doesn't provide a `SaveableStateRegistry`, so there is nothing to restore from. Remembered state lives as
-long as its `ComposeView`: SwiftUI keeps the view (and its Kotlin composition) while it stays in the hierarchy, across
-tab switches and navigation pushes. It is lost when the `ComposeView` leaves the hierarchy, and when the process ends.
-State that must survive that belongs in a view model backed by persistence.
+`rememberSaveable` is available (the runtime depends on `runtime-saveable`), so code shared with Android compiles
+unchanged. Inside a `LazyForEach`, a row's saveable state is kept while the row scrolls off screen and restored when
+it comes back. Elsewhere it behaves like `remember`: state lives as long as its `ComposeView`, which SwiftUI keeps
+across tab switches and navigation pushes, and is lost when the process ends. State that must survive that belongs in
+a view model backed by persistence.
 
 ## Hoisting and bindings
 

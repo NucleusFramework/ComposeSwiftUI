@@ -603,8 +603,9 @@ public enum class PaymentAuthorizationStatus { success, failure }
 
 /**
  * PassKit `PayWithApplePayButton(_:request:onPaymentAuthorizationChange:onMerchantSessionRequested:)`: shows the Apple
- * Pay sheet for [request]; [onAuthorize] processes the payment and returns its status, [onFinish] runs when the sheet
- * closes. [merchantSession] returns the merchant session JSON for Apple Pay on the web. Without a [request], the
+ * Pay sheet for [request]; [onAuthorize] processes the payment (it can suspend, e.g. to confirm with your server
+ * while the sheet shows its spinner) and returns its status, [onFinish] runs when the sheet closes. [merchantSession]
+ * returns the merchant session JSON for Apple Pay on the web (it can suspend to fetch it). Without a [request], the
  * button calls [action] (`PayWithApplePayButton(_:action:)`). [fallback] shows where Apple Pay isn't available.
  */
 @HiddenFromObjC
@@ -613,15 +614,15 @@ public fun PayWithApplePayButton(
     modifier: Modifier = Modifier,
     label: ApplePayButtonLabel = ApplePayButtonLabel.plain,
     request: ApplePayRequest? = null,
-    onAuthorize: (ApplePayPayment) -> PaymentAuthorizationStatus = { PaymentAuthorizationStatus.success },
+    onAuthorize: suspend (ApplePayPayment) -> PaymentAuthorizationStatus = { PaymentAuthorizationStatus.success },
     onFinish: () -> Unit = {},
-    merchantSession: (() -> String)? = null,
+    merchantSession: (suspend () -> String)? = null,
     action: () -> Unit = {},
     fallback: (@Composable () -> Unit)? = null,
 ) {
     SwiftView(FrameworkIds.APPLE_PAY_BUTTON, listOf(label.ordinal, request?.encode(),
-        kfn { a -> (a[0] as List<*>).let { p -> onAuthorize(ApplePayPayment(p[0] as String, p[1] as String, p[2] as String?, p[3] as String?, p[4] as String?)).ordinal } },
-        SAction(onFinish), merchantSession?.let { f -> kfn { f() } }, SAction(action), fallback?.let { SSlotRef(0) }), modifier, slots = listOfNotNull(fallback))
+        SAsyncFunction { a -> (a[0] as List<*>).let { p -> onAuthorize(ApplePayPayment(p[0] as String, p[1] as String, p[2] as String?, p[3] as String?, p[4] as String?)).ordinal } },
+        SAction(onFinish), merchantSession?.let { f -> SAsyncFunction { f() } }, SAction(action), fallback?.let { SSlotRef(0) }), modifier, slots = listOfNotNull(fallback))
 }
 
 /** PassKit `payWithApplePayButtonStyle(_:)` and `payWithApplePayButtonDisableCardArt()`. */

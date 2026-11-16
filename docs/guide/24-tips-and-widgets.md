@@ -115,8 +115,29 @@ fun FavoriteButton(viewCount: Int, onToggle: () -> Unit) {
 ```
 
 `isPresented = null` (the default) leaves the decision to TipKit. On earlier OS versions `isPresented` is ignored and the
-tip follows TipKit's own state. A tip that needs real rules (show after the third launch, after an event) is best
-declared in Swift and shown with a Swift view.
+tip follows TipKit's own state; there, pass `null` as the tip while your Kotlin rule says no.
+
+### Invalidating tips and display options
+
+When the user does what a tip suggests, set `invalidated = true` on the `Tip`: TipKit calls
+`invalidate(reason: .actionPerformed)` and won't show it again, on any screen. The `Tip` also carries TipKit's
+options: `maxDisplayCount`, `maxDisplayDuration` (seconds, iOS 18) and `ignoresDisplayFrequency`.
+
+```kotlin
+@Composable
+fun FavoriteTip(hasFavorited: Boolean) {
+    TipView(
+        Tip(
+            id = "favorite",
+            title = "Save it for later",
+            message = "Tap the star to add this item to your favorites.",
+            systemImage = "star",
+            invalidated = hasFavorited,
+            maxDisplayCount = 3,
+        ),
+    )
+}
+```
 
 ### Anchors (iOS 26)
 

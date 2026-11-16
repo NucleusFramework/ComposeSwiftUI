@@ -239,6 +239,25 @@ ComposeRegistry.nativeViews["starPicker"] = { args in
 The callback value arrives as its Kotlin representation: a Swift `String` as `String`, numbers and booleans boxed
 (read them as `Number` / `Boolean`), arrays as lists, and `NSNull` as `null`.
 
+When the Swift side needs an answer that takes time (a SwiftUI `async` closure, a network call made in Kotlin), pass a
+`suspend` function with `nativeSuspendFunction { args -> … }`. Swift awaits its result with `kotlinAwait`; cancelling
+the Swift task cancels the coroutine, and a failure or cancellation returns `nil`:
+
+```kotlin
+@Composable
+fun PriceTag(productId: String, loadPrice: suspend (String) -> String) {
+    NativeView("priceTag", Modifier, productId, nativeSuspendFunction { args -> loadPrice(args[0] as String) })
+}
+```
+
+```swift
+ComposeRegistry.nativeViews["priceTag"] = { args in
+    let load = UncheckedSendable(args.raw(2))
+    let id = args.string(1)
+    return AnyView(Text("…").task { _ = await kotlinAwait(load.value, [id]) })
+}
+```
+
 Keep the value in Kotlin (state hoisting): the Swift view displays `stars` and reports changes, Kotlin decides. A
 `NativeView` keeps its SwiftUI identity while its key and position stay the same, so `@State` inside the Swift view
 survives recompositions.

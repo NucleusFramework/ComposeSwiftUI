@@ -56,6 +56,11 @@ public class TipAction(public val id: String, public val title: String)
 /**
  * A TipKit `Tip`. TipKit remembers a tip's status (shown, closed) by [id] across launches; call
  * `ComposeIntegrations.registerTipKit()` at launch, which runs `Tips.configure()`.
+ *
+ * Eligibility rules (TipKit's `#Rule` macros) are Swift types: decide in Kotlin when a tip applies and pass `null`
+ * otherwise. [invalidated] = true calls `invalidate(reason: .actionPerformed)` (the user did what the tip suggests:
+ * TipKit won't show it again); [maxDisplayCount], [maxDisplayDuration] (seconds, iOS 18) and
+ * [ignoresDisplayFrequency] are the tip's `options`.
  */
 @HiddenFromObjC
 public class Tip(
@@ -64,8 +69,13 @@ public class Tip(
     public val message: String? = null,
     public val systemImage: String? = null,
     public val actions: List<TipAction> = emptyList(),
+    public val invalidated: Boolean = false,
+    public val maxDisplayCount: Int? = null,
+    public val maxDisplayDuration: Double? = null,
+    public val ignoresDisplayFrequency: Boolean = false,
 ) {
-    internal fun encode(): List<Any?> = listOf(id, title, message, systemImage, actions.map { listOf(it.id, it.title) })
+    internal fun encode(): List<Any?> = listOf(id, title, message, systemImage, actions.map { listOf(it.id, it.title) },
+        invalidated, maxDisplayCount, maxDisplayDuration, ignoresDisplayFrequency)
 }
 
 /**

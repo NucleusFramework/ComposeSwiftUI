@@ -1,5 +1,7 @@
 package dev.nucleusframework.composeswiftui
 
+import androidx.compose.runtime.saveable.SaveableStateHolder
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.CompositionContext
@@ -18,27 +20,44 @@ import kotlin.native.HiddenFromObjC
  * the screen. Use it for long lists; a plain Kotlin loop composes every row up front. Each row should be one view.
  *
  * A row recomposes when its item changes (by `equals`), so prefer immutable items such as data classes.
+ *
+ * Inside a `List`, [onDelete] enables swipe-to-delete and edit-mode deletion (`ForEach.onDelete`) with the item
+ * indices, and [onMove] row reordering in edit mode (`ForEach.onMove`) with the moved indices and the destination
+ * index, as SwiftUI gives them (apply them like `MutableList.move`).
  */
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 @Composable
-public fun <T> LazyForEach(items: List<T>, key: (T) -> Any, content: @Composable (T) -> Unit) {
+public fun <T> LazyForEach(
+    items: List<T>,
+    key: (T) -> Any,
+    onDelete: ((indices: List<Int>) -> Unit)? = null,
+    onMove: ((indices: List<Int>, destination: Int) -> Unit)? = null,
+    content: @Composable (T) -> Unit,
+) {
     val parent = rememberCompositionContext()
     val lazyItems = remember { LazyItems() }
     lazyItems.parent = parent
+    // `rememberSaveable` state of a row survives the row scrolling off screen, as in a Compose `LazyColumn`.
+    lazyItems.saveable = rememberSaveableStateHolder()
     @Suppress("UNCHECKED_CAST")
     lazyItems.content = content as @Composable (Any?) -> Unit
     // The identity version only changes when keys are added, removed or moved: SwiftUI then re-reads the ids.
     val version = lazyItems.prepare(items, key)
     SideEffect { lazyItems.update(items) }
     DisposableEffect(lazyItems) { onDispose { lazyItems.disposeAll() } }
-    SwiftView(SNodeKinds.LAZY_FOR_EACH, listOf(lazyItems, version))
+    SwiftView(SNodeKinds.LAZY_FOR_EACH, listOf(
+        lazyItems, version,
+        onDelete?.let { f -> SValueCallback { v -> f((v as List<*>).map { (it as Number).toInt() }) } },
+        onMove?.let { f -> SValueCallback { v -> (v as List<*>).let { f((it[0] as List<*>).map { i -> (i as Number).toInt() }, (it[1] as Number).toInt()) } } },
+    ))
 }
 
 /** The rows of a [LazyForEach], composed on demand by the Swift renderer. */
 public class LazyItems internal constructor() {
     internal var parent: CompositionContext? = null
     internal var content: @Composable (Any?) -> Unit = {}
+    internal var saveable: SaveableStateHolder? = null
     private var keys: List<Any> = emptyList()
     private var items: List<Any?> = emptyList()
     private var indexByKey: Map<Any, Int> = emptyMap()
@@ -60,7 +79,11 @@ public class LazyItems internal constructor() {
         val parent = parent ?: return root
         val item = mutableStateOf(itemFor(id))
         val composition = Composition(SNodeApplier(root), parent)
-        composition.setContent { content(item.value) }
+        val key = keyById[id]
+        val holder = saveable
+        composition.setContent {
+            if (holder != null && key != null) holder.SaveableStateProvider(key) { content(item.value) } else content(item.value)
+        }
         rows[root] = Row(id, item, composition)
         return root
     }
@@ -85,6 +108,8 @@ public class LazyItems internal constructor() {
             newIdByKey[k] = id
             newIds[i] = id
         }
+        // Saved row state of removed items goes away with them.
+        saveable?.let { holder -> keys.filter { it !in newIdByKey }.forEach(holder::removeState) }
         keys = newKeys
         idByKey = newIdByKey
         keyById = newIdByKey.entries.associate { (k, id) -> id to k }

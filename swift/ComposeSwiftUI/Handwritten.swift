@@ -754,7 +754,14 @@ struct LazyForEachContent: View {
     var body: some View {
         let _ = model.version
         if let items = model.args.raw(0) as? LazyItems {
+            let a = model.args
+            let delete = a.isNil(2) ? nil : a.callback(2, box: { (o: IndexSet) -> Any? in o.map { KotlinInt(value: Int32($0)) } as NSArray })
+            let move = a.isNil(3) ? nil : a.callback(3, box: { (x: (IndexSet, Int)) -> Any? in
+                [x.0.map { KotlinInt(value: Int32($0)) } as NSArray, KotlinInt(value: Int32(x.1))] as NSArray
+            })
             ForEach(Self.ids(items), id: \.self) { LazyItemView(items: items, id: $0) }
+                .onDelete(perform: delete)
+                .onMove(perform: move.map { f in { f(($0, $1)) } })
         }
     }
 

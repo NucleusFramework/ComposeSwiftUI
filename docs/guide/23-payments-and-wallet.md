@@ -99,9 +99,8 @@ How the values travel:
 - `ApplePayPayment` carries `tokenData` (base64), `transactionIdentifier`, the card `network`, the chosen
   `shippingMethodId` and the shipping `email`.
 
-`onAuthorize` is called synchronously on the main thread and must return the status right away: the renderer passes it
-straight to the sheet. If your server must confirm the charge first, keep that call short, or return `success` and
-handle a later failure in your order flow.
+`onAuthorize` is a `suspend` function: the Apple Pay sheet keeps its spinner while it runs, so you can send the token
+to your server and return the status it answers. If the coroutine fails or is cancelled, the sheet shows a failure.
 
 `onFinish` runs when the sheet closes, whatever the outcome. `fallback` shows instead of the button when Apple Pay is
 not available.
@@ -110,7 +109,8 @@ Without a `request`, the button only calls `action`: use this to start your own 
 Apple Pay.
 
 For Apple Pay on the web flows that need a merchant session, `merchantSession` returns the merchant session JSON
-(the object your server got from Apple Pay's `paymentSession` endpoint), synchronously as well.
+(the object your server got from Apple Pay's `paymentSession` endpoint); it is a `suspend` function too, so it can
+fetch it.
 
 ### Updating the sheet
 

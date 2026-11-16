@@ -460,8 +460,16 @@ public fun nativeAction(action: () -> Unit): Any = SAction(action)
 public fun nativeCallback(callback: (Any?) -> Unit): Any = SValueCallback(callback)
 
 /**
+ * A Kotlin `suspend` function to pass in a [NativeView]'s `args`: the Swift renderer awaits it with
+ * `await kotlinAwait(a.raw(i), [arguments])`, which returns its result (null if it fails or the Swift task is
+ * cancelled, which cancels the coroutine).
+ */
+@HiddenFromObjC
+public fun nativeSuspendFunction(function: suspend (args: List<Any?>) -> Any?): Any = SAsyncFunction(function)
+
+/**
  * Renders a Swift view registered with `ComposeRegistry.nativeViews[key]` (MapKit, UIKit wrappers…). Pass actions
- * and callbacks in [args] with [nativeAction] and [nativeCallback].
+ * and callbacks in [args] with [nativeAction], [nativeCallback] and [nativeSuspendFunction].
  */
 @HiddenFromObjC
 @Composable

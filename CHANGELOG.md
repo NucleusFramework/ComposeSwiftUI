@@ -18,6 +18,14 @@
 - `WebViewController.evaluateJavaScript(script, onError = …)`: JavaScript errors no longer reach `onResult`.
 - Gradle plugin: `composeSwiftUI { integrations.set(listOf("MapKit", "Charts")) }` writes only those integration
   files.
+- `AnyLayout(if (wide) HStackLayout() else VStackLayout()) { … }`: switching layouts keeps the children's identity.
+- `LazyForEach(items, key, onDelete = …, onMove = …)`.
+- `rememberSaveable` (the runtime depends on `runtime-saveable`); a `LazyForEach` row keeps its saveable state while it
+  scrolls off screen.
+- TipKit: `Tip(invalidated = true)` invalidates the tip; `maxDisplayCount`, `maxDisplayDuration`,
+  `ignoresDisplayFrequency` options.
+- `PayWithApplePayButton`: `onAuthorize` and `merchantSession` are `suspend`, so the sheet waits for your server.
+- `nativeSuspendFunction { }`: a Kotlin `suspend` function a `NativeView` renderer awaits with `kotlinAwait`.
 
 ### Changed
 
