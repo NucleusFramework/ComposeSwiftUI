@@ -32,7 +32,7 @@ public extension ComposeIntegrations {
             Task { @MainActor in
                 do {
                     let result = try await page.callJavaScript(script)
-                    done?.invoke(value: result.map { "\($0)" } ?? NSNull())
+                    done?.invoke(value: result.map { "\($0)" })
                 } catch {
                     done?.invoke(value: error.localizedDescription)
                 }

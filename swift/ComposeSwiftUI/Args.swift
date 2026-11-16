@@ -2,6 +2,9 @@ import SwiftUI
 
 /// Typed access to the arguments Kotlin encoded for a view init, a modifier or an expression.
 /// Reads go through Kotlin's typed accessors (`SArgs`): no NSArray bridging, no dynamic casts.
+/// Swift renderers spell "no value" as `NSNull()` (it fits in arrays); Kotlin expects `null`.
+@inline(__always) func kotlinValue(_ v: Any?) -> Any? { v is NSNull ? nil : v }
+
 public struct Args {
     let node: SNode?
     let src: any SArgs
@@ -74,7 +77,7 @@ public struct Args {
     public func callback<T>(_ i: Int, box: @escaping (T) -> Any? = { $0 }) -> (T) -> Void {
         guard let callback = src.argCallback(index: k(i)) else { return { _ in } }
         return {
-            callback.invoke(value: box($0))
+            callback.invoke(value: kotlinValue(box($0)))
             ComposeSwiftUIHostKt.flushCompose()
         }
     }
@@ -91,7 +94,7 @@ public struct Args {
                 get: { cell.value },
                 set: { newValue in
                     cell.value = newValue
-                    callback?.invoke(value: box(newValue))
+                    callback?.invoke(value: kotlinValue(box(newValue)))
                     ComposeSwiftUIHostKt.flushCompose()
                 }
             )
@@ -107,7 +110,7 @@ public struct Args {
                 return read(Args(node: node, src: node, modifierIndex: nil), i)
             },
             set: { newValue in
-                let boxed = box(newValue)
+                let boxed = kotlinValue(box(newValue))
                 if let modifierIndex {
                     node.setModifierArgSilently(modifierIndex: Int32(modifierIndex), argIndex: Int32(i), value: boxed)
                 } else {

@@ -22,6 +22,9 @@
 
 ### Fixed
 
+- Callbacks that report "no value" (dismissing a sheet, clearing a selection, a JavaScript call without result)
+  delivered an `NSNull` object to Kotlin instead of `null`: `== null` checks never matched and `as String?` casts
+  failed. The renderer now converts it to `null`.
 - `List(selection, onSelectionChange)` did nothing on iOS: it now selects and highlights the tagged row.
 - `renderComposeSwiftUIPreviews` failed to link apps whose Kotlin libraries use `sqlite3` (SQLDelight) or `zlib`:
   the preview host now links both.

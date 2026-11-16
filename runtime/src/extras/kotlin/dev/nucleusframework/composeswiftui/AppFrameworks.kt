@@ -501,7 +501,7 @@ public fun Modifier.certificateSheet(
     title: String? = null,
     message: String? = null,
     helpUrl: String? = null,
-): Modifier = element(AppFrameworkIds.CERTIFICATE_SHEET, certificates, SValueCallback { if (it == null) onDismiss() }, title, message, helpUrl)
+): Modifier = element(AppFrameworkIds.CERTIFICATE_SHEET, certificates, SValueCallback { onDismiss() }, title, message, helpUrl)
 
 /** AutomatedDeviceEnrollment `automatedDeviceEnrollmentAddition(isPresented:)` (iOS). */
 @HiddenFromObjC

@@ -9,7 +9,7 @@ import UniformTypeIdentifiers
 
 /// Invokes a Kotlin `SValueCallback` received inside a list argument.
 @MainActor func kotlinCall(_ callback: Any?, _ value: Any?) {
-    (callback as? SValueCallback)?.invoke(value: value)
+    (callback as? SValueCallback)?.invoke(value: kotlinValue(value))
     ComposeSwiftUIHostKt.flushCompose()
 }
 
