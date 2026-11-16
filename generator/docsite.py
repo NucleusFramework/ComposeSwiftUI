@@ -184,6 +184,18 @@ def apple_url(e, page):
         return APPLE + "view/" + e["swift"].split(".", 1)[1].lower()
     return APPLE + page["title"].lower()
 
+# ---- Guide chapters: docs/guide/NN-slug.md, "<!-- group: … -->", "# Title", "> abstract", then the body ----------
+
+GUIDE = []  # (group, slug, title, abstract, body)
+for _f in sorted(glob.glob(os.path.join(ROOT, "docs", "guide", "*.md"))):
+    _lines = open(_f).read().split("\n")
+    _group = re.match(r"<!-- group: (.*?) -->", _lines[0]).group(1)
+    _title = _lines[1][2:].strip()
+    _abstract = _lines[3][2:].strip() if _lines[3].startswith("> ") else ""
+    GUIDE.append((_group, re.sub(r"^\d+-", "", os.path.splitext(os.path.basename(_f))[0]), _title, _abstract, "\n".join(_lines[4:]).strip()))
+GUIDE_SLUGS = {g[1] for g in GUIDE}
+GUIDE_GROUPS = list(dict.fromkeys(g[0] for g in GUIDE))
+
 # ---- Markdown subset for the guides -------------------------------------------------------------------------
 
 def inline(s):
@@ -193,10 +205,17 @@ def inline(s):
     s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: '<a href="%s">%s</a>' % (link(m.group(2)), m.group(1)), s)
     return s
 
+LINK_UP = ""  # "../" while rendering a guide chapter (pages under guide/)
+
 def link(target):
     t = html.unescape(target)
-    if t.startswith("http"):
+    if t.startswith("http") or t.startswith("#"):
         return t
+    m = re.match(r"^([\w-]+)\.md(#.*)?$", t)
+    if m and m.group(1) in GUIDE_SLUGS:  # another guide chapter
+        return "%sguide/%s.html%s" % (LINK_UP, m.group(1), m.group(2) or "")
+    if t.startswith("/"):  # a page of this site: /reference/list.html, /mapkit.html
+        return LINK_UP + t[1:]
     mapping = {"docs/API.md": "reference.html", "docs/COVERAGE.md": REPO + "/blob/main/docs/COVERAGE.md",
                "docs/bench/RESULTS.md": "benchmarks.html", "docs/CONTRIBUTING.md": "contributing.html",
                "../bench/BENCH_GUIDE.md": REPO + "/blob/main/bench/BENCH_GUIDE.md"}
@@ -374,6 +393,8 @@ main{view-transition-name:content}::view-transition-old(content),::view-transiti
 main{flex:1;min-width:0}
 .hero,.content{max-width:920px;padding-left:80px;padding-right:80px}
 .hero{padding-top:44px}.hero,.content{overflow-wrap:break-word}
+.ontoc{display:flex;flex-wrap:wrap;gap:6px 14px;padding:14px 16px;margin:0 0 28px;border:1px solid var(--line);border-radius:12px;font-size:14px}.ontoc b{width:100%;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.ontoc a{color:var(--accent);text-decoration:none}
+.pager{display:flex;gap:12px;margin-top:48px}.pager a{flex:1;display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;color:var(--accent);text-decoration:none;font-weight:600}.pager .next{text-align:right}.pager small{color:var(--muted);font-weight:400;font-size:13px}
 .crumbs{font-size:15px;color:var(--muted);margin-bottom:22px;overflow-wrap:anywhere}.crumbs a{color:var(--fg);text-decoration:underline;text-underline-offset:2px}.crumbs i{font-style:normal;margin:0 6px}
 .eyebrow{color:var(--muted);font-size:21px;font-weight:500;margin-bottom:6px}
 .hero h1{font-size:44px;line-height:1.08;margin:0 0 14px;font-weight:700;letter-spacing:-.015em;overflow-wrap:anywhere}
@@ -417,7 +438,10 @@ FRAMEWORK_PAGES = [("mapkit", "MapKit"), ("charts", "Swift Charts"), ("storekit"
 def sidebar(up, current):
     out = ['<nav class="side" aria-label="Documentation"><div class="scroll"><div id="results"></div><div id="tree">',
            '<h4>Essentials</h4><a href="%sindex.html">Overview</a><a href="%sguide.html">Guide</a><a href="%sreference.html">All APIs</a>' % (up, up, up)]
-    out.append("<h4>Frameworks</h4>" + "".join('<a href="%s%s.html"%s>%s</a>' % (up, key, ' class="on" aria-current="page"' if current == key else "", esc(title))
+    for group in GUIDE_GROUPS:
+        out.append("<h4>%s</h4>" % esc(group) + "".join('<a href="%sguide/%s.html"%s>%s</a>' % (up, slug_, ' class="on" aria-current="page"' if current == "guide/" + slug_ else "", esc(title))
+                                                       for g, slug_, title, _, _ in GUIDE if g == group))
+    out.append("<h4>Framework references</h4>" + "".join('<a href="%s%s.html"%s>%s</a>' % (up, key, ' class="on" aria-current="page"' if current == key else "", esc(title))
                                                 for key, title in FRAMEWORK_PAGES))
     for title, keys in TOPICS:
         links = [k for k in keys if k in pages]
@@ -552,10 +576,28 @@ index_body = """<div class="hero"><div class="eyebrow" data-pagefind-ignore>Fram
 <p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a> · <a href="kotlin-apis.html">Kotlin-specific APIs</a></p></div>""" % (intro_html, framework_cards, cards, len(entries))
 write("index.html", layout("Compose SwiftUI", index_body))
 
-toc = "".join('<li><a href="#%s">%s</a></li>' % (slug(t.lower()), esc(t)) for t, _ in guide_parts)
-guide_body = '<div class="hero">' + crumbs("", ("Compose SwiftUI", "index.html"), ("Guide", "")) + '<div class="eyebrow" data-pagefind-ignore>Article</div><h1>Guide</h1><p class="abstract">Set up Compose SwiftUI, write screens and use it with other Compose libraries.</p></div><div class="content"><ul>%s</ul>%s</div>' % (
-    toc, "".join('<h2 id="%s">%s</h2>%s' % (slug(t.lower()), esc(t), markdown(b)) for t, b in guide_parts))
-write("guide.html", layout("Guide", guide_body, description="Set up Compose SwiftUI, write screens and use it with other Compose libraries."))
+GUIDE_ABSTRACT = "Everything about Compose SwiftUI, from installation to the Apple frameworks, with examples that compile."
+groups_html = "".join('<h2>%s</h2><div class="grid" data-pagefind-ignore>%s</div>' % (esc(group), "".join(
+    '<a class="card" href="guide/%s.html"><b>%s</b><span>%s</span></a>' % (slug_, esc(title), esc(abstract))
+    for g, slug_, title, abstract, _ in GUIDE if g == group)) for group in GUIDE_GROUPS)
+guide_body = '<div class="hero">' + crumbs("", ("Compose SwiftUI", "index.html"), ("Guide", "")) + \
+    '<div class="eyebrow" data-pagefind-ignore>Article</div><h1>Guide</h1><p class="abstract">%s</p></div><div class="content">%s</div>' % (esc(GUIDE_ABSTRACT), groups_html)
+write("guide.html", layout("Guide", guide_body, description=GUIDE_ABSTRACT))
+
+for n, (group, slug_, title, abstract, body) in enumerate(GUIDE):
+    LINK_UP = "../"
+    content = markdown(body)
+    LINK_UP = ""
+    nav = []
+    if n > 0:
+        nav.append('<a class="prev" href="%s.html"><small>Previous</small>%s</a>' % (GUIDE[n - 1][1], esc(GUIDE[n - 1][2])))
+    if n + 1 < len(GUIDE):
+        nav.append('<a class="next" href="%s.html"><small>Next</small>%s</a>' % (GUIDE[n + 1][1], esc(GUIDE[n + 1][2])))
+    toc = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', content)
+    toc_html = '<nav class="ontoc" data-pagefind-ignore><b>On this page</b>%s</nav>' % "".join('<a href="#%s">%s</a>' % (i, t) for i, t in toc) if len(toc) > 2 else ""
+    page = '<div class="hero">%s<div class="eyebrow" data-pagefind-ignore>%s</div><h1>%s</h1><p class="abstract">%s</p></div><div class="content">%s%s<div class="pager" data-pagefind-ignore>%s</div></div>' % (
+        crumbs("../", ("Compose SwiftUI", "index.html"), ("Guide", "guide.html"), (title, "")), esc(group), esc(title), esc(abstract), toc_html, content, "".join(nav))
+    write("guide/%s.html" % slug_, layout(title, page, depth=1, current="guide/" + slug_, description=abstract or title))
 
 def article_page(title, abstract, md_html):
     return layout(title, article(title, abstract, md_html), description=abstract)
@@ -1051,7 +1093,8 @@ Key rules for writing Compose SwiftUI code:
 llms = ["# Compose SwiftUI", "", "> " + summary, "", rules, "",
         "## Docs", "",
         "- [Full documentation for LLMs](%sllms-full.txt): the guide and every API mapping in one file" % SITE,
-        "- [Guide](%sguide.html): setup, writing screens, previews, interop, how it works, limitations" % SITE,
+        "- [Guide](%sguide.html): setup, writing screens, state, lists, navigation, the Apple frameworks, previews, interop, performance" % SITE,
+        *["- [%s](%sguide/%s.html): %s" % (title, SITE, slug_, abstract) for _, slug_, title, abstract, _ in GUIDE],
         "- [All APIs](%sreference.html): every supported SwiftUI view, modifier and type" % SITE,
         "- [Source code](%s)" % REPO, ""]
 for t, keys in TOPICS:
@@ -1062,7 +1105,7 @@ llms += ["## Optional", "", "- [Benchmarks](%sbenchmarks.html)" % SITE, "- [Chan
 write("llms.txt", "\n".join(llms))
 
 full = ["# Compose SwiftUI", "", "> " + summary, "", rules, "", "# Guide", ""]
-full += ["## %s\n\n%s\n" % (t, b.strip()) for t, b in guide_parts]
+full += ["## %s\n\n%s\n\n%s\n" % (title, abstract, re.sub(r"(?m)^(#+) ", r"#\1 ", body)) for _, _, title, abstract, body in GUIDE]
 full += ["# API reference", "", "Format: `Kotlin declaration` ← SwiftUI API it maps · availability when it differs from the default · notes.", ""]
 for cat in ("Views", "Modifiers", "Types"):
     full += ["## %s" % cat, ""] + [api_text(k, p) for k, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower())

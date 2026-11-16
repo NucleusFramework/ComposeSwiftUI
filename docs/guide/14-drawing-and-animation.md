@@ -1,0 +1,502 @@
+<!-- group: Building screens -->
+# Drawing and animation
+
+> Shapes, custom paths, Canvas drawing in Kotlin, and SwiftUI animations, transitions and effects driven by Kotlin state.
+
+Everything on this page is rendered by SwiftUI itself: a `Circle()` is a SwiftUI `Circle`, `withAnimation` opens a real
+SwiftUI transaction, and a `Canvas` draws into a SwiftUI `GraphicsContext`. Kotlin decides *what* to draw and *when*
+state changes; SwiftUI interpolates. A few SwiftUI features that are protocols or closures in Swift (`Shape`,
+`Transition`, `CustomAnimation`, `keyframeAnimator`, `visualEffect`) have a Kotlin form described below.
+
+## Shapes
+
+The built-in shapes are Kotlin values (`Circle()`, `Capsule()`, `Rectangle()`, `Ellipse()`,
+`RoundedRectangle(cornerRadius = 12.0)`, `UnevenRoundedRectangle(...)`, `ContainerRelativeShape()`). To show one as
+a view, use `ShapeView`, which covers SwiftUI's `fill`, `stroke` and `trim` in one call:
+
+```kotlin
+HStack(spacing = 16.0) {
+    ShapeView(Circle(), fill = Color.orange, modifier = Modifier.frame(width = 44.0, height = 44.0))
+    ShapeView(
+        RoundedRectangle(cornerRadius = 12.0),
+        stroke = Color.blue,
+        lineWidth = 3.0,
+        modifier = Modifier.frame(width = 80.0, height = 44.0),
+    )
+    // A progress ring: Circle().trim(from: 0, to: 0.7).stroke(...)
+    ShapeView(
+        Circle(),
+        stroke = Color.green,
+        strokeStyle = StrokeStyle(lineWidth = 6.0, dash = emptyList()),
+        trimFrom = 0.0,
+        trimTo = 0.7,
+        modifier = Modifier.frame(width = 44.0, height = 44.0).rotationEffect(Angle.degrees(-90.0)),
+    )
+}
+```
+
+| SwiftUI | Compose SwiftUI |
+|---|---|
+| `Circle().fill(.red)` | `ShapeView(Circle(), fill = Color.red)` |
+| `Capsule().stroke(.blue, lineWidth: 2)` | `ShapeView(Capsule(), stroke = Color.blue, lineWidth = 2.0)` |
+| `Circle().trim(from: 0, to: 0.5)` | `ShapeView(Circle(), stroke = …, trimFrom = 0.0, trimTo = 0.5)` |
+| `.clipShape(Circle())` | `Modifier.clipShape(Circle())` |
+| `.background(.blue, in: Capsule())` | `Modifier.background(Color.blue, Capsule())` (see [Styling](styling.md)) |
+| `.contentShape(Rectangle())` | `Modifier.contentShape(Rectangle())` |
+
+Any `ShapeStyle` works as a fill or stroke: colors, `ShapeStyle.secondary`, gradients. `StrokeStyle` takes a line width,
+a miter limit and a dash pattern (`dash = listOf(4.0, 2.0)`); line caps and joins are not exposed.
+
+### Shape operations
+
+The SwiftUI `Shape` operations are extension functions that return a new `Shape`, so they compose and can be used
+anywhere a shape is accepted (`ShapeView`, `clipShape`, `contentShape`, `mask`…):
+
+```kotlin
+val ring = Circle().subtracting(Circle().scale(0.6))
+val badge = RoundedRectangle(cornerRadius = 8.0).union(Circle().offset(x = 30.0, y = -10.0))
+
+VStack(spacing = 12.0) {
+    ShapeView(ring, fill = Color.purple, modifier = Modifier.frame(width = 60.0, height = 60.0))
+    ShapeView(badge, fill = Color.red, modifier = Modifier.frame(width = 80.0, height = 40.0))
+    ShapeView(Rectangle().rotation(Angle.degrees(45.0)), fill = Color.teal, modifier = Modifier.frame(width = 40.0, height = 40.0))
+}
+```
+
+Available: `offset`, `rotation`, `scale`, `trim`, `transform`, `size`, `union`, `intersection`, `subtracting`,
+`symmetricDifference`, `lineIntersection`, `lineSubtraction`, `strokedShape`, and `inset(by)` on insettable shapes
+(`Circle`, `Capsule`, `RoundedRectangle`…). The boolean operations need iOS 17 / macOS 14, which is the library
+minimum anyway.
+
+## Custom shapes with PathShape
+
+A Swift custom `Shape` implements `path(in:)`. In Kotlin, build a `PathShape` with a `PathBuilder` in **unit
+coordinates**: `0.0…1.0` on each axis, scaled to whatever frame the shape gets. The same shape therefore works at any
+size, exactly like a SwiftUI shape that reads `rect`.
+
+```kotlin
+val Triangle = PathShape {
+    moveTo(0.5, 0.0)
+    lineTo(1.0, 1.0)
+    lineTo(0.0, 1.0)
+    close()
+}
+
+val Wave = PathShape {
+    moveTo(0.0, 0.5)
+    curveTo(0.25, 0.0, 0.25, 1.0, 0.5, 0.5)
+    curveTo(0.75, 0.0, 0.75, 1.0, 1.0, 0.5)
+}
+
+@Composable
+fun ShapesDemo() {
+    VStack(spacing = 16.0) {
+        ShapeView(Triangle, fill = Color.yellow, modifier = Modifier.frame(width = 60.0, height = 50.0))
+        ShapeView(Wave, stroke = Color.blue, lineWidth = 3.0, modifier = Modifier.frame(height = 40.0))
+        Image(systemName = SFSymbol.star, modifier = Modifier.padding().background(Color.gray).clipShape(Triangle))
+    }
+}
+```
+
+`PathBuilder` mirrors SwiftUI's `Path`: `moveTo`, `lineTo`, `quadTo`, `curveTo`, `close`, `rect`, `ellipse`,
+`roundedRect`, `arc`, `relativeArc`, `tangentArc`, `lines(...)`, `rects(...)` and `path { }` to append another path.
+Angles are in degrees. In a `PathShape`, arc radii and corner radii are fractions of the **shorter side** of the
+frame (so `arc(0.5, 0.5, 0.5, 0.0, 360.0, false)` is an inscribed circle).
+
+## Canvas
+
+`Canvas` is SwiftUI's immediate-mode drawing view. Its `onDraw` lambda runs in Kotlin every time SwiftUI renders the
+canvas, with the size in points, and records drawing commands into a `DrawScope`. Coordinates in a `Canvas` are
+**points**, not unit coordinates.
+
+```kotlin
+@Composable
+fun Gauge(progress: Double, label: String) {
+    // Read state in composition, not inside onDraw: the lambda runs during SwiftUI's draw pass, outside Compose.
+    val fraction = progress.coerceIn(0.0, 1.0)
+    Canvas(modifier = Modifier.frame(width = 200.0, height = 120.0)) {
+        fill(Color.gray.opacity(0.2)) { rect(0.0, 0.0, width, height) }
+        fill(Color.green) { rect(0.0, height - 12.0, width * fraction, 12.0) }
+        stroke(Color.primary, lineWidth = 2.0) {
+            moveTo(0.0, height / 2)
+            curveTo(width / 3, 0.0, 2 * width / 3, height, width, height / 2)
+        }
+        drawText(label, width / 2, 20.0, font = Font.headline)
+        drawSymbol(SFSymbol.boltFill, width - 20.0, 20.0, color = Color.yellow)
+    }
+}
+```
+
+The `DrawScope` holds `width` and `height` and offers:
+
+| SwiftUI `GraphicsContext` | `DrawScope` |
+|---|---|
+| `fill(path, with:)` | `fill(style) { path }` |
+| `stroke(path, with:, lineWidth:)` | `stroke(style, lineWidth) { path }` |
+| `draw(Text, at:, anchor:)` | `drawText(text, x, y, font, color, anchor)` |
+| `draw(Image(systemName:), at:)` | `drawSymbol(symbol, x, y, font, color)` |
+| `translateBy`, `scaleBy`, `rotate(by:)`, `opacity`, `clip(to:)` | `translate`, `scale`, `rotate(degrees)`, `opacity`, `clip { }` |
+| a copy of the context (`var c = context`) | `withState { … }` |
+
+State changes (`translate`, `scale`, `rotate`, `opacity`, `clip`) apply to every following command; wrap them in
+`withState { }` to scope them:
+
+```kotlin
+Canvas(modifier = Modifier.frame(width = 120.0, height = 120.0)) {
+    for (i in 0 until 12) {
+        withState {
+            translate(width / 2, height / 2)
+            rotate(i * 30.0)
+            fill(Color.blue.opacity(0.3 + i / 20.0)) { rect(-2.0, -height / 2, 4.0, 16.0) }
+        }
+    }
+}
+```
+
+Gotchas:
+
+- Inside a `Canvas`, paths support `moveTo`, `lineTo`, `quadTo`, `curveTo`, `close`, `rect`, `ellipse` and nested
+  `path { }`. The arc and rounded-rectangle commands are only decoded by `PathShape`: in a canvas they stop the path
+  at that point. Approximate arcs with `curveTo`, or draw a `ShapeView` instead.
+- `onDraw` reads Kotlin values at draw time but is not observed by Compose. Pass state in as parameters (or read it
+  into a local `val` before `Canvas`) so a state change recomposes the canvas and SwiftUI redraws it.
+- Images other than SF Symbols, filters, blend modes and resolved symbols are not available in a canvas. For layered
+  effects, stack views in a `ZStack` and use view modifiers (`blendMode`, `blur`, `shadow`).
+
+## Implicit animations
+
+`Modifier.animation(animation, value)` animates every animatable change of the modified view when `value` changes,
+as in SwiftUI. Animation values mirror SwiftUI's: `Animation.default`, `Animation.spring`, `Animation.bouncy`,
+`Animation.snappy`, `Animation.smooth`, `Animation.easeInOut(0.3)`, `Animation.linear(1.0)`,
+`Animation.spring(duration = 0.4, bounce = 0.3)`, plus `.delay(0.1)`, `.speed(2.0)`, `.repeatCount(3)` and
+`.repeatForever(autoreverses = true)`.
+
+```kotlin
+var expanded by remember { mutableStateOf(false) }
+VStack {
+    ShapeView(
+        RoundedRectangle(cornerRadius = if (expanded) 32.0 else 8.0),
+        fill = if (expanded) Color.orange else Color.blue,
+        modifier = Modifier
+            .frame(width = if (expanded) 200.0 else 80.0, height = 80.0)
+            .animation(Animation.spring(duration = 0.4, bounce = 0.3), value = expanded),
+    )
+    Button(if (expanded) "Collapse" else "Expand") { expanded = !expanded }
+}
+```
+
+`value` is compared with `equals`, so any Kotlin value works (an enum, a data class, an `Int`).
+
+## withAnimation
+
+`withAnimation` runs a block of Kotlin state changes inside one animated SwiftUI transaction: the recomposition it
+triggers is applied before the transaction ends, so every view that changed animates with the given curve.
+
+```kotlin
+var selected by remember { mutableStateOf(0) }
+HStack {
+    for (i in 0 until 3) {
+        Button("Tab $i") {
+            withAnimation(Animation.snappy) { selected = i }
+        }
+    }
+}
+```
+
+The overload with `completion` maps to `withAnimation(_:completionCriteria:_:completion:)`:
+
+```kotlin
+var visible by remember { mutableStateOf(true) }
+var log by remember { mutableStateOf("") }
+Button("Hide") {
+    withAnimation(Animation.easeOut(0.25), completion = { log = "hidden" }) { visible = false }
+}
+```
+
+Changes made in a `ViewModel` work the same way: call `withAnimation { viewModel.select(id) }` from the action. A
+`StateFlow` emission that arrives later, outside the block (after a network call, say), is not animated; use
+`Modifier.animation(…, value)` on the views that should animate in that case.
+
+## Transitions
+
+A view that appears or disappears because of a Kotlin `if` is inserted or removed in SwiftUI, so
+`Modifier.transition` behaves as in Swift. Trigger the change inside `withAnimation` (or an enclosing `animation`):
+
+```kotlin
+var showBanner by remember { mutableStateOf(false) }
+VStack {
+    Button("Toggle") { withAnimation { showBanner = !showBanner } }
+    if (showBanner) {
+        Text(
+            "Saved",
+            modifier = Modifier
+                .padding()
+                .background(Color.green.opacity(0.2))
+                .transition(AnyTransition.move(Edge.top).combined(AnyTransition.opacity)),
+        )
+    }
+}
+```
+
+`AnyTransition` offers `opacity`, `scale`, `scale(scale, anchor)`, `slide`, `move(edge)`, `push(edge)`, `offset(…)`,
+`identity`, `asymmetric(insertion, removal)`, `.combined(other)` and `.animation(animation)`.
+
+A custom `Transition` is a Kotlin function from the transition stage to `VisualEffects` (opacity, scale, offset,
+rotation, blur):
+
+```kotlin
+var showCard by remember { mutableStateOf(false) }
+if (showCard) {
+    Text("Card", modifier = Modifier.padding().transition { stage ->
+        when (stage) {
+            TransitionStage.WillAppear -> VisualEffects(opacity = 0.0, scale = 0.8, offsetY = 20.0)
+            TransitionStage.Identity -> VisualEffects()
+            TransitionStage.DidDisappear -> VisualEffects(opacity = 0.0, blurRadius = 8.0)
+        }
+    })
+}
+```
+
+## Content transitions
+
+`contentTransition` animates a change of content inside the same view, such as a number in a `Text`. Combine it with
+an animation:
+
+```kotlin
+var count by remember { mutableStateOf(0) }
+VStack {
+    Text(
+        "$count",
+        modifier = Modifier
+            .font(Font.largeTitle)
+            .contentTransition(ContentTransition.numericText(value = count.toDouble()))
+            .animation(Animation.default, value = count),
+    )
+    Button("Add") { count++ }
+}
+```
+
+Other values: `ContentTransition.interpolate`, `opacity`, `identity`, `symbolEffect` (for an `Image(systemName:)`
+whose symbol changes) and `numericText(countsDown = true)`.
+
+## Matched geometry
+
+`@Namespace` is a Kotlin `NamespaceScope`, which hands you a `NamespaceId`. Views with the same id in that namespace
+morph into each other when one replaces the other inside an animated transaction:
+
+```kotlin
+@Composable
+fun ExpandingAvatar() {
+    var expanded by remember { mutableStateOf(false) }
+    NamespaceScope { ns ->
+        if (expanded) {
+            ShapeView(
+                RoundedRectangle(cornerRadius = 24.0),
+                fill = Color.indigo,
+                modifier = Modifier
+                    .matchedGeometryEffect(id = "avatar", namespace = ns)
+                    .frame(width = 240.0, height = 240.0)
+                    .onTapGesture { withAnimation(Animation.spring) { expanded = false } },
+            )
+        } else {
+            ShapeView(
+                Circle(),
+                fill = Color.indigo,
+                modifier = Modifier
+                    .matchedGeometryEffect(id = "avatar", namespace = ns)
+                    .frame(width = 48.0, height = 48.0)
+                    .onTapGesture { withAnimation(Animation.spring) { expanded = true } },
+            )
+        }
+    }
+}
+```
+
+`matchedGeometryEffect` also takes `properties` (`MatchedGeometryProperties.frame`, `.position`, `.size`), `anchor`
+and `isSource`. The same namespace drives the navigation zoom transition: mark the source with
+`Modifier.matchedTransitionSource(id, ns)` and the destination with `Modifier.zoomTransition(id, ns)` (iOS 18+,
+macOS 15+ for the source; see [Navigation](navigation.md)).
+
+## Phase and keyframe animations
+
+`phaseAnimator` steps a view through a list of `VisualEffects`. With no `trigger` it loops; with a `trigger` it runs
+once each time the trigger changes:
+
+```kotlin
+var likes by remember { mutableStateOf(0) }
+HStack {
+    // Loops forever: a pulsing dot
+    ShapeView(
+        Circle(),
+        fill = Color.red,
+        modifier = Modifier.frame(width = 12.0, height = 12.0)
+            .phaseAnimator(listOf(VisualEffects(), VisualEffects(scale = 1.4, opacity = 0.5))),
+    )
+    // Runs once per like
+    Button(action = { likes++ }) {
+        Image(
+            systemName = SFSymbol.heartFill,
+            modifier = Modifier.phaseAnimator(
+                phases = listOf(VisualEffects(), VisualEffects(scale = 1.3, rotationDegrees = -10.0), VisualEffects()),
+                trigger = likes,
+                animation = Animation.bouncy,
+            ),
+        )
+    }
+}
+```
+
+`keyframeAnimator` gives each step its own duration and curve (`KeyframeCurve.Linear`, `Spring`, `Cubic`, `Move`),
+starting from `initial`:
+
+```kotlin
+var shakes by remember { mutableStateOf(0) }
+TextField("PIN", text = "", onTextChange = {}, modifier = Modifier.keyframeAnimator(
+    keyframes = listOf(
+        Keyframe(VisualEffects(offsetX = -10.0), 0.08),
+        Keyframe(VisualEffects(offsetX = 10.0), 0.08),
+        Keyframe(VisualEffects(offsetX = -6.0), 0.08),
+        Keyframe(VisualEffects(), 0.1, KeyframeCurve.Spring),
+    ),
+    trigger = shakes,
+))
+```
+
+SwiftUI's keyframe API animates arbitrary values on separate tracks; the Kotlin form animates the fixed set of effects
+in `VisualEffects` along one track. For anything else (a color, a path), animate Kotlin state with `withAnimation`.
+
+## Custom animation curves
+
+`customAnimation(duration) { t -> progress }` is a SwiftUI `CustomAnimation` whose curve is a Kotlin function, called by
+SwiftUI on every frame. Keep it cheap:
+
+```kotlin
+val overshoot = customAnimation(duration = 0.6) { t -> 1 - (1 - t) * (1 - t) * (1 - 2.5 * t) }
+var big by remember { mutableStateOf(false) }
+Text("Hi", modifier = Modifier.scaleEffect(if (big) 2.0 else 1.0).animation(overshoot, value = big))
+```
+
+## SF Symbol effects
+
+`symbolEffect` animates an `Image(systemName:)`:
+
+```kotlin
+var downloads by remember { mutableStateOf(0) }
+var syncing by remember { mutableStateOf(true) }
+HStack(spacing = 20.0) {
+    // Discrete: plays once each time `downloads` changes
+    Image(systemName = SFSymbol.arrowDownCircle, modifier = Modifier.symbolEffect(SymbolEffectKind.Bounce, value = downloads))
+    // Indefinite: runs while isActive is true
+    Image(systemName = SFSymbol.wifi, modifier = Modifier.symbolEffect(SymbolEffectKind.VariableColor, isActive = syncing))
+}
+```
+
+`SymbolEffectKind` has `Bounce`, `Pulse`, `VariableColor`, `Scale`, `Appear`, `Disappear`, `Wiggle`, `Rotate` and
+`Breathe`. `Wiggle`, `Rotate` and `Breathe` (and the indefinite `Bounce`) need iOS 18 / macOS 15 / tvOS 18 /
+watchOS 11 and are ignored on older systems. With `value`, only `Bounce`, `Pulse`, `VariableColor`, `Wiggle`, `Rotate`
+and `Breathe` play.
+
+## Scroll transitions and visual effects
+
+`scrollTransition` maps the scroll phase of a view to effects. The phase is `-1.0` when the view is entering from
+the top/leading edge, `0.0` when fully visible, and `1.0` at the bottom/trailing edge; SwiftUI calls the Kotlin lambda
+while scrolling, so it must be fast and side-effect free:
+
+```kotlin
+ScrollView {
+    LazyVStack(spacing = 12.0) {
+        for (i in 0 until 50) {
+            Text(
+                "Row $i",
+                modifier = Modifier
+                    .frame(maxWidth = Double.POSITIVE_INFINITY)
+                    .padding()
+                    .background(Color.blue.opacity(0.15))
+                    .scrollTransition { phase, _ ->
+                        VisualEffects(opacity = 1 - kotlin.math.abs(phase) * 0.7, scale = 1 - kotlin.math.abs(phase) * 0.1)
+                    },
+            )
+        }
+    }
+}
+```
+
+`visualEffect` computes effects from the view's geometry at layout time (`width`, `height`, and `minX` / `minY` in the
+global coordinate space), for parallax and position-based fades:
+
+```kotlin
+Image(
+    systemName = SFSymbol.mountain2Fill,
+    modifier = Modifier.visualEffect { g -> VisualEffects(offsetY = -g.minY * 0.2) },
+)
+```
+
+Both return a `VisualEffects`, so the effects available are opacity, scale, offset, rotation and blur. Other
+geometry-dependent changes belong in a `GeometryReader` or `onGeometryChange` (see [Layout](layout.md)).
+
+## TimelineView
+
+`TimelineView` recomposes its content on a schedule, with the date in epoch seconds:
+
+```kotlin
+TimelineView(TimelineSchedule.periodic(0.0, 1.0)) { now ->
+    val seconds = now.toLong() % 60
+    Text("Seconds: $seconds", modifier = Modifier.monospacedDigit())
+}
+```
+
+Schedules: `TimelineSchedule.everyMinute`, `TimelineSchedule.periodic(startDate, interval)` and
+`TimelineSchedule.animation` (every frame, or `TimelineSchedule.animation(minimumInterval = …)`). With the animation
+schedule, every frame is a Kotlin recomposition of the content: keep that content small, typically one `Canvas`.
+
+```kotlin
+TimelineView(TimelineSchedule.animation) { now ->
+    val angle = (now % 4.0) / 4.0 * 360.0
+    Canvas(modifier = Modifier.frame(width = 80.0, height = 80.0)) {
+        translate(width / 2, height / 2)
+        rotate(angle)
+        fill(Color.orange) { rect(-4.0, -36.0, 8.0, 36.0) }
+    }
+}
+```
+
+On watchOS, the system throttles timelines in the always-on state, as it does for SwiftUI apps: prefer
+`everyMinute` or `periodic` schedules for content that stays on screen.
+
+## MeshGradient
+
+`MeshGradient` (iOS 18, macOS 15, tvOS 18, watchOS 11; empty on older systems) takes a grid size, the control points
+as flat `x, y` pairs in unit space (row by row), and one color per point:
+
+```kotlin
+MeshGradient(
+    width = 3,
+    height = 3,
+    points = listOf(
+        0.0, 0.0, 0.5, 0.0, 1.0, 0.0,
+        0.0, 0.5, 0.6, 0.4, 1.0, 0.5,
+        0.0, 1.0, 0.5, 1.0, 1.0, 1.0,
+    ),
+    colors = listOf(
+        Color.red, Color.purple, Color.indigo,
+        Color.orange, Color.white, Color.blue,
+        Color.yellow, Color.green, Color.mint,
+    ),
+    modifier = Modifier.ignoresSafeArea(),
+)
+```
+
+The point and color counts must equal `width * height`, otherwise nothing is drawn. Animate the mesh by changing the
+points inside `withAnimation`, or drive them from a `TimelineView`.
+
+## Performance notes
+
+- SwiftUI interpolates animations natively; Kotlin only runs when state changes. A `withAnimation` costs one
+  recomposition, not one per frame.
+- Callbacks that SwiftUI calls per frame or per layout (`scrollTransition`, `visualEffect`, `customAnimation`,
+  `textRenderer`, `Canvas.onDraw`, `TimelineSchedule.animation`) cross into Kotlin each time. Keep them pure and
+  allocation-light.
+- `Modifier.drawingGroup()` flattens a complex subtree into one layer, as in SwiftUI.
+
+See [Gestures and input](gestures-and-input.md) to drive animations from drags and pinches, and [Accessibility](accessibility.md)
+for reduced motion.

@@ -24,6 +24,11 @@ fun counterScreen() = composeSwiftUI {
 ComposeView { CounterScreenKt.counterScreen() }
 ```
 
+**Documentation:** the [guide](https://nucleusframework.github.io/ComposeSwiftUI/guide) covers everything in 32 chapters,
+from installation and your first app to lists, navigation, animation, accessibility, every Apple framework
+integration, previews, performance and troubleshooting. Its Kotlin examples are compiled on every change
+(`scripts/check_docs.py`).
+
 ## Requirements
 
 | Tool | Minimum |
@@ -43,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.5.0"
+       id("dev.nucleusframework.compose-swiftui") version "0.6.0"
    }
 
    kotlin {

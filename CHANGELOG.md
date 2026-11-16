@@ -1,9 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
 
 ### Added
 
+- A full guide on the documentation site: 32 chapters (getting started, building screens, every Apple framework,
+  platforms, interop, previews, performance, troubleshooting, limitations) whose 333 Kotlin examples compile
+  (`scripts/check_docs.py`).
 - Opt-in integrations for PhotosUI, WebKit, AVKit and QuickLook, AuthenticationServices, CoreLocationUI,
   LocalAuthentication, PassKit, MusicKit, Translation, SpriteKit, SceneKit, GameController, RealityKit, AppIntents,
   DeviceActivity, WatchKit, ManagedAppDistribution, PermissionKit, ScreenCaptureKit, WorkoutKit and DeviceDiscoveryUI

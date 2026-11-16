@@ -18,5 +18,7 @@ kotlin {
         commonMain.dependencies {
             api(project(":runtime"))
         }
+        // scripts/check_docs.py compiles the documentation's Kotlin snippets from this directory
+        providers.gradleProperty("docSamples").orNull?.let { commonMain.get().kotlin.srcDir(it) }
     }
 }

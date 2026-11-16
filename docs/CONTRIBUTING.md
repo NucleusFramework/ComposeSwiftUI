@@ -97,3 +97,9 @@ artifacts instead, publish them to Maven Local:
 ./gradlew --project-dir gradle-plugin publishToMavenLocal
 
 ```
+
+## Documentation
+
+The guide lives in `docs/guide/NN-slug.md` (first lines: `<!-- group: … -->`, `# Title`, a blank line, `> abstract`).
+Run `python3 scripts/check_docs.py` after editing it: every ```` ```kotlin ```` block must compile (fence a block as
+```` ```kotlin skip ```` only for iOS-only code). `python3 generator/docsite.py . site` builds the website.
