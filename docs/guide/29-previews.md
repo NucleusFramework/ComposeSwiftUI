@@ -117,10 +117,10 @@ The previews in the IDE need the Compose SwiftUI IDE plugin. It is not on the Je
 
 Repeat these steps to update: the IDE doesn't offer updates for a plugin installed from disk.
 
-A Kotlin file with previews opens in a split editor: code on the left, rendered previews on the right. Each preview
-has a gutter icon that renders it and scrolls to it, and the previews render again every time the file is saved. To
-render by hand, use *Code › Render Compose SwiftUI Previews* (⌥⇧⌘P on macOS, Ctrl+Alt+Shift+P elsewhere). Rendering
-runs at most once at a time per module; a save during a run queues one more.
+A Kotlin file with previews opens in a split editor: code on the left, rendered previews on the right. Rendering
+only runs on demand: the editor's *Render Previews* button, the gutter icon of a preview (which also scrolls to it), or
+*Code › Render Compose SwiftUI Previews* (⌥⇧⌘P on macOS, Ctrl+Alt+Shift+P elsewhere). Rendering runs at most once at a
+time per module; a request during a run queues one more.
 
 ### How rendering works
 

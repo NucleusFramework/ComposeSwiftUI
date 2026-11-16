@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.2
+
+### Changed
+
+- IDE plugin: previews render only on demand (the editor's *Render Previews* button, a preview's gutter icon, or
+  ⌥⇧⌘P / Ctrl+Alt+Shift+P), no longer on every save or when a file opens. Each render links the framework and drives
+  the simulator, which saturated the machine under IntelliJ's frequent autosaves.
+
 ## 0.6.1
 
 ### Added

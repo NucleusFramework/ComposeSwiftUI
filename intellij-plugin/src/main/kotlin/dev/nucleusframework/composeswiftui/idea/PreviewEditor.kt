@@ -1,6 +1,5 @@
 package dev.nucleusframework.composeswiftui.idea
 
-import com.intellij.AppTopics
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionUpdateThread
@@ -11,9 +10,6 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.ModalityState
 import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.components.service
-import com.intellij.openapi.editor.Document
-import com.intellij.openapi.fileEditor.FileDocumentManager
-import com.intellij.openapi.fileEditor.FileDocumentManagerListener
 import com.intellij.openapi.fileEditor.FileEditor
 import com.intellij.openapi.fileEditor.FileEditorState
 import com.intellij.openapi.externalSystem.service.project.manage.ProjectDataImportListener
@@ -54,7 +50,7 @@ private fun KtNamedFunction.previewTitle(): String {
         ?: name.orEmpty()
 }
 
-/** Right side of the split editor: the rendered previews of the file, re-rendered when the file is saved. */
+/** Right side of the split editor: the rendered previews of the file, rendered on demand. */
 class PreviewEditor(private val project: Project, private val file: VirtualFile) : UserDataHolderBase(), FileEditor {
     // Resolved on use: the module is unknown until the Gradle sync has finished.
     val module: PreviewModule? get() = PreviewModule.of(project, file)
@@ -95,29 +91,18 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
                 reload()
             }
         })
-        ApplicationManager.getApplication().messageBus.connect(this)
-            .subscribe(AppTopics.FILE_DOCUMENT_SYNC, object : FileDocumentManagerListener {
-                override fun beforeDocumentSaving(document: Document) {
-                    if (FileDocumentManager.getInstance().getFile(document) == file) {
-                        ApplicationManager.getApplication().invokeLater { render() }
-                    }
-                }
-            })
-
         connection.subscribe(ProjectDataImportListener.TOPIC, object : ProjectDataImportListener {
             override fun onImportFinished(projectPath: String?) {
-                ApplicationManager.getApplication().invokeLater { if (!project.isDisposed) reloadOrRender() }
+                ApplicationManager.getApplication().invokeLater { if (!project.isDisposed) reloadWithStatus() }
             }
         })
-        reloadOrRender()
+        reloadWithStatus()
     }
 
-    /** Shows the rendered previews, or renders them when there are none yet. */
-    private fun reloadOrRender() {
-        reload { previews ->
-            val module = module
+    // Rendering builds the framework and drives the simulator, so it only runs on demand (button or shortcut).
+    private fun reloadWithStatus() {
+        reload {
             status.text = if (module == null) "Waiting for the Gradle sync…" else ""
-            if (module != null && previews.isNotEmpty() && previews.none { it.image != null }) render()
         }
     }
 
@@ -161,7 +146,7 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
             card.add(JBLabel(preview.title).apply { font = JBUI.Fonts.label().asBold() })
             card.add(
                 preview.image?.let { ScaledImage(it) }
-                    ?: JBLabel("Not rendered yet").apply { foreground = UIUtil.getContextHelpForeground() },
+                    ?: JBLabel("Not rendered yet: click Render Previews").apply { foreground = UIUtil.getContextHelpForeground() },
             )
             cards.add(card)
             cardsByName[preview.qualifiedName] = card

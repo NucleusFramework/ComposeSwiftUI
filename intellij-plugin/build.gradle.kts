@@ -12,7 +12,7 @@ version =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.6.1"
+        ?: "0.6.2"
 
 repositories {
     mavenCentral()

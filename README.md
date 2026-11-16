@@ -48,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.6.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.6.2"
    }
 
    kotlin {
@@ -210,9 +210,9 @@ installed manually:
 Repeat these steps to update: the IDE won't offer updates for a plugin installed from disk.
 
 A Kotlin file with previews opens in a split editor, code on the left and the rendered previews on the right, like
-Compose's own preview. Each preview has a gutter icon that renders it and scrolls to it, and the previews are rendered
-again every time the file is saved. To render them again by hand, use *Code › Render Compose SwiftUI Previews* (⌥⇧⌘P on
-macOS, Ctrl+Alt+Shift+P elsewhere).
+Compose's own preview. Rendering only runs on demand: the editor's *Render Previews* button, the gutter icon of a
+preview (which also scrolls to it), or *Code › Render Compose SwiftUI Previews* (⌥⇧⌘P on macOS, Ctrl+Alt+Shift+P
+elsewhere).
 
 Rendering runs the `renderComposeSwiftUIPreviews` Gradle task: it links the debug framework of the simulator target
 (`iosSimulatorArm64`, or `iosX64` on Intel Macs), builds a small host app with the renderer, and snapshots every
