@@ -15,7 +15,7 @@
     "List.init(_:id:rowContent:)": "List { LazyForEach(items, key) { } }",
     "List.init(_:selection:rowContent:)": "List(selection / selectedKeys) { LazyForEach(items, key) { } }",
     "List.init(_:id:selection:rowContent:)": "List(selection / selectedKeys) { LazyForEach(items, key) { } }",
-    "List.init(selection:content:)": "List(selectedKeys, onSelectedKeysChange) { }",
+    "List.init(selection:content:)": "List(selectedKey, onSelectedKeyChange) { } (one row) / List(selectedKeys, onSelectedKeysChange) { } (several)",
     "List.init(_:editActions:": "List { ForEach(items, key) { } } with Kotlin list edits",
     "List.init(_:id:editActions:": "List { ForEach(items, key) { } } with Kotlin list edits",
     "ForEach.init(_:content:)": "ForEach(items, key) { } / Kotlin loop",

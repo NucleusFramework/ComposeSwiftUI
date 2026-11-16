@@ -782,3 +782,163 @@ public enum class DataDetectorType { all, link, emailAddress, phoneNumber, posta
 @HiddenFromObjC
 public fun Modifier.dataDetection(types: List<DataDetectorType> = listOf(DataDetectorType.all)): Modifier =
     element(FrameworkIds.DATA_DETECTION, types.map { it.ordinal })
+
+// ---- RealityKit, AppIntents, DeviceActivity, WatchKit, ManagedAppDistribution, PermissionKit, ScreenCaptureKit,
+// WorkoutKit, DeviceDiscoveryUI --------------------------------------------------------------------------------
+
+internal object MoreFrameworkIds {
+    const val REALITY_VIEW = 200_320
+    const val SHORTCUTS_LINK = 200_321
+    const val ACTIVITY_REPORT = 200_322
+    const val NOW_PLAYING = 200_323
+    const val MANAGED_CONTENT = 200_324
+    const val PERMISSION_BUTTON = 200_325
+    const val DEVICE_PICKER = 200_326
+
+    const val REALITY_STYLE = 200_320
+    const val SHORTCUTS_STYLE = 200_321
+    const val MANAGED_STYLE = 200_322
+    const val RECORDING_EDITOR = 200_323
+    const val WORKOUT_PREVIEW = 200_324
+}
+
+/** RealityKit `CameraControls` of a [RealityView]. */
+@HiddenFromObjC
+public enum class RealityCameraControls { none, orbit, dolly, pan, tilt }
+
+/** RealityKit `RealityViewLayoutOption`. */
+@HiddenFromObjC
+public enum class RealityViewLayout { flexible, centered, fixedSize }
+
+/**
+ * RealityKit `RealityView(make:update:placeholder:)` (iOS 18 / macOS 15): loads the Reality Composer / USDZ models
+ * [models] from the app bundle (`Entity(named:)`) into the scene; [placeholder] shows while they load.
+ */
+@HiddenFromObjC
+@Composable
+public fun RealityView(models: List<String>, modifier: Modifier = Modifier, placeholder: (@Composable () -> Unit)? = null) {
+    SwiftView(MoreFrameworkIds.REALITY_VIEW, listOf(models, placeholder?.let { SSlotRef(0) }), modifier, slots = listOfNotNull(placeholder))
+}
+
+/** RealityKit `realityViewCameraControls(_:)` and `realityViewLayoutBehavior(_:)`. */
+@HiddenFromObjC
+public fun Modifier.realityViewStyle(cameraControls: RealityCameraControls? = null, layout: RealityViewLayout? = null): Modifier =
+    element(MoreFrameworkIds.REALITY_STYLE, cameraControls?.ordinal, layout?.ordinal)
+
+/** AppIntents `ShortcutsLink(action:)`: opens the app's shortcuts in the Shortcuts app. */
+@HiddenFromObjC
+@Composable
+public fun ShortcutsLink(modifier: Modifier = Modifier, action: () -> Unit = {}) {
+    SwiftView(MoreFrameworkIds.SHORTCUTS_LINK, listOf(SAction(action)), modifier)
+}
+
+/** AppIntents `ShortcutsLinkStyle` / `SiriTipViewStyle`. */
+@HiddenFromObjC
+public enum class ShortcutsStyle { automatic, automaticOutline, dark, darkOutline, light, lightOutline }
+
+/** AppIntents `shortcutsLinkStyle(_:)` and `siriTipViewStyle(_:)` (automatic, dark or light). */
+@HiddenFromObjC
+public fun Modifier.shortcutsStyle(shortcutsLink: ShortcutsStyle? = null, siriTip: ShortcutsStyle? = null): Modifier =
+    element(MoreFrameworkIds.SHORTCUTS_STYLE, shortcutsLink?.ordinal, siriTip?.ordinal)
+
+/** DeviceActivity `DeviceActivityReport(_:filter:)`: the report [context] of the app's device activity report extension. */
+@HiddenFromObjC
+@Composable
+public fun DeviceActivityReport(context: String, modifier: Modifier = Modifier) {
+    SwiftView(MoreFrameworkIds.ACTIVITY_REPORT, listOf(context), modifier)
+}
+
+/** WatchKit `NowPlayingView()` (watchOS): the system now playing controls. */
+@HiddenFromObjC
+@Composable
+public fun NowPlayingView(modifier: Modifier = Modifier) {
+    SwiftView(MoreFrameworkIds.NOW_PLAYING, emptyList(), modifier)
+}
+
+/** ManagedAppDistribution `ManagedContentOfferState`. */
+@HiddenFromObjC
+public enum class ManagedContentOfferState { notInstalled, neverInstalled, installing, installed, noninteractive }
+
+/** ManagedAppDistribution `ManagedContentStyle`. */
+@HiddenFromObjC
+public enum class ManagedContentStyle { automatic, compact, header, vertical }
+
+/**
+ * ManagedAppDistribution `ManagedContentView(primaryLabel:secondaryLabel:tertiaryLabel:quaternaryLabel:offerState:offerAction:icon:)`
+ * (macOS 26.4): an offer row; [offerAction] receives the state when the offer button is pressed.
+ */
+@HiddenFromObjC
+@Composable
+public fun ManagedContentView(
+    primaryLabel: String,
+    offerState: ManagedContentOfferState,
+    offerAction: (ManagedContentOfferState) -> Unit,
+    modifier: Modifier = Modifier,
+    secondaryLabel: String = "",
+    tertiaryLabel: String = "",
+    quaternaryLabel: String = "",
+    icon: @Composable () -> Unit,
+) {
+    SwiftView(MoreFrameworkIds.MANAGED_CONTENT, listOf(listOf(primaryLabel, secondaryLabel, tertiaryLabel, quaternaryLabel), offerState.ordinal,
+        SValueCallback { offerAction(ManagedContentOfferState.entries[(it as Number).toInt()]) }, SSlotRef(0)), modifier, slots = listOf(icon))
+}
+
+/** ManagedAppDistribution `managedContentStyle(_:)`. */
+@HiddenFromObjC
+public fun Modifier.managedContentStyle(style: ManagedContentStyle): Modifier = element(MoreFrameworkIds.MANAGED_STYLE, style.ordinal)
+
+/** A PermissionKit `CommunicationHandle`: a phone number, an email address or a custom handle. */
+@HiddenFromObjC
+public data class CommunicationHandle(val value: String, val kind: Kind) {
+    public enum class Kind { phoneNumber, emailAddress, custom }
+}
+
+/**
+ * PermissionKit `CommunicationLimitsButton(question:label:)` / `PermissionButton(question:label:)` (iOS 26): asks a
+ * parent for permission to communicate with [handles].
+ */
+@HiddenFromObjC
+@Composable
+public fun CommunicationLimitsButton(handles: List<CommunicationHandle>, modifier: Modifier = Modifier, label: @Composable () -> Unit) {
+    SwiftView(MoreFrameworkIds.PERMISSION_BUTTON, listOf(handles.map { listOf(it.value, it.kind.ordinal) }, SSlotRef(0)), modifier, slots = listOf(label))
+}
+
+/** ScreenCaptureKit `recordingEditor(_:)` (macOS 27): edits the recording at [fileUrl]; null closes the editor. */
+@HiddenFromObjC
+public fun Modifier.recordingEditor(fileUrl: String?, onDismiss: () -> Unit): Modifier =
+    element(MoreFrameworkIds.RECORDING_EDITOR, fileUrl, SValueCallback { if (it == null) onDismiss() })
+
+/** A WorkoutKit single-goal workout goal. */
+@HiddenFromObjC
+public sealed class WorkoutGoal {
+    internal abstract fun encode(): List<Any?>
+    public data object Open : WorkoutGoal() { override fun encode() = listOf(0) }
+    public data class DistanceKilometers(val value: Double) : WorkoutGoal() { override fun encode() = listOf(1, value) }
+    public data class TimeMinutes(val value: Double) : WorkoutGoal() { override fun encode() = listOf(2, value) }
+    public data class EnergyKilocalories(val value: Double) : WorkoutGoal() { override fun encode() = listOf(3, value) }
+}
+
+/**
+ * WorkoutKit `workoutPreview(_:isPresented:)` (iOS 17 / watchOS 10): previews a single-goal workout of the HealthKit
+ * activity type [activityType] (`HKWorkoutActivityType` raw value, e.g. 37 = running) and sends it to Apple Watch.
+ */
+@HiddenFromObjC
+public fun Modifier.workoutPreview(isPresented: Boolean, onDismiss: () -> Unit, activityType: Int, goal: WorkoutGoal = WorkoutGoal.Open): Modifier =
+    element(MoreFrameworkIds.WORKOUT_PREVIEW, isPresented, SValueCallback { if (it == false) onDismiss() }, activityType, goal.encode())
+
+/**
+ * DeviceDiscoveryUI `DevicePicker(_:onSelect:label:fallback:)` (tvOS): browses for the app service [serviceName];
+ * [onSelect] receives the selected endpoint's description.
+ */
+@HiddenFromObjC
+@Composable
+public fun DevicePicker(
+    serviceName: String,
+    onSelect: (endpoint: String) -> Unit,
+    modifier: Modifier = Modifier,
+    label: @Composable () -> Unit,
+    fallback: @Composable () -> Unit = {},
+) {
+    SwiftView(MoreFrameworkIds.DEVICE_PICKER, listOf(serviceName, SValueCallback { onSelect(it as String) }, SSlotRef(0), SSlotRef(1)), modifier,
+        slots = listOf(label, fallback))
+}

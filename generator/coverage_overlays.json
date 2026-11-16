@@ -3,8 +3,8 @@
   "usr": "s:5ARKit0A7SessionC01_A8_SwiftUIE6deviceAC0cD022RemoteDeviceIdentifierV_tcfc",
   "path": "ARKitSession.init(device:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ARKit integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS ARKit session (Swift app code)",
   "platforms": [
    "macos"
   ]
@@ -1143,8 +1143,8 @@
   "usr": "s:10AppIntents0A6IntentP01_aB8_SwiftUIE13requestChoice7between6dialog7contentAA0cG6OptionVSayAJG_AA0C6DialogVSgqd__yXEtYaK0dE04ViewRd__lF",
   "path": "AppIntent.requestChoice(between:dialog:content:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -1156,8 +1156,8 @@
   "usr": "s:10AppIntents0A6IntentP01_aB8_SwiftUIE13requestChoice7between6dialog4viewAA0cG6OptionVSayAJG_AA0C6DialogVSgqd__tYaK0dE04ViewRd__lF",
   "path": "AppIntent.requestChoice(between:dialog:view:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -1169,8 +1169,8 @@
   "usr": "s:10AppIntents0A6IntentP01_aB8_SwiftUIE19requestConfirmation10conditions10actionName6dialog18showDialogAsPrompt7contentyAA0G10ConditionsV_AA0g6ActionJ0VAA0cM0VSgSbqd__yXEtYaK0dE04ViewRd__lF",
   "path": "AppIntent.requestConfirmation(conditions:actionName:dialog:showDialogAsPrompt:content:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -1182,8 +1182,8 @@
   "usr": "s:7SwiftUI10AppStorageV01_a5Data_aB0E_5storeACy0aE020PersistentIdentifierVSgGSS_So14NSUserDefaultsCSgtcAIRszlufc",
   "path": "AppStorage.init(_:store:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData PersistentIdentifier storage (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -1195,8 +1195,8 @@
   "usr": "s:7SwiftUI10AppStorageV01_a5Data_aB0E12wrappedValue_5storeACy0aE020PersistentIdentifierVGAI_SSSo14NSUserDefaultsCSgtcAIRszlufc",
   "path": "AppStorage.init(wrappedValue:_:store:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData PersistentIdentifier storage (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -1851,8 +1851,8 @@
   "usr": "s:22_PermissionKit_SwiftUI03AskA6ActionV14callAsFunctionyy0aB00A8QuestionCyxGYaKAE0J5TopicRzlF",
   "path": "AskPermissionAction.callAsFunction(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "PermissionKit integration: not bridged",
+  "status": "n/a",
+  "detail": "environment action, use CommunicationLimitsButton",
   "platforms": [
    "ios",
    "macos"
@@ -4286,8 +4286,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA5LabelVyAA4TextVAA5ImageVGRszrlE_5image4role6intentACyAKGAA18LocalizedStringKeyV_21DeveloperToolsSupport0H8ResourceVAA0C4RoleVSgqd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:image:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4299,8 +4299,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA5LabelVyAA4TextVAA5ImageVGRszrlE_5image4role6intentACyAKG10Foundation23LocalizedStringResourceV_21DeveloperToolsSupport0hO0VAA0C4RoleVSgqd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:image:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4312,8 +4312,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA5LabelVyAA4TextVAA5ImageVGRszrlE_5image4role6intentACyAKGqd___21DeveloperToolsSupport0H8ResourceVAA0C4RoleVSgqd_0_tcSyRd__0dE00D6IntentRd_0_r0_lufc",
   "path": "Button.init(_:image:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4325,8 +4325,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA4TextVRszrlE_6intentACyAFGAA18LocalizedStringKeyV_qd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4338,8 +4338,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA4TextVRszrlE_6intentACyAFG10Foundation23LocalizedStringResourceV_qd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4351,8 +4351,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA4TextVRszrlE_6intentACyAFGqd___qd_0_tcSyRd__0dE00D6IntentRd_0_r0_lufc",
   "path": "Button.init(_:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4364,8 +4364,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA4TextVRszrlE_4role6intentACyAFGAA18LocalizedStringKeyV_AA0C4RoleVSgqd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4377,8 +4377,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA4TextVRszrlE_4role6intentACyAFG10Foundation23LocalizedStringResourceV_AA0C4RoleVSgqd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4390,8 +4390,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA4TextVRszrlE_4role6intentACyAFGqd___AA0C4RoleVSgqd_0_tcSyRd__0dE00D6IntentRd_0_r0_lufc",
   "path": "Button.init(_:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4403,8 +4403,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA5LabelVyAA4TextVAA5ImageVGRszrlE_06systemH04role6intentACyAKGAA18LocalizedStringKeyV_SSAA0C4RoleVSgqd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:systemImage:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4416,8 +4416,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA5LabelVyAA4TextVAA5ImageVGRszrlE_06systemH04role6intentACyAKG10Foundation23LocalizedStringResourceV_SSAA0C4RoleVSgqd__tc0dE00D6IntentRd__lufc",
   "path": "Button.init(_:systemImage:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4429,8 +4429,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0AA5LabelVyAA4TextVAA5ImageVGRszrlE_06systemH04role6intentACyAKGqd___SSAA0C4RoleVSgqd_0_tcSyRd__0dE00D6IntentRd_0_r0_lufc",
   "path": "Button.init(_:systemImage:role:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4442,8 +4442,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0E6intent5labelACyxGqd___xyXEtc0dE00D6IntentRd__lufc",
   "path": "Button.init(intent:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4455,8 +4455,8 @@
   "usr": "s:7SwiftUI6ButtonV012_AppIntents_aB0E4role6intent5labelACyxGAA0C4RoleVSg_qd__xyXEtc0dE00D6IntentRd__lufc",
   "path": "Button.init(role:intent:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -4639,7 +4639,7 @@
   "path": "CLKComplicationTemplate.PreviewFaceColor",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4649,7 +4649,7 @@
   "path": "CLKComplicationTemplate.PreviewFaceColor.ID",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4658,8 +4658,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV9allColorsSayAEGvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.allColors",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4668,8 +4668,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV4blueAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.blue",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4678,8 +4678,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV5greenAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.green",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4689,7 +4689,7 @@
   "path": "CLKComplicationTemplate.PreviewFaceColor.id",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4698,8 +4698,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV10multicolorAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.multicolor",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4708,8 +4708,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV6orangeAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.orange",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4718,8 +4718,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV4pinkAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.pink",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4728,8 +4728,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV6purpleAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.purple",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4738,8 +4738,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV3redAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.red",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4748,8 +4748,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE16PreviewFaceColorV6yellowAEvpZ",
   "path": "CLKComplicationTemplate.PreviewFaceColor.yellow",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4758,8 +4758,8 @@
   "usr": "s:So23CLKComplicationTemplateC17_ClockKit_SwiftUIE14previewContext9faceColorQrAbCE011PreviewFaceJ0V_tF",
   "path": "CLKComplicationTemplate.previewContext(faceColor:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4769,7 +4769,7 @@
   "path": "CLKComplicationTemplateGraphicCircularClosedGaugeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4779,7 +4779,7 @@
   "path": "CLKComplicationTemplateGraphicCircularClosedGaugeView.gaugeProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4788,8 +4788,8 @@
   "usr": "s:17_ClockKit_SwiftUI53CLKComplicationTemplateGraphicCircularClosedGaugeViewC13gaugeProvider5labelACyxGSo08CLKGaugeM0C_xtcfc",
   "path": "CLKComplicationTemplateGraphicCircularClosedGaugeView.init(gaugeProvider:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4799,7 +4799,7 @@
   "path": "CLKComplicationTemplateGraphicCircularClosedGaugeView.label",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4809,7 +4809,7 @@
   "path": "CLKComplicationTemplateGraphicCircularOpenGaugeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4819,7 +4819,7 @@
   "path": "CLKComplicationTemplateGraphicCircularOpenGaugeView.bottomLabel",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4829,7 +4829,7 @@
   "path": "CLKComplicationTemplateGraphicCircularOpenGaugeView.centerTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4839,7 +4839,7 @@
   "path": "CLKComplicationTemplateGraphicCircularOpenGaugeView.gaugeProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4848,8 +4848,8 @@
   "usr": "s:17_ClockKit_SwiftUI51CLKComplicationTemplateGraphicCircularOpenGaugeViewC13gaugeProvider010centerTextM011bottomLabelACyxGSo08CLKGaugeM0C_So07CLKTextM0Cxtcfc",
   "path": "CLKComplicationTemplateGraphicCircularOpenGaugeView.init(gaugeProvider:centerTextProvider:bottomLabel:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4859,7 +4859,7 @@
   "path": "CLKComplicationTemplateGraphicCircularStackViewText",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4869,7 +4869,7 @@
   "path": "CLKComplicationTemplateGraphicCircularStackViewText.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4878,8 +4878,8 @@
   "usr": "s:17_ClockKit_SwiftUI51CLKComplicationTemplateGraphicCircularStackViewTextC7content12textProviderACyxGx_So07CLKTextN0Ctcfc",
   "path": "CLKComplicationTemplateGraphicCircularStackViewText.init(content:textProvider:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4889,7 +4889,7 @@
   "path": "CLKComplicationTemplateGraphicCircularStackViewText.textProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4899,7 +4899,7 @@
   "path": "CLKComplicationTemplateGraphicCircularView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4909,7 +4909,7 @@
   "path": "CLKComplicationTemplateGraphicCircularView.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4918,8 +4918,8 @@
   "usr": "s:17_ClockKit_SwiftUI42CLKComplicationTemplateGraphicCircularViewCyACyxGxcfc",
   "path": "CLKComplicationTemplateGraphicCircularView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4929,7 +4929,7 @@
   "path": "CLKComplicationTemplateGraphicCornerCircularView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4939,7 +4939,7 @@
   "path": "CLKComplicationTemplateGraphicCornerCircularView.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4948,8 +4948,8 @@
   "usr": "s:17_ClockKit_SwiftUI48CLKComplicationTemplateGraphicCornerCircularViewCyACyxGxcfc",
   "path": "CLKComplicationTemplateGraphicCornerCircularView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4959,7 +4959,7 @@
   "path": "CLKComplicationTemplateGraphicCornerGaugeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4969,7 +4969,7 @@
   "path": "CLKComplicationTemplateGraphicCornerGaugeView.gaugeProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4978,8 +4978,8 @@
   "usr": "s:17_ClockKit_SwiftUI45CLKComplicationTemplateGraphicCornerGaugeViewC13gaugeProvider011leadingTextL008trailingnL05labelACyxGSo08CLKGaugeL0C_So07CLKTextL0CSgAMxtcfc",
   "path": "CLKComplicationTemplateGraphicCornerGaugeView.init(gaugeProvider:leadingTextProvider:trailingTextProvider:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4989,7 +4989,7 @@
   "path": "CLKComplicationTemplateGraphicCornerGaugeView.label",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -4999,7 +4999,7 @@
   "path": "CLKComplicationTemplateGraphicCornerGaugeView.leadingTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5009,7 +5009,7 @@
   "path": "CLKComplicationTemplateGraphicCornerGaugeView.trailingTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5019,7 +5019,7 @@
   "path": "CLKComplicationTemplateGraphicCornerTextView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5028,8 +5028,8 @@
   "usr": "s:17_ClockKit_SwiftUI44CLKComplicationTemplateGraphicCornerTextViewC12textProvider5labelACyxGSo07CLKTextL0C_xtcfc",
   "path": "CLKComplicationTemplateGraphicCornerTextView.init(textProvider:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5039,7 +5039,7 @@
   "path": "CLKComplicationTemplateGraphicCornerTextView.label",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5049,7 +5049,7 @@
   "path": "CLKComplicationTemplateGraphicCornerTextView.textProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5059,7 +5059,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5069,7 +5069,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeView.gaugeProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5078,8 +5078,8 @@
   "usr": "s:17_ClockKit_SwiftUI63CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeViewC13gaugeProvider5labelACyxGSo08CLKGaugeO0C_xtcfc",
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeView.init(gaugeProvider:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5089,7 +5089,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularClosedGaugeView.label",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5099,7 +5099,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5109,7 +5109,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeView.bottomLabel",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5119,7 +5119,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeView.centerTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5129,7 +5129,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeView.gaugeProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5138,8 +5138,8 @@
   "usr": "s:17_ClockKit_SwiftUI61CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeViewC13gaugeProvider010centerTextO011bottomLabelACyxGSo08CLKGaugeO0C_So07CLKTextO0Cxtcfc",
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularOpenGaugeView.init(gaugeProvider:centerTextProvider:bottomLabel:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5149,7 +5149,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularStackViewText",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5159,7 +5159,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularStackViewText.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5168,8 +5168,8 @@
   "usr": "s:17_ClockKit_SwiftUI61CLKComplicationTemplateGraphicExtraLargeCircularStackViewTextC7content12textProviderACyxGx_So07CLKTextP0Ctcfc",
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularStackViewText.init(content:textProvider:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5179,7 +5179,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularStackViewText.textProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5189,7 +5189,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5199,7 +5199,7 @@
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularView.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5208,8 +5208,8 @@
   "usr": "s:17_ClockKit_SwiftUI52CLKComplicationTemplateGraphicExtraLargeCircularViewCyACyxGxcfc",
   "path": "CLKComplicationTemplateGraphicExtraLargeCircularView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5219,7 +5219,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularFullView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5229,7 +5229,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularFullView.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5238,8 +5238,8 @@
   "usr": "s:17_ClockKit_SwiftUI49CLKComplicationTemplateGraphicRectangularFullViewCyACyxGxcfc",
   "path": "CLKComplicationTemplateGraphicRectangularFullView.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5249,7 +5249,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularLargeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5259,7 +5259,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularLargeView.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5269,7 +5269,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularLargeView.headerTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5278,8 +5278,8 @@
   "usr": "s:17_ClockKit_SwiftUI50CLKComplicationTemplateGraphicRectangularLargeViewC18headerTextProvider7contentACyxGSo07CLKTextM0C_xtcfc",
   "path": "CLKComplicationTemplateGraphicRectangularLargeView.init(headerTextProvider:content:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5289,7 +5289,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularStandardBodyView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5299,7 +5299,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularStandardBodyView.body1TextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5309,7 +5309,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularStandardBodyView.body2TextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5319,7 +5319,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularStandardBodyView.headerLabel",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5329,7 +5329,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularStandardBodyView.headerTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5338,8 +5338,8 @@
   "usr": "s:17_ClockKit_SwiftUI57CLKComplicationTemplateGraphicRectangularStandardBodyViewC11headerLabel0L12TextProvider05body1nO005body2nO0ACyxGx_So07CLKTextO0CA2JSgtcfc",
   "path": "CLKComplicationTemplateGraphicRectangularStandardBodyView.init(headerLabel:headerTextProvider:body1TextProvider:body2TextProvider:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5349,7 +5349,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularTextGaugeView",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the ClockKit integration exposes what views need",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5359,7 +5359,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularTextGaugeView.bodyTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5369,7 +5369,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularTextGaugeView.gaugeProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5379,7 +5379,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularTextGaugeView.headerLabel",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5389,7 +5389,7 @@
   "path": "CLKComplicationTemplateGraphicRectangularTextGaugeView.headerTextProvider",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -5398,8 +5398,8 @@
   "usr": "s:17_ClockKit_SwiftUI54CLKComplicationTemplateGraphicRectangularTextGaugeViewC11headerLabel0lI8Provider04bodyiN005gaugeN0ACyxGx_So07CLKTextN0CAJSo08CLKGaugeN0Ctcfc",
   "path": "CLKComplicationTemplateGraphicRectangularTextGaugeView.init(headerLabel:headerTextProvider:bodyTextProvider:gaugeProvider:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -7816,8 +7816,8 @@
   "usr": "s:22_PermissionKit_SwiftUI25CommunicationLimitsButtonV8question5labelACyxG0aB00A8QuestionCyAG0E5TopicVG_xyctcfc",
   "path": "CommunicationLimitsButton.init(question:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PermissionKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PermissionKit integration): CommunicationLimitsButton(handles) { label }",
   "platforms": [
    "ios",
    "macos"
@@ -8069,7 +8069,7 @@
   "path": "ComplicationRenderingMode.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -8078,8 +8078,8 @@
   "usr": "s:17_ClockKit_SwiftUI25ComplicationRenderingModeO9fullColoryA2CmF",
   "path": "ComplicationRenderingMode.fullColor",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -8089,7 +8089,7 @@
   "path": "ComplicationRenderingMode.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -8099,7 +8099,7 @@
   "path": "ComplicationRenderingMode.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -8108,8 +8108,8 @@
   "usr": "s:17_ClockKit_SwiftUI25ComplicationRenderingModeO6tintedyA2CmF",
   "path": "ComplicationRenderingMode.tinted",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -8119,7 +8119,7 @@
   "path": "CompositorLayer",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the CompositorServices integration exposes what views need",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8129,7 +8129,7 @@
   "path": "CompositorLayer.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8138,8 +8138,8 @@
   "usr": "s:27_CompositorServices_SwiftUI0A5LayerV13configuration8rendererAcA0aE13Configuration_p_ySo019CP_OBJECT_cp_layer_G0CScMYcctcfc",
   "path": "CompositorLayer.init(configuration:renderer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "CompositorServices integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8148,8 +8148,8 @@
   "usr": "s:27_CompositorServices_SwiftUI0A5LayerV13configuration8rendererAcA0aE13Configuration_p_ySo019CP_OBJECT_cp_layer_G0C_7Network10NWEndpointOSgtScMYcctcfc",
   "path": "CompositorLayer.init(configuration:renderer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "CompositorServices integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8159,7 +8159,7 @@
   "path": "CompositorLayerConfiguration",
   "kind": "swift.protocol",
   "status": "n/a",
-  "detail": "Swift protocol adopted by app-defined types",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8168,8 +8168,8 @@
   "usr": "s:27_CompositorServices_SwiftUI0A18LayerConfigurationPA2A07DefaultaeF0VRszrlE7defaultAEvpZ",
   "path": "CompositorLayerConfiguration.default",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "CompositorServices integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8178,8 +8178,8 @@
   "usr": "s:27_CompositorServices_SwiftUI0A18LayerConfigurationP04makeF012capabilities13configurationySo27CP_OBJECT_cp_layer_rendererC0aB0E12CapabilitiesV_AhIE0F0VztF",
   "path": "CompositorLayerConfiguration.makeConfiguration(capabilities:configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "CompositorServices integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8299,8 +8299,8 @@
   "usr": "s:23SecureElementCredential0C7SessionC01_abC8_SwiftUIE13configurationAD0C11TransactionC13ConfigurationCyYaKF",
   "path": "CredentialSession.configuration()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SecureElementCredential integration: not bridged",
+  "status": "n/a",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8320,7 +8320,7 @@
   "path": "CredentialTransaction.Configuration",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the SecureElementCredential integration exposes what views need",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8330,7 +8330,7 @@
   "path": "CredentialTransaction.Configuration.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8339,8 +8339,8 @@
   "usr": "s:32_SecureElementCredential_SwiftUI0C11TransactionC13ConfigurationC10invalidateyyYaKF",
   "path": "CredentialTransaction.Configuration.invalidate()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SecureElementCredential integration: not bridged",
+  "status": "n/a",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8349,8 +8349,8 @@
   "usr": "s:32_SecureElementCredential_SwiftUI0C11TransactionC020performCardEmulationf11WithCurrentC07optionsy0abC00C7SessionC0hI7OptionsV_tYaKF",
   "path": "CredentialTransaction.performCardEmulationTransactionWithCurrentCredential(options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SecureElementCredential integration: not bridged",
+  "status": "n/a",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8359,8 +8359,8 @@
   "usr": "s:32_SecureElementCredential_SwiftUI0C11TransactionC07performF05using7optionsy0abC00C7SessionC0C0V_AI20CardEmulationOptionsVtYaKF",
   "path": "CredentialTransaction.performTransaction(using:options:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SecureElementCredential integration: not bridged",
+  "status": "n/a",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8369,8 +8369,8 @@
   "usr": "s:32_SecureElementCredential_SwiftUI0C11TransactionC07performF11InWiredMode5using11instanceAIDy0abC00C7SessionC0C0V_10Foundation4DataVtYaKF",
   "path": "CredentialTransaction.performTransactionInWiredMode(using:instanceAID:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SecureElementCredential integration: not bridged",
+  "status": "n/a",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -8675,8 +8675,8 @@
   "usr": "s:27_CompositorServices_SwiftUI07DefaultA18LayerConfigurationV04makeG012capabilities13configurationySo27CP_OBJECT_cp_layer_rendererC0aB0E12CapabilitiesV_AhIE0G0VztF",
   "path": "DefaultCompositorLayerConfiguration.makeConfiguration(capabilities:configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "CompositorServices integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS CompositorServices (Metal immersive rendering)",
   "platforms": [
    "macos"
   ]
@@ -8848,8 +8848,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB6ReportV7ContextVyAESScfc",
   "path": "DeviceActivityReport.Context.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (DeviceActivity integration): DeviceActivityReport(context)",
   "platforms": [
    "ios"
   ]
@@ -8858,8 +8858,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB6ReportV7ContextV8rawValueAESS_tcfc",
   "path": "DeviceActivityReport.Context.init(rawValue:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (DeviceActivity integration): DeviceActivityReport(context)",
   "platforms": [
    "ios"
   ]
@@ -8888,8 +8888,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB6ReportV_6filterA2C7ContextV_0aB00aB6FilterVtcfc",
   "path": "DeviceActivityReport.init(_:filter:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (DeviceActivity integration): DeviceActivityReport(context)",
   "platforms": [
    "ios"
   ]
@@ -8908,8 +8908,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrxAA0abE5SceneRzlFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8918,8 +8918,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_tAA0abE5SceneRzAaER_r0_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8928,8 +8928,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_tAA0abE5SceneRzAaER_AaER0_r1_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8938,8 +8938,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_tAA0abE5SceneRzAaER_AaER0_AaER1_r2_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8948,8 +8948,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_r3_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8958,8 +8958,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_r4_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8968,8 +8968,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_r5_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8978,8 +8978,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_r6_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8988,8 +8988,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_r7_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -8998,8 +8998,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_r8_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9008,8 +9008,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_r9_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9018,8 +9018,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_r10_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9028,8 +9028,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_r11_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9038,8 +9038,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_r12_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9048,8 +9048,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_r13_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9058,8 +9058,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_r14_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9068,8 +9068,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_r15_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9078,8 +9078,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_r16_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9088,8 +9088,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_q16_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_AaER16_r17_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9098,8 +9098,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB13ReportBuilderV10buildBlockyQrx_q_q0_q1_q2_q3_q4_q5_q6_q7_q8_q9_q10_q11_q12_q13_q14_q15_q16_q17_tAA0abE5SceneRzAaER_AaER0_AaER1_AaER2_AaER3_AaER4_AaER5_AaER6_AaER7_AaER8_AaER9_AaER10_AaER11_AaER12_AaER13_AaER14_AaER15_AaER16_AaER17_r18_lFZ",
   "path": "DeviceActivityReportBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift result-builder method",
   "platforms": [
    "ios"
   ]
@@ -9159,7 +9159,7 @@
   "path": "DeviceActivityReportScene.Configuration",
   "kind": "swift.associatedtype",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9169,7 +9169,7 @@
   "path": "DeviceActivityReportScene.Content",
   "kind": "swift.associatedtype",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9179,7 +9179,7 @@
   "path": "DeviceActivityReportScene.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9189,7 +9189,7 @@
   "path": "DeviceActivityReportScene.content",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9199,7 +9199,7 @@
   "path": "DeviceActivityReportScene.context",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9208,8 +9208,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB11ReportSceneP17makeConfiguration12representing0H0QzAA0aB7ResultsVy0aB00aB4DataVG_tYaF",
   "path": "DeviceActivityReportScene.makeConfiguration(representing:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9229,7 +9229,7 @@
   "path": "DeviceActivityResults.AsyncIterator",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9239,7 +9239,7 @@
   "path": "DeviceActivityResults.Iterator",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the DeviceActivity integration exposes what views need",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9249,7 +9249,7 @@
   "path": "DeviceActivityResults.Iterator.Element",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9258,8 +9258,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB7ResultsV8IteratorC4nextqd__SgyYaF",
   "path": "DeviceActivityResults.Iterator.next()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9268,8 +9268,8 @@
   "usr": "s:23_DeviceActivity_SwiftUI0aB7ResultsV17makeAsyncIteratorAC0H0Cyx_xGyF",
   "path": "DeviceActivityResults.makeAsyncIterator()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "DeviceActivity integration: not bridged",
+  "status": "n/a",
+  "detail": "report extension (Swift app extension)",
   "platforms": [
    "ios"
   ]
@@ -9289,7 +9289,7 @@
   "path": "DevicePairingView.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "needs a Swift DeviceDiscoveryUI pairing descriptor",
   "platforms": [
    "ios"
   ]
@@ -9299,7 +9299,7 @@
   "path": "DevicePairingView.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "needs a Swift DeviceDiscoveryUI pairing descriptor",
   "platforms": [
    "ios"
   ]
@@ -9308,8 +9308,8 @@
   "usr": "s:024_DeviceDiscoveryUI_SwiftC00A11PairingViewV_6access5label8fallbackACyxq_G7Network16ListenerProvider_p_0abC008DDDeviceE6AccessVxyXEq_yXEtcfc",
   "path": "DevicePairingView.init(_:access:label:fallback:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "DeviceDiscoveryUI integration: not bridged",
+  "status": "n/a",
+  "detail": "needs a Swift DeviceDiscoveryUI pairing descriptor",
   "platforms": [
    "ios"
   ]
@@ -9351,8 +9351,8 @@
   "usr": "s:024_DeviceDiscoveryUI_SwiftC00A6PickerV_6access8onSelect5label8fallback10parametersACyxq_Gqd___0abC021DDDevicePairingAccessVy8EndpointQyd__cxyXEq_yXE7Network12NWParametersCycSgtcAO15BrowserProviderRd__lufc",
   "path": "DevicePicker.init(_:access:onSelect:label:fallback:parameters:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "DeviceDiscoveryUI integration: not bridged",
+  "status": "n/a",
+  "detail": "accessory access descriptor (Swift-typed)",
   "platforms": [
    "ios"
   ]
@@ -9361,8 +9361,8 @@
   "usr": "s:024_DeviceDiscoveryUI_SwiftC00A6PickerV_8onSelect5label8fallback10parametersACyxq_G7Network9NWBrowserC10DescriptorO_yAI10NWEndpointOcxyXEq_yXEAI12NWParametersCycSgtcfc",
   "path": "DevicePicker.init(_:onSelect:label:fallback:parameters:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "DeviceDiscoveryUI integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (DeviceDiscoveryUI integration): DevicePicker(serviceName, onSelect) { label } fallback",
   "platforms": [
    "tvos"
   ]
@@ -9381,8 +9381,8 @@
   "usr": "s:024_DeviceDiscoveryUI_SwiftC00A21PickerSupportedActionV14callAsFunction_10parametersSb7Network9NWBrowserC10DescriptorO_AF12NWParametersCycSgtF",
   "path": "DevicePickerSupportedAction.callAsFunction(_:parameters:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "DeviceDiscoveryUI integration: not bridged",
+  "status": "n/a",
+  "detail": "environment action, query through DevicePicker",
   "platforms": [
    "tvos"
   ]
@@ -9411,8 +9411,8 @@
   "usr": "s:7SwiftUI13DocumentGroupV01_a5Data_aB0AD05ModelC0VRszrlE7editing11contentType6editor07prepareC0ACyAFq_G0aE0010PersistentF0_pXp_07UniformI11Identifiers6UTTypeVq_ycyAL0F7ContextCctcfc",
   "path": "DocumentGroup.init(editing:contentType:editor:prepareDocument:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "ios",
    "macos"
@@ -9422,8 +9422,8 @@
   "usr": "s:7SwiftUI13DocumentGroupV01_a5Data_aB0AD05ModelC0VRszrlE7editing11contentType6editor07prepareC0ACyAFq_GSay0aE0010PersistentF0_pXpG_07UniformI11Identifiers6UTTypeVq_ycyAL0F7ContextCctcfc",
   "path": "DocumentGroup.init(editing:contentType:editor:prepareDocument:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "ios",
    "macos"
@@ -9433,8 +9433,8 @@
   "usr": "s:7SwiftUI13DocumentGroupV01_a5Data_aB0AD05ModelC0VRszrlE7editing13migrationPlan6editor07prepareC0ACyAFq_G22UniformTypeIdentifiers6UTTypeV_0aE0015SchemaMigrationI0_pXpq_ycyAO0F7ContextCctcfc",
   "path": "DocumentGroup.init(editing:migrationPlan:editor:prepareDocument:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "ios",
    "macos"
@@ -9444,8 +9444,8 @@
   "usr": "s:7SwiftUI13DocumentGroupV01_a5Data_aB0AD05ModelC0VRszrlE7viewing11contentType6viewerACyAFq_G0aE0010PersistentF0_pXp_07UniformI11Identifiers6UTTypeVq_yctcfc",
   "path": "DocumentGroup.init(viewing:contentType:viewer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "ios",
    "macos"
@@ -9455,8 +9455,8 @@
   "usr": "s:7SwiftUI13DocumentGroupV01_a5Data_aB0AD05ModelC0VRszrlE7viewing11contentType6viewerACyAFq_GSay0aE0010PersistentF0_pXpG_07UniformI11Identifiers6UTTypeVq_yctcfc",
   "path": "DocumentGroup.init(viewing:contentType:viewer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "ios",
    "macos"
@@ -9466,8 +9466,8 @@
   "usr": "s:7SwiftUI13DocumentGroupV01_a5Data_aB0AD05ModelC0VRszrlE7viewing13migrationPlan6viewerACyAFq_G22UniformTypeIdentifiers6UTTypeV_0aE0015SchemaMigrationI0_pXpq_yctcfc",
   "path": "DocumentGroup.init(viewing:migrationPlan:viewer:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "ios",
    "macos"
@@ -9711,8 +9711,8 @@
   "usr": "s:17RealityFoundation6EntityC01_A11Kit_SwiftUIE7animate_4body10completiony0eF09AnimationV_yyXEyycSgtFZ",
   "path": "Entity.animate(_:body:completion:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -9735,7 +9735,7 @@
   "path": "EntityTargetValue.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9745,8 +9745,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV8entities2at2inSay0A10Foundation0E0CGSo7CGPointV_qd__t0cD023CoordinateSpaceProtocolRd__lF",
   "path": "EntityTargetValue.entities(at:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9757,7 +9757,7 @@
   "path": "EntityTargetValue.entity",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9767,8 +9767,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV6entity2at2in0A10Foundation0E0CSgSo7CGPointV_qd__t0cD023CoordinateSpaceProtocolRd__lF",
   "path": "EntityTargetValue.entity(at:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9779,7 +9779,7 @@
   "path": "EntityTargetValue.gestureValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9789,8 +9789,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV7hitTest5point2in5query4maskSay0A10Foundation16CollisionCastHitVGSo7CGPointV_qd__AI0oP9QueryTypeOAI0O5GroupVt0cD023CoordinateSpaceProtocolRd__lF",
   "path": "EntityTargetValue.hitTest(point:in:query:mask:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9800,8 +9800,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV7project5point2toSo7CGPointVSgs5SIMD3VySfG_qd__t0cD023CoordinateSpaceProtocolRd__lF",
   "path": "EntityTargetValue.project(point:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9811,8 +9811,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV3ray7through2in2tos5SIMD3VySfG6origin_AJ9directiontSgSo7CGPointV_qd__qd_0_t0cD023CoordinateSpaceProtocolRd__0A10Foundation0apQ0Rd_0_r0_lF",
   "path": "EntityTargetValue.ray(through:in:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9823,7 +9823,7 @@
   "path": "EntityTargetValue.subscript(dynamicMember:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9833,8 +9833,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV9unproject_4from2tos5SIMD3VySfGSgSo7CGPointV_qd__qd_0_t0cD023CoordinateSpaceProtocolRd__0A10Foundation0amN0Rd_0_r0_lF",
   "path": "EntityTargetValue.unproject(_:from:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9844,8 +9844,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV9unproject_4from2to9ontoPlanes5SIMD3VySfGSgSo7CGPointV_qd__qd_0_So13simd_float4x4at0cD023CoordinateSpaceProtocolRd__0A10Foundation0aqR0Rd_0_r0_lF",
   "path": "EntityTargetValue.unproject(_:from:to:ontoPlane:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -9855,8 +9855,8 @@
   "usr": "s:19_RealityKit_SwiftUI17EntityTargetValueV9unproject_2tos5SIMD3VySfGSgs7KeyPathCyxSo7CGPointVG_qd__t0A10Foundation0A15CoordinateSpaceRd__lF",
   "path": "EntityTargetValue.unproject(_:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -10255,8 +10255,8 @@
   "usr": "s:7SwiftUI7GestureP012_RealityKit_aB0E19targetedToAnyEntityQryF",
   "path": "Gesture.targetedToAnyEntity()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity gestures (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -10266,8 +10266,8 @@
   "usr": "s:7SwiftUI7GestureP012_RealityKit_aB0E16targetedToEntityyQr0D10Foundation0H0CF",
   "path": "Gesture.targetedToEntity(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity gestures (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -10277,8 +10277,8 @@
   "usr": "s:7SwiftUI7GestureP012_RealityKit_aB0E16targetedToEntity5whereQr0D10Foundation14QueryPredicateVyAG0H0CG_tF",
   "path": "Gesture.targetedToEntity(where:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity gestures (Swift scene graph)",
   "platforms": [
    "ios",
    "macos"
@@ -10288,8 +10288,8 @@
   "usr": "s:17RealityFoundation16GestureComponentV01_A11Kit_SwiftUIEyACxc0fG00C0Rzlufc",
   "path": "GestureComponent.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -10482,8 +10482,8 @@
   "usr": "s:10AppIntents15IntentParameterC01_aB8_SwiftUIE19requestConfirmation3for6dialog4viewSb9ValueTypeQz_AA0C6DialogVSgqd__yXEtYaK0eF04ViewRd__lF",
   "path": "IntentParameter.requestConfirmation(for:dialog:view:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10495,8 +10495,8 @@
   "usr": "s:10AppIntents15IntentParameterC01_aB8_SwiftUIE19requestConfirmation3for6dialog4viewSb9ValueTypeQz_AA0C6DialogVSgqd__tYaK0eF04ViewRd__lF",
   "path": "IntentParameter.requestConfirmation(for:dialog:view:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10508,8 +10508,8 @@
   "usr": "s:10AppIntents22IntentParameterContextV01_aB8_SwiftUIE19requestConfirmation3for6dialog4viewSb9ValueTypeQz_AA0C6DialogVSgqd__yXEtYaK0fG04ViewRd__lF",
   "path": "IntentParameterContext.requestConfirmation(for:dialog:view:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10521,8 +10521,8 @@
   "usr": "s:10AppIntents22IntentParameterContextV01_aB8_SwiftUIE19requestConfirmation3for6dialog4viewSb9ValueTypeQz_AA0C6DialogVSgqd__tYaK0fG04ViewRd__lF",
   "path": "IntentParameterContext.requestConfirmation(for:dialog:view:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10534,8 +10534,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result7contentAA0cD9ContainerVys5NeverOAjA012_SnippetViewI0VAJGqd__yXE_tAMRsz0eF00L0Rd__lFZ",
   "path": "IntentResult.result(content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10547,8 +10547,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result6dialog7contentAA0cD9ContainerVys5NeverOAkA012_SnippetViewJ0VAA0C6DialogVGAO_qd__yXEtAPRsz0eF00M0Rd__lFZ",
   "path": "IntentResult.result(dialog:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10560,8 +10560,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result6dialog4viewAA0cD9ContainerVys5NeverOAkA012_SnippetViewJ0VAA0C6DialogVGAO_qd__tAPRsz0eF00M0Rd__lFZ",
   "path": "IntentResult.result(dialog:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10573,8 +10573,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC07contentAA0cD9ContainerVys5NeverOqd__AA012_SnippetViewJ0VAKGqd___qd_0_yXEtANRszAA0aC0Rd__0eF00M0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10586,8 +10586,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC07contentAA0cD9ContainerVys5NeverOAkA012_SnippetViewJ0VAKGqd_0__qd__yXEtANRsz0eF00M0Rd__AA0aC0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10599,8 +10599,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC06dialog7contentAA0cD9ContainerVys5NeverOqd__AA012_SnippetViewK0VAA0C6DialogVGqd___APqd_0_yXEtAQRszAA0aC0Rd__0eF00N0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:dialog:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10612,8 +10612,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC06dialog7contentAA0cD9ContainerVys5NeverOAlA012_SnippetViewK0VAA0C6DialogVGqd_0__APqd__yXEtAQRsz0eF00N0Rd__AA0aC0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:dialog:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10625,8 +10625,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC06dialog4viewAA0cD9ContainerVys5NeverOqd__AA012_SnippetViewK0VAA0C6DialogVGqd___APqd_0_tAQRszAA0aC0Rd__0eF00N0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:dialog:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10638,8 +10638,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC06dialog4viewAA0cD9ContainerVys5NeverOAlA012_SnippetViewK0VAA0C6DialogVGqd_0__APqd__tAQRsz0eF00N0Rd__AA0aC0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:dialog:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10651,8 +10651,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC04viewAA0cD9ContainerVys5NeverOqd__AA012_SnippetViewJ0VAKGqd___qd_0_tANRszAA0aC0Rd__0eF00M0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10664,8 +10664,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC04viewAA0cD9ContainerVys5NeverOAkA012_SnippetViewJ0VAKGqd_0__qd__tANRsz0eF00M0Rd__AA0aC0Rd_0_r0_lFZ",
   "path": "IntentResult.result(opensIntent:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10677,8 +10677,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value7contentAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewJ0VAKGqd___qd_0_yXEtANRszAA01_C5ValueRd__0eF00M0Rd_0_r0_lFZ",
   "path": "IntentResult.result(value:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10690,8 +10690,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value6dialog7contentAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewK0VAA0C6DialogVGqd___APqd_0_yXEtAQRszAA01_C5ValueRd__0eF00N0Rd_0_r0_lFZ",
   "path": "IntentResult.result(value:dialog:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10703,8 +10703,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value6dialog4viewAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewK0VAA0C6DialogVGqd___APqd_0_tAQRszAA01_C5ValueRd__0eF00N0Rd_0_r0_lFZ",
   "path": "IntentResult.result(value:dialog:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10716,8 +10716,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC07contentAA0cD9ContainerVyqd__qd_0_AA012_SnippetViewK0Vs5NeverOGqd___qd_0_qd_1_yXEtAORszAA01_C5ValueRd__AA0aC0Rd_0_0eF00M0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10729,8 +10729,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC07contentAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewK0VALGqd___qd_1_qd_0_yXEtAORszAA01_C5ValueRd__0eF00N0Rd_0_AA0aC0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10742,8 +10742,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC06dialog7contentAA0cD9ContainerVyqd__qd_0_AA012_SnippetViewL0VAA0C6DialogVGqd___qd_0_AOqd_1_yXEtAPRszAA01_C5ValueRd__AA0aC0Rd_0_0eF00N0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:dialog:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10755,8 +10755,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC06dialog7contentAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewL0VAA0C6DialogVGqd___qd_1_AQqd_0_yXEtARRszAA01_C5ValueRd__0eF00O0Rd_0_AA0aC0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:dialog:content:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10768,8 +10768,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC06dialog4viewAA0cD9ContainerVyqd__qd_0_AA012_SnippetViewL0VAA0C6DialogVGqd___qd_0_AOqd_1_tAPRszAA01_C5ValueRd__AA0aC0Rd_0_0eF00N0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:dialog:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10781,8 +10781,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC06dialog4viewAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewL0VAA0C6DialogVGqd___qd_1_AQqd_0_tARRszAA01_C5ValueRd__0eF00O0Rd_0_AA0aC0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:dialog:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10794,8 +10794,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC04viewAA0cD9ContainerVyqd__qd_0_AA012_SnippetViewK0Vs5NeverOGqd___qd_0_qd_1_tAORszAA01_C5ValueRd__AA0aC0Rd_0_0eF00M0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10807,8 +10807,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value05opensC04viewAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewK0VALGqd___qd_1_qd_0_tAORszAA01_C5ValueRd__0eF00N0Rd_0_AA0aC0Rd_1_r1_lFZ",
   "path": "IntentResult.result(value:opensIntent:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10820,8 +10820,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result5value4viewAA0cD9ContainerVyqd__s5NeverOAA012_SnippetViewJ0VAKGqd___qd_0_tANRszAA01_C5ValueRd__0eF00M0Rd_0_r0_lFZ",
   "path": "IntentResult.result(value:view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -10833,8 +10833,8 @@
   "usr": "s:10AppIntents12IntentResultP01_aB8_SwiftUIE6result4viewAA0cD9ContainerVys5NeverOAjA012_SnippetViewI0VAJGqd___tAMRsz0eF00L0Rd__lFZ",
   "path": "IntentResult.result(view:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent implementations (intents are Swift types)",
   "platforms": [
    "ios",
    "macos",
@@ -11681,7 +11681,7 @@
   "path": "ManagedAppView.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "needs a Swift ManagedApp value",
   "platforms": [
    "macos"
   ]
@@ -11691,7 +11691,7 @@
   "path": "ManagedAppView.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "needs a Swift ManagedApp value",
   "platforms": [
    "macos"
   ]
@@ -11700,8 +11700,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0aB4ViewV3appAC0abC00aB0V_tcfc",
   "path": "ManagedAppView.init(app:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "n/a",
+  "detail": "needs a Swift ManagedApp value",
   "platforms": [
    "macos"
   ]
@@ -11720,8 +11720,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV2eeoiySbAC_ACtFZ",
   "path": "ManagedContentOfferState.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11730,8 +11730,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV6custom5titleACSS_tFZ",
   "path": "ManagedContentOfferState.custom(title:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11740,8 +11740,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV4hash4intoys6HasherVz_tF",
   "path": "ManagedContentOfferState.hash(into:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11750,8 +11750,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV9hashValueSivp",
   "path": "ManagedContentOfferState.hashValue",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11760,8 +11760,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV9installedACvpZ",
   "path": "ManagedContentOfferState.installed",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11770,8 +11770,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV10installing8progressACSdSg_tFZ",
   "path": "ManagedContentOfferState.installing(progress:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11780,8 +11780,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV14neverInstalledACvpZ",
   "path": "ManagedContentOfferState.neverInstalled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11790,8 +11790,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV14noninteractiveACvpZ",
   "path": "ManagedContentOfferState.noninteractive",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11800,8 +11800,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A17ContentOfferStateV12notInstalledACvpZ",
   "path": "ManagedContentOfferState.notInstalled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(offerState)",
   "platforms": [
    "macos"
   ]
@@ -11820,8 +11820,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A12ContentStyleV9automaticACvpZ",
   "path": "ManagedContentStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): Modifier.managedContentStyle(style)",
   "platforms": [
    "macos"
   ]
@@ -11830,8 +11830,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A12ContentStyleV7compactACvpZ",
   "path": "ManagedContentStyle.compact",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): Modifier.managedContentStyle(style)",
   "platforms": [
    "macos"
   ]
@@ -11840,8 +11840,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A12ContentStyleV6headerACvpZ",
   "path": "ManagedContentStyle.header",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): Modifier.managedContentStyle(style)",
   "platforms": [
    "macos"
   ]
@@ -11850,8 +11850,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A12ContentStyleV8verticalACvpZ",
   "path": "ManagedContentStyle.vertical",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): Modifier.managedContentStyle(style)",
   "platforms": [
    "macos"
   ]
@@ -11890,8 +11890,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A11ContentViewV12primaryLabel09secondaryI008tertiaryI0010quaternaryI010offerState0M6Action4iconACyxG0dE018LocalizedStringKeyV_A3nA0af5OfferN0VyAPcxyXEtcfc",
   "path": "ManagedContentView.init(primaryLabel:secondaryLabel:tertiaryLabel:quaternaryLabel:offerState:offerAction:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(labels, offerState, onOffer) { icon }",
   "platforms": [
    "macos"
   ]
@@ -11900,8 +11900,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A11ContentViewV12primaryLabel09secondaryI008tertiaryI0010quaternaryI010offerState0M6Action4iconACyxGSy_p_Sy_pSy_pSy_pAA0af5OfferN0VyAMcxyXEtcfc",
   "path": "ManagedContentView.init(primaryLabel:secondaryLabel:tertiaryLabel:quaternaryLabel:offerState:offerAction:icon:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): ManagedContentView(labels, offerState, onOffer) { icon }",
   "platforms": [
    "macos"
   ]
@@ -11921,7 +11921,7 @@
   "path": "ManagedPackageView.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "needs a Swift ManagedPackage value",
   "platforms": [
    "macos"
   ]
@@ -11931,7 +11931,7 @@
   "path": "ManagedPackageView.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "needs a Swift ManagedPackage value",
   "platforms": [
    "macos"
   ]
@@ -11940,8 +11940,8 @@
   "usr": "s:31_ManagedAppDistribution_SwiftUI0A11PackageViewV7packageAC0abC00aF0V_tcfc",
   "path": "ManagedPackageView.init(package:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "n/a",
+  "detail": "needs a Swift ManagedPackage value",
   "platforms": [
    "macos"
   ]
@@ -15335,7 +15335,7 @@
   "path": "MeshResource.ShapeExtrusionOptions.chamferProfile",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -15346,8 +15346,8 @@
   "usr": "s:17RealityFoundation12MeshResourceC01_A11Kit_SwiftUIE9extruding16extrusionOptionsAC0fG04PathV_AC014ShapeExtrusionJ0VtKcfc",
   "path": "MeshResource.init(extruding:extrusionOptions:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -15358,8 +15358,8 @@
   "usr": "s:17RealityFoundation12MeshResourceC01_A11Kit_SwiftUIE9extruding16extrusionOptionsAC0fG04PathV_AC014ShapeExtrusionJ0VtYaKcfc",
   "path": "MeshResource.init(extruding:extrusionOptions:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -15407,8 +15407,8 @@
   "usr": "s:7SwiftUI15ModifiedContentV012_AppIntents_aB0AA31AccessibilityAttachmentModifierVRs_rlE19accessibilityAction_6intentACyxAFGAA0gK4KindV_qd__t0eF00E6IntentRd__lF",
   "path": "ModifiedContent.accessibilityAction(_:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -15420,8 +15420,8 @@
   "usr": "s:7SwiftUI15ModifiedContentV012_AppIntents_aB0AA31AccessibilityAttachmentModifierVRs_rlE19accessibilityAction5named6intentACyxAFGAA4TextV_qd__t0eF00E6IntentRd__lF",
   "path": "ModifiedContent.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -15433,8 +15433,8 @@
   "usr": "s:7SwiftUI15ModifiedContentV012_AppIntents_aB0AA31AccessibilityAttachmentModifierVRs_rlE19accessibilityAction5named6intentACyxAFGAA18LocalizedStringKeyV_qd__t0eF00E6IntentRd__lF",
   "path": "ModifiedContent.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -15446,8 +15446,8 @@
   "usr": "s:7SwiftUI15ModifiedContentV012_AppIntents_aB0AA31AccessibilityAttachmentModifierVRs_rlE19accessibilityAction5named6intentACyxAFG10Foundation23LocalizedStringResourceV_qd__t0eF00E6IntentRd__lF",
   "path": "ModifiedContent.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -15459,8 +15459,8 @@
   "usr": "s:7SwiftUI15ModifiedContentV012_AppIntents_aB0AA31AccessibilityAttachmentModifierVRs_rlE19accessibilityAction5named6intentACyxAFGqd___qd_0_tSyRd__0eF00E6IntentRd_0_r0_lF",
   "path": "ModifiedContent.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -15906,8 +15906,8 @@
   "usr": "s:7SwiftUI17NewDocumentActionV01_a5Data_aB0E14callAsFunction11contentType07prepareD0y07UniformK11Identifiers6UTTypeV_y0aF012ModelContextCctF",
   "path": "NewDocumentAction.callAsFunction(contentType:prepareDocument:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData model types (Swift persistence)",
   "platforms": [
    "macos"
   ]
@@ -15946,8 +15946,8 @@
   "usr": "s:17_WatchKit_SwiftUI14NowPlayingViewVACycfc",
   "path": "NowPlayingView.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "WatchKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WatchKit integration): NowPlayingView()",
   "platforms": [
    "watchos"
   ]
@@ -16243,7 +16243,7 @@
   "path": "ObjectCapturePointCloudView",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16253,7 +16253,7 @@
   "path": "ObjectCapturePointCloudView.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16263,7 +16263,7 @@
   "path": "ObjectCapturePointCloudView.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16272,8 +16272,8 @@
   "usr": "s:19_RealityKit_SwiftUI27ObjectCapturePointCloudViewV7sessionAcA0eF7SessionC_tcfc",
   "path": "ObjectCapturePointCloudView.init(session:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16282,8 +16282,8 @@
   "usr": "s:19_RealityKit_SwiftUI27ObjectCapturePointCloudViewV17showShotLocationsyACSbF",
   "path": "ObjectCapturePointCloudView.showShotLocations(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16293,7 +16293,7 @@
   "path": "ObjectCaptureSession",
   "kind": "swift.class",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16303,7 +16303,7 @@
   "path": "ObjectCaptureSession.CaptureState",
   "kind": "swift.enum",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16313,7 +16313,7 @@
   "path": "ObjectCaptureSession.CaptureState.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16322,8 +16322,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO9capturingyA2EmF",
   "path": "ObjectCaptureSession.CaptureState.capturing",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16332,8 +16332,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO9completedyA2EmF",
   "path": "ObjectCaptureSession.CaptureState.completed",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16342,8 +16342,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO9detectingyA2EmF",
   "path": "ObjectCaptureSession.CaptureState.detecting",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16352,8 +16352,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO6failedyAEs5Error_pcAEmF",
   "path": "ObjectCaptureSession.CaptureState.failed(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16362,8 +16362,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO9finishingyA2EmF",
   "path": "ObjectCaptureSession.CaptureState.finishing",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16372,8 +16372,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO12initializingyA2EmF",
   "path": "ObjectCaptureSession.CaptureState.initializing",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16382,8 +16382,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO5readyyA2EmF",
   "path": "ObjectCaptureSession.CaptureState.ready",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16393,7 +16393,7 @@
   "path": "ObjectCaptureSession.Configuration",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16403,7 +16403,7 @@
   "path": "ObjectCaptureSession.Configuration.checkpointDirectory",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16412,8 +16412,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC13ConfigurationVAEycfc",
   "path": "ObjectCaptureSession.Configuration.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16423,7 +16423,7 @@
   "path": "ObjectCaptureSession.Configuration.isOverCaptureEnabled",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16433,7 +16433,7 @@
   "path": "ObjectCaptureSession.Error",
   "kind": "swift.enum",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16442,8 +16442,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5ErrorO9cancelledyA2EmF",
   "path": "ObjectCaptureSession.Error.cancelled",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16452,8 +16452,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5ErrorO17directoryNotEmptyyAE10Foundation3URLVcAEmF",
   "path": "ObjectCaptureSession.Error.directoryNotEmpty(_:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16462,8 +16462,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5ErrorO19insufficientStorageyAEs5Int64V_tcAEmF",
   "path": "ObjectCaptureSession.Error.insufficientStorage(requiredBytes:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16473,7 +16473,7 @@
   "path": "ObjectCaptureSession.Error.localizedDescription",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16482,8 +16482,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5ErrorO12sensorFailedyA2EmF",
   "path": "ObjectCaptureSession.Error.sensorFailed",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16492,8 +16492,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5ErrorO14trackingFailedyA2EmF",
   "path": "ObjectCaptureSession.Error.trackingFailed",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16503,7 +16503,7 @@
   "path": "ObjectCaptureSession.Feedback",
   "kind": "swift.enum",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16513,7 +16513,7 @@
   "path": "ObjectCaptureSession.Feedback.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16522,8 +16522,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO19environmentLowLightyA2EmF",
   "path": "ObjectCaptureSession.Feedback.environmentLowLight",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16532,8 +16532,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO18environmentTooDarkyA2EmF",
   "path": "ObjectCaptureSession.Feedback.environmentTooDark",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16543,7 +16543,7 @@
   "path": "ObjectCaptureSession.Feedback.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16553,7 +16553,7 @@
   "path": "ObjectCaptureSession.Feedback.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16562,8 +16562,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO13movingTooFastyA2EmF",
   "path": "ObjectCaptureSession.Feedback.movingTooFast",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16572,8 +16572,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO17objectNotDetectedyA2EmF",
   "path": "ObjectCaptureSession.Feedback.objectNotDetected",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16582,8 +16582,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO18objectNotFlippableyA2EmF",
   "path": "ObjectCaptureSession.Feedback.objectNotFlippable",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16592,8 +16592,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO14objectTooCloseyA2EmF",
   "path": "ObjectCaptureSession.Feedback.objectTooClose",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16602,8 +16602,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO12objectTooFaryA2EmF",
   "path": "ObjectCaptureSession.Feedback.objectTooFar",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16612,8 +16612,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO010outOfFieldJ4ViewyA2EmF",
   "path": "ObjectCaptureSession.Feedback.outOfFieldOfView",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16622,8 +16622,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8FeedbackO13overCapturingyA2EmF",
   "path": "ObjectCaptureSession.Feedback.overCapturing",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16633,7 +16633,7 @@
   "path": "ObjectCaptureSession.ID",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16643,7 +16643,7 @@
   "path": "ObjectCaptureSession.Tracking",
   "kind": "swift.enum",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16653,7 +16653,7 @@
   "path": "ObjectCaptureSession.Tracking.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16663,7 +16663,7 @@
   "path": "ObjectCaptureSession.Tracking.Reason",
   "kind": "swift.enum",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16673,7 +16673,7 @@
   "path": "ObjectCaptureSession.Tracking.Reason.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16682,8 +16682,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO6ReasonO15excessiveMotionyA2GmF",
   "path": "ObjectCaptureSession.Tracking.Reason.excessiveMotion",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16693,7 +16693,7 @@
   "path": "ObjectCaptureSession.Tracking.Reason.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16703,7 +16703,7 @@
   "path": "ObjectCaptureSession.Tracking.Reason.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16712,8 +16712,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO6ReasonO12initializingyA2GmF",
   "path": "ObjectCaptureSession.Tracking.Reason.initializing",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16722,8 +16722,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO6ReasonO20insufficientFeaturesyA2GmF",
   "path": "ObjectCaptureSession.Tracking.Reason.insufficientFeatures",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16732,8 +16732,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO6ReasonO12relocalizingyA2GmF",
   "path": "ObjectCaptureSession.Tracking.Reason.relocalizing",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16742,8 +16742,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO7limitedyA2E6ReasonO_tcAEmF",
   "path": "ObjectCaptureSession.Tracking.limited(reason:)",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16752,8 +16752,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO6normalyA2EmF",
   "path": "ObjectCaptureSession.Tracking.normal",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16762,8 +16762,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC8TrackingO12notAvailableyA2EmF",
   "path": "ObjectCaptureSession.Tracking.notAvailable",
   "kind": "swift.enum.case",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16773,7 +16773,7 @@
   "path": "ObjectCaptureSession.Updates",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16783,7 +16783,7 @@
   "path": "ObjectCaptureSession.Updates.AsyncIterator",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16793,7 +16793,7 @@
   "path": "ObjectCaptureSession.Updates.Iterator",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16802,8 +16802,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC7UpdatesV8IteratorV4nextxSgyYaF",
   "path": "ObjectCaptureSession.Updates.Iterator.next()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16812,8 +16812,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC7UpdatesV17makeAsyncIteratorAE0K0Vy_x_GyF",
   "path": "ObjectCaptureSession.Updates.makeAsyncIterator()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16822,8 +16822,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC16beginNewScanPassyyF",
   "path": "ObjectCaptureSession.beginNewScanPass()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16832,8 +16832,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC25beginNewScanPassAfterFlipyyF",
   "path": "ObjectCaptureSession.beginNewScanPassAfterFlip()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16843,7 +16843,7 @@
   "path": "ObjectCaptureSession.cameraTracking",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16853,7 +16853,7 @@
   "path": "ObjectCaptureSession.cameraTrackingUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16863,7 +16863,7 @@
   "path": "ObjectCaptureSession.canRequestImageCapture",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16873,7 +16873,7 @@
   "path": "ObjectCaptureSession.canRequestImageCaptureUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16882,8 +16882,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC6cancelyyF",
   "path": "ObjectCaptureSession.cancel()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16893,7 +16893,7 @@
   "path": "ObjectCaptureSession.configuration",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16903,7 +16903,7 @@
   "path": "ObjectCaptureSession.feedback",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16913,7 +16913,7 @@
   "path": "ObjectCaptureSession.feedbackUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16922,8 +16922,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC6finishyyF",
   "path": "ObjectCaptureSession.finish()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16932,8 +16932,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionCACycfc",
   "path": "ObjectCaptureSession.init()",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16943,7 +16943,7 @@
   "path": "ObjectCaptureSession.isAutoCaptureEnabled",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16953,7 +16953,7 @@
   "path": "ObjectCaptureSession.isPaused",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16963,7 +16963,7 @@
   "path": "ObjectCaptureSession.isPausedUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16972,8 +16972,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC11isSupportedSbvpZ",
   "path": "ObjectCaptureSession.isSupported",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16983,7 +16983,7 @@
   "path": "ObjectCaptureSession.maximumNumberOfInputImages",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -16993,7 +16993,7 @@
   "path": "ObjectCaptureSession.numberOfShotsTaken",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17003,7 +17003,7 @@
   "path": "ObjectCaptureSession.numberOfShotsTakenUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17012,8 +17012,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5pauseyyF",
   "path": "ObjectCaptureSession.pause()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17022,8 +17022,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC012requestImageF0yyF",
   "path": "ObjectCaptureSession.requestImageCapture()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17032,8 +17032,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC14resetDetectionSbyF",
   "path": "ObjectCaptureSession.resetDetection()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17042,8 +17042,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC6resumeyyF",
   "path": "ObjectCaptureSession.resume()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17053,7 +17053,7 @@
   "path": "ObjectCaptureSession.shouldPlayHaptics",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17062,8 +17062,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC5start15imagesDirectory13configurationy10Foundation3URLV_AC13ConfigurationVtF",
   "path": "ObjectCaptureSession.start(imagesDirectory:configuration:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17072,8 +17072,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC14startCapturingyyF",
   "path": "ObjectCaptureSession.startCapturing()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17082,8 +17082,8 @@
   "usr": "s:19_RealityKit_SwiftUI20ObjectCaptureSessionC14startDetectingSbyF",
   "path": "ObjectCaptureSession.startDetecting()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17093,7 +17093,7 @@
   "path": "ObjectCaptureSession.state",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17103,7 +17103,7 @@
   "path": "ObjectCaptureSession.stateUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17113,7 +17113,7 @@
   "path": "ObjectCaptureSession.userCompletedScanPass",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17123,7 +17123,7 @@
   "path": "ObjectCaptureSession.userCompletedScanPassUpdates",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17133,7 +17133,7 @@
   "path": "ObjectCaptureView",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17143,7 +17143,7 @@
   "path": "ObjectCaptureView.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17153,7 +17153,7 @@
   "path": "ObjectCaptureView.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17162,8 +17162,8 @@
   "usr": "s:19_RealityKit_SwiftUI17ObjectCaptureViewV04hideE7ReticleyACyxGSbF",
   "path": "ObjectCaptureView.hideObjectReticle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17172,8 +17172,8 @@
   "usr": "s:19_RealityKit_SwiftUI17ObjectCaptureViewV7sessionACy0cD005EmptyG0VGAA0eF7SessionC_tcAGRszrlufc",
   "path": "ObjectCaptureView.init(session:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -17182,8 +17182,8 @@
   "usr": "s:19_RealityKit_SwiftUI17ObjectCaptureViewV7session17cameraFeedOverlayACyxGAA0eF7SessionC_xyXEtcfc",
   "path": "ObjectCaptureView.init(session:cameraFeedOverlay:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ObjectCapture session (LiDAR photogrammetry, Swift session object)",
   "platforms": [
    "ios"
   ]
@@ -18138,8 +18138,8 @@
   "usr": "s:22_PermissionKit_SwiftUI0A6ButtonV8question5labelACy0aB018CommunicationTopicVq_GAF0A8QuestionCyAHG_q_yctcAHRszrlufc",
   "path": "PermissionButton.init(question:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PermissionKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PermissionKit integration): CommunicationLimitsButton(handles) { label } (communication questions)",
   "platforms": [
    "ios",
    "macos"
@@ -18149,8 +18149,8 @@
   "usr": "s:22_PermissionKit_SwiftUI0A6ButtonV8question5labelACy0aB025SignificantAppUpdateTopicVq_GAF0A8QuestionCyAHG_q_yctcAHRszrlufc",
   "path": "PermissionButton.init(question:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PermissionKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (PermissionKit integration): CommunicationLimitsButton(handles) { label } (communication questions)",
   "platforms": [
    "ios",
    "macos"
@@ -18160,8 +18160,8 @@
   "usr": "s:22_PermissionKit_SwiftUI0A6ButtonV8question14permissionFlow02onA6Result5labelACy0aB025SignificantAppUpdateTopicVq_GAH0A8QuestionCyAJG_AH0aH0Oys0J0OyAH0aJ0Os5Error_pGcq_yctcAJRszrlufc",
   "path": "PermissionButton.init(question:permissionFlow:onPermissionResult:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "PermissionKit integration: not bridged",
+  "status": "n/a",
+  "detail": "significant app update questions (Swift-typed topics)",
   "platforms": [
    "ios",
    "macos"
@@ -21158,7 +21158,7 @@
   "path": "Query.fetchError",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21170,8 +21170,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV_9animationACyxSayxGG0aB015FetchDescriptorVyxG_0aC09AnimationVtcAERs_rlufc",
   "path": "Query.init(_:animation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21183,8 +21183,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV_9animation9sectionByACyx0aB016SectionedResultsVyxSSGGAF15FetchDescriptorVyxG_0aC09AnimationVs7KeyPathCyxSSGtcAIRs_rlufc",
   "path": "Query.init(_:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21196,8 +21196,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV_9animation9sectionByACyx0aB016SectionedResultsVyxSSGGAF15FetchDescriptorVyxG_0aC09AnimationVs7KeyPathCyxSSSgGtcAIRs_rlufc",
   "path": "Query.init(_:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21209,8 +21209,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV_11transactionACyxSayxGG0aB015FetchDescriptorVyxG_0aC011TransactionVSgtcAERs_rlufc",
   "path": "Query.init(_:transaction:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21222,8 +21222,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV_11transaction9sectionByACyx0aB016SectionedResultsVyxSSGGAF15FetchDescriptorVyxG_0aC011TransactionVSgs7KeyPathCyxSSGtcAIRs_rlufc",
   "path": "Query.init(_:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21235,8 +21235,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV_11transaction9sectionByACyx0aB016SectionedResultsVyxSSGGAF15FetchDescriptorVyxG_0aC011TransactionVSgs7KeyPathCyxSSSgGtcAIRs_rlufc",
   "path": "Query.init(_:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21248,8 +21248,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort9animationACyxSayxGG10Foundation9PredicateVyx_QPGSg_SayAI14SortDescriptorVyxGG0aC09AnimationVtcAGRs_rlufc",
   "path": "Query.init(filter:sort:animation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21261,8 +21261,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort9animation9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_SayAM14SortDescriptorVyxGG0aC09AnimationVs7KeyPathCyxSSGtcAKRs_rlufc",
   "path": "Query.init(filter:sort:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21274,8 +21274,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort9animation9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_SayAM14SortDescriptorVyxGG0aC09AnimationVs7KeyPathCyxSSSgGtcAKRs_rlufc",
   "path": "Query.init(filter:sort:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21287,8 +21287,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order9animationACyxSayxGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__GAJ9SortOrderO0aC09AnimationVtcAHRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:animation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21300,8 +21300,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order9animationACyxSayxGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__SgGAJ9SortOrderO0aC09AnimationVtcAHRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:animation:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21313,8 +21313,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order9animation9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__GAN9SortOrderO0aC09AnimationVATyxSSGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21326,8 +21326,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order9animation9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__SgGAN9SortOrderO0aC09AnimationVATyxSSGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21339,8 +21339,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order9animation9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__GAN9SortOrderO0aC09AnimationVATyxSSSgGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21352,8 +21352,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order9animation9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__SgGAN9SortOrderO0aC09AnimationVATyxSSSgGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:animation:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21365,8 +21365,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order11transactionACyxSayxGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__GAJ9SortOrderO0aC011TransactionVSgtcAHRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:transaction:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21378,8 +21378,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order11transactionACyxSayxGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__SgGAJ9SortOrderO0aC011TransactionVSgtcAHRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:transaction:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21391,8 +21391,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order11transaction9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__GAN9SortOrderO0aC011TransactionVSgATyxSSGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21404,8 +21404,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order11transaction9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__SgGAN9SortOrderO0aC011TransactionVSgATyxSSGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21417,8 +21417,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order11transaction9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__GAN9SortOrderO0aC011TransactionVSgATyxSSSgGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21430,8 +21430,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort5order11transaction9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_s7KeyPathCyxqd__SgGAN9SortOrderO0aC011TransactionVSgATyxSSSgGtcALRs_SLRd__lufc",
   "path": "Query.init(filter:sort:order:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21443,8 +21443,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort11transactionACyxSayxGG10Foundation9PredicateVyx_QPGSg_SayAI14SortDescriptorVyxGG0aC011TransactionVSgtcAGRs_rlufc",
   "path": "Query.init(filter:sort:transaction:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21456,8 +21456,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort11transaction9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_SayAM14SortDescriptorVyxGG0aC011TransactionVSgs7KeyPathCyxSSGtcAKRs_rlufc",
   "path": "Query.init(filter:sort:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21469,8 +21469,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6filter4sort11transaction9sectionByACyx0aB016SectionedResultsVyxSSGG10Foundation9PredicateVyx_QPGSg_SayAM14SortDescriptorVyxGG0aC011TransactionVSgs7KeyPathCyxSSSgGtcAKRs_rlufc",
   "path": "Query.init(filter:sort:transaction:sectionBy:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21483,7 +21483,7 @@
   "path": "Query.modelContext",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21496,7 +21496,7 @@
   "path": "Query.sections",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21508,8 +21508,8 @@
   "usr": "s:011_SwiftData_A2UI5QueryV6updateyyF",
   "path": "Query.update()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21522,7 +21522,7 @@
   "path": "Query.wrappedValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "SwiftData @Query (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -21546,8 +21546,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A25CoordinateSpaceProjectingP8entities2at2inSay0A10Foundation6EntityCGSo7CGPointV_qd__t0cD00eF8ProtocolRd__lF",
   "path": "RealityCoordinateSpaceProjecting.entities(at:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21558,8 +21558,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A25CoordinateSpaceProjectingP6entity2at2in0A10Foundation6EntityCSgSo7CGPointV_qd__t0cD00eF8ProtocolRd__lF",
   "path": "RealityCoordinateSpaceProjecting.entity(at:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21570,8 +21570,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A25CoordinateSpaceProjectingP7hitTest5point2in5query4maskSay0A10Foundation16CollisionCastHitVGSo7CGPointV_qd__AI0oP9QueryTypeOAI0O5GroupVt0cD00eF8ProtocolRd__lF",
   "path": "RealityCoordinateSpaceProjecting.hitTest(point:in:query:mask:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21582,8 +21582,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A25CoordinateSpaceProjectingP7project5point2toSo7CGPointVSgs5SIMD3VySfG_qd__t0cD00eF8ProtocolRd__lF",
   "path": "RealityCoordinateSpaceProjecting.project(point:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21594,8 +21594,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A25CoordinateSpaceProjectingP3ray7through2in2tos5SIMD3VySfG6origin_AJ9directiontSgSo7CGPointV_qd__qd_0_t0cD00eF8ProtocolRd__0A10Foundation0aeF0Rd_0_r0_lF",
   "path": "RealityCoordinateSpaceProjecting.ray(through:in:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21606,8 +21606,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A25CoordinateSpaceProjectingP9unproject_4from2to9ontoPlanes5SIMD3VySfGSgSo7CGPointV_qd__qd_0_So13simd_float4x4at0cD00eF8ProtocolRd__0A10Foundation0aeF0Rd_0_r0_lF",
   "path": "RealityCoordinateSpaceProjecting.unproject(_:from:to:ontoPlane:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit entity API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21666,8 +21666,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A4ViewV4make6updateACyAA0aE13CameraContentV4BodyVy_AA0aE18DefaultPlaceholderVGGyAGzYaYbScMYcc_yAGzScMYccSgtcALRszrlufc",
   "path": "RealityView.init(make:update:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): RealityView(models)",
   "platforms": [
    "ios",
    "macos",
@@ -21678,8 +21678,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A4ViewV4make6update11placeholderACyAA0aE13CameraContentV4BodyVy_qd__GGyAHzYaYbScMYcc_yAHzScMYccSgqd__yXEtcAKRsz0cD00E0Rd__lufc",
   "path": "RealityView.init(make:update:placeholder:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): RealityView(models, placeholder)",
   "platforms": [
    "ios",
    "macos",
@@ -21702,8 +21702,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A10ViewCameraV15spatialTrackingACvpZ",
   "path": "RealityViewCamera.spatialTracking",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios"
   ]
@@ -21712,8 +21712,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A10ViewCameraV7virtualACvpZ",
   "path": "RealityViewCamera.virtual",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21737,7 +21737,7 @@
   "path": "RealityViewCameraContent.Body",
   "kind": "swift.struct",
   "status": "n/a",
-  "detail": "type not built directly from Kotlin: the RealityKit integration exposes what views need",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21749,7 +21749,7 @@
   "path": "RealityViewCameraContent.Body.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21761,7 +21761,7 @@
   "path": "RealityViewCameraContent.Body.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21773,7 +21773,7 @@
   "path": "RealityViewCameraContent.Entities",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21784,8 +21784,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV7animate4body10completionyyyXE_yycSgtF",
   "path": "RealityViewCameraContent.animate(body:completion:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21797,7 +21797,7 @@
   "path": "RealityViewCameraContent.audioListener",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21809,7 +21809,7 @@
   "path": "RealityViewCameraContent.camera",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21821,7 +21821,7 @@
   "path": "RealityViewCameraContent.cameraTarget",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21833,7 +21833,7 @@
   "path": "RealityViewCameraContent.entities",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21844,8 +21844,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV8entities2at2inSay0A10Foundation6EntityCGSo7CGPointV_xt0cD023CoordinateSpaceProtocolRzlF",
   "path": "RealityViewCameraContent.entities(at:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21856,8 +21856,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV6entity2at2in0A10Foundation6EntityCSgSo7CGPointV_xt0cD023CoordinateSpaceProtocolRzlF",
   "path": "RealityViewCameraContent.entity(at:in:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21869,7 +21869,7 @@
   "path": "RealityViewCameraContent.environment",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21880,8 +21880,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV7hitTest5point2in5query4maskSay0A10Foundation16CollisionCastHitVGSo7CGPointV_xAI0oP9QueryTypeOAI0O5GroupVt0cD023CoordinateSpaceProtocolRzlF",
   "path": "RealityViewCameraContent.hitTest(point:in:query:mask:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21892,8 +21892,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV7project5point2toSo7CGPointVSgs5SIMD3VySfG_xt0cD023CoordinateSpaceProtocolRzlF",
   "path": "RealityViewCameraContent.project(point:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21904,8 +21904,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV3ray7through2in2tos5SIMD3VySfG6origin_AJ9directiontSgSo7CGPointV_xq_t0cD023CoordinateSpaceProtocolRz0A10Foundation0apQ0R_r0_lF",
   "path": "RealityViewCameraContent.ray(through:in:to:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21917,7 +21917,7 @@
   "path": "RealityViewCameraContent.renderingEffects",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21928,8 +21928,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV9subscribe2to2on13componentType_0A10Foundation17EventSubscriptionVxm_AH0N6Source_pSgAH9Component_pXpSgyxctAH0N0RzlF",
   "path": "RealityViewCameraContent.subscribe(to:on:componentType:_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21940,8 +21940,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A17ViewCameraContentV9unproject_4from2to9ontoPlanes5SIMD3VySfGSgSo7CGPointV_xq_So13simd_float4x4at0cD023CoordinateSpaceProtocolRz0A10Foundation0aqR0R_r0_lF",
   "path": "RealityViewCameraContent.unproject(_:from:to:ontoPlane:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21965,7 +21965,7 @@
   "path": "RealityViewContentProtocol.Entities",
   "kind": "swift.associatedtype",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -21976,8 +21976,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A19ViewContentProtocolPAAE3addyy0A10Foundation6EntityCF",
   "path": "RealityViewContentProtocol.add(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): RealityView(models) loads each bundled model",
   "platforms": [
    "ios",
    "macos",
@@ -21989,7 +21989,7 @@
   "path": "RealityViewContentProtocol.entities",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22000,8 +22000,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A19ViewContentProtocolPAAE6removeyy0A10Foundation6EntityCF",
   "path": "RealityViewContentProtocol.remove(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22012,8 +22012,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A19ViewContentProtocolPAAE9subscribe2to13componentType_0A10Foundation17EventSubscriptionVqd__m_AG9Component_pXpSgyqd__ctAG0M0Rd__lF",
   "path": "RealityViewContentProtocol.subscribe(to:componentType:_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22024,8 +22024,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A19ViewContentProtocolPAAE9subscribe2to2on_0A10Foundation17EventSubscriptionVqd__m_AG0L6Source_pSgyqd__ctAG0L0Rd__lF",
   "path": "RealityViewContentProtocol.subscribe(to:on:_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22036,8 +22036,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A19ViewContentProtocolP9subscribe2to2on13componentType_0A10Foundation17EventSubscriptionVqd__m_AH0N6Source_pSgAH9Component_pXpSgyqd__ctAH0N0Rd__lF",
   "path": "RealityViewContentProtocol.subscribe(to:on:componentType:_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22097,7 +22097,7 @@
   "path": "RealityViewDynamicRange.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22108,8 +22108,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A16ViewDynamicRangeV7defaultACvpZ",
   "path": "RealityViewDynamicRange.default",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22121,7 +22121,7 @@
   "path": "RealityViewDynamicRange.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22133,7 +22133,7 @@
   "path": "RealityViewDynamicRange.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22144,8 +22144,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A16ViewDynamicRangeV8standardACvpZ",
   "path": "RealityViewDynamicRange.standard",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22169,7 +22169,7 @@
   "path": "RealityViewEntityCollection.Element",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22181,7 +22181,7 @@
   "path": "RealityViewEntityCollection.Index",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22193,7 +22193,7 @@
   "path": "RealityViewEntityCollection.Indices",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22205,7 +22205,7 @@
   "path": "RealityViewEntityCollection.Iterator",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22217,7 +22217,7 @@
   "path": "RealityViewEntityCollection.SubSequence",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22228,8 +22228,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A20ViewEntityCollectionV6append10contentsOfyx_tSTRz0A10Foundation0F0C7ElementRczlF",
   "path": "RealityViewEntityCollection.append(contentsOf:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22241,7 +22241,7 @@
   "path": "RealityViewEntityCollection.count",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22253,7 +22253,7 @@
   "path": "RealityViewEntityCollection.endIndex",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22265,7 +22265,7 @@
   "path": "RealityViewEntityCollection.index(after:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22276,8 +22276,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A20ViewEntityCollectionV6insert10contentsOf11beforeIndexyx_SitSTRz0A10Foundation0F0C7ElementRczlF",
   "path": "RealityViewEntityCollection.insert(contentsOf:beforeIndex:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22288,8 +22288,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A20ViewEntityCollectionV6removeyy0A10Foundation0F0CF",
   "path": "RealityViewEntityCollection.remove(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22300,8 +22300,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A20ViewEntityCollectionV6remove2atySi_tF",
   "path": "RealityViewEntityCollection.remove(at:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22312,8 +22312,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A20ViewEntityCollectionV9removeAllyyF",
   "path": "RealityViewEntityCollection.removeAll()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22324,8 +22324,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A20ViewEntityCollectionV10replaceAllyyxSTRz0A10Foundation0F0C7ElementRczlF",
   "path": "RealityViewEntityCollection.replaceAll(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22337,7 +22337,7 @@
   "path": "RealityViewEntityCollection.startIndex",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22349,7 +22349,7 @@
   "path": "RealityViewEntityCollection.subscript(_:)",
   "kind": "swift.subscript",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22372,8 +22372,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A15ViewEnvironmentV7defaultACvpZ",
   "path": "RealityViewEnvironment.default",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22384,8 +22384,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A15ViewEnvironmentV6skyboxyAC0A10Foundation0F8ResourceCFZ",
   "path": "RealityViewEnvironment.skybox(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22408,8 +22408,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A16ViewLayoutOptionV2eeoiySbAC_ACtFZ",
   "path": "RealityViewLayoutOption.==(_:_:)",
   "kind": "swift.func.op",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): Modifier.realityViewStyle(layout)",
   "platforms": [
    "ios",
    "macos",
@@ -22420,8 +22420,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A16ViewLayoutOptionV8centeredACvpZ",
   "path": "RealityViewLayoutOption.centered",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): Modifier.realityViewStyle(layout)",
   "platforms": [
    "ios",
    "macos",
@@ -22432,8 +22432,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A16ViewLayoutOptionV9fixedSizeACvpZ",
   "path": "RealityViewLayoutOption.fixedSize",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): Modifier.realityViewStyle(layout)",
   "platforms": [
    "ios",
    "macos",
@@ -22444,8 +22444,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A16ViewLayoutOptionV8flexibleACvpZ",
   "path": "RealityViewLayoutOption.flexible",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): Modifier.realityViewStyle(layout)",
   "platforms": [
    "ios",
    "macos",
@@ -22468,8 +22468,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A21ViewPostProcessEffectV6effectyACx0A10Foundation0fgH0RzlFZ",
   "path": "RealityViewPostProcessEffect.effect(_:)",
   "kind": "swift.type.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22480,8 +22480,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A21ViewPostProcessEffectV4noneACvpZ",
   "path": "RealityViewPostProcessEffect.none",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22505,7 +22505,7 @@
   "path": "RealityViewRenderingEffectMode.==(_:_:)",
   "kind": "swift.func.op",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22516,8 +22516,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A23ViewRenderingEffectModeV7defaultACvpZ",
   "path": "RealityViewRenderingEffectMode.default",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22528,8 +22528,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A23ViewRenderingEffectModeV8disabledACvpZ",
   "path": "RealityViewRenderingEffectMode.disabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22540,8 +22540,8 @@
   "usr": "s:19_RealityKit_SwiftUI0A23ViewRenderingEffectModeV7enabledACvpZ",
   "path": "RealityViewRenderingEffectMode.enabled",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "n/a",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22553,7 +22553,7 @@
   "path": "RealityViewRenderingEffectMode.hash(into:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -22565,7 +22565,7 @@
   "path": "RealityViewRenderingEffectMode.hashValue",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, Collection\u2026)",
+  "detail": "RealityKit scene API (Swift scene graph)",
   "platforms": [
    "ios",
    "macos",
@@ -23611,8 +23611,8 @@
   "usr": "s:7SwiftUI5SceneP01_a5Data_aB0E14modelContaineryQr0aD005ModelF0CF",
   "path": "Scene.modelContainer(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -23624,8 +23624,8 @@
   "usr": "s:7SwiftUI5SceneP01_a5Data_aB0E14modelContainer3for8inMemory17isAutosaveEnabled0j4UndoL07onSetupQr0aD015PersistentModel_pXp_S3bys6ResultOyAK0qF0Cs5Error_pGctF",
   "path": "Scene.modelContainer(for:inMemory:isAutosaveEnabled:isUndoEnabled:onSetup:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -23637,8 +23637,8 @@
   "usr": "s:7SwiftUI5SceneP01_a5Data_aB0E14modelContainer3for8inMemory17isAutosaveEnabled0j4UndoL07onSetupQrSay0aD015PersistentModel_pXpG_S3bys6ResultOyAK0qF0Cs5Error_pGctF",
   "path": "Scene.modelContainer(for:inMemory:isAutosaveEnabled:isUndoEnabled:onSetup:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -23650,8 +23650,8 @@
   "usr": "s:7SwiftUI5SceneP01_a5Data_aB0E12modelContextyQr0aD005ModelF0CF",
   "path": "Scene.modelContext(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -23663,8 +23663,8 @@
   "usr": "s:7SwiftUI12SceneStorageV01_a5Data_aB0EyACy0aE020PersistentIdentifierVSgGSScAHRszlufc",
   "path": "SceneStorage.init(_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData PersistentIdentifier storage (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -23676,8 +23676,8 @@
   "usr": "s:7SwiftUI12SceneStorageV01_a5Data_aB0E12wrappedValue_ACy0aE020PersistentIdentifierVGAH_SStcAHRszlufc",
   "path": "SceneStorage.init(wrappedValue:_:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData PersistentIdentifier storage (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -24031,8 +24031,8 @@
   "usr": "s:19_AppIntents_SwiftUI13ShortcutsLinkV6actionACyyc_tcfc",
   "path": "ShortcutsLink.init(action:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): ShortcutsLink(onClick)",
   "platforms": [
    "ios"
   ]
@@ -24051,8 +24051,8 @@
   "usr": "s:19_AppIntents_SwiftUI18ShortcutsLinkStyleV9automaticACvpZ",
   "path": "ShortcutsLinkStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -24061,8 +24061,8 @@
   "usr": "s:19_AppIntents_SwiftUI18ShortcutsLinkStyleV16automaticOutlineACvpZ",
   "path": "ShortcutsLinkStyle.automaticOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -24071,8 +24071,8 @@
   "usr": "s:19_AppIntents_SwiftUI18ShortcutsLinkStyleV4darkACvpZ",
   "path": "ShortcutsLinkStyle.dark",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -24081,8 +24081,8 @@
   "usr": "s:19_AppIntents_SwiftUI18ShortcutsLinkStyleV11darkOutlineACvpZ",
   "path": "ShortcutsLinkStyle.darkOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -24091,8 +24091,8 @@
   "usr": "s:19_AppIntents_SwiftUI18ShortcutsLinkStyleV5lightACvpZ",
   "path": "ShortcutsLinkStyle.light",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -24101,8 +24101,8 @@
   "usr": "s:19_AppIntents_SwiftUI18ShortcutsLinkStyleV12lightOutlineACvpZ",
   "path": "ShortcutsLinkStyle.lightOutline",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -24303,8 +24303,8 @@
   "usr": "s:19_AppIntents_SwiftUI11SiriTipViewV6intent9isVisibleACx_0cD07BindingVySbGSgtc0aB00A6IntentRzlufc",
   "path": "SiriTipView.init(intent:isVisible:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "tvos",
@@ -24327,8 +24327,8 @@
   "usr": "s:19_AppIntents_SwiftUI16SiriTipViewStyleV9automaticACvpZ",
   "path": "SiriTipViewStyle.automatic",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(siriTip)",
   "platforms": [
    "ios",
    "tvos",
@@ -24339,8 +24339,8 @@
   "usr": "s:19_AppIntents_SwiftUI16SiriTipViewStyleV4darkACvpZ",
   "path": "SiriTipViewStyle.dark",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(siriTip)",
   "platforms": [
    "ios",
    "tvos",
@@ -24351,8 +24351,8 @@
   "usr": "s:19_AppIntents_SwiftUI16SiriTipViewStyleV5lightACvpZ",
   "path": "SiriTipViewStyle.light",
   "kind": "swift.type.property",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(siriTip)",
   "platforms": [
    "ios",
    "tvos",
@@ -24384,7 +24384,7 @@
   "path": "SpatialPreviewDevicePicker.Body",
   "kind": "swift.typealias",
   "status": "n/a",
-  "detail": "type alias / associated type (no runtime surface)",
+  "detail": "visionOS spatial preview",
   "platforms": [
    "macos"
   ]
@@ -24394,7 +24394,7 @@
   "path": "SpatialPreviewDevicePicker.body",
   "kind": "swift.property",
   "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "detail": "visionOS spatial preview",
   "platforms": [
    "macos"
   ]
@@ -24403,8 +24403,8 @@
   "usr": "s:23_SpatialPreview_SwiftUI0aB12DevicePickerV11isPresented8onSelectAC0cD07BindingVySbG_y0aB00aB8EndpointVctcfc",
   "path": "SpatialPreviewDevicePicker.init(isPresented:onSelect:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "SpatialPreview integration: not bridged",
+  "status": "n/a",
+  "detail": "visionOS spatial preview",
   "platforms": [
    "macos"
   ]
@@ -27883,8 +27883,8 @@
   "usr": "s:7SwiftUI6ToggleV012_AppIntents_aB0AA4TextVRszrlE_4isOn6intentACyAFGAA18LocalizedStringKeyV_Sbqd__tc0dE00D6IntentRd__lufc",
   "path": "Toggle.init(_:isOn:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -27896,8 +27896,8 @@
   "usr": "s:7SwiftUI6ToggleV012_AppIntents_aB0AA4TextVRszrlE_4isOn6intentACyAFG10Foundation23LocalizedStringResourceV_Sbqd__tc0dE00D6IntentRd__lufc",
   "path": "Toggle.init(_:isOn:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -27909,8 +27909,8 @@
   "usr": "s:7SwiftUI6ToggleV012_AppIntents_aB0AA4TextVRszrlE_4isOn6intentACyAFGqd___Sbqd_0_tcSyRd__0dE00D6IntentRd_0_r0_lufc",
   "path": "Toggle.init(_:isOn:intent:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -27922,8 +27922,8 @@
   "usr": "s:7SwiftUI6ToggleV012_AppIntents_aB0E4isOn6intent5labelACyxGSb_qd__xyXEtc0dE00D6IntentRd__lufc",
   "path": "Toggle.init(isOn:intent:label:)",
   "kind": "swift.init",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29192,8 +29192,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction_6intentAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGAA0kG4KindV_qd__t0dE00D6IntentRd__lF",
   "path": "View.accessibilityAction(_:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29205,8 +29205,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction6intent5labelQrqd___qd_0_yXEt0dE00D6IntentRd__AaBRd_0_r0_lF",
   "path": "View.accessibilityAction(intent:label:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29218,8 +29218,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction5named6intentAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGAA4TextV_qd__t0dE00D6IntentRd__lF",
   "path": "View.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29231,8 +29231,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction5named6intentAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGAA18LocalizedStringKeyV_qd__t0dE00D6IntentRd__lF",
   "path": "View.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29244,8 +29244,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction5named6intentAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVG10Foundation23LocalizedStringResourceV_qd__t0dE00D6IntentRd__lF",
   "path": "View.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29257,8 +29257,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction5named6intentAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGqd___qd_0_tSyRd__0dE00D6IntentRd_0_r0_lF",
   "path": "View.accessibilityAction(named:intent:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "takes a Swift AppIntent value",
   "platforms": [
    "ios",
    "macos",
@@ -29280,8 +29280,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifieryQr0dE00gH0VSgF",
   "path": "View.appEntityIdentifier(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppEntity types",
   "platforms": [
    "ios",
    "macos",
@@ -29293,8 +29293,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifier16forSelectionType10identifierQrqd__m_0dE00gH0VSgqd__YbctSHRd__lF",
   "path": "View.appEntityIdentifier(forSelectionType:identifier:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppEntity types",
   "platforms": [
    "ios",
    "macos",
@@ -29306,8 +29306,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E19appEntityUIElementsyQrSay0dE00dG9UIElementVGAF0dgH7ContextVScMYccF",
   "path": "View.appEntityUIElements(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppEntity types",
   "platforms": [
    "ios",
    "macos",
@@ -30407,8 +30407,8 @@
   "usr": "s:7SwiftUI4ViewP010_ClockKit_aB0E22complicationForegroundQryF",
   "path": "View.complicationForeground()",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "ClockKit integration: not bridged",
+  "status": "n/a",
+  "detail": "ClockKit complications (deprecated, replaced by WidgetKit)",
   "platforms": [
    "watchos"
   ]
@@ -30524,8 +30524,8 @@
   "usr": "s:7SwiftUI4ViewP024_ManagedAppDistribution_aB0E19managedContentStyleyQrAD0dhI0VF",
   "path": "View.managedContentStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "ManagedAppDistribution integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ManagedAppDistribution integration): Modifier.managedContentStyle(style)",
   "platforms": [
    "macos"
   ]
@@ -30695,8 +30695,8 @@
   "usr": "s:7SwiftUI4ViewP01_a5Data_aB0E14modelContaineryQr0aD005ModelF0CF",
   "path": "View.modelContainer(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -30708,8 +30708,8 @@
   "usr": "s:7SwiftUI4ViewP01_a5Data_aB0E14modelContainer3for8inMemory17isAutosaveEnabled0j4UndoL07onSetupQr0aD015PersistentModel_pXp_S3bys6ResultOyAK0qF0Cs5Error_pGctF",
   "path": "View.modelContainer(for:inMemory:isAutosaveEnabled:isUndoEnabled:onSetup:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -30721,8 +30721,8 @@
   "usr": "s:7SwiftUI4ViewP01_a5Data_aB0E14modelContainer3for8inMemory17isAutosaveEnabled0j4UndoL07onSetupQrSay0aD015PersistentModel_pXpG_S3bys6ResultOyAK0qF0Cs5Error_pGctF",
   "path": "View.modelContainer(for:inMemory:isAutosaveEnabled:isUndoEnabled:onSetup:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -30734,8 +30734,8 @@
   "usr": "s:7SwiftUI4ViewP01_a5Data_aB0E12modelContextyQr0aD005ModelF0CF",
   "path": "View.modelContext(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SwiftData integration: not bridged",
+  "status": "n/a",
+  "detail": "SwiftData (Swift persistence)",
   "platforms": [
    "ios",
    "macos",
@@ -30810,8 +30810,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E02onD15IntentExecution_7performQrqd__m_yqd__ScMYcct0dE0022TargetContentProvidingG0Rd__lF",
   "path": "View.onAppIntentExecution(_:perform:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "n/a",
+  "detail": "Swift AppIntent types",
   "platforms": [
    "ios",
    "tvos"
@@ -31327,8 +31327,8 @@
   "usr": "s:7SwiftUI4ViewP012_RealityKit_aB0E07realityC14CameraControlsyQr0D10Foundation0gH0VF",
   "path": "View.realityViewCameraControls(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): Modifier.realityViewStyle(cameraControls)",
   "platforms": [
    "ios",
    "macos"
@@ -31338,8 +31338,8 @@
   "usr": "s:7SwiftUI4ViewP012_RealityKit_aB0E07realityC14LayoutBehavioryQrAD0dcG6OptionVF",
   "path": "View.realityViewLayoutBehavior(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "RealityKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (RealityKit integration): Modifier.realityViewStyle(layout)",
   "platforms": [
    "ios",
    "macos",
@@ -31350,8 +31350,8 @@
   "usr": "s:7SwiftUI4ViewP018_ScreenCaptureKit_aB0E15recordingEditoryQrAA7BindingVy10Foundation3URLVSgGF",
   "path": "View.recordingEditor(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "ScreenCaptureKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (ScreenCaptureKit integration): Modifier.recordingEditor(url, onUrlChange)",
   "platforms": [
    "macos"
   ]
@@ -31371,8 +31371,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E18shortcutsLinkStyleyQrAD09ShortcutsgH0VF",
   "path": "View.shortcutsLinkStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(link)",
   "platforms": [
    "ios"
   ]
@@ -31394,8 +31394,8 @@
   "usr": "s:7SwiftUI4ViewP012_AppIntents_aB0E07siriTipC5StyleyQrAD04SirigcH0VF",
   "path": "View.siriTipViewStyle(_:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "AppIntents integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (AppIntents integration): Modifier.shortcutsStyle(siriTip)",
   "platforms": [
    "ios",
    "tvos",
@@ -31701,8 +31701,8 @@
   "usr": "s:7SwiftUI4ViewP025_SecureElementCredential_aB0E15transactionTask_6actionQrAD0F11TransactionC13ConfigurationCSg_yAHYactF",
   "path": "View.transactionTask(_:action:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "SecureElementCredential integration: not bridged",
+  "status": "n/a",
+  "detail": "SecureElementCredential (entitled NFC / Secure Element apps)",
   "platforms": [
    "ios"
   ]
@@ -31874,8 +31874,8 @@
   "usr": "s:7SwiftUI4ViewP012_WorkoutKit_aB0E14workoutPreview_11isPresentedQr0dE00D4PlanV_AA7BindingVySbGtF",
   "path": "View.workoutPreview(_:isPresented:)",
   "kind": "swift.method",
-  "status": "skipped",
-  "detail": "WorkoutKit integration: not bridged",
+  "status": "covered",
+  "detail": "hand-written (WorkoutKit integration): Modifier.workoutPreview(isPresented, activityType, goal)",
   "platforms": [
    "ios",
    "macos",

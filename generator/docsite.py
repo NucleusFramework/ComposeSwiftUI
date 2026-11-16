@@ -410,9 +410,14 @@ dialog.search{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin
 def page_url(key):
     return "reference/%s.html" % slug(key)
 
+FRAMEWORK_PAGES = [("mapkit", "MapKit"), ("charts", "Swift Charts"), ("storekit", "StoreKit"),
+                   ("frameworks", "Photos, web, media, Apple Pay…"), ("kotlin-apis", "Kotlin-specific APIs")]
+
 def sidebar(up, current):
     out = ['<nav class="side" aria-label="Documentation"><div class="scroll"><div id="results"></div><div id="tree">',
            '<h4>Essentials</h4><a href="%sindex.html">Overview</a><a href="%sguide.html">Guide</a><a href="%sreference.html">All APIs</a>' % (up, up, up)]
+    out.append("<h4>Frameworks</h4>" + "".join('<a href="%s%s.html"%s>%s</a>' % (up, key, ' class="on" aria-current="page"' if current == key else "", esc(title))
+                                                for key, title in FRAMEWORK_PAGES))
     for title, keys in TOPICS:
         links = [k for k in keys if k in pages]
         if not links:
@@ -531,13 +536,18 @@ intro = readme.split("\n## ")[0]
 intro_html = markdown("\n".join(intro.split("\n")[1:]))
 guide_parts = [(t, b) for t, b in sections(readme) if t not in ("Contributing", "Reference", "Performance")]
 
+framework_cards = "".join('<a class="card" href="%s.html"><b>%s</b><span>%s</span></a>' % (k, esc(t), esc(d)) for k, t, d in [
+    ("mapkit", "MapKit", "Map, markers, annotations, overlays, Look Around"),
+    ("charts", "Swift Charts", "Marks, plots, 3D charts, axes, selection"),
+    ("storekit", "StoreKit", "Product and subscription stores, offers"),
+    ("frameworks", "Photos, web, media, Apple Pay…", "PhotosPicker, WebView, VideoPlayer, Sign in with Apple, Apple Pay")])
 cards = "".join('<a class="card" href="%s"><b>%s</b><span>%s</span></a>' % (page_url(keys[0]), esc(t), esc(", ".join(pages[k]["title"] for k in keys[:4] if k in pages)))
                 for t, keys in TOPICS if keys and keys[0] in pages)
 index_body = """<div class="hero"><div class="eyebrow" data-pagefind-ignore>Framework</div><h1>Compose SwiftUI</h1>
 <p class="abstract">Write SwiftUI screens in Kotlin with the Compose runtime, and keep your view models.</p>
 <div class="avail" data-pagefind-ignore><span>iOS 17.0+</span><span>macOS 14.0+</span><span>tvOS 17.0+</span><span>watchOS 10.0+</span></div></div>
-<div class="content"><h2>Overview</h2>%s<h2>Topics</h2><div class="grid" data-pagefind-ignore>%s</div>
-<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a> · <a href="mapkit.html">MapKit</a> · <a href="charts.html">Swift Charts</a> · <a href="storekit.html">StoreKit</a></p></div>""" % (intro_html, cards, len(entries))
+<div class="content"><h2>Overview</h2>%s<h2>Frameworks</h2><div class="grid" data-pagefind-ignore>%s</div><h2>Topics</h2><div class="grid" data-pagefind-ignore>%s</div>
+<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a> · <a href="kotlin-apis.html">Kotlin-specific APIs</a></p></div>""" % (intro_html, framework_cards, cards, len(entries))
 write("index.html", layout("Compose SwiftUI", index_body))
 
 toc = "".join('<li><a href="#%s">%s</a></li>' % (slug(t.lower()), esc(t)) for t, _ in guide_parts)
@@ -646,6 +656,10 @@ HANDWRITTEN = [
      "Register `swift/ComposeSwiftUIIntegrations/Charts.swift` with `ComposeIntegrations.registerCharts()`.", ["Charts.kt"]),
     ("storekit", "StoreKit", "Product and subscription stores, offers, purchase callbacks and store sheets.",
      "Register `swift/ComposeSwiftUIIntegrations/StoreKit.swift` with `ComposeIntegrations.registerStoreKit()`.", ["StoreKit.kt"]),
+    ("frameworks", "Photos, web, media, Apple Pay…",
+     "PhotosUI, WebKit, AVKit, QuickLook, Sign in with Apple, LocationButton, Translation, SpriteKit, SceneKit, PassKit, MusicKit, RealityKit and more.",
+     "Each framework has its own file in `swift/ComposeSwiftUIIntegrations` (`PhotosUI.swift`, `WebKit.swift`, `PassKit.swift`…): add the ones you use and call their `ComposeIntegrations.register…()`.",
+     ["Frameworks.kt"]),
     ("kotlin-apis", "Kotlin-specific APIs", "SwiftUI APIs whose Swift form relies on Swift types, closures or protocols, in their Kotlin form.",
      "These are part of the renderer: nothing to register.",
      ["Extras.kt", "Interactive.kt", "Advanced.kt", "Completions.kt", "Handwritten.kt"]),
@@ -707,7 +721,7 @@ for key, title, abstract, setup, files in HANDWRITTEN:
         for decl, doc in handwritten_entries(path):
             body.append('<div class="topic"><div class="sig">%s</div><div class="meta">%s</div></div>' % (sig_html(decl), inline(doc)))
     body.append("</div>")
-    write(key + ".html", layout(title, "".join(body), description=abstract))
+    write(key + ".html", layout(title, "".join(body), current=key, description=abstract))
     search.append({"n": title, "u": key})
     handwritten_links.append('<a href="%s.html">%s</a>' % (key, esc(title)))
 ref.insert(-1, '<h2>Frameworks and Kotlin-specific APIs</h2><div class="grid" data-pagefind-ignore>%s</div>' % "".join(handwritten_links))

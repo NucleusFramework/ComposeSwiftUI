@@ -142,6 +142,8 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         try {
             exec(
                 "xcrun", "swiftc", *common, objectFile.path, "-framework", frameworkName.get(), "-lc++",
+                // system libraries that common KMP libraries link through the app (SQLDelight: sqlite3)
+                "-lsqlite3", "-lz",
                 "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks", "-o", app.resolve(HOST_NAME).path,
                 // Like Xcode's default DEAD_CODE_STRIPPING: unused C interop wrappers must not need their symbols.
                 "-Xlinker", "-dead_strip",

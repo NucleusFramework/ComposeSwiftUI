@@ -47476,7 +47476,7 @@
   "path": "List.init(selection:content:)",
   "kind": "swift.init",
   "status": "covered",
-  "detail": "hand-written: List(selectedKeys, onSelectedKeysChange) { }",
+  "detail": "hand-written: List(selectedKey, onSelectedKeyChange) { } (one row) / List(selectedKeys, onSelectedKeysChange) { } (several)",
   "platforms": [
    "ios",
    "macos",
@@ -47498,7 +47498,7 @@
   "path": "List.init(selection:content:)",
   "kind": "swift.init",
   "status": "covered",
-  "detail": "hand-written: List(selectedKeys, onSelectedKeysChange) { }",
+  "detail": "hand-written: List(selectedKey, onSelectedKeyChange) { } (one row) / List(selectedKeys, onSelectedKeysChange) { } (several)",
   "platforms": [
    "ios",
    "macos",

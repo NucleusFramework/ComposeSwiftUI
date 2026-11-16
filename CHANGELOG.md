@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Opt-in integrations for PhotosUI, WebKit, AVKit and QuickLook, AuthenticationServices, CoreLocationUI,
+  LocalAuthentication, PassKit, MusicKit, Translation, SpriteKit, SceneKit, GameController, RealityKit, AppIntents,
+  DeviceActivity, WatchKit, ManagedAppDistribution, PermissionKit, ScreenCaptureKit, WorkoutKit and DeviceDiscoveryUI
+  (see the README table). Every SwiftUI API of the Apple framework overlays is now bridged or classified.
+- `List(selectedKey, onSelectedKeyChange) { }`: single selection on every platform. Rows are selected by their
+  `Modifier.tag(key)`.
+- A Frameworks section in the docs site sidebar, linking MapKit, Swift Charts, StoreKit and the other frameworks.
+
+### Fixed
+
+- `List(selection, onSelectionChange)` did nothing on iOS: it now selects and highlights the tagged row.
+- `renderComposeSwiftUIPreviews` failed to link apps whose Kotlin libraries use `sqlite3` (SQLDelight) or `zlib`:
+  the preview host now links both.
+
 ## 0.5.0
 
 ### Added

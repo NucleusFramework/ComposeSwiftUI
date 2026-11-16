@@ -273,6 +273,23 @@ Chart(modifier = Modifier.frame(height = 200.0)) {
 SubscriptionStoreView(groupId = "21482456", modifier = Modifier.storeStyle(StoreContentStyle(controlStyle = SubscriptionStoreControlStyle.picker)))
 ```
 
+The other frameworks follow the same pattern:
+
+| File | Register | Kotlin APIs |
+|---|---|---|
+| `PhotosUI.swift` | `registerPhotosUI()` | `PhotosPicker`, `Modifier.photosPicker`, picker styles, shared albums |
+| `WebKit.swift` | `registerWebKit()` | `WebView` with a `WebViewController`, `Modifier.webViewStyle` |
+| `AVKit.swift` | `registerAVKit()` | `VideoPlayer`, camera capture events, `quickLookPreview` |
+| `AuthenticationServices.swift` | `registerAuthenticationServices()` | `SignInWithAppleButton`, passkey / password requests, `LocationButton` |
+| `PassKit.swift` | `registerPassKit()` | `PayWithApplePayButton`, `AddPassToWalletButton` |
+| `MusicKit.swift` | `registerMusicKit()`, `registerDataDetection()` | `musicSubscriptionOffer`, music picker, data detection |
+| `Translation.swift` | `registerTranslation()` | `translationPresentation`, `translationTask` |
+| `SpriteKit.swift` | `registerSpriteKit()` | `SpriteView`, `SceneView`, game controller events |
+| `RealityKit.swift` | `registerRealityKit()` | `RealityView` with bundled models, `Modifier.realityViewStyle` |
+| `SystemServices.swift` | `registerAppIntents()`, `registerDeviceActivity()`, `registerWatchKit()`, `registerManagedAppDistribution()`, `registerPermissionKit()`, `registerScreenCaptureKit()`, `registerWorkoutKit()`, `registerDeviceDiscoveryUI()` | `ShortcutsLink`, `DeviceActivityReport`, `NowPlayingView`, `ManagedContentView`, `CommunicationLimitsButton`, `Modifier.recordingEditor`, `Modifier.workoutPreview`, `DevicePicker` |
+
+A register function exists only on the platforms its framework supports, so call it under the same `#if os(…)`.
+
 Swift-only data stays on the Swift side: map items are coordinates and names, chart values are strings, numbers or
 `ChartDate`s, and products are identified by their App Store Connect ids (purchases, transactions and subscription
 statuses arrive as Kotlin data classes). Vectorized chart plots (`ChartPlot`) are drawn as one mark per item, and 3D

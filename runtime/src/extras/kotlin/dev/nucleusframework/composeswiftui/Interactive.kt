@@ -458,6 +458,21 @@ public fun Modifier.labelStyle(body: @Composable () -> Unit): Modifier =
 // ---- selection, search tokens, number fields ---------------------------------------------------
 
 /**
+ * SwiftUI `List(selection: Binding<SelectionValue?>)`: tapping a row marked `Modifier.tag(key)` selects it (null: no
+ * selection) and highlights it, on iOS, macOS and visionOS.
+ */
+@HiddenFromObjC
+@Composable
+public fun List(
+    selectedKey: Any?,
+    onSelectedKeyChange: (Any?) -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    SwiftView(100_063, listOf(selectedKey, SValueCallback { onSelectedKeyChange(it) }), modifier, content = content)
+}
+
+/**
  * SwiftUI `List(selection: Binding<Set<…>>)`: rows marked `Modifier.tag(key)` can be selected together (on iOS, in
  * edit mode: add an `EditButton`). Single selection is `List(selection, onSelectionChange)`.
  */

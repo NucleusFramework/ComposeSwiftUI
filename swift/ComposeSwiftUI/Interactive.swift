@@ -513,6 +513,23 @@ private struct NamespacedModifier: ViewModifier {
 
 extension InteractiveRenderers {
     static func registerSelectionAndInput() {
+        // List(selection:) with one selected row. SwiftUI's non-optional selection initializer (the generated one)
+        // only exists on macOS: elsewhere the optional one is used, so tapping a tagged row selects it on iOS too.
+        let singleSelection = { (m: NodeModel, value: Int, callback: Int) -> AnyView in
+            let a = m.args
+            let report = a.callback(callback, box: { (k: AnyHashable?) -> Any? in k.map { KBox.hashable($0) } ?? NSNull() })
+            let selection = Binding<AnyHashable?>(get: { m.args.hashableOpt(value) }, set: { report($0) })
+            #if os(watchOS) || os(tvOS)
+            _ = selection
+            return ModChain.apply(List { ChildrenView(m) }, m, 0)
+            #else
+            return ModChain.apply(List(selection: selection) { ChildrenView(m) }, m, 0)
+            #endif
+        }
+        #if !os(macOS)
+        ComposeRegistry.views[134] = { m in singleSelection(m, 0, 1) }
+        #endif
+        ComposeRegistry.views[100_063] = { m in singleSelection(m, 0, 1) }
         ComposeRegistry.views[100_030] = { m in
             let report = m.args.callback(1, box: { (keys: [AnyHashable]) -> Any? in kotlinKeys(keys) })
             let selection = Binding<Set<AnyHashable>>(get: { swiftKeys(m.args.list(0)) }, set: { report(Array($0)) })
