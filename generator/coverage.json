@@ -21845,8 +21845,8 @@
   "usr": "s:7SwiftUI13DismissActionV14callAsFunctionyyF",
   "path": "DismissAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.dismiss() }",
   "platforms": [
    "ios",
    "macos",
@@ -21924,8 +21924,8 @@
   "usr": "s:7SwiftUI19DismissSearchActionV14callAsFunctionyyF",
   "path": "DismissSearchAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.dismissSearch() }",
   "platforms": [
    "ios",
    "macos",
@@ -21948,8 +21948,8 @@
   "usr": "s:7SwiftUI19DismissWindowActionV14callAsFunctionyyF",
   "path": "DismissWindowAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.dismissWindow() }",
   "platforms": [
    "ios",
    "macos"
@@ -21959,8 +21959,8 @@
   "usr": "s:7SwiftUI19DismissWindowActionV14callAsFunction2idySS_tF",
   "path": "DismissWindowAction.callAsFunction(id:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.dismissWindow(id) }",
   "platforms": [
    "ios",
    "macos"
@@ -28092,8 +28092,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV38accessibilityDifferentiateWithoutColorSbvp",
   "path": "EnvironmentValues.accessibilityDifferentiateWithoutColor",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.differentiateWithoutColor }",
   "platforms": [
    "ios",
    "macos",
@@ -28131,8 +28131,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV25accessibilityInvertColorsSbvp",
   "path": "EnvironmentValues.accessibilityInvertColors",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.invertColors }",
   "platforms": [
    "ios",
    "macos",
@@ -28209,8 +28209,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV25accessibilityReduceMotionSbvp",
   "path": "EnvironmentValues.accessibilityReduceMotion",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.reduceMotion }",
   "platforms": [
    "ios",
    "macos",
@@ -28222,8 +28222,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV31accessibilityReduceTransparencySbvp",
   "path": "EnvironmentValues.accessibilityReduceTransparency",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.reduceTransparency }",
   "platforms": [
    "ios",
    "macos",
@@ -28274,8 +28274,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV29accessibilityVoiceOverEnabledSbvp",
   "path": "EnvironmentValues.accessibilityVoiceOverEnabled",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.voiceOverEnabled }",
   "platforms": [
    "ios",
    "macos",
@@ -28440,8 +28440,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV19colorSchemeContrastAA05ColorfG0Ovp",
   "path": "EnvironmentValues.colorSchemeContrast",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.colorScheme }",
   "platforms": [
    "ios",
    "macos",
@@ -28564,8 +28564,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE7dismissAA13DismissActionVvp",
   "path": "EnvironmentValues.dismiss",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.dismiss() }",
   "platforms": [
    "ios",
    "macos",
@@ -28577,8 +28577,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE21dismissImmersiveSpaceAA07DismissfG6ActionVvp",
   "path": "EnvironmentValues.dismissImmersiveSpace",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.dismiss() }",
   "platforms": [
    "macos"
   ]
@@ -28587,8 +28587,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE13dismissSearchAA07DismissF6ActionVvp",
   "path": "EnvironmentValues.dismissSearch",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.dismiss() }",
   "platforms": [
    "ios",
    "macos",
@@ -28600,8 +28600,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE13dismissWindowAA07DismissF6ActionVvp",
   "path": "EnvironmentValues.dismissWindow",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.dismiss() }",
   "platforms": [
    "ios",
    "macos"
@@ -28837,8 +28837,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE11isPresentedSbvp",
   "path": "EnvironmentValues.isPresented",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.isPresented }",
   "platforms": [
    "ios",
    "macos",
@@ -28873,8 +28873,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE11isSearchingSbvp",
   "path": "EnvironmentValues.isSearching",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.isSearching }",
   "platforms": [
    "ios",
    "macos",
@@ -29173,8 +29173,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE12openSettingsAA04OpenF6ActionVvp",
   "path": "EnvironmentValues.openSettings",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openSettings() }",
   "platforms": [
    "macos"
   ]
@@ -29183,8 +29183,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV7openURLAA13OpenURLActionVvp",
   "path": "EnvironmentValues.openURL",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openURL(url) }",
   "platforms": [
    "ios",
    "macos",
@@ -29196,8 +29196,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE10openWindowAA04OpenF6ActionVvp",
   "path": "EnvironmentValues.openWindow",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openWindow(id, value) }",
   "platforms": [
    "ios",
    "macos"
@@ -29281,8 +29281,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE7refreshAA13RefreshActionVSgvp",
   "path": "EnvironmentValues.refresh",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.refresh() }",
   "platforms": [
    "ios",
    "macos",
@@ -29304,8 +29304,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE6renameAA12RenameActionVSgvp",
   "path": "EnvironmentValues.rename",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.rename() }",
   "platforms": [
    "ios",
    "macos",
@@ -29457,8 +29457,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesVAAE23supportsMultipleWindowsSbvp",
   "path": "EnvironmentValues.supportsMultipleWindows",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.supportsMultipleWindows }",
   "platforms": [
    "ios",
    "macos",
@@ -56842,8 +56842,8 @@
   "usr": "s:7SwiftUI18OpenSettingsActionV14callAsFunctionyyF",
   "path": "OpenSettingsAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openSettings() }",
   "platforms": [
    "macos"
   ]
@@ -56943,8 +56943,8 @@
   "usr": "s:7SwiftUI13OpenURLActionV14callAsFunctionyy10Foundation3URLVF",
   "path": "OpenURLAction.callAsFunction(_:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openURL(url) }",
   "platforms": [
    "ios",
    "macos",
@@ -57035,8 +57035,8 @@
   "usr": "s:7SwiftUI16OpenWindowActionV14callAsFunction2idySS_tF",
   "path": "OpenWindowAction.callAsFunction(id:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openWindow(id) }",
   "platforms": [
    "ios",
    "macos"
@@ -57056,8 +57056,8 @@
   "usr": "s:7SwiftUI16OpenWindowActionV14callAsFunction2id5valueySS_xtSeRzSERzSHRzlF",
   "path": "OpenWindowAction.callAsFunction(id:value:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openWindow(id, value) }",
   "platforms": [
    "ios",
    "macos"
@@ -57077,8 +57077,8 @@
   "usr": "s:7SwiftUI16OpenWindowActionV14callAsFunction5valueyx_tSeRzSERzSHRzlF",
   "path": "OpenWindowAction.callAsFunction(value:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.openWindow(value = \u2026) }",
   "platforms": [
    "ios",
    "macos"
@@ -64295,8 +64295,8 @@
   "usr": "s:7SwiftUI13RefreshActionV14callAsFunctionyyYaF",
   "path": "RefreshAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.refresh() }",
   "platforms": [
    "ios",
    "macos",
@@ -64451,8 +64451,8 @@
   "usr": "s:7SwiftUI12RenameActionV14callAsFunctionyyF",
   "path": "RenameAction.callAsFunction()",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "protocol conformance plumbing (Equatable, Hashable, Codable, SetAlgebra, Sequence\u2026)",
+  "status": "covered",
+  "detail": "hand-written: EnvironmentReader { env -> env.actions.rename() }",
   "platforms": [
    "ios",
    "macos",

@@ -215,7 +215,25 @@ fun DetailContent(onShare: () -> Unit) {
 
 The values are read where the reader sits, after SwiftUI's first layout pass: the first composition sees defaults
 (light, large, no size class) and recomposes when the real values arrive. Don't base an irreversible decision on the
-first value.
+first value. It also reports `isSearching` (inside a `searchable`), `increasedContrast` and `supportsMultipleWindows`.
+
+### Environment actions
+
+`env.actions` holds SwiftUI's environment actions: `openURL(url)`, `openWindow(id, value)` and `dismissWindow(id)`
+(iPad, Mac), `openSettings()` (macOS), `dismissSearch()`, `refresh()` and `rename()`. `canRefresh` tells whether a
+`refreshable` applies. An action an OS doesn't have does nothing. SwiftUI doesn't expose `refresh` to the rows of a
+`List`, so put the reader under the view that carries `refreshable` (or call your own refresh function).
+
+```kotlin
+@Composable
+fun HelpLinks() {
+    EnvironmentReader { env ->
+        Button("Open the help center") { env.actions.openURL("https://example.com/help") }
+        if (env.supportsMultipleWindows) Button("Open in a new window") { env.actions.openWindow(id = "help") }
+        if (env.isSearching) Button("Cancel search") { env.actions.dismissSearch() }
+    }
+}
+```
 
 ## Effects
 

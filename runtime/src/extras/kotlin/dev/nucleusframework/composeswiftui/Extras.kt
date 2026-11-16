@@ -171,13 +171,61 @@ public data class SwiftUIEnvironment(
     val voiceOverEnabled: Boolean = false,
     /** `legibilityWeight == .bold` (Bold Text). */
     val boldText: Boolean = false,
+    /** `isSearching`: a `searchable` above this reader is being edited. */
+    val isSearching: Boolean = false,
+    /** `colorSchemeContrast == .increased` (Increase Contrast). */
+    val increasedContrast: Boolean = false,
+    /** `supportsMultipleWindows` (iPad, Mac). */
+    val supportsMultipleWindows: Boolean = false,
+    /** The environment's actions (`openURL`, `openWindow`…), equal when the same ones are available. */
+    val actions: SwiftUIEnvironmentActions = SwiftUIEnvironmentActions(),
 ) {
     val isDark: Boolean get() = colorScheme == ColorScheme.dark
 }
 
 /**
+ * The SwiftUI environment actions available where an [EnvironmentReader] is placed. Those an OS doesn't have do
+ * nothing (`openWindow` on watchOS, `openSettings` outside macOS…).
+ */
+public class SwiftUIEnvironmentActions internal constructor(private val raw: List<Any?> = emptyList()) {
+    private fun fn(i: Int) = raw.getOrNull(i) as? KotlinFunction
+    private fun action(i: Int) = raw.getOrNull(i) as? SwiftAction
+
+    /** `openURL(_:)`: opens [url] with the system (or a universal link's app). */
+    public fun openURL(url: String) { fn(0)?.invoke(listOf(url)) }
+
+    /** `openWindow(id:)` / `openWindow(value:)`: opens the `WindowGroup` with [id], or the one presenting a `String` [value]. */
+    public fun openWindow(id: String? = null, value: String? = null) { fn(1)?.invoke(listOf(id, value)) }
+
+    /** `dismissWindow()` / `dismissWindow(id:)`. */
+    public fun dismissWindow(id: String? = null) { fn(2)?.invoke(listOf(id)) }
+
+    /** `openSettings()` (macOS 14): shows the app's `Settings` scene. */
+    public fun openSettings() { action(3)?.run() }
+
+    /** `dismissSearch()`: ends the search of the enclosing `searchable`. */
+    public fun dismissSearch() { action(4)?.run() }
+
+    /** `refresh()`: runs the enclosing `refreshable` action (no-op without one). */
+    public fun refresh() { action(5)?.run() }
+
+    /** `rename()`: starts renaming the enclosing `renameAction` target. */
+    public fun rename() { action(6)?.run() }
+
+    /** True when the enclosing view has a `refreshable` action. */
+    public val canRefresh: Boolean get() = raw.getOrNull(5) != null
+
+    // Equal when the same actions are available: new closures alone don't recompose the reader's content.
+    private val available get() = raw.map { it != null }
+    override fun equals(other: Any?): Boolean = other is SwiftUIEnvironmentActions && other.available == available
+    override fun hashCode(): Int = available.hashCode()
+}
+
+/**
  * Reads SwiftUI `@Environment` values (color scheme, dynamic type, size classes, locale, layout
- * direction, enabled/presented state, `dismiss`, scene phase, accessibility preferences) where it is placed. Values arrive after the first
+ * direction, enabled/presented state, `dismiss`, scene phase, accessibility preferences, search state) and its
+ * actions ([SwiftUIEnvironment.actions]: `openURL`, `openWindow`, `dismissWindow`, `openSettings`, `dismissSearch`,
+ * `refresh`, `rename`) where it is placed. Values arrive after the first
  * layout pass (the first composition sees defaults).
  */
 @HiddenFromObjC
@@ -206,6 +254,11 @@ public fun EnvironmentReader(modifier: Modifier = Modifier, content: @Composable
                 invertColors = v[13] == true,
                 voiceOverEnabled = v[14] == true,
                 boldText = v[15] == true,
+                isSearching = v.getOrNull(16) == true,
+                increasedContrast = v.getOrNull(17) == true,
+                supportsMultipleWindows = v.getOrNull(18) == true,
+                // [19] and [20] (refresh / rename available) only make Swift report when they change
+                actions = SwiftUIEnvironmentActions((v.getOrNull(21) as? List<*>).orEmpty()),
             )
             if (new.copy(dismiss = env.dismiss) != env) env = new
         }),

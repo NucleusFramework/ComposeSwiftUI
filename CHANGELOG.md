@@ -25,6 +25,8 @@
 - TipKit: `Tip(invalidated = true)` invalidates the tip; `maxDisplayCount`, `maxDisplayDuration`,
   `ignoresDisplayFrequency` options.
 - `PayWithApplePayButton`: `onAuthorize` and `merchantSession` are `suspend`, so the sheet waits for your server.
+- `EnvironmentReader`: `env.actions` (`openURL`, `openWindow`, `dismissWindow`, `openSettings`, `dismissSearch`,
+  `refresh`, `rename`), `isSearching`, `increasedContrast`, `supportsMultipleWindows`.
 - `nativeSuspendFunction { }`: a Kotlin `suspend` function a `NativeView` renderer awaits with `kotlinAwait`.
 
 ### Changed

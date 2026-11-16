@@ -201,6 +201,16 @@ struct KotlinPathShape: Shape {
     }
 }
 
+/// Swift implementation of a Kotlin `KotlinFunction` (arguments in, no result).
+final class ClosureFunction: NSObject, KotlinFunction {
+    let block: ([Any]) -> Void
+    init(_ block: @escaping ([Any]) -> Void) { self.block = block }
+    func invoke(args: [Any]) -> Any? {
+        block(args.map { $0 is NSNull ? NSNull() : $0 })
+        return nil
+    }
+}
+
 /// Swift implementation of a Kotlin `SwiftAction`.
 final class ClosureAction: NSObject, SwiftAction {
     let block: () -> Void
@@ -312,6 +322,20 @@ struct EnvironmentReporter: View {
     @Environment(\.accessibilityInvertColors) private var invertColors
     @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
     @Environment(\.legibilityWeight) private var legibilityWeight
+    @Environment(\.isSearching) private var isSearching
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.openURL) private var openURL
+    @Environment(\.dismissSearch) private var dismissSearch
+    @Environment(\.refresh) private var refresh
+    #if os(iOS) || os(macOS) || os(visionOS)
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
+    @Environment(\.rename) private var rename
+    #endif
+    #if os(macOS)
+    @Environment(\.openSettings) private var openSettings
+    #endif
 
     private var snapshot: [String] {
         var hsc = "", vsc = ""
@@ -324,7 +348,54 @@ struct EnvironmentReporter: View {
                 isEnabled ? "1" : "0", isPresented ? "1" : "0",
                 scenePhase == .background ? "background" : scenePhase == .inactive ? "inactive" : "active",
                 reduceMotion ? "1" : "0", reduceTransparency ? "1" : "0", differentiateWithoutColor ? "1" : "0",
-                invertColors ? "1" : "0", voiceOverEnabled ? "1" : "0", legibilityWeight == .bold ? "1" : "0"]
+                invertColors ? "1" : "0", voiceOverEnabled ? "1" : "0", legibilityWeight == .bold ? "1" : "0",
+                isSearching ? "1" : "0", colorSchemeContrast == .increased ? "1" : "0", multipleWindows ? "1" : "0",
+                refresh == nil ? "0" : "1", renameAvailable ? "1" : "0"]
+    }
+
+    private var multipleWindows: Bool {
+        #if os(iOS) || os(macOS) || os(visionOS)
+        supportsMultipleWindows
+        #else
+        false
+        #endif
+    }
+
+    private var renameAvailable: Bool {
+        #if os(iOS) || os(macOS) || os(visionOS)
+        rename != nil
+        #else
+        false
+        #endif
+    }
+
+    /// [openURL, openWindow, dismissWindow, openSettings, dismissSearch, refresh, rename]; nil where unavailable.
+    private var actions: [Any] {
+        let url = openURL, search = dismissSearch, refresh = self.refresh
+        var list: [Any] = [ClosureFunction { args in
+            if let s = args.first as? String, let u = URL(string: s) { url(u) }
+        }, NSNull(), NSNull(), NSNull(), ClosureAction { search() }, refresh.map { r in ClosureAction { Task { await r() } } } ?? NSNull(), NSNull()]
+        #if os(iOS) || os(macOS) || os(visionOS)
+        let open = openWindow, dismiss = dismissWindow
+        list[1] = ClosureFunction { args in
+            let id = args.first as? String, value = args.count > 1 ? args[1] as? String : nil
+            switch (id, value) {
+            case let (id?, value?): open(id: id, value: value)
+            case let (id?, nil): open(id: id)
+            case let (nil, value?): open(value: value)
+            default: break
+            }
+        }
+        list[2] = ClosureFunction { args in
+            if let id = args.first as? String { dismiss(id: id) } else { dismiss() }
+        }
+        if let rename { list[6] = ClosureAction { rename() } }
+        #endif
+        #if os(macOS)
+        let settings = openSettings
+        list[3] = ClosureAction { settings() }
+        #endif
+        return list
     }
 
     var body: some View {
@@ -340,6 +411,7 @@ struct EnvironmentReporter: View {
                              s[3].isEmpty ? NSNull() : s[3] as NSString, s[4] as NSString, s[5] as NSString,
                              KotlinBoolean(value: s[6] == "1"), KotlinBoolean(value: s[7] == "1"),
                              ClosureAction { dismiss() }, s[8] as NSString] + s[9...].map { KotlinBoolean(value: $0 == "1") }
+            + [actions as NSArray]
         m.args.callback(0, box: { (v: [Any]) -> Any? in v as NSArray })(values)
     }
 }

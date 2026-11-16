@@ -18078,8 +18078,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23authorizationControllerAD013AuthorizationH0Vvp",
   "path": "EnvironmentValues.authorizationController",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.authorizationRequest(trigger, requests, \u2026)",
   "platforms": [
    "ios",
    "macos",
@@ -18155,8 +18155,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV010_StoreKit_aB0E07displayeF7MessageAD07DisplayH6ActionVvp",
   "path": "EnvironmentValues.displayStoreKitMessage",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeAction(\u2026 StoreKit messages)",
   "platforms": [
    "ios"
   ]
@@ -18292,8 +18292,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV010_StoreKit_aB0E8purchaseAD14PurchaseActionVvp",
   "path": "EnvironmentValues.purchase",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeAction(trigger, purchaseProductId = \u2026)",
   "platforms": [
    "ios",
    "macos",
@@ -18357,8 +18357,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV010_StoreKit_aB0E13requestReviewAD07RequestH6ActionVvp",
   "path": "EnvironmentValues.requestReview",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (StoreKit integration): Modifier.storeAction(trigger, requestReview = true)",
   "platforms": [
    "ios",
    "macos"
@@ -18432,8 +18432,8 @@
   "usr": "s:7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E03webE7SessionAD03WebeH0Vvp",
   "path": "EnvironmentValues.webAuthenticationSession",
   "kind": "swift.property",
-  "status": "n/a",
-  "detail": "instance property / subscript (read side, not a view-building API)",
+  "status": "covered",
+  "detail": "hand-written (AuthenticationServices integration): Modifier.webAuthenticationSession(trigger, url, callbackScheme, \u2026)",
   "platforms": [
    "ios",
    "macos",

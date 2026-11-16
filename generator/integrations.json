@@ -411,7 +411,12 @@
     "View.automatedDeviceEnrollmentAddition(": "Modifier.automatedDeviceEnrollmentAddition(isPresented, onDismiss)",
     "View.locationHeadingAnchor(": "Modifier.spatialAnchors(locationHeading)",
     "View.deviceMotionAnchor(": "Modifier.spatialAnchors(deviceMotion)",
-    "View.nearbyInteractionOriginAnchor(": "Modifier.spatialAnchors(nearbyInteractionSession, nearbyInteraction)"
+    "View.nearbyInteractionOriginAnchor(": "Modifier.spatialAnchors(nearbyInteractionSession, nearbyInteraction)",
+    "EnvironmentValues.requestReview": "Modifier.storeAction(trigger, requestReview = true)",
+    "EnvironmentValues.purchase": "Modifier.storeAction(trigger, purchaseProductId = …)",
+    "EnvironmentValues.displayStoreKitMessage": "Modifier.storeAction(… StoreKit messages)",
+    "EnvironmentValues.authorizationController": "Modifier.authorizationRequest(trigger, requests, …)",
+    "EnvironmentValues.webAuthenticationSession": "Modifier.webAuthenticationSession(trigger, url, callbackScheme, …)"
   },
   "not_applicable": {
     "MapContentBuilder.": "Swift result-builder method",
