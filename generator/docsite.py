@@ -258,7 +258,8 @@ def highlight(code, lang):
     return "".join(out) + esc(code[pos:])
 
 def code_block(code, lang, cls=""):
-    return '<pre%s><code>%s</code></pre>' % (' class="%s"' % cls if cls else "", highlight(code, lang))
+    return ('<div class="pre"><pre%s><code>%s</code></pre><button class="copy" type="button" aria-label="Copy code">Copy</button></div>'
+            % (' class="%s"' % cls if cls else "", highlight(code, lang)))
 
 def markdown(md):
     out, lines, i = [], md.split("\n"), 0
@@ -408,6 +409,8 @@ p{margin:0 0 16px}
 code{font:.88em "SF Mono",ui-monospace,Menlo,monospace}p code,li code,td code{color:var(--fg)}:not(pre)>code{overflow-wrap:anywhere}
 pre{background:var(--code);padding:14px 16px;border-radius:15px;overflow:auto;font-size:15px;line-height:1.66;margin:0 0 24px}
 pre code{font-size:15px}.decl{margin:24px 0 0}
+.pre{position:relative}.copy{position:absolute;top:8px;right:8px;font:12px/1 -apple-system,BlinkMacSystemFont,sans-serif;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer;opacity:0;transition:opacity .15s}
+.pre:hover .copy,.copy:focus-visible,.copy.done{opacity:1}@media (hover:none){.copy{opacity:1}}
 /* syntax colours (Xcode-like) */
 code .k,code .m{color:var(--kw)}code .t{color:var(--ty)}code .s{color:var(--str)}code .n{color:var(--num)}code .c{color:var(--com);font-style:italic}
 /* topics */
@@ -951,6 +954,17 @@ document.addEventListener('click', e => {
   if (e.target.closest('.searchbtn')) openSearch();
   else if (e.target.closest('#sres .hit')) document.querySelector('dialog.search').close();  // same-page anchors don't swap the body
   else if (e.target.matches('dialog.search') || e.target.closest('.scancel')) document.querySelector('dialog.search').close();
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('.copy');
+  if (!b) return;
+  const pre = b.previousElementSibling, flash = t => {
+    b.textContent = t; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done') }, 1500);
+  };
+  // Clipboard denied (insecure context, embedded view): select the code so Cmd/Ctrl+C still works.
+  navigator.clipboard.writeText(pre.textContent).then(() => flash('Copied'),
+    () => { getSelection().selectAllChildren(pre); flash(isMac ? 'Press ⌘C' : 'Press Ctrl+C') });
 });
 document.addEventListener('input', e => { if (e.target.id === 'sq') runSearch(e.target.value) });
 document.addEventListener('input', e => { if (e.target.id === 'q') filter(e.target.value) });
