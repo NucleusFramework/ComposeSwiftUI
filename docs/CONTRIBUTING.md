@@ -74,7 +74,8 @@ scripts/typecheck_swift.sh /tmp/corefw      # the frameworks from step 2 of "Reg
 ```
 
 After changing the rich `TextEditor` codec (`RichTextCodec` in `Completions.swift`), run `scripts/check_rich_text.sh`
-(macOS 26): it checks that every native attribute survives a Kotlin restyle.
+(macOS 26, and a booted iOS 26 simulator): it checks on both that every native attribute, Genmoji included, survives
+a Kotlin restyle.
 
 ## Publishing a release
 
