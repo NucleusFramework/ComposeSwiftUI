@@ -73,6 +73,9 @@ To typecheck the Swift renderer on the four platforms after changing it:
 scripts/typecheck_swift.sh /tmp/corefw      # the frameworks from step 2 of "Regenerating the bindings"
 ```
 
+After changing the rich `TextEditor` codec (`RichTextCodec` in `Completions.swift`), run `scripts/check_rich_text.sh`
+(macOS 26): it checks that every native attribute survives a Kotlin restyle.
+
 ## Publishing a release
 
 Pushing a tag `vX.Y.Z` runs two workflows:

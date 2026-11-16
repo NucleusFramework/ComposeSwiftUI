@@ -220,6 +220,293 @@ private struct SelectionTextEditorView: View {
         }
     }
 }
+
+/// `TextEditor(text: Binding<AttributedString>, selection:)` editing a Kotlin `StyledString` (Kotlin `RichText.kt`).
+/// The editor keeps its own `AttributedString` and selection: Kotlin values are loaded when their revision changes
+/// (args 0 and 2), and edits are reported as runs (`RichTextCodec`).
+@available(iOS 26.0, macOS 26.0, *)
+private struct RichTextEditorView: View {
+    let m: NodeModel
+    @State private var text = AttributedString()
+    @State private var selection = AttributedTextSelection()
+    @State private var codec = RichTextCodec()
+    @Environment(\.self) private var environment
+
+    var body: some View {
+        let _ = m.version
+        let a = m.args
+        TextEditor(text: $text, selection: $selection)
+            .onChange(of: a.int(0), initial: true) {
+                let loaded = codec.load(m.args.list(1), in: environment)
+                text = loaded
+                applySelection(in: loaded)
+            }
+            .onChange(of: a.int(2)) { applySelection(in: text) }
+            .onChange(of: text) { _, new in
+                guard new != codec.loaded else { return }
+                m.args.callback(4, box: { (v: NSArray) -> Any? in v })(codec.encode(new, in: environment) as NSArray)
+            }
+            .onChange(of: selection) { _, new in
+                guard new != codec.appliedSelection else { return }
+                m.args.callback(5, box: { (v: NSArray) -> Any? in v })(codec.encode(new, in: text, environment: environment) as NSArray)
+            }
+    }
+
+    /// Selects Kotlin's selection (arg 3) in `text`: the text just loaded, whose indices the selection must use.
+    private func applySelection(in text: AttributedString) {
+        guard !m.args.isNil(3), let new = codec.selection(m.args.list(3), in: text, environment: environment) else { return }
+        codec.appliedSelection = new
+        selection = new
+    }
+}
+
+/// Converts Kotlin `StyledString` runs (text + 14 style values, see Kotlin `encodeStyle`) to an `AttributedString`
+/// and back. Each distinct attribute container the editor produces gets a token Kotlin carries along
+/// (`SpanStyle.nativeAttributes`), so attributes Kotlin can't express survive the round trip; Kotlin flags the
+/// properties it changed since. Fonts and colors built from Kotlin values go back as the same Kotlin values.
+@available(iOS 26.0, macOS 26.0, *)
+@MainActor final class RichTextCodec {
+    typealias UI = AttributeScopes.SwiftUIAttributes
+    private(set) var loaded = AttributedString()
+    var appliedSelection = AttributedTextSelection()
+    private var fonts: [Font: [Any]] = [:]
+    private var colors: [Color: Any] = [:]
+    private var natives: [AttributeContainer] = []
+
+    // MARK: Kotlin → Swift
+
+    func load(_ v: [Any], in environment: EnvironmentValues) -> AttributedString {
+        var result = AttributedString()
+        for b in stride(from: 0, to: v.count - 14, by: 15) {
+            if ((v[b + 6] as? NSNumber)?.intValue ?? 0) & 16 != 0 { continue } // ponytail: SF Symbol runs aren't editable text
+            result += AttributedString(v[b] as? String ?? "", attributes: attributes(v, b + 1, in: environment))
+        }
+        loaded = result
+        return result
+    }
+
+    func selection(_ v: [Any], in text: AttributedString, environment: EnvironmentValues) -> AttributedTextSelection? {
+        let flat = (v.first as? [Any] ?? []).compactMap { ($0 as? NSNumber)?.intValue }
+        let count = text.utf16.count
+        var ranges: [Range<AttributedString.Index>] = []
+        for i in stride(from: 0, to: flat.count - 1, by: 2) {
+            let lo = flat[i], hi = flat[i + 1]
+            guard lo >= 0, lo <= hi, hi <= count else { return nil }
+            ranges.append(text.utf16.index(text.startIndex, offsetBy: lo)..<text.utf16.index(text.startIndex, offsetBy: hi))
+        }
+        guard let first = ranges.first else { return nil }
+        if ranges.count == 1 && first.isEmpty {
+            let typing = (v.count > 1 ? v[1] as? [Any] : nil).map { attributes($0, 0, in: environment) }
+            return AttributedTextSelection(insertionPoint: first.lowerBound, typingAttributes: typing)
+        }
+        return AttributedTextSelection(ranges: RangeSet(ranges.filter { !$0.isEmpty }))
+    }
+
+    /// The attributes of the style encoded at `v[b...]`: the editor's own container for the run's token, with the
+    /// properties Kotlin changed applied on top (all of them when there's no token).
+    private func attributes(_ v: [Any], _ b: Int, in environment: EnvironmentValues) -> AttributeContainer {
+        func int(_ i: Int) -> Int { (v[b + i] as? NSNumber)?.intValue ?? 0 }
+        func double(_ i: Int) -> Double { (v[b + i] as? NSNumber)?.doubleValue ?? 0 }
+        let token = int(12)
+        let native = token > 0 && token <= natives.count
+        var c = native ? natives[token - 1] : AttributeContainer()
+        let changed = native ? int(13) : 1023
+        let flags = int(5)
+        if changed & 1 != 0 { c[UI.ForegroundColorAttribute.self] = color(v[b]) }
+        if changed & 2 != 0 { c[UI.FontAttribute.self] = font(v, b, flags: flags, base: native ? c[UI.FontAttribute.self] : nil, in: environment) }
+        if changed & 4 != 0 { c[UI.UnderlineStyleAttribute.self] = flags & 2 != 0 ? .single : nil }
+        if changed & 8 != 0 { c[UI.StrikethroughStyleAttribute.self] = flags & 4 != 0 ? .single : nil }
+        if changed & 16 != 0 { c[UI.BaselineOffsetAttribute.self] = double(6) != 0 ? double(6) : nil }
+        if changed & 32 != 0 { c[UI.KerningAttribute.self] = double(7) != 0 ? double(7) : nil }
+        if changed & 64 != 0 { c[UI.BackgroundColorAttribute.self] = color(v[b + 8]) }
+        if changed & 128 != 0 { c[UI.TrackingAttribute.self] = double(9) != 0 ? double(9) : nil }
+        if changed & 256 != 0 { c[AttributeScopes.FoundationAttributes.LinkAttribute.self] = (v[b + 10] as? String).flatMap(URL.init(string:)) }
+        if changed & 512 != 0 { c[AttributeScopes.CoreTextAttributes.TextAlignmentAttribute.self] = RichTextCodecAlignment.named(v[b + 11] as? String) }
+        return c
+    }
+
+    private func color(_ value: Any) -> Color? {
+        guard let color = d_Color(value as? SExpr) else { return nil }
+        colors[color] = value
+        return color
+    }
+
+    /// The font of Kotlin's font properties. A run whose font the editor made (a font picked by name, a bold trait)
+    /// keeps it, with Kotlin's size, weight, italic and monospaced applied, unless Kotlin set a `Font` or a design.
+    private func font(_ v: [Any], _ b: Int, flags: Int, base: Font?, in environment: EnvironmentValues) -> Font? {
+        let size = (v[b + 2] as? NSNumber).map { CGFloat($0.doubleValue) }
+        let weight = d_Font_Weight(v[b + 3] as? SExpr), design = d_Font_Design(v[b + 4] as? SExpr)
+        let kotlinFont = d_Font(v[b + 1] as? SExpr)
+        if let base, fonts[base] == nil, kotlinFont == nil, design == nil {
+            return Self.derive(base, size: size, weight: weight, italic: flags & 1 != 0, monospaced: flags & 8 != 0, in: environment)
+        }
+        guard var font = kotlinFont ?? size.map({ .system(size: $0, design: design) })
+            ?? (weight != nil || design != nil || flags & 9 != 0 ? (design.map { .system(.body, design: $0) } ?? environment.font ?? .body) : nil) else { return nil }
+        if let weight { font = font.weight(weight) }
+        if flags & 1 != 0 { font = font.italic() }
+        if flags & 8 != 0 { font = font.monospaced() }
+        fonts[font] = [v[b + 1], v[b + 2], v[b + 3], v[b + 4], KBox.int(flags & 9)]
+        return font
+    }
+
+    /// The editor's font with Kotlin's size, weight, italic and monospaced, applied with `Font` modifiers only, as
+    /// SwiftUI code restyling the run would: the font keeps its family and, when it was built from a text style, its
+    /// Dynamic Type scaling (a new point size pins it, like `Font.pointSize(_:)` does natively).
+    private static func derive(_ base: Font, size: CGFloat?, weight: Font.Weight?, italic: Bool, monospaced: Bool, in environment: EnvironmentValues) -> Font {
+        let resolved = base.resolve(in: environment.fontResolutionContext)
+        var font = base.weight(weight ?? .regular).italic(italic).monospaced(monospaced)
+        if let size, abs(size - resolved.pointSize) > 0.01 { font = font.pointSize(size) }
+        return font
+    }
+
+    // MARK: Swift → Kotlin
+
+    func encode(_ text: AttributedString, in environment: EnvironmentValues) -> [Any] {
+        var out: [Any] = []
+        for run in text.runs {
+            out.append(String(text[run.range].characters) as NSString)
+            out += encode(run.attributes, in: environment)
+        }
+        return out
+    }
+
+    func encode(_ selection: AttributedTextSelection, in text: AttributedString, environment: EnvironmentValues) -> [Any] {
+        func offset(_ i: AttributedString.Index) -> Int { text.utf16[text.startIndex..<i].count }
+        var flat: [Int] = []
+        switch selection.indices(in: text) {
+        case .insertionPoint(let i): flat = [offset(i), offset(i)]
+        case .ranges(let set): for r in set.ranges { flat += [offset(r.lowerBound), offset(r.upperBound)] }
+        }
+        let typing = encode(selection.typingAttributes(in: text), in: environment) as NSArray
+        return [flat.map { KotlinInt(value: Int32($0)) } as NSArray, typing]
+    }
+
+    /// The 14 style values of a container: Kotlin values for fonts and colors built from Kotlin, otherwise resolved
+    /// ones, plus the container's token.
+    private func encode(_ c: AttributeContainer, in environment: EnvironmentValues) -> [Any] {
+        var flags = 0
+        var font: [Any] = [NSNull(), NSNull(), NSNull(), NSNull()]
+        if let f = c[UI.FontAttribute.self] {
+            if let known = fonts[f] {
+                font = Array(known[0..<4])
+                flags = (known[4] as? NSNumber)?.intValue ?? 0
+            } else {
+                let r = f.resolve(in: environment.fontResolutionContext)
+                // a font picked by name goes back as its PostScript name (Kotlin `Font.custom`); system fonts can't be
+                // created by name, so they go back as size, weight and traits
+                let name = CTFontCopyPostScriptName(r.ctFont) as String
+                if !name.hasPrefix("."), CTFontCopyPostScriptName(CTFontCreateWithName(name as CFString, 12, nil)) as String == name {
+                    font[0] = name as NSString
+                }
+                font[1] = KBox.double(Double(r.pointSize))
+                // the bold trait the editor sets (⌘B) can leave `weight` at regular
+                let weight = Self.weightName(r.weight)
+                font[2] = (r.isBold && (weight == nil || weight == "regular") ? "bold" : weight).map { $0 as NSString } ?? NSNull()
+                if r.isItalic { flags |= 1 }
+                if r.isMonospaced { flags |= 8 }
+            }
+        }
+        if c[UI.UnderlineStyleAttribute.self] != nil { flags |= 2 }
+        if c[UI.StrikethroughStyleAttribute.self] != nil { flags |= 4 }
+        let alignment: String? = switch c[AttributeScopes.CoreTextAttributes.TextAlignmentAttribute.self] {
+        case .left: "left"
+        case .center: "center"
+        case .right: "right"
+        default: nil
+        }
+        let token: Int
+        if let i = natives.firstIndex(of: c) { token = i + 1 } else { natives.append(c); token = natives.count }
+        var out: [Any] = [encode(c[UI.ForegroundColorAttribute.self], in: environment)] + font
+        out += [KBox.int(flags), KBox.double(Double(c[UI.BaselineOffsetAttribute.self] ?? 0)), KBox.double(Double(c[UI.KerningAttribute.self] ?? 0))]
+        out += [encode(c[UI.BackgroundColorAttribute.self], in: environment), KBox.double(Double(c[UI.TrackingAttribute.self] ?? 0))]
+        out += [c[AttributeScopes.FoundationAttributes.LinkAttribute.self].map { $0.absoluteString as NSString } ?? NSNull()]
+        out += [alignment.map { $0 as NSString } ?? NSNull(), KBox.int(token), KBox.int(0)]
+        return out
+    }
+
+    private func encode(_ color: Color?, in environment: EnvironmentValues) -> Any {
+        guard let color else { return NSNull() }
+        if let known = colors[color] { return known }
+        let r = color.resolve(in: environment)
+        return [r.red, r.green, r.blue, r.opacity].map { KBox.double(Double($0)) } as NSArray
+    }
+
+    private static func weightName(_ w: Font.Weight) -> String? {
+        let names: [(Font.Weight, String)] = [
+            (.ultraLight, "ultraLight"), (.thin, "thin"), (.light, "light"), (.regular, "regular"), (.medium, "medium"),
+            (.semibold, "semibold"), (.bold, "bold"), (.heavy, "heavy"), (.black, "black"),
+        ]
+        return names.first { $0.0 == w }?.1
+    }
+}
+
+/// `attributedTextFormattingDefinition(_:)` built from Kotlin `AttributedTextValueConstraint`s (key, values, default).
+@available(iOS 26.0, macOS 26.0, *)
+private struct KotlinFormattingDefinition: AttributedTextFormattingDefinition {
+    typealias Scope = AttributeScopes.SwiftUIAttributes
+    typealias UI = AttributeScopes.SwiftUIAttributes
+    var font: ValueConstraint<Scope, UI.FontAttribute>?
+    var foregroundColor: ValueConstraint<Scope, UI.ForegroundColorAttribute>?
+    var backgroundColor: ValueConstraint<Scope, UI.BackgroundColorAttribute>?
+    var underline: ValueConstraint<Scope, UI.UnderlineStyleAttribute>?
+    var strikethrough: ValueConstraint<Scope, UI.StrikethroughStyleAttribute>?
+    var kerning: ValueConstraint<Scope, UI.KerningAttribute>?
+    var tracking: ValueConstraint<Scope, UI.TrackingAttribute>?
+    var baselineOffset: ValueConstraint<Scope, UI.BaselineOffsetAttribute>?
+    var alignment: ValueConstraint<Scope, AttributeScopes.CoreTextAttributes.TextAlignmentAttribute>?
+    var glyph: ValueConstraint<Scope, UI.AdaptiveImageGlyphAttribute>?
+
+    @MainActor init(_ a: Args) {
+        func constraint<K, V: Hashable>(_ i: Int, _ key: K.Type, _ decode: (Any) -> V?) -> ValueConstraint<Scope, K>? where K.Value == V {
+            ValueConstraint(for: key, values: Set(a.list(i + 1).map { $0 is NSNull ? nil : decode($0) }), default: decode(a.raw(i + 2) ?? NSNull()))
+        }
+        let expr = { (v: Any) in v as? SExpr }
+        let number = { (v: Any) in (v as? NSNumber).map { CGFloat($0.doubleValue) } }
+        for i in stride(from: 0, to: a.count - 2, by: 3) {
+            switch a.int(i) {
+            case 0: font = constraint(i, UI.FontAttribute.self) { d_Font(expr($0)) }
+            case 1: foregroundColor = constraint(i, UI.ForegroundColorAttribute.self) { d_Color(expr($0)) }
+            case 2: backgroundColor = constraint(i, UI.BackgroundColorAttribute.self) { d_Color(expr($0)) }
+            case 3: underline = constraint(i, UI.UnderlineStyleAttribute.self) { d_Text_LineStyle(expr($0)) }
+            case 4: strikethrough = constraint(i, UI.StrikethroughStyleAttribute.self) { d_Text_LineStyle(expr($0)) }
+            case 5: kerning = constraint(i, UI.KerningAttribute.self, number)
+            case 6: tracking = constraint(i, UI.TrackingAttribute.self, number)
+            case 7: baselineOffset = constraint(i, UI.BaselineOffsetAttribute.self, number)
+            case 8: alignment = constraint(i, AttributeScopes.CoreTextAttributes.TextAlignmentAttribute.self) { RichTextCodecAlignment.named($0 as? String) }
+            case 9:
+                if (a.list(i + 1).first as? NSNumber)?.boolValue == false {
+                    glyph = ValueConstraint(for: UI.AdaptiveImageGlyphAttribute.self, values: [nil], default: nil)
+                }
+            default: break
+            }
+        }
+    }
+
+    var body: some AttributedTextFormattingDefinition<Scope> {
+        font
+        foregroundColor
+        backgroundColor
+        underline
+        strikethrough
+        kerning
+        tracking
+        baselineOffset
+        alignment
+        glyph
+    }
+}
+
+@available(iOS 26.0, macOS 26.0, *)
+private enum RichTextCodecAlignment {
+    static func named(_ name: String?) -> AttributedString.TextAlignment? {
+        switch name {
+        case "left": .left
+        case "center": .center
+        case "right": .right
+        default: nil
+        }
+    }
+}
 #endif
 
 // MARK: - Accessibility
@@ -433,12 +720,32 @@ private func dragPhase(_ p: Any) -> Int {
         }
         #endif
         ComposeRegistry.views[100_050] = { m in AnyView(EditableForEach(model: m)) }
+        ComposeRegistry.views[100_064] = { m in ModChain.apply(formattedNumber(m.args), m, 0) }
+        ComposeRegistry.views[100_065] = { m in
+            let e = m.args.expr(0)
+            let layout = d_HStackLayout(e).map { AnyLayout($0) } ?? d_VStackLayout(e).map { AnyLayout($0) }
+                ?? d_ZStackLayout(e).map { AnyLayout($0) } ?? d_GridLayout(e).map { AnyLayout($0) } ?? AnyLayout(VStackLayout())
+            return ModChain.apply(layout { ChildrenView(m) }, m, 0)
+        }
         ComposeRegistry.views[100_051] = { m in AnyView(StyleContentView(m: m)) }
         ComposeRegistry.views[100_052] = { m in AnyView(StyleProgressFillView(m: m)) }
         #if os(iOS) || os(macOS)
         ComposeRegistry.views[100_053] = { m in ModChain.apply(SelectionTextFieldView(m: m), m, 0) }
         ComposeRegistry.views[100_054] = { m in ModChain.apply(SelectionTextEditorView(m: m), m, 0) }
-        ComposeRegistry.views[100_064] = { m in ModChain.apply(formattedNumber(m.args), m, 0) }
+        ComposeRegistry.views[100_067] = { m in
+            if #available(iOS 26.0, macOS 26.0, *) { return ModChain.apply(RichTextEditorView(m: m), m, 0) }
+            // Older systems: plain text, edits sent back as one unstyled run (text + 14 style values)
+            let text = m.args.list(1).enumerated().filter { $0.offset % 15 == 0 }.compactMap { $0.element as? String }.joined()
+            let report = m.args.callback(4, box: { (s: String) -> Any? in
+                ([s as NSString, NSNull(), NSNull(), NSNull(), NSNull(), NSNull(), KBox.int(0), KBox.double(0), KBox.double(0),
+                  NSNull(), KBox.double(0), NSNull(), NSNull(), KBox.int(0), KBox.int(0)] as [Any]) as NSArray
+            })
+            return ModChain.apply(TextEditor(text: Binding(get: { text }, set: report)), m, 0)
+        }
+        ComposeRegistry.modifiers[100_114] = { v, a, _ in
+            if #available(iOS 26.0, macOS 26.0, *) { return AnyView(v.attributedTextFormattingDefinition(KotlinFormattingDefinition(a))) }
+            return v
+        }
         #endif
         ComposeRegistry.views[100_055] = { m in
             let report = m.args.callback(2, box: { (v: NSArray) -> Any? in v })

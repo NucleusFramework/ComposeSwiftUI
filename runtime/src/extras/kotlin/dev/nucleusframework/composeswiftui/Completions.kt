@@ -173,7 +173,7 @@ public fun TextEditor(
     )
 }
 
-private fun textRange(value: Any?): TextRange? =
+internal fun textRange(value: Any?): TextRange? =
     (value as? List<*>)?.let { TextRange((it[0] as Number).toInt(), (it[1] as Number).toInt()) }
 
 // ---- mixed-state controls ----------------------------------------------------------------------

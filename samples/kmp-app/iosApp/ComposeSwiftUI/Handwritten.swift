@@ -201,6 +201,16 @@ struct KotlinPathShape: Shape {
     }
 }
 
+/// Swift implementation of a Kotlin `KotlinFunction` (arguments in, no result).
+final class ClosureFunction: NSObject, KotlinFunction {
+    let block: ([Any]) -> Void
+    init(_ block: @escaping ([Any]) -> Void) { self.block = block }
+    func invoke(args: [Any]) -> Any? {
+        block(args.map { $0 is NSNull ? NSNull() : $0 })
+        return nil
+    }
+}
+
 /// Swift implementation of a Kotlin `SwiftAction`.
 final class ClosureAction: NSObject, SwiftAction {
     let block: () -> Void
@@ -305,6 +315,27 @@ struct EnvironmentReporter: View {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.isPresented) private var isPresented
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+    @Environment(\.accessibilityInvertColors) private var invertColors
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
+    @Environment(\.legibilityWeight) private var legibilityWeight
+    @Environment(\.isSearching) private var isSearching
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.openURL) private var openURL
+    @Environment(\.dismissSearch) private var dismissSearch
+    @Environment(\.refresh) private var refresh
+    #if os(iOS) || os(macOS) || os(visionOS)
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
+    @Environment(\.rename) private var rename
+    #endif
+    #if os(macOS)
+    @Environment(\.openSettings) private var openSettings
+    #endif
 
     private var snapshot: [String] {
         var hsc = "", vsc = ""
@@ -314,7 +345,57 @@ struct EnvironmentReporter: View {
         #endif
         return [colorScheme == .dark ? "dark" : "light", String(describing: dynamicTypeSize), hsc, vsc,
                 locale.identifier, layoutDirection == .rightToLeft ? "rightToLeft" : "leftToRight",
-                isEnabled ? "1" : "0", isPresented ? "1" : "0"]
+                isEnabled ? "1" : "0", isPresented ? "1" : "0",
+                scenePhase == .background ? "background" : scenePhase == .inactive ? "inactive" : "active",
+                reduceMotion ? "1" : "0", reduceTransparency ? "1" : "0", differentiateWithoutColor ? "1" : "0",
+                invertColors ? "1" : "0", voiceOverEnabled ? "1" : "0", legibilityWeight == .bold ? "1" : "0",
+                isSearching ? "1" : "0", colorSchemeContrast == .increased ? "1" : "0", multipleWindows ? "1" : "0",
+                refresh == nil ? "0" : "1", renameAvailable ? "1" : "0"]
+    }
+
+    private var multipleWindows: Bool {
+        #if os(iOS) || os(macOS) || os(visionOS)
+        supportsMultipleWindows
+        #else
+        false
+        #endif
+    }
+
+    private var renameAvailable: Bool {
+        #if os(iOS) || os(macOS) || os(visionOS)
+        rename != nil
+        #else
+        false
+        #endif
+    }
+
+    /// [openURL, openWindow, dismissWindow, openSettings, dismissSearch, refresh, rename]; nil where unavailable.
+    private var actions: [Any] {
+        let url = openURL, search = dismissSearch, refresh = self.refresh
+        var list: [Any] = [ClosureFunction { args in
+            if let s = args.first as? String, let u = URL(string: s) { url(u) }
+        }, NSNull(), NSNull(), NSNull(), ClosureAction { search() }, refresh.map { r in ClosureAction { Task { await r() } } } ?? NSNull(), NSNull()]
+        #if os(iOS) || os(macOS) || os(visionOS)
+        let open = openWindow, dismiss = dismissWindow
+        list[1] = ClosureFunction { args in
+            let id = args.first as? String, value = args.count > 1 ? args[1] as? String : nil
+            switch (id, value) {
+            case let (id?, value?): open(id: id, value: value)
+            case let (id?, nil): open(id: id)
+            case let (nil, value?): open(value: value)
+            default: break
+            }
+        }
+        list[2] = ClosureFunction { args in
+            if let id = args.first as? String { dismiss(id: id) } else { dismiss() }
+        }
+        if let rename { list[6] = ClosureAction { rename() } }
+        #endif
+        #if os(macOS)
+        let settings = openSettings
+        list[3] = ClosureAction { settings() }
+        #endif
+        return list
     }
 
     var body: some View {
@@ -329,8 +410,29 @@ struct EnvironmentReporter: View {
         let values: [Any] = [s[0] as NSString, s[1] as NSString, s[2].isEmpty ? NSNull() : s[2] as NSString,
                              s[3].isEmpty ? NSNull() : s[3] as NSString, s[4] as NSString, s[5] as NSString,
                              KotlinBoolean(value: s[6] == "1"), KotlinBoolean(value: s[7] == "1"),
-                             ClosureAction { dismiss() }]
+                             ClosureAction { dismiss() }, s[8] as NSString] + s[9...].map { KotlinBoolean(value: $0 == "1") }
+            + [actions as NSArray]
         m.args.callback(0, box: { (v: [Any]) -> Any? in v as NSArray })(values)
+    }
+}
+
+/// Kotlin `ScaledMetric`: reports the `@ScaledMetric` value to Kotlin, which composes the content with it.
+struct ScaledMetricReporter: View {
+    let m: NodeModel
+    @ScaledMetric private var scaled: Double
+
+    init(m: NodeModel) {
+        self.m = m
+        let a = m.args
+        _scaled = a.isNil(1) ? ScaledMetric(wrappedValue: a.double(0))
+            : ScaledMetric(wrappedValue: a.double(0), relativeTo: d_Font_TextStyle(a.expr(1)) ?? .body)
+    }
+
+    var body: some View {
+        let report = m.args.callback(2, box: { (d: Double) -> Any? in KotlinDouble(value: d) })
+        ChildrenView(m)
+            .onAppear { report(scaled) }
+            .onChange(of: scaled) { _, value in report(value) }
     }
 }
 
@@ -375,12 +477,16 @@ struct KotlinLayout: Layout {
                 if let pushed = new.last?.base as? KHashable { change([pushed.object] as NSArray) } else { change(KBox.int(new.count)) }
             })
             return ModChain.apply(NavigationStack(path: path) {
+                // Path elements are AnyHashable: indices into the Kotlin destinations, or the value a Kotlin
+                // `NavigationLink(value:)` presents, which the setter above turns into the next index at once.
                 ChildrenView(m)
-                    .navigationDestination(for: Int.self) { i in SlotView(model: m.slot(i)) }
-                    .navigationDestination(for: KHashable.self) { _ in EmptyView() }
+                    .navigationDestination(for: AnyHashable.self) { v in
+                        if let i = v.base as? Int { SlotView(model: m.slot(i)) }
+                    }
             }, m, 0)
         }
         ComposeRegistry.views[100_003] = { m in ModChain.apply(EnvironmentReporter(m: m), m, 0) }
+        ComposeRegistry.views[100_066] = { m in ModChain.apply(ScaledMetricReporter(m: m), m, 0) }
         ComposeRegistry.views[100_004] = { m in ModChain.apply(NamespaceScopeView(m: m, id: Int64(m.args.int(0))), m, 0) }
         ComposeRegistry.views[100_005] = { m in
             guard let policy = m.args.raw(0) as? LayoutPolicy else { return AnyView(ChildrenView(m)) }
@@ -478,17 +584,36 @@ private struct KotlinTabs: View {
 
     var body: some View {
         let _ = m.version
-        TabView(selection: $selection) {
+        customized(TabView(selection: $selection) {
             ForEach(m.children, id: \.nodeId) { child in
                 if child.kind == 100_059 {
                     TabSection(child.args.string(0)) {
                         ForEach(child.children, id: \.nodeId) { kotlinTab($0) }
                     }
+                    .customizationID(child.args.stringOpt(1) ?? child.args.string(0))
                 } else {
                     kotlinTab(child)
                 }
             }
+        })
+    }
+
+    /// `tabViewCustomization` bound to the Kotlin JSON (TabViewCustomization is Codable).
+    @ViewBuilder private func customized(_ view: some View) -> some View {
+        #if os(iOS) || os(macOS) || os(visionOS)
+        if !m.args.isNil(3) {
+            let report = m.args.callback(3, box: { (s: String) -> Any? in s })
+            view.tabViewCustomization(Binding(get: {
+                m.args.stringOpt(2).flatMap { try? JSONDecoder().decode(TabViewCustomization.self, from: Data($0.utf8)) } ?? TabViewCustomization()
+            }, set: { value in
+                if let data = try? JSONEncoder().encode(value) { report(String(decoding: data, as: UTF8.self)) }
+            }))
+        } else {
+            view
         }
+        #else
+        view
+        #endif
     }
 }
 
@@ -520,9 +645,10 @@ private func kotlinTab(_ c: NodeModel) -> some TabContent<AnyHashable> {
     let role = d_TabRole(c.args.expr(3))
     let badge = c.args.stringOpt(4).map { Text($0) }
     if let symbol = c.args.stringOpt(1) {
-        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge)
+        Tab(c.args.string(0), systemImage: symbol, value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge).customizationID(c.args.stringOpt(5) ?? c.args.string(0))
     } else {
         Tab(c.args.string(0), image: "", value: c.args.hashable(2), role: role) { ZStack { ChildrenView(c) } }.kotlinBadge(badge)
+            .customizationID(c.args.stringOpt(5) ?? c.args.string(0))
     }
 }
 
@@ -667,23 +793,26 @@ private struct EmbeddedNSView: NSViewRepresentable {
     }
 }
 
-/// Builds one `Text` from the styled runs encoded by Kotlin `Text(StyledString)` (9 args per run).
+/// Builds one `Text` from the styled runs encoded by Kotlin `Text(StyledString)` (15 args per run, see `encodeRuns`).
 @MainActor enum StyledTextRenderer {
     static func text(_ a: Args) -> Text {
         var result = Text(verbatim: "")
         for r in 0..<a.int(0) {
-            let b = 1 + r * 9
-            var t = a.int(b + 6) & 16 != 0 ? Text(Image(systemName: a.string(b))) : Text(verbatim: a.string(b))
-            if let font = d_Font(a.expr(b + 2)) {
-                t = t.font(font)
-            } else if !a.isNil(b + 3) {
-                t = t.font(.system(size: a.cgFloat(b + 3)))
-            }
-            if let weight = d_Font_Weight(a.expr(b + 4)) { t = t.fontWeight(weight) }
-            if let design = d_Font_Design(a.expr(b + 5)) { t = t.fontDesign(design) }
-            if let color = d_Color(a.expr(b + 1)) { t = t.foregroundStyle(color) }
+            let b = 1 + r * 15
+            var t = a.int(b + 6) & 16 != 0 ? Text(Image(systemName: a.string(b))) : plain(a, b)
             let flags = a.int(b + 6)
-            if flags & 1 != 0 { t = t.italic() }
+            let weight = d_Font_Weight(a.expr(b + 4)), design = d_Font_Design(a.expr(b + 5))
+            // A run with its own font gets weight and italic on that Font: Text.fontWeight drops a later .italic()
+            if var font = d_Font(a.expr(b + 2)) ?? (a.isNil(b + 3) ? nil : .system(size: a.cgFloat(b + 3), design: design)) {
+                if let weight { font = font.weight(weight) }
+                if flags & 1 != 0 { font = font.italic() }
+                t = t.font(font)
+            } else {
+                if let weight { t = t.fontWeight(weight) }
+                if let design { t = t.fontDesign(design) }
+                if flags & 1 != 0 { t = t.italic() }
+            }
+            if let color = d_Color(a.expr(b + 1)) { t = t.foregroundStyle(color) }
             if flags & 2 != 0 { t = t.underline() }
             if flags & 4 != 0 { t = t.strikethrough() }
             if flags & 8 != 0 { t = t.monospaced() }
@@ -691,9 +820,22 @@ private struct EmbeddedNSView: NSViewRepresentable {
             if offset != 0 { t = t.baselineOffset(offset) }
             let kerning = a.cgFloat(b + 8)
             if kerning != 0 { t = t.kerning(kerning) }
+            let tracking = a.cgFloat(b + 10)
+            if tracking != 0 { t = t.tracking(tracking) }
             result = r == 0 ? t : Text("\(result)\(t)")
         }
         return result
+    }
+
+    /// The run's characters, as an `AttributedString` when it has a highlight or a link (`Text` modifiers can't set them).
+    private static func plain(_ a: Args, _ b: Int) -> Text {
+        let background = d_Color(a.expr(b + 9))
+        let link = a.stringOpt(b + 11).flatMap(URL.init(string:))
+        guard background != nil || link != nil else { return Text(verbatim: a.string(b)) }
+        var s = AttributedString(a.string(b))
+        s[AttributeScopes.SwiftUIAttributes.BackgroundColorAttribute.self] = background
+        s[AttributeScopes.FoundationAttributes.LinkAttribute.self] = link
+        return Text(s)
     }
 }
 
@@ -713,7 +855,7 @@ struct KotlinTabView: View {
     var body: some View {
         // The iOS 18 Tab API carries sections and roles; plain tabs keep the older tabItem form.
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *),
-           m.children.contains(where: { $0.kind == 100_059 || ($0.kind == 100_009 && !$0.args.isNil(3)) }) {
+           !m.args.isNil(3) || m.children.contains(where: { $0.kind == 100_059 || ($0.kind == 100_009 && !$0.args.isNil(3)) }) {
             KotlinTabs(m: m, selection: $selection)
                 .onChange(of: kotlinSelection) { _, new in selection = new }
                 .onChange(of: selection) { _, new in
@@ -741,7 +883,14 @@ struct LazyForEachContent: View {
     var body: some View {
         let _ = model.version
         if let items = model.args.raw(0) as? LazyItems {
+            let a = model.args
+            let delete = a.isNil(2) ? nil : a.callback(2, box: { (o: IndexSet) -> Any? in o.map { KotlinInt(value: Int32($0)) } as NSArray })
+            let move = a.isNil(3) ? nil : a.callback(3, box: { (x: (IndexSet, Int)) -> Any? in
+                [x.0.map { KotlinInt(value: Int32($0)) } as NSArray, KotlinInt(value: Int32(x.1))] as NSArray
+            })
             ForEach(Self.ids(items), id: \.self) { LazyItemView(items: items, id: $0) }
+                .onDelete(perform: delete)
+                .onMove(perform: move.map { f in { f(($0, $1)) } })
         }
     }
 

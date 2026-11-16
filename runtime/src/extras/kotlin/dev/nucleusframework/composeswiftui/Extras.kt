@@ -625,6 +625,18 @@ public data class SpanStyle(
     val monospaced: Boolean = false,
     val baselineOffset: Double = 0.0,
     val kerning: Double = 0.0,
+    /** Highlight behind the text (`AttributedString.backgroundColor`). */
+    val backgroundColor: Color? = null,
+    val tracking: Double = 0.0,
+    /** URL the run links to (`AttributedString.link`). */
+    val link: String? = null,
+    /** Paragraph alignment (`AttributedString.alignment`, iOS 26), used by the rich [TextEditor]. */
+    val alignment: AttributedTextAlignment? = null,
+    /**
+     * Attributes a rich [TextEditor] set that have no property here (a font picked by name, a line height, a writing
+     * direction, a Genmoji…): kept as is when the run goes back to the editor. Null for styles built in Kotlin.
+     */
+    val nativeAttributes: NativeAttributes? = null,
 ) {
     /** Returns this style with the properties set in [other] taking precedence. */
     public fun merge(other: SpanStyle): SpanStyle = SpanStyle(
@@ -639,7 +651,21 @@ public data class SpanStyle(
         monospaced = monospaced || other.monospaced,
         baselineOffset = if (other.baselineOffset != 0.0) other.baselineOffset else baselineOffset,
         kerning = if (other.kerning != 0.0) other.kerning else kerning,
+        backgroundColor = other.backgroundColor ?: backgroundColor,
+        tracking = if (other.tracking != 0.0) other.tracking else tracking,
+        link = other.link ?: link,
+        alignment = other.alignment ?: alignment,
     )
+}
+
+/** SwiftUI `AttributedString.TextAlignment`: the alignment of a paragraph in a rich [TextEditor]. */
+public enum class AttributedTextAlignment { left, center, right }
+
+/** Opaque handle on the SwiftUI attributes of a run edited in a rich [TextEditor] (see [SpanStyle.nativeAttributes]). */
+public class NativeAttributes internal constructor(internal val token: Int) {
+    override fun equals(other: Any?): Boolean = other is NativeAttributes && other.token == token
+    override fun hashCode(): Int = token
+    override fun toString(): String = "NativeAttributes($token)"
 }
 
 /** A string made of differently styled runs, shown by `Text(StyledString)`. Build it with [buildStyledString]. */
@@ -691,6 +717,10 @@ public class StyledStringBuilder internal constructor() {
 public fun buildStyledString(block: StyledStringBuilder.() -> Unit): StyledString =
     StyledStringBuilder().apply(block).build()
 
+/** A [StyledString] of one run. */
+public fun StyledString(text: String, style: SpanStyle = SpanStyle()): StyledString =
+    StyledString(if (text.isEmpty()) emptyList() else listOf(text to style))
+
 /**
  * SwiftUI `Text` made of styled runs (the equivalent of concatenating `Text` values). Modifiers such as
  * `font` or `foregroundStyle` apply to the runs that don't set that property themselves.
@@ -698,31 +728,191 @@ public fun buildStyledString(block: StyledStringBuilder.() -> Unit): StyledStrin
 @HiddenFromObjC
 @Composable
 public fun Text(text: StyledString, modifier: Modifier = Modifier) {
-    val args = ArrayList<Any?>(1 + text.runs.size * STYLED_RUN_STRIDE)
-    args += text.runs.size
-    for ((s, style) in text.runs) {
-        var flags = 0
-        if (style.italic) flags = flags or 1
-        if (style.underline) flags = flags or 2
-        if (style.strikethrough) flags = flags or 4
-        if (style.monospaced) flags = flags or 8
-        // ponytail: symbol runs are marked by a prefix no user text contains; a run type if more kinds appear
-        val symbol = s.startsWith(SYMBOL_RUN)
-        if (symbol) flags = flags or 16
-        args += if (symbol) s.removePrefix(SYMBOL_RUN) else s
-        args += style.color
-        args += style.font
-        args += style.fontSize
-        args += style.fontWeight
-        args += style.fontDesign
-        args += flags
-        args += style.baselineOffset
-        args += style.kerning
-    }
-    SwiftView(ExtraIds.STYLED_TEXT, args, modifier)
+    SwiftView(ExtraIds.STYLED_TEXT, listOf(text.runs.size) + text.encodeRuns(), modifier)
 }
 
-private const val STYLED_RUN_STRIDE = 9
+/** Returns a copy where the runs inside [range] (UTF-16 offsets) are restyled by [transform]. */
+@HiddenFromObjC
+public fun StyledString.transformStyle(range: TextRange, transform: (SpanStyle) -> SpanStyle): StyledString {
+    if (range.start >= range.end) return this
+    val out = ArrayList<Pair<String, SpanStyle>>(runs.size + 2)
+    var pos = 0
+    for ((s, style) in runs) {
+        val a = (range.start - pos).coerceIn(0, s.length)
+        val b = (range.end - pos).coerceIn(0, s.length)
+        if (a > 0) out += s.substring(0, a) to style
+        if (b > a) out += s.substring(a, b) to transform(style)
+        if (b < s.length) out += s.substring(b) to style
+        pos += s.length
+    }
+    return StyledString(out)
+}
+
+/** The style of the character at [offset] (UTF-16), or of the last character when [offset] is the end. */
+public fun StyledString.styleAt(offset: Int): SpanStyle? {
+    var pos = 0
+    for ((s, style) in runs) {
+        pos += s.length
+        if (offset < pos) return style
+    }
+    return runs.lastOrNull()?.second
+}
+
+/** The runs of [range] (UTF-16 offsets), cut at its bounds. */
+@HiddenFromObjC
+public fun StyledString.subSequence(range: TextRange): StyledString {
+    val out = ArrayList<Pair<String, SpanStyle>>()
+    var pos = 0
+    for ((s, style) in runs) {
+        val a = (range.start - pos).coerceIn(0, s.length)
+        val b = (range.end - pos).coerceIn(0, s.length)
+        if (b > a) out += s.substring(a, b) to style
+        pos += s.length
+    }
+    return StyledString(out)
+}
+
+/** Returns a copy where [range] (UTF-16 offsets) is replaced by [replacement]. */
+@HiddenFromObjC
+public fun StyledString.replace(range: TextRange, replacement: StyledString): StyledString {
+    val end = text.length
+    return subSequence(TextRange(0, range.start.coerceIn(0, end))) + replacement + subSequence(TextRange(range.end.coerceIn(0, end), end))
+}
+
+/**
+ * Flat encoding of the runs, [STYLED_RUN_STRIDE] values per run (decoded by the Swift renderers). [changed] gives,
+ * for a run carrying [SpanStyle.nativeAttributes], the properties Kotlin changed since the editor reported it.
+ */
+internal fun StyledString.encodeRuns(changed: (SpanStyle) -> Int = { ALL_STYLE_FIELDS }): List<Any?> {
+    val args = ArrayList<Any?>(runs.size * STYLED_RUN_STRIDE)
+    for ((s, style) in runs) {
+        // ponytail: symbol runs are marked by a prefix no user text contains; a run type if more kinds appear
+        val symbol = s.startsWith(SYMBOL_RUN)
+        args += if (symbol) s.removePrefix(SYMBOL_RUN) else s
+        args.encodeStyle(style, symbol, changed(style))
+    }
+    return args
+}
+
+internal fun MutableList<Any?>.encodeStyle(style: SpanStyle, symbol: Boolean = false, changed: Int = ALL_STYLE_FIELDS) {
+    var flags = 0
+    if (style.italic) flags = flags or 1
+    if (style.underline) flags = flags or 2
+    if (style.strikethrough) flags = flags or 4
+    if (style.monospaced) flags = flags or 8
+    if (symbol) flags = flags or 16
+    this += style.color
+    this += style.font
+    this += style.fontSize
+    this += style.fontWeight
+    this += style.fontDesign
+    this += flags
+    this += style.baselineOffset
+    this += style.kerning
+    this += style.backgroundColor
+    this += style.tracking
+    this += style.link
+    this += style.alignment?.name
+    this += if (changed == ALL_STYLE_FIELDS) 0 else style.nativeAttributes?.token ?: 0
+    this += changed
+}
+
+// Groups of SpanStyle properties, flagged when Kotlin changes them on a run the editor reported.
+internal const val FIELD_COLOR = 1
+internal const val FIELD_FONT = 2
+internal const val FIELD_UNDERLINE = 4
+internal const val FIELD_STRIKETHROUGH = 8
+internal const val FIELD_BASELINE = 16
+internal const val FIELD_KERNING = 32
+internal const val FIELD_BACKGROUND = 64
+internal const val FIELD_TRACKING = 128
+internal const val FIELD_LINK = 256
+internal const val FIELD_ALIGNMENT = 512
+internal const val ALL_STYLE_FIELDS = 1023
+
+/** The property groups that differ between [a] and [b]. */
+internal fun changedFields(a: SpanStyle, b: SpanStyle): Int {
+    var m = 0
+    if (a.color != b.color) m = m or FIELD_COLOR
+    if (a.font != b.font || a.fontSize != b.fontSize || a.fontWeight != b.fontWeight || a.fontDesign != b.fontDesign ||
+        a.italic != b.italic || a.monospaced != b.monospaced) m = m or FIELD_FONT
+    if (a.underline != b.underline) m = m or FIELD_UNDERLINE
+    if (a.strikethrough != b.strikethrough) m = m or FIELD_STRIKETHROUGH
+    if (a.baselineOffset != b.baselineOffset) m = m or FIELD_BASELINE
+    if (a.kerning != b.kerning) m = m or FIELD_KERNING
+    if (a.backgroundColor != b.backgroundColor) m = m or FIELD_BACKGROUND
+    if (a.tracking != b.tracking) m = m or FIELD_TRACKING
+    if (a.link != b.link) m = m or FIELD_LINK
+    if (a.alignment != b.alignment) m = m or FIELD_ALIGNMENT
+    return m
+}
+
+/**
+ * Decodes runs sent back by Swift in the [encodeRuns] layout. Values Swift created itself (formatting applied in a
+ * rich editor) arrive as a `[r, g, b, a]` list for colors, a PostScript name for a font picked by name and a weight
+ * name for the font weight.
+ */
+internal fun decodeStyledRuns(values: List<*>): StyledString {
+    val runs = ArrayList<Pair<String, SpanStyle>>(values.size / STYLED_RUN_STRIDE)
+    for (b in 0 until values.size / STYLED_RUN_STRIDE * STYLED_RUN_STRIDE step STYLED_RUN_STRIDE) {
+        runs += values[b] as String to decodeStyle(values, b + 1)
+    }
+    return StyledString(runs)
+}
+
+internal fun decodeStyle(values: List<*>, b: Int): SpanStyle {
+    val flags = (values[b + 5] as Number).toInt()
+    val size = (values[b + 2] as? Number)?.toDouble()
+    return SpanStyle(
+        color = decodeColor(values[b]),
+        font = when (val f = values[b + 1]) {
+            is Font -> f
+            is String -> Font.custom(f, size ?: 17.0)
+            else -> null
+        },
+        fontSize = if (values[b + 1] is String) null else size,
+        fontWeight = when (val w = values[b + 3]) {
+            is Font.Weight -> w
+            is String -> fontWeightNamed(w)
+            else -> null
+        },
+        fontDesign = values[b + 4] as? Font.Design,
+        italic = flags and 1 != 0,
+        underline = flags and 2 != 0,
+        strikethrough = flags and 4 != 0,
+        monospaced = flags and 8 != 0,
+        baselineOffset = (values[b + 6] as Number).toDouble(),
+        kerning = (values[b + 7] as Number).toDouble(),
+        backgroundColor = decodeColor(values[b + 8]),
+        tracking = (values[b + 9] as Number).toDouble(),
+        link = values[b + 10] as? String,
+        alignment = (values[b + 11] as? String)?.let { AttributedTextAlignment.valueOf(it) },
+        nativeAttributes = (values[b + 12] as? Number)?.toInt()?.takeIf { it != 0 }?.let(::NativeAttributes),
+    )
+}
+
+private fun decodeColor(value: Any?): Color? = when (value) {
+    is Color -> value
+    is List<*> -> value.map { (it as Number).toDouble() }.let { Color(red = it[0], green = it[1], blue = it[2], opacity = it[3]) }
+    else -> null
+}
+
+private fun fontWeightNamed(name: String): Font.Weight? = when (name) {
+    "ultraLight" -> Font.Weight.ultraLight
+    "thin" -> Font.Weight.thin
+    "light" -> Font.Weight.light
+    "regular" -> Font.Weight.regular
+    "medium" -> Font.Weight.medium
+    "semibold" -> Font.Weight.semibold
+    "bold" -> Font.Weight.bold
+    "heavy" -> Font.Weight.heavy
+    "black" -> Font.Weight.black
+    else -> null
+}
+
+/** Values per run: the text, then [STYLE_STRIDE] style values. */
+internal const val STYLE_STRIDE = 14
+internal const val STYLED_RUN_STRIDE = 1 + STYLE_STRIDE
 
 /** The pointer location of SwiftUI `HoverPhase.active(_:)` (in the modifier's coordinate space); null for `.ended`. */
 @HiddenFromObjC

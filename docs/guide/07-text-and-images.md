@@ -139,8 +139,9 @@ fun PriceLine(price: String, oldPrice: String) {
 ```
 
 `SpanStyle` has `color`, `font` (or `fontSize` for the system font), `fontWeight`, `fontDesign`, `italic`,
-`underline`, `strikethrough`, `monospaced`, `baselineOffset` and `kerning`. Nested `withStyle` blocks merge their
-styles, and a property a run doesn't set comes from the `Text`'s modifiers:
+`underline`, `strikethrough`, `monospaced`, `baselineOffset`, `kerning`, `tracking`, `backgroundColor` (a highlight)
+and `link` (a tappable URL). Nested `withStyle` blocks merge their styles, and a property a run doesn't set comes from
+the `Text`'s modifiers. The rich `TextEditor` edits a `StyledString` (see [Controls](controls.md#rich-text)):
 
 ```kotlin
 // every run is footnote-sized; only the name is bold

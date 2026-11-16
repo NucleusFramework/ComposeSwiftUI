@@ -793,23 +793,26 @@ private struct EmbeddedNSView: NSViewRepresentable {
     }
 }
 
-/// Builds one `Text` from the styled runs encoded by Kotlin `Text(StyledString)` (9 args per run).
+/// Builds one `Text` from the styled runs encoded by Kotlin `Text(StyledString)` (15 args per run, see `encodeRuns`).
 @MainActor enum StyledTextRenderer {
     static func text(_ a: Args) -> Text {
         var result = Text(verbatim: "")
         for r in 0..<a.int(0) {
-            let b = 1 + r * 9
-            var t = a.int(b + 6) & 16 != 0 ? Text(Image(systemName: a.string(b))) : Text(verbatim: a.string(b))
-            if let font = d_Font(a.expr(b + 2)) {
-                t = t.font(font)
-            } else if !a.isNil(b + 3) {
-                t = t.font(.system(size: a.cgFloat(b + 3)))
-            }
-            if let weight = d_Font_Weight(a.expr(b + 4)) { t = t.fontWeight(weight) }
-            if let design = d_Font_Design(a.expr(b + 5)) { t = t.fontDesign(design) }
-            if let color = d_Color(a.expr(b + 1)) { t = t.foregroundStyle(color) }
+            let b = 1 + r * 15
+            var t = a.int(b + 6) & 16 != 0 ? Text(Image(systemName: a.string(b))) : plain(a, b)
             let flags = a.int(b + 6)
-            if flags & 1 != 0 { t = t.italic() }
+            let weight = d_Font_Weight(a.expr(b + 4)), design = d_Font_Design(a.expr(b + 5))
+            // A run with its own font gets weight and italic on that Font: Text.fontWeight drops a later .italic()
+            if var font = d_Font(a.expr(b + 2)) ?? (a.isNil(b + 3) ? nil : .system(size: a.cgFloat(b + 3), design: design)) {
+                if let weight { font = font.weight(weight) }
+                if flags & 1 != 0 { font = font.italic() }
+                t = t.font(font)
+            } else {
+                if let weight { t = t.fontWeight(weight) }
+                if let design { t = t.fontDesign(design) }
+                if flags & 1 != 0 { t = t.italic() }
+            }
+            if let color = d_Color(a.expr(b + 1)) { t = t.foregroundStyle(color) }
             if flags & 2 != 0 { t = t.underline() }
             if flags & 4 != 0 { t = t.strikethrough() }
             if flags & 8 != 0 { t = t.monospaced() }
@@ -817,9 +820,22 @@ private struct EmbeddedNSView: NSViewRepresentable {
             if offset != 0 { t = t.baselineOffset(offset) }
             let kerning = a.cgFloat(b + 8)
             if kerning != 0 { t = t.kerning(kerning) }
+            let tracking = a.cgFloat(b + 10)
+            if tracking != 0 { t = t.tracking(tracking) }
             result = r == 0 ? t : Text("\(result)\(t)")
         }
         return result
+    }
+
+    /// The run's characters, as an `AttributedString` when it has a highlight or a link (`Text` modifiers can't set them).
+    private static func plain(_ a: Args, _ b: Int) -> Text {
+        let background = d_Color(a.expr(b + 9))
+        let link = a.stringOpt(b + 11).flatMap(URL.init(string:))
+        guard background != nil || link != nil else { return Text(verbatim: a.string(b)) }
+        var s = AttributedString(a.string(b))
+        s[AttributeScopes.SwiftUIAttributes.BackgroundColorAttribute.self] = background
+        s[AttributeScopes.FoundationAttributes.LinkAttribute.self] = link
+        return Text(s)
     }
 }
 

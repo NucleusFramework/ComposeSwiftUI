@@ -247,6 +247,51 @@ TextEditor(notes, modifier = Modifier.frame(minHeight = 120.0), onTextChange = {
 
 For a few lines, a vertical `TextField` is usually nicer: it has a placeholder and sizes itself.
 
+### Rich text
+
+`TextEditor(StyledString, …)` is SwiftUI's rich-text `TextEditor(text: Binding<AttributedString>, selection:)` (iOS 26 /
+macOS 26). Users format the text with ⌘B, ⌘I and ⌘U, the Format menu and its panel (fonts, sizes, colors, alignment,
+line height). `onTextChange` gets the result back as a [`StyledString`](text-and-images.md). Attributes `SpanStyle` has
+no property for, such as a font picked by name, a line height or a Genmoji, travel in `SpanStyle.nativeAttributes`.
+They are kept when you restyle the run from Kotlin.
+
+The selection is a `RichTextSelection`, SwiftUI's `AttributedTextSelection`: one or more ranges, plus the typing style
+at an insertion point. The editing helpers follow `AttributedString`:
+
+| SwiftUI | Kotlin |
+|---|---|
+| `text.transformAttributes(in: &selection) { … }` | `text.transformStyle(selection) { … }` → `(text, selection)` |
+| `selection.attributes(in: text)` | `text.styles(selection)` |
+| `text.replaceSelection(&selection, withCharacters:)` | `text.replaceSelection(selection, characters)` → `(text, selection)` |
+
+```kotlin
+var text by remember { mutableStateOf(StyledString("Hello")) }
+var selection by remember { mutableStateOf<RichTextSelection?>(null) }
+VStack {
+    val bold = selection?.let { s -> text.styles(s).all { it.fontWeight == Font.Weight.bold } } ?: false
+    Toggle("Bold", isOn = bold, onIsOnChange = { on ->
+        val current = selection ?: return@Toggle
+        text.transformStyle(current) { it.copy(fontWeight = if (on) Font.Weight.bold else null) }
+            .let { (t, s) -> text = t; selection = s }
+    })
+    TextEditor(
+        text, onTextChange = { text = it }, selection = selection, onSelectionChange = { selection = it },
+        modifier = Modifier.attributedTextFormattingDefinition(AttributedTextFormattingDefinition(
+            AttributedTextValueConstraint.underlineStyle(setOf(null)),
+            AttributedTextValueConstraint.foregroundColor(setOf(null, Color.red, Color.blue)),
+        )),
+    )
+}
+```
+
+`Modifier.attributedTextFormattingDefinition` constrains what users can apply, like SwiftUI's
+`AttributedTextFormatting.ValueConstraint`: each constraint lists the values an attribute may take, and the editor
+replaces any other value with the default. Before iOS 26 the editor edits plain text.
+
+On macOS, ⌘B / ⌘I and the Format menu come from the app's scene, as in any SwiftUI app: add
+`.commands { TextFormattingCommands() }` to the `WindowGroup` that shows the `ComposeView`. tvOS and watchOS have no
+`TextEditor`.
+
 ### Numbers
 
 `NumberField` is SwiftUI's `TextField(value:format:)` for numbers. SwiftUI parses and formats the text in the user's

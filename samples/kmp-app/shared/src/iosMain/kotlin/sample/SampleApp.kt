@@ -25,6 +25,7 @@ sealed interface Route : NavKey {
     data object Chart : Route
     data object Paragraph : Route
     data object LongList : Route
+    data object RichEditor : Route
 }
 
 enum class AppTab { Examples, Text }
@@ -76,6 +77,7 @@ private fun SampleNavigation(onShowText: () -> Unit) {
         entry<Route.Chart> { ChartScreen() }
         entry<Route.Paragraph> { ParagraphScreen() }
         entry<Route.LongList> { LongListScreen() }
+        entry<Route.RichEditor> { RichEditorScreen() }
     }
     NavDisplay(backStack) { route -> entries(route).Content() }
 }
@@ -85,6 +87,7 @@ private fun HomeScreenRows() = listOf(
     Triple(Route.Chart, "Compose Multiplatform chart", SFSymbol.chartBarFill),
     Triple(Route.Paragraph, "UIKit paragraph", SFSymbol.textAlignleft),
     Triple(Route.LongList, "Long list (5,000 rows)", SFSymbol.listNumber),
+    Triple(Route.RichEditor, "Rich text editor", SFSymbol.textformat),
 )
 
 @androidx.compose.runtime.Composable
@@ -145,12 +148,57 @@ private fun StyledTextScreen() {
         withStyle(SpanStyle(color = Color.orange, fontWeight = Font.Weight.semibold)) { append("a coloured word") }
         append(", and ")
         withStyle(SpanStyle(font = Font.title3, underline = true)) { append("a larger underlined one") }
+        append(", ")
+        withStyle(SpanStyle(backgroundColor = Color.yellow)) { append("a highlight") }
+        append(" and ")
+        withStyle(SpanStyle(link = "https://developer.apple.com")) { append("a link") }
         append(".")
     }
     NavigationStack {
         ScrollView {
             Text(paragraph, modifier = Modifier.font(Font.body).padding().navigationTitle("Styled text"))
         }
+    }
+}
+
+@androidx.compose.runtime.Composable
+private fun RichEditorScreen() {
+    var text by remember {
+        mutableStateOf(buildStyledString {
+            append("Select some text and press ")
+            withStyle(SpanStyle(fontWeight = Font.Weight.bold)) { append("B") }
+            append(", or use the Format menu (fonts, colors, alignment).")
+        })
+    }
+    var selection by remember { mutableStateOf<RichTextSelection?>(null) }
+    // SwiftUI's `text.transformAttributes(in: &selection) { … }`
+    fun format(isOn: (SpanStyle) -> Boolean, set: SpanStyle.(Boolean) -> SpanStyle) {
+        val current = selection ?: return
+        val on = text.styles(current).all(isOn)
+        text.transformStyle(current) { it.set(!on) }.let { (t, s) -> text = t; selection = s }
+    }
+    val styles = selection?.let { text.styles(it) }.orEmpty()
+    VStack(alignment = HorizontalAlignment.leading, modifier = Modifier.padding().navigationTitle("Rich text editor")) {
+        HStack(modifier = Modifier.toggleStyle(ToggleStyle.button)) {
+            Toggle("B", isOn = styles.isNotEmpty() && styles.all { it.fontWeight == Font.Weight.bold }, onIsOnChange = {
+                format({ it.fontWeight == Font.Weight.bold }) { copy(fontWeight = if (it) Font.Weight.bold else null) }
+            })
+            Toggle("I", isOn = styles.isNotEmpty() && styles.all { it.italic }, onIsOnChange = {
+                format({ it.italic }) { copy(italic = it) }
+            })
+            Toggle("Highlight", isOn = styles.isNotEmpty() && styles.all { it.backgroundColor != null }, onIsOnChange = {
+                format({ it.backgroundColor != null }) { copy(backgroundColor = if (it) Color.yellow else null) }
+            })
+        }
+        TextEditor(text, onTextChange = { text = it }, selection = selection, onSelectionChange = { selection = it },
+            modifier = Modifier.frame(minHeight = 160.0).border(Color.gray)
+                // SwiftUI's attributedTextFormattingDefinition: no underline, text colors limited to a palette
+                .attributedTextFormattingDefinition(AttributedTextFormattingDefinition(
+                    AttributedTextValueConstraint.underlineStyle(setOf(null)),
+                    AttributedTextValueConstraint.foregroundColor(setOf(null, Color.red, Color.blue)),
+                )))
+        Text("Kotlin state (selection ${selection?.ranges}):", modifier = Modifier.font(Font.caption).foregroundStyle(ShapeStyle.secondary))
+        Text(text)
     }
 }
 

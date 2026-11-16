@@ -181,6 +181,35 @@ public enum ComposeIntegrations {}
 /// Calls a synchronous Kotlin function (`KotlinFunction`) passed as an argument; nil when absent.
 func kotlinInvoke(_ f: Any?, _ args: [Any]) -> Any? { (f as? KotlinFunction)?.invoke(args: args) }
 
+/// Awaits a Kotlin `suspend` function (`SAsyncFunction`) passed as an argument; nil when absent, failed or cancelled.
+@MainActor func kotlinAwait(_ f: Any?, _ args: [Any]) async -> Any? {
+    guard let function = f as? SAsyncFunction else { return nil }
+    let cancel = UncheckedSendable<SwiftAction?>(nil)
+    let result = UncheckedSendable<Any?>(nil)
+    await withTaskCancellationHandler {
+        await withCheckedContinuation { (done: CheckedContinuation<Void, Never>) in
+            cancel.value = function.start(args: args, done: KotlinResultReceiver { value in
+                result.value = value
+                done.resume()
+            })
+            ComposeSwiftUIHostKt.flushCompose()
+        }
+    } onCancel: {
+        Task { @MainActor in cancel.value?.run() }
+    }
+    return result.value
+}
+
+/// Receives the result of a Kotlin `SAsyncFunction` (`[result]`).
+final class KotlinResultReceiver: NSObject, KotlinFunction {
+    let receive: (Any?) -> Void
+    init(_ receive: @escaping (Any?) -> Void) { self.receive = receive }
+    func invoke(args: [Any]) -> Any? {
+        receive(args.first.flatMap { $0 is NSNull ? nil : $0 })
+        return nil
+    }
+}
+
 /// Registry of view / modifier renderers. The generated code registers itself here; hand-written
 /// renderers can override or extend any id.
 @MainActor

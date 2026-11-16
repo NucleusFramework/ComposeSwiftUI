@@ -102,8 +102,11 @@ private struct KotlinApplePayButton: View {
                                          (payment.token.paymentMethod.network?.rawValue as Any?) ?? NSNull(),
                                          (payment.shippingMethod?.identifier as Any?) ?? NSNull(),
                                          (payment.shippingContact?.emailAddress as Any?) ?? NSNull()]
-                    let status = (kotlinInvoke(authorize, [info]) as? NSNumber)?.intValue ?? 1
-                    resultHandler(PKPaymentAuthorizationResult(status: status == 0 ? .success : .failure, errors: nil))
+                    // The sheet keeps its spinner until the Kotlin suspend function returns.
+                    Task { @MainActor in
+                        let status = (await kotlinAwait(authorize, [info]) as? NSNumber)?.intValue ?? 1
+                        resultHandler(PKPaymentAuthorizationResult(status: status == 0 ? .success : .failure, errors: nil))
+                    }
                 case .didFinish: finish()
                 @unknown default: break
                 }
@@ -111,7 +114,7 @@ private struct KotlinApplePayButton: View {
             if !a.isNil(4) {
                 let session = a.raw(4)
                 let merchant = { () async -> PKPaymentRequestMerchantSessionUpdate in
-                    let json = await MainActor.run { kotlinInvoke(session, []) as? String ?? "{}" }
+                    let json = await kotlinAwait(session, []) as? String ?? "{}"
                     let dict = (try? JSONSerialization.jsonObject(with: Data(json.utf8))) as? [String: Any] ?? [:]
                     return PKPaymentRequestMerchantSessionUpdate(status: .success, merchantSession: PKPaymentMerchantSession(dictionary: dict))
                 }

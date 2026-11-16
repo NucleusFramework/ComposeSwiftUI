@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.7.0
+
+### Added
+
+- `TextEditor(StyledString, onTextChange, selection, onSelectionChange)`: SwiftUI's rich-text editor (iOS 26 /
+  macOS 26). Formatting from ⌘B / ⌘I / ⌘U, the Format menu and its panel (fonts, sizes, colors, alignment, line
+  height) comes back as a `StyledString`; attributes with no `SpanStyle` property are kept in
+  `SpanStyle.nativeAttributes`.
+- `RichTextSelection` (SwiftUI `AttributedTextSelection`: ranges and typing style) with `transformStyle`, `styles` and
+  `replaceSelection`, the counterparts of `transformAttributes(in:)`, `attributes(in:)` and `replaceSelection`.
+- `Modifier.attributedTextFormattingDefinition(AttributedTextFormattingDefinition(AttributedTextValueConstraint…))`.
+- `SpanStyle.backgroundColor`, `tracking`, `link` (also drawn by `Text(StyledString)`) and `alignment`;
+  `StyledString(text, style)`, `subSequence`, `replace`.
+- macOS: ⌘B / ⌘I and the Format menu need `.commands { TextFormattingCommands() }` on the app's scene, as in SwiftUI.
+
+### Fixed
+
+- `Text(StyledString)`: an italic run with its own font or weight is drawn italic.
+
 ## 0.6.2
 
 ### Changed

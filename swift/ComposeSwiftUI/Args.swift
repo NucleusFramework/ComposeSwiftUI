@@ -24,6 +24,7 @@ public struct Args {
     @inline(__always) private func k(_ i: Int) -> Int32 { Int32(truncatingIfNeeded: i) }
 
     public func raw(_ i: Int) -> Any? { src.argAt(index: k(i)) }
+    public var count: Int { Int(src.argCount()) }
     public func isNil(_ i: Int) -> Bool { src.argIsNull(index: k(i)) }
 
     public func string(_ i: Int) -> String { src.argString(index: k(i)) ?? "" }
