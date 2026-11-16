@@ -47,7 +47,7 @@ Apply the plugin in the shared module and declare framework binaries for the App
 // shared/build.gradle.kts
 plugins {
     kotlin("multiplatform") version "2.4.20"
-    id("dev.nucleusframework.compose-swiftui") version "0.6.0"
+    id("dev.nucleusframework.compose-swiftui") version "0.6.1"
 }
 
 kotlin {
@@ -124,7 +124,7 @@ composeSwiftUI {
     frameworkName = "Shared"
     // Library version added to commonMain (appleMain when the module also has non-Apple targets).
     // Default: the plugin version. Keep them equal.
-    libraryVersion = "0.6.0"
+    libraryVersion = "0.6.1"
     // Integration files written to ComposeSwiftUIIntegrations, by name without .swift. Default: all of them.
     integrations.set(listOf("MapKit", "Charts", "StoreKit"))
     // Simulator used to render previews in the IDE. Default: the booted one, else the first iPhone.
@@ -296,7 +296,7 @@ Multiplatform screen, Compose Multiplatform string resources and the preview gal
    `Completions.swift` and `Generated/GenEncoders.swift`, and previews added `ComposeSwiftUIPreviews.swift`.
 4. Since 0.5.0 the integrations are opt-in: if you upgrade from an older version and use maps, charts or StoreKit, add
    their files and register them.
-5. After 0.6.0, `AppServices.swift` and `SystemServices.swift` were split into one file per framework (`HealthKitUI.swift`,
+5. In 0.6.1, `AppServices.swift` and `SystemServices.swift` were split into one file per framework (`HealthKitUI.swift`,
    `AppIntents.swift`…). The sync deletes the old files: add the new files you use to the target. The register
    functions are unchanged.
 

@@ -48,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.6.0"
+       id("dev.nucleusframework.compose-swiftui") version "0.6.1"
    }
 
    kotlin {
