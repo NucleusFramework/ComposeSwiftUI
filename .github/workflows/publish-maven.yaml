@@ -4,14 +4,21 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to publish again (e.g. v0.7.1)
+        required: true
 
 jobs:
   publish:
-    # Apple targets (iosArm64, iosSimulatorArm64, macosArm64) can only be compiled on macOS.
-    runs-on: macos-15
+    # Apple targets can only be compiled on macOS. Intel, because hosted arm64 macOS runners can stay unavailable for hours.
+    runs-on: macos-15-intel
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -29,8 +36,10 @@ jobs:
           key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
 
       - name: Publish to Maven Central
-        run: ./gradlew :runtime:publishAndReleaseToMavenCentral --no-configuration-cache
+        # The build reads the version from GITHUB_REF, which is the branch on a manual run
+        run: GITHUB_REF="refs/tags/${INPUT_TAG:-${GITHUB_REF#refs/tags/}}" ./gradlew :runtime:publishAndReleaseToMavenCentral --no-configuration-cache
         env:
+          INPUT_TAG: ${{ inputs.tag }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNINGINMEMORYKEY }}
