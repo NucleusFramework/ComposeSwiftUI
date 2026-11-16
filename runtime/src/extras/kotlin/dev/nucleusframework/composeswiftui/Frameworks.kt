@@ -903,10 +903,13 @@ public fun CommunicationLimitsButton(handles: List<CommunicationHandle>, modifie
     SwiftView(MoreFrameworkIds.PERMISSION_BUTTON, listOf(handles.map { listOf(it.value, it.kind.ordinal) }, SSlotRef(0)), modifier, slots = listOf(label))
 }
 
-/** ScreenCaptureKit `recordingEditor(_:)` (macOS 27): edits the recording at [fileUrl]; null closes the editor. */
+/**
+ * ScreenCaptureKit `recordingEditor(_:)` (macOS 27, iOS / tvOS 27 devices): edits the recording at [fileUrl]; null
+ * closes the editor. On tvOS, [shareMode] picks `recordingEditor(_:mode:)` with `.share` (true) or `.preview`.
+ */
 @HiddenFromObjC
-public fun Modifier.recordingEditor(fileUrl: String?, onDismiss: () -> Unit): Modifier =
-    element(MoreFrameworkIds.RECORDING_EDITOR, fileUrl, SValueCallback { if (it == null) onDismiss() })
+public fun Modifier.recordingEditor(fileUrl: String?, onDismiss: () -> Unit, shareMode: Boolean? = null): Modifier =
+    element(MoreFrameworkIds.RECORDING_EDITOR, fileUrl, SValueCallback { if (it == null) onDismiss() }, shareMode)
 
 /** A WorkoutKit single-goal workout goal. */
 @HiddenFromObjC

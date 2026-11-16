@@ -7,7 +7,15 @@
 - Opt-in integrations for PhotosUI, WebKit, AVKit and QuickLook, AuthenticationServices, CoreLocationUI,
   LocalAuthentication, PassKit, MusicKit, Translation, SpriteKit, SceneKit, GameController, RealityKit, AppIntents,
   DeviceActivity, WatchKit, ManagedAppDistribution, PermissionKit, ScreenCaptureKit, WorkoutKit and DeviceDiscoveryUI
-  (see the README table). Every SwiftUI API of the Apple framework overlays is now bridged or classified.
+  (see the README table).
+- TipKit (`TipView`, `popoverTip`, tip styles), WidgetKit and ActivityKit view modifiers (`widgetStyle`, `widgetLabel`,
+  `activityStyle`, `controlWidgetText`, `AccessoryWidgetGroup`, `WidgetImage`), HealthKitUI, ContactsUI,
+  FamilyControls, FinanceKitUI, ImagePlayground, JournalingSuggestions, GameSave, ClassKitUI, SecurityUI,
+  AutomatedDeviceEnrollment, and the CoreLocation / CoreMotion anchors: the SwiftUI APIs these frameworks declare in
+  their own module.
+- `recordingEditor` on iOS and tvOS devices, with the tvOS `mode`.
+- Every entry of Apple's SwiftUI documentation index is now generated, bridged or classified in `docs/COVERAGE.md`
+  (none left unmatched); visionOS-only APIs are listed as such.
 - `List(selectedKey, onSelectedKeyChange) { }`: single selection on every platform. Rows are selected by their
   `Modifier.tag(key)`.
 - A Frameworks section in the docs site sidebar, linking MapKit, Swift Charts, StoreKit and the other frameworks.

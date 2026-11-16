@@ -411,7 +411,8 @@ def page_url(key):
     return "reference/%s.html" % slug(key)
 
 FRAMEWORK_PAGES = [("mapkit", "MapKit"), ("charts", "Swift Charts"), ("storekit", "StoreKit"),
-                   ("frameworks", "Photos, web, media, Apple Pay…"), ("kotlin-apis", "Kotlin-specific APIs")]
+                   ("frameworks", "Photos, web, media, Apple Pay…"),
+                   ("app-frameworks", "Tips, widgets, Health, Contacts…"), ("kotlin-apis", "Kotlin-specific APIs")]
 
 def sidebar(up, current):
     out = ['<nav class="side" aria-label="Documentation"><div class="scroll"><div id="results"></div><div id="tree">',
@@ -540,7 +541,8 @@ framework_cards = "".join('<a class="card" href="%s.html"><b>%s</b><span>%s</spa
     ("mapkit", "MapKit", "Map, markers, annotations, overlays, Look Around"),
     ("charts", "Swift Charts", "Marks, plots, 3D charts, axes, selection"),
     ("storekit", "StoreKit", "Product and subscription stores, offers"),
-    ("frameworks", "Photos, web, media, Apple Pay…", "PhotosPicker, WebView, VideoPlayer, Sign in with Apple, Apple Pay")])
+    ("frameworks", "Photos, web, media, Apple Pay…", "PhotosPicker, WebView, VideoPlayer, Sign in with Apple, Apple Pay"),
+    ("app-frameworks", "Tips, widgets, Health, Contacts…", "TipView, widget modifiers, HealthKit access, ContactAccessButton, Image Playground")])
 cards = "".join('<a class="card" href="%s"><b>%s</b><span>%s</span></a>' % (page_url(keys[0]), esc(t), esc(", ".join(pages[k]["title"] for k in keys[:4] if k in pages)))
                 for t, keys in TOPICS if keys and keys[0] in pages)
 index_body = """<div class="hero"><div class="eyebrow" data-pagefind-ignore>Framework</div><h1>Compose SwiftUI</h1>
@@ -660,6 +662,10 @@ HANDWRITTEN = [
      "PhotosUI, WebKit, AVKit, QuickLook, Sign in with Apple, LocationButton, Translation, SpriteKit, SceneKit, PassKit, MusicKit, RealityKit and more.",
      "Each framework has its own file in `swift/ComposeSwiftUIIntegrations` (`PhotosUI.swift`, `WebKit.swift`, `PassKit.swift`…): add the ones you use and call their `ComposeIntegrations.register…()`.",
      ["Frameworks.kt"]),
+    ("app-frameworks", "Tips, widgets, Health, Contacts…",
+     "TipKit, WidgetKit and ActivityKit, HealthKitUI, ContactsUI, FamilyControls, FinanceKitUI, ImagePlayground, JournalingSuggestions, GameSave, ClassKitUI, SecurityUI and more.",
+     "Add `TipKit.swift`, `WidgetKit.swift` or `AppServices.swift` from `swift/ComposeSwiftUIIntegrations` and call the `ComposeIntegrations.register…()` of each framework you use (`registerTipKit()`, `registerWidgetKit()`, `registerHealthKitUI()`…).",
+     ["AppFrameworks.kt"]),
     ("kotlin-apis", "Kotlin-specific APIs", "SwiftUI APIs whose Swift form relies on Swift types, closures or protocols, in their Kotlin form.",
      "These are part of the renderer: nothing to register.",
      ["Extras.kt", "Interactive.kt", "Advanced.kt", "Completions.kt", "Handwritten.kt"]),

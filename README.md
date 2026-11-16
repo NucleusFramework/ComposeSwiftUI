@@ -287,6 +287,9 @@ The other frameworks follow the same pattern:
 | `SpriteKit.swift` | `registerSpriteKit()` | `SpriteView`, `SceneView`, game controller events |
 | `RealityKit.swift` | `registerRealityKit()` | `RealityView` with bundled models, `Modifier.realityViewStyle` |
 | `SystemServices.swift` | `registerAppIntents()`, `registerDeviceActivity()`, `registerWatchKit()`, `registerManagedAppDistribution()`, `registerPermissionKit()`, `registerScreenCaptureKit()`, `registerWorkoutKit()`, `registerDeviceDiscoveryUI()` | `ShortcutsLink`, `DeviceActivityReport`, `NowPlayingView`, `ManagedContentView`, `CommunicationLimitsButton`, `Modifier.recordingEditor`, `Modifier.workoutPreview`, `DevicePicker` |
+| `TipKit.swift` | `registerTipKit()` | `TipView`, `Modifier.popoverTip`, `Modifier.tipStyle`, `Modifier.tipAnchor` |
+| `WidgetKit.swift` | `registerWidgetKit()` | `Modifier.widgetStyle`, `widgetLabel`, `activityStyle`, `controlWidgetText`, `AccessoryWidgetGroup`, `WidgetImage` |
+| `AppServices.swift` | `registerHealthKitUI()`, `registerContactsUI()`, `registerFamilyControls()`, `registerFinanceKitUI()`, `registerAutomatedDeviceEnrollment()`, `registerImagePlayground()`, `registerGameSave()`, `registerClassKitUI()`, `registerSecurityUI()`, `registerJournalingSuggestions()`, `registerSpatialAnchors()` | `Modifier.healthDataAccessRequest`, `ContactAccessButton`, `FamilyActivityPicker`, `AddOrderToWalletButton`, `TransactionPicker`, `Modifier.imagePlaygroundSheet`, `JournalingSuggestionsPicker`, `Modifier.gameSaveSyncingAlert`, `AssignedDocumentLabel`, `Modifier.certificateSheet`… |
 
 A register function exists only on the platforms its framework supports, so call it under the same `#if os(…)`.
 

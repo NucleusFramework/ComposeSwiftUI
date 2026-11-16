@@ -14,7 +14,12 @@ if os.path.exists(overlays_path):
     cov += json.load(open(overlays_path))
 by_key = collections.defaultdict(list)
 for e in cov:
-    by_key[e["path"].lower().replace(".", "/")].append(e)
+    key = e["path"].lower().replace(".", "/")
+    by_key[key].append(e)
+    if "<" in key or ">" in key:  # Apple's URLs spell operators with '_' for '<' and '>'
+        by_key[key.replace("<", "_").replace(">", "_")].append(e)
+# Documented symbols that no supported SDK declares (newer than the installed SDKs, or Mac Catalyst only).
+doc_only = json.load(open(os.path.join(root, "generator/integrations.json"))).get("doc_only", {})
 
 RANK = {"generated": 0, "covered": 1, "rejected": 2, "skipped": 3, "n/a": 4}
 ICON = {"generated": "✅", "covered": "☑️", "rejected": "⛔", "skipped": "➖", "n/a": "·", "unmatched": "?"}
@@ -63,6 +68,8 @@ for section, title, kind, path in entries:
         status = best["status"]
         detail = best["detail"] if status != "generated" else "%s (%d/%d overloads bridged)" % (best["detail"], n_gen, len(matches))
         plats = ",".join(best["platforms"])
+    elif any(key == k or key.startswith(k) for k in doc_only):
+        status, detail, plats = "n/a", next(v for k, v in doc_only.items() if key == k or key.startswith(k)), ""
     else:
         status, detail, plats = "unmatched", "not in the iOS, macOS, tvOS or watchOS SDKs (visionOS-only, or a framework without a SwiftUI overlay on these platforms)", ""
     stats[status] += 1

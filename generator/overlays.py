@@ -13,7 +13,8 @@ sg_root, project = sys.argv[1], sys.argv[2]
 table = json.load(open(os.path.join(project, "generator", "integrations.json")))
 
 syms = {}
-for plat in ("ios", "macos", "tvos", "watchos"):
+# overlays/xros holds the symbols that exist only in the visionOS SDK (Kotlin/Native has no visionOS target).
+for plat in ("ios", "macos", "tvos", "watchos", "xros"):
     for f in sorted(glob.glob(os.path.join(sg_root, "overlays", plat, "*.symbols.json"))):
         d = json.load(open(f))
         module = d["module"]["name"]
@@ -22,7 +23,7 @@ for plat in ("ios", "macos", "tvos", "watchos"):
             s = syms.setdefault(usr, {"usr": usr, "path": ".".join(raw["pathComponents"]), "kind": raw["kind"]["identifier"],
                                       "module": module, "platforms": set()})
             available = not any(a.get("isUnconditionallyUnavailable") or a.get("obsoleted")
-                                for a in raw.get("availability") or [] if a.get("domain") in (None, "*", {"ios": "iOS", "macos": "macOS", "tvos": "tvOS", "watchos": "watchOS"}[plat]))
+                                for a in raw.get("availability") or [] if a.get("domain") in (None, "*", {"ios": "iOS", "macos": "macOS", "tvos": "tvOS", "watchos": "watchOS", "xros": "visionOS"}[plat]))
             if available:
                 s["platforms"].add(plat)
 
@@ -37,6 +38,8 @@ def framework(module):
 
 def classify(s):
     path, kind = s["path"], s["kind"]
+    if s["platforms"] <= {"xros"}:
+        return "n/a", "visionOS only (Kotlin/Native has no visionOS target)"
     for key, api in table["covered"].items():
         if match(path, key):
             return "covered", "hand-written (%s integration): %s" % (framework(s["module"]), api)
