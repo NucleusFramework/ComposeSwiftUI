@@ -226,6 +226,12 @@ public enum ComposeRegistry {
     public static var values: [Int32: (SExpr) -> Any?] = [:]
 
     static func makeView(_ model: NodeModel) -> AnyView {
+        let view = makeNodeView(model)
+        guard ComposeInspection.enabled else { return view }
+        return AnyView(view.background(InspectionFrameReporter(id: model.node.id)))
+    }
+
+    private static func makeNodeView(_ model: NodeModel) -> AnyView {
         model.consumedPrefix = 0
         if model.kind < 0 {  // SNodeKinds.ROOT / SLOT
             return ModChain.apply(ChildrenView(model), model, 0)
@@ -251,5 +257,24 @@ public enum ModChain {
         if let applied = GeneratedChain.apply(v, id, a, m, i) { return applied }
         if let custom = ComposeRegistry.modifiers[id] { return apply(custom(AnyView(v), a, m), m, i + 1) }
         return apply(v, m, i + 1)
+    }
+}
+
+/// For the IDE previews: when enabled, every node reports its frame (window coordinates) under its Kotlin node id, so
+/// a point of a preview maps to the node, then to its code. Off in apps.
+@MainActor
+public enum ComposeInspection {
+    public static var enabled = false
+    public static var frames: [Int64: CGRect] = [:]
+}
+
+private struct InspectionFrameReporter: View {
+    let id: Int64
+
+    var body: some View {
+        // Lighter than a GeometryReader: no layout container, only a callback when the frame changes.
+        Color.clear.onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { frame in
+            ComposeInspection.frames[id] = frame
+        }
     }
 }

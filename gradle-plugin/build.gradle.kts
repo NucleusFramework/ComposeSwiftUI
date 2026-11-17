@@ -15,13 +15,16 @@ version =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.7.1"
+        ?: "0.8.0"
 
 dependencies {
     compileOnly(libs.kotlin.gradle.plugin)
     // Lets the plugin apply the Compose compiler plugin for the user.
     implementation(libs.compose.compiler.gradle.plugin)
+    testImplementation(kotlin("test"))
 }
+
+tasks.test { useJUnitPlatform() }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

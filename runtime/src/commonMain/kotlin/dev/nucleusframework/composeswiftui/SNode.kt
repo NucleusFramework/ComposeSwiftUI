@@ -158,7 +158,19 @@ class SNode internal constructor(val kind: Int) : SArgs {
     private var composedArgs: List<Any?> = emptyList()
     private var composedModifiers: List<SModifier> = emptyList()
 
-    internal fun updateArgs(newArgs: List<Any?>) {
+    // What composition gave, before literal patches (see LiteralPatches).
+    private var rawArgs: List<Any?> = emptyList()
+    private var rawModifiers: List<SModifier> = emptyList()
+
+    /** Applies the current literal patches to the last composed values. */
+    internal fun reapplyLiteralPatches() {
+        updateArgs(rawArgs)
+        updateModifiers(rawModifiers)
+    }
+
+    internal fun updateArgs(composed: List<Any?>) {
+        rawArgs = composed
+        val newArgs = if (LiteralPatches.isEmpty) composed else LiteralPatches.args(this, composed)
         if (sameShape(composedArgs, newArgs)) {
             transferCallbacks(composedArgs, newArgs)
             if (args !== composedArgs) {
@@ -173,7 +185,9 @@ class SNode internal constructor(val kind: Int) : SArgs {
         }
     }
 
-    internal fun updateModifiers(newModifiers: List<SModifier>) {
+    internal fun updateModifiers(composed: List<SModifier>) {
+        rawModifiers = composed
+        val newModifiers = if (LiteralPatches.isEmpty) composed else LiteralPatches.modifiers(this, composed)
         val old = composedModifiers
         val same = old.size == newModifiers.size &&
             old.indices.all { old[it].id == newModifiers[it].id && sameShape(old[it].args, newModifiers[it].args) }

@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Recomposer
+import androidx.compose.runtime.currentComposer
+import androidx.compose.runtime.tooling.CompositionData
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.ObserverHandle
 import androidx.compose.runtime.snapshots.Snapshot
@@ -36,6 +38,24 @@ class ComposeSwiftUIHost(private val content: @Composable () -> Unit) : ViewMode
     private var frameScheduled = false
     private val input = mutableStateOf<Any?>(null)
 
+    /**
+     * Records the source of every call, for the IDE previews: [inspect] maps nodes to code, and literal patches
+     * ([setLiteralPatches]) apply. Set before [start]; costs memory and time, so off in apps.
+     */
+    var inspectable: Boolean = false
+    private var compositionData: CompositionData? = null
+
+    /** For the IDE: the call sites of the nodes, as JSON (see [CompositionInspector.toJson]). Needs [inspectable]. */
+    fun inspect(): String = compositionData?.let { CompositionInspector.toJson(CompositionInspector.nodeSources(it)) } ?: "[]"
+
+    /** Installs the requested literal patches on this host's nodes. */
+    internal fun applyLiteralPatches() {
+        val data = compositionData ?: return
+        val sources = CompositionInspector.nodeSources(data)
+        LiteralPatches.install(LiteralPatches.requested, sources)
+        sources.keys.forEach { it.reapplyLiteralPatches() }
+    }
+
     /** Pushes a new value from Swift (`ComposeView(input:)`); read it with [hostInput]. */
     fun updateInput(value: Any?) {
         input.value = value
@@ -50,6 +70,10 @@ class ComposeSwiftUIHost(private val content: @Composable () -> Unit) : ViewMode
         scope.launch(clock, start = CoroutineStart.UNDISPATCHED) { recomposer.runRecomposeAndApplyChanges() }
         composition = Composition(SNodeApplier(root), recomposer).apply {
             setContent {
+                if (inspectable) {
+                    currentComposer.collectParameterInformation()
+                    compositionData = currentComposer.compositionData
+                }
                 CompositionLocalProvider(
                     LocalViewModelStoreOwner provides this@ComposeSwiftUIHost,
                     LocalHostInput provides input.value,
@@ -57,6 +81,7 @@ class ComposeSwiftUIHost(private val content: @Composable () -> Unit) : ViewMode
                 )
             }
         }
+        if (inspectable && LiteralPatches.requested.isNotEmpty()) applyLiteralPatches()
     }
 
     /**
@@ -101,6 +126,17 @@ private val liveHosts = LinkedHashSet<ComposeSwiftUIHost>()
  */
 fun flushCompose() {
     liveHosts.toList().forEach { it.flush() }
+}
+
+/**
+ * For the IDE previews: shows [patches] (literal edits) in every inspectable host, live ones and those created later,
+ * without recompiling. An empty list removes the patches (after a build that includes the edits).
+ */
+fun setLiteralPatches(patches: List<LiteralPatch>) {
+    LiteralPatches.requested = patches
+    LiteralPatches.clear()
+    liveHosts.filter { it.inspectable }.forEach { it.applyLiteralPatches() }
+    flushCompose()
 }
 
 /** Creates a host for [content]. Exported entry point for Swift (`ComposeView(host:)`). */

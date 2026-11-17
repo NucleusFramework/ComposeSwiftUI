@@ -14,14 +14,15 @@ import com.intellij.openapi.vfs.VirtualFile
 class PreviewEditorProvider : FileEditorProvider, DumbAware {
     override fun accept(project: Project, file: VirtualFile): Boolean {
         if (file.extension != "kt" || !file.isInLocalFileSystem) return false
-        // Cheap text check (no PSI here): a preview in a file that uses the library.
+        // Cheap text check (no PSI here): a preview (or a library multipreview) in a file that uses the library.
         val text = String(file.contentsToByteArray(), file.charset)
         return "@Preview" in text && "dev.nucleusframework.composeswiftui" in text
     }
 
     override fun createEditor(project: Project, file: VirtualFile): FileEditor {
         val textEditor = TextEditorProvider.getInstance().createEditor(project, file) as TextEditor
-        return TextEditorWithPreview(textEditor, PreviewEditor(project, file), "Compose SwiftUI Preview")
+        val preview = PreviewEditor(project, file).apply { attach(textEditor) }
+        return TextEditorWithPreview(textEditor, preview, "Compose SwiftUI Preview")
     }
 
     override fun getEditorTypeId() = "compose-swiftui-preview"

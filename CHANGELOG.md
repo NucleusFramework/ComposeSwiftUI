@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.8.0
+
+### Added
+
+- `@Preview` arguments: `group`, `device`, `width` / `height`, `sizeThatFits`, `colorScheme`, `dynamicTypeSize`,
+  `locale`, `layoutDirection` and `backgroundColor`, applied in the IDE and in Xcode's `#Preview`s.
+- Variants: `@Preview` is repeatable and works on annotation classes (multipreviews), with `@PreviewLightDark`,
+  `@PreviewDynamicTypeSizes`, `@PreviewScreenSizes` and `@PreviewLayoutDirections` provided.
+- `@PreviewParameter(Provider::class, limit)` and `PreviewParameterProvider`: one preview per sample value.
+- IDE plugin, at parity with Android Studio's Compose preview:
+  - previews render when a file opens and on save (or while typing, or only on demand), only while the pane is
+    visible, and show *Out of date* when the code changed;
+  - list, grid and gallery layouts, zoom (toolbar, Ctrl/⌘ + wheel, fit), group filter;
+  - the caret selects the preview of its function, and clicking a preview moves the caret to its function;
+  - *Run on Simulator* opens a preview live on the simulator; copy or save a preview image; render one preview or the
+    whole module;
+  - compile errors as links to their line, and the Kotlin exception of a crashing preview in its place;
+  - click a view of a preview to go to its code (hover outlines it and names the call);
+  - live literals: string, number and boolean edits show in the previews within half a second, without a build;
+  - interactive mode in the pane: the preview runs live, the mouse taps, drags and scrolls (real touches), the keyboard
+    types; *Select Component* goes to a view's code, *Slow Animations* slows animations down, and *Record Animation*
+    replays them frame by frame on a timeline (the animation inspector);
+  - an inspection for `@Preview` functions that can't render, with quick fixes;
+  - *Settings › Tools › Compose SwiftUI Previews*.
+
+- `ComposeSwiftUIHost.inspectable` and `setLiteralPatches(…)`: the hooks the IDE previews use (source of each node,
+  literal edits without recompiling). The library is compiled with Compose source information.
+
+### Changed
+
+- The Gradle plugin turns on Compose source information (`composeCompiler { includeSourceInformation }`) except in
+  Xcode Release builds, for click-to-code and live literals. A value set in `composeCompiler { }` wins.
+- Faster previews: only the previews of the open file render, up to 8 at once, each captured as soon as it stops
+  changing (no more fixed 800 ms per preview). The host app stays running on the simulator between renders, is only
+  compiled once per library version (adding a preview or changing the app's API no longer recompiles it), and is
+  relinked and reinstalled only when the framework changed. Simulators of different `device`s render in parallel, and
+  the IDE turns on Kotlin/Native incremental compilation. A re-render without a Kotlin change takes about a second,
+  down from six or more.
+- A preview that throws no longer stops the others: it shows its Kotlin exception. So do a
+  `PreviewParameterProvider` that throws or has no values, and a preview that blocks the main thread (stopped after
+  30 s). A preview that crashed renders first and alone next time, so it costs one host restart, not three.
+- Previews render on a simulator of their own, *Compose SwiftUI Previews*, booted in the background, with one host app
+  per module: modules and projects no longer replace each other's app.
+- Previews named in backticks (``fun `Dark mode`()``) render.
+- The IDE plugin needs IntelliJ IDEA / Android Studio 2026.2 (build 262) running on Java 25.
+- IDE previews render on save again (0.6.2 made them on demand): each render now only costs what changed. Choose
+  *Only when asked* in the settings to keep the 0.6.2 behavior.
+
 ## 0.7.1
 
 ### Added

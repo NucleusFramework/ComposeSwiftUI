@@ -12,7 +12,7 @@ val publishVersion =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.7.1"
+        ?: "0.8.0"
 
 val coreOnly = providers.gradleProperty("csui.coreOnly").isPresent
 
@@ -42,6 +42,12 @@ kotlin {
             }
         }
     }
+}
+
+// Source information of the library's composables: the IDE previews map views to the app's code through it (call
+// sites of a composition only line up when every composable records its source). No cost unless a host collects it.
+composeCompiler {
+    includeSourceInformation = true
 }
 
 mavenPublishing {

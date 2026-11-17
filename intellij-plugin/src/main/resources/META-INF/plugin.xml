@@ -6,6 +6,15 @@
     <description><![CDATA[
         Shows the Compose SwiftUI <code>@Preview</code> composables next to the code, rendered with real SwiftUI
         on the iOS simulator by the <code>renderComposeSwiftUIPreviews</code> Gradle task.
+        <ul>
+            <li>Split code and preview editor, with list, grid and gallery layouts, zoom and group filter</li>
+            <li>Renders on save or while typing, only the previews of the open file, in parallel</li>
+            <li><code>@Preview</code> variants (color scheme, Dynamic Type, locale, layout direction, size, device),
+                multipreview annotations and <code>@PreviewParameter</code></li>
+            <li>Run a preview live on the simulator, navigate between code and previews, copy or save images</li>
+            <li>Compile errors and preview crashes shown next to the previews; inspections for previews that
+                can't render</li>
+        </ul>
         Needs macOS with Xcode, and the <code>dev.nucleusframework.compose-swiftui</code> Gradle plugin.
     ]]></description>
 
@@ -21,6 +30,13 @@
         <fileEditorProvider implementation="dev.nucleusframework.composeswiftui.idea.PreviewEditorProvider"/>
         <codeInsight.lineMarkerProvider language="kotlin"
                                         implementationClass="dev.nucleusframework.composeswiftui.idea.PreviewLineMarkerProvider"/>
+        <localInspection language="kotlin" shortName="ComposeSwiftUIPreview"
+                         displayName="Compose SwiftUI preview that won't be rendered"
+                         groupName="Compose SwiftUI" enabledByDefault="true" level="WARNING"
+                         implementationClass="dev.nucleusframework.composeswiftui.idea.PreviewInspection"/>
+        <applicationConfigurable parentId="tools" id="dev.nucleusframework.composeswiftui.previews"
+                                 displayName="Compose SwiftUI Previews"
+                                 instance="dev.nucleusframework.composeswiftui.idea.PreviewConfigurable"/>
     </extensions>
 
     <actions>
@@ -30,6 +46,11 @@
             <add-to-group group-id="CodeMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift P"/>
             <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="meta alt shift P" replace-all="true"/>
+        </action>
+        <action id="ComposeSwiftUI.RenderModulePreviews" class="dev.nucleusframework.composeswiftui.idea.RenderModulePreviewsAction"
+                text="Render All Compose SwiftUI Previews of the Module"
+                description="Render every preview of the module of this file on the iOS simulator">
+            <add-to-group group-id="CodeMenu" anchor="last"/>
         </action>
     </actions>
 </idea-plugin>

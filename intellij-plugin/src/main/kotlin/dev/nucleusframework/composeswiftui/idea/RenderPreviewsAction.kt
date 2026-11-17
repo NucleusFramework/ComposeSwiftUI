@@ -23,15 +23,32 @@ class RenderPreviewsAction : DumbAwareAction() {
 
     override fun getActionUpdateThread() = ActionUpdateThread.EDT
 
-    private fun previewEditor(e: AnActionEvent): PreviewEditor? {
-        val project = e.project ?: return null
-        val file = e.getData(CommonDataKeys.VIRTUAL_FILE) ?: return null
-        return FileEditorManager.getInstance(project).getEditors(file)
-            .filterIsInstance<TextEditorWithPreview>()
-            .firstNotNullOfOrNull { it.previewEditor as? PreviewEditor }
-    }
-
     companion object {
         const val ID = "ComposeSwiftUI.RenderPreviews"
+
+        fun previewEditor(e: AnActionEvent): PreviewEditor? {
+            val project = e.project ?: return null
+            val file = e.getData(CommonDataKeys.VIRTUAL_FILE) ?: return null
+            return FileEditorManager.getInstance(project).getEditors(file)
+                .filterIsInstance<TextEditorWithPreview>()
+                .firstNotNullOfOrNull { it.previewEditor as? PreviewEditor }
+        }
     }
+}
+
+/** Renders every preview of the module of the current file (Code › Render All Compose SwiftUI Previews of the Module). */
+class RenderModulePreviewsAction : DumbAwareAction() {
+    override fun actionPerformed(e: AnActionEvent) {
+        val project = e.project ?: return
+        val file = e.getData(CommonDataKeys.VIRTUAL_FILE) ?: return
+        PreviewModule.of(project, file)?.let { project.service<PreviewRenderer>().render(it, emptySet()) }
+    }
+
+    override fun update(e: AnActionEvent) {
+        val project = e.project
+        val file = e.getData(CommonDataKeys.VIRTUAL_FILE)
+        e.presentation.isEnabledAndVisible = project != null && file != null && RenderPreviewsAction.previewEditor(e) != null
+    }
+
+    override fun getActionUpdateThread() = ActionUpdateThread.EDT
 }

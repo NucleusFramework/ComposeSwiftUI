@@ -15,11 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The IntelliJ plugin targets the IDE's Java 25 runtime.
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: '25'
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4

@@ -48,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.7.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.8.0"
    }
 
    kotlin {
@@ -185,16 +185,20 @@ A row recomposes when its item changes, so prefer immutable items such as data c
 ## Previews
 
 Compose SwiftUI draws with real SwiftUI, so previews render with SwiftUI: in IntelliJ IDEA / Android Studio with the
-Compose SwiftUI IDE plugin, or in Xcode's canvas. Annotate a
-top-level, parameterless composable with `@Preview`:
+Compose SwiftUI IDE plugin, or in Xcode's canvas. Annotate a top-level composable with `@Preview`, repeat it or use a
+multipreview such as `@PreviewLightDark` for variants, and `@PreviewParameter` for sample data:
 
 ```kotlin
-@Preview(name = "Counter")
+@Preview(name = "Counter", group = "Screens")
+@PreviewLightDark
 @Composable
 fun CounterPreview() {
     NavigationStack { CounterScreen() }
 }
 ```
+
+`@Preview` also takes `device`, `width` / `height`, `sizeThatFits`, `colorScheme`, `dynamicTypeSize`, `locale`,
+`layoutDirection` and `backgroundColor`.
 
 ### In IntelliJ IDEA and Android Studio
 
@@ -210,15 +214,16 @@ installed manually:
 Repeat these steps to update: the IDE won't offer updates for a plugin installed from disk.
 
 A Kotlin file with previews opens in a split editor, code on the left and the rendered previews on the right, like
-Compose's own preview. Rendering only runs on demand: the editor's *Render Previews* button, the gutter icon of a
-preview (which also scrolls to it), or *Code › Render Compose SwiftUI Previews* (⌥⇧⌘P on macOS, Ctrl+Alt+Shift+P
-elsewhere).
+Compose's own preview: they render when the file opens and on save (or while typing, or only on demand), in a list,
+grid or gallery with zoom and group filter. The caret and the previews follow each other, a preview runs live on the
+simulator from its context menu, and compile errors and crashing previews show next to the previews.
 
-Rendering runs the `renderComposeSwiftUIPreviews` Gradle task: it links the debug framework of the simulator target
-(`iosSimulatorArm64`, or `iosX64` on Intel Macs), builds a small host app with the renderer, and snapshots every
-preview on the booted simulator (or boots the last available iPhone) into `build/composeSwiftUI/previews/`. It needs
-macOS with Xcode. The first run compiles the renderer (about a minute); after that, a Kotlin change only costs the
-framework link. Choose the simulator with `composeSwiftUI { previewDevice.set("iPhone 17 Pro") }`.
+Rendering runs the `renderComposeSwiftUIPreviews` Gradle task with the previews of the file: it links the debug
+framework of the simulator target (`iosSimulatorArm64`, or `iosX64` on Intel Macs), and a host app that stays running
+on the simulator composes the previews in parallel and captures each one as soon as it stops changing, into
+`build/composeSwiftUI/previews/`. It needs macOS with Xcode. The host is compiled once per library version (about a
+minute); after that a Kotlin change costs the framework link and about two seconds, and re-rendering without a change
+about one. Choose the simulator with `composeSwiftUI { previewDevice.set("iPhone 17 Pro") }`.
 
 ### In Xcode
 
@@ -233,7 +238,7 @@ simulator or device, for example from a debug menu:
 
 - Previews are found by scanning the sources, so any annotation named `Preview` works, including
   `org.jetbrains.compose.ui.tooling.preview.Preview`. The function must be declared at the start of a line (not
-  indented), must not be private and must take no parameters.
+  indented), must not be private and must take no parameters except one `@PreviewParameter`.
 - Only source sets compiled into every Apple framework are scanned: `commonMain`, `appleMain`, and `iosMain` for an
   iOS-only app. A preview in `iosMain` is skipped if the module also has macOS targets.
 - If you added the `ComposeSwiftUI` folder to Xcode as a group before this version, add the new

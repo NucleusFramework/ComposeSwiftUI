@@ -3,12 +3,46 @@
 
 import SwiftUI
 
+#Preview("BadgePreview - Large text") {
+    ComposeView { ComposeSwiftUIPreviews.shared.badgePreview() }
+    .dynamicTypeSize(.accessibility3)
+}
+
+#Preview("BadgePreview - Right to left") {
+    ComposeView { ComposeSwiftUIPreviews.shared.badgePreview() }
+    .environment(\.locale, Locale(identifier: "ar"))
+    .environment(\.layoutDirection, .rightToLeft)
+}
+
+#Preview("Contact row", traits: .sizeThatFitsLayout) {
+    TabView {
+        ForEach(0..<max(0, Int(ComposeSwiftUIPreviews.shared.count(id: "sample.ContactRowPreview"))), id: \.self) { index in
+            ComposeView { ComposeSwiftUIPreviews.shared.contactRowPreview(index: Int32(index)) }
+        }
+    }
+    .tabViewStyle(.page)
+}
+
 #Preview("Counter") {
     ComposeView { ComposeSwiftUIPreviews.shared.counterScreenPreview() }
 }
 
+#Preview("SettingsPreview - Light") {
+    ComposeView { ComposeSwiftUIPreviews.shared.settingsPreview() }
+    .preferredColorScheme(.light)
+}
+
+#Preview("SettingsPreview - Dark") {
+    ComposeView { ComposeSwiftUIPreviews.shared.settingsPreview() }
+    .preferredColorScheme(.dark)
+}
+
 #Preview("Styled text") {
     ComposeView { ComposeSwiftUIPreviews.shared.styledTextScreenPreview() }
+}
+
+#Preview("Tablet", traits: .fixedLayout(width: 820, height: 1180)) {
+    ComposeView { ComposeSwiftUIPreviews.shared.tabletPreview() }
 }
 
 /// Lists every Kotlin `@Preview`. Show it from your app to browse the previews on a device or simulator.
@@ -21,8 +55,12 @@ public struct ComposeSwiftUIPreviewGallery: View {
 
     private var entries: [Entry] {
         [
-            Entry(id: 0, name: "Counter", makeHost: { ComposeSwiftUIPreviews.shared.counterScreenPreview() }),
-            Entry(id: 1, name: "Styled text", makeHost: { ComposeSwiftUIPreviews.shared.styledTextScreenPreview() }),
+            Entry(id: 0, name: "BadgePreview", makeHost: { ComposeSwiftUIPreviews.shared.badgePreview() }),
+            Entry(id: 1, name: "Contact row", makeHost: { ComposeSwiftUIPreviews.shared.contactRowPreview(index: 0) }),
+            Entry(id: 2, name: "Counter", makeHost: { ComposeSwiftUIPreviews.shared.counterScreenPreview() }),
+            Entry(id: 3, name: "SettingsPreview", makeHost: { ComposeSwiftUIPreviews.shared.settingsPreview() }),
+            Entry(id: 4, name: "Styled text", makeHost: { ComposeSwiftUIPreviews.shared.styledTextScreenPreview() }),
+            Entry(id: 5, name: "Tablet", makeHost: { ComposeSwiftUIPreviews.shared.tabletPreview() }),
         ]
     }
 

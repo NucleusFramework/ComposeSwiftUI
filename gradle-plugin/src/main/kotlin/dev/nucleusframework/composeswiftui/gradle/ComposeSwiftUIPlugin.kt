@@ -46,8 +46,8 @@ abstract class ComposeSwiftUIExtension {
     abstract val libraryVersion: Property<String>
 
     /**
-     * Simulator (name or UDID) used by `renderComposeSwiftUIPreviews`. Default: the booted simulator, else the
-     * first available iPhone.
+     * Simulator (name or UDID) used by `renderComposeSwiftUIPreviews`. Default: a simulator of its own,
+     * `Compose SwiftUI Previews` (created like the booted iPhone), booted in the background so the app's stays free.
      */
     abstract val previewDevice: Property<String>
 
@@ -130,8 +130,8 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             task.swiftOutputFile.set(
                 project.layout.buildDirectory.file("generated/composeSwiftUI/previews/${PreviewCodegen.SWIFT_FILE_NAME}"),
             )
-            task.hostSwiftOutputFile.set(
-                project.layout.buildDirectory.file("generated/composeSwiftUI/previews/ComposeSwiftUIRenderedPreviews.swift"),
+            task.manifestFile.set(
+                project.layout.buildDirectory.file("generated/composeSwiftUI/previews/${PreviewCodegen.MANIFEST_FILE_NAME}"),
             )
         }.also { previews ->
             kotlin.targets.withType(KotlinNativeTarget::class.java).configureEach { target ->
@@ -159,9 +159,18 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             task.frameworkName.set(framework.map { it.baseName })
             task.staticFramework.set(framework.map { it.isStatic })
             task.linkerOpts.set(framework.map { if (it.isStatic) it.linkerOpts else emptyList() })
-            task.previewsSwiftFile.set(previews.flatMap { it.swiftOutputFile })
-            task.hostSwiftFile.set(previews.flatMap { it.hostSwiftOutputFile })
+            task.manifestFile.set(previews.flatMap { it.manifestFile })
             task.device.set(extension.previewDevice)
+            // Set by the IDE plugin: the previews of the open file, or one preview to run interactively.
+            task.previewFilter.set(
+                project.providers.gradleProperty("composeSwiftUI.previews")
+                    .map { it.split(',').map(String::trim).filter(String::isNotEmpty) }
+                    .orElse(emptyList()),
+            )
+            task.interactivePreview.set(project.providers.gradleProperty("composeSwiftUI.interactivePreview"))
+            task.settleMilliseconds.set(
+                project.providers.gradleProperty("composeSwiftUI.previewSettleMs").map(String::toInt).orElse(1500),
+            )
             // Compose Multiplatform resources, when the module uses them (the app bundle must carry them).
             // Wire the task's outputs, not the task itself: a Task can't be stored in the configuration cache.
             task.composeResources.from(
@@ -212,6 +221,17 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 e,
             )
         }
+        // Source information lets the IDE previews go from a view to its code and patch literals without a build.
+        // Off in Xcode Release builds only, so Xcode Debug and the IDE share their compilations. A value set in
+        // `composeCompiler { }` wins. (Reflection: the user's build may load the Compose plugin in another class loader.)
+        val composeCompiler = project.extensions.findByName("composeCompiler") ?: return
+        @Suppress("UNCHECKED_CAST")
+        val includeSourceInformation = runCatching {
+            composeCompiler.javaClass.getMethod("getIncludeSourceInformation").invoke(composeCompiler) as Property<Boolean>
+        }.getOrNull() ?: return
+        includeSourceInformation.convention(
+            project.providers.environmentVariable("CONFIGURATION").map { it != "Release" }.orElse(true),
+        )
     }
 
     private fun defaultOutputDir(project: Project) = project.layout.dir(
@@ -336,8 +356,9 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
  */
 @CacheableTask
 abstract class GenerateComposeSwiftUIPreviewsTask : DefaultTask() {
+    // Absolute: the manifest records where each preview is declared, for the IDE.
     @get:InputFiles
-    @get:PathSensitive(PathSensitivity.RELATIVE)
+    @get:PathSensitive(PathSensitivity.ABSOLUTE)
     abstract val sources: ConfigurableFileCollection
 
     @get:Input
@@ -349,15 +370,15 @@ abstract class GenerateComposeSwiftUIPreviewsTask : DefaultTask() {
     @get:OutputFile
     abstract val swiftOutputFile: RegularFileProperty
 
-    /** Preview list of the host app that renders the previews to PNG (see [RenderComposeSwiftUIPreviewsTask]). */
+    /** Previews and their variants, read by the host app that renders them (see [RenderComposeSwiftUIPreviewsTask]). */
     @get:OutputFile
-    abstract val hostSwiftOutputFile: RegularFileProperty
+    abstract val manifestFile: RegularFileProperty
 
     @TaskAction
     fun generate() {
-        val previews = sources.asFileTree.matching { it.include("**/*.kt") }.files
-            .sorted()
-            .flatMap { PreviewScanner.scan(it.readText()) }
+        val previews = PreviewScanner.scanAll(
+            sources.asFileTree.matching { it.include("**/*.kt") }.files.sorted().map { it.path to it.readText() },
+        )
         val entries = PreviewScanner.entries(previews)
 
         val kotlinRoot = kotlinOutputDirectory.get().asFile
@@ -367,7 +388,7 @@ abstract class GenerateComposeSwiftUIPreviewsTask : DefaultTask() {
             kotlinRoot.resolve("$target/${PreviewCodegen.OBJECT_NAME}.kt").apply { parentFile.mkdirs() }.writeText(kotlinCode)
         }
         swiftOutputFile.get().asFile.apply { parentFile.mkdirs() }.writeText(PreviewCodegen.swift(entries))
-        hostSwiftOutputFile.get().asFile.apply { parentFile.mkdirs() }.writeText(PreviewCodegen.hostSwift(entries))
+        manifestFile.get().asFile.apply { parentFile.mkdirs() }.writeText(PreviewCodegen.manifest(entries))
         logger.info("Compose SwiftUI: ${entries.size} preview(s): ${entries.joinToString { it.function.qualifiedName }}")
     }
 }
