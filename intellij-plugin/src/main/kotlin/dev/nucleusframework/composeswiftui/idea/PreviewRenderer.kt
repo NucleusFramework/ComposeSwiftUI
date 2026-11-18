@@ -100,8 +100,8 @@ class PreviewRenderer(private val project: Project) {
         if (code < built && !unsaved) {
             // Nothing to build since the last build: the running host renders right away, without Gradle.
             LOG.info("Rendering ${module.gradlePath} on the running host, without Gradle")
-            progressBars[module]?.step = "Rendering on the simulator…"
-            publisher().renderingProgress(module, "Rendering on the simulator…")
+            progressBars[module]?.step = "Rendering on the simulator or the Mac…"
+            publisher().renderingProgress(module, "Rendering on the simulator or the Mac…")
             ApplicationManager.getApplication().executeOnPooledThread {
                 val done = ids.isNotEmpty() && PreviewHostClient(module).render(ids, emptyList(), PreviewSettings.options.settleMs)
                 if (done) {
@@ -132,7 +132,7 @@ class PreviewRenderer(private val project: Project) {
             val step = when {
                 ":compileKotlin" in taskPath -> "Compiling Kotlin…"
                 ":link" in taskPath -> "Linking the framework…"
-                ":renderComposeSwiftUIPreviews" in taskPath -> "Rendering on the simulator…"
+                ":renderComposeSwiftUIPreviews" in taskPath -> "Rendering on the simulator or the Mac…"
                 else -> null
             }
             if (step != null) {
@@ -206,11 +206,11 @@ class PreviewRenderer(private val project: Project) {
     /** Projects whose build can't run with the configuration cache: rendered without it from then on. */
     private val withoutConfigurationCache = java.util.Collections.newSetFromMap(java.util.concurrent.ConcurrentHashMap<PreviewModule, Boolean>())
 
-    /** Opens the preview [key] live on the simulator, where it can be used like the app. */
+    /** Opens the preview [key] live on the simulator (or the Mac), where it can be used like the app. */
     fun runInteractive(module: PreviewModule, key: String) {
         writeRequest(module, setOf(key.substringBefore('~').substringBefore('#')), interactive = key)
         gradle(module, {}) { success, output ->
-            if (!success) LOG.warn("Run on Simulator failed:\n${output.takeLast(4000)}")
+            if (!success) LOG.warn("Run Preview failed:\n${output.takeLast(4000)}")
         }
     }
 

@@ -2,6 +2,7 @@
 // IOHIDEvent routed to the window's rendering context and enqueued in UIKit, which turns it into touches exactly as
 // for a real finger (the technique of Lyft's Hammer). Private API, which is fine for a simulator-only development tool.
 
+#if os(iOS)
 import UIKit
 
 @MainActor
@@ -49,11 +50,8 @@ final class TouchSynthesizer {
             UIApplication.shared.responds(to: enqueueSelector)
     }
 
-    /// Phase of the one-finger gesture the IDE drives: began, moved…, ended.
-    enum Phase { case began, moved, ended }
-
     /// Sends one phase of the finger at [point] (window coordinates) to [window].
-    func send(_ phase: Phase, at point: CGPoint, in window: UIWindow) {
+    func send(_ phase: PointerPhase, at point: CGPoint, in window: UIWindow) {
         guard Self.isAvailable, let event = hidEvent(phase, window.convert(point, to: nil)) else { return }
         Self.setSenderID?(event, Self.senderID)
         // Routes the event to the window's rendering context, as backboardd does for a real finger.
@@ -64,7 +62,7 @@ final class TouchSynthesizer {
         Unmanaged<CFTypeRef>.fromOpaque(UnsafeRawPointer(event)).release()
     }
 
-    private func hidEvent(_ phase: Phase, _ point: CGPoint) -> OpaquePointer? {
+    private func hidEvent(_ phase: PointerPhase, _ point: CGPoint) -> OpaquePointer? {
         guard let createHand = Self.createHand, let createFinger = Self.createFinger,
               let setInteger = Self.setInteger, let append = Self.append else { return nil }
         let time = mach_absolute_time()
@@ -114,3 +112,4 @@ extension UIResponder {
         MainActor.assumeIsolated { FirstResponder.found = self }
     }
 }
+#endif

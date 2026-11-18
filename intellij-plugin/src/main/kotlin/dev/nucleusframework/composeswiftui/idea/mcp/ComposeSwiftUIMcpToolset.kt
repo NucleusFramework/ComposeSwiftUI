@@ -20,7 +20,7 @@ class ComposeSwiftUIMcpToolset : McpToolset {
         """
         |Lists the Compose SwiftUI @Preview functions of a Kotlin file (or of the whole project) with their variants:
         |the index of each variant (multipreview annotations, repeated @Preview, @PreviewParameter values) is the
-        |previewIndex of the other tools. Compose SwiftUI previews render real SwiftUI on the iOS simulator.
+        |previewIndex of the other tools. Compose SwiftUI previews render real SwiftUI on the iOS simulator, or on the Mac (`device = "mac"`, or a macOS-only module).
         """,
     )
     suspend fun list_swiftui_previews(
@@ -31,7 +31,7 @@ class ComposeSwiftUIMcpToolset : McpToolset {
     @McpTool
     @McpDescription(
         """
-        |Renders a Compose SwiftUI preview with real SwiftUI on the iOS simulator and describes it: the PNG path (open it
+        |Renders a Compose SwiftUI preview with real SwiftUI on the iOS simulator or the Mac and describes it: the PNG path (open it
         |to see the preview), the component tree (every view with its source line, frame in points and text) and UI
         |checks (touch targets, text contrast, small text, overlaps, clipping). On failure: compiler errors with their
         |lines, or the Kotlin exception of the preview. Saves open files and builds what changed first.

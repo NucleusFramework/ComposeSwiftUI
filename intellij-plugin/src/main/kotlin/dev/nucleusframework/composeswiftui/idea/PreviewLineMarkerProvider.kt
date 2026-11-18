@@ -17,7 +17,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.ui.awt.RelativePoint
 import org.jetbrains.kotlin.psi.KtNamedFunction
 
-/** Gutter icon on each preview: render it, show it in the preview pane, or run it on the simulator. */
+/** Gutter icon on each preview: render it, show it in the preview pane, or run it on the simulator or the Mac. */
 class PreviewLineMarkerProvider : LineMarkerProvider {
     override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? {
         val function = element.parent as? KtNamedFunction ?: return null
@@ -36,7 +36,7 @@ class PreviewLineMarkerProvider : LineMarkerProvider {
                 action("Interactive Mode", AllIcons.Actions.Execute) {
                     previewEditor(project, file, show = true)?.startInteractive(key)
                 },
-                action("Run on Simulator", AllIcons.Nodes.Deploy) {
+                action("Run Preview", AllIcons.Nodes.Deploy) {
                     PreviewModule.of(project, file)?.let { project.service<PreviewRenderer>().runInteractive(it, key) }
                 },
             )

@@ -13,7 +13,7 @@ version =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.8.0"
+        ?: "0.8.1"
 
 repositories {
     mavenCentral()
@@ -38,6 +38,9 @@ tasks.test {
     systemProperty("idea.kotlin.plugin.use.k2", "true")
     // End-to-end test against the simulator (SimulatorEndToEndTest), when given.
     providers.systemProperty("csui.e2e.module").orNull?.let { systemProperty("csui.e2e.module", it) }
+    // The same against the Mac host (MacEndToEndTest), when given.
+    providers.systemProperty("csui.e2e.mac.module").orNull?.let { systemProperty("csui.e2e.mac.module", it) }
+    providers.systemProperty("csui.e2e.dump").orNull?.let { systemProperty("csui.e2e.dump", it) }
     // The preview pane through many edits against a copy of the sample (EditorTortureTest), when given.
     providers.systemProperty("csui.torture.module").orNull?.let { systemProperty("csui.torture.module", it) }
 }

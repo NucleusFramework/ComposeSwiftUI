@@ -1,28 +1,21 @@
-// Host app run by the `renderComposeSwiftUIPreviews` Gradle task on the iOS simulator. It stays running between
-// renders: it watches a request file (written by the task, or by the IDE for live literal edits), renders a batch of
-// previews at once, each in its own window, and writes `<output>/<key>.png` as soon as a preview stops changing, with
-// `<key>.layout.json` (the frame and source of every view, for the IDE's click-to-code). The task relaunches it when
-// the app changes. Interactive requests run a live preview streamed to the IDE (PreviewInteractive.swift).
-// These files never change with the previews (they are looked up by name), so the host is only compiled once.
+// Host app run by the `renderComposeSwiftUIPreviews` Gradle task, on the iOS simulator or on the Mac. It stays running
+// between renders: it watches a request file (written by the task, or by the IDE for live literal edits), renders a
+// batch of previews at once, each in its own window, and writes `<output>/<key>.png` as soon as a preview stops
+// changing, with `<key>.layout.json` (the frame and source of every view, for the IDE's click-to-code). The task
+// relaunches it when the app changes. Interactive requests run a live preview streamed to the IDE
+// (PreviewInteractive.swift).
+// These files never change with the previews (they are looked up by name), so the host is only compiled once. This
+// file is shared by both platforms; the windows are UIKit's (PreviewHostUIKit.swift) or AppKit's (PreviewHostAppKit.swift).
 //
 // Protocol: the app writes `{"pid": …}` to the state file once started. For each request (a new `seq`), its stdout
 // and stderr go to the request's `response` file: `CSUI-BEGIN <key>` before a preview is composed, `CSUI-DONE <json>`
 // once its image is written, `CSUI-ERROR <key> <message>` (newlines as `\n`) for a preview that can't be rendered, and `CSUI-END` at the
 // end. A Kotlin exception ends the app: its message is the end of the response.
 
+import Foundation
+import ImageIO
 import SwiftUI
-import UIKit
-
-@main
-struct ComposeSwiftUIPreviewHost: App {
-    init() {
-        ComposeInspection.enabled = true
-    }
-
-    var body: some Scene {
-        WindowGroup { HostRoot() }
-    }
-}
+import UniformTypeIdentifiers
 
 struct PreviewJob: Decodable {
     let key: String
@@ -72,12 +65,37 @@ struct PreviewUnit {
     let title: String
 
     /// Only called for units made by `Host.units`, which skips previews missing from the framework.
+    @MainActor
     func makeHost() -> ComposeSwiftUIHost {
         let host = ComposeSwiftUIPreviews.shared.host(id: job.id, index: Int32(index))!
         host.inspectable = true
         return host
     }
 }
+
+/// The window of one preview, UIKit's or AppKit's: the batch renderer and the live preview only see this.
+@MainActor
+protocol PreviewSurface: AnyObject {
+    /// The preview's bounds, in points.
+    var bounds: CGRect { get }
+    /// Pixels per point of the final image.
+    var scale: CGFloat { get }
+    /// Whether [pointer] reaches the views like a real finger or mouse.
+    var pointerAvailable: Bool { get }
+    /// Resizes a `sizeThatFits` preview to its content.
+    func fitContent()
+    func snapshot(scale: CGFloat, afterScreenUpdates: Bool) -> CGImage?
+    func close()
+    /// A press, drag or release at [point] (points from the top left).
+    func pointer(_ phase: PointerPhase, at point: CGPoint)
+    /// The scroll view under [point] scrolls by [delta], within its content.
+    func scroll(at point: CGPoint, by delta: CGPoint)
+    /// Typing into the focused field.
+    func type(_ text: String)
+    func deleteBackward()
+}
+
+enum PointerPhase { case began, moved, ended }
 
 @MainActor
 enum Patches {
@@ -96,7 +114,7 @@ enum Patches {
     }
 }
 
-private enum Host {
+enum Host {
     static let environment = ProcessInfo.processInfo.environment
     static let requestPath = environment["COMPOSE_SWIFTUI_PREVIEW_REQUEST"] ?? ""
     static let statePath = environment["COMPOSE_SWIFTUI_PREVIEW_STATE"]
@@ -107,18 +125,23 @@ private enum Host {
 
     static let initialRequest = readRequest()
 
+    /// `Run on Simulator` / `Run on Mac`: the preview of the initial request, live, in the foreground.
+    @MainActor
+    static var runUnit: PreviewUnit? {
+        guard let request = initialRequest, request.interactive, request.port == nil else { return nil }
+        return units(request.jobs).first
+    }
+
     /// Serves requests until the app is terminated: each new `seq` is rendered, its output in its response file.
     @MainActor
-    static func serve(scene: UIWindowScene) async {
+    static func serve() async {
         // Only the foreground app of a simulator renders: the state tells the caller to activate the host again.
         func writeState(active: Bool) {
             guard let statePath else { return }
             try? "{\"pid\": \(getpid()), \"active\": \(active)}".write(toFile: statePath, atomically: true, encoding: .utf8)
         }
         writeState(active: true)
-        for (name, active) in [(UIApplication.didEnterBackgroundNotification, false), (UIApplication.didBecomeActiveNotification, true)] {
-            NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) { _ in writeState(active: active) }
-        }
+        PreviewHostPlatform.observeActivity(writeState)
         var last: Int64 = -1
         while true {
             if let request = readRequest(), request.seq != last {
@@ -129,9 +152,9 @@ private enum Host {
                 dup2(fileno(stdout), STDERR_FILENO)
                 Patches.apply(request.patches ?? [])
                 if request.interactive, let port = request.port, let unit = units(request.jobs).first {
-                    InteractiveSession.start(unit, port: UInt16(port), scene: scene)
+                    InteractiveSession.start(unit, port: UInt16(port))
                 } else {
-                    await BatchRenderer(request: request, scene: scene).run()
+                    await BatchRenderer(request: request).run()
                 }
                 print("CSUI-END")
                 fflush(stdout)
@@ -141,6 +164,7 @@ private enum Host {
     }
 
     /// Expands parameterized previews into one unit per value of their provider.
+    @MainActor
     static func units(_ jobs: [PreviewJob]) -> [PreviewUnit] {
         jobs.flatMap { job -> [PreviewUnit] in
             let count = Int(ComposeSwiftUIPreviews.shared.count(id: job.id))
@@ -163,22 +187,6 @@ private enum Host {
             return indices.map { i in
                 PreviewUnit(job: job, index: i, key: "\(job.key)#\(i)", title: "\(job.title) (\(i + 1) of \(count))")
             }
-        }
-    }
-}
-
-private struct HostRoot: View {
-    var body: some View {
-        // `Run on Simulator`: the preview, live, full screen on the simulator.
-        if let request = Host.initialRequest, request.interactive, request.port == nil, let unit = Host.units(request.jobs).first {
-            PreviewContent(unit: unit, host: unit.makeHost())
-        } else {
-            Text("Rendering previews…")
-                .foregroundStyle(.secondary)
-                .task {
-                    guard let scene = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first else { exit(1) }
-                    await Host.serve(scene: scene)
-                }
         }
     }
 }
@@ -240,48 +248,26 @@ private extension Color {
     }
 }
 
-/// The window of a preview, set up from its `@Preview` arguments: size, size classes, appearance, direction.
-@MainActor
-enum PreviewWindow {
-    /// Configures [window] and [controller] for [job] and returns the window size.
-    static func configure(_ controller: UIHostingController<PreviewContent>, window: UIWindow, job: PreviewJob, screen: CGSize) -> CGSize {
-        if job.width > 0 || job.height > 0 || job.sizeThatFits {
-            // A component, not a screen: no status bar or home indicator insets.
-            controller.safeAreaRegions = []
-            let width = CGFloat(job.width > 0 ? job.width : Int(screen.width))
-            controller.traitOverrides.horizontalSizeClass = width >= 700 ? .regular : .compact
-            if job.height > 0 { controller.traitOverrides.verticalSizeClass = job.height < 500 ? .compact : .regular }
-        }
-        switch job.colorScheme {
-        case "dark": window.overrideUserInterfaceStyle = .dark
-        case "light": window.overrideUserInterfaceStyle = .light
-        default: break
-        }
-        if job.layoutDirection == "rightToLeft" { controller.traitOverrides.layoutDirection = .rightToLeft }
-        controller.view.backgroundColor = .systemBackground
-        return size(of: job, controller: controller, screen: screen)
+enum ImageEncoding {
+    static func png(_ image: CGImage) -> Data? { encode(image, type: .png, properties: [:]) }
+
+    static func jpeg(_ image: CGImage, quality: Double) -> Data? {
+        encode(image, type: .jpeg, properties: [kCGImageDestinationLossyCompressionQuality: quality])
     }
 
-    /// Size of the window: the `@Preview` size, else the screen; the content's height with `sizeThatFits`.
-    static func size(of job: PreviewJob, controller: UIHostingController<PreviewContent>, screen: CGSize) -> CGSize {
-        let width = job.width > 0 ? CGFloat(job.width) : screen.width
-        var height = job.height > 0 ? CGFloat(job.height) : screen.height
-        if job.sizeThatFits {
-            let fitting = controller.sizeThatFits(in: CGSize(width: width, height: job.height > 0 ? height : .greatestFiniteMagnitude))
-            if fitting.height.isFinite && fitting.height > 0 { height = min(fitting.height, job.height > 0 ? height : 4 * screen.height) }
-            let fittingWidth = job.width > 0 ? width : min(max(fitting.width, 1), width)
-            return CGSize(width: ceil(fittingWidth), height: ceil(height))
-        }
-        return CGSize(width: width, height: height)
+    private static func encode(_ image: CGImage, type: UTType, properties: [CFString: Any]) -> Data? {
+        let data = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(data, type.identifier as CFString, 1, nil) else { return nil }
+        CGImageDestinationAddImage(destination, image, properties as CFDictionary)
+        return CGImageDestinationFinalize(destination) ? data as Data : nil
     }
 }
 
 /// The views of a preview for the IDE and agents: each node's frame in the window, its strings and the call sites that produced it.
 @MainActor
 enum PreviewLayoutCapture {
-    static func capture(host: ComposeSwiftUIHost, window: UIWindow) -> [String: Any] {
+    static func capture(host: ComposeSwiftUIHost, bounds: CGRect) -> [String: Any] {
         let sources = (try? JSONSerialization.jsonObject(with: Data(host.inspect().utf8)) as? [[String: Any]]) ?? []
-        let bounds = window.bounds
         var nodes: [[String: Any]] = []
         for source in sources {
             guard let id = (source["id"] as? NSNumber)?.int64Value, let frame = ComposeInspection.frames[id],
@@ -302,26 +288,22 @@ enum PreviewLayoutCapture {
 @MainActor
 private final class BatchRenderer {
     private let request: PreviewRequest
-    private let scene: UIWindowScene
 
-    init(request: PreviewRequest, scene: UIWindowScene) {
+    init(request: PreviewRequest) {
         self.request = request
-        self.scene = scene
     }
 
     private final class Slot {
         let unit: PreviewUnit
-        let window: UIWindow
-        let controller: UIHostingController<PreviewContent>
+        let surface: PreviewSurface
         let host: ComposeSwiftUIHost
         let start = Date()
         var previous: Data?
         var done = false
 
-        init(unit: PreviewUnit, window: UIWindow, controller: UIHostingController<PreviewContent>, host: ComposeSwiftUIHost) {
+        init(unit: PreviewUnit, surface: PreviewSurface, host: ComposeSwiftUIHost) {
             self.unit = unit
-            self.window = window
-            self.controller = controller
+            self.surface = surface
             self.host = host
         }
     }
@@ -337,57 +319,39 @@ private final class BatchRenderer {
     }
 
     private func render(_ batch: [PreviewUnit]) async {
-        let screen = scene.screen.bounds.size
         let slots = batch.map { unit -> Slot in
             print("CSUI-BEGIN \(unit.key)")
             fflush(stdout)
             let host = unit.makeHost()
-            let controller = UIHostingController(rootView: PreviewContent(unit: unit, host: host))
-            let window = UIWindow(windowScene: scene)
-            let size = PreviewWindow.configure(controller, window: window, job: unit.job, screen: screen)
-            window.rootViewController = controller
-            window.frame = CGRect(origin: .zero, size: size)
-            window.isHidden = false
-            return Slot(unit: unit, window: window, controller: controller, host: host)
+            return Slot(unit: unit, surface: PreviewHostPlatform.makeSurface(unit: unit, host: host, interactive: false), host: host)
         }
 
         let limit = Double(request.settleMilliseconds) / 1000
         while slots.contains(where: { !$0.done }) {
             try? await Task.sleep(for: .milliseconds(100))
             for slot in slots where !slot.done {
-                let job = slot.unit.job
-                if job.sizeThatFits {
-                    slot.window.frame.size = PreviewWindow.size(of: job, controller: slot.controller, screen: screen)
-                }
+                slot.surface.fitContent()
                 let elapsed = Date().timeIntervalSince(slot.start)
-                let probe = snapshot(slot.window, scale: 0.25).pngData()
+                let probe = slot.surface.snapshot(scale: 0.25, afterScreenUpdates: true).flatMap(ImageEncoding.png)
                 let stable = probe != nil && probe == slot.previous && elapsed >= 0.2
                 slot.previous = probe
                 if stable || elapsed >= limit { finish(slot, elapsed: elapsed) }
             }
         }
-        for slot in slots {
-            slot.window.isHidden = true
-            slot.window.rootViewController = nil
-        }
-    }
-
-    private func snapshot(_ window: UIWindow, scale: CGFloat) -> UIImage {
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = scale
-        return UIGraphicsImageRenderer(bounds: window.bounds, format: format).image { _ in
-            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
-        }
+        for slot in slots { slot.surface.close() }
     }
 
     private func finish(_ slot: Slot, elapsed: TimeInterval) {
         slot.done = true
         let output = URL(fileURLWithPath: request.output)
         let file = output.appendingPathComponent("\(slot.unit.key).png")
-        let image = snapshot(slot.window, scale: slot.window.screen.scale)
+        let surface = slot.surface
         do {
-            try image.pngData()?.write(to: file)
-            let layout = PreviewLayoutCapture.capture(host: slot.host, window: slot.window)
+            guard let image = surface.snapshot(scale: surface.scale, afterScreenUpdates: true), let png = ImageEncoding.png(image) else {
+                throw CocoaError(.fileWriteUnknown)
+            }
+            try png.write(to: file)
+            let layout = PreviewLayoutCapture.capture(host: slot.host, bounds: surface.bounds)
             try JSONSerialization.data(withJSONObject: layout).write(to: output.appendingPathComponent("\(slot.unit.key).layout.json"))
         } catch {
             print("CSUI-ERROR \(slot.unit.key) \(error)")
@@ -397,8 +361,8 @@ private final class BatchRenderer {
             "id": slot.unit.job.id,
             "title": slot.unit.title,
             "file": file.lastPathComponent,
-            "width": Int(slot.window.bounds.width),
-            "height": Int(slot.window.bounds.height),
+            "width": Int(surface.bounds.width),
+            "height": Int(surface.bounds.height),
             "milliseconds": Int(elapsed * 1000),
         ]
         if let data = try? JSONSerialization.data(withJSONObject: result), let json = String(data: data, encoding: .utf8) {
@@ -407,4 +371,3 @@ private final class BatchRenderer {
         }
     }
 }
-

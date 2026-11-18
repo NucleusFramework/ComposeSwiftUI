@@ -8,7 +8,7 @@ ways to see them, both driven by the same `@Preview` annotation:
 
 | Where | How it renders | Needs |
 |---|---|---|
-| IntelliJ IDEA / Android Studio | The `renderComposeSwiftUIPreviews` Gradle task snapshots each preview on the iOS simulator; the IDE plugin shows the PNGs next to the code | macOS, Xcode, an `iosSimulatorArm64` (or `iosX64`) target, the IDE plugin |
+| IntelliJ IDEA / Android Studio | The `renderComposeSwiftUIPreviews` Gradle task snapshots each preview on the iOS simulator or on the Mac; the IDE plugin shows the PNGs next to the code | macOS, Xcode, an `iosSimulatorArm64` (or `iosX64`) or `macosArm64` (or `macosX64`) target, the IDE plugin |
 | Xcode | A generated `ComposeSwiftUIPreviews.swift` holds one Swift `#Preview` per Kotlin preview | The app builds in Xcode |
 
 ## Writing previews
@@ -55,7 +55,7 @@ is optional, and they must be literals (or enum entries):
 |---|---|
 | `name` | Title in the IDE, in Xcode and in the gallery. Default: the function name |
 | `group` | Group, to filter the previews in the IDE |
-| `device` | Simulator (name or UDID) that renders it in the IDE. Default: `previewDevice` |
+| `device` | Simulator (name or UDID) that renders it in the IDE, or `"mac"` to render it on the Mac. Default: `previewDevice` |
 | `width`, `height` | Size in points. Default: the device screen. A custom size drops the safe areas and sets the size classes (regular from 700 points wide) |
 | `sizeThatFits` | Sizes the preview to its content, like Xcode's `.sizeThatFitsLayout` |
 | `colorScheme` | `PreviewColorScheme.Light` or `Dark` |
@@ -210,7 +210,8 @@ A Kotlin file with previews opens in a split editor: code on the left, rendered 
   - *Slow Animations* runs animations ten times slower (the simulator's *Slow Animations*);
   - *Record Animation* captures the frames until you stop it, then a timeline replays them at their pace or frame by
     frame: the animation inspector.
-- **Run on Simulator** opens a preview in the Simulator app instead, full screen, with the variant's settings.
+- **Run Preview** opens a preview in the Simulator app instead, full screen, with the variant's settings (a Mac
+  preview opens in a window of its own).
 - **Errors stay next to the previews.** A compile error lists its file and line, as links; a preview that throws shows
   the Kotlin exception in its place while the others render.
 - Right-click a preview to copy its image, save it as PNG, or render only that preview. *Code › Render All Compose
@@ -238,6 +239,8 @@ The task:
 1. Links the **debug framework of the simulator target**: `iosSimulatorArm64` on Apple silicon, `iosX64` on Intel
    Macs. The IDE turns on Kotlin/Native incremental compilation (`-Pkotlin.incremental.native=true`), which shortens
    this link; turn it off in the settings if your build doesn't support it.
+   A Mac preview uses the debug framework of the macOS target (`macosArm64`, or `macosX64`) instead (see
+   [Previews on the Mac](#previews-on-the-mac)).
 2. Builds a small host app with `swiftc`: the Swift renderer and a runner that looks previews up by name. It is
    compiled once per library version (about a minute), not when previews or your app's API change. The app is
    relinked only when the framework changed (never for a dynamic framework, whose copy in the app is replaced), with
@@ -267,20 +270,51 @@ Because the previews run on a real simulator, they render exactly like the app o
 Liquid Glass, Dynamic Type, safe areas. By default each preview gets the full screen of the device; use `width` and
 `height`, or `sizeThatFits`, for components.
 
+### Previews on the Mac
+
+A macOS app's previews render on the Mac itself, with AppKit's SwiftUI: a `List` is a table, a `Picker` a pop-up
+button, a `Form` is aligned in columns, exactly like the Mac app.
+
+- In a module with a `macosArm64()` target (`macosX64()` on an Intel Mac) and no iOS simulator target, every preview
+  renders on the Mac.
+- In a module with both, previews render on the simulator; `device = "mac"` sends one to the Mac, and
+  `previewDevice.set("mac")` the whole module. A multipreview can have variants on both:
+
+```kotlin
+@Preview(name = "iPhone", sizeThatFits = true)
+@Preview(name = "Mac", device = "mac", width = 400, sizeThatFits = true)
+@Composable
+fun MessageCountPreview() {
+    Text("5 new messages", modifier = Modifier.padding())
+}
+```
+
+The macOS framework is only linked when a preview needs it: when a preview's source says `device = "mac"` (written
+as a literal), `previewDevice` is `"mac"`, or the module has no iOS simulator target.
+
+The Mac host runs in the background, without a Dock icon and without taking the focus, each preview in a window off
+the screen, captured as the WindowServer draws it (materials and vibrancy included). It doesn't need the screen
+recording permission. A preview without `width` or `height` gets a typical window, 800 × 600 points; with
+`sizeThatFits`, its content's size. The images have the scale of your screen. Live literals, click-to-code, the agent
+tools and interactive mode work the same: in interactive mode the mouse clicks, drags and scrolls and the keyboard
+types, as real mouse and key events. *Slow Animations* has no effect on the Mac, and `dynamicTypeSize` is ignored
+there, as macOS has no Dynamic Type. *Run Preview* opens the preview in a regular window.
+
 ### Configuration
 
 ```kts
 composeSwiftUI {
-    // Simulator name or UDID used for previews (default: "Compose SwiftUI Previews", created and booted in the background)
+    // Simulator name or UDID used for previews (default: "Compose SwiftUI Previews", created and booted in the
+    // background), or "mac" to render them on the Mac
     previewDevice.set("iPhone 17 Pro")
 }
 ```
 
 `-PcomposeSwiftUI.previewSettleMs=3000` raises the longest wait for a preview to settle (also in the IDE settings).
 
-The module needs an `iosSimulatorArm64()` target (`iosX64()` on an Intel Mac) with a framework binary; Kotlin creates
-the debug variant of every `binaries.framework { }`. A module with only macOS, tvOS or watchOS targets has no IDE
-previews; use Xcode's canvas there.
+The module needs an `iosSimulatorArm64()` target (`iosX64()` on an Intel Mac) or a `macosArm64()` target (`macosX64()`)
+with a framework binary; Kotlin creates the debug variant of every `binaries.framework { }`. A module with only tvOS or
+watchOS targets has no IDE previews; use Xcode's canvas there.
 
 ## For AI agents
 
@@ -413,14 +447,15 @@ Generated source directories (under `build/`) are never scanned.
 
 | Symptom | Cause and fix |
 |---|---|
-| "Compose SwiftUI previews need the `iosSimulatorArm64()` target with a framework binary" | Add the simulator target with `binaries.framework { }` to the module. |
+| "Compose SwiftUI previews need the `iosSimulatorArm64()` or `macosArm64()` target…" | Add the simulator or macOS target with `binaries.framework { }` to the module. |
+| "previews on the Mac need the `macosArm64()` target…" | Add the macOS target, or, if it is there and the device comes from a constant, write `device = "mac"` as a literal or set `previewDevice`. |
 | "…need a debug framework on `iosSimulatorArm64`" | The framework is declared only for release (`binaries.framework(listOf(RELEASE))`); add `DEBUG`. |
 | Link error with "Undefined symbols" | The host app does not get your Xcode target's `OTHER_LDFLAGS`. Declare the system libraries the Kotlin code needs on the framework: `binaries.framework { linkerOpts("-lsqlite3") }`. They are forwarded for static frameworks; a dynamic framework already links them itself. `sqlite3` (SQLDelight) and `zlib` are linked automatically since 0.6.0. |
 | "no iOS simulator found" | Install an iOS simulator runtime in Xcode › Settings › Components, or set `previewDevice` to an existing device name or UDID. |
 | A preview is missing | Check the rules above (the IDE plugin highlights a `@Preview` that breaks them): top-level at column 0, not private, no parameter except one `@PreviewParameter`, `@Composable` present, and in a scanned source set. The task log lists the previews found (`--info`). |
 | A preview shows a spinner or empty content | A preview is captured once it stops changing, or at the settle limit (1.5 s). Content loaded asynchronously after that is not captured: preview with fake, synchronous data, or raise the limit in the IDE settings (`-PcomposeSwiftUI.previewSettleMs`). |
 | Clicking a view goes nowhere, or live literals don't apply | Both need the source information (see above) and a render since it was turned on. Live literals only cover string, number and boolean literals; other edits wait for the build. |
-| Interactive mode says "touches unavailable" | The simulator runtime lacks the private touch API the host uses: the preview still streams; use *Run on Simulator* to interact. |
+| Interactive mode says "touches unavailable" | The simulator runtime lacks the private touch API the host uses: the preview still streams; use *Run Preview* to interact. |
 | A preview shows a Kotlin exception | It threw while composing: the other previews still render. The stack trace has no line numbers; reproduce it in the app or a test. |
 | "not in the framework yet" | The preview was added after the framework was linked by another task: render again. |
 | A preview shows "Unsupported view kind" or a red "No native view" | The renderer is older than the library (stale Xcode copy), or a `NativeView` key registered by your app is missing in the preview host, which does not run your app's `init`. Avoid `NativeView` in previews, or guard it. |

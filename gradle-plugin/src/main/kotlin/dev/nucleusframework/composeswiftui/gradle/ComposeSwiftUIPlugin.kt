@@ -46,8 +46,9 @@ abstract class ComposeSwiftUIExtension {
     abstract val libraryVersion: Property<String>
 
     /**
-     * Simulator (name or UDID) used by `renderComposeSwiftUIPreviews`. Default: a simulator of its own,
-     * `Compose SwiftUI Previews` (created like the booted iPhone), booted in the background so the app's stays free.
+     * Simulator (name or UDID) used by `renderComposeSwiftUIPreviews`, or `"mac"` to render on this Mac. Default: a
+     * simulator of its own, `Compose SwiftUI Previews` (created like the booted iPhone), booted in the background so
+     * the app's stays free; the Mac in a module without an iOS simulator target.
      */
     abstract val previewDevice: Property<String>
 
@@ -146,22 +147,53 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             }
         }
 
-    /** `renderComposeSwiftUIPreviews`, run by the IntelliJ plugin. Uses the debug framework of the simulator target. */
+    /**
+     * `renderComposeSwiftUIPreviews`, run by the IntelliJ plugin. Uses the debug framework of the simulator target, and
+     * that of the macOS target for the previews rendered on the Mac: only linked when some preview goes there, since
+     * linking a framework is the slow part of a render.
+     */
     private fun registerPreviewRendering(
         project: Project,
         kotlin: KotlinMultiplatformExtension,
         extension: ComposeSwiftUIExtension,
         previews: TaskProvider<GenerateComposeSwiftUIPreviewsTask>,
     ) {
-        val framework = project.provider { previewFramework(kotlin) }
+        // The `device` arguments written in the preview sources: re-read on each build, without breaking the configuration cache.
+        val sourceDevices = project.providers.of(PreviewDevicesSource::class.java) { spec ->
+            spec.parameters.sources.from(project.provider { previewSourceDirs(project, kotlin) + scratchDirs(project) })
+        }
+        val platforms = project.provider {
+            val ios = previewFramework(kotlin, HostPlatform.IOS)
+            val mac = previewFramework(kotlin, HostPlatform.MAC)
+            if (ios == null && mac == null) {
+                throw GradleException(
+                    "Compose SwiftUI previews need the `${previewTargetName(HostPlatform.IOS)}()` or " +
+                        "`${previewTargetName(HostPlatform.MAC)}()` target with a debug framework binary: `binaries.framework { }`.",
+                )
+            }
+            // A preview without `device` renders on `previewDevice`, else on the simulator, else on the Mac.
+            val default = extension.previewDevice.orNull.orEmpty().ifEmpty { if (ios == null) MAC_DEVICE else "" }
+            val devices = sourceDevices.get() + default
+            PreviewFrameworks(
+                ios = ios?.takeIf { devices.any { !it.equals(MAC_DEVICE, ignoreCase = true) } },
+                mac = mac?.takeIf { devices.any { it.equals(MAC_DEVICE, ignoreCase = true) } },
+            )
+        }
+        // A null mapping is an absent provider: the task's framework properties stay unset.
+        val framework = platforms.map { it.ios }
+        val macFramework = platforms.map { it.mac }
         project.tasks.register("renderComposeSwiftUIPreviews", RenderComposeSwiftUIPreviewsTask::class.java) { task ->
             task.group = "compose swiftui"
-            task.description = "Renders the @Preview composables to PNG on the iOS simulator."
-            task.dependsOn(framework.map { it.linkTaskProvider })
+            task.description = "Renders the @Preview composables to PNG on the iOS simulator or the Mac."
+            task.dependsOn(platforms.map { listOfNotNull(it.ios?.linkTaskProvider, it.mac?.linkTaskProvider) })
             task.frameworkDirectory.set(project.layout.dir(framework.map { it.outputFile }))
             task.frameworkName.set(framework.map { it.baseName })
             task.staticFramework.set(framework.map { it.isStatic })
-            task.linkerOpts.set(framework.map { if (it.isStatic) it.linkerOpts else emptyList() })
+            task.linkerOpts.set(framework.map { if (it.isStatic) it.linkerOpts else emptyList() }.orElse(emptyList()))
+            task.macFrameworkDirectory.set(project.layout.dir(macFramework.map { it.outputFile }))
+            task.macFrameworkName.set(macFramework.map { it.baseName })
+            task.macStaticFramework.set(macFramework.map { it.isStatic })
+            task.macLinkerOpts.set(macFramework.map { if (it.isStatic) it.linkerOpts else emptyList() }.orElse(emptyList()))
             task.manifestFile.set(previews.flatMap { it.manifestFile })
             task.device.set(extension.previewDevice)
             // Set by the IDE plugin: the previews of the open file, or one preview to run interactively.
@@ -183,12 +215,13 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             )
             // Compose Multiplatform resources, when the module uses them (the app bundle must carry them).
             // Wire the task's outputs, not the task itself: a Task can't be stored in the configuration cache.
-            task.composeResources.from(
-                project.provider {
-                    val name = "assemble${framework.get().target.name.replaceFirstChar { it.uppercase() }}MainResources"
-                    if (name in project.tasks.names) project.tasks.named(name).get().outputs.files else project.files()
-                },
-            )
+            fun resources(of: org.gradle.api.provider.Provider<Framework>) = project.provider {
+                val target = of.orNull?.target ?: return@provider project.files()
+                val name = "assemble${target.name.replaceFirstChar { it.uppercase() }}MainResources"
+                if (name in project.tasks.names) project.tasks.named(name).get().outputs.files else project.files()
+            }
+            task.composeResources.from(resources(framework))
+            task.macComposeResources.from(resources(macFramework))
             task.workDirectory.set(project.layout.buildDirectory.dir("composeSwiftUI/previewHost"))
             task.outputDirectory.set(project.layout.buildDirectory.dir(PREVIEW_IMAGES_DIR))
         }
@@ -216,10 +249,20 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
         }
     }
 
-    private fun previewFramework(kotlin: KotlinMultiplatformExtension): Framework {
-        val targetName = if (System.getProperty("os.arch") == "aarch64") "iosSimulatorArm64" else "iosX64"
-        val target = kotlin.targets.findByName(targetName) as? KotlinNativeTarget
-            ?: throw GradleException("Compose SwiftUI previews need the `$targetName()` target with a framework binary.")
+    private class PreviewFrameworks(val ios: Framework?, val mac: Framework?)
+
+    private fun previewTargetName(platform: HostPlatform): String {
+        val arm64 = System.getProperty("os.arch") == "aarch64"
+        return when (platform) {
+            HostPlatform.IOS -> if (arm64) "iosSimulatorArm64" else "iosX64"
+            HostPlatform.MAC -> if (arm64) "macosArm64" else "macosX64"
+        }
+    }
+
+    /** The debug framework the previews of [platform] render with, if the module has the target of this Mac. */
+    private fun previewFramework(kotlin: KotlinMultiplatformExtension, platform: HostPlatform): Framework? {
+        val targetName = previewTargetName(platform)
+        val target = kotlin.targets.findByName(targetName) as? KotlinNativeTarget ?: return null
         return target.binaries.withType(Framework::class.java).firstOrNull { it.buildType == NativeBuildType.DEBUG }
             ?: throw GradleException("Compose SwiftUI previews need a debug framework on `$targetName`: `binaries.framework { }`.")
     }
@@ -296,6 +339,9 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
 
         /** Scratch previews (under the build directory): compiled into the frameworks and scanned like the sources. */
         const val SCRATCH_DIR = "composeSwiftUI/scratch"
+
+        /** `@Preview(device = "mac")`: rendered on this Mac. */
+        const val MAC_DEVICE = RenderComposeSwiftUIPreviewsTask.MAC_HOST
     }
 
     private val Family.isAppleFamily: Boolean

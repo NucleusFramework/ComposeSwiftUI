@@ -40,7 +40,7 @@ import javax.swing.SwingConstants
 import javax.swing.Timer
 
 /**
- * Interactive mode, like Android Studio's: the preview runs live on the simulator and streams here. The mouse taps,
+ * Interactive mode, like Android Studio's: the preview runs live on the simulator (or the Mac) and streams here. The mouse taps,
  * drags and scrolls, the keyboard types. *Select Component* goes to the code of a view, *Slow Animations* slows them
  * down, and *Record* captures the frames of an animation to replay them frame by frame (the animation inspector).
  */

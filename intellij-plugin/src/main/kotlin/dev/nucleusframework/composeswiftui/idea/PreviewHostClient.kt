@@ -21,21 +21,25 @@ data class LiteralEdit(val file: String, val offset: Int, val function: String?,
 }
 
 /**
- * Talks to the preview host app that `renderComposeSwiftUIPreviews` leaves running on the simulator, without Gradle:
+ * Talks to the preview host app that `renderComposeSwiftUIPreviews` leaves running on the simulator or the Mac, without Gradle:
  * renders with literal edits (live literals) and starts live previews (interactive mode). Same request protocol as
  * the task (see `PreviewHost.swift`).
  */
 class PreviewHostClient(private val module: PreviewModule) {
     private val work = File(module.moduleDir, "build/composeSwiftUI/previewHost")
 
-    /** UDID of the host for the `@Preview` [device] (`""`: the default one), if running and built from the last build. */
+    /**
+     * UDID of the host for the `@Preview` [device] (`""`: the default one), or [MAC_HOST], if running and built from the
+     * last build.
+     */
     fun runningHost(device: String = ""): String? {
         val devices = json(File(work, "devices.json")) ?: return null
         val udid = (devices.get(device) ?: devices.get("") ?: devices.entrySet().firstOrNull()?.value)?.asString ?: return null
         val state = File(work, "host-$udid.json")
         val pid = hostPid(udid) ?: return null
         val build = runCatching { File(work, "host-$udid.build").readText() }.getOrNull()
-        val current = runCatching { File(work, "app.stamp").readText() }.getOrNull()
+        // The Mac host is built in its own directory; the simulator one at the root.
+        val current = runCatching { File(if (udid == MAC_HOST) File(work, "mac") else work, "app.stamp").readText() }.getOrNull()
         if (build == null || build != current || !isAlive(pid)) return null
         // Only the foreground app of a simulator renders: the host of another module may have taken its place.
         if (!isActive(state)) activate(udid, state)
@@ -45,6 +49,8 @@ class PreviewHostClient(private val module: PreviewModule) {
     private fun isActive(state: File) = runCatching { "\"active\": false" !in state.readText() }.getOrDefault(true)
 
     private fun activate(udid: String, state: File) {
+        // The Mac host renders in the background.
+        if (udid == MAC_HOST) return
         val bundleId = runCatching { File(work, "bundle-id").readText().trim() }.getOrNull() ?: return
         // `simctl launch` brings an app that runs to the foreground.
         runCatching { ProcessBuilder("xcrun", "simctl", "launch", udid, bundleId).redirectErrorStream(true).start().waitFor(10, TimeUnit.SECONDS) }
@@ -242,3 +248,6 @@ object BuiltSources {
         return json.get("text")?.asString
     }
 }
+
+/** The Mac's host, in place of a simulator UDID in `devices.json` and the host files (see the Gradle task). */
+const val MAC_HOST = "mac"

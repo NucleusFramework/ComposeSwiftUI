@@ -729,7 +729,7 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
         },
         action("Go to Source", AllIcons.Actions.EditSource) { navigateTo(entry.id, focus = true) },
         action("Render This Preview", AllIcons.Actions.Refresh, enabled = module != null) { render(entry.id) },
-        action("Run on Simulator", AllIcons.Nodes.Deploy, enabled = module != null && entry.rendered) {
+        action("Run Preview", AllIcons.Nodes.Deploy, enabled = module != null && entry.rendered) {
             module?.let { renderer.runInteractive(it, entry.key) }
         },
         Separator.getInstance(),
@@ -739,7 +739,7 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
     )
 
     private fun toolbarActions(): ActionGroup {
-        val renderAction = object : DumbAwareAction("Render Previews", "Render the previews of this file on the iOS simulator", AllIcons.Actions.Refresh) {
+        val renderAction = object : DumbAwareAction("Render Previews", "Render the previews of this file on the iOS simulator or the Mac", AllIcons.Actions.Refresh) {
             override fun actionPerformed(e: AnActionEvent) = render()
             override fun update(e: AnActionEvent) {
                 val module = module

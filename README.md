@@ -48,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.8.0"
+       id("dev.nucleusframework.compose-swiftui") version "0.8.1"
    }
 
    kotlin {
@@ -223,7 +223,8 @@ framework of the simulator target (`iosSimulatorArm64`, or `iosX64` on Intel Mac
 on the simulator composes the previews in parallel and captures each one as soon as it stops changing, into
 `build/composeSwiftUI/previews/`. It needs macOS with Xcode. The host is compiled once per library version (about a
 minute); after that a Kotlin change costs the framework link and about two seconds, and re-rendering without a change
-about one. Choose the simulator with `composeSwiftUI { previewDevice.set("iPhone 17 Pro") }`.
+about one. Choose the simulator with `composeSwiftUI { previewDevice.set("iPhone 17 Pro") }`. A macOS app's previews
+render on the Mac itself (`@Preview(device = "mac")`, or every preview of a module with only the macOS target).
 
 ### In Xcode
 

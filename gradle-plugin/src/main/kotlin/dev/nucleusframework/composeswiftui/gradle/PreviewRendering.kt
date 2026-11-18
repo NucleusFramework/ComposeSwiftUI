@@ -40,36 +40,62 @@ internal object RendererResources {
         loader.getResourceAsStream("${BuildConfig.RENDERER_RESOURCES}/$path")!!.use { it.readBytes() }
 
     /** The preview host app: name to source. */
-    fun previewHost(): List<Pair<String, String>> = listOf("PreviewHost.swift", "PreviewInteractive.swift", "PreviewTouchSynthesis.swift").map { name ->
+    fun previewHost(): List<Pair<String, String>> = listOf("PreviewHost.swift", "PreviewInteractive.swift", "PreviewHostUIKit.swift", "PreviewHostAppKit.swift", "PreviewTouchSynthesis.swift").map { name ->
         name to loader.getResourceAsStream("dev/nucleusframework/composeswiftui/preview-host/$name")!!.bufferedReader().use { it.readText() }
     }
 }
 
 /**
- * Renders the `@Preview`s to `<outputDirectory>/<key>.png`, with real SwiftUI on the iOS simulator: builds a small
- * host app from the renderer and the debug simulator framework, runs it on the simulator of each preview (the
- * booted one by default, or the first available iPhone), and lets it snapshot the previews. Writes
+ * Renders the `@Preview`s to `<outputDirectory>/<key>.png`, with real SwiftUI on the iOS simulator or on the Mac:
+ * builds a small host app from the renderer and the debug framework of the simulator (or of the Mac), runs it on the
+ * simulator of each preview (a simulator of its own by default) or on this Mac (`device = "mac"`, and the default of
+ * a module without an iOS simulator target), and lets it snapshot the previews. Writes
  * `<outputDirectory>/results.json`, read by the Compose SwiftUI IntelliJ plugin to show the previews next to the code.
  *
  * Only what changed is redone: the host's Swift code is compiled once per renderer version, the app is relinked
  * and reinstalled only when the framework changed, and [previewFilter] renders the previews of one file.
  */
-@DisableCachingByDefault(because = "Runs the iOS simulator")
+@DisableCachingByDefault(because = "Runs the iOS simulator or an app on this Mac")
 abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
-    /** Debug `.framework` for the simulator of this Mac. */
+    /** Debug `.framework` for the simulator of this Mac. Absent: the module has no iOS simulator target. */
     @get:InputDirectory
+    @get:Optional
     @get:PathSensitive(PathSensitivity.NONE)
     abstract val frameworkDirectory: DirectoryProperty
 
     @get:Input
+    @get:Optional
     abstract val frameworkName: Property<String>
 
     @get:Input
+    @get:Optional
     abstract val staticFramework: Property<Boolean>
 
     /** The framework's `linkerOpts`, e.g. SQLDelight's `-lsqlite3`: a static framework leaves them to the app link. */
     @get:Input
     abstract val linkerOpts: ListProperty<String>
+
+    /** Debug `.framework` for macOS, when previews render on the Mac. */
+    @get:InputDirectory
+    @get:Optional
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val macFrameworkDirectory: DirectoryProperty
+
+    @get:Input
+    @get:Optional
+    abstract val macFrameworkName: Property<String>
+
+    @get:Input
+    @get:Optional
+    abstract val macStaticFramework: Property<Boolean>
+
+    @get:Input
+    abstract val macLinkerOpts: ListProperty<String>
+
+    /** Compose Multiplatform resources of the macOS target, copied to `Contents/Resources/compose-resources`. */
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val macComposeResources: ConfigurableFileCollection
 
     /** Previews and their variants, from `generateComposeSwiftUIPreviews`. */
     @get:InputFile
@@ -81,7 +107,10 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
     @get:PathSensitive(PathSensitivity.RELATIVE)
     abstract val composeResources: ConfigurableFileCollection
 
-    /** Simulator name or UDID. Default: `Compose SwiftUI Previews`, created like the booted iPhone and run in the background. */
+    /**
+     * Simulator name or UDID, or `mac`. Default: `Compose SwiftUI Previews`, created like the booted iPhone and run in
+     * the background; the Mac in a module without an iOS simulator target.
+     */
     @get:Input
     @get:Optional
     abstract val device: Property<String>
@@ -141,7 +170,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         }
         val interactive = interactivePreview.orNull ?: ideRequest?.get("interactive") as? String
         if (interactive != null) {
-            openInteractive(manifest, interactive, timed("host app") { buildHostApp(work) }, work)
+            openInteractive(manifest, interactive, work)
             return
         }
 
@@ -156,6 +185,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             throw GradleException("Compose SwiftUI: no preview matches ${(wanted + files).joinToString()}. Run listComposeSwiftUIPreviews to see them.")
         }
         val byDevice = jobs.groupBy { it.device.ifEmpty { device.orNull.orEmpty() } }
+        byDevice.keys.map(::platformOf).toSet().forEach(::framework)
         // One simulator per device, found (and booted) while the app links, then rendering in parallel.
         val pool = Executors.newFixedThreadPool(byDevice.size.coerceAtLeast(1))
         val devices = work.resolve(DEVICES_FILE_NAME)
@@ -165,23 +195,27 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             val simulators = byDevice.keys.associateWith { name ->
                 // A host still running there: the simulator is booted, no need to ask simctl.
                 val running = known[name]?.takeIf { udid -> hostPid(work.resolve("host-$udid.json"))?.let(::isAlive) == true }
-                pool.submit(Callable { running ?: timed("simulator") { simulator(name.ifEmpty { null }) } })
+                pool.submit(Callable { if (platformOf(name) == HostPlatform.MAC) MAC_HOST else running ?: timed("simulator") { simulator(name.ifEmpty { null }) } })
             }
-            val app = timed("host app") { buildHostApp(work) }
+            // The app of each platform the module has a framework for: hosts left running on the other one stay current.
+            val apps = HostPlatform.entries.filter(::hasFramework).associateWith { timed("host app") { buildHostApp(work, it) } }
             // For the IDE, which talks to the running hosts directly (live preview, literal edits).
             // Merged: a render of some previews (or none) keeps the simulators of the others.
             devices.writeText(JsonOutput.toJson(known + simulators.mapValues { it.value.get() }))
             val rendered = byDevice.map { (deviceName, deviceJobs) ->
-                pool.submit(Callable { renderOn(deviceName, simulators.getValue(deviceName).get(), deviceJobs, app, work, out) })
+                val udid = simulators.getValue(deviceName).get()
+                pool.submit(Callable { renderOn(deviceName, udid, deviceJobs, apps.getValue(hostPlatform(udid)), work, out) })
             }.flatMap { it.get() }
             // Hosts of other simulators still running an older build: updated, for the IDE's live literals and previews.
             val used = simulators.values.map { it.get() }.toSet()
             (known.values.toSet() - used).filter { udid ->
                 val pid = hostPid(work.resolve("host-$udid.json"))
-                pid != null && isAlive(pid) && work.resolve("host-$udid.build").let { !it.exists() || it.readText() != work.resolve("app.stamp").readText() }
+                val stamp = hostDirectory(work, hostPlatform(udid)).resolve("app.stamp")
+                hostPlatform(udid) in apps && pid != null && isAlive(pid) &&
+                    work.resolve("host-$udid.build").let { !it.exists() || it.readText() != stamp.readText() }
             }.forEach { udid ->
                 timed("update host") {
-                    install(udid, app, work)
+                    install(udid, apps.getValue(hostPlatform(udid)), work)
                     launch(udid, emptyList(), BATCH_SIZE, out, work)
                 }
             }
@@ -342,7 +376,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         val request = work.resolve("request-$udid.json")
         val state = work.resolve("host-$udid.json")
         val build = work.resolve("host-$udid.build")
-        val bundleKey = work.resolve("app.stamp").readText()
+        val bundleKey = hostDirectory(work, hostPlatform(udid)).resolve("app.stamp").readText()
         val started = System.nanoTime()
         var pid = hostPid(state)?.takeIf { build.exists() && build.readText() == bundleKey && isAlive(it) }
         // Another app came to the foreground of the simulator (the host of another module): only the foreground app renders.
@@ -366,21 +400,25 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
 
         if (pid == null) {
             stopHost(udid, work)
-            // simctl passes SIMCTL_CHILD_* variables to the app without the prefix.
-            exec(
-                "xcrun", "simctl", "launch", "--terminate-running-process", udid, bundleId(work),
-                environment = mapOf(
-                    "SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path,
-                    "SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_STATE" to state.path,
-                ),
-            )
+            if (hostPlatform(udid) == HostPlatform.MAC) {
+                launchMacHost(work, mapOf("COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path, "COMPOSE_SWIFTUI_PREVIEW_STATE" to state.path))
+            } else {
+                // simctl passes SIMCTL_CHILD_* variables to the app without the prefix.
+                exec(
+                    "xcrun", "simctl", "launch", "--terminate-running-process", udid, bundleId(work),
+                    environment = mapOf(
+                        "SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path,
+                        "SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_STATE" to state.path,
+                    ),
+                )
+            }
             build.writeText(bundleKey)
             val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(60)
             while (pid == null && System.nanoTime() < deadline) {
                 Thread.sleep(20)
                 pid = hostPid(state)
             }
-            pid ?: throw GradleException("Compose SwiftUI: the preview host didn't start on the simulator")
+            pid ?: throw GradleException("Compose SwiftUI: the preview host didn't start on ${if (hostPlatform(udid) == HostPlatform.MAC) "the Mac" else "the simulator"}")
             logger.info("Compose SwiftUI: host launched in ${(System.nanoTime() - started) / 1_000_000} ms")
         }
 
@@ -447,6 +485,21 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         return Run(completed, begun, done, errors, output.toString(), stalled)
     }
 
+    /**
+     * Starts the Mac host as a child of Gradle, not with `open`: an app launched by LaunchServices is its own
+     * "responsible process" for privacy checks, and blocks on a permission prompt when the project is on an external
+     * volume or in a protected folder (Documents, Desktop). A child shares Gradle's access, and outlives the build.
+     */
+    private fun launchMacHost(work: File, environment: Map<String, String>) {
+        val executable = hostApp(work, HostPlatform.MAC).resolve("Contents/MacOS/$HOST_NAME")
+        ProcessBuilder(executable.path)
+            .redirectInput(ProcessBuilder.Redirect.from(File("/dev/null")))
+            .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+            .redirectError(ProcessBuilder.Redirect.DISCARD)
+            .apply { environment().putAll(environment) }
+            .start()
+    }
+
     /** Kills the rendering host of [udid], if running: much faster than letting simctl terminate it. */
     private fun stopHost(udid: String, work: File) {
         val state = work.resolve("host-$udid.json")
@@ -462,6 +515,8 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
 
     /** Brings the running host back to the foreground: `simctl launch` activates an app that runs. */
     private fun activate(udid: String, work: File, state: File) {
+        // The Mac host renders in the background.
+        if (hostPlatform(udid) == HostPlatform.MAC) return
         exec("xcrun", "simctl", "launch", udid, bundleId(work))
         val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5)
         while (!hostActive(state) && System.nanoTime() < deadline) Thread.sleep(20)
@@ -469,6 +524,47 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
 
     /** One app per module: hosts of several modules (or projects) can share a simulator. */
     private fun bundleId(work: File) = "$BUNDLE_ID.${sha256(listOf(work.canonicalPath.toByteArray()))}"
+
+    /** Where the previews of [deviceName] (a `device` argument, else `previewDevice`) render. */
+    private fun platformOf(deviceName: String) = when {
+        deviceName.equals(MAC_HOST, ignoreCase = true) -> HostPlatform.MAC
+        deviceName.isEmpty() && !frameworkDirectory.isPresent && macFrameworkDirectory.isPresent -> HostPlatform.MAC
+        else -> HostPlatform.IOS
+    }
+
+    /** The Mac host stands where a simulator UDID does elsewhere (state, request and response files, `devices.json`). */
+    private fun hostPlatform(udid: String) = if (udid == MAC_HOST) HostPlatform.MAC else HostPlatform.IOS
+
+    private fun hasFramework(platform: HostPlatform) = when (platform) {
+        HostPlatform.IOS -> frameworkDirectory.isPresent
+        HostPlatform.MAC -> macFrameworkDirectory.isPresent
+    }
+
+    /** The debug framework of [platform], or why the module has none. */
+    private fun framework(platform: HostPlatform): HostFramework = when (platform) {
+        HostPlatform.IOS -> frameworkDirectory.orNull?.let {
+            HostFramework(it.asFile, frameworkName.get(), staticFramework.get(), linkerOpts.get(), composeResources.files)
+        } ?: throw GradleException(
+            "Compose SwiftUI: previews on the iOS simulator need the `$iosTargetName()` target with a framework binary: " +
+                "add it, or render them on the Mac with `device = \"mac\"` (or `previewDevice.set(\"mac\")`).",
+        )
+        HostPlatform.MAC -> macFrameworkDirectory.orNull?.let {
+            HostFramework(it.asFile, macFrameworkName.get(), macStaticFramework.get(), macLinkerOpts.get(), macComposeResources.files)
+        } ?: throw GradleException(
+            "Compose SwiftUI: previews on the Mac need the `$macTargetName()` target with a framework binary. The plugin " +
+                "links it when a preview says `device = \"mac\"`, `previewDevice` is \"mac\", or the module has no iOS simulator target.",
+        )
+    }
+
+    private val arm64 get() = System.getProperty("os.arch") == "aarch64"
+    private val iosTargetName get() = if (arm64) "iosSimulatorArm64" else "iosX64"
+    private val macTargetName get() = if (arm64) "macosArm64" else "macosX64"
+
+    /** Build files of the host app of [platform]: the iOS one at the root of the work directory, as before the Mac. */
+    private fun hostDirectory(work: File, platform: HostPlatform) =
+        if (platform == HostPlatform.MAC) work.resolve("mac").apply { mkdirs() } else work
+
+    private fun hostApp(work: File, platform: HostPlatform) = hostDirectory(work, platform).resolve("$HOST_NAME.app")
 
     // Simulator apps are processes of this Mac.
     private fun isAlive(pid: Long) = ProcessHandle.of(pid).map { it.isAlive }.orElse(false)
@@ -525,14 +621,16 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         .orEmpty()
 
     /** Opens the preview [key] (`<variant key>` or `<variant key>#<parameter index>`) live on its simulator. */
-    private fun openInteractive(manifest: List<ManifestPreview>, key: String, app: File, work: File) {
+    private fun openInteractive(manifest: List<ManifestPreview>, key: String, work: File) {
         val jobs = manifest.flatMap { it.jobs() }
         val base = key.substringBefore('#')
         // A bare qualified name opens the first variant of the preview.
         val job = jobs.firstOrNull { it.key == base } ?: jobs.firstOrNull { it.id == base }
             ?: throw GradleException("Compose SwiftUI: no preview $key")
         val index = key.substringAfter('#', "").toIntOrNull() ?: -1
-        val udid = simulator(job.device.ifEmpty { device.orNull })
+        val platform = platformOf(job.device.ifEmpty { device.orNull.orEmpty() })
+        val app = timed("host app") { buildHostApp(work, platform) }
+        val udid = if (platform == HostPlatform.MAC) MAC_HOST else simulator(job.device.ifEmpty { device.orNull })
         install(udid, app, work)
         val request = work.resolve("interactive-$udid.json")
         request.writeText(
@@ -545,6 +643,11 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         )
         // Replaces the rendering host, which the next render launches again.
         stopHost(udid, work)
+        if (platform == HostPlatform.MAC) {
+            launchMacHost(work, mapOf("COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path))
+            logger.lifecycle("Compose SwiftUI: ${job.variant["title"]} is running on the Mac")
+            return
+        }
         exec(
             "xcrun", "simctl", "launch", "--terminate-running-process", udid, bundleId(work),
             environment = mapOf("SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path),
@@ -553,27 +656,42 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         logger.lifecycle("Compose SwiftUI: ${job.variant["title"]} is running on the simulator")
     }
 
-    private fun buildHostApp(work: File): File {
-        val src = work.resolve("src")
-        val framework = frameworkDirectory.get().asFile
-        val app = work.resolve("$HOST_NAME.app")
-        val sdk = exec("xcrun", "--sdk", "iphonesimulator", "--show-sdk-path").trim()
-        val arch = if (System.getProperty("os.arch") == "aarch64") "arm64" else "x86_64"
-        val common = arrayOf("-target", "$arch-apple-ios17.0-simulator", "-sdk", sdk, "-F", framework.parentFile.path)
+    /** The debug framework a host app links, and what goes with it. */
+    private class HostFramework(
+        val directory: File,
+        val name: String,
+        val static: Boolean,
+        val linkerOpts: List<String>,
+        val resources: Set<File>,
+    )
+
+    private fun buildHostApp(work: File, platform: HostPlatform): File {
+        val mac = platform == HostPlatform.MAC
+        val dir = hostDirectory(work, platform)
+        val inputs = framework(platform)
+        val src = dir.resolve("src")
+        val framework = inputs.directory
+        val app = hostApp(work, platform)
+        // A Mac app keeps its files in Contents; an iOS app at its root.
+        val contents = if (mac) app.resolve("Contents") else app
+        val sdk = exec("xcrun", "--sdk", if (mac) "macosx" else "iphonesimulator", "--show-sdk-path").trim()
+        val arch = if (arm64) "arm64" else "x86_64"
+        val triple = if (mac) "$arch-apple-macos14.0" else "$arch-apple-ios17.0-simulator"
+        val common = arrayOf("-target", triple, "-sdk", sdk, "-F", framework.parentFile.path)
 
         // The host's Swift code only uses the renderer, the runtime classes and `ComposeSwiftUIPreviews.host`, whose
         // ObjC names only change with the library version: compile it once, not on every change to the app's API.
         val sources = buildList {
             RendererResources.files().forEach { add(it to RendererResources.read(it)) }
-            add("KotlinModule.swift" to "@_exported import ${frameworkName.get()}\n".toByteArray())
+            add("KotlinModule.swift" to "@_exported import ${inputs.name}\n".toByteArray())
             RendererResources.previewHost().forEach { (name, text) -> add(name to text.toByteArray()) }
         }
-        val key = sha256(sources.map { it.second } + listOf(sdk, frameworkName.get(), rendererVersion, arch).map { it.toByteArray() } + exportedNames(framework, sources))
-        val objectFile = work.resolve("host-$key.o")
+        val key = sha256(sources.map { it.second } + listOf(sdk, inputs.name, rendererVersion, triple).map { it.toByteArray() } + exportedNames(framework, sources))
+        val objectFile = dir.resolve("host-$key.o")
         if (!objectFile.exists()) {
             src.deleteRecursively()
             sources.forEach { (rel, bytes) -> src.resolve(rel).apply { parentFile.mkdirs() }.writeBytes(bytes) }
-            work.listFiles { f -> f.name.startsWith("host-") }?.forEach { it.delete() }
+            dir.listFiles { f -> f.name.startsWith("host-") && f.extension == "o" }?.forEach { it.delete() }
             logger.lifecycle("Compose SwiftUI: compiling the preview host (once per library version)")
             exec(
                 "xcrun", "swiftc", "-c", "-wmo", "-parse-as-library", "-swift-version", "5", "-Onone", *common,
@@ -585,36 +703,39 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
 
         // A static framework is part of the executable: relink when it changes. A dynamic one is loaded at run time:
         // the app is linked once, and only the copy of the framework in the bundle is replaced.
-        val binary = framework.resolve(frameworkName.get())
-        val static = staticFramework.get()
+        val binary = framework.resolve(inputs.name)
+        val static = inputs.static
         val linkKey = sha256(
-            listOf(key, if (static) binary.stamp() else "", linkerOpts.get().joinToString(" "), static.toString()).map { it.toByteArray() },
+            listOf(key, if (static) binary.stamp() else "", inputs.linkerOpts.joinToString(" "), static.toString()).map { it.toByteArray() },
         )
-        val resources = composeResources.files.filter { it.isDirectory }
-        val bundleId = bundleId(work)
-        // For the IDE, which activates the host itself.
-        work.resolve(BUNDLE_ID_FILE_NAME).writeText(bundleId)
+        val resources = inputs.resources.filter { it.isDirectory }
+        val bundleId = if (mac) "$BUNDLE_ID.mac.${sha256(listOf(work.canonicalPath.toByteArray()))}" else bundleId(work)
+        // For the IDE, which activates the simulator host itself.
+        if (!mac) work.resolve(BUNDLE_ID_FILE_NAME).writeText(bundleId)
         val bundleKey = sha256(
             listOf(linkKey, binary.stamp(), bundleId).map { it.toByteArray() } +
                 resources.flatMap { dir -> dir.walkTopDown().filter { it.isFile }.map { it.stamp().toByteArray() } },
         )
-        val linkStamp = work.resolve("link.stamp")
-        val bundleStamp = work.resolve("app.stamp")
-        val executable = app.resolve(HOST_NAME)
+        val linkStamp = dir.resolve("link.stamp")
+        val bundleStamp = dir.resolve("app.stamp")
+        val executable = if (mac) contents.resolve("MacOS/$HOST_NAME") else app.resolve(HOST_NAME)
         if (executable.exists() && bundleStamp.exists() && bundleStamp.readText() == bundleKey) return app
 
+        // The Mac host runs from this bundle (a simulator runs a copy): never change it under a running host.
+        if (mac) stopHost(MAC_HOST, work)
         if (!executable.exists() || !linkStamp.exists() || linkStamp.readText() != linkKey) {
             app.deleteRecursively()
-            app.mkdirs()
+            executable.parentFile.mkdirs()
             try {
                 exec(
-                    "xcrun", "swiftc", *common, objectFile.path, "-framework", frameworkName.get(), "-lc++",
+                    "xcrun", "swiftc", *common, objectFile.path, "-framework", inputs.name, "-lc++",
                     // system libraries that common KMP libraries link through the app (SQLDelight: sqlite3)
                     "-lsqlite3", "-lz",
-                    "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks", "-o", executable.path,
+                    "-Xlinker", "-rpath", "-Xlinker", if (mac) "@executable_path/../Frameworks" else "@executable_path/Frameworks",
+                    "-o", executable.path,
                     // Like Xcode's default DEAD_CODE_STRIPPING: unused C interop wrappers must not need their symbols.
                     "-Xlinker", "-dead_strip",
-                    *linkerOpts.get().flatMap { listOf("-Xlinker", it) }.toTypedArray(),
+                    *inputs.linkerOpts.flatMap { listOf("-Xlinker", it) }.toTypedArray(),
                 )
             } catch (e: GradleException) {
                 if ("Undefined symbols" !in e.message.orEmpty()) throw e
@@ -626,13 +747,16 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             }
             linkStamp.writeText(linkKey)
         }
-        app.resolve("compose-resources").deleteRecursively()
-        resources.forEach { it.copyRecursively(app.resolve("compose-resources"), overwrite = true) }
+        // Where Compose Multiplatform looks them up: the bundle's resource directory.
+        val composeResourcesDir = (if (mac) contents.resolve("Resources") else app).resolve("compose-resources")
+        composeResourcesDir.deleteRecursively()
+        resources.forEach { it.copyRecursively(composeResourcesDir, overwrite = true) }
         if (!static) {
-            app.resolve("Frameworks").deleteRecursively()
-            framework.copyRecursively(app.resolve("Frameworks/${framework.name}"))
+            contents.resolve("Frameworks").deleteRecursively()
+            // ditto keeps the symbolic links of a macOS framework (Versions/Current), which codesign requires.
+            exec("ditto", framework.path, contents.resolve("Frameworks/${framework.name}").path)
         }
-        app.resolve("Info.plist").writeText(infoPlist(bundleId))
+        contents.resolve("Info.plist").writeText(if (mac) macInfoPlist(bundleId) else infoPlist(bundleId))
         exec("codesign", "--force", "--deep", "--sign", "-", app.path)
         bundleStamp.writeText(bundleKey)
         return app
@@ -660,6 +784,8 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
      * files of the installed app in place: much faster than `simctl install`, which copies and registers the whole app.
      */
     private fun install(udid: String, app: File, work: File) {
+        // The Mac host runs from the bundle it was built in.
+        if (hostPlatform(udid) == HostPlatform.MAC) return
         val stamp = work.resolve("installed-$udid.stamp")
         val build = work.resolve("app.stamp").readText()
         // Where the app is installed, remembered: asking simctl takes half a second. Gone after an erase or uninstall.
@@ -761,6 +887,9 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         /** Bundle ID of the module's host app, read by the IntelliJ plugin. */
         const val BUNDLE_ID_FILE_NAME = "bundle-id"
         const val HOST_NAME = "ComposeSwiftUIPreviewHost"
+
+        /** The `device` of previews rendered on this Mac, and the name of its host in place of a simulator UDID. */
+        const val MAC_HOST = "mac"
         const val BUNDLE_ID = "dev.nucleusframework.composeswiftui.previewhost"
 
         /** The simulator the previews render on by default, created when missing. */
@@ -791,5 +920,29 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             |</dict>
             |</plist>
             |""".trimMargin()
+
+        /** A background app (`LSUIElement`): no Dock icon, and it never takes the focus while rendering. */
+        fun macInfoPlist(bundleId: String) = """
+            |<?xml version="1.0" encoding="UTF-8"?>
+            |<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+            |<plist version="1.0">
+            |<dict>
+            |    <key>CFBundleIdentifier</key><string>$bundleId</string>
+            |    <key>CFBundleExecutable</key><string>$HOST_NAME</string>
+            |    <key>CFBundleName</key><string>Previews</string>
+            |    <key>CFBundlePackageType</key><string>APPL</string>
+            |    <key>CFBundleVersion</key><string>1</string>
+            |    <key>CFBundleShortVersionString</key><string>1.0</string>
+            |    <key>CFBundleSupportedPlatforms</key><array><string>MacOSX</string></array>
+            |    <key>LSMinimumSystemVersion</key><string>14.0</string>
+            |    <key>LSUIElement</key><true/>
+            |    <key>NSHighResolutionCapable</key><true/>
+            |    <key>NSPrincipalClass</key><string>NSApplication</string>
+            |</dict>
+            |</plist>
+            |""".trimMargin()
     }
 }
+
+/** Where a preview host runs. */
+internal enum class HostPlatform { IOS, MAC }

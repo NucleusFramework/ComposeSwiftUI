@@ -1,9 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.8.1
 
 ### Added
 
+- Previews of macOS apps in the IDE: in a module with the macOS target and no iOS simulator target, previews render on
+  the Mac itself, with AppKit's SwiftUI; elsewhere `@Preview(device = "mac")` (or `previewDevice.set("mac")`) sends
+  them there. A background host app without a Dock icon renders them off screen, captured as the WindowServer draws
+  them, with live literals, click-to-code, the agent tools, interactive mode (real mouse and key events) and *Run
+  Preview* in a window. The macOS framework is only linked when a preview renders on the Mac.
 - Previews for AI agents, like Android Studio's agent tools for Compose previews:
   - IDE plugin: tools on the IDE's MCP server (`list_swiftui_previews`, `render_swiftui_preview`,
     `render_swiftui_preview_code`, `check_swiftui_preview`, `compare_swiftui_preview_to_image`, `compare_images`,
@@ -14,6 +19,10 @@
   - image comparison with expected images or folders of screenshots (mismatch, PSNR, diff and side-by-side images);
   - scratch previews: throwaway code in `build/composeSwiftUI/scratch` rendered without touching the sources.
 - The layout of a rendered preview records the strings of each view (text, label, SF Symbol name).
+
+### Changed
+
+- *Run on Simulator* is now *Run Preview*, as Mac previews open on the Mac.
 
 ## 0.8.0
 
