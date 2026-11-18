@@ -38,6 +38,8 @@
                          displayName="Compose SwiftUI preview that won't be rendered"
                          groupName="Compose SwiftUI" enabledByDefault="true" level="WARNING"
                          implementationClass="dev.nucleusframework.composeswiftui.idea.PreviewInspection"/>
+        <!-- The agent tools on the plugin's own MCP server, for IDEs without JetBrains' (Android Studio). -->
+        <postStartupActivity implementation="dev.nucleusframework.composeswiftui.idea.mcp.StandaloneMcpServerStarter"/>
         <applicationConfigurable parentId="tools" id="dev.nucleusframework.composeswiftui.previews"
                                  displayName="Compose SwiftUI Previews"
                                  instance="dev.nucleusframework.composeswiftui.idea.PreviewConfigurable"/>

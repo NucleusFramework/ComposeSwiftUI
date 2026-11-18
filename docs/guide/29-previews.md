@@ -325,8 +325,32 @@ needs is text and PNG files, from the IDE or the command line.
 ### In the IDE, over MCP
 
 When the IDE's *MCP Server* plugin is on (bundled in IntelliJ IDEA, *Settings › Tools › MCP Server*), the Compose
-SwiftUI plugin adds its tools to it. An agent connected to the IDE gets the tools below. Android Studio doesn't bundle
-that plugin: there, agents use the command line (next section).
+SwiftUI plugin adds its tools to it. An agent connected to the IDE gets the tools below.
+
+Android Studio doesn't have that plugin, and its agent only relays its own tools: there, the Compose SwiftUI plugin
+serves the same tools on an MCP server of its own, `http://127.0.0.1:64360/mcp` (streamable HTTP, local connections
+only). Add it to Android Studio's agent in *Settings › Tools › AI › MCP Servers*, in `mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "compose-swiftui": {
+      "httpUrl": "http://127.0.0.1:64360/mcp"
+    }
+  }
+}
+```
+
+Any other MCP client works the same, for example Claude Code:
+
+```bash
+claude mcp add --transport http compose-swiftui http://127.0.0.1:64360/mcp
+```
+
+*Settings › Tools › Compose SwiftUI Previews › AI Agents* shows the address and copies both. The server runs while
+the IDE does: when the IDE has no MCP server of its own by default, or always, or never. When port 64360 is taken
+(another IDE), the next free one is used and shown there. With several projects open, the tools take the project
+from their file paths, or from a `projectPath` argument.
 
 | Tool | Does | Android Studio's equivalent |
 |---|---|---|

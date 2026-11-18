@@ -14,6 +14,9 @@ import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toNullableProperty
 import com.intellij.ui.dsl.listCellRenderer.textListCellRenderer
+import com.intellij.openapi.ide.CopyPasteManager
+import dev.nucleusframework.composeswiftui.idea.mcp.StandaloneMcpServer
+import java.awt.datatransfer.StringSelection
 
 /** When the previews render without a click. */
 enum class AutoRender(val label: String) {
@@ -23,6 +26,13 @@ enum class AutoRender(val label: String) {
 }
 
 enum class PreviewLayout { LIST, GRID, GALLERY }
+
+/** When the plugin serves the agent tools on its own MCP server ([StandaloneMcpServer]). */
+enum class McpServerMode(val label: String) {
+    AUTO("When the IDE has no MCP server of its own (Android Studio)"),
+    ON("Always"),
+    OFF("Never"),
+}
 
 @Service(Service.Level.APP)
 @State(name = "ComposeSwiftUIPreview", storages = [Storage("composeSwiftUIPreview.xml")])
@@ -35,6 +45,8 @@ class PreviewSettings : SimplePersistentStateComponent<PreviewSettings.Options>(
         var configurationCache by property(true)
         var settleMs by property(1500)
         var layout by enum(PreviewLayout.LIST)
+        var mcpServerMode by enum(McpServerMode.AUTO)
+        var mcpPort by property(StandaloneMcpServer.DEFAULT_PORT)
     }
 
     companion object {
@@ -69,6 +81,47 @@ class PreviewConfigurable : BoundConfigurable("Compose SwiftUI Previews") {
                         .comment("Turned off automatically for a build that doesn't support it.")
                 }
             }
+            group("AI Agents") {
+                row("Serve the preview tools over MCP:") {
+                    comboBox(McpServerMode.entries, textListCellRenderer { it?.label })
+                        .bindItem(options::mcpServerMode.toNullableProperty())
+                }
+                row("Port:") {
+                    intTextField(1024..65_535).bindIntText(options::mcpPort)
+                        .comment("The next free port is used when it is taken (another IDE window).")
+                }
+                row {
+                    comment(serverStatus())
+                }
+                row {
+                    button("Copy Android Studio mcp.json Entry") { copy(McpClientConfig.androidStudio()) }
+                    button("Copy Claude Code Command") { copy(McpClientConfig.claudeCode()) }
+                }.comment(
+                    "Android Studio: Settings › Tools › AI › MCP Servers, add it to mcp.json. In IntelliJ IDEA with the MCP Server " +
+                        "plugin on, its own server already has these tools.",
+                )
+            }
         }
     }
+
+    override fun apply() {
+        super.apply()
+        StandaloneMcpServer.instance.applySettings()
+    }
+
+    private fun serverStatus(): String = StandaloneMcpServer.instance.url?.let { "Running at $it" }
+        ?: if (StandaloneMcpServer.ideMcpServerEnabled()) "Not running: the IDE's MCP Server serves the tools." else "Not running."
+
+    private fun copy(text: String) = CopyPasteManager.getInstance().setContents(StringSelection(text))
+}
+
+/** What an MCP client needs to reach [StandaloneMcpServer]: its running URL, else the configured port. */
+object McpClientConfig {
+    private fun url(): String = StandaloneMcpServer.instance.url
+        ?: "http://127.0.0.1:${PreviewSettings.options.mcpPort}${StandaloneMcpServer.PATH}"
+
+    fun androidStudio() =
+        "\"compose-swiftui\": {\n  \"httpUrl\": \"${url()}\"\n}"
+
+    fun claudeCode() = "claude mcp add --transport http compose-swiftui ${url()}"
 }

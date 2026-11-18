@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.2
+
+### Added
+
+- The agent tools in Android Studio and any MCP client: the IDE plugin serves them on an MCP server of its own
+  (`http://127.0.0.1:64360/mcp`, streamable HTTP) when the IDE has no MCP Server plugin, for Android Studio's agent
+  (`mcp.json`), Claude Code, Codex or Gemini CLI. *Settings › Tools › Compose SwiftUI Previews* shows its address
+  and copies the configuration.
+
 ## 0.8.1
 
 ### Added

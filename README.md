@@ -48,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.8.1"
+       id("dev.nucleusframework.compose-swiftui") version "0.8.2"
    }
 
    kotlin {
@@ -248,7 +248,9 @@ simulator or device, for example from a debug menu:
   `Generated/GenEncoders.swift` to the app target once when you upgrade past 0.4.1.
 
 AI agents (Claude Code, Junie, Codex, Gemini…) get the previews as tools, like Android Studio's agent: on the IDE's MCP
-server (render a preview or throwaway code, UI checks, compare with a design) or on the command line
+server (render a preview or throwaway code, UI checks, compare with a design), on the plugin's own MCP server in
+Android Studio (add `"compose-swiftui": { "httpUrl": "http://127.0.0.1:64360/mcp" }` to its `mcp.json`, in
+*Settings › Tools › AI › MCP Servers*), or on the command line
 (`listComposeSwiftUIPreviews`, and `renderComposeSwiftUIPreviews`, which writes a `report.md` with each image, its
 component tree and its UI checks). See [Previews › For AI agents](docs/guide/29-previews.md#for-ai-agents).
 
