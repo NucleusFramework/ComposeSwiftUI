@@ -96,6 +96,8 @@ val generateBuildConfig = tasks.register("generateBuildConfig") {
 
 sourceSets.main {
     kotlin.srcDir(generateBuildConfig)
+    // Preview analysis for agents (component tree, UI checks, image comparison), shared with the IntelliJ plugin.
+    kotlin.srcDir("src/shared/kotlin")
     resources.srcDir(embedSwiftRenderer)
 }
 

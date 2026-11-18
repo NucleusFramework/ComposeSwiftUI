@@ -276,7 +276,7 @@ enum PreviewWindow {
     }
 }
 
-/// The views of a preview for the IDE: each node's frame in the window with the call sites that produced it.
+/// The views of a preview for the IDE and agents: each node's frame in the window, its strings and the call sites that produced it.
 @MainActor
 enum PreviewLayoutCapture {
     static func capture(host: ComposeSwiftUIHost, window: UIWindow) -> [String: Any] {
@@ -286,10 +286,12 @@ enum PreviewLayoutCapture {
         for source in sources {
             guard let id = (source["id"] as? NSNumber)?.int64Value, let frame = ComposeInspection.frames[id],
                   frame.width > 0, frame.height > 0, frame.intersects(bounds) else { continue }
-            nodes.append([
+            var node: [String: Any] = [
                 "x": frame.minX, "y": frame.minY, "width": frame.width, "height": frame.height,
                 "calls": source["calls"] ?? [],
-            ])
+            ]
+            if let text = source["text"] { node["text"] = text }
+            nodes.append(node)
         }
         return ["width": bounds.width, "height": bounds.height, "nodes": nodes]
     }

@@ -97,6 +97,7 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
 
             val previews = registerPreviews(project, kotlin)
             registerPreviewRendering(project, kotlin, extension, previews)
+            registerPreviewList(project, previews)
             val sync = project.tasks.register("syncComposeSwiftUIRenderer", SyncComposeSwiftUIRendererTask::class.java) { task ->
                 task.group = "compose swiftui"
                 task.description = "Writes the Compose SwiftUI renderer (Swift sources) into the Xcode project."
@@ -124,7 +125,7 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
         project.tasks.register("generateComposeSwiftUIPreviews", GenerateComposeSwiftUIPreviewsTask::class.java) { task ->
             task.group = "compose swiftui"
             task.description = "Generates the Kotlin and Swift code that shows the @Preview composables in Xcode."
-            task.sources.from(project.provider { previewSourceDirs(project, kotlin) })
+            task.sources.from(project.provider { previewSourceDirs(project, kotlin) + scratchDirs(project) })
             task.targetNames.set(project.provider { appleMainCompilations(kotlin).map { it.target.name } })
             task.kotlinOutputDirectory.set(project.layout.buildDirectory.dir("generated/composeSwiftUI/previews/kotlin"))
             task.swiftOutputFile.set(
@@ -138,6 +139,8 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 if (target.konanTarget.family.isAppleFamily) {
                     target.compilations.named(KotlinCompilation.MAIN_COMPILATION_NAME) { compilation ->
                         compilation.defaultSourceSet.kotlin.srcDir(previews.flatMap { it.kotlinOutputDirectory.dir(target.name) })
+                        // Scratch previews: throwaway code an agent renders without touching the sources.
+                        compilation.defaultSourceSet.kotlin.srcDir(project.provider { scratchDirs(project) })
                     }
                 }
             }
@@ -168,6 +171,13 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                     .orElse(emptyList()),
             )
             task.interactivePreview.set(project.providers.gradleProperty("composeSwiftUI.interactivePreview"))
+            // For agents on the command line: the previews of some files, and the image(s) to compare them with.
+            task.previewFiles.set(
+                project.providers.gradleProperty("composeSwiftUI.previewFile")
+                    .map { it.split(',').map(String::trim).filter(String::isNotEmpty).map { path -> userFile(project, path).canonicalPath } }
+                    .orElse(emptyList()),
+            )
+            task.golden.set(project.providers.gradleProperty("composeSwiftUI.golden").map { userFile(project, it).absolutePath })
             task.settleMilliseconds.set(
                 project.providers.gradleProperty("composeSwiftUI.previewSettleMs").map(String::toInt).orElse(1500),
             )
@@ -181,6 +191,28 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
             )
             task.workDirectory.set(project.layout.buildDirectory.dir("composeSwiftUI/previewHost"))
             task.outputDirectory.set(project.layout.buildDirectory.dir(PREVIEW_IMAGES_DIR))
+        }
+    }
+
+    /** A path given on the command line: absolute, or relative to the root project (where `gradlew` runs) or to the module. */
+    private fun userFile(project: Project, path: String): File {
+        val file = File(path)
+        if (file.isAbsolute) return file
+        return project.rootDir.resolve(path).takeIf { it.exists() } ?: project.file(path)
+    }
+
+    /** `listComposeSwiftUIPreviews`: every preview and its variants, for agents on the command line. */
+    private fun registerPreviewList(project: Project, previews: TaskProvider<GenerateComposeSwiftUIPreviewsTask>) {
+        project.tasks.register("listComposeSwiftUIPreviews", ListComposeSwiftUIPreviewsTask::class.java) { task ->
+            task.group = "compose swiftui"
+            task.description = "Lists the @Preview composables and their variants (-PcomposeSwiftUI.previewFile, -PcomposeSwiftUI.format=json)."
+            task.manifestFile.set(previews.flatMap { it.manifestFile })
+            task.previewFiles.set(
+                project.providers.gradleProperty("composeSwiftUI.previewFile")
+                    .map { it.split(',').map(String::trim).filter(String::isNotEmpty).map { path -> userFile(project, path).canonicalPath } }
+                    .orElse(emptyList()),
+            )
+            task.format.set(project.providers.gradleProperty("composeSwiftUI.format").orElse("text"))
         }
     }
 
@@ -205,6 +237,13 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
         val buildDir = project.layout.buildDirectory.get().asFile
         return sourceSets.flatMap { it.kotlin.srcDirs }.filter { !it.startsWith(buildDir) }.sorted()
     }
+
+    /**
+     * The scratch directory of agents' throwaway previews, except in Xcode Release builds: a scratch file left behind
+     * never ships. An empty directory adds no input, so builds with and without it share their compilations.
+     */
+    private fun scratchDirs(project: Project): List<File> =
+        if (project.providers.environmentVariable("CONFIGURATION").orNull == "Release") emptyList() else listOf(project.layout.buildDirectory.dir(SCRATCH_DIR).get().asFile)
 
     private fun appleMainCompilations(kotlin: KotlinMultiplatformExtension) =
         kotlin.targets.withType(KotlinNativeTarget::class.java)
@@ -254,6 +293,9 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
     internal companion object {
         /** Read by the IntelliJ plugin: keep in sync with `PreviewImages` there. */
         const val PREVIEW_IMAGES_DIR = "composeSwiftUI/previews"
+
+        /** Scratch previews (under the build directory): compiled into the frameworks and scanned like the sources. */
+        const val SCRATCH_DIR = "composeSwiftUI/scratch"
     }
 
     private val Family.isAppleFamily: Boolean

@@ -246,6 +246,11 @@ simulator or device, for example from a debug menu:
 - If the folder is a group, add `Interactive.swift`, `Advanced.swift`, `Completions.swift` and
   `Generated/GenEncoders.swift` to the app target once when you upgrade past 0.4.1.
 
+AI agents (Claude Code, Junie, Codex, Gemini…) get the previews as tools, like Android Studio's agent: on the IDE's MCP
+server (render a preview or throwaway code, UI checks, compare with a design) or on the command line
+(`listComposeSwiftUIPreviews`, and `renderComposeSwiftUIPreviews`, which writes a `report.md` with each image, its
+component tree and its UI checks). See [Previews › For AI agents](docs/guide/29-previews.md#for-ai-agents).
+
 ## Apple frameworks: maps, charts, in-app purchases
 
 The SwiftUI views and modifiers of MapKit, Swift Charts and StoreKit are available from Kotlin. Each framework has its

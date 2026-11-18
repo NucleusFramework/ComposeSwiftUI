@@ -65,7 +65,7 @@ internal object CompositionInspector {
         for (child in group.compositionGroups) walk(child, current, calls, out)
     }
 
-    /** JSON of [nodeSources] for the IDE: `[{"id": …, "calls": [{"function", "file", "line", "offset", "length"}]}]`. */
+    /** JSON of [nodeSources] for the IDE: `[{"id": …, "text": …, "calls": [{"function", "file", "line", "offset", "length"}]}]`. */
     fun toJson(sources: Map<SNode, List<CallSite>>): String = buildString {
         append('[')
         var first = true
@@ -73,7 +73,12 @@ internal object CompositionInspector {
             if (calls.isEmpty()) continue
             if (!first) append(',')
             first = false
-            append("{\"id\":").append(node.id).append(",\"calls\":[")
+            append("{\"id\":").append(node.id)
+            // The strings the view was given (a text, a label, an SF Symbol name): what agents read in the component tree.
+            node.args.filterIsInstance<String>().filter { it.isNotBlank() }.takeIf { it.isNotEmpty() }?.let { texts ->
+                append(",\"text\":").append(jsonString(texts.joinToString(" · ").take(200)))
+            }
+            append(",\"calls\":[")
             calls.forEachIndexed { i, call ->
                 if (i > 0) append(',')
                 append("{\"function\":").append(jsonString(call.function))

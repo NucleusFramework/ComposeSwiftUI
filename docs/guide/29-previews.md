@@ -282,6 +282,78 @@ The module needs an `iosSimulatorArm64()` target (`iosX64()` on an Intel Mac) wi
 the debug variant of every `binaries.framework { }`. A module with only macOS, tvOS or watchOS targets has no IDE
 previews; use Xcode's canvas there.
 
+## For AI agents
+
+Coding agents (Claude Code, Junie, Codex, Gemini…) use the previews the way Android Studio's agent uses Compose
+previews: render, look at the image and the component tree, edit, render again until it's right. Everything an agent
+needs is text and PNG files, from the IDE or the command line.
+
+### In the IDE, over MCP
+
+When the IDE's *MCP Server* plugin is on (bundled in IntelliJ IDEA, *Settings › Tools › MCP Server*), the Compose
+SwiftUI plugin adds its tools to it. An agent connected to the IDE gets the tools below. Android Studio doesn't bundle
+that plugin: there, agents use the command line (next section).
+
+| Tool | Does | Android Studio's equivalent |
+|---|---|---|
+| `list_swiftui_previews` | The previews of a file (or of the project) and their variants, numbered | `android preview list` |
+| `render_swiftui_preview` | Renders a preview (all variants or one `previewIndex`), or any composable without parameters: image path, component tree, UI checks, or the compiler errors and exception | `render_compose_preview` |
+| `render_swiftui_preview_code` | Renders throwaway code in the module of a file, without editing the project | `show_in_memory_compose_preview` |
+| `check_swiftui_preview` | UI checks of a preview: touch targets, text contrast, small text, overlaps, clipping | `visual_lint_service_tool`, UI Check |
+| `compare_swiftui_preview_to_image` | Renders and compares with an expected image (a design, a screenshot): mismatch, PSNR, the views of the regions that differ, a side-by-side image | Match UI to Target Image, `compose_visual_comparison_judge` |
+| `compare_images` | Compares two images: mismatch %, MSE, RMSE, PSNR, a diff image | `compare_images` |
+| `verify_batch_visual_parity` | Compares two folders of screenshots by name, writes a Markdown report | `verify_batch_visual_parity` |
+
+Renders go through the same renderer as the preview pane: open files are saved, the running host renders without
+Gradle when no code changed, and only one build runs per module at a time.
+
+### On the command line
+
+Without an IDE, the Gradle tasks do the same, like Android's `android preview` commands:
+
+```bash
+./gradlew :shared:listComposeSwiftUIPreviews -PcomposeSwiftUI.previewFile=shared/src/commonMain/kotlin/app/Inbox.kt
+./gradlew :shared:renderComposeSwiftUIPreviews -PcomposeSwiftUI.previewFile=shared/src/commonMain/kotlin/app/Inbox.kt
+./gradlew :shared:renderComposeSwiftUIPreviews -PcomposeSwiftUI.previews=app.InboxPreview -PcomposeSwiftUI.golden=design/inbox.png
+```
+
+Each render writes, in `build/composeSwiftUI/previews`, next to the images:
+
+- `report.md`: for each preview rendered, its image, its UI checks, its component tree, and its comparison with the
+  expected image;
+- `<key>.tree.txt`: the component tree, one view per line with its call site, frame in points and text:
+
+```text
+Preview 402×73 pt
+  HStack · Contacts.kt:21 · x=0 y=0 w=402 h=73
+    VStack · Contacts.kt:22 · x=16 y=16 w=132 h=41
+      Text "Ada Lovelace" · Contacts.kt:23 · x=16 y=16 w=105 h=20
+      Text "+44 20 0000 0000" · Contacts.kt:24 · x=16 y=39 w=132 h=18
+    Image "star.fill" · Contacts.kt:27 · x=364 y=27 w=22 h=20
+```
+
+`-PcomposeSwiftUI.golden` takes a PNG, compared with the first image rendered, or a folder of `<key>.png` (a copy of
+`build/composeSwiftUI/previews` from before a change), compared image by image: a visual regression check.
+`listComposeSwiftUIPreviews -PcomposeSwiftUI.format=json` prints the previews as JSON.
+
+Throwaway previews go to `build/composeSwiftUI/scratch/` (any file and package): they are compiled into the module
+and rendered like the others, and never into Xcode *Release* builds. Delete the file when done.
+
+### UI checks
+
+The checks follow Apple's Human Interface Guidelines and WCAG, from the views and the image of each preview. They are
+heuristics, worth a look rather than proofs:
+
+| Category | Check |
+|---|---|
+| Accessibility | A button, toggle, link, picker or text field smaller than 44×44 points (not in a list or form row) |
+| Contrast | A text whose contrast with its background, estimated from the image, is under 4.5:1 (3:1 from 24 points tall) |
+| Typography | A text under 11 points tall |
+| Layout | Texts drawn over each other; a view past the edge of the preview (not in a scrolling container) |
+
+Render variants to check adaptive layouts: `@PreviewDynamicTypeSizes`, `@PreviewScreenSizes`,
+`@PreviewLayoutDirections`, `@PreviewLightDark`.
+
 ## In Xcode
 
 On every build, the plugin writes `ComposeSwiftUIPreviews.swift` next to the renderer (`iosApp/ComposeSwiftUI`), with

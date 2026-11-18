@@ -14,6 +14,8 @@
             <li>Run a preview live on the simulator, navigate between code and previews, copy or save images</li>
             <li>Compile errors and preview crashes shown next to the previews; inspections for previews that
                 can't render</li>
+            <li>Tools for AI agents on the IDE's MCP server: list, render, render throwaway code, UI checks, compare
+                with a design or a folder of screenshots</li>
         </ul>
         Needs macOS with Xcode, and the <code>dev.nucleusframework.compose-swiftui</code> Gradle plugin.
     ]]></description>
@@ -21,6 +23,8 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.kotlin</depends>
     <depends>com.intellij.gradle</depends>
+    <!-- The previews as tools for AI agents connected to the IDE's MCP server. -->
+    <depends optional="true" config-file="compose-swiftui-mcp.xml">com.intellij.mcpServer</depends>
 
     <extensions defaultExtensionNs="org.jetbrains.kotlin">
         <supportsKotlinPluginMode supportsK1="true" supportsK2="true"/>

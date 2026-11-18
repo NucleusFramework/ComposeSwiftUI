@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Previews for AI agents, like Android Studio's agent tools for Compose previews:
+  - IDE plugin: tools on the IDE's MCP server (`list_swiftui_previews`, `render_swiftui_preview`,
+    `render_swiftui_preview_code`, `check_swiftui_preview`, `compare_swiftui_preview_to_image`, `compare_images`,
+    `verify_batch_visual_parity`) for Claude Code, Junie, Codex or any agent connected to the IDE;
+  - `listComposeSwiftUIPreviews`, and `renderComposeSwiftUIPreviews` with `-PcomposeSwiftUI.previewFile` and
+    `-PcomposeSwiftUI.golden`, writing `report.md` and a component tree per preview (`<key>.tree.txt`);
+  - UI checks of every rendered preview: touch targets, text contrast, small text, overlapping texts, clipped views;
+  - image comparison with expected images or folders of screenshots (mismatch, PSNR, diff and side-by-side images);
+  - scratch previews: throwaway code in `build/composeSwiftUI/scratch` rendered without touching the sources.
+- The layout of a rendered preview records the strings of each view (text, label, SF Symbol name).
+
 ## 0.8.0
 
 ### Added

@@ -1,5 +1,7 @@
 package dev.nucleusframework.composeswiftui.gradle
 
+import dev.nucleusframework.composeswiftui.analysis.PreviewReport
+import dev.nucleusframework.composeswiftui.analysis.ViewTree
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask
@@ -88,6 +90,18 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
     @get:Input
     abstract val previewFilter: ListProperty<String>
 
+    /** Canonical paths of source files whose previews to render (`-PcomposeSwiftUI.previewFile=a.kt,b.kt`). */
+    @get:Input
+    abstract val previewFiles: ListProperty<String>
+
+    /**
+     * Expected image(s) to compare the rendered previews with (`-PcomposeSwiftUI.golden`): a PNG, compared with the
+     * first rendered image, or a folder of `<key>.png` (a copy of an earlier output directory).
+     */
+    @get:Input
+    @get:Optional
+    abstract val golden: Property<String>
+
     /** Key of a preview to open live on the simulator instead of rendering (`-PcomposeSwiftUI.interactivePreview`). */
     @get:Input
     @get:Optional
@@ -133,7 +147,14 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
 
         @Suppress("UNCHECKED_CAST")
         val wanted = previewFilter.get().ifEmpty { ideRequest?.get("previews") as? List<String> ?: emptyList() }.toSet()
-        val jobs = manifest.filter { wanted.isEmpty() || it.id in wanted }.flatMap { it.jobs() }
+        val files = previewFiles.get().toSet()
+        val jobs = manifest
+            .filter { wanted.isEmpty() || it.id in wanted }
+            .filter { files.isEmpty() || runCatching { File(it.source).canonicalPath }.getOrNull() in files }
+            .flatMap { it.jobs() }
+        if (jobs.isEmpty() && (wanted.isNotEmpty() || files.isNotEmpty())) {
+            throw GradleException("Compose SwiftUI: no preview matches ${(wanted + files).joinToString()}. Run listComposeSwiftUIPreviews to see them.")
+        }
         val byDevice = jobs.groupBy { it.device.ifEmpty { device.orNull.orEmpty() } }
         // One simulator per device, found (and booted) while the app links, then rendering in parallel.
         val pool = Executors.newFixedThreadPool(byDevice.size.coerceAtLeast(1))
@@ -169,6 +190,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             pool.shutdown()
         }
         writeResults(out, manifest, jobs.map { it.id }.toSet(), results)
+        val report = timed("report") { writeReport(out, results) }
 
         val failed = results.count { it["error"] != null }
         logger.lifecycle(
@@ -176,6 +198,45 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
                 (if (failed > 0) ", $failed failed" else "") +
                 " in ${(System.nanoTime() - started) / 1_000_000} ms to $out",
         )
+        logger.lifecycle("Compose SwiftUI: images, component trees and UI checks in $report")
+    }
+
+    /**
+     * Writes `report.md` for the previews of this render, for agents: each image with its component tree
+     * (`<key>.tree.txt`), its UI checks and, with [golden], its comparison with the expected image.
+     */
+    @Suppress("UNCHECKED_CAST")
+    private fun writeReport(out: File, results: List<Map<String, Any?>>): File {
+        val expected = golden.orNull?.let(::File)
+        if (expected != null && !expected.exists()) throw GradleException("Compose SwiftUI: no expected image at $expected")
+        // The entries of results.json (titles filled in) of the previews rendered now.
+        val keys = results.map { it["key"] }.toSet()
+        val ordered = previousResults(out).filter { it["key"] in keys }
+        val firstImage = ordered.firstOrNull { it["file"] != null }?.get("key")
+        val sections = ordered.map { result ->
+            val key = result["key"] as String
+            val image = (result["file"] as? String)?.let(out::resolve)?.takeIf { it.isFile }
+            val analysis = image?.let {
+                val layout = out.resolve("$key.layout.json")
+                val tree = layout.takeIf { it.isFile }?.let { file ->
+                    runCatching { ViewTree.parse(JsonSlurper().parse(file) as Map<String, Any?>) }.getOrNull()
+                }
+                tree?.let { t -> out.resolve("$key.tree.txt").writeText(t.format()) }
+                val reference = when {
+                    expected == null -> null
+                    expected.isDirectory -> expected.resolve("$key.png").takeIf { it.isFile }
+                    key == firstImage -> expected
+                    else -> null
+                }
+                runCatching { PreviewReport.analyze(it, tree, reference, out.resolve("$key.compare.png")) }
+                    .onFailure { e -> logger.warn("Compose SwiftUI: could not analyze $key: ${e.message}") }
+                    .getOrNull()
+            }
+            PreviewReport.markdown(result["title"] as? String ?: key, key, image, result["error"] as? String, analysis)
+        }
+        return out.resolve(REPORT_FILE_NAME).apply {
+            writeText("# Compose SwiftUI previews\n\n" + sections.joinToString(""))
+        }
     }
 
     /** A preview of the manifest. */
@@ -452,7 +513,8 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         val images = all.mapNotNull { it["file"] as? String }.toSet()
         out.listFiles { f ->
             (f.extension == "png" && f.name !in images) ||
-                (f.name.endsWith(".layout.json") && f.name.removeSuffix(".layout.json") + ".png" !in images)
+                (f.name.endsWith(".layout.json") && f.name.removeSuffix(".layout.json") + ".png" !in images) ||
+                (f.name.endsWith(".tree.txt") && f.name.removeSuffix(".tree.txt") + ".png" !in images)
         }?.forEach { it.delete() }
         file.writeText(JsonOutput.prettyPrint(JsonOutput.toJson(mapOf("previews" to all))))
     }
@@ -687,6 +749,9 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
     internal companion object {
         /** Read by the IntelliJ plugin. */
         const val RESULTS_FILE_NAME = "results.json"
+
+        /** The last render for agents: images, component trees, UI checks, comparisons. */
+        const val REPORT_FILE_NAME = "report.md"
 
         /** Simulator of each device name of the last render (`""`: the default one), read by the IntelliJ plugin. */
         const val DEVICES_FILE_NAME = "devices.json"

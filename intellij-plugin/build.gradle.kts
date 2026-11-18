@@ -25,7 +25,8 @@ dependencies {
         // `-PlocalIde=/Applications/IntelliJ IDEA.app` builds against an installed IDE instead of downloading one.
         val localIde = providers.gradleProperty("localIde").orNull
         if (localIde != null) local(localIde) else intellijIdea("2026.2.1")
-        bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle")
+        // The MCP server is optional: the agent tools are registered only when it is installed.
+        bundledPlugins("org.jetbrains.kotlin", "com.intellij.gradle", "com.intellij.mcpServer")
         testFramework(TestFrameworkType.Platform)
     }
     testImplementation("junit:junit:4.13.2")
@@ -42,6 +43,8 @@ tasks.test {
 }
 
 kotlin {
+    // Preview analysis for agents (component tree, UI checks, image comparison), shared with the Gradle plugin.
+    sourceSets.main { kotlin.srcDir("../gradle-plugin/src/shared/kotlin") }
     jvmToolchain(25)
     compilerOptions.jvmTarget.set(JvmTarget.JVM_25)
 }

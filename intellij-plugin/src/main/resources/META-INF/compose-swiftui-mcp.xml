@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij.mcpServer">
+        <mcpToolset implementation="dev.nucleusframework.composeswiftui.idea.mcp.ComposeSwiftUIMcpToolset"/>
+    </extensions>
+</idea-plugin>
