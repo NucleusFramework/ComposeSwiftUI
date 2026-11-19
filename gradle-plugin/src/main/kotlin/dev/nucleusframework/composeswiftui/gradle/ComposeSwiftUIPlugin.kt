@@ -31,6 +31,19 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.Family
 import java.io.File
 
+private val SKIPPED_DIRS = setOf("build", "DerivedData", "Pods", "ComposeSwiftUI", "ComposeSwiftUIIntegrations")
+private val BUNDLE_EXTENSIONS = setOf("xcodeproj", "xcworkspace", "app", "framework", "bundle")
+
+/** The `.xcassets` folders of the app's sources, not looking into build outputs, the renderer or other bundles. */
+internal fun appAssetCatalogs(dir: File, depth: Int = 0): List<File> =
+    dir.listFiles().orEmpty().filter { it.isDirectory }.sortedBy { it.name }.flatMap {
+        when {
+            it.extension == "xcassets" -> listOf(it)
+            depth < 3 && it.name !in SKIPPED_DIRS && it.extension !in BUNDLE_EXTENSIONS -> appAssetCatalogs(it, depth + 1)
+            else -> emptyList()
+        }
+    }
+
 /** `composeSwiftUI { }` configuration (everything is optional). */
 abstract class ComposeSwiftUIExtension {
     /**
@@ -58,6 +71,13 @@ abstract class ComposeSwiftUIExtension {
      * the folder free of frameworks it doesn't link, so the whole folder can be added to the target.
      */
     abstract val integrations: ListProperty<String>
+
+    /**
+     * The app's asset catalogs (`.xcassets`) the previews use, so named colors and images (`Color("Brand")`,
+     * `Image("logo")`) render as in the app. Default: the ones in the folder of [swiftOutputDir] (the app's sources),
+     * when nothing is set.
+     */
+    abstract val previewAssetCatalogs: ConfigurableFileCollection
 }
 
 /**
@@ -221,6 +241,13 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 if (name in project.tasks.names) project.tasks.named(name).get().outputs.files else project.files()
             }
             task.composeResources.from(resources(framework))
+            // The ones set, else those of the app's sources: the folder the renderer is written to. Nothing here
+            // captures the project, for the configuration cache.
+            task.assetCatalogs.from(
+                extension.previewAssetCatalogs.elements.zip(extension.swiftOutputDir.orElse(defaultOutputDir(project))) { set, renderer ->
+                    if (set.isNotEmpty()) set.map { it.asFile } else appAssetCatalogs(renderer.asFile.parentFile)
+                },
+            )
             task.macComposeResources.from(resources(macFramework))
             task.workDirectory.set(project.layout.buildDirectory.dir("composeSwiftUI/previewHost"))
             task.outputDirectory.set(project.layout.buildDirectory.dir(PREVIEW_IMAGES_DIR))

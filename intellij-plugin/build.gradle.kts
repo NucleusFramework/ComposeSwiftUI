@@ -13,7 +13,7 @@ version =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.8.2"
+        ?: "0.9.0"
 
 repositories {
     mavenCentral()
@@ -41,6 +41,11 @@ tasks.test {
     // The same against the Mac host (MacEndToEndTest), when given.
     providers.systemProperty("csui.e2e.mac.module").orNull?.let { systemProperty("csui.e2e.mac.module", it) }
     providers.systemProperty("csui.e2e.dump").orNull?.let { systemProperty("csui.e2e.dump", it) }
+    // The same from Linux or Windows against a remote Mac (RemoteMacEndToEndTest), when given.
+    providers.systemProperty("csui.e2e.remote").orNull?.let { systemProperty("csui.e2e.remote", it) }
+    for (name in listOf("module", "xcode", "scheme", "bundle")) {
+        providers.systemProperty("csui.e2e.remote.$name").orNull?.let { systemProperty("csui.e2e.remote.$name", it) }
+    }
     // The preview pane through many edits against a copy of the sample (EditorTortureTest), when given.
     providers.systemProperty("csui.torture.module").orNull?.let { systemProperty("csui.torture.module", it) }
 }
@@ -65,4 +70,18 @@ tasks.runIde {
     args(sample.absolutePath, sample.resolve("shared/src/iosMain/kotlin/sample/PreviewShowcase.kt").absolutePath)
     // The sample is part of this repository: no trust dialog in the sandbox.
     jvmArgs("-Didea.trust.all.projects=true")
+}
+
+// `-PandroidStudio=<its install directory>` adds `runAndroidStudio`: the plugin (built against IntelliJ IDEA) in a
+// sandbox Android Studio, with the sample, to check what is specific to Android Studio.
+providers.gradleProperty("androidStudio").orNull?.let { studio ->
+    intellijPlatformTesting.runIde.register("runAndroidStudio") {
+        localPath.set(file(studio))
+        task {
+            val sample = layout.projectDirectory.dir("../samples/kmp-app").asFile
+            args(sample.absolutePath, sample.resolve("shared/src/iosMain/kotlin/sample/PreviewShowcase.kt").absolutePath)
+            // No trust dialog, no first-run setup wizard in the sandbox.
+            jvmArgs("-Didea.trust.all.projects=true", "-Ddisable.android.first.run=true")
+        }
+    }
 }

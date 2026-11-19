@@ -48,7 +48,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.8.2"
+       id("dev.nucleusframework.compose-swiftui") version "0.9.0"
    }
 
    kotlin {
@@ -225,6 +225,16 @@ on the simulator composes the previews in parallel and captures each one as soon
 minute); after that a Kotlin change costs the framework link and about two seconds, and re-rendering without a change
 about one. Choose the simulator with `composeSwiftUI { previewDevice.set("iPhone 17 Pro") }`. A macOS app's previews
 render on the Mac itself (`@Preview(device = "mac")`, or every preview of a module with only the macOS target).
+
+#### From Linux or Windows
+
+The IDE doesn't have to run on the Mac. Set a Mac reached over SSH (key authentication, *Remote Login* on) in
+*Settings › Tools › Compose SwiftUI Previews › Remote Mac*, and the plugin keeps the IDE, indexing and your other builds
+on your machine while the Mac does what needs Apple's tools: the project is synchronized there with rsync (only what
+changed), previews render there and come back, and live previews stream over SSH. The *iOS Simulator* tool window
+shows a simulator of the Mac live, with touches, keyboard, Home and the app switcher, and an *iOS App* run
+configuration builds the app with Xcode on the Mac and runs it on the simulator picked in the toolbar. See
+[Previews › From Linux or Windows](docs/guide/29-previews.md#from-linux-or-windows-a-remote-mac).
 
 ### In Xcode
 

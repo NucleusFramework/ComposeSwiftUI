@@ -122,24 +122,34 @@ class InteractivePreview(
     fun connect(port: Int) {
         startedAt = System.nanoTime()
         ApplicationManager.getApplication().executeOnPooledThread {
-            val socket = (0 until 100).firstNotNullOfOrNull {
-                runCatching { Socket("127.0.0.1", port) }.getOrElse { Thread.sleep(50); null }
+            // Through an SSH forward (a remote Mac), connecting succeeds before the host listens and the connection
+            // then ends without a byte: try again, as for a refused connection.
+            repeat(100) {
+                val socket = runCatching { Socket("127.0.0.1", port) }.getOrNull()
+                if (socket != null) {
+                    this.socket = socket
+                    output = socket.getOutputStream()
+                    if (read(DataInputStream(socket.getInputStream().buffered()))) return@executeOnPooledThread
+                    this.socket = null
+                    output = null
+                    runCatching { socket.close() }
+                }
+                Thread.sleep(50)
             }
-            if (socket == null) {
-                onEdt { status.text = "The live preview didn't start" }
-                return@executeOnPooledThread
-            }
-            this.socket = socket
-            output = socket.getOutputStream()
-            onEdt { status.text = "Live" }
-            read(DataInputStream(socket.getInputStream().buffered()))
+            onEdt { status.text = "The live preview didn't start" }
         }
     }
 
-    private fun read(input: DataInputStream) {
+    /** Reads the stream until it ends; false when it ended before its first byte. */
+    private fun read(input: DataInputStream): Boolean {
+        var started = false
         try {
             while (true) {
                 val type = input.readUnsignedByte()
+                if (!started) {
+                    started = true
+                    onEdt { status.text = "Live" }
+                }
                 val payload = ByteArray(input.readInt()).also(input::readFully)
                 when (type) {
                     1 -> ImageIO.read(ByteArrayInputStream(payload))?.let { frame ->
@@ -154,8 +164,9 @@ class InteractivePreview(
                 }
             }
         } catch (_: Exception) {
-            onEdt { if (socket != null) status.text = "Disconnected" }
+            if (started) onEdt { if (socket != null) status.text = "Disconnected" }
         }
+        return started
     }
 
     private fun message(json: JsonObject) {

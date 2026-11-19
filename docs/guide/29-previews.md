@@ -8,7 +8,7 @@ ways to see them, both driven by the same `@Preview` annotation:
 
 | Where | How it renders | Needs |
 |---|---|---|
-| IntelliJ IDEA / Android Studio | The `renderComposeSwiftUIPreviews` Gradle task snapshots each preview on the iOS simulator or on the Mac; the IDE plugin shows the PNGs next to the code | macOS, Xcode, an `iosSimulatorArm64` (or `iosX64`) or `macosArm64` (or `macosX64`) target, the IDE plugin |
+| IntelliJ IDEA / Android Studio | The `renderComposeSwiftUIPreviews` Gradle task snapshots each preview on the iOS simulator or on the Mac; the IDE plugin shows the PNGs next to the code | macOS (or, from Linux or Windows, a [remote Mac](#from-linux-or-windows-a-remote-mac)), Xcode, an `iosSimulatorArm64` (or `iosX64`) or `macosArm64` (or `macosX64`) target, the IDE plugin |
 | Xcode | A generated `ComposeSwiftUIPreviews.swift` holds one Swift `#Preview` per Kotlin preview | The app builds in Xcode |
 
 ## Writing previews
@@ -307,14 +307,72 @@ composeSwiftUI {
     // Simulator name or UDID used for previews (default: "Compose SwiftUI Previews", created and booted in the
     // background), or "mac" to render them on the Mac
     previewDevice.set("iPhone 17 Pro")
+    // The app's asset catalogs, for named colors and images (default: the .xcassets of the app's sources, the folder
+    // of swiftOutputDir)
+    previewAssetCatalogs.from("../iosApp/iosApp/Assets.xcassets")
 }
 ```
 
 `-PcomposeSwiftUI.previewSettleMs=3000` raises the longest wait for a preview to settle (also in the IDE settings).
 
+The preview host is an app of its own, so it only has the resources it is given: the module's Compose Multiplatform
+resources, and the app's asset catalogs, compiled into it as Xcode does for the app. `Color("Brand")` and
+`Image("logo")` then render as in the app, with their dark variants. By default the catalogs are the `.xcassets`
+folders found in the app's sources: the folder `swiftOutputDir` is in, and its subfolders. Set `previewAssetCatalogs`
+when they are elsewhere.
+
+Previews render in the language of the previews' simulator (English, by default), not the one of the simulator you
+run the app on: set `locale` on `@Preview` to see another one.
+
 The module needs an `iosSimulatorArm64()` target (`iosX64()` on an Intel Mac) or a `macosArm64()` target (`macosX64()`)
 with a framework binary; Kotlin creates the debug variant of every `binaries.framework { }`. A module with only tvOS or
 watchOS targets has no IDE previews; use Xcode's canvas there.
+
+### From Linux or Windows: a remote Mac
+
+The IDE doesn't have to run on the Mac. On Linux or Windows, the plugin uses a Mac reached over SSH for everything
+that needs Apple's tools, and keeps the rest on your machine: the IDE, indexing, the Gradle sync, Android and JVM
+builds. Set it in *Settings › Tools › Compose SwiftUI Previews › Remote Mac*:
+
+- **SSH destination**: an alias of `~/.ssh/config` or `user@host`. Authentication must work without a prompt (a key),
+  and the Mac needs *Remote Login* on (*System Settings › General › Sharing*), Xcode, and `rsync` here.
+- *Test Connection* shows the Mac's macOS and Xcode versions.
+
+Then previews work as on a Mac:
+
+- Before a build, the project is synchronized to `~/.compose-swiftui/projects/` on the Mac with rsync, only what
+  changed (a fraction of a second once copied). The whole Git repository is sent, so builds it includes from elsewhere
+  in the repository are there; `build/`, `.gradle/`, `.git/` and `local.properties` never are.
+- Gradle runs in the Mac's daemon, kept warm between renders, with the Mac's Android SDK when the project has an
+  Android target.
+- The images, results and component trees come back; compiler errors and the previews' sources have this machine's
+  paths, so their links open your files.
+- Live literals and renders without a code change talk to the running host directly, one SSH round trip each.
+  Interactive mode streams over a port forwarded by SSH.
+
+All the commands share one SSH connection (OpenSSH connection sharing), so each costs a round trip on the network, not
+a handshake. *Use it on a Mac too* sends the work to the remote Mac from a Mac IDE as well, to offload a small Mac.
+
+### The simulator in the IDE
+
+The *iOS Simulator* tool window shows a simulator of the Mac, live, like Android Studio's *Running Devices*: it
+connects to the booted simulator when it opens, or pick one and press ▶ (it boots if needed). A click is a touch, a
+drag a swipe, the wheel scrolls, and the keyboard types. Beside the screen are the device's controls: *Home* and the
+*App Switcher* (the gestures of Face ID iPhones), a *Screenshot* (copied, and saved where you choose), *Shake*, and
+light or dark appearance. It works on the Mac and, through the remote Mac, from Linux or Windows.
+
+It doesn't need the Simulator app: a small helper, compiled on the Mac on first use, reads the simulator's
+framebuffer and sends touches and keys as hardware events, the way the Simulator app does. No window to keep open and
+no screen recording permission. The physical buttons (lock, volume) and rotation are not available yet.
+
+### Running the app
+
+From Linux or Windows, the plugin adds an *iOS App* run configuration for the project's Xcode project when it opens
+the project, as the Kotlin Multiplatform plugin does on a Mac, and the toolbar lists the Mac's simulators next to it.
+▶ builds the app on the Mac with Xcode, installs it on the simulator picked there and runs it, with its output in the
+Run tool window, and shows the *iOS Simulator* tool window. *Stop* ends the app on the simulator. The Xcode project
+builds the Kotlin framework as usual (`embedAndSignAppleFrameworkForXcode`), on the Mac. Add more configurations in
+*Run › Edit Configurations › + › iOS App* (another scheme, configuration or simulator).
 
 ## For AI agents
 

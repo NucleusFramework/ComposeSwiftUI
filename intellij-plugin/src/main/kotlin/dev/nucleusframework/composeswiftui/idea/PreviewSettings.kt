@@ -6,16 +6,20 @@ import com.intellij.openapi.components.SimplePersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.openapi.components.service
+import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.openapi.ui.DialogPanel
+import com.intellij.openapi.ui.Messages
+import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.bindIntText
 import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
+import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toNullableProperty
 import com.intellij.ui.dsl.listCellRenderer.textListCellRenderer
-import com.intellij.openapi.ide.CopyPasteManager
 import dev.nucleusframework.composeswiftui.idea.mcp.StandaloneMcpServer
+import dev.nucleusframework.composeswiftui.idea.remote.SshMacShell
 import java.awt.datatransfer.StringSelection
 
 /** When the previews render without a click. */
@@ -47,6 +51,10 @@ class PreviewSettings : SimplePersistentStateComponent<PreviewSettings.Options>(
         var layout by enum(PreviewLayout.LIST)
         var mcpServerMode by enum(McpServerMode.AUTO)
         var mcpPort by property(StandaloneMcpServer.DEFAULT_PORT)
+        // `ssh` destination of the Mac that runs the Apple tools when the IDE is not on a Mac.
+        var remoteMac by string("")
+        // Use the remote Mac even on a Mac (to try it, or to offload a small Mac).
+        var remoteMacOnMac by property(false)
     }
 
     companion object {
@@ -79,6 +87,34 @@ class PreviewConfigurable : BoundConfigurable("Compose SwiftUI Previews") {
                     checkBox("Gradle configuration cache (skips the configuration of the build on every render)")
                         .bindSelected(options::configurationCache)
                         .comment("Turned off automatically for a build that doesn't support it.")
+                }
+            }
+            group("Remote Mac") {
+                lateinit var destinationField: JBTextField
+                row("SSH destination:") {
+                    destinationField = textField().bindText({ options.remoteMac.orEmpty() }, { options.remoteMac = it.trim() })
+                        .comment(
+                            "On Linux or Windows, the Mac that builds for Apple platforms, renders the previews and runs the " +
+                                "simulator: an alias of ~/.ssh/config or user@host, with key authentication. The project is " +
+                                "synchronized to it with rsync.",
+                        ).component
+                }
+                row {
+                    checkBox("Use it on a Mac too").bindSelected(options::remoteMacOnMac)
+                }
+                row {
+                    button("Test Connection") {
+                        val destination = destinationField.text.trim()
+                        val result = if (destination.isEmpty()) null else SshMacShell(destination).check()
+                        Messages.showInfoMessage(
+                            when {
+                                result == null -> "Set the SSH destination first."
+                                result.success -> "Connected: macOS ${result.output.trim().replace("\n", ", ")}"
+                                else -> "Failed:\n${result.output.trim()}"
+                            },
+                            "Remote Mac",
+                        )
+                    }
                 }
             }
             group("AI Agents") {

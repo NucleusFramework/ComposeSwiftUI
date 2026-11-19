@@ -15,7 +15,7 @@ version =
         .environmentVariable("GITHUB_REF")
         .orNull
         ?.removePrefix("refs/tags/v")
-        ?: "0.8.2"
+        ?: "0.9.0"
 
 dependencies {
     compileOnly(libs.kotlin.gradle.plugin)

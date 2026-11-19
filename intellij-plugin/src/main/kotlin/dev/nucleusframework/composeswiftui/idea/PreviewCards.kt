@@ -300,7 +300,10 @@ class PreviewImageView(
 /** Copy and save actions of the cards. */
 object PreviewImages {
     fun copy(entry: PreviewEntry) {
-        val image = entry.image ?: return
+        copyImage(entry.image ?: return)
+    }
+
+    fun copyImage(image: java.awt.Image) {
         CopyPasteManager.getInstance().setContents(object : Transferable {
             override fun getTransferDataFlavors() = arrayOf(DataFlavor.imageFlavor)
             override fun isDataFlavorSupported(flavor: DataFlavor) = flavor == DataFlavor.imageFlavor

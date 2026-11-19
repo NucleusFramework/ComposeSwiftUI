@@ -17,7 +17,8 @@
             <li>Tools for AI agents on the IDE's MCP server: list, render, render throwaway code, UI checks, compare
                 with a design or a folder of screenshots</li>
         </ul>
-        Needs macOS with Xcode, and the <code>dev.nucleusframework.compose-swiftui</code> Gradle plugin.
+        Needs macOS with Xcode, or, on Linux and Windows, a Mac reached over SSH (Settings › Tools › Compose SwiftUI
+        Previews › Remote Mac), and the <code>dev.nucleusframework.compose-swiftui</code> Gradle plugin.
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
@@ -32,6 +33,12 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <fileEditorProvider implementation="dev.nucleusframework.composeswiftui.idea.PreviewEditorProvider"/>
+        <!-- A simulator of the Mac (this one or the remote one, from Linux or Windows) live in the IDE. -->
+        <toolWindow id="iOS Simulator" anchor="right" secondary="false" icon="AllIcons.Nodes.Deploy"
+                    factoryClass="dev.nucleusframework.composeswiftui.idea.SimulatorToolWindowFactory"/>
+        <configurationType implementation="dev.nucleusframework.composeswiftui.idea.IosRunConfigurationType"/>
+        <executionTargetProvider implementation="dev.nucleusframework.composeswiftui.idea.IosSimulatorTargetProvider"/>
+        <postStartupActivity implementation="dev.nucleusframework.composeswiftui.idea.IosRunConfigurationCreator"/>
         <codeInsight.lineMarkerProvider language="kotlin"
                                         implementationClass="dev.nucleusframework.composeswiftui.idea.PreviewLineMarkerProvider"/>
         <localInspection language="kotlin" shortName="ComposeSwiftUIPreview"

@@ -7,6 +7,8 @@ import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.progress.EmptyProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
+import dev.nucleusframework.composeswiftui.idea.remote.MacHosts
+import dev.nucleusframework.composeswiftui.idea.remote.RemoteGradle
 import org.gradle.tooling.GradleConnectionException
 import org.gradle.tooling.GradleConnector
 import org.gradle.tooling.ProjectConnection
@@ -48,6 +50,16 @@ class GradleRunner(private val project: Project) : Disposable {
         val done = { success: Boolean, output: String ->
             lock.release()
             finished(success, output)
+        }
+        // On Linux or Windows, Gradle runs on the remote Mac.
+        MacHosts.workspace(module.rootProjectPath)?.let { workspace ->
+            try {
+                RemoteGradle.run(workspace, module, task, arguments, progress, done)
+            } catch (e: Exception) {
+                LOG.warn("Remote Gradle failed", e)
+                done(false, e.message.orEmpty())
+            }
+            return
         }
         val output = StringBuffer()
         val sink = object : OutputStream() {

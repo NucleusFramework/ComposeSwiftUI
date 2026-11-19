@@ -108,6 +108,14 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
     abstract val composeResources: ConfigurableFileCollection
 
     /**
+     * The app's asset catalogs (`.xcassets`), compiled into the host: named colors and images (`Color("Brand")`,
+     * `Image("logo")`) render as in the app.
+     */
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val assetCatalogs: ConfigurableFileCollection
+
+    /**
      * Simulator name or UDID, or `mac`. Default: `Compose SwiftUI Previews`, created like the booted iPhone and run in
      * the background; the Mac in a module without an iOS simulator target.
      */
@@ -543,13 +551,13 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
     /** The debug framework of [platform], or why the module has none. */
     private fun framework(platform: HostPlatform): HostFramework = when (platform) {
         HostPlatform.IOS -> frameworkDirectory.orNull?.let {
-            HostFramework(it.asFile, frameworkName.get(), staticFramework.get(), linkerOpts.get(), composeResources.files)
+            HostFramework(it.asFile, frameworkName.get(), staticFramework.get(), linkerOpts.get(), composeResources.files, assetCatalogs.files)
         } ?: throw GradleException(
             "Compose SwiftUI: previews on the iOS simulator need the `$iosTargetName()` target with a framework binary: " +
                 "add it, or render them on the Mac with `device = \"mac\"` (or `previewDevice.set(\"mac\")`).",
         )
         HostPlatform.MAC -> macFrameworkDirectory.orNull?.let {
-            HostFramework(it.asFile, macFrameworkName.get(), macStaticFramework.get(), macLinkerOpts.get(), macComposeResources.files)
+            HostFramework(it.asFile, macFrameworkName.get(), macStaticFramework.get(), macLinkerOpts.get(), macComposeResources.files, assetCatalogs.files)
         } ?: throw GradleException(
             "Compose SwiftUI: previews on the Mac need the `$macTargetName()` target with a framework binary. The plugin " +
                 "links it when a preview says `device = \"mac\"`, `previewDevice` is \"mac\", or the module has no iOS simulator target.",
@@ -663,6 +671,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         val static: Boolean,
         val linkerOpts: List<String>,
         val resources: Set<File>,
+        val assetCatalogs: Set<File>,
     )
 
     private fun buildHostApp(work: File, platform: HostPlatform): File {
@@ -709,12 +718,13 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             listOf(key, if (static) binary.stamp() else "", inputs.linkerOpts.joinToString(" "), static.toString()).map { it.toByteArray() },
         )
         val resources = inputs.resources.filter { it.isDirectory }
+        val catalogs = inputs.assetCatalogs.filter { it.isDirectory }.sortedBy { it.path }
         val bundleId = if (mac) "$BUNDLE_ID.mac.${sha256(listOf(work.canonicalPath.toByteArray()))}" else bundleId(work)
         // For the IDE, which activates the simulator host itself.
         if (!mac) work.resolve(BUNDLE_ID_FILE_NAME).writeText(bundleId)
         val bundleKey = sha256(
             listOf(linkKey, binary.stamp(), bundleId).map { it.toByteArray() } +
-                resources.flatMap { dir -> dir.walkTopDown().filter { it.isFile }.map { it.stamp().toByteArray() } },
+                (resources + catalogs).flatMap { dir -> dir.walkTopDown().filter { it.isFile }.map { it.stamp().toByteArray() } },
         )
         val linkStamp = dir.resolve("link.stamp")
         val bundleStamp = dir.resolve("app.stamp")
@@ -751,6 +761,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         val composeResourcesDir = (if (mac) contents.resolve("Resources") else app).resolve("compose-resources")
         composeResourcesDir.deleteRecursively()
         resources.forEach { it.copyRecursively(composeResourcesDir, overwrite = true) }
+        if (catalogs.isNotEmpty()) compileAssetCatalogs(catalogs, if (mac) contents.resolve("Resources") else app, mac, dir)
         if (!static) {
             contents.resolve("Frameworks").deleteRecursively()
             // ditto keeps the symbolic links of a macOS framework (Versions/Current), which codesign requires.
@@ -760,6 +771,25 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
         exec("codesign", "--force", "--deep", "--sign", "-", app.path)
         bundleStamp.writeText(bundleKey)
         return app
+    }
+
+    /**
+     * Compiles the app's asset [catalogs] into `Assets.car` in [resources], as Xcode does for the app: `Color("Name")`
+     * and `Image("name")` find them in the host's main bundle.
+     */
+    private fun compileAssetCatalogs(catalogs: List<File>, resources: File, mac: Boolean, dir: File) {
+        resources.mkdirs()
+        val partialInfoPlist = dir.resolve("assets-info.plist")
+        val platform = if (mac) {
+            arrayOf("--platform", "macosx", "--minimum-deployment-target", "14.0")
+        } else {
+            arrayOf("--platform", "iphonesimulator", "--minimum-deployment-target", "17.0", "--target-device", "iphone", "--target-device", "ipad")
+        }
+        exec(
+            "xcrun", "actool", "--compile", resources.path, *platform,
+            "--output-partial-info-plist", partialInfoPlist.path, "--output-format", "human-readable-text",
+            "--errors", "--warnings", *catalogs.map { it.path }.toTypedArray(),
+        )
     }
 
     /**

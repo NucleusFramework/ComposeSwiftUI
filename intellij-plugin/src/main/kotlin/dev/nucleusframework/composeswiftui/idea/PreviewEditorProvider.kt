@@ -27,5 +27,7 @@ class PreviewEditorProvider : FileEditorProvider, DumbAware {
 
     override fun getEditorTypeId() = "compose-swiftui-preview"
 
-    override fun getPolicy() = FileEditorPolicy.HIDE_DEFAULT_EDITOR
+    // Hides every other editor of the file, not only the default one: Android Studio opens Kotlin files in an editor of
+    // its own, which would otherwise be selected, leaving the previews in a tab at the bottom.
+    override fun getPolicy() = FileEditorPolicy.HIDE_OTHER_EDITORS
 }

@@ -52,6 +52,7 @@ import com.intellij.util.concurrency.AppExecutorUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.UIUtil
 import com.intellij.util.ui.WrapLayout
+import dev.nucleusframework.composeswiftui.idea.remote.MacHosts
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtPsiFactory
@@ -683,6 +684,13 @@ class PreviewEditor(private val project: Project, private val file: VirtualFile)
         component.repaint()
 
         val port = ServerSocket(0).use { it.localPort }
+        // On a remote Mac, the live preview listens there: forward its port here for the panel's lifetime.
+        MacHosts.workspace(module.rootProjectPath)?.let { workspace ->
+            ApplicationManager.getApplication().executeOnPooledThread {
+                val forward = workspace.shell.forward(port)
+                Disposer.register(panel) { ApplicationManager.getApplication().executeOnPooledThread { forward.close() } }
+            }
+        }
         val edits = liveEdits
         val start = { PreviewHostClient(module).startInteractive(key, port, edits) }
         val connectOrBuild = {

@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.9.0
+
+### Added
+
+- Apple development from Linux and Windows with a remote Mac: set *Settings › Tools › Compose SwiftUI Previews ›
+  Remote Mac* to an SSH destination, and the IDE plugin works as on a Mac. The project is synchronized there with
+  rsync (only what changed); Gradle builds and renders in the Mac's daemon; images, results and compiler errors come
+  back with this machine's paths. Live literals, interactive mode (its stream forwarded over SSH), the agent tools and
+  *Run Preview* work the same.
+- The *iOS Simulator* tool window: a simulator of the Mac (this one or the remote one) live in the IDE, like Android
+  Studio's *Running Devices*. The screen is read from the simulator's framebuffer and touches, keys and the Home
+  gesture are sent as HID events, headless: no Simulator window, no screen recording permission. The mouse touches,
+  drags and scrolls, the keyboard types. Beside the screen: Home, the app switcher, a screenshot, shake, light or dark
+  appearance. It connects to the booted simulator when it opens.
+- The *iOS App* run configuration: builds the app's Xcode project on the Mac, installs it on a simulator and runs it,
+  with its output in the Run tool window; *Stop* ends it on the simulator. With a remote Mac, it is created for the
+  project's Xcode project, and the toolbar lists the Mac's simulators next to it.
+- `./gradlew -p intellij-plugin runAndroidStudio -PandroidStudio=<install dir>` runs the IDE plugin in a sandbox
+  Android Studio, with the sample.
+
+### Fixed
+
+- Previews use the app's asset catalogs: named colors and images (`Color("Brand")`, `Image("logo")`) rendered empty, as
+  the preview host didn't have them. The `.xcassets` of the app's sources (the folder of `swiftOutputDir`) are compiled
+  into it; `composeSwiftUI { previewAssetCatalogs }` sets others.
+- Android Studio: the preview pane shows for files with previews. Android Studio's own Kotlin editor was selected
+  instead, leaving the previews in a tab at the bottom of the editor.
+
 ## 0.8.2
 
 ### Added

@@ -3,6 +3,10 @@ package dev.nucleusframework.composeswiftui.idea
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import dev.nucleusframework.composeswiftui.idea.remote.MacHosts
+import dev.nucleusframework.composeswiftui.idea.remote.RemoteGradle
+import dev.nucleusframework.composeswiftui.idea.remote.RemoteWorkspace
+import dev.nucleusframework.composeswiftui.idea.remote.quote
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
@@ -27,41 +31,40 @@ data class LiteralEdit(val file: String, val offset: Int, val function: String?,
  */
 class PreviewHostClient(private val module: PreviewModule) {
     private val work = File(module.moduleDir, "build/composeSwiftUI/previewHost")
+    private val access: HostAccess = MacHosts.workspace(module.rootProjectPath)?.let(::RemoteHostAccess) ?: LocalHostAccess
 
     /**
      * UDID of the host for the `@Preview` [device] (`""`: the default one), or [MAC_HOST], if running and built from the
      * last build.
      */
     fun runningHost(device: String = ""): String? {
-        val devices = json(File(work, "devices.json")) ?: return null
+        val devices = json(access.read(File(work, "devices.json"))) ?: return null
         val udid = (devices.get(device) ?: devices.get("") ?: devices.entrySet().firstOrNull()?.value)?.asString ?: return null
         val state = File(work, "host-$udid.json")
         val pid = hostPid(udid) ?: return null
-        val build = runCatching { File(work, "host-$udid.build").readText() }.getOrNull()
+        val build = access.read(File(work, "host-$udid.build"))
         // The Mac host is built in its own directory; the simulator one at the root.
-        val current = runCatching { File(if (udid == MAC_HOST) File(work, "mac") else work, "app.stamp").readText() }.getOrNull()
-        if (build == null || build != current || !isAlive(pid)) return null
+        val current = access.read(File(if (udid == MAC_HOST) File(work, "mac") else work, "app.stamp"))
+        if (build == null || build != current || !access.isAlive(pid)) return null
         // Only the foreground app of a simulator renders: the host of another module may have taken its place.
         if (!isActive(state)) activate(udid, state)
         return udid
     }
 
-    private fun isActive(state: File) = runCatching { "\"active\": false" !in state.readText() }.getOrDefault(true)
+    private fun isActive(state: File) = access.read(state)?.let { "\"active\": false" !in it } ?: true
 
     private fun activate(udid: String, state: File) {
         // The Mac host renders in the background.
         if (udid == MAC_HOST) return
-        val bundleId = runCatching { File(work, "bundle-id").readText().trim() }.getOrNull() ?: return
+        val bundleId = access.read(File(work, "bundle-id"))?.trim() ?: return
         // `simctl launch` brings an app that runs to the foreground.
-        runCatching { ProcessBuilder("xcrun", "simctl", "launch", udid, bundleId).redirectErrorStream(true).start().waitFor(10, TimeUnit.SECONDS) }
+        access.launch(udid, bundleId)
         val deadline = System.nanoTime() + 5_000_000_000L
         while (!isActive(state) && System.nanoTime() < deadline) Thread.sleep(20)
     }
 
-    private fun isAlive(pid: Long) = ProcessHandle.of(pid).map { it.isAlive }.orElse(false)
-
     private fun hostPid(udid: String) =
-        runCatching { Regex("""\d+""").find(File(work, "host-$udid.json").readText())?.value?.toLong() }.getOrNull()
+        access.read(File(work, "host-$udid.json"))?.let { Regex("""\d+""").find(it)?.value?.toLongOrNull() }
 
     /** Request entries of the previews [ids], from the manifest of the last Gradle run, by device. */
     fun jobs(ids: Collection<String>): Map<String, List<JsonObject>> {
@@ -93,6 +96,7 @@ class PreviewHostClient(private val module: PreviewModule) {
             val output = request(hosts.getValue(device), jobs, edits, settleMilliseconds, interactive = false, port = null) ?: return false
             results += parseResults(output, jobs, device)
         }
+        access.pullPreviews(module)
         mergeResults(ids.toSet(), results)
         return true
     }
@@ -130,6 +134,7 @@ class PreviewHostClient(private val module: PreviewModule) {
         previous.filter { it.get("id")?.asString !in ids }.forEach(all::add)
         fresh.forEach(all::add)
         file.writeText(JsonObject().apply { add("previews", all) }.toString())
+        access.pushed(file)
     }
 
     /** Starts the live preview [key] (`<variant key>[#<parameter index>]`) streaming on [port]. */
@@ -165,11 +170,11 @@ class PreviewHostClient(private val module: PreviewModule) {
         interactive: Boolean,
         port: Int?,
     ): String? {
-        val response = File(work, "response-ide-$udid.log").apply { delete() }
+        val response = File(work, "response-ide-$udid.log")
         val body = JsonObject().apply {
             addProperty("seq", System.currentTimeMillis() * 1000 + System.nanoTime() / 1000 % 1000)
-            addProperty("response", response.path)
-            addProperty("output", module.previewsDir.path)
+            addProperty("response", access.path(response))
+            addProperty("output", access.path(module.previewsDir))
             add("jobs", JsonArray().apply { jobs.forEach(::add) })
             addProperty("batchSize", 8)
             addProperty("settleMilliseconds", settleMilliseconds)
@@ -177,11 +182,58 @@ class PreviewHostClient(private val module: PreviewModule) {
             port?.let { addProperty("port", it) }
             add("patches", JsonArray().apply { edits.forEach { add(it.toJson()) } })
         }
-        // Written in one move: the host polls the file and must never read half of it.
-        val tmp = File(work, "request-$udid.json.ide")
-        tmp.writeText(body.toString())
-        Files.move(tmp.toPath(), File(work, "request-$udid.json").toPath(), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE)
         val pid = hostPid(udid) ?: return null
+        return access.exchange(work, udid, body.toString(), response, pid)
+    }
+
+    private fun json(file: File): JsonObject? =
+        if (file.isFile) json(file.readText()) else null
+
+    private fun json(text: String?): JsonObject? =
+        text?.let { runCatching { JsonParser.parseString(it).asJsonObject }.getOrNull() }
+}
+
+/** How the IDE reaches the preview host's files and process: on this Mac, or on the remote one. */
+private interface HostAccess {
+    /** Text of the host's [file] (a local path), null when missing. */
+    fun read(file: File): String?
+    fun isAlive(pid: Long): Boolean
+
+    /** Brings the host app of [bundleId] to the foreground of the simulator [udid]. */
+    fun launch(udid: String, bundleId: String)
+
+    /** The path of [file] where the host runs. */
+    fun path(file: File): String
+
+    /**
+     * Sends the request [body] to the host of [udid] in [work] (written in one move: the host polls the file and must
+     * never read half of it), and waits for the end of its [response] while the host [pid] lives.
+     */
+    fun exchange(work: File, udid: String, body: String, response: File, pid: Long): String?
+
+    /** After a render: makes the images the host wrote readable here. */
+    fun pullPreviews(module: PreviewModule) {}
+
+    /** After the IDE changed [file]: makes the host's copy the same. */
+    fun pushed(file: File) {}
+}
+
+private object LocalHostAccess : HostAccess {
+    override fun read(file: File) = runCatching { file.readText() }.getOrNull()
+
+    override fun isAlive(pid: Long) = ProcessHandle.of(pid).map { it.isAlive }.orElse(false)
+
+    override fun launch(udid: String, bundleId: String) {
+        runCatching { ProcessBuilder("xcrun", "simctl", "launch", udid, bundleId).redirectErrorStream(true).start().waitFor(10, TimeUnit.SECONDS) }
+    }
+
+    override fun path(file: File): String = file.path
+
+    override fun exchange(work: File, udid: String, body: String, response: File, pid: Long): String? {
+        response.delete()
+        val tmp = File(work, "request-$udid.json.ide")
+        tmp.writeText(body)
+        Files.move(tmp.toPath(), File(work, "request-$udid.json").toPath(), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE)
         val deadline = System.nanoTime() + 30_000_000_000L
         while (System.nanoTime() < deadline) {
             val text = if (response.isFile) response.readText() else ""
@@ -192,9 +244,45 @@ class PreviewHostClient(private val module: PreviewModule) {
         }
         return null
     }
+}
 
-    private fun json(file: File): JsonObject? =
-        if (file.isFile) runCatching { JsonParser.parseString(file.readText()).asJsonObject }.getOrNull() else null
+/** The host on a remote Mac: each operation is one command over the shared SSH connection. */
+private class RemoteHostAccess(private val workspace: RemoteWorkspace) : HostAccess {
+    override fun read(file: File) = workspace.read(file)
+
+    override fun isAlive(pid: Long) = workspace.shell.run("kill -0 $pid", timeoutSeconds = 30).success
+
+    override fun launch(udid: String, bundleId: String) {
+        workspace.shell.run("xcrun simctl launch ${quote(udid)} ${quote(bundleId)}", timeoutSeconds = 30)
+    }
+
+    override fun path(file: File) = workspace.toRemote(file)
+
+    override fun exchange(work: File, udid: String, body: String, response: File, pid: Long): String? {
+        val dir = quote(workspace.toRemote(work))
+        val responsePath = quote(workspace.toRemote(response))
+        // The same as the local exchange, run on the Mac: one round trip instead of one per poll.
+        val script = """
+            rm -f $responsePath
+            cat > $dir/request-$udid.json.ide && mv -f $dir/request-$udid.json.ide $dir/request-$udid.json
+            for i in {1..2000}; do
+              if [[ -f $responsePath ]] && grep -q CSUI-END $responsePath; then cat $responsePath; exit 0; fi
+              kill -0 $pid 2>/dev/null || exit 3
+              sleep 0.015
+            done
+            exit 4
+        """.trimIndent()
+        val result = workspace.shell.run(script, body.toByteArray(), timeoutSeconds = 40)
+        return if (result.success) workspace.toLocalText(result.output) else null
+    }
+
+    override fun pullPreviews(module: PreviewModule) {
+        RemoteGradle.pullOutputs(workspace, module)
+    }
+
+    override fun pushed(file: File) {
+        workspace.write(file, file.readBytes())
+    }
 }
 
 /**

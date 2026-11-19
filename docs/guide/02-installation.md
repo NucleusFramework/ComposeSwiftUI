@@ -47,7 +47,7 @@ Apply the plugin in the shared module and declare framework binaries for the App
 // shared/build.gradle.kts
 plugins {
     kotlin("multiplatform") version "2.4.20"
-    id("dev.nucleusframework.compose-swiftui") version "0.8.2"
+    id("dev.nucleusframework.compose-swiftui") version "0.9.0"
 }
 
 kotlin {
@@ -124,11 +124,13 @@ composeSwiftUI {
     frameworkName = "Shared"
     // Library version added to commonMain (appleMain when the module also has non-Apple targets).
     // Default: the plugin version. Keep them equal.
-    libraryVersion = "0.8.2"
+    libraryVersion = "0.9.0"
     // Integration files written to ComposeSwiftUIIntegrations, by name without .swift. Default: all of them.
     integrations.set(listOf("MapKit", "Charts", "StoreKit"))
     // Simulator used to render previews in the IDE. Default: the booted one, else the first iPhone.
     previewDevice = "iPhone 17 Pro"
+    // Asset catalogs the previews use (named colors and images). Default: the .xcassets of the app's sources.
+    previewAssetCatalogs.from("../iosApp/iosApp/Assets.xcassets")
 }
 ```
 
