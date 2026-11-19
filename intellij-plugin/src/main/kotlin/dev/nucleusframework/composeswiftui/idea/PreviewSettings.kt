@@ -130,10 +130,11 @@ class PreviewConfigurable : BoundConfigurable("Compose SwiftUI Previews") {
                     comment(serverStatus())
                 }
                 row {
-                    button("Copy Android Studio mcp.json Entry") { copy(McpClientConfig.androidStudio()) }
+                    button("Copy Android Studio mcp.json") { copy(McpClientConfig.androidStudio()) }
                     button("Copy Claude Code Command") { copy(McpClientConfig.claudeCode()) }
                 }.comment(
-                    "Android Studio: Settings › Tools › AI › MCP Servers, add it to mcp.json. In IntelliJ IDEA with the MCP Server " +
+                    "Android Studio: Settings › Tools › AI › MCP Servers › JSON View, paste it (with other servers, add only the " +
+                        "\"compose-swiftui\" entry to their \"mcpServers\"). In IntelliJ IDEA with the MCP Server " +
                         "plugin on, its own server already has these tools.",
                 )
             }
@@ -156,8 +157,9 @@ object McpClientConfig {
     private fun url(): String = StandaloneMcpServer.instance.url
         ?: "http://127.0.0.1:${PreviewSettings.options.mcpPort}${StandaloneMcpServer.PATH}"
 
+    /** A whole `mcp.json`, valid as pasted into *Settings › Tools › AI › MCP Servers* (its JSON view). */
     fun androidStudio() =
-        "\"compose-swiftui\": {\n  \"httpUrl\": \"${url()}\"\n}"
+        "{\n  \"mcpServers\": {\n    \"compose-swiftui\": {\n      \"httpUrl\": \"${url()}\"\n    }\n  }\n}"
 
     fun claudeCode() = "claude mcp add --transport http compose-swiftui ${url()}"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.1
+
+### Fixed
+
+- *Copy Android Studio mcp.json* copies a whole `mcp.json` (`{"mcpServers": {"compose-swiftui": …}}`), valid as pasted
+  into Android Studio's *MCP Servers › JSON View*; the entry alone was rejected there.
+
 ## 0.9.0
 
 ### Added
