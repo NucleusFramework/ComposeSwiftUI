@@ -40,6 +40,20 @@ class Simulators(private val shell: MacShell) {
 
     fun shutdown(udid: String): ShellResult = shell.run("xcrun simctl shutdown ${quote(udid)}", timeoutSeconds = 120)
 
+    /** A hardware button, as its HID consumer usage. */
+    enum class Button(val usage: Int) {
+        LOCK(0x30),
+        VOLUME_UP(0xE9),
+        VOLUME_DOWN(0xEA),
+    }
+
+    /** Presses [button] on the device, with `simbutton` (see `simbutton.swift`), built on the Mac on first use. */
+    fun press(udid: String, button: Button) {
+        val binary = installButtonHelper(shell)
+        val result = shell.run("${quote(binary)} ${quote(udid)} c ${Integer.toHexString(button.usage)}", timeoutSeconds = 30)
+        if (!result.success) error(result.output.trim().ifEmpty { "Couldn't press the button" })
+    }
+
     /** Turns the device a quarter turn ([left] or right); the app turns if it supports the orientation. */
     fun rotate(udid: String, left: Boolean): ShellResult =
         shell.run("xcrun devicectl device orientation rotate --device ${quote(udid)} ${if (left) "left" else "right"}", timeoutSeconds = 30)
@@ -70,6 +84,36 @@ class Simulators(private val shell: MacShell) {
         /** The simulator the previews render on by default (see the Gradle plugin). */
         const val PREVIEWS_SIMULATOR = "Compose SwiftUI Previews"
     }
+}
+
+private fun resource(name: String) =
+    Simulators::class.java.getResource("/dev/nucleusframework/composeswiftui/remote/$name")!!.readText()
+
+private fun hash(vararg texts: String) =
+    MessageDigest.getInstance("SHA-256").digest(texts.joinToString("\u0000").toByteArray()).joinToString("") { "%02x".format(it) }.take(16)
+
+/**
+ * Compiles `simbutton` on the Mac when this version isn't there yet; returns its path. It calls Xcode's private
+ * CoreDevice framework through the interface written for it (`CoreDevice.swiftinterface`).
+ */
+private fun installButtonHelper(shell: MacShell): String {
+    val source = resource("simbutton.swift")
+    val api = resource("CoreDevice.swiftinterface")
+    val dir = "${shell.home}/.compose-swiftui/bin"
+    val binary = "$dir/simbutton-${hash(source, api)}"
+    val module = "$binary.stub/CoreDevice.swiftmodule"
+    val frameworks = "/Library/Developer/PrivateFrameworks"
+    val write = """
+        [[ -x ${quote(binary)} ]] && exit 0
+        mkdir -p ${quote(module)} && printf %s ${quote(api)} > ${quote("$module/arm64-apple-macos.swiftinterface")} &&
+        cp ${quote("$module/arm64-apple-macos.swiftinterface")} ${quote("$module/x86_64-apple-macos.swiftinterface")} &&
+        cat > ${quote("$binary.swift")} &&
+        xcrun swiftc -O -I ${quote("$binary.stub")} -F $frameworks -framework CoreDevice -framework CoreDeviceUtilities \
+          -Xlinker -rpath -Xlinker $frameworks ${quote("$binary.swift")} -o ${quote(binary)}
+    """.trimIndent()
+    val result = shell.run(write, source.toByteArray(), timeoutSeconds = 300)
+    if (!result.success) error("Couldn't build the button helper on the Mac (this Xcode's CoreDevice may differ):\n${result.output}")
+    return binary
 }
 
 /**

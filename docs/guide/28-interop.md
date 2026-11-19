@@ -418,7 +418,7 @@ Swift code needs its classes too:
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.compose")
-    id("dev.nucleusframework.compose-swiftui") version "0.9.2"
+    id("dev.nucleusframework.compose-swiftui") version "0.9.3"
 }
 
 kotlin {

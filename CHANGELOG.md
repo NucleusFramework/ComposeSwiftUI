@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.9.3
+
+### Added
+
+- *iOS Simulator* tool window: *Lock*, *Volume Up* and *Volume Down*, real hardware buttons pressed through Xcode's
+  CoreDevice (a small helper compiled on the Mac on first use), as Xcode's device window does.
+- A phone outline icon for the *iOS Simulator* tool window, the *iOS App* configuration and the simulators of the
+  toolbar, like Android Studio's for its devices.
+
+### Fixed
+
+- Remote Mac: previews' Gradle renders and the *iOS App* configuration's Xcode builds take turns on the Mac (a lock
+  file, with `lockf`). Running both at once left Kotlin/Native's incremental caches inconsistent: the next link failed
+  with "is cached, but its dependency isn't". *Stop* also ends the Xcode build.
+- Previews: when the simulator lost the preview host (its files are there but it isn't registered, after an erase or a
+  crash of the simulator's services), it is installed again instead of failing to launch every time.
+
 ## 0.9.2
 
 ### Added

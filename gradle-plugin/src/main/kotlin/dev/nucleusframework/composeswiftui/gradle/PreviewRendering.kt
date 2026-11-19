@@ -412,9 +412,9 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
                 launchMacHost(work, mapOf("COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path, "COMPOSE_SWIFTUI_PREVIEW_STATE" to state.path))
             } else {
                 // simctl passes SIMCTL_CHILD_* variables to the app without the prefix.
-                exec(
-                    "xcrun", "simctl", "launch", "--terminate-running-process", udid, bundleId(work),
-                    environment = mapOf(
+                launchOnSimulator(
+                    udid, work,
+                    mapOf(
                         "SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path,
                         "SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_STATE" to state.path,
                     ),
@@ -656,10 +656,7 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
             logger.lifecycle("Compose SwiftUI: ${job.variant["title"]} is running on the Mac")
             return
         }
-        exec(
-            "xcrun", "simctl", "launch", "--terminate-running-process", udid, bundleId(work),
-            environment = mapOf("SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path),
-        )
+        launchOnSimulator(udid, work, mapOf("SIMCTL_CHILD_COMPOSE_SWIFTUI_PREVIEW_REQUEST" to request.path))
         exec("open", "-a", "Simulator", "--args", "-CurrentDeviceUDID", udid)
         logger.lifecycle("Compose SwiftUI: ${job.variant["title"]} is running on the simulator")
     }
@@ -808,6 +805,25 @@ abstract class RenderComposeSwiftUIPreviewsTask : DefaultTask() {
     }
 
     private fun File.stamp() = "$path:${length()}:${lastModified()}"
+
+    /**
+     * Launches the host on the simulator [udid]. When the simulator no longer knows the app (its files are there, but it
+     * isn't registered: after an erase, a crash of the simulator's services, or a runtime update), installs it again
+     * and retries once.
+     */
+    private fun launchOnSimulator(udid: String, work: File, environment: Map<String, String>) {
+        val launch = { exec("xcrun", "simctl", "launch", "--terminate-running-process", udid, bundleId(work), environment = environment) }
+        try {
+            launch()
+        } catch (e: GradleException) {
+            if ("FBSOpenApplicationServiceErrorDomain" !in e.message.orEmpty()) throw e
+            logger.lifecycle("Compose SwiftUI: the simulator lost the preview host, installing it again")
+            exec("xcrun", "simctl", "install", udid, hostApp(work, HostPlatform.IOS).path)
+            work.resolve("container-$udid.txt").delete()
+            work.resolve("installed-$udid.stamp").writeText(hostDirectory(work, HostPlatform.IOS).resolve("app.stamp").readText())
+            launch()
+        }
+    }
 
     /**
      * Installs the app unless the same build is already installed on [udid]. Once installed, a new build replaces the

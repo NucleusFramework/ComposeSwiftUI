@@ -48,6 +48,12 @@ class RemoteWorkspace(val shell: SshMacShell, val localRoot: String) {
         "${shell.home}/.compose-swiftui/projects/$name-${Integer.toHexString(localRoot.hashCode())}"
     }
 
+    /**
+     * Lock file of the builds of this copy: Gradle renders and Xcode builds take it in turn (with `lockf`), as two
+     * builds linking at once leave Kotlin/Native's incremental caches inconsistent.
+     */
+    val buildLock: String get() = "$remoteRoot/$BUILD_LOCK"
+
     fun toRemote(local: String): String =
         if (local == localRoot || local.startsWith("$localRoot/")) remoteRoot + local.removePrefix(localRoot) else local
 
@@ -118,6 +124,8 @@ class RemoteWorkspace(val shell: SshMacShell, val localRoot: String) {
     companion object {
         private val LOG = logger<RemoteWorkspace>()
 
+        const val BUILD_LOCK = ".compose-swiftui-build.lock"
+
         /**
          * What the `.gitignore` files of [root] ignore, as rsync patterns: kept on the Mac though missing here. Tools
          * generate such files there (the Swift renderer Compose SwiftUI writes into the Xcode project, Pods), and the
@@ -147,7 +155,7 @@ class RemoteWorkspace(val shell: SshMacShell, val localRoot: String) {
          * `local.properties`, whose SDK paths are this machine's.
          */
         val EXCLUDES = listOf(
-            "build/", ".gradle/", ".kotlin/", ".idea/", ".git/", "*.iml", ".DS_Store", "local.properties",
+            "build/", ".gradle/", ".kotlin/", ".idea/", ".git/", "*.iml", ".DS_Store", "local.properties", BUILD_LOCK,
             "xcuserdata/", "DerivedData/", ".swiftpm/", "Pods/",
         )
     }

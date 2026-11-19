@@ -1,0 +1,69 @@
+// swift-interface-format-version: 1.0
+// swift-module-flags: -target arm64-apple-macos15.0 -enable-library-evolution -module-name CoreDevice
+// Hand-written subset of Xcode's private CoreDevice framework, which ships no interface: only what simbutton.swift calls,
+// declared to match the framework's symbols (some of its types are defined in CoreDeviceUtilities). Checked against
+// Xcode 27; the helper fails to build, and the buttons are disabled, if a later Xcode changes them.
+import Foundation
+import CoreGraphics
+import Swift
+
+public protocol CoreDeviceServiceConnection {
+}
+
+public struct CoreDeviceService {
+  public static var sharedConnection: any CoreDevice.CoreDeviceServiceConnection { get }
+}
+
+public protocol DeviceCapability {
+  associatedtype ProtocolType
+  associatedtype ImplType
+}
+
+public struct CapabilityStaticMember<A> {
+}
+
+extension CoreDevice.CapabilityStaticMember where A : CoreDevice.DeviceCapability {
+  public static var hid: CoreDevice.CapabilityStaticMember<CoreDevice.HIDDeviceCapability>.Type { get }
+}
+
+extension CoreDevice.CapabilityStaticMember where A == CoreDevice.HIDDeviceCapability {
+  public static var button: CoreDevice.CapabilityStaticMember<CoreDevice.ButtonHIDCapability> { get }
+}
+
+public struct HIDDeviceCapability : CoreDevice.DeviceCapability {
+  public typealias ProtocolType = Swift.Void
+  public typealias ImplType = Swift.Void
+}
+
+public struct ButtonHIDCapability : CoreDevice.DeviceCapability {
+  public typealias ProtocolType = any CoreDevice.HIDButton
+  public typealias ImplType = any CoreDevice.HIDButton
+}
+
+public enum HIDButtonState {
+  case down
+  case up
+}
+
+public protocol HIDButton {
+  func sendBarrier()
+  func sendCustomButton(usagePage: Swift.Int, usageCode: Swift.Int, state: CoreDevice.HIDButtonState) throws
+}
+
+public class RemoteDevice {
+  public func getImplementation<A>(for: CoreDevice.CapabilityStaticMember<A>) async throws -> A.ProtocolType where A : CoreDevice.DeviceCapability
+}
+
+public enum DeviceVisibilityClass : Swift.String, Swift.Hashable, Swift.CaseIterable {
+  case `default`
+  case wirelessPairableDevices
+  case devicesBeingProvisioned
+  case simulators
+}
+
+public class DeviceManager {
+  public init(serviceConnection: any CoreDevice.CoreDeviceServiceConnection)
+  public init(serviceConnection: any CoreDevice.CoreDeviceServiceConnection, allowedDeviceVisibilityClasses: Swift.Set<CoreDevice.DeviceVisibilityClass>)
+  public func awaitFullInitialization() async
+  public var devices: [Foundation.UUID : CoreDevice.RemoteDevice] { get }
+}

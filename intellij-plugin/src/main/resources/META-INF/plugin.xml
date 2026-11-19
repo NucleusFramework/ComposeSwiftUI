@@ -34,7 +34,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileEditorProvider implementation="dev.nucleusframework.composeswiftui.idea.PreviewEditorProvider"/>
         <!-- A simulator of the Mac (this one or the remote one, from Linux or Windows) live in the IDE. -->
-        <toolWindow id="iOS Simulator" anchor="right" secondary="false" icon="AllIcons.Nodes.Deploy"
+        <toolWindow id="iOS Simulator" anchor="right" secondary="false" icon="dev.nucleusframework.composeswiftui.idea.ComposeSwiftUIIcons.SimulatorToolWindow"
                     factoryClass="dev.nucleusframework.composeswiftui.idea.SimulatorToolWindowFactory"/>
         <configurationType implementation="dev.nucleusframework.composeswiftui.idea.IosRunConfigurationType"/>
         <executionTargetProvider implementation="dev.nucleusframework.composeswiftui.idea.IosSimulatorTargetProvider"/>

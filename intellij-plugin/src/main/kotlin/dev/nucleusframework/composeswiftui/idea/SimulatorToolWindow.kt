@@ -63,8 +63,8 @@ class SimulatorToolWindowFactory : ToolWindowFactory, DumbAware {
 
 /**
  * Picks a simulator, boots it, and shows its screen: the mouse touches, drags and scrolls, the keyboard types. The
- * device's controls sit next to the screen: Home, the app switcher, rotation, a screenshot, a shake, light or dark
- * appearance.
+ * device's controls sit next to the screen: Home, the app switcher, lock, volume, rotation, a screenshot, a shake,
+ * light or dark appearance.
  * Like Android Studio's *Running Devices*.
  */
 class SimulatorPanel : JPanel(BorderLayout()), Disposable {
@@ -114,6 +114,10 @@ class SimulatorPanel : JPanel(BorderLayout()), Disposable {
         val controls = DefaultActionGroup(
             action("Home", AllIcons.Nodes.HomeFolder, live) { button("home") },
             action("App Switcher", AllIcons.Actions.ListFiles, live) { button("appSwitcher") },
+            Separator.getInstance(),
+            action("Lock", AllIcons.Nodes.Padlock, live) { onDevice("Lock") { simulators, udid -> simulators.press(udid, Simulators.Button.LOCK) } },
+            action("Volume Up", AllIcons.General.Add, live) { onDevice("Volume up") { simulators, udid -> simulators.press(udid, Simulators.Button.VOLUME_UP) } },
+            action("Volume Down", AllIcons.General.Remove, live) { onDevice("Volume down") { simulators, udid -> simulators.press(udid, Simulators.Button.VOLUME_DOWN) } },
             Separator.getInstance(),
             action("Rotate Left", AllIcons.Actions.Undo, live) { onDevice("Rotated left") { simulators, udid -> simulators.rotate(udid, left = true) } },
             action("Rotate Right", AllIcons.Actions.Redo, live) { onDevice("Rotated right") { simulators, udid -> simulators.rotate(udid, left = false) } },
@@ -260,8 +264,9 @@ class SimulatorPanel : JPanel(BorderLayout()), Disposable {
         val shell = shell() ?: return
         val udid = device?.udid ?: return
         ApplicationManager.getApplication().executeOnPooledThread {
-            runCatching { work(Simulators(shell), udid) }.onFailure { setStatus(it.message ?: it.toString()) }
-            setStatus(label)
+            runCatching { work(Simulators(shell), udid) }
+                .onSuccess { setStatus(label) }
+                .onFailure { setStatus(it.message ?: it.toString()) }
         }
     }
 

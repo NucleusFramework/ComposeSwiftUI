@@ -5,7 +5,6 @@ import com.intellij.execution.ExecutionTargetManager
 import com.intellij.execution.ExecutionTargetProvider
 import com.intellij.execution.RunManager
 import com.intellij.execution.configurations.RunConfiguration
-import com.intellij.icons.AllIcons
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
@@ -21,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 class IosSimulatorTarget(val simulator: Simulator) : ExecutionTarget() {
     override fun getId() = "ios-simulator:${simulator.udid}"
     override fun getDisplayName() = "${simulator.name} (${simulator.runtime})"
-    override fun getIcon() = AllIcons.Nodes.Deploy
+    override fun getIcon() = ComposeSwiftUIIcons.Simulator
     override fun canRun(configuration: RunConfiguration) = configuration is IosRunConfiguration
 }
 

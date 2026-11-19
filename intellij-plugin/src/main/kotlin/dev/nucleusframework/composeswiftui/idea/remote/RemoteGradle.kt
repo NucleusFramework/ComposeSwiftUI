@@ -31,7 +31,8 @@ object RemoteGradle {
             append("cd ${quote(workspace.toRemote(module.rootProjectPath))} && ")
             // An Android target needs the SDK: the Mac's own, as local.properties is not copied.
             append("{ [[ -n \$ANDROID_HOME || ! -d \$HOME/Library/Android/sdk ]] || export ANDROID_HOME=\$HOME/Library/Android/sdk; } && ")
-            append("./gradlew --console=plain ${quote(module.taskPath(task))} ")
+            // One build at a time on this copy, with the Xcode builds of the iOS App configuration.
+            append("lockf -k ${quote(workspace.buildLock)} ./gradlew --console=plain ${quote(module.taskPath(task))} ")
             append(arguments.joinToString(" ") { quote(it) })
         }
         val process = workspace.shell.start(command)

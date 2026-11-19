@@ -234,10 +234,10 @@ class RemoteSimulatorPanelTest : BasePlatformTestCase() {
             PlatformTestUtil.dispatchAllEventsInIdeEventQueue()
             val dump = System.getProperty("java.io.tmpdir")
             val before = snapshot(screen, File(dump, "simulator-panel-before.png"))
-            // Settings ("Réglages") sits at about (339, 421) points of the 402 × 874 point screen.
+            // The Search button, at about (201, 711) points of the 402 × 874 point screen on every home screen page.
             val scale = minOf((screen.width - 24.0) / 402, (screen.height - 24.0) / 874)
-            val x = ((screen.width - 402 * scale) / 2 + 339 * scale).toInt()
-            val y = ((screen.height - 874 * scale) / 2 + 421 * scale).toInt()
+            val x = ((screen.width - 402 * scale) / 2 + 201 * scale).toInt()
+            val y = ((screen.height - 874 * scale) / 2 + 711 * scale).toInt()
             for (id in listOf(MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED)) {
                 screen.dispatchEvent(MouseEvent(screen, id, System.currentTimeMillis(), 0, x, y, 1, false, MouseEvent.BUTTON1))
             }
@@ -268,5 +268,36 @@ class RemoteSimulatorPanelTest : BasePlatformTestCase() {
             PlatformTestUtil.dispatchAllEventsInIdeEventQueue()
             Thread.sleep(50)
         }
+    }
+}
+
+/** Hardware buttons through CoreDevice, on a remote Mac. Uses a booted "iPhone 17" only, to leave other simulators alone. */
+class RemoteSimulatorButtonsTest : BasePlatformTestCase() {
+    private val destination: String? = System.getProperty("csui.e2e.remote")
+
+    fun testLockTurnsTheScreenOffAndOn() {
+        if (destination == null) return
+        PreviewSettings.options.remoteMac = destination
+        PreviewSettings.options.remoteMacOnMac = true
+        val shell = MacHosts.shell()!!
+        val simulators = Simulators(shell)
+        val device = simulators.list().firstOrNull { it.booted && it.name == "iPhone 17" } ?: return
+        fun brightness(): Double {
+            val image = javax.imageio.ImageIO.read(java.io.ByteArrayInputStream(simulators.screenshot(device.udid)))
+            var sum = 0.0
+            for (y in 0 until image.height step 20) for (x in 0 until image.width step 20) {
+                val rgb = image.getRGB(x, y)
+                sum += ((rgb shr 16 and 0xFF) + (rgb shr 8 and 0xFF) + (rgb and 0xFF)) / 3.0
+            }
+            return sum / ((image.height / 20 + 1) * (image.width / 20 + 1))
+        }
+        val before = brightness()
+        simulators.press(device.udid, Simulators.Button.LOCK)
+        Thread.sleep(1500)
+        val locked = brightness()
+        simulators.press(device.udid, Simulators.Button.LOCK)
+        Thread.sleep(1500)
+        assertTrue("Lock darkens the screen ($before → $locked)", locked < before - 20)
+        simulators.press(device.udid, Simulators.Button.VOLUME_UP)
     }
 }

@@ -14,7 +14,6 @@ import com.intellij.execution.process.KillableColoredProcessHandler
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
-import com.intellij.icons.AllIcons
 import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
@@ -32,7 +31,7 @@ import javax.swing.JTextField
 class IosRunConfigurationType : ConfigurationType {
     override fun getDisplayName() = "iOS App"
     override fun getConfigurationTypeDescription() = "Builds an iOS app with Xcode on the Mac and runs it on a simulator"
-    override fun getIcon() = AllIcons.Nodes.Deploy
+    override fun getIcon() = ComposeSwiftUIIcons.Simulator
     override fun getId() = "ComposeSwiftUIIosApp"
     override fun getConfigurationFactories(): Array<ConfigurationFactory> = arrayOf(IosRunConfigurationFactory(this))
 }
@@ -93,6 +92,8 @@ internal class IosRunState(private val configuration: IosRunConfiguration, envir
         val configurationName = options.configuration.orEmpty().ifEmpty { "Debug" }
         val derivedData = "${shell.home}/.compose-swiftui/DerivedData/${Integer.toHexString(local.hashCode())}"
         // The simulator picked in the toolbar, else the configuration's.
+        // The same lock as the previews' renders of this copy; on this Mac, one out of the project.
+        val buildLock = workspace?.buildLock ?: "${shell.home}/.compose-swiftui/locks/${Integer.toHexString(base.hashCode())}.lock"
         val simulator = (environment.executionTarget as? IosSimulatorTarget)?.simulator?.udid ?: options.simulator.orEmpty()
 
         // One script on the Mac: pick the simulator, build, install, launch with the app's output here. It stops (with
@@ -110,7 +111,8 @@ internal class IosRunState(private val configuration: IosRunConfiguration, envir
               echo "Simulator ${'$'}udid"
               xcrun simctl boot ${'$'}udid 2>/dev/null; xcrun simctl bootstatus ${'$'}udid -b >/dev/null
               echo "Building $scheme…"
-              xcodebuild $kind ${quote(path)} -scheme ${quote(scheme)} -configuration ${quote(configurationName)} \
+              # One build at a time on the project, with the previews' Gradle renders.
+              lockf -k ${quote(buildLock)} xcodebuild $kind ${quote(path)} -scheme ${quote(scheme)} -configuration ${quote(configurationName)} \
                 -destination "id=${'$'}udid" -derivedDataPath ${quote(derivedData)} build 2>&1 \
                 | grep --line-buffered -E '(error|warning):|^\*\* |^Ld |^CompileSwift |^PhaseScriptExecution |> Task :'
               # xcodebuild's own status, not the filter's.
@@ -128,6 +130,7 @@ internal class IosRunState(private val configuration: IosRunConfiguration, envir
             exec 3<&0
             ( cat <&3 >/dev/null 2>&1
               read -r udid bundle < ${quote("$derivedData/running")} && xcrun simctl terminate ${'$'}udid ${'$'}bundle
+              pkill -f ${quote("xcodebuild .*-derivedDataPath $derivedData")}
               pkill -P ${'$'}${'$'} ) </dev/null >/dev/null 2>&1 &
             watcher=${'$'}!
             run; code=${'$'}?
@@ -139,7 +142,7 @@ internal class IosRunState(private val configuration: IosRunConfiguration, envir
             val upload = workspace.upload()
             if (!upload.success) throw ExecutionException("Couldn't copy the project to the Mac:\n${upload.output}")
         }
-        val process = shell.start("mkdir -p ${quote(derivedData)} && $script")
+        val process = shell.start("mkdir -p ${quote(derivedData)} ${quote(File(buildLock).parent)} && $script")
         val handler = KillableColoredProcessHandler(process, GeneralCommandLine("xcodebuild").commandLineString)
         ProcessTerminatedListener.attach(handler)
         // The app is on the simulator: show it.

@@ -358,14 +358,16 @@ a handshake. *Use it on a Mac too* sends the work to the remote Mac from a Mac I
 The *iOS Simulator* tool window shows a simulator of the Mac, live, like Android Studio's *Running Devices*: it
 connects to the booted simulator when it opens, or pick one and press ▶ (it boots if needed). A click is a touch, a
 drag a swipe, the wheel scrolls, and the keyboard types. Beside the screen are the device's controls: *Home* and the
-*App Switcher* (the gestures of Face ID iPhones), *Rotate Left* and *Rotate Right*, a *Screenshot* (copied, and saved
+*App Switcher* (the gestures of Face ID iPhones), *Lock*, *Volume Up* and *Volume Down*, *Rotate Left* and *Rotate
+Right*, a *Screenshot* (copied, and saved
 where you choose), *Shake*, and light or dark appearance. It works on the Mac and, through the remote Mac, from Linux
 or Windows. A foldable simulator (iPhone Duo) shows the screen its posture lights, view only: its touchscreens go
 through CoreDevice, which the tool window can't reach yet.
 
 It doesn't need the Simulator app: a small helper, compiled on the Mac on first use, reads the simulator's
 framebuffer and sends touches and keys as hardware events, the way the Simulator app does. No window to keep open and
-no screen recording permission. The physical buttons (lock, volume) are not available yet.
+no screen recording permission. The hardware buttons go through Xcode's CoreDevice framework, with a second helper
+compiled on the Mac on first use.
 
 ### Running the app
 
