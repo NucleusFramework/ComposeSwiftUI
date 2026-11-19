@@ -44,7 +44,7 @@ class RemoteMacEndToEndTest : BasePlatformTestCase() {
         assertTrue("the render succeeds:\n${output.takeLast(3000)}", success)
         val results = File(module.previewsDir, "results.json").readText()
         val workspace = MacHosts.workspace(module.rootProjectPath)!!
-        assertFalse("the results have this machine's paths", workspace.remoteRoot in results)
+        assertFalse("the results have this machine's paths", workspace.mentionsRemote(results))
         val counter = JsonParser.parseString(results).asJsonObject.getAsJsonArray("previews")
             .map { it.asJsonObject }.first { it.get("id").asString == "sample.CounterScreenPreview" }
         assertTrue("the source is the local file", counter.get("source").asString.startsWith(module.rootProjectPath))
@@ -83,7 +83,10 @@ class RemoteMacEndToEndTest : BasePlatformTestCase() {
         val module = module() ?: return
         ensureRendered(module)
         val port = ServerSocket(0).use { it.localPort }
-        assertTrue("start the live preview", PreviewHostClient(module).startInteractive("sample.CounterScreenPreview", port, emptyList()))
+        // As the IDE does: when no host runs, a render starts one.
+        val started = PreviewHostClient(module).startInteractive("sample.CounterScreenPreview", port, emptyList()) ||
+            gradleRender(module).first && PreviewHostClient(module).startInteractive("sample.CounterScreenPreview", port, emptyList())
+        assertTrue("start the live preview", started)
         val forward = MacHosts.workspace(module.rootProjectPath)!!.shell.forward(port)
         val panel = InteractivePreview("Counter", SourceNavigator(project, module)) {}
         try {
@@ -225,6 +228,10 @@ class RemoteSimulatorPanelTest : BasePlatformTestCase() {
             Thread.sleep(1500)
             PlatformTestUtil.dispatchAllEventsInIdeEventQueue()
             screen.setSize(520, 950)
+            // From the home screen, whatever app the simulator shows.
+            panel.press("home")
+            Thread.sleep(2000)
+            PlatformTestUtil.dispatchAllEventsInIdeEventQueue()
             val dump = System.getProperty("java.io.tmpdir")
             val before = snapshot(screen, File(dump, "simulator-panel-before.png"))
             // Settings ("Réglages") sits at about (339, 421) points of the 402 × 874 point screen.

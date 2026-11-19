@@ -63,7 +63,8 @@ class SimulatorToolWindowFactory : ToolWindowFactory, DumbAware {
 
 /**
  * Picks a simulator, boots it, and shows its screen: the mouse touches, drags and scrolls, the keyboard types. The
- * device's controls sit next to the screen: Home, the app switcher, a screenshot, a shake, light or dark appearance.
+ * device's controls sit next to the screen: Home, the app switcher, rotation, a screenshot, a shake, light or dark
+ * appearance.
  * Like Android Studio's *Running Devices*.
  */
 class SimulatorPanel : JPanel(BorderLayout()), Disposable {
@@ -89,6 +90,8 @@ class SimulatorPanel : JPanel(BorderLayout()), Disposable {
     @Volatile private var busy = false
     @Volatile private var dark = false
     @Volatile private var device: Simulator? = null
+    /** Screen ID of the shown screen, from the stream: the one to capture on a device with several. */
+    @Volatile private var display: Int? = null
 
     init {
         val actions = DefaultActionGroup(
@@ -111,6 +114,9 @@ class SimulatorPanel : JPanel(BorderLayout()), Disposable {
         val controls = DefaultActionGroup(
             action("Home", AllIcons.Nodes.HomeFolder, live) { button("home") },
             action("App Switcher", AllIcons.Actions.ListFiles, live) { button("appSwitcher") },
+            Separator.getInstance(),
+            action("Rotate Left", AllIcons.Actions.Undo, live) { onDevice("Rotated left") { simulators, udid -> simulators.rotate(udid, left = true) } },
+            action("Rotate Right", AllIcons.Actions.Redo, live) { onDevice("Rotated right") { simulators, udid -> simulators.rotate(udid, left = false) } },
             Separator.getInstance(),
             action("Screenshot (copied, and saved where you choose)", AllIcons.Actions.Download, live) { screenshot() },
             action("Shake", AllIcons.Actions.ShortcutFilter, live) { onDevice("Shaking…") { simulators, udid -> simulators.shake(udid) } },
@@ -208,8 +214,13 @@ class SimulatorPanel : JPanel(BorderLayout()), Disposable {
                     2 -> {
                         val json = JsonParser.parseString(String(payload)).asJsonObject
                         if (json.get("t")?.asString == "info") SwingUtilities.invokeLater {
+                            display = json.get("screen")?.asInt
                             screen.pointsWidth = json.get("width").asDouble
                             screen.pointsHeight = json.get("height").asDouble
+                            // A foldable (iPhone Duo) takes touches through CoreDevice, which the stream can't reach yet.
+                            if (json.get("touches")?.asBoolean == false) {
+                                status.text = "${device?.name.orEmpty()}: view only (touches aren't supported on this device yet)"
+                            }
                         }
                     }
                 }
@@ -259,7 +270,7 @@ class SimulatorPanel : JPanel(BorderLayout()), Disposable {
         val shell = shell() ?: return
         val device = device ?: return
         ApplicationManager.getApplication().executeOnPooledThread {
-            val png = runCatching { Simulators(shell).screenshot(device.udid) }.getOrElse { return@executeOnPooledThread setStatus(it.message ?: "") }
+            val png = runCatching { Simulators(shell).screenshot(device.udid, display) }.getOrElse { return@executeOnPooledThread setStatus(it.message ?: "") }
             val image = ImageIO.read(ByteArrayInputStream(png)) ?: return@executeOnPooledThread setStatus("The screenshot is empty")
             SwingUtilities.invokeLater {
                 PreviewImages.copyImage(image)

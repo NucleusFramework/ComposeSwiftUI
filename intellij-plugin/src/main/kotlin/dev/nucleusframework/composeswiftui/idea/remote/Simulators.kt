@@ -19,8 +19,9 @@ class Simulators(private val shell: MacShell) {
         if (!result.success) error(result.output.trim())
         val devices = JsonParser.parseString(result.output.substring(result.output.indexOf('{'))).asJsonObject.getAsJsonObject("devices")
         return devices.entrySet().flatMap { (runtime, list) ->
-            // com.apple.CoreSimulator.SimRuntime.iOS-27-2 → iOS 27.2
-            val label = runtime.substringAfterLast('.').replaceFirst('-', ' ').replace('-', '.')
+            // com.apple.CoreSimulator.SimRuntime.iOS-27-2 (or iOS-27-2-iPhone19-4, a device's own) → iOS 27.2
+            val label = Regex("""(\w+?)-(\d+)-(\d+)""").find(runtime.substringAfterLast('.'))
+                ?.destructured?.let { (os, major, minor) -> "$os $major.$minor" } ?: runtime.substringAfterLast('.')
             list.asJsonArray.map { it.asJsonObject }.map {
                 Simulator(it.get("udid").asString, it.get("name").asString, label, it.get("state").asString)
             }
@@ -39,6 +40,10 @@ class Simulators(private val shell: MacShell) {
 
     fun shutdown(udid: String): ShellResult = shell.run("xcrun simctl shutdown ${quote(udid)}", timeoutSeconds = 120)
 
+    /** Turns the device a quarter turn ([left] or right); the app turns if it supports the orientation. */
+    fun rotate(udid: String, left: Boolean): ShellResult =
+        shell.run("xcrun devicectl device orientation rotate --device ${quote(udid)} ${if (left) "left" else "right"}", timeoutSeconds = 30)
+
     /** Shakes the device, as the Simulator app does (`UIEventSubtypeMotionShake` in the foreground app). */
     fun shake(udid: String): ShellResult =
         shell.run("xcrun simctl spawn ${quote(udid)} notifyutil -p com.apple.UIKit.SimulatorShake", timeoutSeconds = 30)
@@ -49,14 +54,16 @@ class Simulators(private val shell: MacShell) {
     fun setDark(udid: String, dark: Boolean): ShellResult =
         shell.run("xcrun simctl ui ${quote(udid)} appearance ${if (dark) "dark" else "light"}", timeoutSeconds = 30)
 
-    /** A PNG of the screen at full resolution. */
-    fun screenshot(udid: String): ByteArray {
+    /** A PNG of the screen at full resolution: of the [display] (screen ID) on a device with several (iPhone Duo). */
+    fun screenshot(udid: String, display: Int? = null): ByteArray {
+        val option = display?.let { "--display=$it " }.orEmpty()
         val result = shell.run(
-            "d=\$(mktemp -d) && xcrun simctl io ${quote(udid)} screenshot --type=png \"\$d/s.png\" >/dev/null 2>&1 && base64 < \"\$d/s.png\"; rm -rf \"\$d\"",
+            "d=\$(mktemp -d) && xcrun simctl io ${quote(udid)} screenshot $option--type=png \"\$d/s.png\" >/dev/null 2>&1 && base64 < \"\$d/s.png\"; rm -rf \"\$d\"",
             timeoutSeconds = 60,
         )
-        if (!result.success) error("Couldn't take the screenshot: ${result.output.trim()}")
-        return java.util.Base64.getMimeDecoder().decode(result.output.trim())
+        val png = java.util.Base64.getMimeDecoder().decode(result.output.trim())
+        if (png.size < 8) error("Couldn't take the screenshot")
+        return png
     }
 
     private companion object {

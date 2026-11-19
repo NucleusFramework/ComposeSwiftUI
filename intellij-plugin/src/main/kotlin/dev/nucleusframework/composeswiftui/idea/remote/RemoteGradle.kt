@@ -79,7 +79,7 @@ object RemoteGradle {
     private fun mapPaths(workspace: RemoteWorkspace, dir: File) {
         dir.listFiles()?.filter { it.isFile && it.extension in setOf("json", "txt", "md") }?.forEach { file ->
             val text = file.readText()
-            if (workspace.remoteRoot in text) file.writeText(workspace.toLocalText(text))
+            if (workspace.mentionsRemote(text)) file.writeText(workspace.toLocalText(text))
         }
     }
 }

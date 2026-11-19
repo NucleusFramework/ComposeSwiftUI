@@ -12,7 +12,8 @@
 //                  button {name: home, appSwitcher}, edge {phase: down/move/up, x, y, edge} (a touch from a screen edge).
 //
 // Debugging: `simstream <udid> 0 <quality> <scale> --commands '<JSON array>'` runs commands and exits;
-// `--frame <file>` writes one frame. SIMSTREAM_DEBUG=1 logs the HID messages.
+// `--frame <file>` writes one frame. SIMSTREAM_DEBUG=1 logs the HID messages; SIMSTREAM_TOUCH_TARGET=<n> forces the
+// Indigo target of touches.
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
@@ -79,35 +80,82 @@ static id findDevice(NSString *udid) {
     return nil;
 }
 
+/** UIInterfaceOrientation of the shown screen: 1 portrait, 2 upside down, 3 and 4 landscape. */
+static volatile long orientation = 1;
+/** ID of the shown screen, to notice a switch (each lookup returns a new proxy for the same screen). */
+static volatile uint32_t shownScreenID = 0;
 /**
- * The main screen: the first IO port whose descriptor renders to an IOSurface. Also sets the Indigo target of its
- * touches the way SimulatorKit derives it from the screen properties: 1 for screen types 1 and 2, else the screen ID
- * with bit 30 set.
+ * Whether touches can be sent: not on a device with several integrated screens (iPhone Duo), whose touchscreens are
+ * CoreDevice HID services that Indigo messages don't reach (one sent there crashes backboardd).
+ */
+static BOOL touchesSupported = YES;
+
+static long longProperty(id object, NSString *name) {
+    return ((long (*)(id, SEL))objc_msgSend)(object, NSSelectorFromString(name));
+}
+
+/**
+ * The screen to show: the integrated screen whose backlight is on (state 2), else the first IO port whose descriptor
+ * renders to an IOSurface. A foldable device (iPhone Duo) has two, and lights one or the other with its posture.
+ * Also sets the Indigo target of its touches the way SimulatorKit derives it from the screen properties (1 for screen
+ * types 1 and 2, else the screen ID with bit 30 set), and its orientation.
  */
 static id findScreen(void) {
     id io = ((id (*)(id, SEL))objc_msgSend)(device, NSSelectorFromString(@"io"));
+    id first = nil, lit = nil;
+    int integrated = 0;
     for (id port in ((id (*)(id, SEL))objc_msgSend)(io, NSSelectorFromString(@"ioPorts"))) {
         id descriptor = ((id (*)(id, SEL))objc_msgSend)(port, NSSelectorFromString(@"descriptor"));
         if (![descriptor conformsToProtocol:NSProtocolFromString(@"SimDisplayIOSurfaceRenderable")]) continue;
         if (!((id (*)(id, SEL))objc_msgSend)(descriptor, NSSelectorFromString(@"framebufferSurface"))) continue;
-        if ([descriptor conformsToProtocol:NSProtocolFromString(@"SimScreen")]) {
-            id properties = ((id (*)(id, SEL))objc_msgSend)(descriptor, NSSelectorFromString(@"screenProperties"));
-            long type = ((long (*)(id, SEL))objc_msgSend)(properties, NSSelectorFromString(@"screenType"));
-            uint32_t screenID = (uint32_t)((long (*)(id, SEL))objc_msgSend)(properties, NSSelectorFromString(@"screenID"));
-            touchTarget = (type == 1 || type == 2) ? 1 : (screenID | 0x40000000);
-        }
-        return descriptor;
+        if (!first) first = descriptor;
+        integrated++;
+        if (![descriptor conformsToProtocol:NSProtocolFromString(@"SimScreen")]) continue;
+        id properties = ((id (*)(id, SEL))objc_msgSend)(descriptor, NSSelectorFromString(@"screenProperties"));
+        id backlight = ((id (*)(id, SEL))objc_msgSend)(properties, NSSelectorFromString(@"backlight"));
+        if (backlight && (int32_t)longProperty(backlight, @"state") == 2 && !lit) lit = descriptor;
     }
-    return nil;
+    touchesSupported = integrated <= 1;
+    id chosen = lit ?: first;
+    if ([chosen conformsToProtocol:NSProtocolFromString(@"SimScreen")]) {
+        id properties = ((id (*)(id, SEL))objc_msgSend)(chosen, NSSelectorFromString(@"screenProperties"));
+        long type = longProperty(properties, @"screenType");
+        uint32_t screenID = (uint32_t)longProperty(properties, @"screenID");
+        touchTarget = (type == 1 || type == 2) ? 1 : (screenID | 0x40000000);
+        shownScreenID = screenID;
+        long uiOrientation = longProperty(properties, @"uiOrientation");
+        orientation = (uiOrientation >= 1 && uiOrientation <= 4) ? uiOrientation : 1;
+    }
+    return chosen;
+}
+
+static BOOL landscape(void) {
+    return orientation == 3 || orientation == 4;
 }
 
 static IOSurfaceRef currentSurface(void) {
     return (__bridge IOSurfaceRef)((id (*)(id, SEL))objc_msgSend)(screen, NSSelectorFromString(@"framebufferSurface"));
 }
 
-/** Screen size in points, from the device type's scale. */
+/** Screen size in points, from the device type's scale, as the framebuffer is laid out (the device held upright). */
 static CGSize pointSize(IOSurfaceRef surface) {
     return CGSizeMake(IOSurfaceGetWidth(surface) / pointScale, IOSurfaceGetHeight(surface) / pointScale);
+}
+
+/** Screen size in points as the viewer shows it: turned with the interface. */
+static CGSize displaySize(IOSurfaceRef surface) {
+    CGSize size = pointSize(surface);
+    return landscape() ? CGSizeMake(size.height, size.width) : size;
+}
+
+/** A point of the viewer (the turned screen) in the framebuffer's coordinates, which touches use. */
+static CGPoint framebufferPoint(double x, double y, CGSize native) {
+    switch (orientation) {
+        case 2: return CGPointMake(native.width - x, native.height - y);
+        case 3: return CGPointMake(y, native.height - x);
+        case 4: return CGPointMake(native.width - y, x);
+        default: return CGPointMake(x, y);
+    }
 }
 
 static void sendHID(IndigoMessage *message) {
@@ -120,12 +168,17 @@ static void sendHID(IndigoMessage *message) {
         });
 }
 
+/** A touch at ([x], [y]) of the viewer, from screen [edge] (0: none) for system gestures. */
 static void touchFromEdge(NSEventType type, double x, double y, uint64_t edge) {
+    if (!touchesSupported && !getenv("SIMSTREAM_TOUCH_TARGET")) return;
     IOSurfaceRef surface = currentSurface();
     if (!surface) return;
     CGSize size = pointSize(surface);
-    CGPoint point = CGPointMake(x, y);
-    sendHID(mouseEvent(&point, NULL, touchTarget, type, edge, size));
+    CGPoint point = framebufferPoint(x, y, size);
+    // Debugging: SIMSTREAM_TOUCH_TARGET overrides the Indigo target.
+    const char *forced = getenv("SIMSTREAM_TOUCH_TARGET");
+    uint32_t target = forced ? (uint32_t)strtoul(forced, NULL, 0) : touchTarget;
+    sendHID(mouseEvent(&point, NULL, target, type, edge, size));
 }
 
 static void touch(NSEventType type, double x, double y) {
@@ -186,39 +239,44 @@ static void typeString(NSString *text) {
     }
 }
 
-static const uint64_t kEdgeBottom = 3;
+/** The framebuffer's edge that is the bottom of the screen as shown (Indigo edges: top 1, left 2, bottom 3, right 4). */
+static uint64_t bottomEdge(void) {
+    switch (orientation) {
+        case 2: return 1;
+        case 3: return 4;
+        case 4: return 2;
+        default: return 3;
+    }
+}
+
+/** A swipe up from the bottom of the screen as shown, to [stop] of its height, held [hold] µs before lifting. */
+static void swipeUpFromBottom(double stop, int steps, useconds_t stepDelay, useconds_t hold) {
+    IOSurfaceRef surface = currentSurface();
+    if (!surface) return;
+    CGSize size = displaySize(surface);
+    uint64_t edge = bottomEdge();
+    double x = size.width / 2;
+    touchFromEdge(NSEventTypeLeftMouseDown, x, size.height - 2, edge);
+    for (int i = 1; i <= steps; i++) {
+        usleep(stepDelay);
+        touchFromEdge(NSEventTypeLeftMouseDragged, x, size.height - 2 - size.height * stop * i / steps, edge);
+    }
+    // Holding still (moving by a point) is what tells the app switcher from Home.
+    for (useconds_t held = 0; held < hold; held += 60000) {
+        usleep(60000);
+        touchFromEdge(NSEventTypeLeftMouseDragged, x, size.height * (1 - stop) - (held / 60000 % 2), edge);
+    }
+    touchFromEdge(NSEventTypeLeftMouseUp, x, size.height * (1 - stop), edge);
+}
 
 /** Home as on a Face ID iPhone: a swipe up from the bottom edge. */
 static void home(void) {
-    IOSurfaceRef surface = currentSurface();
-    if (!surface) return;
-    CGSize size = pointSize(surface);
-    double x = size.width / 2;
-    touchFromEdge(NSEventTypeLeftMouseDown, x, size.height - 2, kEdgeBottom);
-    for (int i = 1; i <= 8; i++) {
-        usleep(10000);
-        touchFromEdge(NSEventTypeLeftMouseDragged, x, size.height - 2 - size.height * 0.5 * i / 8, kEdgeBottom);
-    }
-    touchFromEdge(NSEventTypeLeftMouseUp, x, size.height * 0.5, kEdgeBottom);
+    swipeUpFromBottom(0.5, 8, 10000, 0);
 }
 
 /** The app switcher as on a Face ID iPhone: a swipe up from the bottom edge that pauses midway. */
 static void appSwitcher(void) {
-    IOSurfaceRef surface = currentSurface();
-    if (!surface) return;
-    CGSize size = pointSize(surface);
-    double x = size.width / 2;
-    touchFromEdge(NSEventTypeLeftMouseDown, x, size.height - 2, kEdgeBottom);
-    for (int i = 1; i <= 10; i++) {
-        usleep(15000);
-        touchFromEdge(NSEventTypeLeftMouseDragged, x, size.height - 2 - size.height * 0.35 * i / 10, kEdgeBottom);
-    }
-    // Holding still is what tells the switcher from Home.
-    for (int i = 0; i < 8; i++) {
-        usleep(60000);
-        touchFromEdge(NSEventTypeLeftMouseDragged, x, size.height * 0.65 - (i % 2), kEdgeBottom);
-    }
-    touchFromEdge(NSEventTypeLeftMouseUp, x, size.height * 0.65, kEdgeBottom);
+    swipeUpFromBottom(0.35, 10, 15000, 480000);
 }
 
 /**
@@ -271,6 +329,9 @@ static CIContext *ciContext;
 
 static NSData *encodeFrame(IOSurfaceRef surface) {
     CIImage *image = [CIImage imageWithIOSurface:surface];
+    // Turned with the interface (Core Image turns counterclockwise for positive angles).
+    double angle = orientation == 4 ? M_PI_2 : orientation == 3 ? -M_PI_2 : orientation == 2 ? M_PI : 0;
+    if (angle != 0) image = [image imageByApplyingTransform:CGAffineTransformMakeRotation(angle)];
     if (frameScale != 1.0) image = [image imageByApplyingTransform:CGAffineTransformMakeScale(frameScale, frameScale)];
     CGImageRef cgImage = [ciContext createCGImage:image fromRect:image.extent];
     if (!cgImage) return nil;
@@ -287,6 +348,8 @@ static NSData *encodeFrame(IOSurfaceRef surface) {
 static void streamFrames(int fd) {
     uint32_t lastSeed = UINT32_MAX;
     size_t lastWidth = 0, lastHeight = 0;
+    long lastOrientation = 0;
+    uint32_t lastScreenID = UINT32_MAX;
     const uint64_t period = 16666667;  // ns: 60 frames a second
     mach_timebase_info_data_t timebase;
     mach_timebase_info(&timebase);
@@ -296,12 +359,14 @@ static void streamFrames(int fd) {
             IOSurfaceRef surface = currentSurface();
             if (surface) {
                 size_t width = IOSurfaceGetWidth(surface), height = IOSurfaceGetHeight(surface);
-                if (width != lastWidth || height != lastHeight) {
-                    CGSize size = pointSize(surface);
-                    __block NSDictionary *info = @{@"t": @"info", @"width": @(size.width), @"height": @(size.height), @"touches": @YES, @"scale": @(pointScale)};
+                if (width != lastWidth || height != lastHeight || orientation != lastOrientation || shownScreenID != lastScreenID) {
+                    CGSize size = displaySize(surface);
+                    __block NSDictionary *info = @{@"t": @"info", @"width": @(size.width), @"height": @(size.height), @"touches": @(touchesSupported), @"scale": @(pointScale), @"screen": @(shownScreenID)};
                     dispatch_sync(sendQueue, ^{ sendJSON(info); });
                     lastWidth = width;
                     lastHeight = height;
+                    lastOrientation = orientation;
+                    lastScreenID = shownScreenID;
                     lastSeed = UINT32_MAX;
                 }
                 uint32_t seed = IOSurfaceGetSeed(surface);
@@ -373,6 +438,18 @@ int main(int argc, const char *argv[]) {
         if ([[device valueForKey:@"state"] integerValue] != 3) fail(@"The simulator is not booted");
         screen = findScreen();
         if (!screen) fail(@"No screen found");
+        // Follows the lit screen (a foldable's posture) and the interface's orientation.
+        [NSThread detachNewThreadWithBlock:^{
+            while (true) {
+                usleep(300000);
+                @autoreleasepool {
+                    uint32_t before = shownScreenID;
+                    id found = findScreen();
+                    // Keep the same proxy while the same screen shows: frames compare its surface's seed.
+                    if (found && shownScreenID != before) screen = found;
+                }
+            }
+        }];
         id deviceType = [device valueForKey:@"deviceType"];
         double scale = [[deviceType valueForKey:@"mainScreenScale"] doubleValue];
         if (scale > 0) pointScale = scale;

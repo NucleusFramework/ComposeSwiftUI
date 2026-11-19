@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.9.2
+
+### Added
+
+- *iOS Simulator* tool window: *Rotate Left* and *Rotate Right*; the screen, touches and the Home gesture follow the
+  app's orientation.
+
+### Fixed
+
+- *iOS Simulator* tool window with a foldable simulator (iPhone Duo): it shows the screen the posture lights, instead of
+  the dark one. Its touches go through CoreDevice, which the stream can't reach yet: it is view only (sending them
+  crashed the simulator's backboardd). Its screenshots capture the shown screen.
+- Remote Mac: paths come back mapped when `~/.compose-swiftui/projects` on the Mac is a symbolic link to another disk.
+- Simulators of a device's own runtime are listed as `iOS 27.2`, not `iOS 27.2.iPhone19.4`.
+
 ## 0.9.1
 
 ### Fixed

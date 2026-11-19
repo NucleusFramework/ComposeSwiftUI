@@ -53,7 +53,20 @@ class RemoteWorkspace(val shell: SshMacShell, val localRoot: String) {
 
     fun toRemote(local: File): String = toRemote(local.path)
 
-    fun toLocalText(text: String): String = text.replace(remoteRoot, localRoot)
+    /** [remoteRoot] with its symbolic links resolved (`~/.compose-swiftui/projects` may link to another disk). */
+    private val remoteRealRoot: String by lazy {
+        shell.run("mkdir -p ${quote(remoteRoot)} && cd ${quote(remoteRoot)} && pwd -P", timeoutSeconds = 30)
+            .takeIf { it.success }?.output?.trim()?.takeIf { it.startsWith("/") } ?: remoteRoot
+    }
+
+    /** [text] with the Mac's paths of the build (as given or as resolved, which the tools write) mapped to this machine's. */
+    fun toLocalText(text: String): String {
+        val mapped = text.replace(remoteRoot, localRoot)
+        return if (remoteRealRoot == remoteRoot) mapped else mapped.replace(remoteRealRoot, localRoot)
+    }
+
+    /** Whether [text] mentions the build's paths on the Mac. */
+    fun mentionsRemote(text: String) = remoteRoot in text || remoteRealRoot in text
 
     /** Sends the sources: only what changed, and deletes what was deleted here (except build outputs, kept there). */
     @Synchronized
