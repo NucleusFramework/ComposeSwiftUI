@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "2.4.20"
+    kotlin("multiplatform") version "2.4.21"
     // Compose SwiftUI: adds the library, the Compose compiler and the framework export, and writes the Swift
     // renderer into iosApp/ComposeSwiftUI on every Xcode build.
     id("dev.nucleusframework.compose-swiftui")
