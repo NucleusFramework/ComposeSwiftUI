@@ -18,7 +18,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation("org.jetbrains.compose.components:components-resources:1.12.1")
+            implementation("org.jetbrains.compose.components:components-resources:1.12.2")
             // Standard DI: koinViewModel() reads the official LocalViewModelStoreOwner.
             implementation("io.insert-koin:koin-compose-viewmodel:4.2.2")
         }
