@@ -31,11 +31,11 @@ process, os_log, XCTest), `scripts/run_ios_package_e2e.sh [--cocoapods]` (app iO
 - [x] Test de fuites mémoire ARC ↔ GC — a trouvé et corrigé un cycle racine ↔ modèle Swift au `dispose()`
 
 ## P0 — CI et stabilité d'API
-- [x] Workflow CI sur PR et `main` (runner macOS) : build, tests, `verify.py`, `check_docs.py`, `typecheck_swift.sh`, e2e — `actionlint` OK ; chaque commande exécutée localement (premier passage réel sur GitHub à observer)
+- [x] Workflow CI sur PR et `main` (runner macOS, Xcode 26) : build, tests, ABI, `check_docs.py`, `typecheck_swift.sh`, e2e macOS + iOS (SPM, CocoaPods) — vert sur GitHub. La régénération des bindings (`verify.py`) demande le SDK 27, absent des runners : elle reste locale
 - [x] Validation d'ABI Kotlin (`checkKotlinAbi`, dump `runtime/api`) — une rupture volontaire est bien détectée
 - [x] `explicitApi()` sur le runtime
 - [x] `@RequiresOptIn` : `@ExperimentalComposeSwiftUIApi`, `@InternalComposeSwiftUIApi`
-- [x] Xcode N-1 : APIs SDK 27 derrière `#if compiler(>=6.4)` (générateur + code manuel) — vérifié statiquement par `scripts/check_n1.py` (choix validé : pas de compilation avec un vrai Xcode 26)
+- [x] Xcode N-1 : APIs SDK 27 derrière `#if compiler(>=6.4)` (générateur + code manuel) — vérifié pour de vrai : la CI compile et lance tout avec Xcode 26.6. Ce test a trouvé des API rétro-portées que la vérification statique ratait ; `generator/n1_missing.py` les déduit des graphes de symboles d'Xcode 26 (artefact CI)
 
 ## P1 — Distribution et intégration Xcode
 - [x] XCFramework / SPM / CocoaPods — `assembleComposeSwiftUIPackage` ; app iOS construite et lancée dans le simulateur par SPM et par CocoaPods
