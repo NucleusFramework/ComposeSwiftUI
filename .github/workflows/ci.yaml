@@ -88,6 +88,14 @@ jobs:
             mkdir -p "/tmp/corefw/${p%%:*}"
             cp -R "runtime/build/bin/${p##*:}/debugFramework/BenchShared.framework" "/tmp/corefw/${p%%:*}/"
           done
+      # APIs back-deployed by the newest SDK are missing from this one: generator/n1_missing.py compares both
+      - name: Symbol graphs of Xcode N-1
+        run: generator/extract.sh /tmp/sg-n1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: symbolgraphs-n1
+          path: /tmp/sg-n1
+          retention-days: 14
       - name: Typecheck the renderer on iOS, macOS, tvOS and watchOS
         run: |
           scripts/typecheck_swift.sh /tmp/corefw | tee /tmp/typecheck.txt
