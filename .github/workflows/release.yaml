@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+  # Re-runs the release of an existing tag with this workflow (e.g. after fixing it), without moving the tag.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to release (v1.2.3)
+        required: true
 
 permissions:
   contents: write
@@ -14,8 +20,12 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ inputs.tag || github.ref }}
 
       # The IntelliJ plugin targets the IDE's Java 25 runtime.
       - name: Set up JDK
@@ -44,21 +54,25 @@ jobs:
           if [ -z "$PUBLISH_TOKEN" ]; then echo "No JETBRAINS_MARKETPLACE_TOKEN: skipping the Marketplace"; exit 0; fi
           ./gradlew --project-dir intellij-plugin verifyPluginSignature publishPlugin
 
+      # The signed zip when the JETBRAINS_* secrets are set, else the unsigned one.
+      - name: Pick the IntelliJ plugin zip
+        run: |
+          zip=$(ls intellij-plugin/build/distributions/*-signed.zip 2>/dev/null || ls intellij-plugin/build/distributions/*.zip)
+          echo "PLUGIN_ZIP=$zip" >> "$GITHUB_ENV"
+
       - name: SBOM of the library (CycloneDX)
         run: |
           ./gradlew :runtime:cyclonedxDirectBom
-          cp runtime/build/reports/cyclonedx-direct/bom.json "compose-swiftui-${GITHUB_REF_NAME#v}.cdx.json"
+          cp runtime/build/reports/cyclonedx-direct/bom.json "compose-swiftui-${TAG#v}.cdx.json"
 
       - name: Provenance of the release files
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
           subject-path: |
-            intellij-plugin/build/distributions/*-signed.zip
+            ${{ env.PLUGIN_ZIP }}
             compose-swiftui-*.cdx.json
 
       - name: Write release notes
-        env:
-          TAG: ${{ github.ref_name }}
         run: |
           VERSION="${TAG#v}"
           {
@@ -76,7 +90,7 @@ jobs:
             echo "Library: \`dev.nucleusframework:compose-swiftui:$VERSION\` on Maven Central."
             echo "Gradle plugin: \`dev.nucleusframework.compose-swiftui\` $VERSION on the Gradle Plugin Portal."
             echo "IDE plugin (previews in IntelliJ IDEA / Android Studio): *Compose SwiftUI* on the JetBrains Marketplace,"
-            echo "or the signed zip below (*Settings › Plugins › ⚙ › Install Plugin from Disk*)."
+            echo "or the zip below (*Settings › Plugins › ⚙ › Install Plugin from Disk*)."
             echo ""
             echo "Supply chain: \`compose-swiftui-$VERSION.cdx.json\` is the CycloneDX SBOM of the library; the release files"
             echo "and the Maven artifacts carry GitHub provenance attestations (\`gh attestation verify <file> --repo $GITHUB_REPOSITORY\`)."
@@ -85,10 +99,9 @@ jobs:
       - name: Create the GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
         run: |
           gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes-file notes.md --generate-notes --verify-tag \
-            intellij-plugin/build/distributions/*-signed.zip "compose-swiftui-${TAG#v}.cdx.json"
+            "$PLUGIN_ZIP" "compose-swiftui-${TAG#v}.cdx.json"
 
       # A release created with GITHUB_TOKEN fires no `release` event, so the docs site (which shows the latest
       # release) is rebuilt explicitly: workflow_dispatch is the one trigger GITHUB_TOKEN may fire.
