@@ -761,6 +761,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1742:
         return .foreground
+    #if compiler(>=6.4)
     case 1743:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -770,12 +771,14 @@ import UniformTypeIdentifiers
             return .conicGradient(p0, center: p1, angle: p2, options: p3)
         }
         return nil
+    #endif
     case 1744:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
         guard let p2 = d_Angle(a.expr(2)) else { return nil }
         let p3: GraphicsContext.GradientOptions = a.isNil(3) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(3)) ?? GraphicsContext.GradientOptions())
         return .conicGradient(p0, center: p1, angle: p2, options: p3)
+    #if compiler(>=6.4)
     case 1745:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -785,6 +788,7 @@ import UniformTypeIdentifiers
             return .linearGradient(p0, startPoint: p1, endPoint: p2, options: p3)
         }
         return nil
+    #endif
     case 1746:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }
@@ -813,6 +817,7 @@ import UniformTypeIdentifiers
         }
         return nil
     #endif
+    #if compiler(>=6.4)
     case 1749:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -821,6 +826,7 @@ import UniformTypeIdentifiers
             return .radialGradient(p0, center: p1, startRadius: a.cgFloat(2), endRadius: a.cgFloat(3), options: p4)
         }
         return nil
+    #endif
     case 1750:
         guard let p0 = d_Gradient(a.expr(0)) else { return nil }
         guard let p1 = d_CGPoint(a.expr(1)) else { return nil }

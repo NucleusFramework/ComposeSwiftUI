@@ -10,10 +10,12 @@ usage: generator/n1_missing.py <newest-symbol-graphs> <n1-symbol-graphs>   (both
 import glob
 import json
 import os
+import re
 import sys
 
 from generate import NEWEST_SDK
 
+BUILDER = re.compile(r"@\w+Builder(<[^>]*>)? ")
 DOMAIN = {"ios": "iOS", "macos": "macOS", "tvos": "tvOS", "watchos": "watchOS"}
 
 
@@ -22,13 +24,16 @@ def version(s):
 
 
 def symbols(root, plat):
-    """usr -> (path with argument labels, version introduced on `plat` or None when the graph doesn't say)."""
+    """usr -> (path and parameter types, version introduced on `plat` or None when the graph doesn't say)."""
     out = {}
     for f in glob.glob(os.path.join(root, plat, "*.symbols.json")):
         for raw in json.load(open(f))["symbols"]:
             intro = next((version(a["introduced"]) for a in raw.get("availability") or []
                           if a.get("domain") == DOMAIN[plat] and a.get("introduced")), None)
-            out[raw["identifier"]["precise"]] = (".".join(raw["pathComponents"]), intro)
+            # Parameter types without their result builder: `@ViewBuilder` became `@ContentBuilder` in SDK 27
+            params = [BUILDER.sub("", "".join(fr["spelling"] for fr in prm.get("declarationFragments", [])))
+                      for prm in raw.get("functionSignature", {}).get("parameters", [])]
+            out[raw["identifier"]["precise"]] = (".".join(raw["pathComponents"]) + "(" + ", ".join(params) + ")", intro)
     return out
 
 
@@ -40,8 +45,8 @@ def main(newest, n1):
         old = symbols(n1, plat)
         old_paths = {path for path, _ in old.values()}
         for usr, (path, intro) in symbols(newest, plat).items():
-            # Introduced in the newest SDK: already guarded by its version. Same path in the previous SDK: an existing
-            # API whose mangled name changed (generics reworked), compiled by both.
+            # Introduced in the newest SDK: already guarded by its version. Same path and parameter types in the
+            # previous SDK: an existing API whose mangled name changed, compiled by both.
             if usr not in old and path not in old_paths and (intro is None or intro < NEWEST_SDK[plat]):
                 missing.add(usr)
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "n1_missing.json")
