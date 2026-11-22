@@ -681,7 +681,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS) || os(macOS) || os(watchOS)
+    #if (os(iOS) || os(macOS) || os(watchOS)) && (compiler(>=6.4))
     case 1903:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
             guard let p2 = d_GestureInputKinds(a.expr(2)) else { return nil }
@@ -1151,7 +1151,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? TabSearchActivation
     }
 }
-#if os(iOS) || os(macOS) || os(tvOS)
+#if (os(iOS) || os(macOS) || os(tvOS)) && (compiler(>=6.4))
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 10.0, *)
 @MainActor func d_TabsPickerStyle(_ e: SExpr?) -> TabsPickerStyle? {
     guard let e else { return nil }
@@ -1237,12 +1237,13 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarDefaultItemKind
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_ToolbarMinimizationRestoration(_ e: SExpr?) -> ToolbarMinimizationRestoration? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2513:
         return .atScrollEdge
     #endif
@@ -1251,6 +1252,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarMinimizationRestoration
     }
 }
+#endif
 @MainActor func d_ToolbarTitleDisplayMode(_ e: SExpr?) -> ToolbarTitleDisplayMode? {
     guard let e else { return nil }
     let a = Args(expr: e)

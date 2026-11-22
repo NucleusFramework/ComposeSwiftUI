@@ -10,27 +10,32 @@ on:
         description: Tag to publish again (e.g. v0.7.1)
         required: true
 
+permissions:
+  contents: read
+  id-token: write  # provenance attestations
+  attestations: write
+
 jobs:
   publish:
     # Apple targets can only be compiled on macOS. Intel, because hosted arm64 macOS runners can stay unavailable for hours.
     runs-on: macos-15-intel
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ${{ inputs.tag || github.ref }}
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
         with:
           distribution: temurin
           java-version: '21'
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
 
       - name: Cache Kotlin/Native
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.konan
           key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
@@ -45,3 +50,21 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNINGINMEMORYKEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNINGKEYID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNINGPASSWORD }}
+
+      # The same files as on Maven Central, built by the same job
+      - name: Collect the published artifacts
+        run: GITHUB_REF="refs/tags/${INPUT_TAG:-${GITHUB_REF#refs/tags/}}" ./gradlew :runtime:publishToMavenLocal --no-configuration-cache
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNINGINMEMORYKEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNINGKEYID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNINGPASSWORD }}
+
+      - name: Provenance of the published artifacts
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            ~/.m2/repository/dev/nucleusframework/compose-swiftui*/*/*.klib
+            ~/.m2/repository/dev/nucleusframework/compose-swiftui*/*/*.jar
+            ~/.m2/repository/dev/nucleusframework/compose-swiftui*/*/*.module
+            ~/.m2/repository/dev/nucleusframework/compose-swiftui*/*/*.pom

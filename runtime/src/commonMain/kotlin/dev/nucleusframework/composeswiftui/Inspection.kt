@@ -114,10 +114,10 @@ internal fun jsonString(value: String?): String {
  * A literal of the source changed in the IDE: [oldText] becomes [newText] at [offset] of [file], in the composable
  * [function]. [kind] is `string`, `number` or `boolean`; the texts are the values (unquoted, unescaped).
  */
-class LiteralPatch(
-    val file: String,
-    val offset: Int,
-    val function: String?,
+public class LiteralPatch(
+    public val file: String,
+    public val offset: Int,
+    public val function: String?,
     kind: String,
     oldText: String,
     newText: String,

@@ -1,0 +1,8 @@
+# Reviewers requested automatically on pull requests. Add maintainers here as they join (see MAINTAINERS.md).
+*                                   @kdroidFilter
+
+# Public API: changes to the ABI dump need a maintainer's review
+/runtime/api/                       @kdroidFilter
+# Release and supply chain
+/.github/workflows/                 @kdroidFilter
+/VERSION                            @kdroidFilter

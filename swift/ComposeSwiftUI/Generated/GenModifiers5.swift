@@ -103,21 +103,21 @@ import UniformTypeIdentifiers
             guard let p4 = d_DigitalCrownRotationalSensitivity(a.expr(5)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.digitalCrownRotation(detent: a.doubleBinding(0), from: a.double(2), through: a.double(3), by: a.double(4), sensitivity: p4, isContinuous: a.bool(6), isHapticFeedbackEnabled: a.bool(7), onIdle: a.action(8)), m, i + 1)
 #endif
-#if os(iOS) || os(macOS)
+#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
         case 221:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(Text(a.string(0)), shouldPresent: a.bool(1), actions: { a.slot(2) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if os(iOS)
+#if (os(iOS)) && (compiler(>=6.4))
         case 229:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchSubtitle(LocalizedStringResource(String.LocalizationValue(a.string(0)))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if os(iOS) || os(macOS)
+#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
         case 237:
             if #available(iOS 27.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.draggable(containerItemID: a.hashable(0)), m, i + 1)
@@ -302,6 +302,7 @@ import UniformTypeIdentifiers
 #endif
         case 581:
             return ModChain.apply(v.toolbar(removing: d_ToolbarDefaultItemKind(a.expr(0))), m, i + 1)
+#if compiler(>=6.4)
         case 589:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_ToolbarMinimizationRestoration(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -309,12 +310,15 @@ import UniformTypeIdentifiers
                 return ModChain.apply(v.toolbarMinimizationRestoration(p0, for: p1), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
+#if compiler(>=6.4)
         case 597:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 guard let p0 = d_ToolbarVerticalCompressionBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
                 return ModChain.apply(v.toolbarVerticalCompressionBehavior(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 605:
             guard let p0 = d_AnyTransition(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.transition(p0), m, i + 1)
@@ -333,22 +337,26 @@ import UniformTypeIdentifiers
             return ModChain.apply(v.environment(\.allowsTightening, a.bool(0)), m, i + 1)
         case 645:
             return ModChain.apply(v.environment(\.isLuminanceReduced, a.bool(0)), m, i + 1)
+#if compiler(>=6.4)
         case 653:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.environment(\.splitArrangementAxis, d_Axis(a.expr(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 661:
             return ModChain.apply(v.environment(\.font, d_Font(a.expr(0))), m, i + 1)
         case 669:
             guard let p0 = d_SidebarRowSize(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.sidebarRowSize, p0), m, i + 1)
+#if compiler(>=6.4)
         case 677:
             if #available(iOS 27.2, macOS 27.2, tvOS 27.2, watchOS 27.2, *) {
                 guard let p0 = d_ToolbarTitleAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
                 return ModChain.apply(v.environment(\.toolbarTitleAlignment, p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 685:
             guard let p0 = d_ScrollBounceBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.horizontalScrollBounceBehavior, p0), m, i + 1)

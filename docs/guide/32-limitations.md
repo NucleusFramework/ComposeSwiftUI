@@ -121,8 +121,8 @@ collections and key paths. In Kotlin, they take Kotlin lists and lambdas: a loop
   configurations) are exposed through hand-written APIs that pass what views need (a size, a `scrollTo`, a value at a
   position), not the full Swift type.
 - **Environment reads.** `EnvironmentReader` exposes the commonly read values (color scheme, Dynamic Type size, size
-  classes, locale, layout direction, enabled and presented state, `dismiss`, scene phase, accessibility preferences),
-  and they arrive after the first layout pass.
+  classes, locale, layout direction, enabled and presented state, `dismiss`, scene phase, accessibility preferences);
+  the first composition sees the values around the `ComposeView`, the reader's own position after the first layout pass.
 
 ## Platform and tooling constraints
 

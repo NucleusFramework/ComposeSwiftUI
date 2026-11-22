@@ -258,7 +258,7 @@ public fun BarMark(
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
     mask: (@Composable () -> Unit)? = null,
-) = mark(0, listOf(x, y, xStart, xEnd, yStart, yEnd), listOf(width.encode(), height.encode(), stacking.ordinal), style, annotation,
+): Unit = mark(0, listOf(x, y, xStart, xEnd, yStart, yEnd), listOf(width.encode(), height.encode(), stacking.ordinal), style, annotation,
     annotationContent, null, mask)
 
 /** Swift Charts `LineMark(x:y:)` / `LineMark(x:y:series:)`. [symbol] draws a Kotlin view at each point. */
@@ -272,7 +272,7 @@ public fun LineMark(
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
     symbol: (@Composable () -> Unit)? = null,
-) = mark(1, listOf(x, y, series), emptyList(), style, annotation, annotationContent, symbol, null)
+): Unit = mark(1, listOf(x, y, series), emptyList(), style, annotation, annotationContent, symbol, null)
 
 /** Swift Charts `PointMark(x:y:)` (one axis may be null). */
 @HiddenFromObjC
@@ -284,7 +284,7 @@ public fun PointMark(
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
     symbol: (@Composable () -> Unit)? = null,
-) = mark(2, listOf(x, y), emptyList(), style, annotation, annotationContent, symbol, null)
+): Unit = mark(2, listOf(x, y), emptyList(), style, annotation, annotationContent, symbol, null)
 
 /** Swift Charts `AreaMark`: [x] with [y] or [yStart]/[yEnd], or [xStart]/[xEnd] with [y]. */
 @HiddenFromObjC
@@ -301,7 +301,7 @@ public fun AreaMark(
     style: ChartMarkStyle = ChartMarkStyle(),
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
-) = mark(3, listOf(x, y, xStart, xEnd, yStart, yEnd, series), listOf(stacking.ordinal), style, annotation, annotationContent, null, null)
+): Unit = mark(3, listOf(x, y, xStart, xEnd, yStart, yEnd, series), listOf(stacking.ordinal), style, annotation, annotationContent, null, null)
 
 /** Swift Charts `RuleMark`: a line at [x] or [y], or between [xStart]/[xEnd] at [y], or [yStart]/[yEnd] at [x]. */
 @HiddenFromObjC
@@ -316,7 +316,7 @@ public fun RuleMark(
     style: ChartMarkStyle = ChartMarkStyle(),
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
-) = mark(4, listOf(x, y, xStart, xEnd, yStart, yEnd), emptyList(), style, annotation, annotationContent, null, null)
+): Unit = mark(4, listOf(x, y, xStart, xEnd, yStart, yEnd), emptyList(), style, annotation, annotationContent, null, null)
 
 /** Swift Charts `RectangleMark`: centered at [x]/[y] with [width]/[height], or spanning ranges. */
 @HiddenFromObjC
@@ -333,7 +333,7 @@ public fun RectangleMark(
     style: ChartMarkStyle = ChartMarkStyle(),
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
-) = mark(5, listOf(x, y, xStart, xEnd, yStart, yEnd), listOf(width.encode(), height.encode()), style, annotation, annotationContent, null, null)
+): Unit = mark(5, listOf(x, y, xStart, xEnd, yStart, yEnd), listOf(width.encode(), height.encode()), style, annotation, annotationContent, null, null)
 
 /** Swift Charts `SectorMark` (pie and donut charts, iOS 17 / macOS 14). */
 @HiddenFromObjC
@@ -346,7 +346,7 @@ public fun SectorMark(
     style: ChartMarkStyle = ChartMarkStyle(),
     annotation: ChartAnnotation? = null,
     annotationContent: (@Composable () -> Unit)? = null,
-) = mark(6, listOf(angle), listOf(innerRadius.encode(), outerRadius.encode(), angularInset), style, annotation, annotationContent, null, null)
+): Unit = mark(6, listOf(angle), listOf(innerRadius.encode(), outerRadius.encode(), angularInset), style, annotation, annotationContent, null, null)
 
 /** The plot kinds of [ChartPlot]: one Kotlin node for many points. */
 @HiddenFromObjC
@@ -411,7 +411,7 @@ public sealed class ChartFunctionPlot {
     }
 
     internal fun fn(body: (List<Double>) -> List<Double>): ChartFunction = object : ChartFunction {
-        override fun evaluate(input: List<Double>): List<Double> = body(input)
+        override fun evaluate(input: List<Double>): List<Double> = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) { body(input) }
     }
 }
 
@@ -600,7 +600,7 @@ public fun RectangleMark3D(x: PlottableValue, y: PlottableValue, z: PlottableVal
 @Composable
 public fun SurfacePlot(x: String, y: String, z: String, style: Chart3DMarkStyle = Chart3DMarkStyle(), function: (Double, Double) -> Double) {
     val fn = object : ChartFunction {
-        override fun evaluate(input: List<Double>): List<Double> = listOf(function(input[0], input[1]))
+        override fun evaluate(input: List<Double>): List<Double> = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) { listOf(function(input[0], input[1])) }
     }
     SwiftView(ChartIds.SURFACE, listOf(listOf(x, y, z), fn, style.encode()), Modifier)
 }
@@ -727,7 +727,7 @@ public data class AxisMarks(
         valueLabel?.let { l ->
             listOf(
                 l.text?.let { f -> object : AxisLabelProvider {
-                    override fun label(value: Any?, index: Int): String? = f(PlottableValue.decodeRaw(value), index)
+                    override fun label(value: Any?, index: Int): String? = guarded(ComposeSwiftUIErrorSource.Callback, null) { f(PlottableValue.decodeRaw(value), index) }
                 } },
                 l.centered, l.anchor, l.multiLabelAlignment, listOf(l.collisionResolution.kind, l.collisionResolution.priority, l.collisionResolution.minimumSpacing),
                 l.offsetsMarks, l.orientation.ordinal, l.horizontalSpacing, l.verticalSpacing, l.font, l.foregroundStyle, l.valueType.ordinal, l.offset?.let { o -> listOf(o.width, o.height) },

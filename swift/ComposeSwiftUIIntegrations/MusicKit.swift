@@ -17,12 +17,15 @@ public extension ComposeIntegrations {
             let done = a.callback(3, box: { (s: String?) -> Any? in s ?? NSNull() })
             return AnyView(v.musicSubscriptionOffer(isPresented: a.boolBinding(0), options: options) { done($0?.localizedDescription) })
         }
+        #if compiler(>=6.4)
         if #available(iOS 27.0, *) {
             ComposeRegistry.modifiers[200_317] = { v, a, _ in MusicModifiers.picker(v, a) }
         }
+        #endif
     }
 }
 
+#if compiler(>=6.4)
 @available(iOS 27.0, *)
 @MainActor private enum MusicModifiers {
     static func picker(_ v: AnyView, _ a: Args) -> AnyView {
@@ -37,6 +40,7 @@ public extension ComposeIntegrations {
     }
 }
 #endif
+#endif
 
 #if os(iOS) || os(visionOS)
 import SwiftUI
@@ -45,6 +49,7 @@ import DataDetection
 public extension ComposeIntegrations {
     /// DataDetection: `Modifier.dataDetection(types)`.
     @MainActor static func registerDataDetection() {
+        #if compiler(>=6.4)
         guard #available(iOS 27.0, *) else { return }
         ComposeRegistry.modifiers[200_318] = { v, a, _ in
             let all: [DataDetector.MatchType] = [.all, .link, .emailAddress, .phoneNumber, .postalAddress, .calendarEvent, .moneyAmount,
@@ -53,6 +58,7 @@ public extension ComposeIntegrations {
             for i in a.list(0).compactMap({ ($0 as? NSNumber)?.intValue }) where i >= 0 && i < all.count { types.formUnion(all[i]) }
             return AnyView(v.dataDetection(types.isEmpty ? .all : types))
         }
+        #endif
     }
 }
 #endif

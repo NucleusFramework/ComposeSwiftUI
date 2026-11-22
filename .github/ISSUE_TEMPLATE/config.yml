@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/NucleusFramework/ComposeSwiftUI/security/advisories/new
+    about: Report it privately.
+  - name: Documentation
+    url: https://github.com/NucleusFramework/ComposeSwiftUI/tree/main/docs/guide
+    about: The guide may already answer it (see Troubleshooting).

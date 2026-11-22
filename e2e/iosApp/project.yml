@@ -1,0 +1,27 @@
+# An iOS app that uses Compose SwiftUI through the Swift package `assembleComposeSwiftUIPackage` writes: no Gradle build
+# phase, and the default ENABLE_USER_SCRIPT_SANDBOXING = YES. Built and run by scripts/run_ios_package_e2e.sh.
+name: E2EiOS
+options:
+  bundleIdPrefix: dev.nucleusframework.composeswiftui
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  ComposeSwiftUIE2EShared:
+    path: ../shared/build/composeSwiftUI/package
+targets:
+  E2EiOS:
+    type: application
+    platform: iOS
+    sources: [Sources]
+    dependencies:
+      - package: ComposeSwiftUIE2EShared
+        product: ComposeSwiftUI
+    info:
+      path: Sources/Info.plist
+      properties:
+        UILaunchScreen: {}
+    settings:
+      base:
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+        SWIFT_VERSION: "5.0"
+        CODE_SIGNING_ALLOWED: NO

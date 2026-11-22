@@ -302,8 +302,8 @@ private fun DynamicTypeSize.ordinalIndex() = typeSizes.indexOf(this)
 ```
 
 `DynamicTypeSize` is a SwiftUI value, not a Kotlin enum, hence the small ordering helper. `ViewThatFits` is often
-simpler: it picks the first child that fits, without reading the size at all. `EnvironmentReader` reports after the
-first layout pass, so the first composition sees the default size (`large`).
+simpler: it picks the first child that fits, without reading the size at all. The first composition already sees the
+size around the `ComposeView`.
 
 To make a size grow with the text (an icon, a padding, a fixed frame), `ScaledMetric` is SwiftUI's `@ScaledMetric`:
 
@@ -357,8 +357,8 @@ fun ExpandingCard() {
 }
 ```
 
-`withAnimation(null) { }` applies the change without animation. Like every `EnvironmentReader` value, the preferences
-arrive after the first layout pass (the first composition sees `false`). In a larger app, read them once near the
+`withAnimation(null) { }` applies the change without animation. The first composition already sees the preferences
+around the `ComposeView` (`currentSwiftUIEnvironment`). In a larger app, read them once near the
 root and provide them through a `CompositionLocal`.
 
 ## Testing

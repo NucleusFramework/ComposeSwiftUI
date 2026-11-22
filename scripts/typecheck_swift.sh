@@ -15,4 +15,4 @@ check arm64-apple-macos14.0 macosx macos &
 check arm64-apple-tvos17.0-simulator appletvsimulator tvos &
 check arm64-apple-watchos10.0-simulator watchsimulator watchos &
 wait
-grep -h "error:" /tmp/typecheck_*.log | sort -u | head -20
+grep -h "error:" /tmp/typecheck_*.log | sort -u | head -20 || true

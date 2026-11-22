@@ -234,24 +234,24 @@ screen and pass it, or its state, to the embedded content.
 
 ### EnvironmentReader shows the wrong color scheme or size class at first
 
-`EnvironmentReader` gets its values from SwiftUI after the first layout pass, so the first composition sees defaults
-(light, large, no size class). Design the content so that the first frame is acceptable, or show nothing until the
-values arrive.
+`ComposeView` passes the SwiftUI environment around it before the first composition, so `currentSwiftUIEnvironment` and
+the first value of an `EnvironmentReader` are already right (dark mode, size classes). A host started by hand
+(`host.start()` before the `ComposeView` shows it) misses it: let `ComposeView` start it.
 
 ### `stringResource` crashes in a Compose SwiftUI screen
 
-Compose Multiplatform resources read Compose UI's `LocalDensity`, which a Compose SwiftUI composition doesn't
-provide. Provide it once at the root:
+With "CompositionLocal LocalDensity not present": Compose Multiplatform resources read Compose UI's `LocalDensity`.
+The Gradle plugin provides it in every host when the module declares a Compose UI dependency (Compose Multiplatform
+resources, foundation…). If the dependency comes another way (a dependency of another module), provide it once:
 
 ```kotlin skip
-fun app() = composeSwiftUI {
-    CompositionLocalProvider(LocalDensity provides Density(UIScreen.mainScreen.scale.toFloat())) {
-        Text(stringResource(Res.string.title))
+ComposeSwiftUI.addHostDecorator(object : HostDecorator {
+    @Composable
+    override fun Decorate(content: @Composable () -> Unit) {
+        CompositionLocalProvider(LocalDensity provides Density(UIScreen.mainScreen.scale.toFloat()), content = content)
     }
-}
+})
 ```
-
-The suspending `getString(Res.string.title)` works without it.
 
 ### An embedded Compose Multiplatform screen stutters or doesn't render
 

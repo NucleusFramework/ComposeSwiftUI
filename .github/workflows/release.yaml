@@ -8,25 +8,53 @@ on:
 permissions:
   contents: write
   actions: write  # to start the docs workflow
+  id-token: write  # provenance attestations
+  attestations: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       # The IntelliJ plugin targets the IDE's Java 25 runtime.
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
         with:
           distribution: temurin
           java-version: '25'
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
 
-      - name: Build the IntelliJ plugin
-        run: ./gradlew --project-dir intellij-plugin buildPlugin
+      - name: Build and sign the IntelliJ plugin
+        run: ./gradlew --project-dir intellij-plugin buildPlugin signPlugin
+        env:
+          CERTIFICATE_CHAIN: ${{ secrets.JETBRAINS_CERTIFICATE_CHAIN }}
+          PRIVATE_KEY: ${{ secrets.JETBRAINS_PRIVATE_KEY }}
+          PRIVATE_KEY_PASSWORD: ${{ secrets.JETBRAINS_PRIVATE_KEY_PASSWORD }}
+
+      - name: Publish the IntelliJ plugin to the JetBrains Marketplace
+        env:
+          CERTIFICATE_CHAIN: ${{ secrets.JETBRAINS_CERTIFICATE_CHAIN }}
+          PRIVATE_KEY: ${{ secrets.JETBRAINS_PRIVATE_KEY }}
+          PRIVATE_KEY_PASSWORD: ${{ secrets.JETBRAINS_PRIVATE_KEY_PASSWORD }}
+          PUBLISH_TOKEN: ${{ secrets.JETBRAINS_MARKETPLACE_TOKEN }}
+        run: |
+          if [ -z "$PUBLISH_TOKEN" ]; then echo "No JETBRAINS_MARKETPLACE_TOKEN: skipping the Marketplace"; exit 0; fi
+          ./gradlew --project-dir intellij-plugin verifyPluginSignature publishPlugin
+
+      - name: SBOM of the library (CycloneDX)
+        run: |
+          ./gradlew :runtime:cyclonedxDirectBom
+          cp runtime/build/reports/cyclonedx-direct/bom.json "compose-swiftui-${GITHUB_REF_NAME#v}.cdx.json"
+
+      - name: Provenance of the release files
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            intellij-plugin/build/distributions/*-signed.zip
+            compose-swiftui-*.cdx.json
 
       - name: Write release notes
         env:
@@ -47,8 +75,11 @@ jobs:
             echo ""
             echo "Library: \`dev.nucleusframework:compose-swiftui:$VERSION\` on Maven Central."
             echo "Gradle plugin: \`dev.nucleusframework.compose-swiftui\` $VERSION on the Gradle Plugin Portal."
-            echo "IDE plugin (previews in IntelliJ IDEA / Android Studio): download the zip below, then"
-            echo "*Settings › Plugins › ⚙ › Install Plugin from Disk*."
+            echo "IDE plugin (previews in IntelliJ IDEA / Android Studio): *Compose SwiftUI* on the JetBrains Marketplace,"
+            echo "or the signed zip below (*Settings › Plugins › ⚙ › Install Plugin from Disk*)."
+            echo ""
+            echo "Supply chain: \`compose-swiftui-$VERSION.cdx.json\` is the CycloneDX SBOM of the library; the release files"
+            echo "and the Maven artifacts carry GitHub provenance attestations (\`gh attestation verify <file> --repo $GITHUB_REPOSITORY\`)."
           } > notes.md
 
       - name: Create the GitHub release
@@ -57,7 +88,7 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes-file notes.md --generate-notes --verify-tag \
-            intellij-plugin/build/distributions/*.zip
+            intellij-plugin/build/distributions/*-signed.zip "compose-swiftui-${TAG#v}.cdx.json"
 
       # A release created with GITHUB_TOKEN fires no `release` event, so the docs site (which shows the latest
       # release) is rebuilt explicitly: workflow_dispatch is the one trigger GITHUB_TOKEN may fire.

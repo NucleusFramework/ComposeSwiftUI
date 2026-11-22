@@ -102,15 +102,19 @@ import AppKit
 }
 
 extension ComposeGenerated {
-    @MainActor private static let once: Void = setUp()
+    @MainActor private static var didSetUp = false
 
     /// Registers the renderers on first use (called by ComposeView; calling it yourself is optional).
     @MainActor public static func ensureSetUp() {
-        _ = once
+        setUp()
     }
 
-    /// Registers generated + hand-written renderers.
+    /// Registers generated + hand-written renderers, and the `os_log` logger of the Kotlin runtime. Runs once: what the
+    /// app registers or configures afterwards (its own renderers, logger) is kept.
     @MainActor public static func setUp() {
+        guard !didSetUp else { return }
+        didSetUp = true
+        ComposeSwiftUI.shared.logger = OSLogRuntimeLogger()
         registerAll()
         HandwrittenRenderers.register()
         ExtraRenderers.register()
@@ -118,6 +122,7 @@ extension ComposeGenerated {
         AdvancedRenderers.register()
         CompletionRenderers.register()
         PlatformViewRenderers.register()
+        ComposeIntegrations.registerConfigured()
     }
 }
 
@@ -311,8 +316,12 @@ struct FocusBridge: ViewModifier {
     }
 }
 
-struct EnvironmentReporter: View {
-    let m: NodeModel
+/// Reports the SwiftUI environment to Kotlin: on appear, on change, and (`first`) synchronously from the first `body`.
+struct EnvironmentReporter<Content: View>: View {
+    let content: Content
+    let report: ([Any]) -> Void
+    var first: (([Any]) -> Void)? = nil
+    @Environment(\.displayScale) private var displayScale
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     #if os(iOS)
@@ -359,7 +368,7 @@ struct EnvironmentReporter: View {
                 reduceMotion ? "1" : "0", reduceTransparency ? "1" : "0", differentiateWithoutColor ? "1" : "0",
                 invertColors ? "1" : "0", voiceOverEnabled ? "1" : "0", legibilityWeight == .bold ? "1" : "0",
                 isSearching ? "1" : "0", colorSchemeContrast == .increased ? "1" : "0", multipleWindows ? "1" : "0",
-                refresh == nil ? "0" : "1", renameAvailable ? "1" : "0"]
+                refresh == nil ? "0" : "1", renameAvailable ? "1" : "0", String(Double(displayScale))]
     }
 
     private var multipleWindows: Bool {
@@ -409,19 +418,19 @@ struct EnvironmentReporter: View {
 
     var body: some View {
         let s = snapshot
-        return ChildrenView(m)
-            .onAppear { report(s) }
-            .onChange(of: s) { _, value in report(value) }
+        if let first { first(values(s)) }
+        return content
+            .onAppear { report(values(s)) }
+            .onChange(of: s) { _, value in report(values(value)) }
     }
 
-    private func report(_ s: [String]) {
+    private func values(_ s: [String]) -> [Any] {
         let dismiss = self.dismiss
-        let values: [Any] = [s[0] as NSString, s[1] as NSString, s[2].isEmpty ? NSNull() : s[2] as NSString,
-                             s[3].isEmpty ? NSNull() : s[3] as NSString, s[4] as NSString, s[5] as NSString,
-                             KotlinBoolean(value: s[6] == "1"), KotlinBoolean(value: s[7] == "1"),
-                             ClosureAction { dismiss() }, s[8] as NSString] + s[9...].map { KotlinBoolean(value: $0 == "1") }
-            + [actions as NSArray]
-        m.args.callback(0, box: { (v: [Any]) -> Any? in v as NSArray })(values)
+        return [s[0] as NSString, s[1] as NSString, s[2].isEmpty ? NSNull() : s[2] as NSString,
+                s[3].isEmpty ? NSNull() : s[3] as NSString, s[4] as NSString, s[5] as NSString,
+                KotlinBoolean(value: s[6] == "1"), KotlinBoolean(value: s[7] == "1"),
+                ClosureAction { dismiss() }, s[8] as NSString] + s[9..<20].map { KotlinBoolean(value: $0 == "1") }
+            + [actions as NSArray, KotlinDouble(value: Double(s[20]) ?? 2)]
     }
 }
 
@@ -494,7 +503,10 @@ struct KotlinLayout: Layout {
                     }
             }, m, 0)
         }
-        ComposeRegistry.views[100_003] = { m in ModChain.apply(EnvironmentReporter(m: m), m, 0) }
+        ComposeRegistry.views[100_003] = { m in
+            let report = m.args.callback(0, box: { (v: [Any]) -> Any? in v as NSArray })
+            return ModChain.apply(EnvironmentReporter(content: ChildrenView(m), report: report), m, 0)
+        }
         ComposeRegistry.views[100_066] = { m in ModChain.apply(ScaledMetricReporter(m: m), m, 0) }
         ComposeRegistry.views[100_004] = { m in ModChain.apply(NamespaceScopeView(m: m, id: Int64(m.args.int(0))), m, 0) }
         ComposeRegistry.views[100_005] = { m in
@@ -504,7 +516,7 @@ struct KotlinLayout: Layout {
         ComposeRegistry.views[100_006] = { m in
             let a = m.args
             guard let factory = ComposeRegistry.nativeViews[a.string(0)] else {
-                return AnyView(Text("No native view '\(a.string(0))'").foregroundStyle(.red))
+                return ComposeRegistry.unsupported("No native view '\(a.string(0))'")
             }
             return ModChain.apply(factory(a), m, 0)
         }

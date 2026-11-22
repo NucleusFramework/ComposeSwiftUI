@@ -113,14 +113,14 @@ import UniformTypeIdentifiers
             guard let p4 = d_DigitalCrownRotationalSensitivity(a.expr(5)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.digitalCrownRotation(detent: a.intBinding(0), from: a.int(2), through: a.int(3), by: a.int(4), sensitivity: p4, isContinuous: a.bool(6), isHapticFeedbackEnabled: a.bool(7), onIdle: a.action(8)), m, i + 1)
 #endif
-#if os(iOS) || os(macOS)
+#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
         case 222:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(LocalizedStringKey(a.string(0)), shouldPresent: a.bool(1), actions: { a.slot(2) }, message: { a.slot(3) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if os(iOS)
+#if (os(iOS)) && (compiler(>=6.4))
         case 230:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchSubtitle(a.string(0)), m, i + 1)
@@ -262,11 +262,13 @@ import UniformTypeIdentifiers
         case 526:
             guard let p0 = d_SensoryFeedback(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.sensoryFeedback(p0, trigger: a.hashable(1)), m, i + 1)
+#if compiler(>=6.4)
         case 534:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.splitArrangementFixedLayoutSize(horizontal: a.bool(0), vertical: a.bool(1)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 542:
             guard let p0 = d_SubmitLabel(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.submitLabel(p0), m, i + 1)
@@ -275,7 +277,7 @@ import UniformTypeIdentifiers
                 return ModChain.apply(v.symbolVariableValueMode(d_SymbolVariableValueMode(a.expr(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-#if os(iOS) || os(macOS) || os(tvOS)
+#if (os(iOS) || os(macOS) || os(tvOS)) && (compiler(>=6.4))
         case 558:
             if #available(iOS 18.0, macOS 15.0, tvOS 27.0, watchOS 10.0, *) {
                 return ModChain.apply(v.tabViewSidebarFooter(content: { a.slot(0) }), m, i + 1)
@@ -294,6 +296,7 @@ import UniformTypeIdentifiers
                 return ModChain.apply(v.toolbarBackground(q0, for: p1), m, i + 1)
             }
             return open(p0)
+#if compiler(>=6.4)
         case 590:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_ToolbarMinimizationSafeAreaAdjustment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -301,6 +304,7 @@ import UniformTypeIdentifiers
                 return ModChain.apply(v.toolbarMinimizationSafeAreaAdjustment(p0, for: p1), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 598:
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
                 guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -339,11 +343,13 @@ import UniformTypeIdentifiers
 #endif
         case 678:
             return ModChain.apply(v.environment(\.defaultMinListRowHeight, a.cgFloat(0)), m, i + 1)
+#if compiler(>=6.4)
         case 686:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 return ModChain.apply(v.environment(\.systemPrefersReducedResourceUsage, a.bool(0)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         default: return nil
         }
     }

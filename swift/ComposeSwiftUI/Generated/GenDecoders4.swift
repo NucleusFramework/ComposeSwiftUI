@@ -489,6 +489,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? DefaultTabViewStyle
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_DeviceHinge_Status(_ e: SExpr?) -> DeviceHinge.Status? {
     guard let e else { return nil }
@@ -503,6 +504,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? DeviceHinge.Status
     }
 }
+#endif
 #if os(iOS) || os(macOS) || os(tvOS)
 @MainActor func d_DoubleColumnNavigationViewStyle(_ e: SExpr?) -> DoubleColumnNavigationViewStyle? {
     guard let e else { return nil }
@@ -1074,6 +1076,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? NavigationSplitViewVisibility
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_OverlayArrangementViewStyle(_ e: SExpr?) -> OverlayArrangementViewStyle? {
     guard let e else { return nil }
@@ -1090,6 +1093,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? OverlayArrangementViewStyle
     }
 }
+#endif
 @MainActor func d_PagingScrollTargetBehavior(_ e: SExpr?) -> PagingScrollTargetBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
@@ -1181,6 +1185,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ReservedRegion_QueryOptions(_ e: SExpr?) -> ReservedRegion.QueryOptions? {
     guard let e else { return nil }
@@ -1193,6 +1198,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ReservedRegion.QueryOptions
     }
 }
+#endif
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
 @MainActor func d_RoundedRectangularShapeCorners(_ e: SExpr?) -> RoundedRectangularShapeCorners? {
     guard let e else { return nil }

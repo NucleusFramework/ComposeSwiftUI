@@ -80,13 +80,37 @@ class Item:
         return plats
 
 
+# APIs introduced in the SDKs of the newest Xcode compile only with its Swift compiler: behind `#if compiler(>=…)`, the
+# renderer still builds with the previous Xcode (N-1), where those APIs render nothing.
+NEWEST_SDK = {"ios": (27, 0), "macos": (27, 0), "tvos": (27, 0), "watchos": (27, 0)}
+NEWEST_COMPILER = "6.4"  # Swift of Xcode 27.0
+
+
+def needs_newest_sdk(plats):
+    return any(v >= NEWEST_SDK[p] for p, v in plats.items() if p in NEWEST_SDK)
+
+
+def case_guard(plats, enclosing):
+    """#if line of a member inside a declaration available on `enclosing` (None when it needs nothing more)."""
+    if set(plats) != set(enclosing) & set(PLATFORMS):
+        return platform_guard(plats)[0]
+    if needs_newest_sdk(plats) and not needs_newest_sdk(enclosing):
+        return "#if compiler(>=%s)" % NEWEST_COMPILER
+    return None
+
+
 def platform_guard(plats):
     """(#if line or None, #available condition or None)."""
     if not plats:
         return None, None
-    ifline = None
+    conditions = []
     if set(plats) != set(PLATFORMS):
-        ifline = "#if " + " || ".join("os(%s)" % OSNAME[p] for p in sorted(plats))
+        conditions.append(" || ".join("os(%s)" % OSNAME[p] for p in sorted(plats)))
+    if needs_newest_sdk(plats):
+        conditions.append("compiler(>=%s)" % NEWEST_COMPILER)
+    ifline = None
+    if conditions:
+        ifline = "#if " + (conditions[0] if len(conditions) == 1 else " && ".join("(%s)" % c for c in conditions))
     need = any(plats[p] > DEPLOYMENT[p] for p in plats)
     avail = None
     if need:
@@ -241,6 +265,8 @@ class Generator:
                 return (d if "." in d else d + ".0") + "f"
             if target.kind == "int":
                 return d if "." not in d else None
+            if target.kind == "long":
+                return d + "L" if "." not in d else None
             return None
         if d.startswith('"') and target.kind in ("str", "text"):
             return d
@@ -585,7 +611,7 @@ class Generator:
         name = internal if label in self.PREPOSITIONS and internal not in ("_", "") else label
         return kotlin_param_name(name if name not in ("_", "") else "value")
 
-    NULL_DEFAULT_KINDS = {"value": None, "str": "String", "bool": "Bool", "int": "Int", "double": "Double",
+    NULL_DEFAULT_KINDS = {"value": None, "str": "String", "bool": "Bool", "int": "Int", "long": "Int64", "double": "Double",
                           "cgfloat": "CGFloat", "float": "Float"}
 
     def null_default(self, b, default):
@@ -1076,7 +1102,7 @@ class Generator:
         return ["@MainActor func open<%s>(%s) -> %s {" % (gens, ps, result_type), "    return %s" % expr, "}",
                 "return open(%s)" % ", ".join(p for p, _, _ in self.opened)]
 
-    PAYLOAD_BOX = {"str": "KBox.string", "bool": "KBox.bool", "int": "KBox.int", "double": "KBox.double",
+    PAYLOAD_BOX = {"str": "KBox.string", "bool": "KBox.bool", "int": "KBox.int", "long": "KBox.long", "double": "KBox.double",
                    "cgfloat": "KBox.cgFloat", "float": "KBox.float", "date": "KBox.date", "hash": "KBox.hashable"}
 
     def _payload_box(self, b, x, todo):
@@ -1128,7 +1154,7 @@ class Generator:
                     continue
                 plats = dict(item.platforms)
                 rel = {p: v for p, v in plats.items() if v > max(tp.get(p, (0, 0)), DEPLOYMENT[p])}
-                case_if = platform_guard(plats)[0] if set(plats) != set(tp) & set(PLATFORMS) else None
+                case_if = case_guard(plats, tp)
                 if case_if:
                     lines.append(case_if)
                 check = "if %s { %s }" % (cond, body)
@@ -1208,7 +1234,7 @@ class Generator:
                 # availability relative to the enclosing decoder
                 plats = dict(item.platforms)
                 rel = {p: v for p, v in plats.items() if v > max(tp.get(p, (0, 0)), DEPLOYMENT[p])}
-                case_if, _ = platform_guard({p: plats[p] for p in plats}) if set(plats) != set(tp) & set(PLATFORMS) else (None, None)
+                case_if = case_guard(plats, tp)
                 lines = []
                 if case_if:
                     lines.append("    " + case_if)
@@ -1248,7 +1274,7 @@ class Generator:
                 both = {q: max(vp[q], tp.get(q, (0, 0))) for q in vp if q in tp}
                 if not both:
                     continue
-                cif, _ = platform_guard(both) if set(both) != set(tp) else (None, None)
+                cif = case_guard(both, tp)
                 rel = {q: v for q, v in both.items() if v > max(tp.get(q, (0, 0)), DEPLOYMENT[q])}
                 lines = []
                 if cif:

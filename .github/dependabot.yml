@@ -1,0 +1,22 @@
+# Dependency updates. Pull requests run CI (ci.yaml): ABI check, unit, XCTest and end-to-end tests.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # The library, the samples and the e2e build share gradle/libs.versions.toml or their own build scripts
+  - package-ecosystem: gradle
+    directories: ["/", "/gradle-plugin", "/intellij-plugin", "/e2e", "/samples/kmp-app", "/samples/macos-app"]
+    schedule:
+      interval: weekly
+    groups:
+      kotlin-and-compose:
+        patterns: ["org.jetbrains.kotlin*", "androidx.compose*", "org.jetbrains.compose*", "androidx.lifecycle*", "androidx.savedstate*"]
+      other:
+        patterns: ["*"]
+        exclude-patterns: ["org.jetbrains.kotlin*", "androidx.compose*", "org.jetbrains.compose*", "androidx.lifecycle*", "androidx.savedstate*"]

@@ -172,8 +172,8 @@ public fun Modifier.onKeyPress(
 ): Modifier = element(
     InteractiveIds.KEY_PRESS,
     object : KeyPressHandler {
-        override fun onKeyPress(characters: String, key: String, modifiers: Int, phase: Int): Boolean =
-            action(KeyPressEvent(characters, key, KeyPressPhase.entries[phase], modifiers))
+        override fun onKeyPress(characters: String, key: String, modifiers: Int, phase: Int): Boolean = guarded(ComposeSwiftUIErrorSource.Callback, false) {
+            action(KeyPressEvent(characters, key, KeyPressPhase.entries[phase], modifiers)) }
     },
     phases.sumOf { 1 shl it.ordinal },
     keys.toList(),
@@ -232,7 +232,7 @@ public class DrawScope internal constructor(public val width: Double, public val
 @Composable
 public fun Canvas(modifier: Modifier = Modifier, opaque: Boolean = false, onDraw: DrawScope.() -> Unit) {
     val renderer = object : CanvasRenderer {
-        override fun draw(width: Double, height: Double): List<Any?> = DrawScope(width, height).apply(onDraw).commands
+        override fun draw(width: Double, height: Double): List<Any?> = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) { DrawScope(width, height).apply(onDraw).commands }
     }
     SwiftView(InteractiveIds.CANVAS, listOf(renderer, opaque), modifier)
 }
@@ -381,8 +381,8 @@ public fun Modifier.scrollTransition(
     configuration,
     axis,
     object : EffectsProvider {
-        override fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double) =
-            transition(phase, isIdentity).toList()
+        override fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double) = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) {
+            transition(phase, isIdentity).toList() }
     },
 )
 
@@ -391,8 +391,8 @@ public fun Modifier.scrollTransition(
 public fun Modifier.visualEffect(effect: (EffectGeometry) -> VisualEffects): Modifier = element(
     InteractiveIds.VISUAL_EFFECT,
     object : EffectsProvider {
-        override fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double) =
-            effect(EffectGeometry(width, height, minX, minY)).toList()
+        override fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double) = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) {
+            effect(EffectGeometry(width, height, minX, minY)).toList() }
     },
 )
 
@@ -400,14 +400,14 @@ public fun Modifier.visualEffect(effect: (EffectGeometry) -> VisualEffects): Mod
 @HiddenFromObjC
 public fun Modifier.alignmentGuide(guide: HorizontalAlignment, computeValue: (width: Double, height: Double) -> Double): Modifier =
     element(InteractiveIds.HORIZONTAL_GUIDE, guide, object : AlignmentGuideProvider {
-        override fun compute(width: Double, height: Double) = computeValue(width, height)
+        override fun compute(width: Double, height: Double) = guarded(ComposeSwiftUIErrorSource.Callback, 0.0) { computeValue(width, height) }
     })
 
 /** SwiftUI `alignmentGuide(_:computeValue:)` for a vertical guide. */
 @HiddenFromObjC
 public fun Modifier.alignmentGuide(guide: VerticalAlignment, computeValue: (width: Double, height: Double) -> Double): Modifier =
     element(InteractiveIds.VERTICAL_GUIDE, guide, object : AlignmentGuideProvider {
-        override fun compute(width: Double, height: Double) = computeValue(width, height)
+        override fun compute(width: Double, height: Double) = guarded(ComposeSwiftUIErrorSource.Callback, 0.0) { computeValue(width, height) }
     })
 
 // ---- navigationDestination(item:) --------------------------------------------------------------
@@ -685,7 +685,7 @@ public fun Modifier.dropDestination(
 ): Modifier = element(
     InteractiveIds.DROP_DESTINATION,
     object : DropHandler {
-        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = onDrop(items, CGPoint(x, y))
+        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = guarded(ComposeSwiftUIErrorSource.Callback, false) { onDrop(items, CGPoint(x, y)) }
     },
     SValueCallback { isTargeted(it as Boolean) },
 )
@@ -816,7 +816,7 @@ public fun Modifier.containerRelativeFrame(
     axes,
     alignment,
     object : LengthProvider {
-        override fun length(length: Double, axis: Int): Double = length(length, axis)
+        override fun length(length: Double, axis: Int): Double = guarded(ComposeSwiftUIErrorSource.Callback, length) { length(length, axis) }
     },
 )
 

@@ -57,7 +57,11 @@ public extension ComposeIntegrations {
             case 2: return .sketch
             case 3: return .emoji
             case 4: if #available(iOS 26.0, macOS 26.0, *) { return .externalProvider } else { return nil }
-            default: if #available(iOS 27.0, macOS 27.0, *) { return .any } else { return nil }
+            default:
+                #if compiler(>=6.4)
+                if #available(iOS 27.0, macOS 27.0, *) { return .any }
+                #endif
+                return nil
             }
         }
         if let i = a.intOpt(0), let s = style(i) {
@@ -72,11 +76,13 @@ public extension ComposeIntegrations {
             func int(_ k: Int) -> Int? { k < o.count ? (o[k] as? NSNumber)?.intValue : nil }
             var options = ImagePlaygroundOptions()
             if let p = int(2) { options.personalization = .init(rawValue: p) ?? .automatic }
+            #if compiler(>=6.4)
             if #available(iOS 27.0, macOS 27.0, *) {
                 if let s = int(0) { options.creationStrategy = .init(rawValue: s) ?? .automatic }
                 if let s = int(1) { options.creationVariety = .init(rawValue: s) ?? .automatic }
                 if o.count > 3, let size = d_CGSize(o[3] as? SExpr) { options.sizeSpecification = .closest(to: size) }
             }
+            #endif
             v = AnyView(v.imagePlaygroundOptions(options))
         }
         return v

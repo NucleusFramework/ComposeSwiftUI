@@ -1,0 +1,45 @@
+name: Bug report
+description: Something renders wrong, crashes or doesn't build
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Security issue? Don't file it here: use [a private report](https://github.com/NucleusFramework/ComposeSwiftUI/security/advisories/new)."
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens
+      description: What you did, what you expected, what happened instead. Screenshots welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Kotlin code that reproduces it
+      render: kotlin
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: "Gradle or Xcode output, or the runtime's log: `log show --last 5m --predicate 'subsystem == \"dev.nucleusframework.composeswiftui\"'`"
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Compose SwiftUI version
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Xcode, Kotlin, OS and device or simulator
+      placeholder: Xcode 27.2, Kotlin 2.4.20, iOS 27.1 simulator
+    validations:
+      required: true
+  - type: dropdown
+    id: integration
+    attributes:
+      label: How the app uses Compose SwiftUI
+      options: [Gradle build phase (embedAndSign), Swift package, CocoaPods, Other]

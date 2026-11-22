@@ -2,7 +2,7 @@
 // AppFrameworks.kt; iOS 27.2 devices). Add this file to the app target and call `ComposeIntegrations.registerSpatialAnchors()`.
 import SwiftUI
 
-#if canImport(_CoreLocation_SwiftUI) && canImport(_CoreMotion_SwiftUI) && canImport(_NearbyInteraction_SwiftUI)
+#if (canImport(_CoreLocation_SwiftUI) && canImport(_CoreMotion_SwiftUI) && canImport(_NearbyInteraction_SwiftUI)) && compiler(>=6.4)  // SDK 27 only: absent with Xcode 26
 import CoreLocation
 import CoreMotion
 import NearbyInteraction

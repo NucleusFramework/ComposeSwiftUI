@@ -170,7 +170,7 @@ class Bridge:
             return stmts, tpl % expr
         k = self.kind
         simple = {
-            "str": "%s.string(%d)", "bool": "%s.bool(%d)", "int": "%s.int(%d)", "double": "%s.double(%d)",
+            "str": "%s.string(%d)", "bool": "%s.bool(%d)", "int": "%s.int(%d)", "long": "%s.long(%d)", "double": "%s.double(%d)",
             "cgfloat": "%s.cgFloat(%d)", "float": "%s.float(%d)", "hash": "%s.hashable(%d)",
             "lsk": "LocalizedStringKey(%s.string(%d))", "action": "%s.action(%d)",
             "lsr": "LocalizedStringResource(String.LocalizationValue(%s.string(%d)))", "text": "Text(%s.string(%d))",
@@ -241,7 +241,7 @@ class Bridge:
                 _, expr = base.swift_decode(i, var, fallback, src)
                 return [], "%s.%s { %s }" % (expr, "flatMap" if inner.conv[2] else "map", inner.conv[1] % "$0")
             opt = {
-                "str": "%s.stringOpt(%d)", "bool": "%s.boolOpt(%d)", "int": "%s.intOpt(%d)",
+                "str": "%s.stringOpt(%d)", "bool": "%s.boolOpt(%d)", "int": "%s.intOpt(%d)", "long": "%s.longOpt(%d)",
                 "double": "%s.doubleOpt(%d)", "cgfloat": "%s.cgFloatOpt(%d)", "action": "%s.actionOpt(%d)",
                 "lsk": "%s.stringOpt(%d).map { LocalizedStringKey($0) }", "hash": "%s.hashableOpt(%d)",
                 "lsr": "%s.stringOpt(%d).map { LocalizedStringResource(String.LocalizationValue($0)) }",
@@ -261,13 +261,13 @@ class Bridge:
         raise Unsupported("decode %s" % k)
 
     def box(self):
-        return {"str": "KBox.string", "bool": "KBox.bool", "int": "KBox.int", "double": "KBox.double",
+        return {"str": "KBox.string", "bool": "KBox.bool", "int": "KBox.int", "long": "KBox.long", "double": "KBox.double",
                 "cgfloat": "KBox.cgFloat", "hash": "KBox.hashable", "float": "KBox.float", "date": "KBox.date"}[self.kind]
 
     def binding_kind(self):
         if self.kind == "optional" and self.inner.kind == "hash":
             return "optionalHashable"
-        return {"str": "string", "bool": "bool", "int": "int", "double": "double", "cgfloat": "cgFloat",
+        return {"str": "string", "bool": "bool", "int": "int", "long": "long", "double": "double", "cgfloat": "cgFloat",
                 "hash": "hashable", "float": "float", "date": "date"}[self.kind]
 
 
@@ -286,7 +286,9 @@ PRIMS = {
 # name -> (base kind, Swift value from the base value, base value back from the Swift value, fallback if failable)
 CONVS = {
     **{t: ("int", t + "(truncatingIfNeeded: %s)", "Int(truncatingIfNeeded: %s)", None)
-       for t in ("Int8", "Int16", "Int32", "Int64", "UInt", "UInt8", "UInt16", "UInt32", "UInt64")},
+       for t in ("Int8", "Int16", "Int32", "UInt", "UInt8", "UInt16", "UInt32")},
+    # 64-bit integers are Kotlin Longs: an Int would truncate them
+    **{t: ("long", t + "(truncatingIfNeeded: %s)", "Int64(truncatingIfNeeded: %s)", None) for t in ("Int64", "UInt64")},
     "Character": ("str", "(%s.first ?? \" \")", "String(%s)", None),
     "AttributedString": ("str", "AttributedString(%s)", "String(%s.characters)", None),
     "Locale": ("str", "Locale(identifier: %s)", "%s.identifier", None),
@@ -401,7 +403,7 @@ class Classifier:
             return self._constrained(ctx.conf.get(name, []), ctx, t)
         if name == "Binding" and t.args:
             inner = self.classify(t.args[0], ctx, top=False)
-            ok = self.encodable(inner) or not (inner.conv and inner.conv[3] is None) and inner.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date") or (
+            ok = self.encodable(inner) or not (inner.conv and inner.conv[3] is None) and inner.kind in ("str", "bool", "int", "long", "double", "cgfloat", "hash", "float", "date") or (
                 inner.kind == "optional" and inner.inner.kind == "hash")
             if not ok:
                 raise Unsupported("Binding<%s>" % inner.kind)
@@ -428,7 +430,7 @@ class Classifier:
             return Bridge(kind, kt)
         if name in CONVS:
             kind, to, back, fallback = CONVS[name]
-            b = Bridge(kind, PRIMS["Int" if kind == "int" else "String"][1])
+            b = Bridge(kind, {"int": "Int", "long": "Long"}.get(kind, "String"))
             b.conv = (name, to, fallback is not None, back, fallback)
             return b
         if name == "Self" and ctx.scope:
@@ -481,13 +483,13 @@ class Classifier:
             if len(t.params) == 1 and not t.is_async:
                 inner = self.classify(t.params[0], ctx, top=False)
                 if self.encodable(inner) or not (inner.conv and inner.conv[3] is None) and inner.kind in (
-                        "str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url"):
+                        "str", "bool", "int", "long", "double", "cgfloat", "hash", "float", "date", "url"):
                     return Bridge("callback", "(%s) -> Unit" % inner.kt, inner=inner)
                 raise Unsupported("callback of %s" % inner.kind)
             if not t.is_async:
                 params = [self.classify(p, ctx, top=False) for p in t.params]
                 for p in params:
-                    if not (self.encodable(p) or not p.conv and p.kind in ("str", "bool", "int", "double", "cgfloat", "hash", "float", "date", "url")):
+                    if not (self.encodable(p) or not p.conv and p.kind in ("str", "bool", "int", "long", "double", "cgfloat", "hash", "float", "date", "url")):
                         raise Unsupported("closure with %d params" % len(t.params))
                 b = Bridge("callbackn", "(%s) -> Unit" % ", ".join(p.kt for p in params))
                 b.params = params

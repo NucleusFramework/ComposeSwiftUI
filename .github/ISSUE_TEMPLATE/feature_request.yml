@@ -1,0 +1,16 @@
+name: Feature request
+description: A SwiftUI API, an integration or a tool that is missing
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What you want to do
+      description: The SwiftUI code you would write, or the problem to solve.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How it could look in Kotlin
+      render: kotlin

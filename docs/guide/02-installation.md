@@ -47,7 +47,7 @@ Apply the plugin in the shared module and declare framework binaries for the App
 // shared/build.gradle.kts
 plugins {
     kotlin("multiplatform") version "2.4.20"
-    id("dev.nucleusframework.compose-swiftui") version "0.9.3"
+    id("dev.nucleusframework.compose-swiftui") version "0.10.0"
 }
 
 kotlin {
@@ -124,9 +124,15 @@ composeSwiftUI {
     frameworkName = "Shared"
     // Library version added to commonMain (appleMain when the module also has non-Apple targets).
     // Default: the plugin version. Keep them equal.
-    libraryVersion = "0.9.3"
+    libraryVersion = "0.10.0"
     // Integration files written to ComposeSwiftUIIntegrations, by name without .swift. Default: all of them.
+    // When set, ComposeGenerated.setUp() registers them: no register…() call to write.
     integrations.set(listOf("MapKit", "Charts", "StoreKit"))
+    // Rewrite the renderer on every Xcode build. false: keep it under version control and update it with
+    // syncComposeSwiftUIRenderer when you upgrade. Default: true.
+    syncRendererOnBuild = true
+    // Build type of the frameworks of assembleComposeSwiftUIPackage. Default: "release".
+    packageBuildType = "release"
     // Simulator used to render previews in the IDE. Default: the booted one, else the first iPhone.
     previewDevice = "iPhone 17 Pro"
     // Asset catalogs the previews use (named colors and images). Default: the .xcassets of the app's sources.
@@ -143,6 +149,7 @@ The plugin registers these tasks in the `compose swiftui` group:
 | `syncComposeSwiftUIRenderer` | Writes the Swift renderer into `swiftOutputDir` and the integrations next to it |
 | `generateComposeSwiftUIPreviews` | Scans the sources for `@Preview` functions and generates their Kotlin and Swift entry points |
 | `renderComposeSwiftUIPreviews` | Renders the previews to PNG on the simulator (used by the IDE plugin) |
+| `assembleComposeSwiftUIPackage` | Writes a Swift package and a podspec: the frameworks as an XCFramework, and the renderer of the same version |
 
 `syncComposeSwiftUIRenderer` runs automatically before `embedAndSign…AppleFrameworkForXcode` (and
 `embedSwiftExportForXcode`), the task of the standard KMP Xcode build phase. After a build you get:
@@ -163,12 +170,41 @@ iosApp/
 an `import Shared`. Files of an older renderer version are deleted from `ComposeSwiftUI/` on sync; nothing outside
 that folder and `ComposeSwiftUIIntegrations/` is touched.
 
-If your Xcode project doesn't use `embedAndSignAppleFrameworkForXcode` (for example an XCFramework built by
-`assembleXCFramework`, or CocoaPods), run the sync yourself whenever you upgrade:
+If your Xcode project doesn't use `embedAndSignAppleFrameworkForXcode`, use the Swift package below, or run the sync
+yourself whenever you upgrade:
 
 ```bash
 ./gradlew :shared:syncComposeSwiftUIRenderer
 ```
+
+A sync warns when the Xcode project lists the renderer's files one by one and misses some (a group instead of a
+folder, after an upgrade added files).
+
+## Swift Package Manager and CocoaPods
+
+Instead of a Gradle build phase, an app can take the Kotlin framework and the renderer as one versioned package:
+
+```bash
+./gradlew :shared:assembleComposeSwiftUIPackage
+```
+
+`shared/build/composeSwiftUI/package/` then holds:
+
+```bash
+Package.swift                      # library product "ComposeSwiftUI"
+Shared.xcframework                 # every Apple framework of the module (release by default)
+Sources/ComposeSwiftUI/            # the renderer, and the integrations listed in composeSwiftUI { integrations }
+ComposeSwiftUIShared.podspec       # the same, for CocoaPods (module ComposeSwiftUI)
+```
+
+- **Swift Package Manager:** add the folder as a local package (*File › Add Package Dependencies › Add Local*), or
+  publish it from CI to a repository of its own and depend on a version. Then `import ComposeSwiftUI` where you show
+  Kotlin screens.
+- **CocoaPods:** `pod 'ComposeSwiftUIShared', :path => '../shared/build/composeSwiftUI/package'`.
+
+The app has no script phase, so it keeps the default `ENABLE_USER_SCRIPT_SANDBOXING = YES`, and the renderer only
+changes when the package does. Compose Multiplatform resources aren't part of the package: copy them into the app
+bundle if the module uses them.
 
 ## Xcode setup
 
@@ -188,7 +224,7 @@ In the target's build settings:
 
 | Setting | Value |
 |---|---|
-| `ENABLE_USER_SCRIPT_SANDBOXING` | `NO` (the build phase writes the renderer into the project) |
+| `ENABLE_USER_SCRIPT_SANDBOXING` | `NO` (the build phase writes the renderer into the project; the [Swift package](#swift-package-manager-and-cocoapods) needs no script) |
 | `FRAMEWORK_SEARCH_PATHS` | `$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)` |
 | `OTHER_LDFLAGS` | `-framework Shared` |
 
@@ -253,7 +289,9 @@ the Kotlin library, but their renderers are opt-in, so your app only links the f
 1. Add its file from `ComposeSwiftUIIntegrations/` to the app target. With the default settings the folder holds every
    integration, so add only the files you use; if you set `integrations` in the `composeSwiftUI { }` block, the folder
    holds only those and you can add the whole folder.
-2. Call its register function once at launch, before the first `ComposeView` is shown.
+2. Call its register function once at launch, before the first `ComposeView` is shown. With an `integrations` list,
+   skip this step: `ComposeGenerated.setUp()` registers the listed integrations (the plugin writes the calls into
+   `ComposeSwiftUI/IntegrationsRegistration.swift`).
 
 ```swift
 @main

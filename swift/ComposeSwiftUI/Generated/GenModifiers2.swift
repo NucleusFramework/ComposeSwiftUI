@@ -106,7 +106,7 @@ import UniformTypeIdentifiers
             guard let p4 = d_DigitalCrownRotationalSensitivity(a.expr(5)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.digitalCrownRotation(a.doubleBinding(0), from: a.double(2), through: a.double(3), by: a.doubleOpt(4), sensitivity: p4, isContinuous: a.bool(6), isHapticFeedbackEnabled: a.bool(7)), m, i + 1)
 #endif
-#if os(iOS) || os(macOS)
+#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
         case 218:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(LocalizedStringKey(a.string(0)), shouldPresent: a.bool(1), actions: { a.slot(2) }), m, i + 1)
@@ -119,7 +119,7 @@ import UniformTypeIdentifiers
             guard let p1 = d_CGSize(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.distortionEffect(p0, maxSampleOffset: p1, isEnabled: a.bool(2)), m, i + 1)
 #endif
-#if os(iOS)
+#if (os(iOS)) && (compiler(>=6.4))
         case 234:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchTitle(a.string(0)), m, i + 1)
@@ -225,11 +225,13 @@ import UniformTypeIdentifiers
             guard let p1 = d_CoordinateSpace(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.onTapGesture(count: a.int(0), coordinateSpace: p1, perform: a.callback(2, box: { e_CGPoint($0) ?? NSNull() })), m, i + 1)
 #endif
+#if compiler(>=6.4)
         case 434:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.overlayArrangementEdge(d_VerticalEdge(a.expr(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 442:
             guard let p0 = dp_PickerStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             @MainActor func open<Q0: PickerStyle>(_ q0: Q0) -> AnyView {
@@ -239,12 +241,14 @@ import UniformTypeIdentifiers
         case 450:
             guard let p0 = d_Alignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.presentationBackground(alignment: p0, content: { a.slot(1) }), m, i + 1)
+#if compiler(>=6.4)
         case 458:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_PresentationPlacement(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
                 return ModChain.apply(v.presentationPlacement(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 466:
             return ModChain.apply(v.privacySensitive(a.bool(0)), m, i + 1)
         case 474:
@@ -284,7 +288,7 @@ import UniformTypeIdentifiers
         case 538:
             guard let p0 = d_SpringLoadingBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.springLoadingBehavior(p0), m, i + 1)
-#if os(iOS) || os(macOS) || os(watchOS)
+#if (os(iOS) || os(macOS) || os(watchOS)) && (compiler(>=6.4))
         case 546:
             if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
                 return ModChain.apply(v.swipeActionsContainer(), m, i + 1)
@@ -306,12 +310,14 @@ import UniformTypeIdentifiers
             }
             return open(p0)
 #endif
+#if compiler(>=6.4)
         case 570:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_TextInputBorderShape(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
                 return ModChain.apply(v.textInputBorderShape(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 578:
             guard let p0 = dp_ToggleStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             @MainActor func open<Q0: ToggleStyle>(_ q0: Q0) -> AnyView {

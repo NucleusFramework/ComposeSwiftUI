@@ -653,6 +653,7 @@ private func lineHeight(_ kind: Int, _ value: Double) -> AttributedString.LineHe
     }
 }
 
+#if compiler(>=6.4)  // SDK 27: Xcode 27
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 private struct KotlinArrangementStyle: ArrangementViewStyle {
     let body: NodeModel?
@@ -660,6 +661,7 @@ private struct KotlinArrangementStyle: ArrangementViewStyle {
         styled(body, label: AnyView(configuration.primary), content: AnyView(configuration.secondary))
     }
 }
+#endif
 
 /// Container items reordered or dragged by id (`draggable(containerItemID:)` tags them with the same ids).
 private struct KotlinItem: Identifiable, Transferable {
@@ -770,6 +772,7 @@ private func dragPhase(_ p: Any) -> Int {
         ComposeRegistry.views[100_057] = { m in
             let a = m.args
             guard let url = URL(string: a.string(0)) else { return AnyView(EmptyView()) }
+            #if compiler(>=6.4)
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 var request = URLRequest(url: url)
                 for (name, value) in zip(a.list(1), a.list(2)) {
@@ -777,6 +780,7 @@ private func dragPhase(_ p: Any) -> Int {
                 }
                 return ModChain.apply(AsyncImage(request: request, scale: a.cgFloat(3)), m, 0)
             }
+            #endif
             return ModChain.apply(AsyncImage(url: url, scale: a.cgFloat(3)), m, 0)
         }
 
@@ -869,6 +873,7 @@ extension CompletionRenderers {
             guard #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) else { return v }
             return AnyView(v.lineHeight(a.isNil(0) ? nil : lineHeight(a.int(0), a.double(1))))
         }
+        #if compiler(>=6.4)
         ComposeRegistry.modifiers[100_103] = { v, a, _ in
             guard #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) else { return v }
             return AnyView(v.arrangementViewStyle(KotlinArrangementStyle(body: a.slotModel(0))))
@@ -878,7 +883,8 @@ extension CompletionRenderers {
             let report = a.callback(1, box: { (d: [Double?]) -> Any? in d.map { $0.map { KotlinDouble(value: $0) } ?? NSNull() } as NSArray })
             return AnyView(v.onHingeChange(isEnabled: a.bool(0)) { old, new in report([old.hinge?.angle.degrees, new.hinge?.angle.degrees]) })
         }
-        #if os(iOS) || os(macOS) || os(watchOS)
+        #endif
+        #if (os(iOS) || os(macOS) || os(watchOS)) && compiler(>=6.4)
         ComposeRegistry.modifiers[100_105] = { v, a, _ in
             guard #available(iOS 27.0, macOS 27.0, watchOS 27.0, *) else { return v }
             let report = a.callback(1, box: { (v: NSArray) -> Any? in v })
@@ -892,7 +898,7 @@ extension CompletionRenderers {
             })
         }
         #endif
-        #if os(iOS) || os(macOS)
+        #if (os(iOS) || os(macOS)) && compiler(>=6.4)
         ComposeRegistry.modifiers[100_106] = { v, a, _ in
             guard #available(iOS 27.0, macOS 26.0, *), let provider = a.raw(0) as? TextForIdProvider else { return v }
             return AnyView(v.dragContainer(for: KotlinItem.self) { (id: AnyHashable) in

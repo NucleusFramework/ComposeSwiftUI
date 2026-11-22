@@ -325,7 +325,7 @@ fun CloseButton() {
 
 `env.dismiss()` dismisses the closest presentation (sheet, cover, popover) or pops the current screen of a
 `NavigationStack`, exactly like `@Environment(\.dismiss)`. `env.isPresented` tells whether the view is presented at
-all. Environment values arrive after the first layout pass, so the first composition sees the defaults.
+all. `isPresented` and `dismiss` are the values where the reader sits, reported after the first layout pass.
 
 ## Platform differences
 

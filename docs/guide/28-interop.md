@@ -332,18 +332,11 @@ UIViewControllerView(modifier = Modifier.frame(height = 260.0)) {
 
 ### Compose Multiplatform resources
 
-`stringResource(Res.string.title)` works in Compose SwiftUI screens once Compose UI's `LocalDensity` is provided,
-because Compose Multiplatform resources read it:
+`stringResource(Res.string.title)` works in Compose SwiftUI screens: Compose Multiplatform resources read Compose UI's
+`LocalDensity`, which the Gradle plugin provides in every host of a module that uses Compose UI (see
+[Running in production](production.md)).
 
-```kotlin skip
-fun app() = composeSwiftUI {
-    CompositionLocalProvider(LocalDensity provides Density(UIScreen.mainScreen.scale.toFloat())) {
-        Text(stringResource(Res.string.title))
-    }
-}
-```
-
-The suspending `getString(Res.string.title)` works without it, for example in a `ViewModel`. The preview renderer
+The suspending `getString(Res.string.title)` works too, for example in a `ViewModel`. The preview renderer
 copies the module's Compose resources into its host app, so previews show the real strings (see
 [Previews](previews.md)).
 
@@ -418,7 +411,7 @@ Swift code needs its classes too:
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.compose")
-    id("dev.nucleusframework.compose-swiftui") version "0.9.3"
+    id("dev.nucleusframework.compose-swiftui") version "0.10.0"
 }
 
 kotlin {

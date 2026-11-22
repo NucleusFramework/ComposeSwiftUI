@@ -24,7 +24,16 @@ fun counterScreen() = composeSwiftUI {
 ComposeView { CounterScreenKt.counterScreen() }
 ```
 
-**Documentation:** the [guide](https://nucleusframework.github.io/ComposeSwiftUI/guide) covers everything in 32 chapters,
+**Benchmarked against plain SwiftUI:** 50 screens written twice, pixel-identical on macOS (50/50) and iOS (48/50),
+updates as fast as or faster than plain SwiftUI, mounting 8–18% slower; scenarios against Compose Multiplatform and
+native `@Observable` models. See [Performance](#performance) and [docs/bench/RESULTS.md](docs/bench/RESULTS.md).
+
+**Production:** Kotlin exceptions never terminate the app (an `onError` hook for your crash reporter), lifecycle,
+`SavedStateHandle` and `rememberSaveable` across process death, Swift package and CocoaPods distribution, ABI-checked
+releases with SemVer, SBOM and provenance. See [Running in production](docs/guide/33-production.md),
+[Versioning](docs/VERSIONING.md), [Security](SECURITY.md) and [who uses it](docs/CASE_STUDIES.md).
+
+**Documentation:** the [guide](https://nucleusframework.github.io/ComposeSwiftUI/guide) covers everything in 33 chapters,
 from installation and your first app to lists, navigation, animation, accessibility, every Apple framework
 integration, previews, performance and troubleshooting. Its Kotlin examples are compiled on every change
 (`scripts/check_docs.py`).
@@ -48,7 +57,7 @@ Apps still run on the older OS versions above.
    ```kotlin
    plugins {
        kotlin("multiplatform")
-       id("dev.nucleusframework.compose-swiftui") version "0.9.3"
+       id("dev.nucleusframework.compose-swiftui") version "0.10.0"
    }
 
    kotlin {

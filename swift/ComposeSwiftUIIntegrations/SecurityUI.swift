@@ -2,7 +2,7 @@
 // call `ComposeIntegrations.registerSecurityUI()` at launch.
 import SwiftUI
 
-#if canImport(SecurityUI)
+#if (canImport(SecurityUI)) && compiler(>=6.4)  // SDK 27 only: absent with Xcode 26
 import SecurityUI
 
 public extension ComposeIntegrations {

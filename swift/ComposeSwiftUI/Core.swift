@@ -1,4 +1,5 @@
 import SwiftUI
+import os
 
 
 /// Observable model backing one Kotlin `SNode`. Kotlin notifies it when the node changes, which
@@ -39,7 +40,8 @@ public final class NodeModel: NSObject, SNodeObserver, Identifiable {
     public var nodeId: Int64 { id }
     /// Cached node id (Identifiable): avoids a Kotlin call per ForEach element.
     @ObservationIgnored public lazy var id: Int64 = node.id
-    public var kind: Int32 { node.kind }
+    /// Cached: the kind never changes, and every render reads it.
+    @ObservationIgnored public lazy var kind: Int32 = node.kind
     public var args: Args { Args(node: node, src: node, modifierIndex: nil) }
 
     public var children: [NodeModel] {
@@ -140,7 +142,13 @@ final class HostHolder: ObservableObject {
         self.host = host
         // the first composition already sees the initial input
         if let input { host.updateInput(value: input.base as AnyObject) }
-        host.start()
+    }
+
+    /// Starts the composition with the SwiftUI environment around the view (no flash of light mode), restoring the
+    /// state saved by an earlier run. Called from `body`, before the first render; no-op afterwards.
+    func start(environment: [Any], restoredState: String?) {
+        if let restoredState, !host.isStarted { host.restoreState(state: restoredState) }
+        host.start(environment: environment)
     }
 
     deinit {
@@ -151,26 +159,101 @@ final class HostHolder: ObservableObject {
 
 /// Displays Kotlin Compose SwiftUI content: `ComposeView { MyScreensKt.homeScreen() }`.
 /// With `input:`, every new value is pushed into the composition (read it with Kotlin `hostInput()`).
+/// With `restorationID:`, the `rememberSaveable` values and `SavedStateHandle`s are kept in `@SceneStorage` and survive
+/// the process (the id must be unique among the scene's `ComposeView`s).
 public struct ComposeView: View {
     @StateObject private var holder: HostHolder
     private let input: AnyHashable?
+    private let restorationID: String?
+    @SceneStorage private var savedState: String?
+    @Environment(\.scenePhase) private var scenePhase
 
-    public init(_ makeHost: @escaping () -> ComposeSwiftUIHost) {
+    public init(restorationID: String? = nil, _ makeHost: @escaping () -> ComposeSwiftUIHost) {
         ComposeGenerated.ensureSetUp()
         _holder = StateObject(wrappedValue: HostHolder(host: makeHost()))
         input = nil
+        self.restorationID = restorationID
+        _savedState = SceneStorage("ComposeSwiftUI.\(restorationID ?? "")")
     }
 
-    public init<Input: Hashable>(input: Input, _ makeHost: @escaping () -> ComposeSwiftUIHost) {
+    public init<Input: Hashable>(input: Input, restorationID: String? = nil, _ makeHost: @escaping () -> ComposeSwiftUIHost) {
         ComposeGenerated.ensureSetUp()
         _holder = StateObject(wrappedValue: HostHolder(host: makeHost(), input: AnyHashable(input)))
         self.input = AnyHashable(input)
+        self.restorationID = restorationID
+        _savedState = SceneStorage("ComposeSwiftUI.\(restorationID ?? "")")
     }
 
     public var body: some View {
-        let host = holder.host
-        return ChildrenView(NodeModel.of(host.root))
-            .onChange(of: input) { _, value in host.updateInput(value: value.map { $0.base as AnyObject }) }
+        let holder = self.holder, host = holder.host
+        let restored = restorationID == nil ? nil : savedState
+        return EnvironmentReporter(
+            content: HostContent(host: host),
+            report: { host.updateEnvironment(values: $0) },
+            first: { holder.start(environment: $0, restoredState: restored) }
+        )
+        .onAppear { host.setVisible(visible: true) }
+        .onDisappear {
+            host.setVisible(visible: false)
+            save()
+        }
+        .onChange(of: scenePhase, initial: true) { _, phase in
+            host.setScenePhase(phase: phase == .background ? "background" : phase == .inactive ? "inactive" : "active")
+            if phase != .active { save() }
+        }
+        .onChange(of: input) { _, value in host.updateInput(value: value.map { $0.base as AnyObject }) }
+    }
+
+    private func save() {
+        guard restorationID != nil, holder.host.isStarted else { return }
+        savedState = holder.host.saveState()
+    }
+}
+
+/// The root nodes of a host, or its failure when the composition threw.
+struct HostContent: View {
+    let host: ComposeSwiftUIHost
+
+    var body: some View {
+        let model = NodeModel.of(host.root)
+        let _ = model.version
+        if let failure = host.failure {
+            #if DEBUG
+            ScrollView {
+                Text(verbatim: "Composition failed: \(failure)").font(.footnote.monospaced()).foregroundStyle(.red).padding()
+            }
+            #else
+            let _ = failure
+            EmptyView()
+            #endif
+        } else {
+            ChildrenView(model)
+        }
+    }
+}
+
+/// Writes the Kotlin runtime's log lines to the unified log (`os_log`), subsystem `dev.nucleusframework.composeswiftui`.
+final class OSLogRuntimeLogger: NSObject, ComposeSwiftUILogger {
+    private let logger = Logger(subsystem: "dev.nucleusframework.composeswiftui", category: "runtime")
+
+    func log(level: ComposeSwiftUILogLevel, message: String) {
+        switch level.ordinal {
+        case 0: logger.debug("\(message, privacy: .public)")
+        case 1: logger.info("\(message, privacy: .public)")
+        case 2: logger.error("\(message, privacy: .public)")
+        default: logger.fault("\(message, privacy: .public)")
+        }
+    }
+}
+
+/// Logs once per message: renderers may be asked for the same unsupported view on every render.
+@MainActor
+enum RuntimeLog {
+    private static var logged = Set<String>()
+
+    static func errorOnce(_ message: String) {
+        guard logged.insert(message).inserted else { return }
+        ComposeSwiftUI.shared.logger.log(level: .error, message: "Compose SwiftUI: \(message)")
     }
 }
 
@@ -237,7 +320,17 @@ public enum ComposeRegistry {
             return ModChain.apply(ChildrenView(model), model, 0)
         }
         if let factory = views[model.kind] { return factory(model) }
-        return AnyView(Text("Unsupported view kind \(model.kind)").foregroundStyle(.red))
+        return unsupported("Unsupported view kind \(model.kind)")
+    }
+
+    /// A red message in debug builds; nothing (and a log line) in release builds.
+    static func unsupported(_ message: String) -> AnyView {
+        #if DEBUG
+        return AnyView(Text(verbatim: message).foregroundStyle(.red))
+        #else
+        RuntimeLog.errorOnce(message)
+        return AnyView(EmptyView())
+        #endif
     }
 }
 

@@ -129,6 +129,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? BlurReplaceTransition.Configuration
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_BorderedTextFieldStyle(_ e: SExpr?) -> BorderedTextFieldStyle? {
     guard let e else { return nil }
@@ -141,6 +142,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? BorderedTextFieldStyle
     }
 }
+#endif
 #if os(iOS) || os(macOS) || os(tvOS)
 @MainActor func d_ButtonMenuStyle(_ e: SExpr?) -> ButtonMenuStyle? {
     guard let e else { return nil }
@@ -673,12 +675,14 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
+    #if compiler(>=6.4)
     case 1907:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
             guard let p1 = d_GestureInputKinds(a.expr(1)) else { return nil }
             return MagnifyGesture(minimumScaleDelta: a.cgFloat(0), inputKinds: p1)
         }
         return nil
+    #endif
     case 1908:
         return MagnifyGesture(minimumScaleDelta: a.cgFloat(0))
     default: return HandwrittenValues.decode(e) as? MagnifyGesture
@@ -1126,6 +1130,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
+    #if compiler(>=6.4)
     case 2297:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
             guard let p1 = dp_CoordinateSpaceProtocol(a.expr(1)) else { return nil }
@@ -1136,6 +1141,7 @@ import UniformTypeIdentifiers
             return open(p1)
         }
         return nil
+    #endif
     case 2298:
         guard let p1 = d_CoordinateSpace(a.expr(1)) else { return nil }
         return SpatialTapGesture(count: a.int(0), coordinateSpace: p1)
@@ -1353,7 +1359,7 @@ import UniformTypeIdentifiers
     case 2489:
         return .navigationBarLeading
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2490:
         if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .topBarPinnedTrailing
@@ -1436,7 +1442,7 @@ import UniformTypeIdentifiers
     case 2524:
         return .bottomBar
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2525:
         if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return .statusBar
@@ -1446,16 +1452,17 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarPlacement
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ToolbarVerticalCompressionBehavior(_ e: SExpr?) -> ToolbarVerticalCompressionBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2540:
         return .prefersToolbarItems
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2541:
         return .prefersTabBar
     #endif
@@ -1464,6 +1471,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarVerticalCompressionBehavior
     }
 }
+#endif
 #if os(iOS) || os(tvOS)
 @MainActor func d_UIHostingControllerSizingOptions(_ e: SExpr?) -> UIHostingControllerSizingOptions? {
     guard let e else { return nil }

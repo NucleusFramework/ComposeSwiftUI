@@ -30,6 +30,8 @@ public struct Args {
     public func string(_ i: Int) -> String { src.argString(index: k(i)) ?? "" }
     public func bool(_ i: Int) -> Bool { src.argBool(index: k(i)) }
     public func int(_ i: Int) -> Int { Int(src.argInt(index: k(i))) }
+    /// A Kotlin `Long`: Swift `Int64` / `UInt64` values keep their 64 bits.
+    public func long(_ i: Int) -> Int64 { src.argLong(index: k(i)) }
     public func double(_ i: Int) -> Double { src.argDouble(index: k(i)) }
     public func float(_ i: Int) -> Float { Float(src.argDouble(index: k(i))) }
     public func cgFloat(_ i: Int) -> CGFloat { CGFloat(src.argDouble(index: k(i))) }
@@ -56,6 +58,7 @@ public struct Args {
     public func stringOpt(_ i: Int) -> String? { src.argString(index: k(i)) }
     public func boolOpt(_ i: Int) -> Bool? { isNil(i) ? nil : bool(i) }
     public func intOpt(_ i: Int) -> Int? { isNil(i) ? nil : int(i) }
+    public func longOpt(_ i: Int) -> Int64? { isNil(i) ? nil : long(i) }
     public func doubleOpt(_ i: Int) -> Double? { isNil(i) ? nil : double(i) }
     public func cgFloatOpt(_ i: Int) -> CGFloat? { isNil(i) ? nil : cgFloat(i) }
 
@@ -159,6 +162,10 @@ public struct Args {
         binding(i, read: { $0.int($1) }, box: { KotlinInt(value: Int32($0)) })
     }
 
+    public func longBinding(_ i: Int) -> Binding<Int64> {
+        binding(i, read: { $0.long($1) }, box: { KotlinLong(value: $0) })
+    }
+
     public func cgFloatBinding(_ i: Int) -> Binding<CGFloat> {
         binding(i, read: { $0.cgFloat($1) }, box: { KotlinDouble(value: Double($0)) })
     }
@@ -204,6 +211,7 @@ private final class BindingBox<T> {
 public enum KBox {
     public static func bool(_ v: Bool) -> Any { KotlinBoolean(value: v) }
     public static func int(_ v: Int) -> Any { KotlinInt(value: Int32(v)) }
+    public static func long(_ v: Int64) -> Any { KotlinLong(value: v) }
     public static func double(_ v: Double) -> Any { KotlinDouble(value: v) }
     public static func cgFloat(_ v: CGFloat) -> Any { KotlinDouble(value: Double(v)) }
     public static func string(_ v: String) -> Any { v as NSString }

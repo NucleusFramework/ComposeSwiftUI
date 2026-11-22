@@ -35,7 +35,7 @@ internal object StoreKitIds {
 }
 
 internal fun kfn(body: (List<Any?>) -> Any?): KotlinFunction = object : KotlinFunction {
-    override fun invoke(args: List<Any?>): Any? = body(args)
+    override fun invoke(args: List<Any?>): Any? = guarded(ComposeSwiftUIErrorSource.Callback, null) { body(args) }
 }
 
 /** A StoreKit `Product` as seen from Kotlin. */

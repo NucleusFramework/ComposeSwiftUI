@@ -213,9 +213,10 @@ fun DetailContent(onShare: () -> Unit) {
 }
 ```
 
-The values are read where the reader sits, after SwiftUI's first layout pass: the first composition sees defaults
-(light, large, no size class) and recomposes when the real values arrive. Don't base an irreversible decision on the
-first value. It also reports `isSearching` (inside a `searchable`), `increasedContrast` and `supportsMultipleWindows`.
+The first composition sees the environment around the `ComposeView` (`currentSwiftUIEnvironment`, which `ComposeView`
+passes before composing), so a dark-mode screen never starts light; the reader then reports the values where it sits
+(inside a sheet, a disabled section…) after SwiftUI's first layout pass. Outside a reader, `currentSwiftUIEnvironment`
+gives the host's environment directly. It also reports `isSearching` (inside a `searchable`), `increasedContrast` and `supportsMultipleWindows`.
 
 ### Environment actions
 

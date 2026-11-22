@@ -8,30 +8,31 @@ import androidx.compose.runtime.Immutable
  * modifiers in Swift: `Modifier.padding().background(Color.red)` == `.padding().background(.red)`.
  */
 @Immutable
-interface Modifier {
-    val elements: List<SModifier>
+public interface Modifier {
+    public val elements: List<SModifier>
 
-    infix fun then(other: Modifier): Modifier =
+    public infix fun then(other: Modifier): Modifier =
         if (other.elements.isEmpty()) this else ModifierChain(elements + other.elements)
 
-    companion object : Modifier {
+    public companion object : Modifier {
         override val elements: List<SModifier> = emptyList()
-        override fun toString() = "Modifier"
+        override fun toString(): String = "Modifier"
     }
 }
 
 private class ModifierChain(override val elements: List<SModifier>) : Modifier {
-    override fun equals(other: Any?) = other is ModifierChain && other.elements == elements
-    override fun hashCode() = elements.hashCode()
+    override fun equals(other: Any?): Boolean = other is ModifierChain && other.elements == elements
+    override fun hashCode(): Int = elements.hashCode()
 }
 
 /** Appends a raw modifier element. Used by generated modifier extensions. */
-fun Modifier.element(id: Int, vararg args: Any?): Modifier = ModifierChain(elements + SModifier(id, args.toList()))
+@InternalComposeSwiftUIApi
+public fun Modifier.element(id: Int, vararg args: Any?): Modifier = ModifierChain(elements + SModifier(id, args.toList()))
 
 /** Wraps composable content passed to a modifier (overlay, background, sheet, toolbar...). */
-fun slotContent(content: @Composable () -> Unit): Any = SlotContent(content)
+public fun slotContent(content: @Composable () -> Unit): Any = SlotContent(content)
 
-fun action(fn: () -> Unit): SAction = SAction(fn)
+public fun action(fn: () -> Unit): SAction = SAction(fn)
 
 @Suppress("UNCHECKED_CAST")
-fun <T> valueCallback(fn: (T) -> Unit): SValueCallback = SValueCallback { fn(it as T) }
+public fun <T> valueCallback(fn: (T) -> Unit): SValueCallback = SValueCallback { fn(it as T) }

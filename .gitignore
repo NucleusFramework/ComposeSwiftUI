@@ -15,3 +15,15 @@ samples/kmp-app/shared/build/
 samples/kmp-app/.gradle/
 samples/kmp-app/.kotlin/
 .intellijPlatform/
+
+# End-to-end tests (scripts/run_e2e.sh, scripts/run_ios_package_e2e.sh)
+e2e/.gradle/
+e2e/.kotlin/
+e2e/build/
+e2e/RendererTests/.build/
+e2e/RendererTests/Snapshots/*.actual.png
+e2e/iosApp/*.xcodeproj/
+e2e/iosPodApp/*.xcodeproj/
+e2e/iosPodApp/*.xcworkspace/
+e2e/iosPodApp/Pods/
+e2e/iosPodApp/Podfile.lock

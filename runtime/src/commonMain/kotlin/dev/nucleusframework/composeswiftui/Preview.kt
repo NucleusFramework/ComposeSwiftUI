@@ -30,7 +30,7 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS)
 @Repeatable
-annotation class Preview(
+public annotation class Preview(
     val name: String = "",
     val group: String = "",
     val device: String = "",
@@ -44,21 +44,21 @@ annotation class Preview(
     val backgroundColor: Long = 0,
 )
 
-enum class PreviewColorScheme { Unspecified, Light, Dark }
+public enum class PreviewColorScheme { Unspecified, Light, Dark }
 
-enum class PreviewDynamicTypeSize {
+public enum class PreviewDynamicTypeSize {
     Unspecified, XSmall, Small, Medium, Large, XLarge, XXLarge, XXXLarge,
     Accessibility1, Accessibility2, Accessibility3, Accessibility4, Accessibility5,
 }
 
-enum class PreviewLayoutDirection { Unspecified, LeftToRight, RightToLeft }
+public enum class PreviewLayoutDirection { Unspecified, LeftToRight, RightToLeft }
 
 /** Light and dark variants of a preview. */
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS)
 @Preview(name = "Light", colorScheme = PreviewColorScheme.Light)
 @Preview(name = "Dark", colorScheme = PreviewColorScheme.Dark)
-annotation class PreviewLightDark
+public annotation class PreviewLightDark
 
 /** A preview at the smallest, the default and two accessibility Dynamic Type sizes. */
 @Retention(AnnotationRetention.SOURCE)
@@ -67,7 +67,7 @@ annotation class PreviewLightDark
 @Preview(name = "Default text", dynamicTypeSize = PreviewDynamicTypeSize.Large)
 @Preview(name = "Accessibility 1", dynamicTypeSize = PreviewDynamicTypeSize.Accessibility1)
 @Preview(name = "Accessibility 5", dynamicTypeSize = PreviewDynamicTypeSize.Accessibility5)
-annotation class PreviewDynamicTypeSizes
+public annotation class PreviewDynamicTypeSizes
 
 /** A preview at the sizes of a small iPhone, a large iPhone, an iPad in portrait and an iPad in landscape. */
 @Retention(AnnotationRetention.SOURCE)
@@ -76,18 +76,18 @@ annotation class PreviewDynamicTypeSizes
 @Preview(name = "Large phone", width = 440, height = 956)
 @Preview(name = "Tablet portrait", width = 820, height = 1180)
 @Preview(name = "Tablet landscape", width = 1180, height = 820)
-annotation class PreviewScreenSizes
+public annotation class PreviewScreenSizes
 
 /** A preview left-to-right and right-to-left. */
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS)
 @Preview(name = "Left to right", layoutDirection = PreviewLayoutDirection.LeftToRight)
 @Preview(name = "Right to left", layoutDirection = PreviewLayoutDirection.RightToLeft)
-annotation class PreviewLayoutDirections
+public annotation class PreviewLayoutDirections
 
 /** Values of a [PreviewParameter]: one preview is rendered per value. Needs a public no-argument constructor. */
-interface PreviewParameterProvider<T> {
-    val values: Sequence<T>
+public interface PreviewParameterProvider<T> {
+    public val values: Sequence<T>
 }
 
 /**
@@ -97,4 +97,4 @@ interface PreviewParameterProvider<T> {
  */
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.VALUE_PARAMETER)
-annotation class PreviewParameter(val provider: KClass<out PreviewParameterProvider<*>>, val limit: Int = Int.MAX_VALUE)
+public annotation class PreviewParameter(val provider: KClass<out PreviewParameterProvider<*>>, val limit: Int = Int.MAX_VALUE)

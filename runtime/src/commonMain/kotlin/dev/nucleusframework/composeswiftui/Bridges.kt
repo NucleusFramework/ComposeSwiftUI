@@ -4,59 +4,59 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 
 /** An action implemented in Swift and invoked from Kotlin (e.g. SwiftUI's `dismiss`). */
-interface SwiftAction {
-    fun run()
+public interface SwiftAction {
+    public fun run()
 }
 
 /**
  * Hooks installed by the Swift renderer at start-up (`ComposeGenerated.setUp()`), so that Kotlin can
  * run code inside SwiftUI constructs that only exist in Swift.
  */
-object SwiftUIBridge {
+public object SwiftUIBridge {
     /** Runs `block` inside `withAnimation(animation)`; the animation is a generated `Animation` value. */
-    var animationRunner: ((SExpr?, () -> Unit) -> Unit)? = null
+    public var animationRunner: ((SExpr?, () -> Unit) -> Unit)? = null
 
     /** Like [animationRunner], then runs the completion when the animation is logically complete. */
-    var animationCompletionRunner: ((SExpr?, () -> Unit, () -> Unit) -> Unit)? = null
+    public var animationCompletionRunner: ((SExpr?, () -> Unit, () -> Unit) -> Unit)? = null
 }
 
 /** Size of a subview as measured by SwiftUI, passed to a [LayoutPolicy]. */
-data class LayoutSize(val width: Double, val height: Double) {
+public data class LayoutSize(val width: Double, val height: Double) {
     /** Values attached to the subview with `Modifier.layoutValue(key, value)` (SwiftUI `LayoutValueKey`). */
     var values: Map<String, Any?> = emptyMap()
 }
 
 /** Top-leading position of a subview inside the layout bounds. */
-data class LayoutPlacement(val x: Double, val y: Double)
+public data class LayoutPlacement(val x: Double, val y: Double)
 
 /**
  * A custom SwiftUI `Layout` written in Kotlin. Subviews are measured with an unspecified proposal
  * (their ideal size); the policy returns the container size and where each subview goes.
  */
-interface LayoutPolicy {
+public interface LayoutPolicy {
     /** [proposedWidth] / [proposedHeight] are null when unspecified. */
-    fun sizeThatFits(proposedWidth: Double?, proposedHeight: Double?, subviews: List<LayoutSize>): LayoutSize
+    public fun sizeThatFits(proposedWidth: Double?, proposedHeight: Double?, subviews: List<LayoutSize>): LayoutSize
 
     /** Returns one placement per subview, relative to the layout's top-leading corner. */
-    fun placeSubviews(width: Double, height: Double, subviews: List<LayoutSize>): List<LayoutPlacement>
+    public fun placeSubviews(width: Double, height: Double, subviews: List<LayoutSize>): List<LayoutPlacement>
 }
 
 /** Value given to [ComposeSwiftUIHost.updateInput] by the Swift `ComposeView(input:)`. */
-val LocalHostInput = compositionLocalOf<Any?> { null }
+public val LocalHostInput: androidx.compose.runtime.ProvidableCompositionLocal<Any?> = compositionLocalOf<Any?> { null }
 
 /** The latest input passed from Swift (`ComposeView(input: …) { … }`), typed by the caller. */
 @Composable
 @Suppress("UNCHECKED_CAST")
-fun <T> hostInput(): T = LocalHostInput.current as T
+public fun <T> hostInput(): T = LocalHostInput.current as T
 
 /**
  * A SwiftUI `LocalizedStringKey` / `LocalizedStringResource`: looked up in the app's string tables
  * and parsed as Markdown, unlike a plain `String` which is displayed verbatim.
  */
-data class LocalizedKey(val key: String)
+public data class LocalizedKey(val key: String)
 
 /** `"settings.title".localized` == `LocalizedKey("settings.title")`. */
-val String.localized: LocalizedKey get() = LocalizedKey(this)
+public val String.localized: LocalizedKey get() = LocalizedKey(this)
 
 /**
  * An SF Symbol name, as taken by `Image(systemName:)` and the `systemImage:` parameters.
@@ -64,8 +64,8 @@ val String.localized: LocalizedKey get() = LocalizedKey(this)
  */
 @OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 @kotlin.native.HiddenFromObjC
-value class SFSymbol(val name: String) {
-    companion object
+public value class SFSymbol(public val name: String) {
+    public companion object
 }
 
 /** View kinds of the platform view embeddings (UIKit / AppKit), rendered by the Swift renderer. */
@@ -93,113 +93,113 @@ internal object NativeViewKinds {
 // ---- Kotlin code that Swift calls synchronously (Interactive.kt) -----------------------------------
 
 /** A SwiftUI `ScrollViewProxy`, implemented in Swift: scrolls to the view marked `Modifier.id(id)`. */
-interface ScrollProxyHandle {
-    fun scrollTo(id: Any, anchor: Any?)
+public interface ScrollProxyHandle {
+    public fun scrollTo(id: Any, anchor: Any?)
 }
 
 /** A synchronous Kotlin function called from Swift (StoreKit predicates, offers, purchase options…). */
-interface KotlinFunction {
-    fun invoke(args: List<Any?>): Any?
+public interface KotlinFunction {
+    public fun invoke(args: List<Any?>): Any?
 }
 
 /** A Kotlin function sampled by Swift Charts (function plots, surfaces): inputs → outputs. */
-interface ChartFunction {
-    fun evaluate(input: List<Double>): List<Double>
+public interface ChartFunction {
+    public fun evaluate(input: List<Double>): List<Double>
 }
 
 /** Custom axis value label: the value as `[kind, raw]` (0 String, 1 Double, 2 date) and its index. */
-interface AxisLabelProvider {
-    fun label(value: Any?, index: Int): String?
+public interface AxisLabelProvider {
+    public fun label(value: Any?, index: Int): String?
 }
 
 /** Swift Charts `ChartProxy`, implemented in Swift (swift/ComposeSwiftUIIntegrations/Charts.swift). Values are `[kind, raw]`. */
-interface ChartProxyHandle {
+public interface ChartProxyHandle {
     /** [type]: 0 String, 1 number, 2 date (a number axis also reads as dates). */
-    fun valueAt(axis: Int, position: Double, type: Int): Any?
-    fun positionFor(axis: Int, value: Any): Double?
-    fun positionForPoint(x: Any, y: Any): List<Double>?
-    fun positionRange(axis: Int, value: Any): List<Double>?
-    fun angleAt(x: Double, y: Double): Double?
-    fun valueAtAngle(degrees: Double, type: Int): Any?
-    fun plotFrame(): List<Double>?
-    fun domain(axis: Int, type: Int): List<Any?>?
-    fun select(axis: Int, values: List<Double>)
+    public fun valueAt(axis: Int, position: Double, type: Int): Any?
+    public fun positionFor(axis: Int, value: Any): Double?
+    public fun positionForPoint(x: Any, y: Any): List<Double>?
+    public fun positionRange(axis: Int, value: Any): List<Double>?
+    public fun angleAt(x: Double, y: Double): Double?
+    public fun valueAtAngle(degrees: Double, type: Int): Any?
+    public fun plotFrame(): List<Double>?
+    public fun domain(axis: Int, type: Int): List<Any?>?
+    public fun select(axis: Int, values: List<Double>)
 }
 
 /** MapKit `MapProxy`, implemented in Swift (swift/ComposeSwiftUIIntegrations/MapKit.swift). */
-interface MapProxyHandle {
+public interface MapProxyHandle {
     /** Coordinate (latitude, longitude) at a point of the reader's local space, or null off the map. */
-    fun coordinate(x: Double, y: Double): List<Double>?
+    public fun coordinate(x: Double, y: Double): List<Double>?
 
     /** Point (x, y) of a coordinate in the reader's local space, or null. */
-    fun point(latitude: Double, longitude: Double): List<Double>?
+    public fun point(latitude: Double, longitude: Double): List<Double>?
 
     /** Camera (latitude, longitude, distance, heading, pitch) framing a region (lat, lon, latDelta, lonDelta). */
-    fun camera(framing: List<Double>): List<Double>?
+    public fun camera(framing: List<Double>): List<Double>?
 }
 
 /** `onKeyPress` handler: returns true when the key press is handled. */
-interface KeyPressHandler {
-    fun onKeyPress(characters: String, key: String, modifiers: Int, phase: Int): Boolean
+public interface KeyPressHandler {
+    public fun onKeyPress(characters: String, key: String, modifiers: Int, phase: Int): Boolean
 }
 
 /** `Canvas` renderer: the drawing commands for a canvas of the given size. */
-interface CanvasRenderer {
-    fun draw(width: Double, height: Double): List<Any?>
+public interface CanvasRenderer {
+    public fun draw(width: Double, height: Double): List<Any?>
 }
 
 /**
  * Visual effects computed in Kotlin for `scrollTransition` / `visualEffect`: `[opacity, scale, offsetX, offsetY,
  * rotationDegrees, blurRadius]`. The arguments are the transition phase value (or 0) and the view geometry.
  */
-interface EffectsProvider {
-    fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double): List<Double>
+public interface EffectsProvider {
+    public fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double): List<Double>
 }
 
 /** `alignmentGuide` value computed in Kotlin from the view size. */
-interface AlignmentGuideProvider {
-    fun compute(width: Double, height: Double): Double
+public interface AlignmentGuideProvider {
+    public fun compute(width: Double, height: Double): Double
 }
 
 /** `dropDestination` handler: returns true when the dropped text items are accepted. */
-interface DropHandler {
-    fun onDrop(items: List<String>, x: Double, y: Double): Boolean
+public interface DropHandler {
+    public fun onDrop(items: List<String>, x: Double, y: Double): Boolean
 }
 
 /** `containerRelativeFrame` length computed in Kotlin from the container length along [axis] (0 horizontal, 1 vertical). */
-interface LengthProvider {
-    fun length(length: Double, axis: Int): Double
+public interface LengthProvider {
+    public fun length(length: Double, axis: Int): Double
 }
 
 /** Progress (0…1, may overshoot) of a Kotlin animation curve at [t], the fraction of its duration elapsed. */
-interface AnimationCurve {
-    fun progress(t: Double): Double
+public interface AnimationCurve {
+    public fun progress(t: Double): Double
 }
 
 /** A SwiftUI `DropDelegate` implemented in Kotlin; locations are in the view's coordinate space. */
-interface DropDelegateHandler {
-    fun validateDrop(x: Double, y: Double): Boolean
-    fun dropEntered(x: Double, y: Double)
+public interface DropDelegateHandler {
+    public fun validateDrop(x: Double, y: Double): Boolean
+    public fun dropEntered(x: Double, y: Double)
     /** A generated `DropOperation` value, or null for the default operation. */
-    fun dropUpdated(x: Double, y: Double): Any?
-    fun dropExited()
+    public fun dropUpdated(x: Double, y: Double): Any?
+    public fun dropExited()
     /** The dropped text items and file URLs, loaded asynchronously; returns whether the drop is accepted. */
-    fun performDrop(x: Double, y: Double, texts: List<String>, urls: List<String>): Boolean
+    public fun performDrop(x: Double, y: Double, texts: List<String>, urls: List<String>): Boolean
 }
 
 /** Text items produced on demand (copy, cut, Services export). */
-interface TextItemsProvider {
-    fun items(): List<String>
+public interface TextItemsProvider {
+    public fun items(): List<String>
 }
 
 /** Text payload of a dragged container item, by item id (`dragContainer`). */
-interface TextForIdProvider {
-    fun text(id: Any): String
+public interface TextForIdProvider {
+    public fun text(id: Any): String
 }
 
 /** `dropConfiguration`: a generated `DropOperation` for a drop at (x, y) of [itemsCount] items, or null. */
-interface DropOperationProvider {
-    fun operation(x: Double, y: Double, itemsCount: Int): Any?
+public interface DropOperationProvider {
+    public fun operation(x: Double, y: Double, itemsCount: Int): Any?
 }
 
 // Widgets and Live Activities whose content is Compose: the widget extension's `Widget` stays a few lines of Swift

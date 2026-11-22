@@ -75,7 +75,7 @@ internal object CompletionIds {
 }
 
 private fun textItems(block: () -> List<String>) = object : TextItemsProvider {
-    override fun items(): List<String> = block()
+    override fun items(): List<String> = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) { block() }
 }
 
 // ---- custom styles (continued from Interactive.kt) ---------------------------------------------
@@ -323,7 +323,7 @@ public fun Modifier.exportableToServices(items: () -> List<String>): Modifier =
 @HiddenFromObjC
 public fun Modifier.importableFromServices(action: (List<String>) -> Boolean): Modifier =
     element(CompletionIds.IMPORT_FROM_SERVICES, object : DropHandler {
-        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = action(items)
+        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = guarded(ComposeSwiftUIErrorSource.Callback, false) { action(items) }
     })
 
 // ---- keyboard modifiers and Apple Pencil ---------------------------------------------------------
@@ -413,7 +413,7 @@ public fun Modifier.reorderContainer(isEnabled: Boolean = true, move: (sources: 
 @HiddenFromObjC
 public fun Modifier.dragContainer(payload: (id: Any) -> String): Modifier =
     element(CompletionIds.DRAG_CONTAINER, object : TextForIdProvider {
-        override fun text(id: Any): String = payload(id)
+        override fun text(id: Any): String = guarded(ComposeSwiftUIErrorSource.Callback, "") { payload(id) }
     })
 
 /** SwiftUI `dragContainerSelection(_:containerNamespace:)` (iOS 27, macOS 26): the ids dragged together. */
@@ -444,7 +444,7 @@ public fun Modifier.onDropSessionUpdated(action: (phase: DragDropPhase, location
 @HiddenFromObjC
 public fun Modifier.dropConfiguration(operation: (location: CGPoint, itemsCount: Int) -> DropOperation?): Modifier =
     element(CompletionIds.DROP_CONFIGURATION, object : DropOperationProvider {
-        override fun operation(x: Double, y: Double, itemsCount: Int): Any? = operation(CGPoint(x, y), itemsCount)
+        override fun operation(x: Double, y: Double, itemsCount: Int): Any? = guarded(ComposeSwiftUIErrorSource.Callback, null) { operation(CGPoint(x, y), itemsCount) }
     })
 
 // ---- remaining view-building pieces ------------------------------------------------------------
@@ -468,7 +468,7 @@ public fun Modifier.editMode(isEditing: Boolean, onEditingChange: (Boolean) -> U
 @HiddenFromObjC
 public fun Modifier.onOpenUrlAction(handler: (url: String) -> Boolean): Modifier =
     element(CompletionIds.OPEN_URL_ACTION, object : DropHandler {
-        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = handler(items.firstOrNull() ?: "")
+        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = guarded(ComposeSwiftUIErrorSource.Callback, false) { handler(items.firstOrNull() ?: "") }
     })
 
 /** SwiftUI `pointerStyle(.image(_:hotSpot:))` (macOS 15): an asset-catalog image as the mouse pointer. */
@@ -492,7 +492,7 @@ public class ImagePaintStyle(imageName: String, scale: Double = 1.0) :
 @HiddenFromObjC
 public fun customPresentationDetent(index: Int, height: (maxDetentValue: Double) -> Double?): PresentationDetent =
     PresentationDetent(CompletionIds.CUSTOM_DETENT, listOf(index.coerceIn(0, 3), object : AlignmentGuideProvider {
-        override fun compute(width: Double, height: Double): Double = height(width) ?: Double.NaN
+        override fun compute(width: Double, height: Double): Double = guarded(ComposeSwiftUIErrorSource.Callback, 0.0) { height(width) ?: Double.NaN }
     }))
 
 // ---- shape operations -----------------------------------------------------------------------------

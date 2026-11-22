@@ -2,24 +2,42 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCompose)
     alias(libs.plugins.vanniktechMavenPublish)
+    // SBOM of the published library (build/reports/cyclonedx), attached to each release
+    alias(libs.plugins.cyclonedx)
 }
 
 // Release version comes from the `vX.Y.Z` tag that triggers the publish workflow.
 group = "dev.nucleusframework"
 
 val publishVersion =
-    providers
-        .environmentVariable("GITHUB_REF")
-        .orNull
-        ?.removePrefix("refs/tags/v")
-        ?: "0.9.3"
+    // The one source of truth: VERSION at the repository root. A release tag must match it.
+    rootProject.file("VERSION").readText().trim().also { version ->
+        val tag = providers.environmentVariable("GITHUB_REF").orNull?.takeIf { it.startsWith("refs/tags/v") }?.removePrefix("refs/tags/v")
+        require(tag == null || tag == version) { "Tag v$tag doesn't match VERSION ($version)" }
+    }
+
+version = publishVersion
 
 val coreOnly = providers.gradleProperty("csui.coreOnly").isPresent
 
 kotlin {
+    // Every public declaration states its visibility: nothing becomes public API by accident.
+    explicitApi()
+
+    // Binary compatibility: `checkKotlinAbi` (part of `check`) compares the public ABI with runtime/api/, so a
+    // regeneration that removes or changes an API fails the build; `updateKotlinAbi` accepts the change.
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation()
+
+    compilerOptions {
+        // The generated bindings are built on the internal entry points (SwiftView, Modifier.element…)
+        optIn.add("dev.nucleusframework.composeswiftui.InternalComposeSwiftUIApi")
+        optIn.add("dev.nucleusframework.composeswiftui.ExperimentalComposeSwiftUIApi")
+    }
+
     listOf(
-        iosArm64(), iosSimulatorArm64(), iosX64(),
-        macosArm64(), macosX64(),
+        iosArm64(), iosSimulatorArm64(),
+        macosArm64(),
         tvosArm64(), tvosSimulatorArm64(),
         watchosArm64(), watchosDeviceArm64(), watchosSimulatorArm64(),
     ).forEach { target ->
@@ -28,6 +46,13 @@ kotlin {
     }
 
     sourceSets {
+        appleMain {
+            // The test API (runComposeSwiftUITest), published with the library
+            if (!coreOnly) kotlin.srcDir("src/testing/kotlin")
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
         commonMain {
             // generated bindings + hand-written ones built on them (excluded for core-only verification builds)
             if (!coreOnly) {
@@ -39,6 +64,10 @@ kotlin {
                 api(libs.compose.runtime.saveable)
                 api(libs.coroutines.core)
                 api(libs.lifecycle.viewmodel)
+                api(libs.lifecycle.viewmodel.compose)
+                api(libs.lifecycle.viewmodel.savedstate)
+                api(libs.lifecycle.runtime.compose)
+                api(libs.savedstate.compose)
             }
         }
     }

@@ -399,7 +399,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ContentSizeCategory
     }
 }
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if (os(iOS) || os(tvOS) || os(watchOS)) && (compiler(>=6.4))
 @available(iOS 27.0, macOS 14.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_CrossFadeNavigationTransition(_ e: SExpr?) -> CrossFadeNavigationTransition? {
     guard let e else { return nil }
@@ -1241,34 +1241,38 @@ import UniformTypeIdentifiers
     }
 }
 #endif
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_TabSectionExpansion(_ e: SExpr?) -> TabSectionExpansion? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2383:
         return .expanded
     #endif
     case 2384:
         return .automatic
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2385:
         return .collapsed
     #endif
     default: return HandwrittenValues.decode(e) as? TabSectionExpansion
     }
 }
+#endif
 @MainActor func d_TapGesture(_ e: SExpr?) -> TapGesture? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
+    #if compiler(>=6.4)
     case 2403:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
             guard let p1 = d_GestureInputKinds(a.expr(1)) else { return nil }
             return TapGesture(count: a.int(0), inputKinds: p1)
         }
         return nil
+    #endif
     case 2404:
         return TapGesture(count: a.int(0))
     default: return HandwrittenValues.decode(e) as? TapGesture
@@ -1323,16 +1327,17 @@ import UniformTypeIdentifiers
     }
 }
 #endif
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ToolbarItemAxisBehavior(_ e: SExpr?) -> ToolbarItemAxisBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2475:
         return .horizontalOnly
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2476:
         return .verticalPreferred
     #endif
@@ -1341,16 +1346,18 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarItemAxisBehavior
     }
 }
+#endif
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_ToolbarMinimizationSafeAreaAdjustment(_ e: SExpr?) -> ToolbarMinimizationSafeAreaAdjustment? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2515:
         return .enabled
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2516:
         return .disabled
     #endif
@@ -1359,6 +1366,8 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarMinimizationSafeAreaAdjustment
     }
 }
+#endif
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ToolbarVerticalBehavior(_ e: SExpr?) -> ToolbarVerticalBehavior? {
     guard let e else { return nil }
@@ -1371,6 +1380,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarVerticalBehavior
     }
 }
+#endif
 @MainActor func d_TypesettingLanguage(_ e: SExpr?) -> TypesettingLanguage? {
     guard let e else { return nil }
     let a = Args(expr: e)

@@ -2,7 +2,7 @@
 // and call `ComposeIntegrations.registerGameSave()` at launch.
 import SwiftUI
 
-#if os(iOS) || os(macOS)
+#if (os(iOS) || os(macOS)) && compiler(>=6.4)  // SDK 27 only: absent with Xcode 26
 import GameSave
 
 public extension ComposeIntegrations {

@@ -1,5 +1,69 @@
 # Changelog
 
+## 0.10.0
+
+Production readiness, ahead of 1.0.0: the public Kotlin ABI is now checked on every change, and the versioning and
+deprecation policy that 1.0.0 will follow is written down (see [docs/VERSIONING.md](docs/VERSIONING.md)).
+
+### Breaking
+
+- Intel targets dropped: `iosX64` and `macosX64` are no longer published, like in the Compose runtime 1.11 and AndroidX
+  Lifecycle 2.11 this release moves to (needed for the official `LocalViewModelStoreOwner` on Apple platforms).
+- Compose runtime 1.11.4, AndroidX Lifecycle 2.11.0, SavedState 1.4.0.
+- `explicitApi()`: declarations that were public by accident are now internal. `SwiftView` and `Modifier.element` need
+  `@OptIn(InternalComposeSwiftUIApi::class)`: they are for the generated bindings.
+- `dev.nucleusframework.composeswiftui.LocalViewModelStoreOwner` is deprecated in favor of the official
+  `androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner` (both are provided).
+
+### Added
+
+- **Errors never terminate the app.** An exception in a callback Swift invokes (actions, bindings, gestures, drawing,
+  layout…), in composition or an effect, or in a `task { }` is caught, logged to `os_log` (subsystem
+  `dev.nucleusframework.composeswiftui`) and passed to `ComposeSwiftUI.onError`, for Crashlytics or Sentry. A host whose
+  composition failed shows nothing (a red message in debug builds); the others keep running.
+- Release builds show no diagnostics to users: an unsupported view kind or a missing `NativeView` renders nothing, and
+  is logged once.
+- **Lifecycle.** Each `ComposeView` is a `LifecycleOwner` (`onAppear`/`onDisappear` and the scene phase):
+  `collectAsStateWithLifecycle`, `LifecycleResumeEffect` and `LifecycleEventEffect` work. The `suspend` callbacks of a
+  host are cancelled with it.
+- **View models and DI.** The official `LocalViewModelStoreOwner` and non-empty `CreationExtras`: `viewModel { }` with
+  `createSavedStateHandle()`, and `koinViewModel()`, work unchanged.
+- **Process death.** `ComposeView(restorationID:)` keeps `rememberSaveable` values and `SavedStateHandle`s in
+  `@SceneStorage`; `host.saveState()` / `restoreState()` without SwiftUI.
+- **First composition sees the SwiftUI environment** (`currentSwiftUIEnvironment`): no light-mode flash in dark mode,
+  right size classes from the first frame. `SwiftUIEnvironment.displayScale`.
+- `stringResource` works without providing `LocalDensity`: the Gradle plugin provides it in modules that use Compose UI.
+  `ComposeSwiftUI.addHostDecorator` provides other composition locals to every host.
+- Swift `Int64` / `UInt64` arguments are Kotlin `Long`s (`Args.long`, `KBox.long`), no longer truncated.
+- **Test API.** `runComposeSwiftUITest { setContent { … }; onNodeWithText("Increment").performClick() }`, finders by
+  text and `accessibilityIdentifier`, `performTextInput`, `waitUntil` (`@ExperimentalComposeSwiftUIApi`).
+- **Swift package and CocoaPods.** `assembleComposeSwiftUIPackage` writes a Swift package and a podspec: the frameworks
+  as an XCFramework and the renderer of the same version. No build phase, so no `ENABLE_USER_SCRIPT_SANDBOXING = NO`.
+- `composeSwiftUI { integrations }` now also registers the listed integrations: no `register…()` call to write.
+- `composeSwiftUI { syncRendererOnBuild = false }` keeps a renderer under version control.
+- The renderer sync warns when the Xcode project misses renderer files (a group instead of a folder).
+- The renderer builds with the previous Xcode (N-1): APIs of the newest SDKs are behind `#if compiler(>=6.4)`.
+- Guide: [Running in production](docs/guide/33-production.md) (errors, logging, symbolication of mixed Kotlin/Swift
+  stack traces, lifecycle, saved state).
+
+### Fixed
+
+- A disposed host leaked its root node and its Swift model (a reference cycle across ARC and the Kotlin GC).
+- `ComposeGenerated.setUp()` ran twice when called by the app before the first `ComposeView`, dropping the renderers
+  and settings registered in between.
+- `flushCompose()` only runs the hosts with pending work, instead of every live host four times.
+- `SNode.children` is computed once per structural change instead of on every read from Swift.
+
+### Project
+
+- CI on pull requests and `main`: every Apple target, unit tests, ABI check, Gradle plugin and generator tests,
+  `verify.py`, renderer typecheck on four platforms, docs snippets, end-to-end tests (a SwiftUI app driven through the
+  accessibility API, XCTest with snapshots and leak checks, an iOS app through the Swift package and through CocoaPods).
+- GitHub Actions pinned by SHA, Dependabot, CycloneDX SBOM and provenance attestations on releases, signed IntelliJ
+  plugin published to the JetBrains Marketplace.
+- One version for everything, in `VERSION`; a release tag must match it.
+- `SECURITY.md`, `CODE_OF_CONDUCT.md`, `MAINTAINERS.md`, `CODEOWNERS`, issue and pull request templates.
+
 ## 0.9.3
 
 ### Added

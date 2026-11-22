@@ -180,6 +180,8 @@ public data class SwiftUIEnvironment(
     val supportsMultipleWindows: Boolean = false,
     /** The environment's actions (`openURL`, `openWindow`…), equal when the same ones are available. */
     val actions: SwiftUIEnvironmentActions = SwiftUIEnvironmentActions(),
+    /** `displayScale`: pixels per point. */
+    val displayScale: Double = 2.0,
 ) {
     val isDark: Boolean get() = colorScheme == ColorScheme.dark
 }
@@ -226,45 +228,62 @@ public class SwiftUIEnvironmentActions internal constructor(private val raw: Lis
  * Reads SwiftUI `@Environment` values (color scheme, dynamic type, size classes, locale, layout
  * direction, enabled/presented state, `dismiss`, scene phase, accessibility preferences, search state) and its
  * actions ([SwiftUIEnvironment.actions]: `openURL`, `openWindow`, `dismissWindow`, `openSettings`, `dismissSearch`,
- * `refresh`, `rename`) where it is placed. Values arrive after the first
- * layout pass (the first composition sees defaults).
+ * `refresh`, `rename`) where it is placed. The first composition sees [currentSwiftUIEnvironment] (the environment
+ * around the `ComposeView`); the values of this position arrive after the first layout pass.
  */
 @HiddenFromObjC
 @Composable
 public fun EnvironmentReader(modifier: Modifier = Modifier, content: @Composable (SwiftUIEnvironment) -> Unit) {
-    var env by remember { mutableStateOf(SwiftUIEnvironment()) }
+    // The host's environment until this position reports its own: no flash of the defaults (light mode…)
+    val initial = currentSwiftUIEnvironment
+    var env by remember { mutableStateOf(initial) }
     SwiftView(
         ExtraIds.ENV_READER,
         listOf(SValueCallback { value ->
-            val v = value as List<*>
-            val dismiss = v[8] as? SwiftAction
-            val new = SwiftUIEnvironment(
-                colorScheme = if (v[0] == "dark") ColorScheme.dark else ColorScheme.light,
-                dynamicTypeSize = dynamicTypeSizeOf(v[1] as String),
-                horizontalSizeClass = sizeClassOf(v[2] as? String),
-                verticalSizeClass = sizeClassOf(v[3] as? String),
-                locale = v[4] as String,
-                layoutDirection = if (v[5] == "rightToLeft") LayoutDirection.rightToLeft else LayoutDirection.leftToRight,
-                isEnabled = v[6] as Boolean,
-                isPresented = v[7] as Boolean,
-                dismiss = { dismiss?.run() },
-                scenePhase = when (v[9]) { "background" -> ScenePhase.background; "inactive" -> ScenePhase.inactive; else -> ScenePhase.active },
-                reduceMotion = v[10] == true,
-                reduceTransparency = v[11] == true,
-                differentiateWithoutColor = v[12] == true,
-                invertColors = v[13] == true,
-                voiceOverEnabled = v[14] == true,
-                boldText = v[15] == true,
-                isSearching = v.getOrNull(16) == true,
-                increasedContrast = v.getOrNull(17) == true,
-                supportsMultipleWindows = v.getOrNull(18) == true,
-                // [19] and [20] (refresh / rename available) only make Swift report when they change
-                actions = SwiftUIEnvironmentActions((v.getOrNull(21) as? List<*>).orEmpty()),
-            )
+            val new = swiftUIEnvironmentOf(value as List<*>)
             if (new.copy(dismiss = env.dismiss) != env) env = new
         }),
         modifier,
     ) { content(env) }
+}
+
+/**
+ * The SwiftUI environment around the `ComposeView` of this composition, known from the first composition (Swift
+ * passes it before composing), so a dark-mode screen never starts light. [EnvironmentReader] reads it at a position.
+ */
+public val currentSwiftUIEnvironment: SwiftUIEnvironment
+    @Composable get() {
+        val raw = LocalHostEnvironment.current
+        return remember(raw) { raw?.let(::swiftUIEnvironmentOf) ?: SwiftUIEnvironment() }
+    }
+
+/** Decodes the values Swift reports (`EnvironmentReporter` in Handwritten.swift). */
+internal fun swiftUIEnvironmentOf(v: List<*>): SwiftUIEnvironment {
+    val dismiss = v[8] as? SwiftAction
+    return SwiftUIEnvironment(
+        colorScheme = if (v[0] == "dark") ColorScheme.dark else ColorScheme.light,
+        dynamicTypeSize = dynamicTypeSizeOf(v[1] as String),
+        horizontalSizeClass = sizeClassOf(v[2] as? String),
+        verticalSizeClass = sizeClassOf(v[3] as? String),
+        locale = v[4] as String,
+        layoutDirection = if (v[5] == "rightToLeft") LayoutDirection.rightToLeft else LayoutDirection.leftToRight,
+        isEnabled = v[6] as Boolean,
+        isPresented = v[7] as Boolean,
+        dismiss = { dismiss?.run() },
+        scenePhase = when (v[9]) { "background" -> ScenePhase.background; "inactive" -> ScenePhase.inactive; else -> ScenePhase.active },
+        reduceMotion = v[10] == true,
+        reduceTransparency = v[11] == true,
+        differentiateWithoutColor = v[12] == true,
+        invertColors = v[13] == true,
+        voiceOverEnabled = v[14] == true,
+        boldText = v[15] == true,
+        isSearching = v.getOrNull(16) == true,
+        increasedContrast = v.getOrNull(17) == true,
+        supportsMultipleWindows = v.getOrNull(18) == true,
+        // [19] and [20] (refresh / rename available) only make Swift report when they change
+        actions = SwiftUIEnvironmentActions((v.getOrNull(21) as? List<*>).orEmpty()),
+        displayScale = (v.getOrNull(22) as? Number)?.toDouble() ?: 2.0,
+    )
 }
 
 // Swift sends `String(describing:)` of the case; unknown future cases fall back to the default.
@@ -419,7 +438,16 @@ public fun <R> withAnimation(animation: Animation? = Animation.default, block: (
 @HiddenFromObjC
 @Composable
 public fun CustomLayout(policy: LayoutPolicy, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
-    SwiftView(ExtraIds.CUSTOM_LAYOUT, listOf(policy), modifier, content = content)
+    SwiftView(ExtraIds.CUSTOM_LAYOUT, listOf(GuardedLayoutPolicy(policy)), modifier, content = content)
+}
+
+/** Reports an exception of the app's layout instead of letting it reach Swift (see [ComposeSwiftUI.onError]). */
+private data class GuardedLayoutPolicy(val policy: LayoutPolicy) : LayoutPolicy {
+    override fun sizeThatFits(proposedWidth: Double?, proposedHeight: Double?, subviews: List<LayoutSize>): LayoutSize =
+        guarded(ComposeSwiftUIErrorSource.Callback, LayoutSize(0.0, 0.0)) { policy.sizeThatFits(proposedWidth, proposedHeight, subviews) }
+
+    override fun placeSubviews(width: Double, height: Double, subviews: List<LayoutSize>): List<LayoutPlacement> =
+        guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) { policy.placeSubviews(width, height, subviews) }
 }
 
 /** Builds a [PathShape] in unit coordinates (0…1 on each axis, scaled to the shape's frame). */

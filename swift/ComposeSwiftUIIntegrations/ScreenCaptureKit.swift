@@ -2,7 +2,7 @@
 // Add this file to the app target and call `ComposeIntegrations.registerScreenCaptureKit()` at launch.
 import SwiftUI
 
-#if canImport(_ScreenCaptureKit_SwiftUI)
+#if (canImport(_ScreenCaptureKit_SwiftUI)) && compiler(>=6.4)  // SDK 27 only: absent with Xcode 26
 import ScreenCaptureKit
 
 public extension ComposeIntegrations {

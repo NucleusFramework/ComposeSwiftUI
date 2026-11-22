@@ -12,10 +12,12 @@ public extension ComposeIntegrations {
         ComposeRegistry.modifiers[200_300] = { v, a, _ in AnyView(v.modifier(PhotosPickerSheet(a: a))) }
         ComposeRegistry.modifiers[200_301] = { v, a, _ in PhotosModifiers.style(v, a) }
         #if os(iOS) || os(visionOS)
+        #if compiler(>=6.4)
         if #available(iOS 27.0, *) {
             ComposeRegistry.modifiers[200_302] = { v, a, _ in PhotosModifiers.sharedAlbum(v, a) }
             ComposeRegistry.modifiers[200_303] = { v, a, _ in PhotosModifiers.referenceImage(v, a) }
         }
+        #endif
         #endif
     }
 }
@@ -159,20 +161,25 @@ private struct PhotosPickerSheet: ViewModifier {
             v = AnyView(v.photosPickerDisabledCapabilities(c))
         }
         let meta = a.list(4).compactMap { ($0 as? NSNumber)?.intValue }
+        #if compiler(>=6.4)
         if !meta.isEmpty, #available(iOS 27.0, macOS 27.0, *) {
             var o: PHPickerMetadataOptions = []
             if meta.contains(0) { o.insert(.removeLocation) }
             if meta.contains(1) { o.insert(.removeCaptions) }
             v = AnyView(v.photosPickerMetadataOptions(o))
         }
+        #endif
+        #if compiler(>=6.4)
         if let text = a.stringOpt(5), #available(iOS 27.0, macOS 27.0, *) {
             v = AnyView(v.photosPickerSearchText(text))
         }
+        #endif
         #endif
         return v
     }
 
     #if os(iOS) || os(visionOS)
+    #if compiler(>=6.4)
     @available(iOS 27.0, *)
     static func sharedAlbum(_ v: AnyView, _ a: Args) -> AnyView {
         let done = a.callback(6, box: { (s: String?) -> Any? in s ?? NSNull() })
@@ -189,7 +196,9 @@ private struct PhotosPickerSheet: ViewModifier {
         }
         return AnyView(v.photosSharedAlbumCreationSheet(isPresented: a.boolBinding(0), defaultTitle: a.stringOpt(4), photoLibrary: PHPhotoLibrary.shared()) { _ in completion(nil) })
     }
+    #endif
 
+    #if compiler(>=6.4)
     @available(iOS 27.0, *)
     static func referenceImage(_ v: AnyView, _ a: Args) -> AnyView {
         let set = a.callback(1, box: { (s: String?) -> Any? in s ?? NSNull() })
@@ -199,6 +208,7 @@ private struct PhotosPickerSheet: ViewModifier {
             if case .success(let url) = result { done(url.absoluteString) } else { done(nil) }
         })
     }
+    #endif
     #endif
 }
 #endif

@@ -21,9 +21,11 @@ public extension ComposeIntegrations {
         #endif
         #if os(iOS) || os(visionOS)
         ComposeRegistry.views[200_312] = { m in ModChain.apply(KotlinVerifyIdentity(m: m), m, 0) }
+        #if compiler(>=6.4)
         if #available(iOS 27.0, *) {
             ComposeRegistry.views[200_311] = { m in ModChain.apply(KotlinMerchandising(m: m), m, 0) }
         }
+        #endif
         #endif
     }
 }
@@ -207,6 +209,7 @@ private struct KotlinVerifyIdentity: View {
     }
 }
 
+#if compiler(>=6.4)
 @available(iOS 27.0, *)
 private struct KotlinMerchandising: View {
     let m: NodeModel
@@ -223,6 +226,7 @@ private struct KotlinMerchandising: View {
         return view
     }
 }
+#endif
 #endif
 
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)

@@ -11,11 +11,11 @@ base.archivesName.set("compose-swiftui-gradle-plugin")
 
 // Same version as the runtime library: the plugin adds `dev.nucleusframework:compose-swiftui:<version>`.
 version =
-    providers
-        .environmentVariable("GITHUB_REF")
-        .orNull
-        ?.removePrefix("refs/tags/v")
-        ?: "0.9.3"
+    // The one source of truth: VERSION at the repository root. A release tag must match it.
+    file("../VERSION").readText().trim().also { version ->
+        val tag = providers.environmentVariable("GITHUB_REF").orNull?.takeIf { it.startsWith("refs/tags/v") }?.removePrefix("refs/tags/v")
+        require(tag == null || tag == version) { "Tag v$tag doesn't match VERSION ($version)" }
+    }
 
 dependencies {
     compileOnly(libs.kotlin.gradle.plugin)

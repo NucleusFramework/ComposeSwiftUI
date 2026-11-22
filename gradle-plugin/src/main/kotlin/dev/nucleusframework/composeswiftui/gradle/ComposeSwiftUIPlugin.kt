@@ -78,6 +78,16 @@ abstract class ComposeSwiftUIExtension {
      * when nothing is set.
      */
     abstract val previewAssetCatalogs: ConfigurableFileCollection
+
+    /**
+     * Rewrites the renderer on every Xcode build (`embedAndSign…AppleFrameworkForXcode`). Default: true. Set to false to
+     * keep a renderer under version control that only changes when you run `syncComposeSwiftUIRenderer` (after
+     * upgrading the library: a renderer older than the library may not know its newest views).
+     */
+    abstract val syncRendererOnBuild: Property<Boolean>
+
+    /** Build type of the frameworks in the Swift package of `assembleComposeSwiftUIPackage`: `release` (default) or `debug`. */
+    abstract val packageBuildType: Property<String>
 }
 
 /**
@@ -89,6 +99,8 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create("composeSwiftUI", ComposeSwiftUIExtension::class.java)
         extension.libraryVersion.convention(BuildConfig.LIBRARY_VERSION)
+        extension.packageBuildType.convention("release")
+        extension.syncRendererOnBuild.convention(true)
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
             applyComposeCompiler(project)
@@ -116,6 +128,8 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 }
             }
 
+            registerComposeUiDefaults(project, kotlin)
+            registerSwiftPackage(project, kotlin, extension)
             val previews = registerPreviews(project, kotlin)
             registerPreviewRendering(project, kotlin, extension, previews)
             registerPreviewList(project, previews)
@@ -132,7 +146,7 @@ class ComposeSwiftUIPlugin : Plugin<Project> {
                 if ((task.name.startsWith("embedAndSign") && task.name.endsWith("AppleFrameworkForXcode")) ||
                     task.name == "embedSwiftExportForXcode"
                 ) {
-                    task.dependsOn(sync)
+                    task.dependsOn(extension.syncRendererOnBuild.map { if (it) listOf(sync) else emptyList() })
                 }
             }
         }
@@ -442,6 +456,11 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
             }
         }
         writeIfChanged(out.resolve("KotlinModule.swift"), "@_exported import ${frameworkName.get()}\n")
+        // The listed integrations are registered by ComposeGenerated.setUp(): no register…() call to write by hand.
+        writeIfChanged(out.resolve(IntegrationsRegistration.FILE), IntegrationsRegistration.swift(written.map { rel ->
+            rel.removePrefix(INTEGRATIONS).removeSuffix(".swift") to RendererResources.read(rel).decodeToString()
+        }.takeIf { selected.isNotEmpty() }.orEmpty()))
+        warnAboutMissingXcodeReferences(out)
         previewsSwiftFile.orNull?.asFile?.let { writeIfChanged(out.resolve(PreviewCodegen.SWIFT_FILE_NAME), it.readText()) }
         writeIfChanged(
             out.resolve(README),
@@ -453,6 +472,21 @@ abstract class SyncComposeSwiftUIRendererTask : DefaultTask() {
 
     private fun writeIfChanged(file: File, text: String) {
         if (!file.exists() || file.readText() != text) file.writeText(text)
+    }
+
+    /**
+     * An Xcode project that lists the renderer's files one by one (instead of a synchronized folder) misses the files a
+     * new version adds: name them, so the build doesn't fail later with an obscure "Cannot find … in scope".
+     */
+    private fun warnAboutMissingXcodeReferences(out: File) {
+        val missing = XcodeProjects.missingRendererFiles(out)
+        if (missing.isNotEmpty()) {
+            logger.warn(
+                "Compose SwiftUI: the Xcode project doesn't reference these renderer files: ${missing.joinToString()}. " +
+                    "Add them to the app target, or turn the ComposeSwiftUI group into a folder (right-click › " +
+                    "Convert to Folder) so new files are picked up automatically.",
+            )
+        }
     }
 
     private companion object {

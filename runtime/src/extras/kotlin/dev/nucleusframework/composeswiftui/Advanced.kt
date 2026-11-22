@@ -157,7 +157,7 @@ public fun Subview(index: Int, modifier: Modifier = Modifier) {
 @HiddenFromObjC
 public fun customAnimation(duration: Double, progress: (t: Double) -> Double): Animation =
     Animation(AdvancedIds.CUSTOM_ANIMATION, listOf(object : AnimationCurve {
-        override fun progress(t: Double): Double = progress(t)
+        override fun progress(t: Double): Double = guarded(ComposeSwiftUIErrorSource.Callback, t) { progress(t) }
     }, duration))
 
 /** Phase of a [transition]. */
@@ -206,8 +206,8 @@ public enum class TextGranularity { Line, Run, Glyph }
 @HiddenFromObjC
 public fun Modifier.textRenderer(granularity: TextGranularity, effects: (index: Int, count: Int) -> VisualEffects): Modifier =
     element(AdvancedIds.TEXT_RENDERER, granularity.ordinal, object : EffectsProvider {
-        override fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double) =
-            effects(phase.toInt(), width.toInt()).toList()
+        override fun effects(phase: Double, isIdentity: Boolean, width: Double, height: Double, minX: Double, minY: Double) = guarded(ComposeSwiftUIErrorSource.Callback, emptyList()) {
+            effects(phase.toInt(), width.toInt()).toList() }
     })
 
 // ---- gestures ----------------------------------------------------------------------------------
@@ -285,7 +285,7 @@ public fun Modifier.dropDestinationUrls(
 ): Modifier = element(
     AdvancedIds.DROP_URLS,
     object : DropHandler {
-        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = onDrop(items, CGPoint(x, y))
+        override fun onDrop(items: List<String>, x: Double, y: Double): Boolean = guarded(ComposeSwiftUIErrorSource.Callback, false) { onDrop(items, CGPoint(x, y)) }
     },
     SValueCallback { isTargeted(it as Boolean) },
 )
@@ -307,12 +307,12 @@ public fun Modifier.onDrop(contentTypes: List<String>, delegate: DropDelegate): 
     AdvancedIds.DROP_DELEGATE,
     contentTypes,
     object : DropDelegateHandler {
-        override fun validateDrop(x: Double, y: Double) = delegate.validateDrop(CGPoint(x, y))
-        override fun dropEntered(x: Double, y: Double) = delegate.dropEntered(CGPoint(x, y))
-        override fun dropUpdated(x: Double, y: Double): Any? = delegate.dropUpdated(CGPoint(x, y))
-        override fun dropExited() = delegate.dropExited()
-        override fun performDrop(x: Double, y: Double, texts: List<String>, urls: List<String>) =
-            delegate.performDrop(CGPoint(x, y), texts, urls)
+        override fun validateDrop(x: Double, y: Double) = guarded(ComposeSwiftUIErrorSource.Callback, false) { delegate.validateDrop(CGPoint(x, y)) }
+        override fun dropEntered(x: Double, y: Double) = guarded(ComposeSwiftUIErrorSource.Callback, Unit) { delegate.dropEntered(CGPoint(x, y)) }
+        override fun dropUpdated(x: Double, y: Double): Any? = guarded(ComposeSwiftUIErrorSource.Callback, null) { delegate.dropUpdated(CGPoint(x, y)) }
+        override fun dropExited() = guarded(ComposeSwiftUIErrorSource.Callback, Unit) { delegate.dropExited() }
+        override fun performDrop(x: Double, y: Double, texts: List<String>, urls: List<String>) = guarded(ComposeSwiftUIErrorSource.Callback, false) {
+            delegate.performDrop(CGPoint(x, y), texts, urls) }
     },
 )
 

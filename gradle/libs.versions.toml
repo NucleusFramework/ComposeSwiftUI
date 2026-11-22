@@ -1,10 +1,12 @@
 [versions]
 kotlin = "2.4.20"
-composeRuntime = "1.10.4"
+composeRuntime = "1.11.4"
 coroutines = "1.10.2"
-lifecycle = "2.10.0"
+lifecycle = "2.11.0"
+savedstate = "1.4.0"
 vanniktechMavenPublish = "0.37.0"
 pluginPublish = "2.2.1"
+cyclonedx = "3.6.1"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -13,8 +15,13 @@ compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "
 compose-runtime-saveable = { module = "androidx.compose.runtime:runtime-saveable", version.ref = "composeRuntime" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
+savedstate-compose = { module = "androidx.savedstate:savedstate-compose", version.ref = "savedstate" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 
 [plugins]
+cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
 pluginPublish = { id = "com.gradle.plugin-publish", version.ref = "pluginPublish" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

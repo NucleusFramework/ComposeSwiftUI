@@ -1,0 +1,137 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The Xcode the bindings are generated with (generator/extract.sh): the renderer needs its SDKs
+  XCODE_VERSION: "27.2"
+
+jobs:
+  runtime:
+    name: Runtime, ABI, plugin, docs
+    runs-on: macos-26
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+
+      - name: Build the runtime for every Apple target
+        run: ./gradlew :runtime:compileKotlinIosArm64 :runtime:compileKotlinIosSimulatorArm64 :runtime:compileKotlinMacosArm64 :runtime:compileKotlinTvosArm64 :runtime:compileKotlinTvosSimulatorArm64 :runtime:compileKotlinWatchosArm64 :runtime:compileKotlinWatchosDeviceArm64 :runtime:compileKotlinWatchosSimulatorArm64
+      - name: Runtime unit tests
+        run: ./gradlew :runtime:macosArm64Test
+      - name: ABI compatibility (runtime/api)
+        run: ./gradlew :runtime:checkKotlinAbi
+      - name: Gradle plugin tests
+        run: ./gradlew --project-dir gradle-plugin test
+      - name: Generator tests
+        run: python3 -I generator/test_generator.py
+      - name: Renderer builds with Xcode N-1
+        run: python3 -I scripts/check_n1.py
+      - name: Documentation snippets compile
+        run: python3 scripts/check_docs.py
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: runtime-reports
+          path: |
+            runtime/build/reports
+            runtime/build/test-results
+
+  renderer:
+    name: Bindings and renderer (verify.py, typecheck)
+    runs-on: macos-26
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+
+      - name: Symbol graphs of the SDKs
+        run: generator/extract.sh /tmp/sg
+      - name: Runtime-only frameworks
+        run: |
+          ./gradlew :runtime:linkDebugFrameworkMacosArm64 :runtime:linkDebugFrameworkIosSimulatorArm64 \
+            :runtime:linkDebugFrameworkTvosSimulatorArm64 :runtime:linkDebugFrameworkWatchosSimulatorArm64 -Pcsui.coreOnly=true
+          for p in macos:macosArm64 ios:iosSimulatorArm64 tvos:tvosSimulatorArm64 watchos:watchosSimulatorArm64; do
+            mkdir -p "/tmp/corefw/${p%%:*}"
+            cp -R "runtime/build/bin/${p##*:}/debugFramework/BenchShared.framework" "/tmp/corefw/${p%%:*}/"
+          done
+      - name: Generate and verify the bindings (verify.py)
+        run: python3 -I generator/verify.py /tmp/sg . /tmp/corefw
+      - name: The committed bindings are the generated ones
+        run: git diff --exit-code -- runtime/src/generated swift/ComposeSwiftUI/Generated generator/rejected.json
+      - name: Typecheck the renderer on iOS, macOS, tvOS and watchOS
+        run: |
+          scripts/typecheck_swift.sh /tmp/corefw | tee /tmp/typecheck.txt
+          ! grep -q "rc=[1-9]" /tmp/typecheck.txt
+
+  e2e:
+    name: End-to-end (SwiftUI app, XCTest, snapshots)
+    runs-on: macos-26
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+      - name: End-to-end tests
+        run: scripts/run_e2e.sh
+      - name: Boot an iPhone simulator
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for r in d.values() for x in r if x['name'].startswith('iPhone')))")
+          xcrun simctl boot "$UDID"
+          xcrun simctl bootstatus "$UDID"
+      - name: iOS app through the Swift package (sandboxed scripts, no build phase)
+        run: scripts/run_ios_package_e2e.sh
+      - name: iOS app through CocoaPods
+        run: scripts/run_ios_package_e2e.sh --cocoapods
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: e2e
+          path: |
+            /tmp/csui-e2e/*.log
+            /tmp/csui-e2e/ios/*.log
+            /tmp/csui-e2e/ios/screenshot.png
+            e2e/RendererTests/Snapshots/*.actual.png

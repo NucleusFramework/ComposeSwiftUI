@@ -3,7 +3,10 @@ package dev.nucleusframework.composeswiftui
 import androidx.compose.runtime.AbstractApplier
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposeNode
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.key
+import androidx.compose.runtime.staticCompositionLocalOf
+import kotlinx.coroutines.CoroutineScope
 
 /** Applies composition changes to the [SNode] tree and notifies the affected parents. */
 internal class SNodeApplier(root: SNode) : AbstractApplier<SNode>(root) {
@@ -13,22 +16,26 @@ internal class SNodeApplier(root: SNode) : AbstractApplier<SNode>(root) {
 
     override fun insertBottomUp(index: Int, instance: SNode) {
         current._children.add(index, instance)
+        current.childrenChanged()
         dirty += current
     }
 
     override fun remove(index: Int, count: Int) {
         repeat(count) { current._children.removeAt(index).detachObservers() }
+        current.childrenChanged()
         dirty += current
     }
 
     override fun move(from: Int, to: Int, count: Int) {
         current._children.move(from, to, count)
+        current.childrenChanged()
         dirty += current
     }
 
     override fun onClear() {
         root._children.forEach { it.detachObservers() }
         root._children.clear()
+        root.childrenChanged()
         dirty += root
     }
 
@@ -56,10 +63,16 @@ internal class SNodeApplier(root: SNode) : AbstractApplier<SNode>(root) {
 }
 
 /** Breaks Kotlin <-> Swift reference cycles for a removed subtree. */
-private fun SNode.detachObservers() {
+internal fun SNode.detachObservers() {
     observer = null
     _children.forEach { it.detachObservers() }
 }
+
+/** Scope of the host's async callbacks (see [SAsyncAction]). */
+internal val LocalAsyncScope = staticCompositionLocalOf<CoroutineScope?> { null }
+
+/** The raw SwiftUI environment values Swift gave the host (see `ComposeSwiftUIHost.updateEnvironment`). */
+internal val LocalHostEnvironment = compositionLocalOf<List<Any?>?> { null }
 
 /** Marker for composable slot content captured inside a modifier argument. */
 internal class SlotContent(val content: @Composable () -> Unit)
@@ -71,8 +84,9 @@ internal class SlotContent(val content: @Composable () -> Unit)
  * @param args encoded init arguments (`SSlotRef` for secondary builders)
  * @param slots secondary builder contents, referenced by index from [args]
  */
+@InternalComposeSwiftUIApi
 @Composable
-fun SwiftView(
+public fun SwiftView(
     kind: Int,
     args: List<Any?>,
     modifier: Modifier = Modifier,
@@ -89,9 +103,11 @@ fun SwiftView(
             } else arg
         })
     }
+    val asyncScope = LocalAsyncScope.current
     ComposeNode<SNode, SNodeApplier>(
         factory = { SNode(kind) },
         update = {
+            set(asyncScope) { this.asyncScope = it }
             reconcile {
                 updateArgs(args)
                 updateModifiers(encodedModifiers)

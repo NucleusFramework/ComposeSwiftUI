@@ -166,6 +166,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? AnyShape
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_AutomaticArrangementViewStyle(_ e: SExpr?) -> AutomaticArrangementViewStyle? {
     guard let e else { return nil }
@@ -178,6 +179,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? AutomaticArrangementViewStyle
     }
 }
+#endif
 @MainActor func d_AutomaticLabeledContentStyle(_ e: SExpr?) -> AutomaticLabeledContentStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
@@ -702,6 +704,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ForegroundStyle
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_GestureInputKinds(_ e: SExpr?) -> GestureInputKinds? {
     guard let e else { return nil }
@@ -722,6 +725,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? GestureInputKinds
     }
 }
+#endif
 @MainActor func d_GlobalCoordinateSpace(_ e: SExpr?) -> GlobalCoordinateSpace? {
     guard let e else { return nil }
     let a = Args(expr: e)
@@ -1078,6 +1082,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
+    #if compiler(>=6.4)
     case 2113:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
             let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
@@ -1085,6 +1090,7 @@ import UniformTypeIdentifiers
             return RotateGesture(minimumAngleDelta: p0, inputKinds: p1)
         }
         return nil
+    #endif
     case 2114:
         let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
         return RotateGesture(minimumAngleDelta: p0)
@@ -1291,11 +1297,13 @@ import UniformTypeIdentifiers
     switch e.id {
     case 2379:
         return .search
+    #if compiler(>=6.4)
     case 2380:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
             return .prominent
         }
         return nil
+    #endif
     default: return HandwrittenValues.decode(e) as? TabRole
     }
 }
@@ -1353,6 +1361,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? Text.TruncationMode
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_TextInputBorderShape(_ e: SExpr?) -> TextInputBorderShape? {
     guard let e else { return nil }
@@ -1369,6 +1378,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? TextInputBorderShape
     }
 }
+#endif
 @MainActor func d_TintShapeStyle(_ e: SExpr?) -> TintShapeStyle? {
     guard let e else { return nil }
     let a = Args(expr: e)
@@ -1391,20 +1401,21 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarCustomizationOptions
     }
 }
+#if compiler(>=6.4)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_ToolbarMinimizationBehavior(_ e: SExpr?) -> ToolbarMinimizationBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2509:
         return .onScrollUp
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2510:
         return .onScrollDown
     #endif
-    #if os(iOS)
+    #if (os(iOS)) && (compiler(>=6.4))
     case 2511:
         return .never
     #endif
@@ -1413,6 +1424,8 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarMinimizationBehavior
     }
 }
+#endif
+#if compiler(>=6.4)
 @available(iOS 27.2, macOS 27.2, tvOS 27.2, watchOS 27.2, *)
 @MainActor func d_ToolbarTitleAlignment(_ e: SExpr?) -> ToolbarTitleAlignment? {
     guard let e else { return nil }
@@ -1427,6 +1440,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarTitleAlignment
     }
 }
+#endif
 @MainActor func d_TransitionPhase(_ e: SExpr?) -> TransitionPhase? {
     guard let e else { return nil }
     let a = Args(expr: e)

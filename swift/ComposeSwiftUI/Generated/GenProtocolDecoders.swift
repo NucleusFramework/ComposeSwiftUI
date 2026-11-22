@@ -14,6 +14,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
+#if compiler(>=6.4)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func dp_ArrangementViewStyle(_ e: SExpr?) -> (any ArrangementViewStyle)? {
     guard let e else { return nil }
@@ -27,6 +28,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? any ArrangementViewStyle
     }
 }
+#endif
 #if os(iOS) || os(macOS) || os(tvOS)
 @MainActor func dp_ControlGroupStyle(_ e: SExpr?) -> (any ControlGroupStyle)? {
     guard let e else { return nil }
@@ -234,9 +236,11 @@ import UniformTypeIdentifiers
         return d_Rectangle(e)
     case 2119, 2120, 2862, 2863:
         return d_RoundedRectangle(e)
+    #if compiler(>=6.4)
     case 2443, 2444, 2445, 2860:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_TextInputBorderShape(e) }
         return nil
+    #endif
     case 2557, 2558, 2872, 2873:
         return d_UnevenRoundedRectangle(e)
     default: return HandwrittenValues.decode(e) as? any InsettableShape
@@ -366,12 +370,14 @@ import UniformTypeIdentifiers
 @MainActor func dp_NavigationTransition(_ e: SExpr?) -> (any NavigationTransition)? {
     guard let e else { return nil }
     switch e.id {
+    #if compiler(>=6.4)
     case 1170:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_AnyNavigationTransition(e) }
         return nil
+    #endif
     case 2828:
         return d_AutomaticNavigationTransition(e)
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #if (os(iOS) || os(tvOS) || os(watchOS)) && (compiler(>=6.4))
     case 2829:
         if #available(iOS 27.0, macOS 14.0, tvOS 27.0, watchOS 27.0, *) { return d_CrossFadeNavigationTransition(e) }
         return nil
@@ -430,7 +436,7 @@ import UniformTypeIdentifiers
     case 2215, 2750:
         return d_SegmentedPickerStyle(e)
     #endif
-    #if os(iOS) || os(macOS) || os(tvOS)
+    #if (os(iOS) || os(macOS) || os(tvOS)) && (compiler(>=6.4))
     case 2402, 2745:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 10.0, *) { return d_TabsPickerStyle(e) }
         return nil
@@ -564,9 +570,11 @@ import UniformTypeIdentifiers
         return d_Rectangle(e)
     case 2119, 2120, 2862, 2863:
         return d_RoundedRectangle(e)
+    #if compiler(>=6.4)
     case 2443, 2444, 2445, 2860:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_TextInputBorderShape(e) }
         return nil
+    #endif
     case 2557, 2558, 2872, 2873:
         return d_UnevenRoundedRectangle(e)
     default: return HandwrittenValues.decode(e) as? any Shape
@@ -693,9 +701,11 @@ import UniformTypeIdentifiers
 @MainActor func dp_TextFieldStyle(_ e: SExpr?) -> (any TextFieldStyle)? {
     guard let e else { return nil }
     switch e.id {
+    #if compiler(>=6.4)
     case 1242, 2781:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_BorderedTextFieldStyle(e) }
         return nil
+    #endif
     case 1420, 2780:
         return d_DefaultTextFieldStyle(e)
     case 2032, 2779:

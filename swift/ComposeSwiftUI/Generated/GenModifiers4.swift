@@ -103,26 +103,28 @@ import UniformTypeIdentifiers
             return ModChain.apply(v, m, i + 1)
         case 188:
             return ModChain.apply(v.coordinateSpace(name: a.hashable(0)), m, i + 1)
+#if compiler(>=6.4)
         case 196:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_AdaptableTabBarPlacement(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
                 return ModChain.apply(v.defaultTabBarPlacement(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 204:
             return ModChain.apply(v.dialogSuppressionToggle(a.string(0), isSuppressed: a.boolBinding(1)), m, i + 1)
 #if os(watchOS)
         case 212:
             return ModChain.apply(v.digitalCrownRotation(a.doubleBinding(0), onIdle: a.action(2)), m, i + 1)
 #endif
-#if os(iOS) || os(macOS)
+#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
         case 220:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(a.string(0), shouldPresent: a.bool(1), actions: { a.slot(2) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if os(iOS)
+#if (os(iOS)) && (compiler(>=6.4))
         case 228:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchSubtitle(LocalizedStringKey(a.string(0))), m, i + 1)
@@ -319,6 +321,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v, m, i + 1)
         case 580:
             return ModChain.apply(v.toolbar(content: { a.slot(0) }), m, i + 1)
+#if compiler(>=6.4)
         case 588:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_ToolbarMinimizationBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -326,12 +329,15 @@ import UniformTypeIdentifiers
                 return ModChain.apply(v.toolbarMinimizationBehavior(p0, for: p1), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
+#if compiler(>=6.4)
         case 596:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 guard let p0 = d_ToolbarVerticalBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
                 return ModChain.apply(v.toolbarVerticalBehavior(p0), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 604:
             guard let p0 = d_CGAffineTransform(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.transformEffect(p0), m, i + 1)
