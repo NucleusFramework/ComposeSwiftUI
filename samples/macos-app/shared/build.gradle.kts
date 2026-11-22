@@ -15,7 +15,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation("org.jetbrains.compose.components:components-resources:1.12.1")
+            implementation("org.jetbrains.compose.components:components-resources:1.12.2")
         }
     }
 }
