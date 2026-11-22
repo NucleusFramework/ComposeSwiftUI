@@ -46,6 +46,18 @@ class GuardTests(unittest.TestCase):
         self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, generate.case_guard(dict(self.ALL, ios=(27, 0)), self.ALL))
         self.assertIsNone(generate.case_guard(dict(self.ALL, ios=(27, 0)), dict(self.ALL, ios=(27, 0))))
 
+    def test_back_deployed_api_missing_from_the_previous_sdk_is_behind_the_compiler_check(self):
+        generate.N1_MISSING.add("s:test.alphaMultiply")
+        try:
+            plats = generate.newest_sdk_only(dict(self.ALL, ios=(18, 0)), "s:test.alphaMultiply")
+            ifline, avail = generate.platform_guard(plats)
+            self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, ifline)
+            self.assertIn("iOS 18.0", avail)  # still available at run time where the OS has it
+            self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, generate.case_guard(plats, self.ALL))
+            self.assertIsNone(generate.platform_guard(generate.newest_sdk_only(dict(self.ALL), "s:test.other"))[0])
+        finally:
+            generate.N1_MISSING.discard("s:test.alphaMultiply")
+
 
 if __name__ == "__main__":
     unittest.main()

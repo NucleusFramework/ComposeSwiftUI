@@ -22,6 +22,9 @@ then compiles both. When the Swift compiler rejects an API on any platform, `ver
 ```bash
 # 1. Symbol graphs of the installed Xcode SDKs (iOS, macOS, tvOS, watchOS)
 generator/extract.sh /tmp/sg
+# When the SDKs change: the APIs the previous Xcode lacks (back-deployed ones included), from its symbol graphs (the
+# `symbolgraphs-n1` artifact of a CI run, extracted with Xcode N-1) -> generator/n1_missing.json
+python3 generator/n1_missing.py /tmp/sg /tmp/sg-n1
 
 # 2. Runtime-only frameworks, used to typecheck the generated Swift
 ./gradlew :runtime:linkDebugFrameworkMacosArm64 :runtime:linkDebugFrameworkIosSimulatorArm64 \

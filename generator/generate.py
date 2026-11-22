@@ -76,8 +76,8 @@ class Item:
                 intro = max(intro, tp[p])
             if ok:
                 plats[p] = intro
-        self.platforms = plats
-        return plats
+        self.platforms = newest_sdk_only(plats, self.sym.usr, *refs) if plats else plats
+        return self.platforms
 
 
 # APIs introduced in the SDKs of the newest Xcode compile only with its Swift compiler: behind `#if compiler(>=…)`, the
@@ -86,8 +86,26 @@ NEWEST_SDK = {"ios": (27, 0), "macos": (27, 0), "tvos": (27, 0), "watchos": (27,
 NEWEST_COMPILER = "6.4"  # Swift of Xcode 27.0
 
 
+class NewestSdkOnly(dict):
+    """Platforms of an API the previous SDK lacks although it is available on older OS versions (back-deployed)."""
+
+
+def _load_n1_missing():
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "n1_missing.json")
+    return set(json.load(open(path))) if os.path.exists(path) else set()
+
+
+# The symbols the newest SDK has and the previous one lacks (generator/n1_missing.py): guarded like newer APIs
+N1_MISSING = _load_n1_missing()
+
+
+def newest_sdk_only(plats, *usrs):
+    """`plats`, marked when one of `usrs` is missing from the previous SDK."""
+    return NewestSdkOnly(plats) if any(u in N1_MISSING for u in usrs) else plats
+
+
 def needs_newest_sdk(plats):
-    return any(v >= NEWEST_SDK[p] for p, v in plats.items() if p in NEWEST_SDK)
+    return isinstance(plats, NewestSdkOnly) or any(v >= NEWEST_SDK[p] for p, v in plats.items() if p in NEWEST_SDK)
 
 
 def case_guard(plats, enclosing):
@@ -204,7 +222,7 @@ class Generator:
         out = {}
         for p, info in s.platforms.items():
             out[p] = info["introduced"] or (0, 0)
-        return out
+        return newest_sdk_only(out, usr)
 
     def ctx_for(self, sym, attrs=()):
         names, conf, same = sym.constraints()
@@ -1152,7 +1170,7 @@ class Generator:
                     body = "return SExpr(id: %d, args: [%s])" % (item.id, ", ".join(boxes))
                 else:
                     continue
-                plats = dict(item.platforms)
+                plats = item.platforms
                 rel = {p: v for p, v in plats.items() if v > max(tp.get(p, (0, 0)), DEPLOYMENT[p])}
                 case_if = case_guard(plats, tp)
                 if case_if:
@@ -1232,7 +1250,7 @@ class Generator:
                     expr = "base.%s(%s)" % (self._swift_member(item.sym.name), ", ".join(args))
                 body = stmts + self.open_call(swift_t + "?", expr)
                 # availability relative to the enclosing decoder
-                plats = dict(item.platforms)
+                plats = item.platforms
                 rel = {p: v for p, v in plats.items() if v > max(tp.get(p, (0, 0)), DEPLOYMENT[p])}
                 case_if = case_guard(plats, tp)
                 lines = []
@@ -1271,7 +1289,7 @@ class Generator:
                 if not ids:
                     continue
                 vp = self.type_platforms(vt.usr)
-                both = {q: max(vp[q], tp.get(q, (0, 0))) for q in vp if q in tp}
+                both = newest_sdk_only({q: max(vp[q], tp.get(q, (0, 0))) for q in vp if q in tp}, vt.usr)
                 if not both:
                     continue
                 cif = case_guard(both, tp)

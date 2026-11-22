@@ -659,12 +659,14 @@ import UniformTypeIdentifiers
         return .saturation(a.double(0))
     case 1720:
         return .colorInvert(a.double(0))
+    #if compiler(>=6.4)
     case 1721:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_ColorMatrix(a.expr(0)) else { return nil }
             return .colorMatrix(p0, isPremultiplied: a.bool(1))
         }
         return nil
+    #endif
     case 1722:
         guard let p0 = d_ColorMatrix(a.expr(0)) else { return nil }
         return .colorMatrix(p0)
@@ -682,12 +684,14 @@ import UniformTypeIdentifiers
         guard let p1 = d_CGSize(a.expr(1)) else { return nil }
         return .layerShader(p0, maxSampleOffset: p1)
     #endif
+    #if compiler(>=6.4)
     case 1726:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_Color(a.expr(0)) else { return nil }
             return .alphaMultiply(p0)
         }
         return nil
+    #endif
     case 1727:
         guard let p0 = d_Color(a.expr(0)) else { return nil }
         return .colorMultiply(p0)

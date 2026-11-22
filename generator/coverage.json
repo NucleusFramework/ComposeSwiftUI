@@ -9123,7 +9123,7 @@
   "path": "AttributedTextSelection.init(insertionPoint:typingAttributes:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "AttributedString rich-text selection: Swift-only types",
+  "detail": "RichTextSelection",
   "platforms": [
    "ios",
    "macos",
@@ -9136,7 +9136,7 @@
   "path": "AttributedTextSelection.init(range:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "AttributedString rich-text selection: Swift-only types",
+  "detail": "RichTextSelection",
   "platforms": [
    "ios",
    "macos",
@@ -9149,7 +9149,7 @@
   "path": "AttributedTextSelection.init(ranges:)",
   "kind": "swift.init",
   "status": "n/a",
-  "detail": "AttributedString rich-text selection: Swift-only types",
+  "detail": "RichTextSelection",
   "platforms": [
    "ios",
    "macos",
@@ -19419,8 +19419,8 @@
   "usr": "s:7SwiftUI26CustomizableToolbarContentPAAE26sharedBackgroundVisibilityyQrAA0H0OF",
   "path": "CustomizableToolbarContent.sharedBackgroundVisibility(_:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "requirement or default of a Swift protocol adopted by app-defined types",
+  "status": "covered",
+  "detail": "hand-written: Modifier.toolbarItem(placement, sharedBackgroundVisibility) { }",
   "platforms": [
    "ios",
    "macos"
@@ -94126,8 +94126,8 @@
   "usr": "s:7SwiftUI14ToolbarContentPAAE26sharedBackgroundVisibilityyQrAA0G0OF",
   "path": "ToolbarContent.sharedBackgroundVisibility(_:)",
   "kind": "swift.method",
-  "status": "n/a",
-  "detail": "requirement or default of a Swift protocol adopted by app-defined types",
+  "status": "covered",
+  "detail": "hand-written: Modifier.toolbarItem(placement, sharedBackgroundVisibility) { }",
   "platforms": [
    "ios",
    "macos"
@@ -103232,7 +103232,7 @@
   "path": "View.attributedTextFormattingDefinition(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "AttributedString formatting definitions: Swift-only types",
+  "detail": "Modifier.attributedTextFormattingDefinition(AttributedTextFormattingDefinition)",
   "platforms": [
    "ios",
    "macos",
@@ -103245,7 +103245,7 @@
   "path": "View.attributedTextFormattingDefinition(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "AttributedString formatting definitions: Swift-only types",
+  "detail": "Modifier.attributedTextFormattingDefinition(AttributedTextFormattingDefinition)",
   "platforms": [
    "ios",
    "macos",
@@ -103258,7 +103258,7 @@
   "path": "View.attributedTextFormattingDefinition(_:)",
   "kind": "swift.method",
   "status": "n/a",
-  "detail": "AttributedString formatting definitions: Swift-only types",
+  "detail": "Modifier.attributedTextFormattingDefinition(AttributedTextFormattingDefinition)",
   "platforms": [
    "ios",
    "macos",

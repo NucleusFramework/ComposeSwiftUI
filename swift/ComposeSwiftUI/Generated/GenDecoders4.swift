@@ -791,6 +791,7 @@ import UniformTypeIdentifiers
         guard let p2 = d_CGPoint(a.expr(2)) else { return nil }
         let p3: GraphicsContext.GradientOptions = a.isNil(3) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(3)) ?? GraphicsContext.GradientOptions())
         return .linearGradient(p0, startPoint: p1, endPoint: p2, options: p3)
+    #if compiler(>=6.4)
     case 1747:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -800,6 +801,8 @@ import UniformTypeIdentifiers
             return .radialGradient(p0, startCenter: p1, startRadius: a.cgFloat(2), endCenter: p3, endRadius: a.cgFloat(4), options: p5)
         }
         return nil
+    #endif
+    #if compiler(>=6.4)
     case 1748:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_Gradient(a.expr(0)) else { return nil }
@@ -809,6 +812,7 @@ import UniformTypeIdentifiers
             return .radialGradient(p0, startCenter: p1, startRadius: a.cgFloat(2), endCenter: p3, endRadius: a.cgFloat(4), options: p5)
         }
         return nil
+    #endif
     case 1749:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }

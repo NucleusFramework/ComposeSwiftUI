@@ -364,11 +364,13 @@ import UniformTypeIdentifiers
         case 652:
             return ModChain.apply(v.environment(\.isHoverEffectEnabled, a.bool(0)), m, i + 1)
 #endif
+#if compiler(>=6.4)
         case 660:
             if #available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, *) {
                 return ModChain.apply(v.environment(\.accessibilityPrefersCrossFadeTransitions, a.bool(0)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
+#endif
         case 668:
             guard let p0 = d_ScenePhase(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.environment(\.scenePhase, p0), m, i + 1)
