@@ -14,8 +14,10 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # The Xcode the bindings are generated with (generator/extract.sh): the renderer needs its SDKs
-  XCODE_VERSION: "27.2"
+  # GitHub's runners have no Xcode 27: CI builds and runs everything with Xcode 26 (N-1), which also proves the
+  # `#if compiler(>=6.4)` guards. Regenerating the bindings needs the SDK 27 symbol graphs and is run locally:
+  # generator/extract.sh, then generator/verify.py (docs/CONTRIBUTING.md).
+  XCODE_VERSION: "26.6"
 
 jobs:
   runtime:
@@ -60,7 +62,7 @@ jobs:
             runtime/build/test-results
 
   renderer:
-    name: Bindings and renderer (verify.py, typecheck)
+    name: Renderer typecheck with Xcode N-1
     runs-on: macos-26
     timeout-minutes: 120
     steps:
@@ -78,8 +80,6 @@ jobs:
           path: ~/.konan
           key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
 
-      - name: Symbol graphs of the SDKs
-        run: generator/extract.sh /tmp/sg
       - name: Runtime-only frameworks
         run: |
           ./gradlew :runtime:linkDebugFrameworkMacosArm64 :runtime:linkDebugFrameworkIosSimulatorArm64 \
@@ -88,10 +88,6 @@ jobs:
             mkdir -p "/tmp/corefw/${p%%:*}"
             cp -R "runtime/build/bin/${p##*:}/debugFramework/BenchShared.framework" "/tmp/corefw/${p%%:*}/"
           done
-      - name: Generate and verify the bindings (verify.py)
-        run: python3 -I generator/verify.py /tmp/sg . /tmp/corefw
-      - name: The committed bindings are the generated ones
-        run: git diff --exit-code -- runtime/src/generated swift/ComposeSwiftUI/Generated generator/rejected.json
       - name: Typecheck the renderer on iOS, macOS, tvOS and watchOS
         run: |
           scripts/typecheck_swift.sh /tmp/corefw | tee /tmp/typecheck.txt
