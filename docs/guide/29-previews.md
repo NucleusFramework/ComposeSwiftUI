@@ -423,6 +423,8 @@ from their file paths, or from a `projectPath` argument.
 | `compare_swiftui_preview_to_image` | Renders and compares with an expected image (a design, a screenshot): mismatch, PSNR, the views of the regions that differ, a side-by-side image | Match UI to Target Image, `compose_visual_comparison_judge` |
 | `compare_images` | Compares two images: mismatch %, MSE, RMSE, PSNR, a diff image | `compare_images` |
 | `verify_batch_visual_parity` | Compares two folders of screenshots by name, writes a Markdown report | `verify_batch_visual_parity` |
+| `run_apple_gradle` | Compiles, links, or tests for iOS and macOS via Gradle on the Mac (locally on macOS, or via the Remote Mac from Linux/Windows) | — |
+| `build_xcode_project` | Compiles or tests an iOS or macOS `.xcodeproj`/`.xcworkspace` with `xcodebuild` on the Mac (locally or via the Remote Mac) | — |
 
 Renders go through the same renderer as the preview pane: open files are saved, the running host renders without
 Gradle when no code changed, and only one build runs per module at a time.

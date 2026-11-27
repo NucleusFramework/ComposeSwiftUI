@@ -14,8 +14,9 @@
             <li>Run a preview live on the simulator, navigate between code and previews, copy or save images</li>
             <li>Compile errors and preview crashes shown next to the previews; inspections for previews that
                 can't render</li>
-            <li>Tools for AI agents on the IDE's MCP server: list, render, render throwaway code, UI checks, compare
-                with a design or a folder of screenshots</li>
+            <li>Tools for AI agents over MCP: compile and test for iOS and macOS (Gradle Apple tasks and
+                <code>xcodebuild</code>, locally or on a remote Mac), list and render previews, render throwaway code,
+                UI checks, compare with a design or a folder of screenshots</li>
         </ul>
         Needs macOS with Xcode, or, on Linux and Windows, a Mac reached over SSH (Settings › Tools › Compose SwiftUI
         Previews › Remote Mac), and the <code>dev.nucleusframework.compose-swiftui</code> Gradle plugin.

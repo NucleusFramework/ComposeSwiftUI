@@ -49,8 +49,11 @@ class StandaloneMcpServerTest : BasePlatformTestCase() {
 
     fun testSpeaksMcpOverHttp() {
         val init = rpc("initialize", """{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"test","version":"1"}}""")
-        assertEquals("2025-06-18", init.getAsJsonObject("result").get("protocolVersion").asString)
-        assertEquals("compose-swiftui", init.getAsJsonObject("result").getAsJsonObject("serverInfo").get("name").asString)
+        val initResult = init.getAsJsonObject("result")
+        assertEquals("2025-06-18", initResult.get("protocolVersion").asString)
+        assertEquals("compose-swiftui", initResult.getAsJsonObject("serverInfo").get("name").asString)
+        val instructions = initResult.get("instructions").asString
+        assertTrue(instructions, "iOS and macOS" in instructions && "run_apple_gradle" in instructions && "build_xcode_project" in instructions)
         assertEquals(202, post("""{"jsonrpc":"2.0","method":"notifications/initialized"}""").statusCode())
         assertEquals(405, http.send(HttpRequest.newBuilder(URI(url)).GET().build(), HttpResponse.BodyHandlers.ofString()).statusCode())
         assertEquals(403, post("""{"jsonrpc":"2.0","id":9,"method":"ping"}""", origin = "https://evil.example").statusCode())
@@ -65,8 +68,25 @@ class StandaloneMcpServerTest : BasePlatformTestCase() {
         assertEquals(listOf("filePath"), render.getAsJsonObject("inputSchema").getAsJsonArray("required").map { it.asString })
         assertTrue(render.toString(), "component tree" in render.get("description").asString && "|" !in render.get("description").asString)
 
+        val appleGradle = tools.single { it.get("name").asString == "run_apple_gradle" }
+        assertEquals(listOf("tasks"), appleGradle.getAsJsonObject("inputSchema").getAsJsonArray("required").map { it.asString })
+        assertTrue(appleGradle.toString(), "iOS and macOS" in appleGradle.get("description").asString && "|" !in appleGradle.get("description").asString)
+
+        val xcodeBuild = tools.single { it.get("name").asString == "build_xcode_project" }
+        assertEquals(emptyList<String>(), xcodeBuild.getAsJsonObject("inputSchema").getAsJsonArray("required").map { it.asString })
+        assertTrue(xcodeBuild.toString(), "xcodebuild" in xcodeBuild.get("description").asString && "|" !in xcodeBuild.get("description").asString)
+
         val missing = call("render_swiftui_preview", "{}")
         assertTrue(missing.toString(), missing.get("isError").asBoolean && "filePath" in text(missing))
+
+        val missingTasks = call("run_apple_gradle", """{"tasks":[]}""")
+        assertTrue(missingTasks.toString(), missingTasks.get("isError").asBoolean && "tasks" in text(missingTasks))
+
+        val badAction = call("build_xcode_project", """{"action":"archive"}""")
+        assertTrue(badAction.toString(), badAction.get("isError").asBoolean && "action" in text(badAction))
+
+        val badPlatform = call("build_xcode_project", """{"platform":"android"}""")
+        assertTrue(badPlatform.toString(), badPlatform.get("isError").asBoolean && "platform" in text(badPlatform))
     }
 
     fun testToolRunsOnTheOpenProject() {
