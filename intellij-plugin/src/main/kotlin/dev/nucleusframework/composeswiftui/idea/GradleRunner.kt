@@ -41,20 +41,50 @@ class GradleRunner(private val project: Project) : Disposable {
      */
     fun run(module: PreviewModule, task: String, arguments: List<String>, progress: (String) -> Unit, done: (Boolean, String) -> Unit) {
         // Resolving the Gradle JVM and connecting block: never on the UI thread.
-        ApplicationManager.getApplication().executeOnPooledThread { start(module, task, arguments, progress, done) }
+        ApplicationManager.getApplication().executeOnPooledThread {
+            start(module.rootProjectPath, listOf(module.taskPath(task)), arguments, module, task, progress, done)
+        }
     }
 
-    private fun start(module: PreviewModule, task: String, arguments: List<String>, progress: (String) -> Unit, finished: (Boolean, String) -> Unit) {
-        val lock = builds.getOrPut(module.rootProjectPath) { Semaphore(1) }
+    /**
+     * Runs [tasks] of the Gradle build at [rootProjectPath] with [arguments] (locally or on the remote Mac);
+     * [progress] gets each task path as it starts, [done] the success and the output. Returns immediately.
+     */
+    fun runTasks(
+        rootProjectPath: String,
+        tasks: List<String>,
+        arguments: List<String>,
+        progress: (String) -> Unit,
+        done: (Boolean, String) -> Unit,
+    ) {
+        ApplicationManager.getApplication().executeOnPooledThread {
+            start(rootProjectPath, tasks, arguments, null, null, progress, done)
+        }
+    }
+
+    private fun start(
+        rootProjectPath: String,
+        tasks: List<String>,
+        arguments: List<String>,
+        module: PreviewModule?,
+        previewTask: String?,
+        progress: (String) -> Unit,
+        finished: (Boolean, String) -> Unit,
+    ) {
+        val lock = builds.getOrPut(rootProjectPath) { Semaphore(1) }
         lock.acquire()
         val done = { success: Boolean, output: String ->
             lock.release()
             finished(success, output)
         }
         // On Linux or Windows, Gradle runs on the remote Mac.
-        MacHosts.workspace(module.rootProjectPath)?.let { workspace ->
+        MacHosts.workspace(rootProjectPath)?.let { workspace ->
             try {
-                RemoteGradle.run(workspace, module, task, arguments, progress, done)
+                if (module != null && previewTask != null) {
+                    RemoteGradle.run(workspace, module, previewTask, arguments, progress, done)
+                } else {
+                    RemoteGradle.runTasks(workspace, rootProjectPath, tasks, arguments, progress, done)
+                }
             } catch (e: Exception) {
                 LOG.warn("Remote Gradle failed", e)
                 done(false, e.message.orEmpty())
@@ -72,11 +102,11 @@ class GradleRunner(private val project: Project) : Disposable {
             }
         }
         try {
-            val connection = connections.getOrPut(module.rootProjectPath) {
-                GradleConnector.newConnector().forProjectDirectory(File(module.rootProjectPath)).connect()
+            val connection = connections.getOrPut(rootProjectPath) {
+                GradleConnector.newConnector().forProjectDirectory(File(rootProjectPath)).connect()
             }
             val build = connection.newBuild()
-                .forTasks(module.taskPath(task))
+                .forTasks(*tasks.toTypedArray())
                 .withArguments(arguments)
                 .setStandardOutput(sink)
                 .setStandardError(sink)
@@ -84,11 +114,11 @@ class GradleRunner(private val project: Project) : Disposable {
                     if (event is TaskStartEvent) progress(event.descriptor.taskPath)
                 }, OperationType.TASK)
             // The project's Gradle JVM, as for the IDE's own Gradle runs.
-            javaHomes.getOrPut(module.rootProjectPath) {
+            javaHomes.getOrPut(rootProjectPath) {
                 // Needs a progress context off the UI thread.
                 runCatching {
                     ProgressManager.getInstance().runProcess<String?>(
-                        { GradleInstallationManager.getInstance().getGradleJvmPath(project, module.rootProjectPath) },
+                        { GradleInstallationManager.getInstance().getGradleJvmPath(project, rootProjectPath) },
                         EmptyProgressIndicator(),
                     )
                 }.getOrNull().orEmpty()
@@ -96,7 +126,7 @@ class GradleRunner(private val project: Project) : Disposable {
             build.run(object : ResultHandler<Void?> {
                 override fun onComplete(result: Void?) = done(true, output.toString())
                 override fun onFailure(failure: GradleConnectionException) {
-                    LOG.info("Gradle failed for ${module.gradlePath}: ${failure.message}")
+                    LOG.info("Gradle failed for ${module?.gradlePath ?: rootProjectPath}: ${failure.message}")
                     done(false, output.toString() + "\n" + (failure.cause?.message ?: failure.message.orEmpty()))
                 }
             })

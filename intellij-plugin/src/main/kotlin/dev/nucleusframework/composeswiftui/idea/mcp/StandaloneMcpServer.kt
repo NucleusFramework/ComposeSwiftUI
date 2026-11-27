@@ -139,15 +139,20 @@ class StandaloneMcpServer : Disposable {
             "serverInfo",
             JsonObject().apply {
                 addProperty("name", "compose-swiftui")
-                addProperty("title", "Compose SwiftUI previews")
+                addProperty("title", "Compose SwiftUI (iOS & macOS builds and previews)")
                 addProperty("version", pluginVersion())
             },
         )
         addProperty(
             "instructions",
-            "Render Compose SwiftUI @Preview composables with real SwiftUI (iOS simulator or Mac), look at the PNG, the " +
-                "component tree and the UI checks, edit, render again. File paths are absolute, or relative to the root of " +
-                "the project open in the IDE; with several projects open, pass projectPath.",
+            "You CAN compile, test, and build for iOS and macOS through this MCP server — both directly on macOS and from " +
+                "Linux or Windows via the plugin's Remote Mac over SSH (sources are synced automatically and errors come " +
+                "back with local paths). Use run_apple_gradle for Kotlin Multiplatform / Compose SwiftUI Gradle tasks " +
+                "(e.g. :shared:compileKotlinIosSimulatorArm64, :shared:compileKotlinMacosArm64, :shared:iosSimulatorArm64Test, " +
+                ":shared:macosArm64Test) and build_xcode_project to compile or test .xcodeproj/.xcworkspace projects with " +
+                "xcodebuild for iOS or macOS. Also render Compose SwiftUI @Preview composables with real SwiftUI (iOS " +
+                "simulator or Mac), look at the PNG, the component tree and the UI checks, edit, and render again. File paths " +
+                "are absolute, or relative to the root of the project open in the IDE; with several projects open, pass projectPath.",
         )
     }
 
@@ -182,7 +187,13 @@ class StandaloneMcpServer : Disposable {
             ?: return toolResult("Unknown tool ${params.get("name")}", isError = true)
         @Suppress("UNCHECKED_CAST")
         val given = params.getAsJsonObject("arguments")?.let { gson.fromJson(it, Map::class.java) as Map<String, Any?> }.orEmpty()
-        val missing = tool.params.filter { it.default == null && given[it.name]?.toString().isNullOrEmpty() }
+        val missing = tool.params.filter { param ->
+            param.default == null && when (val value = given[param.name]) {
+                null -> true
+                is Collection<*> -> value.isEmpty()
+                else -> value.toString().isEmpty()
+            }
+        }
         if (missing.isNotEmpty()) return toolResult("Missing ${missing.joinToString { it.name }}", isError = true)
         val args = tool.params.associate { it.name to (given[it.name] ?: it.default) }
         return try {

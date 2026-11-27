@@ -39,4 +39,40 @@ class BuildProblemsTest {
             PreviewRenderer.problems(output).single().message,
         )
     }
+
+    @Test
+    fun xcodeSwiftAndKotlinErrors() {
+        val output = """
+            /p/iosApp/ContentView.swift:14:9: error: cannot find 'foo' in scope
+            /p/iosApp/Bridge.m:22:5: error: use of undeclared identifier 'bar'
+            e: file:///p/shared/App.kt:8:3 Unresolved reference 'Baz'.
+            xcodebuild: error: Scheme 'Wrong' is not currently configured for the build action.
+        """.trimIndent()
+        assertEquals(
+            listOf(
+                BuildProblem("cannot find 'foo' in scope", "/p/iosApp/ContentView.swift", 14, 9),
+                BuildProblem("use of undeclared identifier 'bar'", "/p/iosApp/Bridge.m", 22, 5),
+                BuildProblem("Unresolved reference 'Baz'.", "/p/shared/App.kt", 8, 3),
+                BuildProblem("Scheme 'Wrong' is not currently configured for the build action."),
+            ),
+            PreviewAgent.xcodeProblems(output),
+        )
+    }
+
+    @Test
+    fun discoverXcodeProjectsPrefersWorkspaceAndSkipsNested() {
+        val root = kotlin.io.path.createTempDirectory("xcode-discover").toFile()
+        try {
+            val iosApp = java.io.File(root, "iosApp").apply { mkdirs() }
+            java.io.File(iosApp, "App.xcodeproj/project.xcworkspace").mkdirs()
+            java.io.File(iosApp, "App.xcworkspace").mkdirs()
+            java.io.File(root, "Pods/Pods.xcodeproj").mkdirs()
+            java.io.File(root, "build/Generated.xcodeproj").mkdirs()
+
+            val discovered = PreviewAgent.discoverXcodeProjects(root)
+            assertEquals(listOf(java.io.File(iosApp, "App.xcworkspace")), discovered)
+        } finally {
+            root.deleteRecursively()
+        }
+    }
 }

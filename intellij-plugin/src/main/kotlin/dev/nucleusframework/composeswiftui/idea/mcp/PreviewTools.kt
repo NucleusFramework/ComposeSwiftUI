@@ -12,17 +12,18 @@ internal object PreviewTools {
         |Lists the Compose SwiftUI @Preview functions of a Kotlin file (or of the whole project) with their variants:
         |the index of each variant (multipreview annotations, repeated @Preview, @PreviewParameter values) is the
         |previewIndex of the other tools. Compose SwiftUI previews render real SwiftUI on the iOS simulator, or on the Mac
-        |(`device = "mac"`, or a macOS-only module).
+        |(`device = "mac"`, or a macOS-only module), locally on macOS or via the configured Remote Mac from Linux/Windows.
         """
     const val LIST_FILE = "Kotlin file, absolute or relative to the project root. Empty: every module that rendered previews once"
 
     const val RENDER = """
-        |Renders a Compose SwiftUI preview with real SwiftUI on the iOS simulator or the Mac and describes it: the PNG
-        |path (open it to see the preview), the component tree (every view with its source line, frame in points and
-        |text) and UI checks (touch targets, text contrast, small text, overlaps, clipping). On failure: compiler errors
-        |with their lines, or the Kotlin exception of the preview. Saves open files and builds what changed first.
-        |Render once before a visual change to know the "before" state, then after each edit to verify it.
-        |composableName may also be a @Composable without parameters that is not a preview.
+        |Renders a Compose SwiftUI preview with real SwiftUI on the iOS simulator or the Mac (locally on macOS, or via
+        |the configured Remote Mac over SSH from Linux or Windows) and describes it: the PNG path (open it to see the
+        |preview), the component tree (every view with its source line, frame in points and text) and UI checks (touch
+        |targets, text contrast, small text, overlaps, clipping). On failure: compiler errors with their lines, or the
+        |Kotlin exception of the preview. Saves open files and builds what changed first. Render once before a visual
+        |change to know the "before" state, then after each edit to verify it. composableName may also be a @Composable
+        |without parameters that is not a preview.
         """
     const val RENDER_FILE = "Kotlin file declaring the preview, absolute or relative to the project root"
     const val RENDER_NAME = "Simple name of the preview function. Empty: every preview of the file"
@@ -76,6 +77,32 @@ internal object PreviewTools {
     const val PARITY_AFTER = "Folder of the new PNGs"
     const val PARITY_REPORT = "Markdown report to write. Empty: build/composeSwiftUI/parity/report.md"
     const val PARITY_THRESHOLD = "Largest share of differing pixels, in percent, for a pair to match"
+
+    const val APPLE_GRADLE = """
+        |Compiles, links, or tests Kotlin Multiplatform / Compose SwiftUI code for iOS and macOS by running Gradle tasks
+        |on the Mac (locally on macOS, or on the configured Remote Mac over SSH from Linux or Windows — sources are synced
+        |automatically and compiler errors come back with local file paths). Use this tool whenever you need to compile or
+        |test for iOS or macOS (for example :shared:compileKotlinIosSimulatorArm64, :shared:compileKotlinMacosArm64,
+        |:shared:linkDebugFrameworkIosSimulatorArm64, :shared:iosSimulatorArm64Test, :shared:macosArm64Test). Saves open
+        |IDE files first.
+        """
+    const val APPLE_GRADLE_TASKS = "Gradle task(s) to run for iOS or macOS (e.g. [\":shared:compileKotlinIosSimulatorArm64\"])"
+    const val APPLE_GRADLE_ARGS = "Optional extra Gradle CLI arguments (e.g. [\"--tests\", \"com.example.MyTest\"])"
+    const val APPLE_GRADLE_ROOT = "Directory containing gradlew / settings.gradle[.kts], absolute or relative to the project root. Empty: the project root"
+
+    const val XCODE_BUILD = """
+        |Compiles or tests an iOS or macOS Xcode project (.xcodeproj or .xcworkspace) with xcodebuild on the Mac (locally
+        |on macOS, or on the configured Remote Mac over SSH from Linux or Windows — sources are synced automatically and
+        |Swift/Kotlin compiler errors come back with local file paths). Supports iOS simulator (platform = "ios"), macOS
+        |(platform = "macos"), and generic iOS device (platform = "ios-device"), and actions "build", "build-for-testing",
+        |or "test". Saves open IDE files first.
+        """
+    const val XCODE_PROJECT = "Path to .xcodeproj or .xcworkspace, absolute or relative to the project root. Empty: auto-detects the project's Xcode project/workspace"
+    const val XCODE_SCHEME = "Xcode scheme to build. Empty: defaults to the project or workspace name"
+    const val XCODE_PLATFORM = "Target platform: \"ios\" (iOS simulator, default), \"macos\" (Mac), or \"ios-device\" (generic iOS device). Ignored when destination is set"
+    const val XCODE_CONFIG = "Build configuration, e.g. \"Debug\" (default) or \"Release\""
+    const val XCODE_ACTION = "xcodebuild action: \"build\" (default), \"build-for-testing\", or \"test\""
+    const val XCODE_DESTINATION = "Explicit xcodebuild -destination value (e.g. \"platform=iOS Simulator,name=iPhone 17 Pro\" or \"platform=macOS\"). Empty: chosen from platform"
 
     /** A parameter of a tool: JSON Schema [type], and its [default] (null: required). */
     class Param(val name: String, val type: String, val description: String, val default: Any? = null, val isPath: Boolean = false)
@@ -147,6 +174,34 @@ internal object PreviewTools {
             ),
         ) {
             verifyParity(it.string("beforeDirectoryPath"), it.string("afterDirectoryPath"), it.string("reportOutputPath"), it.double("thresholdPercent"))
+        },
+        Tool(
+            "run_apple_gradle", APPLE_GRADLE,
+            listOf(
+                Param("tasks", "array", APPLE_GRADLE_TASKS),
+                Param("arguments", "array", APPLE_GRADLE_ARGS, emptyList<String>()),
+                Param("rootProjectPath", "string", APPLE_GRADLE_ROOT, "", isPath = true),
+            ),
+        ) { runAppleGradle(it.strings("tasks"), it.strings("arguments"), it.string("rootProjectPath")) },
+        Tool(
+            "build_xcode_project", XCODE_BUILD,
+            listOf(
+                Param("xcodeProject", "string", XCODE_PROJECT, "", isPath = true),
+                Param("scheme", "string", XCODE_SCHEME, ""),
+                Param("platform", "string", XCODE_PLATFORM, "ios"),
+                Param("configuration", "string", XCODE_CONFIG, "Debug"),
+                Param("action", "string", XCODE_ACTION, "build"),
+                Param("destination", "string", XCODE_DESTINATION, ""),
+            ),
+        ) {
+            buildXcodeProject(
+                it.string("xcodeProject"),
+                it.string("scheme"),
+                it.string("platform"),
+                it.string("configuration"),
+                it.string("action"),
+                it.string("destination"),
+            )
         },
     )
 }

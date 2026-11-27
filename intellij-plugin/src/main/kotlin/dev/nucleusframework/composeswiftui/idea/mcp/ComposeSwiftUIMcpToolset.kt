@@ -93,6 +93,34 @@ class ComposeSwiftUIMcpToolset : McpToolset {
         thresholdPercent: Double = 0.5,
     ): String = call { verifyParity(beforeDirectoryPath, afterDirectoryPath, reportOutputPath, thresholdPercent) }
 
+    @McpTool
+    @McpDescription(PreviewTools.APPLE_GRADLE)
+    suspend fun run_apple_gradle(
+        @McpDescription(PreviewTools.APPLE_GRADLE_TASKS)
+        tasks: List<String>,
+        @McpDescription(PreviewTools.APPLE_GRADLE_ARGS)
+        arguments: List<String> = emptyList(),
+        @McpDescription(PreviewTools.APPLE_GRADLE_ROOT)
+        rootProjectPath: String = "",
+    ): String = call { runAppleGradle(tasks, arguments, rootProjectPath) }
+
+    @McpTool
+    @McpDescription(PreviewTools.XCODE_BUILD)
+    suspend fun build_xcode_project(
+        @McpDescription(PreviewTools.XCODE_PROJECT)
+        xcodeProject: String = "",
+        @McpDescription(PreviewTools.XCODE_SCHEME)
+        scheme: String = "",
+        @McpDescription(PreviewTools.XCODE_PLATFORM)
+        platform: String = "ios",
+        @McpDescription(PreviewTools.XCODE_CONFIG)
+        configuration: String = "Debug",
+        @McpDescription(PreviewTools.XCODE_ACTION)
+        action: String = "build",
+        @McpDescription(PreviewTools.XCODE_DESTINATION)
+        destination: String = "",
+    ): String = call { buildXcodeProject(xcodeProject, scheme, platform, configuration, action, destination) }
+
     private suspend fun call(block: suspend PreviewAgent.() -> String): String {
         val agent = PreviewAgent(currentCoroutineContext().project)
         return try {

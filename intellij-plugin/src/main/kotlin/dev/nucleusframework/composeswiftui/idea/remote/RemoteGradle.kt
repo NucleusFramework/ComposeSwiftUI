@@ -20,20 +20,47 @@ object RemoteGradle {
         progress: (String) -> Unit,
         done: (Boolean, String) -> Unit,
     ) {
-        val output = StringBuilder()
         val upload = workspace.upload()
         if (!upload.success) return done(false, "Couldn't copy the project to the Mac (${workspace.shell.destination}):\n${upload.output}")
         // What to render: the request the IDE wrote next to the module's outputs, which are not synchronized.
         val request = File(module.moduleDir, "build/composeSwiftUI/previewHost/ide-request.json")
         if (request.isFile) workspace.write(request, request.readBytes())
 
+        val (success, output) = execute(workspace, module.rootProjectPath, listOf(module.taskPath(task)), arguments, progress)
+        pullOutputs(workspace, module)
+        done(success, output)
+    }
+
+    /** Runs [tasks] of the Gradle build at [rootProjectPath] on the Mac of [workspace]. Blocks. */
+    fun runTasks(
+        workspace: RemoteWorkspace,
+        rootProjectPath: String,
+        tasks: List<String>,
+        arguments: List<String>,
+        progress: (String) -> Unit,
+        done: (Boolean, String) -> Unit,
+    ) {
+        val upload = workspace.upload()
+        if (!upload.success) return done(false, "Couldn't copy the project to the Mac (${workspace.shell.destination}):\n${upload.output}")
+        val (success, output) = execute(workspace, rootProjectPath, tasks, arguments, progress)
+        done(success, output)
+    }
+
+    private fun execute(
+        workspace: RemoteWorkspace,
+        rootProjectPath: String,
+        tasks: List<String>,
+        arguments: List<String>,
+        progress: (String) -> Unit,
+    ): Pair<Boolean, String> {
+        val output = StringBuilder()
         val command = buildString {
-            append("cd ${quote(workspace.toRemote(module.rootProjectPath))} && ")
+            append("cd ${quote(workspace.toRemote(rootProjectPath))} && ")
             // An Android target needs the SDK: the Mac's own, as local.properties is not copied.
             append("{ [[ -n \$ANDROID_HOME || ! -d \$HOME/Library/Android/sdk ]] || export ANDROID_HOME=\$HOME/Library/Android/sdk; } && ")
             // One build at a time on this copy, with the Xcode builds of the iOS App configuration.
-            append("lockf -k ${quote(workspace.buildLock)} ./gradlew --console=plain ${quote(module.taskPath(task))} ")
-            append(arguments.joinToString(" ") { quote(it) })
+            append("lockf -k ${quote(workspace.buildLock)} ./gradlew --console=plain ")
+            append((tasks + arguments).joinToString(" ") { quote(it) })
         }
         val process = workspace.shell.start(command)
         process.inputStream.bufferedReader().useLines { lines ->
@@ -43,8 +70,7 @@ object RemoteGradle {
             }
         }
         val success = process.waitFor() == 0
-        pullOutputs(workspace, module)
-        done(success, workspace.toLocalText(output.toString()))
+        return success to workspace.toLocalText(output.toString())
     }
 
     /** Brings back what the IDE reads after a render: the images and results, the manifest, the running hosts' state. */
