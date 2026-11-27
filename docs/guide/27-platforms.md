@@ -292,7 +292,7 @@ the Swift renderer imports a single module name:
 plugins {
     kotlin("multiplatform") version "2.4.20"
     kotlin("plugin.compose") version "2.4.20"
-    id("dev.nucleusframework.compose-swiftui") version "0.10.0"
+    id("dev.nucleusframework.compose-swiftui") version "0.10.1"
 }
 
 kotlin {

@@ -47,7 +47,7 @@ Apply the plugin in the shared module and declare framework binaries for the App
 // shared/build.gradle.kts
 plugins {
     kotlin("multiplatform") version "2.4.20"
-    id("dev.nucleusframework.compose-swiftui") version "0.10.0"
+    id("dev.nucleusframework.compose-swiftui") version "0.10.1"
 }
 
 kotlin {
@@ -124,7 +124,7 @@ composeSwiftUI {
     frameworkName = "Shared"
     // Library version added to commonMain (appleMain when the module also has non-Apple targets).
     // Default: the plugin version. Keep them equal.
-    libraryVersion = "0.10.0"
+    libraryVersion = "0.10.1"
     // Integration files written to ComposeSwiftUIIntegrations, by name without .swift. Default: all of them.
     // When set, ComposeGenerated.setUp() registers them: no register…() call to write.
     integrations.set(listOf("MapKit", "Charts", "StoreKit"))

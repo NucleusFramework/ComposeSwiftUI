@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.10.1
+
+### Added
+
+- IDE plugin MCP: `run_apple_gradle` and `build_xcode_project` tools to compile, link, and test for iOS and macOS
+  (Gradle Apple tasks and `xcodebuild`), locally on macOS or over SSH on the configured Remote Mac from Linux and
+  Windows, with automatic source sync and local file paths in compiler errors.
+- IDE plugin MCP: updated server `instructions` and tool descriptions so AI agents know iOS and macOS compilation and
+  testing are available through the plugin.
+
+### Fixed
+
+- Renderer compatibility with Xcode 26 (N-1): guarded additional APIs absent in Xcode 26 SDKs despite back-deployment
+  (`generator/n1_missing.py`), verified by CI on Xcode 26.
+- Release workflow: attaches the unsigned IntelliJ plugin zip when signing secrets are absent and supports manual
+  `workflow_dispatch` re-runs for an existing tag.
+
 ## 0.10.0
 
 Production readiness, ahead of 1.0.0: the public Kotlin ABI is now checked on every change, and the versioning and
