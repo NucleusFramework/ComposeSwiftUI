@@ -14,7 +14,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func dp_ArrangementViewStyle(_ e: SExpr?) -> (any ArrangementViewStyle)? {
     guard let e else { return nil }
@@ -236,7 +236,7 @@ import UniformTypeIdentifiers
         return d_Rectangle(e)
     case 2119, 2120, 2862, 2863:
         return d_RoundedRectangle(e)
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 2443, 2444, 2445, 2860:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_TextInputBorderShape(e) }
         return nil
@@ -370,14 +370,14 @@ import UniformTypeIdentifiers
 @MainActor func dp_NavigationTransition(_ e: SExpr?) -> (any NavigationTransition)? {
     guard let e else { return nil }
     switch e.id {
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1170:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_AnyNavigationTransition(e) }
         return nil
     #endif
     case 2828:
         return d_AutomaticNavigationTransition(e)
-    #if (os(iOS) || os(tvOS) || os(watchOS)) && (compiler(>=6.4))
+    #if (os(iOS) || os(tvOS) || os(watchOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2829:
         if #available(iOS 27.0, macOS 14.0, tvOS 27.0, watchOS 27.0, *) { return d_CrossFadeNavigationTransition(e) }
         return nil
@@ -436,7 +436,7 @@ import UniformTypeIdentifiers
     case 2215, 2750:
         return d_SegmentedPickerStyle(e)
     #endif
-    #if (os(iOS) || os(macOS) || os(tvOS)) && (compiler(>=6.4))
+    #if (os(iOS) || os(macOS) || os(tvOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2402, 2745:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 10.0, *) { return d_TabsPickerStyle(e) }
         return nil
@@ -570,7 +570,7 @@ import UniformTypeIdentifiers
         return d_Rectangle(e)
     case 2119, 2120, 2862, 2863:
         return d_RoundedRectangle(e)
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 2443, 2444, 2445, 2860:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_TextInputBorderShape(e) }
         return nil
@@ -701,7 +701,7 @@ import UniformTypeIdentifiers
 @MainActor func dp_TextFieldStyle(_ e: SExpr?) -> (any TextFieldStyle)? {
     guard let e else { return nil }
     switch e.id {
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1242, 2781:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) { return d_BorderedTextFieldStyle(e) }
         return nil

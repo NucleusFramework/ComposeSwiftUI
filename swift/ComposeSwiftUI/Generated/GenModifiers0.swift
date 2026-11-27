@@ -54,7 +54,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v.alert(LocalizedStringResource(String.LocalizationValue(a.string(0))), isPresented: a.boolBinding(1), actions: { a.slot(3) }), m, i + 1)
         case 112:
             return ModChain.apply(v.allowsHitTesting(a.bool(0)), m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 120:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 guard let p0 = dp_ArrangementViewStyle(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -115,14 +115,14 @@ import UniformTypeIdentifiers
 #endif
         case 216:
             return ModChain.apply(v.disabled(a.bool(0)), m, i + 1)
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
         case 224:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(a.string(0), shouldPresent: a.bool(1), actions: { a.slot(2) }, message: { a.slot(3) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         case 232:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchTitle(LocalizedStringKey(a.string(0))), m, i + 1)
@@ -266,7 +266,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v.searchable(text: a.stringBinding(0), placement: p1, prompt: LocalizedStringKey(a.string(3)), suggestions: { a.slot(4) }), m, i + 1)
         case 528:
             return ModChain.apply(v.sheet(isPresented: a.boolBinding(0), onDismiss: a.actionOpt(2), content: { a.slot(3) }), m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 536:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.splitArrangementLayoutRatio(minHorizontal: a.cgFloatOpt(0), idealHorizontal: a.cgFloatOpt(1), maxHorizontal: a.cgFloatOpt(2), minVertical: a.cgFloatOpt(3), idealVertical: a.cgFloatOpt(4), maxVertical: a.cgFloatOpt(5)), m, i + 1)

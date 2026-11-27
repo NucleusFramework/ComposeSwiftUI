@@ -33,6 +33,8 @@ internal object ExtraIds {
     const val MATCHED_GEOMETRY = 100_006
     const val MATCHED_TRANSITION_SOURCE = 100_007
     const val ZOOM_TRANSITION = 100_008
+    const val TRANSACTION_MODIFIER = 100_121
+    const val TRANSACTION_VALUE = 17
 }
 
 // ---- data-driven containers ---------------------------------------------------------------------
@@ -432,6 +434,88 @@ public fun <R> withAnimation(animation: Animation? = Animation.default, block: (
     return result as R
 }
 
+/**
+ * Returns a copy of this [Transaction] with `animation` set to [animation] (SwiftUI `Transaction.animation`).
+ */
+@HiddenFromObjC
+public fun Transaction.animation(animation: Animation?): Transaction =
+    Transaction(ExtraIds.TRANSACTION_VALUE, listOf(this, true, animation, null, null))
+
+/**
+ * Returns a copy of this [Transaction] with `disablesAnimations` set to [disabled]
+ * (SwiftUI `Transaction.disablesAnimations`).
+ */
+@HiddenFromObjC
+public fun Transaction.disablesAnimations(disabled: Boolean = true): Transaction =
+    Transaction(ExtraIds.TRANSACTION_VALUE, listOf(this, false, null, disabled, null))
+
+/**
+ * Returns a copy of this [Transaction] with `isContinuous` set to [continuous]
+ * (SwiftUI `Transaction.isContinuous`).
+ */
+@HiddenFromObjC
+public fun Transaction.isContinuous(continuous: Boolean = true): Transaction =
+    Transaction(ExtraIds.TRANSACTION_VALUE, listOf(this, false, null, null, continuous))
+
+/**
+ * Builds a SwiftUI [Transaction] configured with [animation], [disablesAnimations], and [isContinuous].
+ */
+@HiddenFromObjC
+public fun transaction(
+    animation: Animation? = null,
+    disablesAnimations: Boolean = false,
+    isContinuous: Boolean = false,
+): Transaction = Transaction(ExtraIds.TRANSACTION_VALUE, listOf(null, true, animation, disablesAnimations, isContinuous))
+
+/**
+ * SwiftUI `withTransaction(_:_:)`: state changes made in [block] (and the resulting recomposition) are applied
+ * synchronously inside [transaction].
+ */
+@HiddenFromObjC
+public fun <R> withTransaction(transaction: Transaction, block: () -> R): R {
+    val runner = SwiftUIBridge.transactionRunner ?: return block()
+    var result: Any? = null
+    runner(transaction) { result = block() }
+    @Suppress("UNCHECKED_CAST")
+    return result as R
+}
+
+/**
+ * SwiftUI `withTransaction(_:_:)`: convenience overload configuring `animation`, `disablesAnimations`, and
+ * `isContinuous` inline.
+ */
+@HiddenFromObjC
+public fun <R> withTransaction(
+    animation: Animation? = null,
+    disablesAnimations: Boolean = false,
+    isContinuous: Boolean = false,
+    block: () -> R,
+): R = withTransaction(transaction(animation = animation, disablesAnimations = disablesAnimations, isContinuous = isContinuous), block)
+
+/**
+ * SwiftUI `transaction(_:)`: overrides transaction properties (`animation`, `disablesAnimations`, `isContinuous`)
+ * for this view subtree. Pass `setAnimation = true` with `animation = null` to clear inherited animations.
+ */
+@HiddenFromObjC
+public fun Modifier.transaction(
+    animation: Animation? = null,
+    setAnimation: Boolean = animation != null,
+    disablesAnimations: Boolean? = null,
+    isContinuous: Boolean? = null,
+): Modifier = element(ExtraIds.TRANSACTION_MODIFIER, setAnimation, animation, disablesAnimations, isContinuous, false, null)
+
+/**
+ * SwiftUI `transaction(value:_:)`: applies transaction overrides only when [value] changes.
+ */
+@HiddenFromObjC
+public fun Modifier.transaction(
+    value: Any,
+    animation: Animation? = null,
+    setAnimation: Boolean = animation != null,
+    disablesAnimations: Boolean? = null,
+    isContinuous: Boolean? = null,
+): Modifier = element(ExtraIds.TRANSACTION_MODIFIER, setAnimation, animation, disablesAnimations, isContinuous, true, value)
+
 // ---- custom layout, shapes and native views ----------------------------------------------------
 
 /** A SwiftUI `Layout` implemented in Kotlin by [policy]. */
@@ -518,11 +602,11 @@ public class PathBuilder internal constructor() {
 }
 
 /**
- * A custom SwiftUI `Shape` drawn from Kotlin path commands in unit coordinates; usable everywhere a
- * `Shape` is (ShapeView, clipShape, background(in:), contentShape…).
+ * A custom SwiftUI `InsettableShape` & `Animatable` drawn from Kotlin path commands in unit coordinates; usable
+ * everywhere a `Shape` or `InsettableShape` is (ShapeView, clipShape, background(in:), inset(by:), contentShape…).
  */
 @HiddenFromObjC
-public class PathShape internal constructor(commands: List<Double>) : SExpr(5, listOf(commands)), Shape {
+public class PathShape internal constructor(commands: List<Double>) : SExpr(5, listOf(commands)), InsettableShape {
     public constructor(build: PathBuilder.() -> Unit) : this(PathBuilder().apply(build).commands.toList())
 }
 

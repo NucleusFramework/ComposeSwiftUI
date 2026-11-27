@@ -119,14 +119,14 @@ import UniformTypeIdentifiers
 #endif
         case 215:
             return ModChain.apply(v.disableAutocorrection(a.boolOpt(0)), m, i + 1)
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
         case 223:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(LocalizedStringResource(String.LocalizationValue(a.string(0))), shouldPresent: a.bool(1), actions: { a.slot(2) }, message: { a.slot(3) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         case 231:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchTitle(Text(a.string(0))), m, i + 1)
@@ -180,7 +180,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v, m, i + 1)
         case 335:
             return ModChain.apply(v.listItemTint(d_ListItemTint(a.expr(0))), m, i + 1)
-#if (os(iOS) || os(tvOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(tvOS)) && (canImport(SwiftUI, _version: 8.0))
         case 343:
             if #available(iOS 17.0, macOS 14.0, tvOS 27.0, watchOS 10.0, *) {
                 return ModChain.apply(v.listRowSpacing(a.cgFloatOpt(0)), m, i + 1)
@@ -264,7 +264,7 @@ import UniformTypeIdentifiers
         case 527:
             let p0: Color = a.isNil(0) ? Color(.sRGBLinear, white: 0, opacity: 0.33) : (d_Color(a.expr(0)) ?? Color(.sRGBLinear, white: 0, opacity: 0.33))
             return ModChain.apply(v.shadow(color: p0, radius: a.cgFloat(1), x: a.cgFloat(2), y: a.cgFloat(3)), m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 535:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.splitArrangementLayoutRatio(a.cgFloatOpt(0)), m, i + 1)
@@ -276,7 +276,7 @@ import UniformTypeIdentifiers
         case 551:
             guard let p0 = d_SymbolVariants(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.symbolVariant(p0), m, i + 1)
-#if (os(iOS) || os(macOS) || os(tvOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS) || os(tvOS)) && (canImport(SwiftUI, _version: 8.0))
         case 559:
             if #available(iOS 18.0, macOS 15.0, tvOS 27.0, watchOS 10.0, *) {
                 return ModChain.apply(v.tabViewSidebarHeader(content: { a.slot(0) }), m, i + 1)
@@ -303,7 +303,7 @@ import UniformTypeIdentifiers
             guard let p0 = d_Visibility(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
             guard let p1 = d_ToolbarPlacement(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.toolbarBackground(p0, for: p1), m, i + 1)
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         case 591:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.toolbarOverflowMenu(content: { a.slot(0) }), m, i + 1)

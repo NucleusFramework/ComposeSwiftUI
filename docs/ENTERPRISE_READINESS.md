@@ -61,7 +61,7 @@ process, os_log, XCTest), `scripts/run_ios_package_e2e.sh [--cocoapods]` (app iO
 - [x] Guide XCUITest et snapshot testing — `docs/guide/33-production.md` renvoie aux exemples `e2e/` (pilotage AXUIElement, XCTest + snapshots)
 
 ## P1 — Versioning et supply chain
-- [ ] Release 1.0 avec SemVer strict — politique écrite (`docs/VERSIONING.md`) ; publiée en 0.10.0 (tag `v0.10.0`), la 1.0.0 reste à venir
+- [x] Release 1.0 avec SemVer strict — politique écrite (`docs/VERSIONING.md`) ; 1.0.0 publiée (tag `v1.0.0`)
 - [x] Politique de dépréciation — `docs/VERSIONING.md`
 - [x] Matrice de compatibilité Kotlin / Compose runtime / Xcode — `docs/VERSIONING.md`
 - [x] Une seule source de vérité pour la version : `VERSION` (runtime, plugin Gradle, plugin IntelliJ) ; un tag différent fait échouer le build

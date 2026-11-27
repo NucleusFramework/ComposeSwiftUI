@@ -19,7 +19,7 @@ import UniformTypeIdentifiers
             let a = m.args
             return ModChain.apply(AnyView(erasing: ChildrenView(m)), m, m.consumedPrefix)
         }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         r[5] = { m in
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 let a = m.args
@@ -957,7 +957,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[202] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -968,7 +968,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[203] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -979,7 +979,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[204] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -990,7 +990,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[205] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -1000,7 +1000,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[206] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -1010,7 +1010,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[207] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -1020,7 +1020,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[208] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -1030,7 +1030,7 @@ import UniformTypeIdentifiers
             return AnyView(EmptyView())
         }
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         r[209] = { m in
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 let a = m.args
@@ -1813,7 +1813,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(TextFieldLink(a.string(0), prompt: a.stringOpt(1).map { Text($0) }, onSubmit: a.callback(2, box: KBox.string)), m, m.consumedPrefix)
         }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
         r[369] = { m in
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 let a = m.args

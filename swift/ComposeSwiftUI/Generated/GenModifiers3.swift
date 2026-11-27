@@ -111,21 +111,21 @@ import UniformTypeIdentifiers
             guard let p3 = d_DigitalCrownRotationalSensitivity(a.expr(4)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.digitalCrownRotation(a.doubleBinding(0), from: a.double(2), through: a.double(3), sensitivity: p3, isContinuous: a.bool(5), isHapticFeedbackEnabled: a.bool(6), onIdle: a.action(7)), m, i + 1)
 #endif
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
         case 219:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(LocalizedStringResource(String.LocalizationValue(a.string(0))), shouldPresent: a.bool(1), actions: { a.slot(2) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         case 227:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchSubtitle(Text(a.string(0))), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
         case 235:
             if #available(iOS 27.0, macOS 26.0, tvOS 17.0, watchOS 10.0, *) {
                 guard let p0 = d_DragConfiguration(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -180,7 +180,7 @@ import UniformTypeIdentifiers
         case 299:
             return ModChain.apply(v.horizontalRadioGroupLayout(), m, i + 1)
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
         case 307:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_SafeAreaRegions(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -233,7 +233,7 @@ import UniformTypeIdentifiers
 #endif
         case 403:
             return ModChain.apply(v.onChange(of: a.hashable(0), perform: a.callback(1, box: KBox.hashable)), m, i + 1)
-#if (os(iOS) || os(macOS) || os(watchOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS) || os(watchOS)) && (canImport(SwiftUI, _version: 8.0))
         case 411:
             if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
                 guard let p2 = d_GestureInputKinds(a.expr(2)) else { return ModChain.apply(v, m, i + 1) }
@@ -254,7 +254,7 @@ import UniformTypeIdentifiers
             }
             return open(p1)
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 435:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.overlayArrangementEdge(d_HorizontalEdge(a.expr(0))), m, i + 1)

@@ -67,6 +67,7 @@ internal object InteractiveIds {
     const val ACCESSIBILITY_LINKED_GROUP = 100_049
     const val ACCESSIBILITY_LABELED_PAIR = 100_050
     const val PREFERS_DEFAULT_FOCUS = 100_051
+    const val SYMBOL_EFFECT_FULL = 100_118
 }
 
 // ---- AsyncImage --------------------------------------------------------------------------------
@@ -704,6 +705,77 @@ public fun Modifier.phaseAnimator(phases: List<VisualEffects>, trigger: Any? = n
 @HiddenFromObjC
 public enum class SymbolEffectKind { Bounce, Pulse, VariableColor, Scale, Appear, Disappear, Wiggle, Rotate, Breathe }
 
+/**
+ * Configuration options for [symbolEffect] (`Symbols.SymbolEffectOptions`): speed multiplier and repetition mode.
+ */
+@HiddenFromObjC
+public data class SymbolEffectOptions(
+    public val speed: Double? = null,
+    public val repeatCount: Int? = null,
+    public val repeating: Boolean? = null,
+) {
+    public fun speed(speed: Double): SymbolEffectOptions = copy(speed = speed)
+    public fun repeat(count: Int): SymbolEffectOptions = copy(repeatCount = count, repeating = null)
+    public fun repeating(): SymbolEffectOptions = copy(repeating = true, repeatCount = null)
+    public fun nonRepeating(): SymbolEffectOptions = copy(repeating = false, repeatCount = null)
+
+    public companion object {
+        public val default: SymbolEffectOptions = SymbolEffectOptions()
+        public val repeating: SymbolEffectOptions = SymbolEffectOptions(repeating = true)
+        public val nonRepeating: SymbolEffectOptions = SymbolEffectOptions(repeating = false)
+        public fun speed(speed: Double): SymbolEffectOptions = SymbolEffectOptions(speed = speed)
+        public fun repeat(count: Int): SymbolEffectOptions = SymbolEffectOptions(repeatCount = count)
+    }
+}
+
+/**
+ * A composable SF Symbol effect with chainable variants, mirroring SwiftUI's `Symbols` effects
+ * (for example `SymbolEffect.bounce.up.byLayer`, `SymbolEffect.variableColor.iterative.reversing`,
+ * or `SymbolEffect.rotate.clockwise`).
+ */
+@HiddenFromObjC
+public class SymbolEffect internal constructor(
+    internal val kind: SymbolEffectKind,
+    internal val variants: List<String> = emptyList(),
+) {
+    private fun with(variant: String): SymbolEffect = SymbolEffect(kind, variants + variant)
+
+    public val up: SymbolEffect get() = with("up")
+    public val down: SymbolEffect get() = with("down")
+    public val byLayer: SymbolEffect get() = with("byLayer")
+    public val wholeSymbol: SymbolEffect get() = with("wholeSymbol")
+    public val reversing: SymbolEffect get() = with("reversing")
+    public val nonReversing: SymbolEffect get() = with("nonReversing")
+    public val cumulative: SymbolEffect get() = with("cumulative")
+    public val iterative: SymbolEffect get() = with("iterative")
+    public val hideInactiveLayers: SymbolEffect get() = with("hideInactiveLayers")
+    public val dimInactiveLayers: SymbolEffect get() = with("dimInactiveLayers")
+    public val clockwise: SymbolEffect get() = with("clockwise")
+    public val counterClockwise: SymbolEffect get() = with("counterClockwise")
+    public val left: SymbolEffect get() = with("left")
+    public val right: SymbolEffect get() = with("right")
+    public val forward: SymbolEffect get() = with("forward")
+    public val backward: SymbolEffect get() = with("backward")
+    public val plain: SymbolEffect get() = with("plain")
+    public val pulseVariant: SymbolEffect get() = with("pulse")
+
+    override fun equals(other: Any?): Boolean = other is SymbolEffect && kind == other.kind && variants == other.variants
+    override fun hashCode(): Int = 31 * kind.hashCode() + variants.hashCode()
+    override fun toString(): String = if (variants.isEmpty()) "SymbolEffect.$kind" else "SymbolEffect.$kind.${variants.joinToString(".")}"
+
+    public companion object {
+        public val bounce: SymbolEffect = SymbolEffect(SymbolEffectKind.Bounce)
+        public val pulse: SymbolEffect = SymbolEffect(SymbolEffectKind.Pulse)
+        public val variableColor: SymbolEffect = SymbolEffect(SymbolEffectKind.VariableColor)
+        public val scale: SymbolEffect = SymbolEffect(SymbolEffectKind.Scale)
+        public val appear: SymbolEffect = SymbolEffect(SymbolEffectKind.Appear)
+        public val disappear: SymbolEffect = SymbolEffect(SymbolEffectKind.Disappear)
+        public val wiggle: SymbolEffect = SymbolEffect(SymbolEffectKind.Wiggle)
+        public val rotate: SymbolEffect = SymbolEffect(SymbolEffectKind.Rotate)
+        public val breathe: SymbolEffect = SymbolEffect(SymbolEffectKind.Breathe)
+    }
+}
+
 /** SwiftUI `symbolEffect(_:options:isActive:)`: a continuous symbol animation while [isActive]. */
 @HiddenFromObjC
 public fun Modifier.symbolEffect(effect: SymbolEffectKind, isActive: Boolean = true): Modifier =
@@ -713,6 +785,58 @@ public fun Modifier.symbolEffect(effect: SymbolEffectKind, isActive: Boolean = t
 @HiddenFromObjC
 public fun Modifier.symbolEffect(effect: SymbolEffectKind, value: Any): Modifier =
     element(InteractiveIds.SYMBOL_EFFECT, effect.ordinal, true, value, true)
+
+/** SwiftUI `symbolEffect(_:options:isActive:)` with [SymbolEffect] variants and [SymbolEffectOptions]. */
+@HiddenFromObjC
+public fun Modifier.symbolEffect(
+    effect: SymbolEffect,
+    options: SymbolEffectOptions = SymbolEffectOptions.default,
+    isActive: Boolean = true,
+): Modifier = element(
+    InteractiveIds.SYMBOL_EFFECT_FULL,
+    effect.kind.ordinal,
+    effect.variants,
+    options.speed,
+    options.repeatCount,
+    options.repeating,
+    isActive,
+    null,
+    false,
+)
+
+/** SwiftUI `symbolEffect(_:options:value:)` with [SymbolEffect] variants and [SymbolEffectOptions]. */
+@HiddenFromObjC
+public fun Modifier.symbolEffect(
+    effect: SymbolEffect,
+    options: SymbolEffectOptions = SymbolEffectOptions.default,
+    value: Any,
+): Modifier = element(
+    InteractiveIds.SYMBOL_EFFECT_FULL,
+    effect.kind.ordinal,
+    effect.variants,
+    options.speed,
+    options.repeatCount,
+    options.repeating,
+    true,
+    value,
+    true,
+)
+
+/** SwiftUI `symbolEffect(_:options:isActive:)` for [SymbolEffectKind] with [SymbolEffectOptions]. */
+@HiddenFromObjC
+public fun Modifier.symbolEffect(
+    effect: SymbolEffectKind,
+    options: SymbolEffectOptions,
+    isActive: Boolean = true,
+): Modifier = symbolEffect(SymbolEffect(effect), options = options, isActive = isActive)
+
+/** SwiftUI `symbolEffect(_:options:value:)` for [SymbolEffectKind] with [SymbolEffectOptions]. */
+@HiddenFromObjC
+public fun Modifier.symbolEffect(
+    effect: SymbolEffectKind,
+    options: SymbolEffectOptions,
+    value: Any,
+): Modifier = symbolEffect(SymbolEffect(effect), options = options, value = value)
 
 /** A mesh of colors (SwiftUI `MeshGradient`, iOS 18): [points] are `x, y` pairs in unit space, row by row. */
 @HiddenFromObjC

@@ -37,6 +37,7 @@ next major version.
 
 | Compose SwiftUI | Kotlin | Compose runtime | AndroidX Lifecycle | Xcode (build) | Minimum OS |
 |---|---|---|---|---|---|
+| 1.0.x | 2.4.20 | 1.11.4 | 2.11.0 | 27.x (N), 26.x (N-1) | iOS 17, macOS 14, tvOS 17, watchOS 10 |
 | 0.10.x | 2.4.20 | 1.11.4 | 2.11.0 | 27.x (N), 26.x (N-1) | iOS 17, macOS 14, tvOS 17, watchOS 10 |
 | 0.9.x | 2.4.20 | 1.10.4 | 2.10.0 | 27.2 | iOS 17, macOS 14, tvOS 17, watchOS 10 |
 

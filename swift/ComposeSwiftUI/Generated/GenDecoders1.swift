@@ -399,7 +399,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ContentSizeCategory
     }
 }
-#if (os(iOS) || os(tvOS) || os(watchOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(tvOS) || os(watchOS)) && (canImport(SwiftUI, _version: 8.0))
 @available(iOS 27.0, macOS 14.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_CrossFadeNavigationTransition(_ e: SExpr?) -> CrossFadeNavigationTransition? {
     guard let e else { return nil }
@@ -659,7 +659,7 @@ import UniformTypeIdentifiers
         return .saturation(a.double(0))
     case 1720:
         return .colorInvert(a.double(0))
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1721:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_ColorMatrix(a.expr(0)) else { return nil }
@@ -684,7 +684,7 @@ import UniformTypeIdentifiers
         guard let p1 = d_CGSize(a.expr(1)) else { return nil }
         return .layerShader(p0, maxSampleOffset: p1)
     #endif
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1726:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_Color(a.expr(0)) else { return nil }
@@ -1245,19 +1245,19 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_TabSectionExpansion(_ e: SExpr?) -> TabSectionExpansion? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2383:
         return .expanded
     #endif
     case 2384:
         return .automatic
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2385:
         return .collapsed
     #endif
@@ -1269,7 +1269,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 2403:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
             guard let p1 = d_GestureInputKinds(a.expr(1)) else { return nil }
@@ -1331,17 +1331,17 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ToolbarItemAxisBehavior(_ e: SExpr?) -> ToolbarItemAxisBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0.85))
     case 2475:
         return .horizontalOnly
     #endif
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0.85))
     case 2476:
         return .verticalPreferred
     #endif
@@ -1351,17 +1351,17 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_ToolbarMinimizationSafeAreaAdjustment(_ e: SExpr?) -> ToolbarMinimizationSafeAreaAdjustment? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2515:
         return .enabled
     #endif
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2516:
         return .disabled
     #endif
@@ -1371,7 +1371,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ToolbarVerticalBehavior(_ e: SExpr?) -> ToolbarVerticalBehavior? {
     guard let e else { return nil }

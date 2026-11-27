@@ -80,10 +80,16 @@ class Item:
         return self.platforms
 
 
-# APIs introduced in the SDKs of the newest Xcode compile only with its Swift compiler: behind `#if compiler(>=…)`, the
-# renderer still builds with the previous Xcode (N-1), where those APIs render nothing.
+# APIs introduced in the SDKs of the newest Xcode compile only when SwiftUI's module version is at least the version
+# that added them. Using `#if canImport(SwiftUI, _version: …)` instead of `#if compiler(>=…)` separates point releases
+# that share a Swift compiler (Xcode 27.0, 27.1, 27.2 all ship Swift 6.4) while still building on Xcode N-1 (26.x).
 NEWEST_SDK = {"ios": (27, 0), "macos": (27, 0), "tvos": (27, 0), "watchos": (27, 0)}
-NEWEST_COMPILER = "6.4"  # Swift of Xcode 27.0
+SWIFTUI_SDK_VERSIONS = (
+    ((27, 2), "8.1.13"),  # Xcode 27.2 (iOS/macOS/tvOS/watchOS 27.2)
+    ((27, 1), "8.0.85"),  # Xcode 27.1 (iOS/macOS/tvOS/watchOS 27.1)
+    ((27, 0), "8.0"),     # Xcode 27.0 (iOS/macOS/tvOS/watchOS 27.0)
+)
+NEWEST_SWIFTUI_VERSION = "8.0"
 
 
 class NewestSdkOnly(dict):
@@ -104,16 +110,37 @@ def newest_sdk_only(plats, *usrs):
     return NewestSdkOnly(plats) if any(u in N1_MISSING for u in usrs) else plats
 
 
+def _ver_key(ver):
+    return tuple(int(part) for part in ver.split("."))
+
+
+def required_swiftui_version(plats):
+    """Minimum SwiftUI module version needed to compile `plats`, or None when Xcode N-1 already defines it."""
+    highest = max((v for p, v in plats.items() if p in NEWEST_SDK), default=(0, 0))
+    for min_os, mod_ver in SWIFTUI_SDK_VERSIONS:
+        if highest >= min_os:
+            return mod_ver
+    if isinstance(plats, NewestSdkOnly):
+        return NEWEST_SWIFTUI_VERSION
+    return None
+
+
 def needs_newest_sdk(plats):
-    return isinstance(plats, NewestSdkOnly) or any(v >= NEWEST_SDK[p] for p, v in plats.items() if p in NEWEST_SDK)
+    return required_swiftui_version(plats) is not None
+
+
+def sdk_guard_expr(ver):
+    return "canImport(SwiftUI, _version: %s)" % ver
 
 
 def case_guard(plats, enclosing):
     """#if line of a member inside a declaration available on `enclosing` (None when it needs nothing more)."""
     if set(plats) != set(enclosing) & set(PLATFORMS):
         return platform_guard(plats)[0]
-    if needs_newest_sdk(plats) and not needs_newest_sdk(enclosing):
-        return "#if compiler(>=%s)" % NEWEST_COMPILER
+    req = required_swiftui_version(plats)
+    enc = required_swiftui_version(enclosing)
+    if req and (not enc or _ver_key(req) > _ver_key(enc)):
+        return "#if " + sdk_guard_expr(req)
     return None
 
 
@@ -124,8 +151,9 @@ def platform_guard(plats):
     conditions = []
     if set(plats) != set(PLATFORMS):
         conditions.append(" || ".join("os(%s)" % OSNAME[p] for p in sorted(plats)))
-    if needs_newest_sdk(plats):
-        conditions.append("compiler(>=%s)" % NEWEST_COMPILER)
+    req = required_swiftui_version(plats)
+    if req:
+        conditions.append(sdk_guard_expr(req))
     ifline = None
     if conditions:
         ifline = "#if " + (conditions[0] if len(conditions) == 1 else " && ".join("(%s)" % c for c in conditions))

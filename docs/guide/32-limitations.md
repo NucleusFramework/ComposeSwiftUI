@@ -73,9 +73,10 @@ or a key path. Kotlin can't create them.
   library (SQLDelight, Room, DataStore) and expose the data as state.
 - **Observation and Combine.** `ObservableObject`, `@Observable`, `@Published` and `onReceive(_ publisher:)` are
   replaced by Kotlin state: `StateFlow` with `collectAsState()`, `LaunchedEffect` to collect flows.
-- **Property wrappers.** `@State`, `@Binding`, `@Environment`, `@FocusState`, `@Namespace`, `@AppStorage`,
-  `@SceneStorage`, `@FocusedValue`: Kotlin state replaces them (`remember`, hoisted values and callbacks,
-  `EnvironmentReader`, `Modifier.focused`, `NamespaceScope`, your own storage for persisted values).
+- **Property wrappers.** `@State`, `@Binding`, `@Environment`, `@FocusState`, `@FocusedValue`, `@FocusedSceneValue`,
+  `@Namespace`, `@AppStorage`, `@SceneStorage`: Kotlin state and readers replace them (`remember`, hoisted values and
+  callbacks, `EnvironmentReader`, `Modifier.focused`, `FocusedValueReader` / `FocusedSceneValueReader`,
+  `NamespaceScope`, your own storage for persisted values).
 - **Key paths.** `ForEach(data, id: \.id)`, `Table` columns by key path, `environment(\.key, value)`: Kotlin lambdas
   replace them (`key = { it.id }`, `column("Name") { Text(it.name) }`, `Modifier.environment(name = value)` for the 60
   settable environment values).
@@ -99,7 +100,7 @@ so on. Kotlin can't conform to Swift protocols, so each one has a Kotlin equival
 | `View` | A `@Composable` function |
 | `ViewModifier` | A function returning a `Modifier` chain |
 | `Layout` | `CustomLayout(policy)` with a `LayoutPolicy` |
-| `Shape` | `PathShape { … }` and the shape operations |
+| `Shape`, `InsettableShape`, `Animatable` | `PathShape { … }`, `AnimatablePathShape(…) { rect, params -> … }` and the shape operations |
 | `ButtonStyle`, `ToggleStyle`, `LabelStyle` and other styles | `Modifier.buttonStyle { isPressed -> }` and the other style lambdas |
 | `PreferenceKey`, `ContainerValueKey`, `LayoutValueKey` | `preference` / `onPreferenceChange`, `containerValue`, `layoutValue` |
 | `Transition`, `CustomAnimation`, `TextRenderer`, `DropDelegate` | `Modifier.transition { stage -> }`, `customAnimation`, `textRenderer`, `onDrop` with a Kotlin delegate |
@@ -129,8 +130,9 @@ collections and key paths. In Kotlin, they take Kotlin lists and lambdas: a loop
 - **Apple only.** Compose SwiftUI renders SwiftUI, so its UI code runs on iOS, macOS, tvOS and watchOS. Share view
   models and logic with Android; write the Android UI with Compose UI, or use Compose Multiplatform where one UI for
   every platform matters more than native views. See [Introduction](introduction.md).
-- **Xcode 27.2 to build.** The renderer references the newest SwiftUI APIs, so an older Xcode can't compile it. The
-  deployment target stays at iOS 17, macOS 14, tvOS 17 and watchOS 10.
+- **Xcode compatibility.** The renderer guards the newest SDK APIs behind fine-grained `#if canImport(SwiftUI, _version: …)`
+  checks so both the newest Xcode and the previous Xcode (N-1) compile cleanly. The deployment target stays at
+  iOS 17, macOS 14, tvOS 17 and watchOS 10.
 - **Performance.** Mounting costs 8% to 18% more than plain SwiftUI and scrolled-in rows cost more to create; long
   lists need `LazyForEach`. See [Performance](performance.md).
 - **Pixel parity.** On iOS, 2 of the 50 benchmark screens differ from plain SwiftUI by less than a pixel (one SF

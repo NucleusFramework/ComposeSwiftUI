@@ -78,7 +78,7 @@ import UniformTypeIdentifiers
                 return ModChain.apply(v.containerCornerOffset(p0, sizeToFit: a.bool(1)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 177:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 guard let p0 = d_ContentMarginGuide(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -123,14 +123,14 @@ import UniformTypeIdentifiers
             }
             return open(p0)
 #endif
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
         case 225:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(Text(a.string(0)), shouldPresent: a.bool(1), actions: { a.slot(2) }, message: { a.slot(3) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         case 233:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchTitle(LocalizedStringResource(String.LocalizationValue(a.string(0)))), m, i + 1)
@@ -232,7 +232,7 @@ import UniformTypeIdentifiers
         case 417:
             return ModChain.apply(v.onMoveCommand(perform: (a.isNil(0) ? nil : a.callback(0, box: { e_MoveCommandDirection($0) ?? NSNull() }))), m, i + 1)
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
         case 425:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p1 = dp_CoordinateSpaceProtocol(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
@@ -296,14 +296,14 @@ import UniformTypeIdentifiers
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 537:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.splitArrangementLayoutSize(minWidth: a.cgFloatOpt(0), idealWidth: a.cgFloatOpt(1), maxWidth: a.cgFloatOpt(2), minHeight: a.cgFloatOpt(3), idealHeight: a.cgFloatOpt(4), maxHeight: a.cgFloatOpt(5)), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS) || os(macOS) || os(watchOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS) || os(watchOS)) && (canImport(SwiftUI, _version: 8.0))
         case 545:
             if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
                 guard let p0 = d_HorizontalEdge(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -327,7 +327,7 @@ import UniformTypeIdentifiers
         case 585:
             guard let p1 = d_ToolbarPlacement(a.expr(1)) else { return ModChain.apply(v, m, i + 1) }
             return ModChain.apply(v.toolbarColorScheme(d_ColorScheme(a.expr(0)), for: p1), m, i + 1)
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.1.13))
         case 593:
             if #available(iOS 27.2, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 guard let p0 = d_ToolbarTitleAlignment(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -361,7 +361,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v.environment(\.contentTransition, p0), m, i + 1)
         case 649:
             return ModChain.apply(v.environment(\.symbolRenderingMode, d_SymbolRenderingMode(a.expr(0))), m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 657:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 return ModChain.apply(v.environment(\.overlayArrangementZIndex, a.int(0)), m, i + 1)

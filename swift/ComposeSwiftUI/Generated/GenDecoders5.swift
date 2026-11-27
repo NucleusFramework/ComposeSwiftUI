@@ -166,7 +166,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? AnyShape
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_AutomaticArrangementViewStyle(_ e: SExpr?) -> AutomaticArrangementViewStyle? {
     guard let e else { return nil }
@@ -704,7 +704,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ForegroundStyle
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_GestureInputKinds(_ e: SExpr?) -> GestureInputKinds? {
     guard let e else { return nil }
@@ -1082,7 +1082,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 2113:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
             let p0: Angle = a.isNil(0) ? .degrees(1) : (d_Angle(a.expr(0)) ?? .degrees(1))
@@ -1297,7 +1297,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 2379:
         return .search
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 2380:
         if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
             return .prominent
@@ -1361,7 +1361,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? Text.TruncationMode
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_TextInputBorderShape(_ e: SExpr?) -> TextInputBorderShape? {
     guard let e else { return nil }
@@ -1401,21 +1401,21 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? ToolbarCustomizationOptions
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_ToolbarMinimizationBehavior(_ e: SExpr?) -> ToolbarMinimizationBehavior? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2509:
         return .onScrollUp
     #endif
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2510:
         return .onScrollDown
     #endif
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2511:
         return .never
     #endif
@@ -1425,7 +1425,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.1.13)
 @available(iOS 27.2, macOS 27.2, tvOS 27.2, watchOS 27.2, *)
 @MainActor func d_ToolbarTitleAlignment(_ e: SExpr?) -> ToolbarTitleAlignment? {
     guard let e else { return nil }

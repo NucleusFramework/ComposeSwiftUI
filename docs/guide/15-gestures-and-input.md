@@ -306,9 +306,45 @@ NamespaceScope { ns ->
 }
 ```
 
-SwiftUI's focused values (`focusedValue`, `focusedSceneValue`, `@FocusedValue`) are not bridged: they exist to pass
-data from the focused view to menu commands through key paths. In Kotlin, keep that data in a shared view model or
-`StateFlow` that both the screen and your Swift commands observe (see [Platforms](platforms.md)).
+### Focused values and focused scene values
+
+SwiftUI's `@FocusedValue` and `@FocusedSceneValue` are bridged with `FocusedValueKey<T>`, `Modifier.focusedValue`,
+`Modifier.focusedSceneValue`, `FocusedValueReader` and `FocusedSceneValueReader`. SwiftUI propagates lightweight
+string tokens through its native focus hierarchy while the Kotlin objects (including data classes, ViewModels or
+lambdas) stay intact in Kotlin memory:
+
+```kotlin
+data class EditorActions(val title: String, val onSave: () -> Unit)
+
+val ActiveEditorKey = FocusedValueKey<EditorActions>("activeEditor")
+
+@Composable
+fun EditorWithToolbar() {
+    var text by remember { mutableStateOf("") }
+    var saved by remember { mutableStateOf("") }
+    VStack(modifier = Modifier.focusedSceneValue(ActiveEditorKey, EditorActions("Untitled") { saved = text })) {
+        FocusedSceneValueReader(ActiveEditorKey) { actions ->
+            HStack {
+                Text(actions?.title ?: "No document")
+                Button("Save") { actions?.onSave?.invoke() }
+            }
+        }
+        TextField(
+            "Notes",
+            text = text,
+            onTextChange = { text = it },
+            modifier = Modifier.focusedValue(ActiveEditorKey, EditorActions("Notes field") { saved = text }),
+        )
+        FocusedValueReader(ActiveEditorKey) { focused ->
+            Text("Focused: ${focused?.title ?: "none"} · Saved: $saved")
+        }
+    }
+}
+```
+
+When nested views publish the same `FocusedValueKey`, the innermost focused view wins automatically, and unmounting or
+moving focus clears the reader back to `null` (or falls back to an enclosing value). For menu bar `CommandMenu` actions
+declared in Swift, you can still share a `StateFlow` or ViewModel between Kotlin and Swift (see [Platforms](platforms.md)).
 
 ## Keyboard
 

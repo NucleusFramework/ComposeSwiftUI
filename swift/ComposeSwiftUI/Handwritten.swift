@@ -121,6 +121,8 @@ extension ComposeGenerated {
         InteractiveRenderers.register()
         AdvancedRenderers.register()
         CompletionRenderers.register()
+        ExpressionRenderers.register()
+        FocusTokenRenderers.register()
         PlatformViewRenderers.register()
         ComposeIntegrations.registerConfigured()
     }
@@ -141,10 +143,21 @@ extension ComposeGenerated {
         case 7: return AdvancedValues.decode(e)
         case 8, 9, 10, 11, 12, 13, 14: return CompletionValues.decode(e)
         case 15: return OptionSetUnion.decode(e)
+        case 16: return ExpressionRenderers.decode(e)
+        case 17: return decodeTransaction(e)
         case 5: return KotlinPathShape(commands: Args(expr: e).list(0).compactMap { ($0 as? NSNumber)?.doubleValue })
         default: return ComposeRegistry.values[e.id]?(e)
         }
     }
+}
+
+@MainActor private func decodeTransaction(_ e: SExpr) -> Transaction {
+    let a = Args(expr: e)
+    var tx = a.isNil(0) ? Transaction() : (d_Transaction(a.expr(0)) ?? Transaction())
+    if a.bool(1) { tx.animation = d_Animation(a.expr(2)) }
+    if !a.isNil(3) { tx.disablesAnimations = a.bool(3) }
+    if !a.isNil(4) { tx.isContinuous = a.bool(4) }
+    return tx
 }
 
 
@@ -176,39 +189,81 @@ extension ComposeGenerated {
 }
 
 /// Shape built from Kotlin `PathBuilder` commands in unit coordinates.
-struct KotlinPathShape: Shape {
-    let commands: [Double]
+/// Conforms to `InsettableShape` and `Animatable` (interpolating numeric command coordinates natively in SwiftUI).
+struct KotlinPathShape: InsettableShape, Sendable {
+    private let opcodes: [Int]
+    var animatableData: KotlinAnimatableVector
+    private var insetAmount: CGFloat = 0
+
+    init(commands: [Double]) {
+        var ops: [Int] = []
+        var vals: [Double] = []
+        var i = 0
+        while i < commands.count {
+            let op = Int(commands[i])
+            let arity: Int
+            switch op {
+            case 0, 1: arity = 2
+            case 2, 5, 6: arity = 4
+            case 3, 7: arity = 6
+            case 4: arity = 0
+            case 8, 9: arity = 5
+            case 10: arity = 9
+            default: i = commands.count; continue
+            }
+            guard i + arity < commands.count else { break }
+            ops.append(op)
+            if arity > 0 { vals.append(contentsOf: commands[(i + 1)...(i + arity)]) }
+            i += 1 + arity
+        }
+        self.opcodes = ops
+        self.animatableData = KotlinAnimatableVector(vals)
+    }
+
+    func inset(by amount: CGFloat) -> KotlinPathShape {
+        var copy = self
+        copy.insetAmount += amount
+        return copy
+    }
 
     func path(in rect: CGRect) -> Path {
+        let r = rect.insetBy(dx: insetAmount, dy: insetAmount)
+        let w = max(0, r.width), h = max(0, r.height)
         var p = Path()
-        func pt(_ x: Double, _ y: Double) -> CGPoint { CGPoint(x: rect.minX + x * rect.width, y: rect.minY + y * rect.height) }
-        let side = min(rect.width, rect.height)
-        var i = 0
-        let c = commands
-        while i < c.count {
-            switch Int(c[i]) {
-            case 0: p.move(to: pt(c[i + 1], c[i + 2])); i += 3
-            case 1: p.addLine(to: pt(c[i + 1], c[i + 2])); i += 3
-            case 2: p.addQuadCurve(to: pt(c[i + 3], c[i + 4]), control: pt(c[i + 1], c[i + 2])); i += 5
-            case 3: p.addCurve(to: pt(c[i + 5], c[i + 6]), control1: pt(c[i + 1], c[i + 2]), control2: pt(c[i + 3], c[i + 4])); i += 7
-            case 4: p.closeSubpath(); i += 1
-            case 5: p.addEllipse(in: CGRect(origin: pt(c[i + 1], c[i + 2]), size: CGSize(width: c[i + 3] * rect.width, height: c[i + 4] * rect.height))); i += 5
-            case 6: p.addRect(CGRect(origin: pt(c[i + 1], c[i + 2]), size: CGSize(width: c[i + 3] * rect.width, height: c[i + 4] * rect.height))); i += 5
+        func pt(_ x: Double, _ y: Double) -> CGPoint { CGPoint(x: r.minX + x * w, y: r.minY + y * h) }
+        let side = min(w, h)
+        let c = animatableData.values
+        var v = 0
+        for op in opcodes {
+            switch op {
+            case 0: guard v + 1 < c.count else { return p }; p.move(to: pt(c[v], c[v + 1])); v += 2
+            case 1: guard v + 1 < c.count else { return p }; p.addLine(to: pt(c[v], c[v + 1])); v += 2
+            case 2: guard v + 3 < c.count else { return p }; p.addQuadCurve(to: pt(c[v + 2], c[v + 3]), control: pt(c[v], c[v + 1])); v += 4
+            case 3: guard v + 5 < c.count else { return p }; p.addCurve(to: pt(c[v + 4], c[v + 5]), control1: pt(c[v], c[v + 1]), control2: pt(c[v + 2], c[v + 3])); v += 6
+            case 4: p.closeSubpath()
+            case 5: guard v + 3 < c.count else { return p }; p.addEllipse(in: CGRect(origin: pt(c[v], c[v + 1]), size: CGSize(width: max(0, c[v + 2] * w), height: max(0, c[v + 3] * h)))); v += 4
+            case 6: guard v + 3 < c.count else { return p }; p.addRect(CGRect(origin: pt(c[v], c[v + 1]), size: CGSize(width: max(0, c[v + 2] * w), height: max(0, c[v + 3] * h)))); v += 4
             case 7:
-                p.addArc(center: pt(c[i + 1], c[i + 2]), radius: c[i + 3] * side, startAngle: .degrees(c[i + 4]),
-                         endAngle: .degrees(c[i + 5]), clockwise: c[i + 6] != 0)
-                i += 7
+                guard v + 5 < c.count else { return p }
+                p.addArc(center: pt(c[v], c[v + 1]), radius: max(0, c[v + 2] * side), startAngle: .degrees(c[v + 3]),
+                         endAngle: .degrees(c[v + 4]), clockwise: c[v + 5] >= 0.5)
+                v += 6
             case 8:
-                p.addRelativeArc(center: pt(c[i + 1], c[i + 2]), radius: c[i + 3] * side, startAngle: .degrees(c[i + 4]), delta: .degrees(c[i + 5]))
-                i += 6
-            case 9: p.addArc(tangent1End: pt(c[i + 1], c[i + 2]), tangent2End: pt(c[i + 3], c[i + 4]), radius: c[i + 5] * side); i += 6
+                guard v + 4 < c.count else { return p }
+                p.addRelativeArc(center: pt(c[v], c[v + 1]), radius: max(0, c[v + 2] * side), startAngle: .degrees(c[v + 3]), delta: .degrees(c[v + 4]))
+                v += 5
+            case 9:
+                guard v + 4 < c.count else { return p }
+                p.addArc(tangent1End: pt(c[v], c[v + 1]), tangent2End: pt(c[v + 2], c[v + 3]), radius: max(0, c[v + 4] * side))
+                v += 5
             case 10:
-                let r = CGRect(origin: pt(c[i + 1], c[i + 2]), size: CGSize(width: c[i + 3] * rect.width, height: c[i + 4] * rect.height))
-                let radii = RectangleCornerRadii(topLeading: c[i + 5] * side, bottomLeading: c[i + 6] * side,
-                                                 bottomTrailing: c[i + 7] * side, topTrailing: c[i + 8] * side)
-                p.addRoundedRect(in: r, cornerRadii: radii, style: c[i + 9] == 0 ? .circular : .continuous)
-                i += 10
-            default: i = c.count
+                guard v + 8 < c.count else { return p }
+                let rr = CGRect(origin: pt(c[v], c[v + 1]), size: CGSize(width: max(0, c[v + 2] * w), height: max(0, c[v + 3] * h)))
+                let radii = RectangleCornerRadii(topLeading: max(0, c[v + 4] * side), bottomLeading: max(0, c[v + 5] * side),
+                                                 bottomTrailing: max(0, c[v + 6] * side), topTrailing: max(0, c[v + 7] * side))
+                p.addRoundedRect(in: rr, cornerRadii: radii, style: c[v + 8] < 0.5 ? .circular : .continuous)
+                v += 9
+            default: return p
             }
         }
         return p
@@ -578,6 +633,21 @@ struct KotlinLayout: Layout {
         ComposeRegistry.modifiers[100_008] = { v, a, _ in
             AnyView(v.modifier(TransitionSourceModifier(id: KHashable(a.raw(0) as? NSObject ?? NSNull()), namespace: Int64(a.int(1)), zoom: true)))
         }
+        ComposeRegistry.modifiers[100_121] = { v, a, _ in
+            let setAnimation = a.bool(0)
+            let animation = setAnimation ? d_Animation(a.expr(1)) : nil
+            let disables: Bool? = a.isNil(2) ? nil : a.bool(2)
+            let continuous: Bool? = a.isNil(3) ? nil : a.bool(3)
+            let apply: (inout Transaction) -> Void = { tx in
+                if setAnimation { tx.animation = animation }
+                if let disables { tx.disablesAnimations = disables }
+                if let continuous { tx.isContinuous = continuous }
+            }
+            if a.bool(4) {
+                return AnyView(v.transaction(value: a.hashable(5), apply))
+            }
+            return AnyView(v.transaction(apply))
+        }
 
         SwiftUIBridge.shared.animationCompletionRunner = { expr, block, completion in
             withAnimation(d_Animation(expr), completionCriteria: .logicallyComplete) {
@@ -590,6 +660,13 @@ struct KotlinLayout: Layout {
         }
         SwiftUIBridge.shared.animationRunner = { expr, block in
             withAnimation(d_Animation(expr)) {
+                _ = block()
+                ComposeSwiftUIHostKt.flushCompose()
+            }
+        }
+        SwiftUIBridge.shared.transactionRunner = { expr, block in
+            let tx = d_Transaction(expr) ?? Transaction()
+            SwiftUI.withTransaction(tx) {
                 _ = block()
                 ComposeSwiftUIHostKt.flushCompose()
             }

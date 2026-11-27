@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0
+
+First major stable release! From 1.0.0, Compose SwiftUI strictly follows [Semantic Versioning](docs/VERSIONING.md).
+
+### Added
+
+- **Symbolic scalar expressions (`ScalarExpr`).** Native evaluation of visual effects (`visualEffectExpr`), scroll transitions (`scrollTransitionExpr`), and animatable shapes (`AnimatablePathShape`) directly in Swift on every frame without Kotlin bridge crossings during animations or scrolling.
+- **Focus values (`focusedValue`, `focusedSceneValue`).** Propagation of SwiftUI focus hierarchy values (`@FocusedValue` and `@FocusedSceneValue`) via token propagation while preserving arbitrary Kotlin types and state holders in Kotlin memory.
+
 ## 0.10.1
 
 ### Added

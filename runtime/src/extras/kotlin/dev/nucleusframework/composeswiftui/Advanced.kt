@@ -33,6 +33,7 @@ internal object AdvancedIds {
     const val DROP_DELEGATE = 100_070
     const val DATA_EXPORTER = 100_071
     const val FILE_MOVER = 100_072
+    const val KEYFRAME_TRACKS = 100_115
 
     /** Hand-written value id of a custom [Animation] (see HandwrittenValues in Swift). */
     const val CUSTOM_ANIMATION = 7
@@ -177,6 +178,47 @@ public enum class KeyframeCurve { Linear, Spring, Cubic, Move }
 @HiddenFromObjC
 public data class Keyframe(val effects: VisualEffects, val duration: Double, val curve: KeyframeCurve = KeyframeCurve.Linear)
 
+/** Property of [VisualEffects] animated by a track of [keyframeAnimator]. */
+@HiddenFromObjC
+public enum class KeyframeProperty { Opacity, Scale, OffsetX, OffsetY, RotationDegrees, BlurRadius }
+
+/** Builds the sequence of keyframes along one [KeyframeProperty] track. */
+@HiddenFromObjC
+public class KeyframeTrackBuilder internal constructor() {
+    internal val frames = ArrayList<List<Double>>()
+
+    /** SwiftUI `LinearKeyframe`: interpolates linearly to [to] over [duration] seconds. */
+    public fun linear(to: Double, duration: Double) {
+        frames += listOf(0.0, to, duration, 0.0)
+    }
+
+    /** SwiftUI `SpringKeyframe`: animates to [to] with a spring ([duration] = null uses the spring's settling time). */
+    public fun spring(to: Double, duration: Double? = null, bounce: Double = 0.0) {
+        frames += listOf(1.0, to, duration ?: -1.0, bounce)
+    }
+
+    /** SwiftUI `CubicKeyframe`: interpolates smoothly through [to] over [duration] seconds. */
+    public fun cubic(to: Double, duration: Double) {
+        frames += listOf(2.0, to, duration, 0.0)
+    }
+
+    /** SwiftUI `MoveKeyframe`: jumps immediately to [to]. */
+    public fun move(to: Double) {
+        frames += listOf(3.0, to, 0.0, 0.0)
+    }
+}
+
+/** Declares independent parallel tracks for [keyframeAnimator]. */
+@HiddenFromObjC
+public class KeyframeTracksBuilder internal constructor() {
+    internal val tracks = Array(KeyframeProperty.entries.size) { emptyList<List<Double>>() }
+
+    /** Adds a `KeyframeTrack` for [property]. */
+    public fun track(property: KeyframeProperty, build: KeyframeTrackBuilder.() -> Unit) {
+        tracks[property.ordinal] = KeyframeTrackBuilder().apply(build).frames
+    }
+}
+
 /**
  * SwiftUI `keyframeAnimator(initialValue:trigger:content:keyframes:)`: animates the view's effects through
  * [keyframes] each time [trigger] changes (or in a loop when [repeating]), starting from [initial].
@@ -194,6 +236,21 @@ public fun Modifier.keyframeAnimator(
     trigger,
     repeating,
 )
+
+/**
+ * SwiftUI `keyframeAnimator(initialValue:trigger:content:keyframes:)` with independent parallel tracks:
+ * each [KeyframeProperty] can run its own sequence of `linear`, `spring`, `cubic` and `move` keyframes.
+ */
+@HiddenFromObjC
+public fun Modifier.keyframeAnimator(
+    initial: VisualEffects = VisualEffects(),
+    trigger: Any? = null,
+    repeating: Boolean = trigger == null,
+    tracks: KeyframeTracksBuilder.() -> Unit,
+): Modifier {
+    val built = KeyframeTracksBuilder().apply(tracks).tracks.toList()
+    return element(AdvancedIds.KEYFRAME_TRACKS, initial.toList(), built, trigger, repeating)
+}
 
 /** Unit of text animated by [textRenderer]. */
 @HiddenFromObjC

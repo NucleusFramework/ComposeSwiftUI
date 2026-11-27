@@ -103,6 +103,46 @@ fun ShapesDemo() {
 Angles are in degrees. In a `PathShape`, arc radii and corner radii are fractions of the **shorter side** of the
 frame (so `arc(0.5, 0.5, 0.5, 0.0, 360.0, false)` is an inscribed circle).
 
+`PathShape` conforms to SwiftUI's `InsettableShape` and `Animatable`, so `inset(by = 4.0)`, `background(style, shape = ...)`,
+`containerShape(...)` and animations between two paths with the same command structure work natively.
+
+### Animatable custom shapes with AnimatablePathShape
+
+When a shape's geometry depends on animated parameters or exact point math, use `AnimatablePathShape`. Its path is
+expressed with symbolic `ScalarExpr` operations over `rect` (`RectExpr`: `minX`, `minY`, `midX`, `midY`, `maxX`, `maxY`,
+`width`, `height`, `minSide`) and `params` (`List<ScalarExpr>`). SwiftUI interpolates `parameters` via
+`Animatable.animatableData` and evaluates the compiled expression tree natively on every display refresh without
+crossing back into Kotlin:
+
+```kotlin
+@Composable
+fun MorphingDiamond() {
+    var inset by remember { mutableStateOf(0.0) }
+    val shape = AnimatablePathShape(inset) { rect, params ->
+        val p = params[0]
+        moveTo(rect.midX, rect.minY + p)
+        lineTo(rect.maxX - p, rect.midY)
+        lineTo(rect.midX, rect.maxY - p)
+        lineTo(rect.minX + p, rect.midY)
+        close()
+    }
+    VStack(spacing = 12.0) {
+        ShapeView(
+            shape.inset(by = 2.0),
+            fill = Color.orange,
+            modifier = Modifier
+                .frame(width = 80.0, height = 80.0)
+                .animation(Animation.spring(duration = 0.4), value = inset),
+        )
+        Button("Morph") { inset = if (inset == 0.0) 16.0 else 0.0 }
+    }
+}
+```
+
+`ScalarExpr` supports `+`, `-`, `*`, `/`, `%`, unary `-`, `abs()`, `sqrt()`, `sin()`, `cos()`, `floor()`, `ceil()`,
+`round()`, `pow(...)`, `clamp(...)`, `ScalarExpr.min(...)`, `ScalarExpr.max(...)`, and conditionals
+(`lt`, `le`, `gt`, `ge`, `eq`, `ScalarExpr.select(...)`).
+
 ## Canvas
 
 `Canvas` is SwiftUI's immediate-mode drawing view. Its `onDraw` lambda runs in Kotlin every time SwiftUI renders the
@@ -229,6 +269,38 @@ Button("Hide") {
 Changes made in a `ViewModel` work the same way: call `withAnimation { viewModel.select(id) }` from the action. A
 `StateFlow` emission that arrives later, outside the block (after a network call, say), is not animated; use
 `Modifier.animation(…, value)` on the views that should animate in that case.
+
+## Transactions
+
+`withTransaction` gives finer control over a SwiftUI transaction than `withAnimation`—for example disabling implicit
+animations during a programmatic reset, or marking drag updates as continuous (`isContinuous`):
+
+```kotlin
+var expanded by remember { mutableStateOf(false) }
+HStack(spacing = 12.0) {
+    Button("Snap immediately") {
+        withTransaction(disablesAnimations = true) { expanded = !expanded }
+    }
+    Button("Custom transaction") {
+        val tx = transaction(animation = Animation.snappy, isContinuous = true)
+        withTransaction(tx) { expanded = !expanded }
+    }
+}
+```
+
+You can also chain modifiers on a `Transaction` value (`Transaction.animation(...)`, `Transaction.disablesAnimations(...)`,
+`Transaction.isContinuous(...)`), or override transactions for a subtree with `Modifier.transaction(...)` (unconditional
+or scoped to a `value`):
+
+```kotlin
+var count by remember { mutableStateOf(0) }
+Text(
+    "$count",
+    modifier = Modifier.transaction(value = count, animation = Animation.easeOut(0.2), disablesAnimations = false),
+)
+```
+
+Pass `setAnimation = true, animation = null` to clear an inherited animation on a subtree.
 
 ## Transitions
 
@@ -359,8 +431,34 @@ HStack {
 }
 ```
 
-`keyframeAnimator` gives each step its own duration and curve (`KeyframeCurve.Linear`, `Spring`, `Cubic`, `Move`),
-starting from `initial`:
+`keyframeAnimator` maps directly to SwiftUI's `keyframeAnimator(initialValue:trigger:content:keyframes:)`. Use the
+multi-track DSL to animate properties independently in parallel—each `KeyframeProperty` (`Opacity`, `Scale`, `OffsetX`,
+`OffsetY`, `RotationDegrees`, `BlurRadius`) gets its own SwiftUI `KeyframeTrack` with `linear`, `spring`, `cubic` and
+`move` keyframes:
+
+```kotlin
+var trigger by remember { mutableStateOf(0) }
+Image(
+    systemName = SFSymbol.starFill,
+    modifier = Modifier.keyframeAnimator(trigger = trigger) {
+        track(KeyframeProperty.Scale) {
+            spring(1.4, duration = 0.25, bounce = 0.4)
+            spring(1.0, duration = 0.25, bounce = 0.2)
+        }
+        track(KeyframeProperty.RotationDegrees) {
+            linear(15.0, duration = 0.15)
+            cubic(-15.0, duration = 0.2)
+            linear(0.0, duration = 0.15)
+        }
+        track(KeyframeProperty.OffsetY) {
+            cubic(-12.0, duration = 0.2)
+            spring(0.0, duration = 0.3)
+        }
+    },
+)
+```
+
+A single-track list overload is also available for simple sequences:
 
 ```kotlin
 var shakes by remember { mutableStateOf(0) }
@@ -375,9 +473,6 @@ TextField("PIN", text = "", onTextChange = {}, modifier = Modifier.keyframeAnima
 ))
 ```
 
-SwiftUI's keyframe API animates arbitrary values on separate tracks; the Kotlin form animates the fixed set of effects
-in `VisualEffects` along one track. For anything else (a color, a path), animate Kotlin state with `withAnimation`.
-
 ## Custom animation curves
 
 `customAnimation(duration) { t -> progress }` is a SwiftUI `CustomAnimation` whose curve is a Kotlin function, called by
@@ -391,29 +486,44 @@ Text("Hi", modifier = Modifier.scaleEffect(if (big) 2.0 else 1.0).animation(over
 
 ## SF Symbol effects
 
-`symbolEffect` animates an `Image(systemName:)`:
+`symbolEffect` animates an `Image(systemName:)` with composable `SymbolEffect` variants and `SymbolEffectOptions`:
 
 ```kotlin
 var downloads by remember { mutableStateOf(0) }
 var syncing by remember { mutableStateOf(true) }
 HStack(spacing = 20.0) {
-    // Discrete: plays once each time `downloads` changes
-    Image(systemName = SFSymbol.arrowDownCircle, modifier = Modifier.symbolEffect(SymbolEffectKind.Bounce, value = downloads))
-    // Indefinite: runs while isActive is true
-    Image(systemName = SFSymbol.wifi, modifier = Modifier.symbolEffect(SymbolEffectKind.VariableColor, isActive = syncing))
+    // Discrete: bounce up by layer, twice, at 1.5× speed
+    Image(
+        systemName = SFSymbol.arrowDownCircle,
+        modifier = Modifier.symbolEffect(
+            effect = SymbolEffect.bounce.up.byLayer,
+            options = SymbolEffectOptions.repeat(2).speed(1.5),
+            value = downloads,
+        ),
+    )
+    // Indefinite: iterative reversing variable color while syncing
+    Image(
+        systemName = SFSymbol.wifi,
+        modifier = Modifier.symbolEffect(
+            effect = SymbolEffect.variableColor.iterative.reversing,
+            options = SymbolEffectOptions.repeating,
+            isActive = syncing,
+        ),
+    )
 }
 ```
 
-`SymbolEffectKind` has `Bounce`, `Pulse`, `VariableColor`, `Scale`, `Appear`, `Disappear`, `Wiggle`, `Rotate` and
-`Breathe`. `Wiggle`, `Rotate` and `Breathe` (and the indefinite `Bounce`) need iOS 18 / macOS 15 / tvOS 18 /
-watchOS 11 and are ignored on older systems. With `value`, only `Bounce`, `Pulse`, `VariableColor`, `Wiggle`, `Rotate`
-and `Breathe` play.
+Available base effects: `SymbolEffect.bounce`, `pulse`, `variableColor`, `scale`, `appear`, `disappear`, plus `wiggle`,
+`rotate` and `breathe` (iOS 18 / macOS 15 / tvOS 18 / watchOS 11; ignored on older systems). Chainable variants include
+`.up`, `.down`, `.byLayer`, `.wholeSymbol`, `.reversing`, `.nonReversing`, `.cumulative`, `.iterative`,
+`.hideInactiveLayers`, `.dimInactiveLayers`, `.clockwise`, `.counterClockwise`, `.left`, `.right`, `.forward`,
+`.backward`, `.plain`, `.pulseVariant`. `SymbolEffectOptions` supports `.speed(factor)`, `.repeat(count)`, `.repeating`
+and `.nonRepeating`. The shorter `SymbolEffectKind` overloads continue to work for default options.
 
 ## Scroll transitions and visual effects
 
-`scrollTransition` maps the scroll phase of a view to effects. The phase is `-1.0` when the view is entering from
-the top/leading edge, `0.0` when fully visible, and `1.0` at the bottom/trailing edge; SwiftUI calls the Kotlin lambda
-while scrolling, so it must be fast and side-effect free:
+For smooth 120 fps scrolling without per-frame Kotlin callbacks, use `scrollTransitionExpr` and `visualEffectExpr`.
+They build symbolic `ScalarExpr` expressions evaluated natively in Swift:
 
 ```kotlin
 ScrollView {
@@ -425,8 +535,13 @@ ScrollView {
                     .frame(maxWidth = Double.POSITIVE_INFINITY)
                     .padding()
                     .background(Color.blue.opacity(0.15))
-                    .scrollTransition { phase, _ ->
-                        VisualEffects(opacity = 1 - kotlin.math.abs(phase) * 0.7, scale = 1 - kotlin.math.abs(phase) * 0.1)
+                    .scrollTransitionExpr { phase ->
+                        val dist = phase.abs()
+                        VisualEffectsExpr(
+                            opacity = 1.0 - dist * 0.7,
+                            scale = 1.0 - dist * 0.1,
+                            offsetY = phase * 16.0,
+                        )
                     },
             )
         }
@@ -434,18 +549,19 @@ ScrollView {
 }
 ```
 
-`visualEffect` computes effects from the view's geometry at layout time (`width`, `height`, and `minX` / `minY` in the
-global coordinate space), for parallax and position-based fades:
-
 ```kotlin
 Image(
     systemName = SFSymbol.mountain2Fill,
-    modifier = Modifier.visualEffect { g -> VisualEffects(offsetY = -g.minY * 0.2) },
+    modifier = Modifier.visualEffectExpr { g -> VisualEffectsExpr(offsetY = -g.minY * 0.2) },
 )
 ```
 
-Both return a `VisualEffects`, so the effects available are opacity, scale, offset, rotation and blur. Other
-geometry-dependent changes belong in a `GeometryReader` or `onGeometryChange` (see [Layout](layout.md)).
+When you need arbitrary Kotlin logic inside the effect, the lambda forms `scrollTransition { phase, isIdentity -> VisualEffects(...) }`
+and `visualEffect { g -> VisualEffects(...) }` are also available; SwiftUI invokes them on each scroll or layout pass,
+so keep them fast and side-effect free.
+
+Both return `VisualEffects` / `VisualEffectsExpr` (opacity, scale, offset, rotation and blur). Other geometry-dependent
+changes belong in a `GeometryReader` or `onGeometryChange` (see [Layout](layout.md)).
 
 ## TimelineView
 
@@ -506,6 +622,8 @@ points inside `withAnimation`, or drive them from a `TimelineView`.
 
 - SwiftUI interpolates animations natively; Kotlin only runs when state changes. A `withAnimation` costs one
   recomposition, not one per frame.
+- Prefer `AnimatablePathShape`, `scrollTransitionExpr` and `visualEffectExpr` over the Kotlin-callback variants when
+  animating shapes or scrolling: their `ScalarExpr` trees run natively in Swift with zero bridge crossings per frame.
 - Callbacks that SwiftUI calls per frame or per layout (`scrollTransition`, `visualEffect`, `customAnimation`,
   `textRenderer`, `Canvas.onDraw`, `TimelineSchedule.animation`) cross into Kotlin each time. Keep them pure and
   allocation-light.

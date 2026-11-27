@@ -133,6 +133,11 @@ private fun Scenario(name: String) {
         "saveable" -> Saveable()
         "environment" -> Environment()
         "resources" -> Text(stringResource(Res.string.greeting))
+        "keyframes" -> KeyframesScenario()
+        "shapesExpr" -> ShapesExprScenario()
+        "symbolEffects" -> SymbolEffectsScenario()
+        "focusedValues" -> FocusedValuesScenario()
+        "transactions" -> TransactionsScenario()
         else -> Text("Unknown scenario $name")
     }
 }
@@ -284,3 +289,209 @@ private fun Environment() {
 }
 
 private fun ColorScheme.name() = if (this == ColorScheme.dark) "dark" else "light"
+
+@Composable
+private fun KeyframesScenario() {
+    var trigger by remember { mutableIntStateOf(0) }
+    VStack(spacing = 8.0) {
+        Text(
+            "kf-multi:$trigger",
+            modifier = Modifier.keyframeAnimator(initial = VisualEffects(scale = 1.0, opacity = 1.0), trigger = trigger) {
+                track(KeyframeProperty.Scale) {
+                    spring(1.25, duration = 0.08, bounce = 0.3)
+                    cubic(1.0, duration = 0.08)
+                }
+                track(KeyframeProperty.OffsetX) {
+                    linear(-8.0, duration = 0.05)
+                    move(0.0)
+                }
+                track(KeyframeProperty.Opacity) {
+                    linear(0.7, duration = 0.08)
+                    linear(1.0, duration = 0.08)
+                }
+            },
+        )
+        Text(
+            "kf-legacy:$trigger",
+            modifier = Modifier.keyframeAnimator(
+                keyframes = listOf(
+                    Keyframe(VisualEffects(offsetX = -6.0), 0.05, KeyframeCurve.Linear),
+                    Keyframe(VisualEffects(offsetX = 0.0), 0.05, KeyframeCurve.Spring),
+                ),
+                trigger = trigger,
+            ),
+        )
+        Button("Fire keyframes") { trigger++ }
+    }
+}
+
+@Composable
+private fun ShapesExprScenario() {
+    var progress by remember { mutableStateOf(0.25) }
+    val morphShape = AnimatablePathShape(progress) { r, params ->
+        val p = params[0]
+        roundedRect(r.minX, r.minY, r.width, r.height, r.minSide * 0.4 * p)
+    }
+    val diamond = PathShape {
+        moveTo(0.5, 0.0)
+        lineTo(1.0, 0.5)
+        lineTo(0.5, 1.0)
+        lineTo(0.0, 0.5)
+        close()
+    }
+    VStack(spacing = 8.0) {
+        ShapeView(
+            shape = morphShape.inset(by = 4.0),
+            fill = Color.blue,
+            modifier = Modifier
+                .frame(width = 60.0, height = 60.0)
+                .animation(Animation.easeInOut(duration = 0.1), value = progress),
+        )
+        Text(
+            "morph=${(progress * 100).toInt()}",
+            modifier = Modifier
+                .padding(8.0)
+                .background(Color.green, shape = diamond.inset(by = 2.0))
+                .visualEffectExpr { g ->
+                    VisualEffectsExpr(
+                        opacity = ScalarExpr.select(g.width.gt(0.0), 0.95, 0.5),
+                        scale = ScalarExpr.const(1.0),
+                    )
+                },
+        )
+        ScrollView {
+            VStack(spacing = 4.0) {
+                Text(
+                    "scroll-expr-item",
+                    modifier = Modifier.scrollTransitionExpr { phase ->
+                        VisualEffectsExpr(
+                            opacity = (1.0 - phase.abs() * 0.4).clamp(0.2, 1.0),
+                            scale = 1.0 - phase.abs() * 0.1,
+                        )
+                    },
+                )
+            }
+        }
+        Button("Morph shape") {
+            withAnimation(Animation.easeInOut(duration = 0.1)) {
+                progress = if (progress < 0.5) 1.0 else 0.25
+            }
+        }
+    }
+}
+
+@Composable
+private fun SymbolEffectsScenario() {
+    var bounces by remember { mutableIntStateOf(0) }
+    var pulsing by remember { mutableStateOf(true) }
+    VStack(spacing = 8.0) {
+        Image(
+            systemName = SFSymbol("bell.fill"),
+            modifier = Modifier.symbolEffect(
+                effect = SymbolEffect.bounce.up.byLayer,
+                options = SymbolEffectOptions.speed(1.5).repeat(2),
+                value = bounces,
+            ),
+        )
+        Image(
+            systemName = SFSymbol("wifi"),
+            modifier = Modifier.symbolEffect(
+                effect = SymbolEffect.variableColor.iterative.reversing,
+                options = SymbolEffectOptions.repeating.speed(1.2),
+                isActive = pulsing,
+            ),
+        )
+        Image(
+            systemName = SFSymbol("arrow.trianglehead.2.clockwise"),
+            modifier = Modifier.symbolEffect(
+                effect = SymbolEffect.rotate.clockwise.byLayer,
+                options = SymbolEffectOptions.nonRepeating,
+                value = bounces,
+            ),
+        )
+        Text("sym:bounces=$bounces:pulsing=$pulsing")
+        Button("Trigger symbol") {
+            bounces++
+            pulsing = !pulsing
+        }
+    }
+}
+
+private data class FocusDoc(val title: String, val onPing: () -> Unit)
+private val FocusDocKey = FocusedValueKey<FocusDoc>("e2e.focusDoc")
+private val FocusFieldKey = FocusedValueKey<String>("e2e.focusField")
+
+@Composable
+private fun FocusedValuesScenario() {
+    var version by remember { mutableIntStateOf(1) }
+    var showInner by remember { mutableStateOf(true) }
+    var showProvider by remember { mutableStateOf(true) }
+    var fieldText by remember { mutableStateOf("hello") }
+    var fieldFocused by remember { mutableStateOf(false) }
+
+    VStack(spacing = 8.0) {
+        FocusedSceneValueReader(FocusDocKey) { doc ->
+            Text("scene=${doc?.title ?: "none"}")
+            if (doc != null) {
+                Button("Ping scene doc") { doc.onPing() }
+            }
+        }
+        FocusedValueReader(FocusFieldKey) { focused ->
+            Text("focused=${focused ?: "none"}")
+        }
+        if (showProvider) {
+            VStack(modifier = Modifier.focusedSceneValue(FocusDocKey, FocusDoc("outer-$version") { E2E.log("ping:outer-$version") })) {
+                if (showInner) {
+                    Text(
+                        "inner-provider",
+                        modifier = Modifier.focusedSceneValue(FocusDocKey, FocusDoc("inner-$version") { E2E.log("ping:inner-$version") }),
+                    )
+                }
+                TextField(
+                    "Note",
+                    text = fieldText,
+                    onTextChange = { fieldText = it },
+                    modifier = Modifier
+                        .focused(isFocused = fieldFocused, onFocusChange = { fieldFocused = it })
+                        .focusedValue(FocusFieldKey, "field-v$version"),
+                )
+            }
+        }
+        Button("Bump focus version") { version++ }
+        Button("Hide inner scene") { showInner = false }
+        Button("Unmount scene provider") { showProvider = false }
+        Button("Focus field") { fieldFocused = true }
+    }
+}
+
+@Composable
+private fun TransactionsScenario() {
+    var count by remember { mutableIntStateOf(0) }
+    var lastReturn by remember { mutableStateOf("none") }
+    VStack(spacing = 8.0) {
+        Text(
+            "tx:count=$count:ret=$lastReturn",
+            modifier = Modifier
+                .opacity(if (count % 2 == 0) 1.0 else 0.7)
+                .transaction(value = count, animation = Animation.easeInOut(duration = 0.05)),
+        )
+        Text(
+            "tx-noanim:$count",
+            modifier = Modifier.transaction(disablesAnimations = true),
+        )
+        Button("Run disabled tx") {
+            val res = withTransaction(Transaction(Animation.spring()).disablesAnimations(true).isContinuous(false)) {
+                count += 1
+                "disabled-$count"
+            }
+            lastReturn = res
+        }
+        Button("Run animated tx") {
+            val res = withTransaction(animation = Animation.easeInOut(duration = 0.05), isContinuous = true) {
+                count += 10
+                "animated-$count"
+            }
+            lastReturn = res
+        }
+    }
+}

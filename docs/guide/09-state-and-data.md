@@ -33,6 +33,7 @@ fun Counter() {
 | `@Binding var value` | a `value` parameter plus an `onValueChange` callback |
 | `@Observable` model | a `ViewModel` exposing `StateFlow`s, or any class with `mutableStateOf` properties |
 | `@Environment(\.colorScheme)` | `EnvironmentReader { env -> env.colorScheme }` |
+| `@FocusedValue` / `@FocusedSceneValue` | `FocusedValueReader(key) { … }` / `FocusedSceneValueReader(key) { … }` (see [Gestures and input](gestures-and-input.md#focus)) |
 
 `derivedStateOf` is worth it when the derived value changes less often than its inputs (a "has unsaved changes" flag
 computed from a large form, a scroll offset turned into a boolean). For a cheap computation, a plain `val` in the

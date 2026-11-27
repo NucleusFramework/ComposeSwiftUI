@@ -489,7 +489,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? DefaultTabViewStyle
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_DeviceHinge_Status(_ e: SExpr?) -> DeviceHinge.Status? {
     guard let e else { return nil }
@@ -761,7 +761,7 @@ import UniformTypeIdentifiers
     switch e.id {
     case 1742:
         return .foreground
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1743:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -778,7 +778,7 @@ import UniformTypeIdentifiers
         guard let p2 = d_Angle(a.expr(2)) else { return nil }
         let p3: GraphicsContext.GradientOptions = a.isNil(3) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(3)) ?? GraphicsContext.GradientOptions())
         return .conicGradient(p0, center: p1, angle: p2, options: p3)
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1745:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -795,7 +795,7 @@ import UniformTypeIdentifiers
         guard let p2 = d_CGPoint(a.expr(2)) else { return nil }
         let p3: GraphicsContext.GradientOptions = a.isNil(3) ? GraphicsContext.GradientOptions() : (d_GraphicsContext_GradientOptions(a.expr(3)) ?? GraphicsContext.GradientOptions())
         return .linearGradient(p0, startPoint: p1, endPoint: p2, options: p3)
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1747:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -806,7 +806,7 @@ import UniformTypeIdentifiers
         }
         return nil
     #endif
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1748:
         if #available(iOS 18.2, macOS 15.2, tvOS 18.2, watchOS 11.2, *) {
             guard let p0 = d_Gradient(a.expr(0)) else { return nil }
@@ -817,7 +817,7 @@ import UniformTypeIdentifiers
         }
         return nil
     #endif
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1749:
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
             guard let p0 = d_AnyGradient(a.expr(0)) else { return nil }
@@ -1086,7 +1086,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? NavigationSplitViewVisibility
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_OverlayArrangementViewStyle(_ e: SExpr?) -> OverlayArrangementViewStyle? {
     guard let e else { return nil }
@@ -1195,7 +1195,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ReservedRegion_QueryOptions(_ e: SExpr?) -> ReservedRegion.QueryOptions? {
     guard let e else { return nil }

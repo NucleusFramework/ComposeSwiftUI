@@ -182,7 +182,9 @@ final class E2ERunner {
             ("callbacks", callbacks), ("composition", composition), ("effect", effect), ("task", task),
             ("taskCancel", taskCancel), ("bridges", bridges), ("integrations", integrations), ("unsupported", unsupported), ("lifecycle", lifecycle),
             ("viewModels", viewModels), ("saveable", saveable), ("environment", environment),
-            ("resources", resources),
+            ("resources", resources), ("keyframes", keyframes), ("shapesExpr", shapesExpr),
+            ("symbolEffects", symbolEffects), ("focusedValues", focusedValues),
+            ("transactions", transactions),
         ]
         for (name, scenario) in scenarios where only == nil || only!.split(separator: ",").contains(Substring(name)) {
             print("== \(name)")
@@ -348,5 +350,56 @@ final class E2ERunner {
         await mount("resources", ComposeView { E2E.shared.host(name: "resources") })
         check("stringResource without providing LocalDensity", await eventually { AX.contains("Hello from resources") },
               AX.texts().description + events().description)
+    }
+
+    func keyframes() async {
+        await mount("keyframes", ComposeView { E2E.shared.host(name: "keyframes") })
+        check("multi-track keyframe view renders", await eventually { AX.contains("kf-multi:0") && AX.contains("kf-legacy:0") }, AX.texts().description)
+        AX.press("Fire keyframes")
+        check("keyframe trigger updates and stays alive", await eventually { AX.contains("kf-multi:1") && AX.contains("kf-legacy:1") }, AX.texts().description)
+        check("no errors during keyframe animation", events().isEmpty, events().description)
+    }
+
+    func shapesExpr() async {
+        await mount("shapesExpr", ComposeView { E2E.shared.host(name: "shapesExpr") })
+        check("animatable shape & expr modifiers render", await eventually { AX.contains("morph=25") && AX.contains("scroll-expr-item") }, AX.texts().description)
+        AX.press("Morph shape")
+        check("animatable shape parameter animates cleanly", await eventually { AX.contains("morph=100") }, AX.texts().description)
+        check("no errors during shape & expression evaluation", events().isEmpty, events().description)
+    }
+
+    func symbolEffects() async {
+        await mount("symbolEffects", ComposeView { E2E.shared.host(name: "symbolEffects") })
+        check("symbol effects render initially", await eventually { AX.contains("sym:bounces=0:pulsing=true") }, AX.texts().description)
+        AX.press("Trigger symbol")
+        check("symbol effects update cleanly", await eventually { AX.contains("sym:bounces=1:pulsing=false") }, AX.texts().description)
+        check("no errors during symbol effects", events().isEmpty, events().description)
+    }
+
+    func focusedValues() async {
+        await mount("focusedValues", ComposeView { E2E.shared.host(name: "focusedValues") })
+        check("inner focusedSceneValue wins over outer", await eventually { AX.contains("scene=inner-1") }, AX.texts().description)
+        AX.press("Ping scene doc")
+        check("Kotlin lambda inside focusedSceneValue executes intact", await eventually { self.hasEvent("ping:inner-1") }, events().description)
+        AX.press("Bump focus version")
+        check("focusedSceneValue updates live on recomposition", await eventually { AX.contains("scene=inner-2") }, AX.texts().description)
+        AX.press("Hide inner scene")
+        check("removing inner falls back to outer focusedSceneValue", await eventually { AX.contains("scene=outer-2") }, AX.texts().description)
+        AX.press("Focus field")
+        check("focusedValue propagates when field gains focus", await eventually { AX.contains("focused=field-v2") }, AX.texts().description)
+        AX.press("Unmount scene provider")
+        check("unmounting provider clears focusedSceneValue to none", await eventually { AX.contains("scene=none") }, AX.texts().description)
+    }
+
+    func transactions() async {
+        await mount("transactions", ComposeView { E2E.shared.host(name: "transactions") })
+        check("transactions initial state renders", await eventually { AX.contains("tx:count=0:ret=none") }, AX.texts().description)
+        AX.press("Run disabled tx")
+        check("withTransaction(disablesAnimations) returns value & updates synchronously",
+              await eventually { AX.contains("tx:count=1:ret=disabled-1") && AX.contains("tx-noanim:1") }, AX.texts().description)
+        AX.press("Run animated tx")
+        check("withTransaction(animation, isContinuous) updates cleanly",
+              await eventually { AX.contains("tx:count=11:ret=animated-11") }, AX.texts().description)
+        check("no errors during transactions", events().isEmpty, events().description)
     }
 }

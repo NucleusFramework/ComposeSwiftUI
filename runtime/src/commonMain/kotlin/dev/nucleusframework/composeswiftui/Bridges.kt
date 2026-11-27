@@ -18,6 +18,9 @@ public object SwiftUIBridge {
 
     /** Like [animationRunner], then runs the completion when the animation is logically complete. */
     public var animationCompletionRunner: ((SExpr?, () -> Unit, () -> Unit) -> Unit)? = null
+
+    /** Runs `block` inside `withTransaction(transaction)` and flushes Compose synchronously. */
+    public var transactionRunner: ((SExpr?, () -> Unit) -> Unit)? = null
 }
 
 /** Size of a subview as measured by SwiftUI, passed to a [LayoutPolicy]. */

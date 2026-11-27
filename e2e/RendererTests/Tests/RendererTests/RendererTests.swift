@@ -50,6 +50,30 @@ final class RendererTests: XCTestCase {
         XCTAssertNotEqual(Int64(a.int(0)), a.long(0), "int() would have truncated it")
     }
 
+    func testAnimatableVectorAndScalarExprEvaluation() {
+        var v = KotlinAnimatableVector([1.0, 2.0]) + KotlinAnimatableVector([3.0, 4.0, 5.0])
+        XCTAssertEqual(v, KotlinAnimatableVector([4.0, 6.0, 5.0]))
+        v.scale(by: 0.5)
+        XCTAssertEqual(v, KotlinAnimatableVector([2.0, 3.0, 2.5]))
+        XCTAssertEqual(v.magnitudeSquared, 4.0 + 9.0 + 6.25, accuracy: 1e-9)
+
+        // select(arg(0) > 0, param(0) * 2 + 1, -arg(0))
+        let cond: [Any] = [20, [0, 0], 0.0]
+        let ifTrue: [Any] = [10, [12, [1, 0], 2.0], 1.0]
+        let ifFalse: [Any] = [2, [0, 0]]
+        let eval = KotlinExpr.compile([23, cond, ifTrue, ifFalse])
+        XCTAssertEqual(eval(KotlinExprFrame(args: [2.0], params: [3.5])), 8.0, accuracy: 1e-9)
+        XCTAssertEqual(eval(KotlinExprFrame(args: [-4.0], params: [3.5])), 4.0, accuracy: 1e-9)
+    }
+
+    func testShapesExprRendersWithoutErrors() throws {
+        let renderer = ImageRenderer(content: ComposeView { E2E.shared.host(name: "shapesExpr") }.frame(width: 240, height: 240))
+        renderer.scale = 1
+        let image = try XCTUnwrap(renderer.cgImage, "shapesExpr should render to CGImage")
+        XCTAssertEqual(image.width, 240)
+        XCTAssertEqual(image.height, 240)
+    }
+
     // MARK: Snapshots
 
     func testSnapshotOfCallbacksScreen() throws {

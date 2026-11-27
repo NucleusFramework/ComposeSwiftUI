@@ -103,7 +103,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v, m, i + 1)
         case 188:
             return ModChain.apply(v.coordinateSpace(name: a.hashable(0)), m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
         case 196:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_AdaptableTabBarPlacement(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -117,14 +117,14 @@ import UniformTypeIdentifiers
         case 212:
             return ModChain.apply(v.digitalCrownRotation(a.doubleBinding(0), onIdle: a.action(2)), m, i + 1)
 #endif
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
         case 220:
             if #available(iOS 27.0, macOS 15.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.dismissalConfirmationDialog(a.string(0), shouldPresent: a.bool(1), actions: { a.slot(2) }), m, i + 1)
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if (os(iOS)) && (compiler(>=6.4))
+#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
         case 228:
             if #available(iOS 27.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                 return ModChain.apply(v.documentLaunchSubtitle(LocalizedStringKey(a.string(0))), m, i + 1)
@@ -321,7 +321,7 @@ import UniformTypeIdentifiers
             return ModChain.apply(v, m, i + 1)
         case 580:
             return ModChain.apply(v.toolbar(content: { a.slot(0) }), m, i + 1)
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
         case 588:
             if #available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *) {
                 guard let p0 = d_ToolbarMinimizationBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -330,7 +330,7 @@ import UniformTypeIdentifiers
             }
             return ModChain.apply(v, m, i + 1)
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
         case 596:
             if #available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *) {
                 guard let p0 = d_ToolbarVerticalBehavior(a.expr(0)) else { return ModChain.apply(v, m, i + 1) }
@@ -364,7 +364,7 @@ import UniformTypeIdentifiers
         case 652:
             return ModChain.apply(v.environment(\.isHoverEffectEnabled, a.bool(0)), m, i + 1)
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
         case 660:
             if #available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, *) {
                 return ModChain.apply(v.environment(\.accessibilityPrefersCrossFadeTransitions, a.bool(0)), m, i + 1)

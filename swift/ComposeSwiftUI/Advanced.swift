@@ -182,16 +182,100 @@ struct EffectValues {
     }
 }
 
-/// Keyframes as phases: each phase is reached with its keyframe's curve and duration (SwiftUI's `KeyframeTrack`
-/// builders can't be built from a runtime list).
-private func keyframeAnimation(_ frame: [Double]) -> Animation? {
-    let duration = frame.count > 6 ? frame[6] : 0.3
-    switch frame.count > 7 ? Int(frame[7]) : 0 {
-    case 1: return .spring(duration: duration)
-    case 2: return .easeInOut(duration: duration)
-    case 3: return nil
-    default: return .linear(duration: duration)
+struct KotlinKeyframeValues: Sendable {
+    var opacity: Double
+    var scale: Double
+    var x: Double
+    var y: Double
+    var rotation: Double
+    var blur: Double
+
+    init(_ v: [Double]) {
+        func at(_ i: Int, _ d: Double) -> Double { i < v.count ? v[i] : d }
+        opacity = at(0, 1); scale = at(1, 1); x = at(2, 0); y = at(3, 0); rotation = at(4, 0); blur = at(5, 0)
     }
+}
+
+enum KotlinKeyframeStep: Sendable {
+    case linear(Double, TimeInterval)
+    case spring(Double, TimeInterval?, Double)
+    case cubic(Double, TimeInterval)
+    case move(Double)
+
+    init(_ f: [Double]) {
+        let kind = f.count > 0 ? Int(f[0]) : 0
+        let to = f.count > 1 ? f[1] : 0
+        let dur = f.count > 2 ? f[2] : 0.3
+        let extra = f.count > 3 ? f[3] : 0
+        switch kind {
+        case 1: self = .spring(to, dur >= 0 ? dur : nil, extra)
+        case 2: self = .cubic(to, max(0, dur))
+        case 3: self = .move(to)
+        default: self = .linear(to, max(0, dur))
+        }
+    }
+}
+
+/// Real multi-track SwiftUI keyframes: tracks are spelled out because `@KeyframesBuilder` can't loop over them,
+/// while `@KeyframeTrackContentBuilder` loops over each track's steps.
+struct KotlinKeyframeTracks: Sendable {
+    let tracks: [[KotlinKeyframeStep]]
+
+    private func steps(_ index: Int) -> [KotlinKeyframeStep] {
+        index < tracks.count ? tracks[index] : []
+    }
+
+    @KeyframeTrackContentBuilder<Double>
+    private func buildTrack(_ steps: [KotlinKeyframeStep]) -> some KeyframeTrackContent<Double> {
+        for step in steps {
+            switch step {
+            case .linear(let to, let duration): LinearKeyframe(to, duration: duration)
+            case .spring(let to, let duration, let bounce): SpringKeyframe(to, duration: duration, spring: Spring(bounce: bounce))
+            case .cubic(let to, let duration): CubicKeyframe(to, duration: duration)
+            case .move(let to): MoveKeyframe(to)
+            }
+        }
+    }
+
+    @KeyframesBuilder<KotlinKeyframeValues>
+    func keyframes(_ value: KotlinKeyframeValues) -> some Keyframes<KotlinKeyframeValues> {
+        KeyframeTrack(\KotlinKeyframeValues.opacity) { buildTrack(steps(0)) }
+        KeyframeTrack(\KotlinKeyframeValues.scale) { buildTrack(steps(1)) }
+        KeyframeTrack(\KotlinKeyframeValues.x) { buildTrack(steps(2)) }
+        KeyframeTrack(\KotlinKeyframeValues.y) { buildTrack(steps(3)) }
+        KeyframeTrack(\KotlinKeyframeValues.rotation) { buildTrack(steps(4)) }
+        KeyframeTrack(\KotlinKeyframeValues.blur) { buildTrack(steps(5)) }
+    }
+}
+
+private func applyKeyframeValues(_ content: some View, _ v: KotlinKeyframeValues) -> some View {
+    content
+        .opacity(v.opacity)
+        .scaleEffect(v.scale)
+        .offset(x: v.x, y: v.y)
+        .rotationEffect(.degrees(v.rotation))
+        .blur(radius: v.blur)
+}
+
+@MainActor private func applyKeyframeAnimator(
+    _ v: AnyView,
+    initial: KotlinKeyframeValues,
+    tracks: KotlinKeyframeTracks,
+    trigger: AnyHashable?,
+    repeating: Bool
+) -> AnyView {
+    if let trigger {
+        return AnyView(v.keyframeAnimator(initialValue: initial, trigger: trigger) { content, val in
+            applyKeyframeValues(content, val)
+        } keyframes: { value in
+            tracks.keyframes(value)
+        })
+    }
+    return AnyView(v.keyframeAnimator(initialValue: initial, repeating: repeating) { content, val in
+        applyKeyframeValues(content, val)
+    } keyframes: { value in
+        tracks.keyframes(value)
+    })
 }
 
 // MARK: - Text renderer
@@ -432,14 +516,31 @@ private func bytes(_ base64: String) -> Data { Data(base64Encoded: base64) ?? Da
             AnyView(v.transition(KotlinTransition(effects: a.list(0).map(doubles))))
         }
         ComposeRegistry.modifiers[100_065] = { v, a, _ in
-            let phases = [doubles(a.list(0) as Any)] + a.list(1).map(doubles)
-            guard phases.count > 1 else { return v }
-            let indices = Array(phases.indices)
-            let animation = { (i: Int) in i == 0 ? Animation?.none : keyframeAnimation(phases[i]) }
-            if a.isNil(2) && a.bool(3) {
-                return AnyView(v.phaseAnimator(indices) { c, i in applyViewEffects(c, phases[i]) } animation: { animation($0) })
+            let initial = KotlinKeyframeValues(doubles(a.list(0) as Any))
+            let frames = a.list(1).map(doubles)
+            guard !frames.isEmpty else { return v }
+            let defaults: [Double] = [1, 1, 0, 0, 0, 0]
+            var byProp = Array(repeating: [KotlinKeyframeStep](), count: 6)
+            for f in frames {
+                let dur = f.count > 6 ? f[6] : 0.3
+                let curve = f.count > 7 ? f[7] : 0.0
+                for p in 0..<6 {
+                    let target = p < f.count ? f[p] : defaults[p]
+                    byProp[p].append(KotlinKeyframeStep([curve, target, dur, 0.0]))
+                }
             }
-            return AnyView(v.phaseAnimator(indices, trigger: a.hashable(2)) { c, i in applyViewEffects(c, phases[i]) } animation: { animation($0) })
+            return applyKeyframeAnimator(
+                v, initial: initial, tracks: KotlinKeyframeTracks(tracks: byProp),
+                trigger: a.isNil(2) ? nil : a.hashable(2), repeating: a.bool(3)
+            )
+        }
+        ComposeRegistry.modifiers[100_115] = { v, a, _ in
+            let initial = KotlinKeyframeValues(doubles(a.list(0) as Any))
+            let rawTracks = a.list(1).map { ($0 as? [Any] ?? []).map { KotlinKeyframeStep(doubles($0)) } }
+            return applyKeyframeAnimator(
+                v, initial: initial, tracks: KotlinKeyframeTracks(tracks: rawTracks),
+                trigger: a.isNil(2) ? nil : a.hashable(2), repeating: a.bool(3)
+            )
         }
         ComposeRegistry.modifiers[100_066] = { v, a, _ in
             guard #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *), let provider = a.raw(1) as? EffectsProvider else { return v }

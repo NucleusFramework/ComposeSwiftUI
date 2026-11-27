@@ -400,7 +400,8 @@ main{flex:1;min-width:0}
 .eyebrow{color:var(--muted);font-size:21px;font-weight:500;margin-bottom:6px}
 .hero h1{font-size:44px;line-height:1.08;margin:0 0 14px;font-weight:700;letter-spacing:-.015em;overflow-wrap:anywhere}
 .abstract{font-size:21px;line-height:1.38;margin:0 0 14px;font-weight:500}
-.avail{font-size:15px;color:var(--fg);margin-bottom:8px}.avail span+span::before{content:"|";color:var(--faint);margin:0 10px}
+.avail{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.avail span{display:inline-flex;align-items:center;font-size:13px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--fg)}
 .content{padding-top:12px;padding-bottom:72px}
 h2{font-size:34px;line-height:1.1;margin:48px 0 20px;padding-top:44px;border-top:1px solid var(--line);font-weight:700;letter-spacing:-.01em}
 h2.first{border-top:0;padding-top:0;margin-top:16px}
@@ -422,9 +423,40 @@ table{border-collapse:collapse;width:100%;margin:12px 0 24px;font-size:15px}th,t
 .card{display:block;border:1px solid var(--line);border-radius:16px;padding:18px 20px;transition:border-color .2s}.card:hover{text-decoration:none;border-color:var(--faint)}
 .card b{display:block;margin-bottom:4px;color:var(--fg)}.card span{color:var(--muted);font-size:14px}
 .grid:has(.card){gap:14px}
+/* interactive demos */
+.demo-card{border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0 24px;background:var(--soft);overflow:hidden}
+.demo-card h3{margin:0 0 6px;font-size:19px}.demo-sub{color:var(--muted);font-size:14px;margin:0 0 14px}
+.pipe-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.pipe-step{display:flex;flex-direction:column;gap:2px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg);cursor:pointer;font:inherit;transition:border-color .15s,background .15s}
+.pipe-step small{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.pipe-step b{font-size:14px;font-weight:600}
+.pipe-step:hover{border-color:var(--faint)}.pipe-step[aria-pressed=true]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--bg))}
+.pipe-step[aria-pressed=true] small{color:var(--accent)}
+.pipe-detail{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+.pipe-detail p{margin:0 0 10px;font-size:15px}.pipe-detail pre{margin:0;max-width:100%}
+.mod-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.mod-tab,.ref-pill{padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:500 13px -apple-system,sans-serif;cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.mod-tab:hover,.ref-pill:hover{border-color:var(--faint)}
+.mod-tab[aria-pressed=true],.ref-pill[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.mod-stage{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;align-items:center}
+.mod-stage>*{min-width:0}
+.mod-canvas{height:124px;border:1px dashed var(--line);border-radius:12px;background:var(--bg);display:grid;place-items:center}
+.mod-demo{font:600 15px -apple-system,sans-serif;transition:all .2s ease}
+.mod-demo[data-mode="pad-bg"]{padding:16px 22px;background:#ff9500;color:#fff;border-radius:6px}
+.mod-demo[data-mode="bg-pad"]{padding:16px 22px;border:1px dashed var(--faint);border-radius:6px}
+.mod-demo[data-mode="bg-pad"] span{display:inline-block;background:#ff9500;color:#fff;padding:2px 6px;border-radius:3px}
+.mod-demo[data-mode="card"]{padding:14px 20px;background:#ff9500;color:#fff;border-radius:12px;box-shadow:0 8px 20px rgba(255,149,0,.35)}
+.mod-code{min-width:0}.mod-code pre{margin:0;max-width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;font-size:14px}
+.ref-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 8px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--soft)}
+.ref-pills{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.ref-filter{min-width:210px;padding:7px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);font:14px -apple-system,sans-serif}
+.ref-filter:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.ref-sec[hidden],.ref-sec a[hidden]{display:none}
+.ref-empty{color:var(--muted);padding:18px 0;font-size:15px}
 #results a{padding:5px 10px}
 footer{color:var(--muted);font-size:13px;padding:22px 80px;background:var(--soft);border-top:1px solid var(--line)}
 @media(max-width:820px){table{display:block;overflow-x:auto}
+.pipe-steps{grid-template-columns:1fr 1fr}.mod-stage{grid-template-columns:1fr}.ref-filter{width:100%}
 dialog.search{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0;background:var(--bg)}
 .sbar{height:56px;padding:0 14px}.sbar input{font-size:18px}.sbar kbd{display:none}.scancel{display:block}
 #sres{max-height:calc(100dvh - 56px)}#sres .x{-webkit-line-clamp:3}.wide{display:none!important}.narrow{display:flex!important}.top{gap:10px;padding:0 12px}.top .brand{font-size:18px}.top .ver{margin-left:-4px}
@@ -572,11 +604,68 @@ framework_cards = "".join('<a class="card" href="%s.html"><b>%s</b><span>%s</spa
     ("app-frameworks", "Tips, widgets, Health, Contacts…", "TipView, widget modifiers, HealthKit access, ContactAccessButton, Image Playground")])
 cards = "".join('<a class="card" href="%s"><b>%s</b><span>%s</span></a>' % (page_url(keys[0]), esc(t), esc(", ".join(pages[k]["title"] for k in keys[:4] if k in pages)))
                 for t, keys in TOPICS if keys and keys[0] in pages)
+
+PIPELINE_STEPS = [
+    ("Step 1", "Compose state", "Kotlin owns your state (`mutableStateOf`, `StateFlow`, `ViewModel`). Mutating state marks only the reading composable scope dirty.",
+     'var count by remember { mutableStateOf(0) }\nButton("Add") { withAnimation(Animation.snappy) { count++ } }', "kotlin"),
+    ("Step 2", "Recomposition", "The Compose runtime recomposes the affected composable and updates only the changed `RenderNode` properties in Kotlin memory.",
+     'Text("Count: $count", modifier = Modifier.contentTransition(ContentTransition.numericText()))', "kotlin"),
+    ("Step 3", "Bridge diff", "Only changed nodes and modifier slots cross into SwiftUI via `SwiftUINode`; unchanged subtrees are skipped untouched.",
+     'SwiftUINode(kind: .text, props: ["Count: \\(count)"], modifiers: [...])', "swift"),
+    ("Step 4", "Native SwiftUI", "SwiftUI renders real native views and interpolates animations, transitions, and `ScalarExpr` shapes at 120 fps on the UI thread.",
+     'Text("Count: 1").contentTransition(.numericText())', "swift"),
+]
+
+MOD_PRESETS = [
+    ("pad-bg", "padding().background()", "Padding runs first, expanding the bounds, so the orange background fills the padded area.",
+     'Text("Hello",\n    modifier = Modifier\n        .padding()\n        .background(Color.orange))'),
+    ("bg-pad", "background().padding()", "Background runs first tightly around the text, then padding adds transparent space outside it.",
+     'Text("Hello",\n    modifier = Modifier\n        .background(Color.orange)\n        .padding())'),
+    ("card", "padding().background(shape).shadow()", "Modifiers compose in chain order, identical to SwiftUI — clip or pass a shape before adding a shadow.",
+     'Text(\n    "Hello",\n    modifier = Modifier\n        .padding()\n        .background(\n            Color.orange,\n            shape = RoundedRectangle(cornerRadius = 12.0),\n        )\n        .shadow(radius = 8.0),\n)'),
+]
+
+pipe_buttons = "".join(
+    '<button type="button" class="pipe-step" data-step="%d" aria-pressed="%s"><small>%s</small><b>%s</b></button>'
+    % (idx, "true" if idx == 0 else "false", esc(num), esc(label))
+    for idx, (num, label, _, _, _) in enumerate(PIPELINE_STEPS)
+)
+pipe_panels = "".join(
+    '<div class="pipe-detail" data-step-panel="%d"%s><p>%s</p>%s</div>'
+    % (idx, "" if idx == 0 else " hidden", inline(desc), code_block(code, lang))
+    for idx, (_, _, desc, code, lang) in enumerate(PIPELINE_STEPS)
+)
+mod_buttons = "".join(
+    '<button type="button" class="mod-tab" data-mod="%s" aria-pressed="%s">%s</button>'
+    % (mode, "true" if idx == 0 else "false", esc(label))
+    for idx, (mode, label, _, _) in enumerate(MOD_PRESETS)
+)
+mod_panels = "".join(
+    '<div class="mod-code" data-mod-panel="%s"%s><p class="demo-sub">%s</p>%s</div>'
+    % (mode, "" if idx == 0 else " hidden", inline(desc), code_block(code, "kotlin"))
+    for idx, (mode, _, desc, code) in enumerate(MOD_PRESETS)
+)
+
+interactive_html = (
+    '<h2 data-pagefind-ignore>Interactive walkthrough</h2>'
+    '<div class="demo-card" data-pagefind-ignore>'
+    '<h3>How Compose SwiftUI renders</h3>'
+    '<p class="demo-sub">Click a stage to trace how a Kotlin state change becomes a native SwiftUI frame.</p>'
+    '<div class="pipe-steps" role="group" aria-label="Render pipeline stages">%s</div>%s'
+    '</div>'
+    '<div class="demo-card" data-pagefind-ignore>'
+    '<h3>Modifier order matches SwiftUI</h3>'
+    '<p class="demo-sub">Modifiers apply in chain order, just like SwiftUI view modifiers.</p>'
+    '<div class="mod-tabs" role="group" aria-label="Modifier order presets">%s</div>'
+    '<div class="mod-stage"><div class="mod-canvas"><div class="mod-demo" data-mode="pad-bg"><span>Hello</span></div></div><div>%s</div></div>'
+    '</div>'
+) % (pipe_buttons, pipe_panels, mod_buttons, mod_panels)
+
 index_body = """<div class="hero"><div class="eyebrow" data-pagefind-ignore>Framework</div><h1>Compose SwiftUI</h1>
 <p class="abstract">Write SwiftUI screens in Kotlin with the Compose runtime, and keep your view models.</p>
 <div class="avail" data-pagefind-ignore><span>iOS 17.0+</span><span>macOS 14.0+</span><span>tvOS 17.0+</span><span>watchOS 10.0+</span></div></div>
-<div class="content"><h2>Overview</h2>%s<h2>Frameworks</h2><div class="grid" data-pagefind-ignore>%s</div><h2>Topics</h2><div class="grid" data-pagefind-ignore>%s</div>
-<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a> · <a href="kotlin-apis.html">Kotlin-specific APIs</a></p></div>""" % (intro_html, framework_cards, cards, len(entries))
+<div class="content"><h2>Overview</h2>%s%s<h2>Frameworks</h2><div class="grid" data-pagefind-ignore>%s</div><h2>Topics</h2><div class="grid" data-pagefind-ignore>%s</div>
+<p><a href="reference.html">Browse all %d APIs</a> · <a href="guide.html">Read the guide</a> · <a href="kotlin-apis.html">Kotlin-specific APIs</a></p></div>""" % (intro_html, interactive_html, framework_cards, cards, len(entries))
 write("index.html", layout("Compose SwiftUI", index_body))
 
 GUIDE_ABSTRACT = "Everything about Compose SwiftUI, from installation to the Apple frameworks, with examples that compile."
@@ -687,10 +776,20 @@ for key, p in sorted(pages.items(), key=lambda kv: kv[1]["title"].lower()):
 
 ref = ['<div class="hero">' + crumbs("", ("Compose SwiftUI", "index.html"), ("All APIs", "")) + '<div class="eyebrow" data-pagefind-ignore>API Collection</div><h1>All APIs</h1><p class="abstract">Every SwiftUI API that '
        'Compose SwiftUI supports, generated from Apple\'s SDK and compiled for iOS, macOS, tvOS and watchOS.</p></div><div class="content">',
-       '<p>APIs with a Kotlin-specific shape (navigation paths, item presentations, gestures, lazy lists, mixed-style text) are '
-       'described in the <a href="guide.html#writing-screens">guide</a>.</p>']
+       '<p>APIs with a Kotlin-specific shape (navigation paths, item presentations, gestures, lazy lists, mixed-style text, '
+       'animatable symbolic shapes, focused values, transactions) are described in the <a href="guide.html">guide</a> and '
+       '<a href="kotlin-apis.html">Kotlin-specific APIs</a>.</p>',
+       '<div class="ref-bar" data-pagefind-ignore><div class="ref-pills" role="group" aria-label="Filter by category">'
+       '<button type="button" class="ref-pill" data-cat="all" aria-pressed="true">All (%d)</button>'
+       '<button type="button" class="ref-pill" data-cat="Views" aria-pressed="false">Views (%d)</button>'
+       '<button type="button" class="ref-pill" data-cat="Modifiers" aria-pressed="false">Modifiers (%d)</button>'
+       '<button type="button" class="ref-pill" data-cat="Types" aria-pressed="false">Types (%d)</button>'
+       '<button type="button" class="ref-pill" data-cat="Extras" aria-pressed="false">Frameworks &amp; Kotlin</button>'
+       '</div><input type="search" class="ref-filter" placeholder="Filter APIs…" aria-label="Filter APIs"></div>'
+       '<p class="ref-empty" hidden>No matching APIs.</p>'
+       % (sum(len(v) for v in cats.values()), len(cats["Views"]), len(cats["Modifiers"]), len(cats["Types"]))]
 for cat in ("Views", "Modifiers", "Types"):
-    ref.append("<h2>%s</h2><div class=\"grid\" data-pagefind-ignore>%s</div>" % (cat, "".join(
+    ref.append('<section class="ref-sec" data-cat="%s"><h2>%s</h2><div class="grid" data-pagefind-ignore>%s</div></section>' % (cat, cat, "".join(
         '<a href="%s">%s</a>' % (rel, esc(t + ("(_:)" if cat == "Modifiers" else ""))) for t, rel in cats[cat])))
 ref.append("</div>")
 # ---- hand-written APIs: Kotlin-specific forms and the framework integrations, from their KDoc ----------------
@@ -713,7 +812,7 @@ HANDWRITTEN = [
      ["AppFrameworks.kt"]),
     ("kotlin-apis", "Kotlin-specific APIs", "SwiftUI APIs whose Swift form relies on Swift types, closures or protocols, in their Kotlin form.",
      "These are part of the renderer: nothing to register.",
-     ["Extras.kt", "Interactive.kt", "Advanced.kt", "Completions.kt", "Handwritten.kt"]),
+     ["Extras.kt", "Interactive.kt", "Advanced.kt", "Expressions.kt", "FocusValues.kt", "Completions.kt", "Handwritten.kt"]),
 ]
 
 def handwritten_entries(path):
@@ -775,7 +874,7 @@ for key, title, abstract, setup, files in HANDWRITTEN:
     write(key + ".html", layout(title, "".join(body), current=key, description=abstract))
     search.append({"n": title, "u": key})
     handwritten_links.append('<a href="%s.html">%s</a>' % (key, esc(title)))
-ref.insert(-1, '<h2>Frameworks and Kotlin-specific APIs</h2><div class="grid" data-pagefind-ignore>%s</div>' % "".join(handwritten_links))
+ref.insert(-1, '<section class="ref-sec" data-cat="Extras"><h2>Frameworks and Kotlin-specific APIs</h2><div class="grid" data-pagefind-ignore>%s</div></section>' % "".join(handwritten_links))
 
 write("reference.html", layout("All APIs", "".join(ref), description="Every SwiftUI API that Compose SwiftUI supports."))
 write("search.json", json.dumps(search, separators=(",", ":")))
@@ -968,6 +1067,53 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('input', e => { if (e.target.id === 'sq') runSearch(e.target.value) });
 document.addEventListener('input', e => { if (e.target.id === 'q') filter(e.target.value) });
+
+// Interactive demos (overview) and category/name filter (All APIs) — delegated so they survive SPA swaps.
+function applyRefFilter() {
+  const bar = document.querySelector('.ref-bar');
+  if (!bar) return;
+  const active = bar.querySelector('.ref-pill[aria-pressed=true]')?.dataset.cat || 'all';
+  const q = (bar.querySelector('.ref-filter')?.value || '').trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.ref-sec').forEach(sec => {
+    const catOk = active === 'all' || sec.dataset.cat === active;
+    let secHits = 0;
+    sec.querySelectorAll('.grid a').forEach(a => {
+      const hit = catOk && (!q || a.textContent.toLowerCase().includes(q));
+      a.hidden = !hit;
+      if (hit) secHits++;
+    });
+    sec.hidden = !catOk || secHits === 0;
+    visible += secHits;
+  });
+  const empty = document.querySelector('.ref-empty');
+  if (empty) empty.hidden = visible > 0;
+}
+document.addEventListener('click', e => {
+  const step = e.target.closest('.pipe-step');
+  if (step) {
+    const card = step.closest('.demo-card'), idx = step.dataset.step;
+    card.querySelectorAll('.pipe-step').forEach(b => b.setAttribute('aria-pressed', String(b === step)));
+    card.querySelectorAll('.pipe-detail').forEach(p => p.hidden = p.dataset.stepPanel !== idx);
+    return;
+  }
+  const tab = e.target.closest('.mod-tab');
+  if (tab) {
+    const card = tab.closest('.demo-card'), mode = tab.dataset.mod;
+    card.querySelectorAll('.mod-tab').forEach(b => b.setAttribute('aria-pressed', String(b === tab)));
+    const box = card.querySelector('.mod-demo');
+    if (box) box.dataset.mode = mode;
+    card.querySelectorAll('.mod-code').forEach(p => p.hidden = p.dataset.modPanel !== mode);
+    return;
+  }
+  const pill = e.target.closest('.ref-pill');
+  if (pill) {
+    pill.closest('.ref-pills').querySelectorAll('.ref-pill').forEach(b => b.setAttribute('aria-pressed', String(b === pill)));
+    applyRefFilter();
+  }
+});
+document.addEventListener('input', e => { if (e.target.classList.contains('ref-filter')) applyRefFilter() });
+
 // Offline: the service worker serves the whole release from its cache. When a new release is published, the
 // browser installs the new worker, which replaces the cache and takes over; the page then reloads onto it.
 function checkForUpdate() { navigator.serviceWorker?.getRegistration().then(r => r?.update()).catch(() => {}) }
@@ -1094,7 +1240,7 @@ def api_text(key, p):
 summary = "Write SwiftUI screens in Kotlin with the Compose runtime: composables build a tree of real SwiftUI views."
 rules = """Latest release: %s (Gradle plugin `id("dev.nucleusframework.compose-swiftui") version "%s"`).
 Platforms: iOS 17.0+, macOS 14.0+, tvOS 17.0+, watchOS 10.0+ unless an API says otherwise.
-Build requirements: Xcode 27.2+ (Swift 6.4), Kotlin 2.4.20+, JDK 17+.
+Build requirements: Xcode 27.2+ or N-1 (SDK guards via `#if canImport(SwiftUI, _version: …)`), Kotlin 2.4.20+, JDK 17+.
 
 Key rules for writing Compose SwiftUI code:
 - Views are Kotlin functions named like SwiftUI (`Text`, `VStack`, `Button`...); Swift labels become named arguments (`spacing = 8.0`).

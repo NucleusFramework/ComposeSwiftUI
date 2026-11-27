@@ -689,39 +689,200 @@ func applyViewEffects(_ content: some View, _ v: [Double]) -> some View {
         .blur(radius: at(5, 0))
 }
 
-@MainActor private func indefiniteSymbolEffect(_ v: AnyView, _ kind: Int, _ active: Bool) -> AnyView {
+@MainActor private func decodeSymbolEffectOptions(speed: Double?, repeatCount: Int?, repeating: Bool?) -> SymbolEffectOptions {
+    var options = SymbolEffectOptions.default
+    if let repeating {
+        options = repeating ? options.repeating : options.nonRepeating
+    }
+    if let repeatCount {
+        options = options.repeat(repeatCount)
+    }
+    if let speed {
+        options = options.speed(speed)
+    }
+    return options
+}
+
+@MainActor private func makeBounceEffect(_ variants: [String]) -> BounceSymbolEffect {
+    var e = BounceSymbolEffect.bounce
+    for m in variants {
+        switch m {
+        case "up": e = e.up
+        case "down": e = e.down
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@MainActor private func makePulseEffect(_ variants: [String]) -> PulseSymbolEffect {
+    var e = PulseSymbolEffect.pulse
+    for m in variants {
+        switch m {
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@MainActor private func makeVariableColorEffect(_ variants: [String]) -> VariableColorSymbolEffect {
+    var e = VariableColorSymbolEffect.variableColor
+    for m in variants {
+        switch m {
+        case "iterative": e = e.iterative
+        case "cumulative": e = e.cumulative
+        case "reversing": e = e.reversing
+        case "nonReversing": e = e.nonReversing
+        case "hideInactiveLayers": e = e.hideInactiveLayers
+        case "dimInactiveLayers": e = e.dimInactiveLayers
+        default: break
+        }
+    }
+    return e
+}
+
+@MainActor private func makeScaleEffect(_ variants: [String]) -> ScaleSymbolEffect {
+    var e = ScaleSymbolEffect.scale
+    for m in variants {
+        switch m {
+        case "up": e = e.up
+        case "down": e = e.down
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@MainActor private func makeAppearEffect(_ variants: [String]) -> AppearSymbolEffect {
+    var e = AppearSymbolEffect.appear
+    for m in variants {
+        switch m {
+        case "up": e = e.up
+        case "down": e = e.down
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@MainActor private func makeDisappearEffect(_ variants: [String]) -> DisappearSymbolEffect {
+    var e = DisappearSymbolEffect.disappear
+    for m in variants {
+        switch m {
+        case "up": e = e.up
+        case "down": e = e.down
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor private func makeWiggleEffect(_ variants: [String]) -> WiggleSymbolEffect {
+    var e = WiggleSymbolEffect.wiggle
+    for m in variants {
+        switch m {
+        case "left": e = e.left
+        case "right": e = e.right
+        case "up": e = e.up
+        case "down": e = e.down
+        case "forward": e = e.forward
+        case "backward": e = e.backward
+        case "clockwise": e = e.clockwise
+        case "counterClockwise": e = e.counterClockwise
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor private func makeRotateEffect(_ variants: [String]) -> RotateSymbolEffect {
+    var e = RotateSymbolEffect.rotate
+    for m in variants {
+        switch m {
+        case "clockwise": e = e.clockwise
+        case "counterClockwise": e = e.counterClockwise
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
+@MainActor private func makeBreatheEffect(_ variants: [String]) -> BreatheSymbolEffect {
+    var e = BreatheSymbolEffect.breathe
+    for m in variants {
+        switch m {
+        case "pulse": e = e.pulse
+        case "plain": e = e.plain
+        case "byLayer": e = e.byLayer
+        case "wholeSymbol": e = e.wholeSymbol
+        default: break
+        }
+    }
+    return e
+}
+
+@MainActor private func indefiniteSymbolEffect(
+    _ v: AnyView,
+    _ kind: Int,
+    _ variants: [String],
+    _ options: SymbolEffectOptions,
+    _ active: Bool
+) -> AnyView {
     switch kind {
-    case 1: return AnyView(v.symbolEffect(.pulse, isActive: active))
-    case 2: return AnyView(v.symbolEffect(.variableColor, isActive: active))
-    case 3: return AnyView(v.symbolEffect(.scale, isActive: active))
-    case 4: return AnyView(v.symbolEffect(.appear, isActive: active))
-    case 5: return AnyView(v.symbolEffect(.disappear, isActive: active))
+    case 1: return AnyView(v.symbolEffect(makePulseEffect(variants), options: options, isActive: active))
+    case 2: return AnyView(v.symbolEffect(makeVariableColorEffect(variants), options: options, isActive: active))
+    case 3: return AnyView(v.symbolEffect(makeScaleEffect(variants), options: options, isActive: active))
+    case 4: return AnyView(v.symbolEffect(makeAppearEffect(variants), options: options, isActive: active))
+    case 5: return AnyView(v.symbolEffect(makeDisappearEffect(variants), options: options, isActive: active))
     default: break
     }
     if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
         switch kind {
-        case 0: return AnyView(v.symbolEffect(.bounce, isActive: active))
-        case 6: return AnyView(v.symbolEffect(.wiggle, isActive: active))
-        case 7: return AnyView(v.symbolEffect(.rotate, isActive: active))
-        case 8: return AnyView(v.symbolEffect(.breathe, isActive: active))
+        case 0: return AnyView(v.symbolEffect(makeBounceEffect(variants), options: options, isActive: active))
+        case 6: return AnyView(v.symbolEffect(makeWiggleEffect(variants), options: options, isActive: active))
+        case 7: return AnyView(v.symbolEffect(makeRotateEffect(variants), options: options, isActive: active))
+        case 8: return AnyView(v.symbolEffect(makeBreatheEffect(variants), options: options, isActive: active))
         default: break
         }
     }
     return v
 }
 
-@MainActor private func discreteSymbolEffect(_ v: AnyView, _ kind: Int, _ value: AnyHashable) -> AnyView {
+@MainActor private func discreteSymbolEffect(
+    _ v: AnyView,
+    _ kind: Int,
+    _ variants: [String],
+    _ options: SymbolEffectOptions,
+    _ value: AnyHashable
+) -> AnyView {
     switch kind {
-    case 0: return AnyView(v.symbolEffect(.bounce, value: value))
-    case 1: return AnyView(v.symbolEffect(.pulse, value: value))
-    case 2: return AnyView(v.symbolEffect(.variableColor, value: value))
+    case 0: return AnyView(v.symbolEffect(makeBounceEffect(variants), options: options, value: value))
+    case 1: return AnyView(v.symbolEffect(makePulseEffect(variants), options: options, value: value))
+    case 2: return AnyView(v.symbolEffect(makeVariableColorEffect(variants), options: options, value: value))
     default: break
     }
     if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *) {
         switch kind {
-        case 6: return AnyView(v.symbolEffect(.wiggle, value: value))
-        case 7: return AnyView(v.symbolEffect(.rotate, value: value))
-        case 8: return AnyView(v.symbolEffect(.breathe, value: value))
+        case 6: return AnyView(v.symbolEffect(makeWiggleEffect(variants), options: options, value: value))
+        case 7: return AnyView(v.symbolEffect(makeRotateEffect(variants), options: options, value: value))
+        case 8: return AnyView(v.symbolEffect(makeBreatheEffect(variants), options: options, value: value))
         default: break
         }
     }
@@ -804,7 +965,19 @@ extension InteractiveRenderers {
             } animation: { _ in animation })
         }
         ComposeRegistry.modifiers[100_042] = { v, a, _ in
-            a.bool(3) ? discreteSymbolEffect(v, a.int(0), a.hashable(2)) : indefiniteSymbolEffect(v, a.int(0), a.bool(1))
+            a.bool(3)
+                ? discreteSymbolEffect(v, a.int(0), [], .default, a.hashable(2))
+                : indefiniteSymbolEffect(v, a.int(0), [], .default, a.bool(1))
+        }
+        ComposeRegistry.modifiers[100_118] = { v, a, _ in
+            let variants = a.list(1).compactMap { $0 as? String }
+            let speed: Double? = a.isNil(2) ? nil : a.double(2)
+            let repeatCount: Int? = a.isNil(3) ? nil : a.int(3)
+            let repeating: Bool? = a.isNil(4) ? nil : a.bool(4)
+            let options = decodeSymbolEffectOptions(speed: speed, repeatCount: repeatCount, repeating: repeating)
+            return a.bool(7)
+                ? discreteSymbolEffect(v, a.int(0), variants, options, a.hashable(6))
+                : indefiniteSymbolEffect(v, a.int(0), variants, options, a.bool(5))
         }
     }
 }

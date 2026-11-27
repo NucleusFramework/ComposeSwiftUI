@@ -29,31 +29,40 @@ class GuardTests(unittest.TestCase):
         # as when the four SDKs were extracted
         generate.PLATFORMS = tuple(self.ALL)
 
-    def test_older_api_needs_no_compiler_guard(self):
+    def test_older_api_needs_no_sdk_version_guard(self):
         ifline, _ = generate.platform_guard(dict(self.ALL, ios=(26, 0)))
         self.assertIsNone(ifline)
 
-    def test_newest_sdk_api_is_behind_the_compiler_check(self):
+    def test_newest_sdk_api_uses_canimport_version_guard(self):
         ifline, avail = generate.platform_guard(dict(self.ALL, ios=(27, 0)))
-        self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, ifline)
+        self.assertEqual("#if canImport(SwiftUI, _version: 8.0)", ifline)
         self.assertIn("iOS 27.0", avail)
 
-    def test_platform_and_compiler_conditions_combine(self):
+    def test_point_releases_get_distinct_swiftui_module_versions(self):
+        self.assertEqual("#if canImport(SwiftUI, _version: 8.0.85)", generate.platform_guard(dict(self.ALL, ios=(27, 1)))[0])
+        self.assertEqual("#if canImport(SwiftUI, _version: 8.1.13)", generate.platform_guard(dict(self.ALL, ios=(27, 2)))[0])
+
+    def test_platform_and_sdk_version_conditions_combine(self):
         ifline, _ = generate.platform_guard({"ios": (27, 1)})
-        self.assertEqual("#if (os(iOS)) && (compiler(>=%s))" % generate.NEWEST_COMPILER, ifline)
+        self.assertEqual("#if (os(iOS)) && (canImport(SwiftUI, _version: 8.0.85))", ifline)
 
     def test_member_of_an_older_type_gets_its_own_guard(self):
-        self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, generate.case_guard(dict(self.ALL, ios=(27, 0)), self.ALL))
+        self.assertEqual("#if canImport(SwiftUI, _version: 8.0)", generate.case_guard(dict(self.ALL, ios=(27, 0)), self.ALL))
         self.assertIsNone(generate.case_guard(dict(self.ALL, ios=(27, 0)), dict(self.ALL, ios=(27, 0))))
+        self.assertEqual(
+            "#if canImport(SwiftUI, _version: 8.0.85)",
+            generate.case_guard(dict(self.ALL, ios=(27, 1)), dict(self.ALL, ios=(27, 0))),
+        )
+        self.assertIsNone(generate.case_guard(dict(self.ALL, ios=(27, 1)), dict(self.ALL, ios=(27, 2))))
 
-    def test_back_deployed_api_missing_from_the_previous_sdk_is_behind_the_compiler_check(self):
+    def test_back_deployed_api_missing_from_the_previous_sdk_uses_canimport_version_guard(self):
         generate.N1_MISSING.add("s:test.alphaMultiply")
         try:
             plats = generate.newest_sdk_only(dict(self.ALL, ios=(18, 0)), "s:test.alphaMultiply")
             ifline, avail = generate.platform_guard(plats)
-            self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, ifline)
+            self.assertEqual("#if canImport(SwiftUI, _version: 8.0)", ifline)
             self.assertIn("iOS 18.0", avail)  # still available at run time where the OS has it
-            self.assertEqual("#if compiler(>=%s)" % generate.NEWEST_COMPILER, generate.case_guard(plats, self.ALL))
+            self.assertEqual("#if canImport(SwiftUI, _version: 8.0)", generate.case_guard(plats, self.ALL))
             self.assertIsNone(generate.platform_guard(generate.newest_sdk_only(dict(self.ALL), "s:test.other"))[0])
         finally:
             generate.N1_MISSING.discard("s:test.alphaMultiply")

@@ -69,7 +69,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? Angle
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_AnyNavigationTransition(_ e: SExpr?) -> AnyNavigationTransition? {
     guard let e else { return nil }
@@ -221,7 +221,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ContentMarginGuide(_ e: SExpr?) -> ContentMarginGuide? {
     guard let e else { return nil }
@@ -298,13 +298,13 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+#if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
 @available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *)
 @MainActor func d_DocumentCreationSource(_ e: SExpr?) -> DocumentCreationSource? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 1436:
         return DocumentCreationSource(id: a.string(0))
     #endif
@@ -317,7 +317,7 @@ import UniformTypeIdentifiers
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if compiler(>=6.4)
+    #if canImport(SwiftUI, _version: 8.0)
     case 1450:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 27.0, *) {
             guard let p1 = dp_CoordinateSpaceProtocol(a.expr(1)) else { return nil }
@@ -821,21 +821,21 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 27.0, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_PresentationPlacement(_ e: SExpr?) -> PresentationPlacement? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2067:
         return .center
     #endif
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2068:
         return .leading
     #endif
-    #if (os(iOS)) && (compiler(>=6.4))
+    #if (os(iOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2069:
         return .trailing
     #endif
@@ -883,7 +883,7 @@ import UniformTypeIdentifiers
     default: return HandwrittenValues.decode(e) as? RadialGradient
     }
 }
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_ReservedRegion_Kind(_ e: SExpr?) -> ReservedRegion.Kind? {
     guard let e else { return nil }
@@ -1058,7 +1058,7 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0.85)
 @available(iOS 27.1, macOS 27.1, tvOS 27.1, watchOS 27.1, *)
 @MainActor func d_SplitArrangementViewStyle(_ e: SExpr?) -> SplitArrangementViewStyle? {
     guard let e else { return nil }
@@ -1207,13 +1207,13 @@ import UniformTypeIdentifiers
     }
 }
 #endif
-#if compiler(>=6.4)
+#if canImport(SwiftUI, _version: 8.0)
 @available(iOS 27.0, macOS 26.1, tvOS 27.0, watchOS 27.0, *)
 @MainActor func d_ToolbarItemVisibilityPriority(_ e: SExpr?) -> ToolbarItemVisibilityPriority? {
     guard let e else { return nil }
     let a = Args(expr: e)
     switch e.id {
-    #if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+    #if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2500:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
             guard let p0 = d_ToolbarItemVisibilityPriority(a.expr(0)) else { return nil }
@@ -1221,17 +1221,17 @@ import UniformTypeIdentifiers
         }
         return nil
     #endif
-    #if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+    #if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2501:
         return .low
     #endif
-    #if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+    #if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2502:
         return .high
     #endif
     case 2503:
         return .automatic
-    #if (os(iOS) || os(macOS)) && (compiler(>=6.4))
+    #if (os(iOS) || os(macOS)) && (canImport(SwiftUI, _version: 8.0))
     case 2504:
         if #available(iOS 27.0, macOS 27.0, tvOS 17.0, watchOS 10.0, *) {
             guard let p0 = d_ToolbarItemVisibilityPriority(a.expr(0)) else { return nil }
